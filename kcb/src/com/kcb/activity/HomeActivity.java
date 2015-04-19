@@ -2,6 +2,7 @@ package com.kcb.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+
 import com.kcb.R;
 
 public class HomeActivity extends Activity {
