@@ -9,7 +9,7 @@ import com.kcbTeam.R;
  * @className: HomeActivity
  * @description: 
  * @author: ZQJ
- * @date: 2015Äê4ÔÂ21ÈÕ ÏÂÎç8:20:48
+ * @date: 2015ï¿½ï¿½4ï¿½ï¿½21ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½8:20:48
  */
 public class HomeActivity extends BaseActivity {
 
@@ -18,7 +18,7 @@ public class HomeActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
     }
-
+//aaaaaaaaa
     @Override
     protected void initView() {}
 
