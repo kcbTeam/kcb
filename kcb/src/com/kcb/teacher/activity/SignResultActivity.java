@@ -21,13 +21,13 @@ import com.kcbTeam.R;
  * @date: 2015年4月22日 下午5:04:02
  */
 public class SignResultActivity extends BaseActivity {
-    
+
     private Button backButton;
     private ListView signRecordList;
-    
+
     private List<SignRecordInfo> mList;
     private ListAdapterSignRecod mAdapter;
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +35,7 @@ public class SignResultActivity extends BaseActivity {
         initData();
         initView();
     }
+
     @Override
     protected void initView() {
         backButton = (Button) findViewById(R.id.button_back);
@@ -52,9 +53,10 @@ public class SignResultActivity extends BaseActivity {
         mList.add(new SignRecordInfo("2015-01-01", "0%"));
         mList.add(new SignRecordInfo("2015-01-02", "0%"));
     }
+
     @Override
     public void onClick(View v) {
-        if(v.getId() == R.id.button_back){
+        if (v.getId() == R.id.button_back) {
             finish();
         }
     }

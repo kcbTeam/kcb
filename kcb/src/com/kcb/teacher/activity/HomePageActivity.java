@@ -68,18 +68,21 @@ public class HomePageActivity extends BaseFragmentActivity {
                 finish();
                 break;
             case R.id.button_course_signin:
+                setButtonTextColor(1);
                 if (null == mSignInFragment) {
                     mSignInFragment = new SignInFragment();
                 }
                 mFragmentTransaction.replace(R.id.fragment_content, mSignInFragment);
                 break;
             case R.id.button_course_test:
+                setButtonTextColor(2);
                 if (null == mTestFragment) {
                     mTestFragment = new TestFragment();
                 }
                 mFragmentTransaction.replace(R.id.fragment_content, mTestFragment);
                 break;
             case R.id.button_student_center:
+                setButtonTextColor(3);
                 if (null == mStudentCentreFragment) {
                     mStudentCentreFragment = new StudentCentreFragment();
                 }
@@ -92,10 +95,33 @@ public class HomePageActivity extends BaseFragmentActivity {
     }
 
     private void setDefaultFragment() {
+        setButtonTextColor(1);
         mFragmentManager = getSupportFragmentManager();
         mFragmentTransaction = mFragmentManager.beginTransaction();
         mSignInFragment = new SignInFragment();
         mFragmentTransaction.replace(R.id.fragment_content, mSignInFragment);
         mFragmentTransaction.commit();
+    }
+
+    private void setButtonTextColor(int index) {
+        switch (index) {
+            case 1:
+                courseSignInButton.setTextColor(getResources().getColor(R.color.blue));
+                courseTestButton.setTextColor(getResources().getColor(R.color.black));
+                studentCenterButton.setTextColor(getResources().getColor(R.color.black));
+                break;
+            case 2:
+                courseSignInButton.setTextColor(getResources().getColor(R.color.black));
+                courseTestButton.setTextColor(getResources().getColor(R.color.blue));
+                studentCenterButton.setTextColor(getResources().getColor(R.color.black));
+                break;
+            case 3:
+                courseSignInButton.setTextColor(getResources().getColor(R.color.black));
+                courseTestButton.setTextColor(getResources().getColor(R.color.black));
+                studentCenterButton.setTextColor(getResources().getColor(R.color.blue));
+                break;
+            default:
+                break;
+        }
     }
 }

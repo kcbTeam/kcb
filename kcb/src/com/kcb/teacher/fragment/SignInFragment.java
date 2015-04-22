@@ -19,9 +19,10 @@ import com.kcbTeam.R;
  * @date: 2015年4月22日 下午4:28:05
  */
 public class SignInFragment extends BaseFragment {
-    
+
     private Button startSign;
     private Button checkSignResult;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.teacher_fragment_signin, container, false);
@@ -37,16 +38,16 @@ public class SignInFragment extends BaseFragment {
 
     @Override
     protected void initData() {}
-    
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.button_begin_signin:
-                //TODO go to begin sign activity
+                // TODO go to begin sign activity
                 break;
             case R.id.button_signin_result:
                 Intent intent = new Intent(getActivity(), SignResultActivity.class);
-                getActivity().startActivity(intent);
+                startActivity(intent);
                 break;
             default:
                 break;

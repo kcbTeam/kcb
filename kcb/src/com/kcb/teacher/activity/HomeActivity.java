@@ -1,6 +1,5 @@
 package com.kcb.teacher.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import com.kcb.common.base.BaseActivity;
@@ -19,8 +18,10 @@ public class HomeActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        Intent intent = new Intent(HomeActivity.this, HomePageActivity.class);
-        startActivity(intent);
+
+        // just for test , while the user name and password is correct, then go to HomePageActivity
+        // Intent intent = new Intent(HomeActivity.this, HomePageActivity.class);
+        // startActivity(intent);
     }
 
     @Override
@@ -28,6 +29,7 @@ public class HomeActivity extends BaseActivity {
         super.onRestart();
         finish();
     }
+
     @Override
     protected void initView() {}
 

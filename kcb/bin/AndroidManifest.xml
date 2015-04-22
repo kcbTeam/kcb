@@ -35,6 +35,10 @@
             android:name="com.kcb.teacher.activity.HomePageActivity"
             android:screenOrientation="portrait" >
         </activity>
+        <activity
+            android:name="com.kcb.teacher.activity.SignResultActivity"
+            android:screenOrientation="portrait" >
+        </activity>
     </application>
 
 </manifest>

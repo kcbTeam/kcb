@@ -1,4 +1,5 @@
 package com.kcb.common.util;
+
 /**
  * 
  * @className: StudentInfo
@@ -22,11 +23,11 @@ public class StudentInfo {
     public void setStudentName(String mStudentName) {
         this.mStudentName = mStudentName;
     }
-    
+
     public String getStudentID() {
         return this.mStudentID;
     }
-    
+
     public String getStudentName() {
         return this.mStudentName;
     }
