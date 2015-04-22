@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Kechengbao</string>
+    <string name="app_name">kechengbao</string>
+    <string name="app_name_chinese">课程宝</string>
+
+    <!-- TEACHER START -->
+
+
+    <!-- home page activty start -->
+
+    <string name="exit">退出</string>
+    <string name="course_signin">课堂签到</string>
+    <string name="course_test">课堂小测试</string>
+    <string name="student_center">学生中心</string>
+    <string name="begin_signin">开始签到</string>
+    <string name="signin_result">查看签到结果</string>
+    <string name="begin_test">测试</string>
+    <string name="test_result">查看测试</string>
+    <!-- home page activty end -->
+
+
+    <!-- TEACHER END -->
 
 </resources>
