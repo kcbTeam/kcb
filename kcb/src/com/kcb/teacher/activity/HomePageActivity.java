@@ -2,15 +2,13 @@ package com.kcb.teacher.activity;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 
-import com.kcb.common.base.BaseActivity;
 import com.kcb.common.base.BaseFragmentActivity;
 import com.kcb.teacher.fragment.SignInFragment;
+import com.kcb.teacher.fragment.StudentCentreFragment;
 import com.kcb.teacher.fragment.TestFragment;
 import com.kcbTeam.R;
 
@@ -30,14 +28,16 @@ public class HomePageActivity extends BaseFragmentActivity {
 
     private SignInFragment mSignInFragment;
     private TestFragment mTestFragment;
-    
+    private StudentCentreFragment mStudentCentreFragment;
+
     private FragmentManager mFragmentManager;
     private FragmentTransaction mFragmentTransaction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_teacher_homepage);
+        setContentView(R.layout.teacher_activity_homepage);
+        initView();
     }
 
     @Override
@@ -52,7 +52,7 @@ public class HomePageActivity extends BaseFragmentActivity {
         courseSignInButton.setOnClickListener(this);
         courseTestButton.setOnClickListener(this);
         studentCenterButton.setOnClickListener(this);
-        
+
         setDefaultFragment();
     }
 
@@ -65,20 +65,25 @@ public class HomePageActivity extends BaseFragmentActivity {
         mFragmentTransaction = mFragmentManager.beginTransaction();
         switch (v.getId()) {
             case R.id.button_exit:
-                
+                finish();
                 break;
             case R.id.button_course_signin:
-                if(null == mSignInFragment){
+                if (null == mSignInFragment) {
                     mSignInFragment = new SignInFragment();
                 }
                 mFragmentTransaction.replace(R.id.fragment_content, mSignInFragment);
                 break;
             case R.id.button_course_test:
-                if(null == mTestFragment){
+                if (null == mTestFragment) {
                     mTestFragment = new TestFragment();
                 }
                 mFragmentTransaction.replace(R.id.fragment_content, mTestFragment);
+                break;
             case R.id.button_student_center:
+                if (null == mStudentCentreFragment) {
+                    mStudentCentreFragment = new StudentCentreFragment();
+                }
+                mFragmentTransaction.replace(R.id.fragment_content, mStudentCentreFragment);
                 break;
             default:
                 break;

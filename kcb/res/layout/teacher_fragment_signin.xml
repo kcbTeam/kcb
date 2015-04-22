@@ -3,18 +3,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
     <Button 
-        android:id="@+id/button_begin_test"
-        android:layout_width="wrap_content"
+        android:id="@+id/button_begin_signin"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:text="@string/begin_test"
+        android:text="@string/begin_signin"
         android:layout_marginTop="150dp"/>
     <Button 
-        android:id="@+id/button_test_result"
-        android:layout_width="wrap_content"
+        android:id="@+id/button_signin_result"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:text="@string/test_result"
+        android:text="@string/signin_result"
         android:layout_marginTop="250dp"/>
 
 </RelativeLayout>
