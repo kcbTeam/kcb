@@ -5,6 +5,15 @@
     <string name="app_name_chinese">课程宝</string>
 
     <!-- TEACHER START -->
+    
+    <!-- register activty start -->
+
+    <string name="myname">课程宝</string>
+    <string name="username">用户名</string>
+    <string name="password">密码</string>
+    <string name="registerin">登陆</string>
+   
+    <!-- register activty end -->
 
 
     <!-- home page activty start -->
