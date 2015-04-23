@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+   xmlns:tools= "http://schemas.android.com/tools" 
+   android:layout_width= "match_parent" 
+   android:layout_height= "match_parent"  > 
+
+<TextView 
+	android:id ="@+id/myname" 
+	android:layout_width ="wrap_content" 
+	android:layout_height ="wrap_content" 
+	android:layout_alignParentLeft="true"
+	android:text = "@string/myname" 
+	android:textColor ="#ff4500" 
+	android:textSize ="25sp" /> 
+   
+<ImageView 
+	android:id ="@+id/register_login_pic" 
+	android:layout_width ="wrap_content" 
+	android:layout_height ="wrap_content" 
+	android:layout_below="@id/myname" 
+	android:layout_centerHorizontal ="true" 
+	android:src ="@drawable/register" /> 
+    
+<EditText 
+	android:id ="@+id/usernameEditText" 
+	android:layout_width ="fill_parent" 
+	android:layout_height ="wrap_content" 
+	android:layout_below="@id/register_login_pic"
+	android:layout_marginLeft="50dp"
+	android:layout_marginRight="50dp"
+    android:layout_marginTop="100dp"
+	android:hint="@string/username" 
+	android:selectAllOnFocus="true"
+	android:singleLine ="true" 
+	android:textSize ="16sp" /> 
+	
+<EditText 
+	android:id ="@+id/passwordEditText" 
+	android:layout_width ="fill_parent" 
+	android:layout_height ="wrap_content" 
+	android:layout_below="@id/usernameEditText"
+	android:layout_alignLeft="@id/usernameEditText"
+    android:layout_marginTop="20dp"
+    android:layout_marginRight="50dp"
+	android:hint="@string/password" 
+	android:inputType="textPassword"
+	android:textSize ="16sp" /> 
+    
+<Button 
+	android:id ="@+id/buton_register" 
+	android:layout_width ="wrap_content" 
+	android:layout_height ="wrap_content" 
+	android:layout_alignRight="@id/passwordEditText"
+	android:layout_below="@id/passwordEditText"
+	android:layout_marginTop="60dp"
+	android:textSize ="20dp" 
+	android:text = "@string/registerin" />     
+    
+    
+</RelativeLayout>
