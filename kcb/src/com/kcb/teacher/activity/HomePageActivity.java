@@ -15,9 +15,9 @@ import com.kcbTeam.R;
 /**
  * 
  * @className: HomePageActivity
- * @description: home page
+ * @description: 
  * @author: ZQJ
- * @date: 2015��4��22�� ����9:39:56
+ * @date: 2015年4月24日 下午3:21:55
  */
 // TODO if delete HomeActivity, rename HomePageActivity to HomeActivity
 public class HomePageActivity extends BaseFragmentActivity {

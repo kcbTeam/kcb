@@ -7,9 +7,9 @@ import android.view.View.OnClickListener;
 /**
  * 
  * @className: BaseFragmentActivity
- * @description: extends FragmentActivity
+ * @description: 
  * @author: ZQJ
- * @date: 2015Äê4ÔÂ22ÈÕ ÉÏÎç11:11:11
+ * @date: 2015å¹´4æœˆ24æ—¥ ä¸‹åˆ3:20:57
  */
 public abstract class BaseFragmentActivity extends FragmentActivity implements OnClickListener {
     protected abstract void initView();

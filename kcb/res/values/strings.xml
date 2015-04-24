@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <string name="app_name">kechengbao</string>
@@ -29,7 +29,6 @@
 
     <!-- home page activty start -->
 
-    
     <string name="course_signin">课堂签到</string>
     <string name="course_test">课堂小测试</string>
     <string name="student_center">学生中心</string>

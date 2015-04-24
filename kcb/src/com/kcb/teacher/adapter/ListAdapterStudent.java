@@ -1,23 +1,23 @@
 package com.kcb.teacher.adapter;
 
 import java.util.List;
-
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-
 import com.kcb.common.util.StudentInfo;
 import com.kcbTeam.R;
 
 /**
  * 
  * @className: ListAdapterStudent
- * @description: student centre list view adapter
+ * @description: 
  * @author: ZQJ
- * @date: 2015Äê4ÔÂ22ÈÕ ÏÂÎç4:27:14
+ * @date: 2015å¹´4æœˆ24æ—¥ ä¸‹åˆ3:24:01
  */
+@SuppressLint("ViewHolder")
 public class ListAdapterStudent extends BaseAdapter {
 
     private List<StudentInfo> mList;

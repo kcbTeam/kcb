@@ -16,10 +16,10 @@ import com.kcbTeam.R;
 
 /**
  * 
- * @className: StudentCenterFragment
- * @description: student centre fragment
+ * @className: StudentCentreFragment
+ * @description: 
  * @author: ZQJ
- * @date: 2015Äê4ÔÂ22ÈÕ ÏÂÎç4:25:13
+ * @date: 2015å¹´4æœˆ24æ—¥ ä¸‹åˆ3:24:10
  */
 public class StudentCentreFragment extends BaseFragment {
 
@@ -50,7 +50,7 @@ public class StudentCentreFragment extends BaseFragment {
     protected void initData() {
         mList = new ArrayList<StudentInfo>();
         mList.clear();
-        mList.add(new StudentInfo("ĞÕÃû", "Ñ§ºÅ"));
+        mList.add(new StudentInfo("NAME", "STUDENT ID"));
         mList.add(new StudentInfo("zqj", "1004210254"));
         mList.add(new StudentInfo("zh", "1104210256"));
     }
