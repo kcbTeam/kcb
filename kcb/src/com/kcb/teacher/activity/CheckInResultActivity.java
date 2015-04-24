@@ -15,15 +15,15 @@ import com.kcbTeam.R;
 
 /**
  * 
- * @className: SignResultActivity
+ * @className: CheckInResultActivity
  * @description:
  * @author: ZQJ
  * @date: 2015年4月24日 下午3:22:02
  */
-public class SignResultActivity extends BaseActivity {
+public class CheckInResultActivity extends BaseActivity {
 
     private Button backButton;
-    private ListView signRecordList;
+    private ListView checkInRecordList;
 
     private List<CheckInRecordInfo> mList;
     private ListAdapterSignRecod mAdapter;
@@ -31,7 +31,7 @@ public class SignResultActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.teacher_activity_signresult);
+        setContentView(R.layout.teacher_activity_checkinresult);
         initData();
         initView();
     }
@@ -40,9 +40,9 @@ public class SignResultActivity extends BaseActivity {
     protected void initView() {
         backButton = (Button) findViewById(R.id.button_back);
         backButton.setOnClickListener(this);
-        signRecordList = (ListView) findViewById(R.id.listview_sign_record);
+        checkInRecordList = (ListView) findViewById(R.id.listview_sign_record);
         mAdapter = new ListAdapterSignRecod(this, mList);
-        signRecordList.setAdapter(mAdapter);
+        checkInRecordList.setAdapter(mAdapter);
     }
 
     @Override

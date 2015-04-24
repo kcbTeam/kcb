@@ -7,8 +7,8 @@ import android.view.View;
 import android.widget.Button;
 
 import com.kcb.common.base.BaseFragmentActivity;
-import com.kcb.teacher.fragment.SignInFragment;
-import com.kcb.teacher.fragment.StudentCentreFragment;
+import com.kcb.teacher.fragment.CheckInFragment;
+import com.kcb.teacher.fragment.StuCentreFragment;
 import com.kcb.teacher.fragment.TestFragment;
 import com.kcbTeam.R;
 
@@ -30,16 +30,16 @@ public class HomeActivity extends BaseFragmentActivity {
     private Button testButton;
     private Button stuCenterButton;
 
-    private SignInFragment mCheckInFragment;
+    private CheckInFragment mCheckInFragment;
     private TestFragment mTestFragment;
-    private StudentCentreFragment mStuCentreFragment;
+    private StuCentreFragment mStuCentreFragment;
 
     private FragmentManager mFragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.teacher_activity_homepage);
+        setContentView(R.layout.teacher_activity_home);
         initView();
     }
 
@@ -77,7 +77,7 @@ public class HomeActivity extends BaseFragmentActivity {
             case R.id.button_course_signin:
                 setButtonTextColor(1);
                 if (null == mCheckInFragment) {
-                    mCheckInFragment = new SignInFragment();
+                    mCheckInFragment = new CheckInFragment();
                 }
                 mFragmentTransaction.replace(R.id.fragment_content, mCheckInFragment);
                 break;
@@ -91,7 +91,7 @@ public class HomeActivity extends BaseFragmentActivity {
             case R.id.button_student_center:
                 setButtonTextColor(3);
                 if (null == mStuCentreFragment) {
-                    mStuCentreFragment = new StudentCentreFragment();
+                    mStuCentreFragment = new StuCentreFragment();
                 }
                 mFragmentTransaction.replace(R.id.fragment_content, mStuCentreFragment);
                 break;

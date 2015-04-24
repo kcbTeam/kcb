@@ -7,7 +7,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
-        android:text="@string/app_name_chinese"
+        android:text="@string/app_name"
         android:textSize="20sp" />
     <Button
         android:id="@+id/exitbtn"

@@ -16,12 +16,12 @@ import com.kcbTeam.R;
 
 /**
  * 
- * @className: StudentCentreFragment
+ * @className: StuCentreFragment
  * @description:
  * @author: ZQJ
  * @date: 2015年4月24日 下午3:24:10
  */
-public class StudentCentreFragment extends BaseFragment {
+public class StuCentreFragment extends BaseFragment {
 
     private ListView mStudentList;
     private ListAdapterStudent mAdapter;
@@ -36,7 +36,7 @@ public class StudentCentreFragment extends BaseFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.teacher_fragment_studentcentre, container, false);
+        View view = inflater.inflate(R.layout.teacher_fragment_stucentre, container, false);
         mStudentList = (ListView) view.findViewById(R.id.listview_student);
         mAdapter = new ListAdapterStudent(getActivity(), mList);
         mStudentList.setAdapter(mAdapter);

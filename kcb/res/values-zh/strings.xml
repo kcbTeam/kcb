@@ -2,5 +2,5 @@
 <resources>
 
     <string name="app_name">课程宝</string>
-
-</resources>
+    <string name="exit">退出</string>
+</resources>

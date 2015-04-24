@@ -32,7 +32,7 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.kcb.teacher.activity.SignResultActivity"
+            android:name="com.kcb.teacher.activity.CheckInResultActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
