@@ -20,9 +20,18 @@
     <string name="hint_studentcenter_search">搜索学生姓名</string>
     <!-- home page activty end -->
 
-
-    <!-- sign result activity start -->
+    <!-- sign result activity start -->
     <string name="back">返回</string>
     <!-- sign result activity end -->
+
+    <string name="signclass">课堂签到</string>
+    <string name="giveupsign">放弃签到</string>
+    <string name="getnumber">获取签到数字</string>
+    <string name="tipforteacher1">请告诉在场学生本次签到数字为：</string>
+    <string name="startsign">开始签到/停止签到</string>
+    <string name="tipforteacher2">已经开始签到30秒</string>
+    <string name="classrate">本次到课率为70%</string>
+    <string name="tipforteacher3">点击按钮可以查看没有到课学生名单</string>
+    <string name="finish">完成</string>
 
 </resources>

@@ -16,7 +16,7 @@ import com.kcbTeam.R;
 /**
  * 
  * @className: CheckinActivity
- * @description:  Check in,six Textview,one reclyclerView,one Button
+ * @description: Check in,six Textview,one reclyclerView,one Button
  * @author: Tao Li
  * @date: 2015-4-24 下午9:16:22
  */
