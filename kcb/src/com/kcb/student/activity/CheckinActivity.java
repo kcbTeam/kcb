@@ -19,10 +19,15 @@ import com.kcbTeam.R;
 /**
  * 
  * @className: CheckinActivity
- * @description: Check in,six Textview,one reclyclerView£¬one Button
+ * @description: Check in,six Textview,one reclyclerViewï¿½ï¿½one Button
  * @author: Tao Li
- * @date: 2015-4-22 ÏÂÎç8:05:53
+ * @date: 2015-4-22 ï¿½ï¿½ï¿½ï¿½8:05:53
  */
+// TODO
+// 1, use utf-8 encode
+// 2, rename myAdapter to mAdapter
+// 3, replace List<ItemBeam>, use String[]
+// 4, use implement MyItemClickListener
 public class CheckinActivity extends BaseActivity {
 
 
@@ -64,9 +69,9 @@ public class CheckinActivity extends BaseActivity {
         itemBeams.add(new ItemBeam("7"));
         itemBeams.add(new ItemBeam("8"));
         itemBeams.add(new ItemBeam("9"));
-        itemBeams.add(new ItemBeam("Çå¿Õ"));
+        itemBeams.add(new ItemBeam("ï¿½ï¿½ï¿½"));
         itemBeams.add(new ItemBeam("0"));
-        itemBeams.add(new ItemBeam("¡Á"));
+        itemBeams.add(new ItemBeam("ï¿½ï¿½"));
         myAdapter = new MyRecycleAdapter(itemBeams);
         mRecyclerView.setAdapter(myAdapter);
         myAdapter.setOnItemClickListener(new MyRecycleAdapter.MyItemClickListener() {

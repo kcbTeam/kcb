@@ -12,11 +12,19 @@ import com.kcbTeam.R;
 /**
  * 
  * @className: HomeActivity
- * @description: Login interface£¬one Textview,one ImageView,two editView£¬one Button
+ * @description: Login interfaceï¿½ï¿½one Textview,one ImageView,two editViewï¿½ï¿½one Button
  * @author: Tao Li
- * @date: 2015-4-22 ÏÂÎç3:41:45
+ * @date: 2015-4-22 ï¿½ï¿½ï¿½ï¿½3:41:45
  */
+// TODO
+// 1, use utf-8 encode
+// 2, delete some empty row
+// 3, rename stuIDEditText to idEdittext
+// 4, rename stuPassWordEditText to passwordEdittext
+// 5, rename this HomeActivity to LoginActivity
+// 6, rename student_activity_home to activity_stu_login
 public class HomeActivity extends BaseActivity {
+
     private EditText stuIDEditText;
     private EditText stuPassWordEditText;
     private Button loginButton;
@@ -44,6 +52,11 @@ public class HomeActivity extends BaseActivity {
 
     @Override
     public void onClick(View v) {
+        // TODO
+        // 1, need detect id and password null;
+        // 2, need request server;
+        // 3, if login success, goto HomeActivity from LoginActivity;
+        // 4, need save login success result to local, then student needn't login next time;
         stuIDEditText.getText().toString();
         stuPassWordEditText.getText().toString();
         Intent intent = new Intent(HomeActivity.this, CheckinActivity.class);

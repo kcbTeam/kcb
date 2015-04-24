@@ -2,13 +2,13 @@ package com.kcb.teacher.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
-import com.kcb.common.base.BaseActivity;
+
 import com.kcbTeam.R;
 
 /**
  * 
  * @className: HomeActivity
- * @description: 
+ * @description:
  * @author: ZQJ
  * @date: 2015��4��21�� ����8:20:48
  */
