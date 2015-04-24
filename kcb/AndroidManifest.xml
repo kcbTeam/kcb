@@ -5,8 +5,8 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="8"
-        android:targetSdkVersion="19" />
+        android:minSdkVersion="11"
+        android:targetSdkVersion="21" />
 
     <!-- uses permission start -->
     <uses-permission android:name="android.permission.INTERNET" />
@@ -29,6 +29,10 @@
         </activity>
         <activity
             android:name="com.kcb.common.activity.StartActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+         <activity
+            android:name="com.kcb.student.activity.CheckinActivity"
             android:screenOrientation="portrait" >
         </activity>
     </application>

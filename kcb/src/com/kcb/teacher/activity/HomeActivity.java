@@ -1,5 +1,6 @@
 package com.kcb.teacher.activity;
 
+import android.app.Activity;
 import android.os.Bundle;
 import com.kcb.common.base.BaseActivity;
 import com.kcbTeam.R;
@@ -16,12 +17,7 @@ public class HomeActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.student_activity_home);
     }
-//aaaaaaaaa
-    @Override
-    protected void initView() {}
 
-    @Override
-    protected void initData() {}
 }
