@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+<<<<<<< HEAD
     <string name="app_name">kechengbao</string>
     <string name="app_name_chinese">课程宝</string>
 
@@ -36,3 +37,15 @@
     <!-- TEACHER END -->
 
 </resources>
+=======
+    <string name="app_name">Kechengbao</string>
+    <string name="projectName">课程宝</string>
+    <string name="exit">退出</string>
+    <string name="signbtn">课堂签到</string>
+    <string name="testbtn">课堂小测试</string>
+    <string name="start">开始签到  </string>
+    <string name="check">查看我的签到</string>
+    <string name="start1">开始答题</string>
+    <string name="check1">查看测试结果</string>
+</resources>
+>>>>>>> dyk_test

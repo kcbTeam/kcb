@@ -6,7 +6,7 @@
 
     <uses-sdk
         android:minSdkVersion="8"
-        android:targetSdkVersion="19" />
+        android:targetSdkVersion="21" />
 
     <!-- uses permission start -->
     <uses-permission android:name="android.permission.INTERNET" />
@@ -32,12 +32,17 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
+<<<<<<< HEAD
             android:name="com.kcb.teacher.activity.HomePageActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.kcb.teacher.activity.SignResultActivity"
             android:screenOrientation="portrait" >
+=======
+            android:name="com.kcb.teacher.activity.SignActivity"
+            android:screenOrientation="portrait">
+>>>>>>> dyk_test
         </activity>
     </application>
 

@@ -12,7 +12,10 @@ import com.kcbTeam.R;
  * @author: ZQJ
  * @date: 2015��4��21�� ����8:20:48
  */
+<<<<<<< HEAD
 //TODO delete this activity if not use
+=======
+>>>>>>> dyk_test
 public class HomeActivity extends BaseActivity {
 
     @Override
@@ -30,7 +33,7 @@ public class HomeActivity extends BaseActivity {
         super.onRestart();
         finish();
     }
-//aaaaaaaaa
+
     @Override
     protected void initView() {}
 
