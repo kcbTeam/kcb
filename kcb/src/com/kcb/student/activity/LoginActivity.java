@@ -12,10 +12,10 @@ import com.kcbTeam.R;
 
 /**
  * 
- * @className: HomeActivity
- * @description: Login interface,one Textview,one ImageView,two editView��one Button
+ * @className: LoginActivity
+ * @description: Login interface,one Textview,one ImageView,two editView,one Button
  * @author: Tao Li
- * @date: 2015-4-22 ����3:41:45
+ * @date: 2015-4-24 下午9:17:01
  */
 
 public class LoginActivity extends BaseActivity {
