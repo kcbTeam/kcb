@@ -1,8 +1,5 @@
 package com.kcb.student.activity;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,7 +11,6 @@ import com.kcb.common.base.BaseActivity;
 import com.kcb.common.util.ToastUtil;
 import com.kcb.student.adapter.MyRecycleAdapter;
 import com.kcb.student.adapter.MyRecycleAdapter.ItemClickListener;
-import com.kcb.student.util.ItemBeam;
 import com.kcbTeam.R;
 
 /**
