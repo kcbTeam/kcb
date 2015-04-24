@@ -6,7 +6,7 @@
 
     <uses-sdk
         android:minSdkVersion="8"
-        android:targetSdkVersion="19" />
+        android:targetSdkVersion="21" />
 
     <!-- uses permission start -->
     <uses-permission android:name="android.permission.INTERNET" />
@@ -30,6 +30,10 @@
         <activity
             android:name="com.kcb.common.activity.StartActivity"
             android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.kcb.teacher.activity.SignActivity"
+            android:screenOrientation="portrait">
         </activity>
     </application>
 
