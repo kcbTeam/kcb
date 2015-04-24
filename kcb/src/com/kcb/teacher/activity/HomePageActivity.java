@@ -19,20 +19,20 @@ import com.kcbTeam.R;
  * @author: ZQJ
  * @date: 2015��4��22�� ����9:39:56
  */
-//TODO if delete HomeActivity, rename HomePageActivity to HomeActivity
+// TODO if delete HomeActivity, rename HomePageActivity to HomeActivity
 public class HomePageActivity extends BaseFragmentActivity {
 
     private Button exitButton;
-    private Button courseSignInButton; //TODO checkInButton
-    private Button courseTestButton; //TODO testButton
-    private Button studentCenterButton; //TODO stuCenterButton
+    private Button courseSignInButton; // TODO checkInButton
+    private Button courseTestButton; // TODO testButton
+    private Button studentCenterButton; // TODO stuCenterButton
 
-    private SignInFragment mSignInFragment; //TODO mCheckInFragment
+    private SignInFragment mSignInFragment; // TODO mCheckInFragment
     private TestFragment mTestFragment;
-    private StudentCentreFragment mStudentCentreFragment; //TODO mStuCenterFragment
+    private StudentCentreFragment mStudentCentreFragment; // TODO mStuCenterFragment
 
     private FragmentManager mFragmentManager;
-    private FragmentTransaction mFragmentTransaction; //TODO use temp variable
+    private FragmentTransaction mFragmentTransaction; // TODO use temp variable
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,11 +95,11 @@ public class HomePageActivity extends BaseFragmentActivity {
         mFragmentTransaction.commit();
     }
 
-    //TODO move to onClick's top
+    // TODO move to onClick's top
     private void setDefaultFragment() {
-        //TODO
-        //you can invoked onClick(courseSignInButton); to replace below codes;
-        
+        // TODO
+        // you can invoked onClick(courseSignInButton); to replace below codes;
+
         setButtonTextColor(1);
         mFragmentManager = getSupportFragmentManager();
         mFragmentTransaction = mFragmentManager.beginTransaction();
@@ -108,12 +108,12 @@ public class HomePageActivity extends BaseFragmentActivity {
         mFragmentTransaction.commit();
     }
 
-    //TODO use constant to replace 1,2,3
-    //for example, INDEX_CHECKIN, INDEX_TEST, INDEX_STUCENTER
+    // TODO use constant to replace 1,2,3
+    // for example, INDEX_CHECKIN, INDEX_TEST, INDEX_STUCENTER
     private void setButtonTextColor(int index) {
         switch (index) {
-            //TODO
-            // set all button black first, then set selected button blue;
+        // TODO
+        // set all button black first, then set selected button blue;
             case 1:
                 courseSignInButton.setTextColor(getResources().getColor(R.color.blue));
                 courseTestButton.setTextColor(getResources().getColor(R.color.black));

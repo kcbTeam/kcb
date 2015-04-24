@@ -12,10 +12,9 @@ import com.kcbTeam.R;
  * @author: ZQJ
  * @date: 2015��4��21�� ����8:20:48
  */
-<<<<<<< HEAD
-//TODO delete this activity if not use
-=======
->>>>>>> dyk_test
+
+// TODO delete this activity if not use
+
 public class HomeActivity extends BaseActivity {
 
     @Override

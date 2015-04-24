@@ -3,8 +3,6 @@ package com.kcb.student.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-
-import com.kcb.teacher.activity.SignActivity;
 import com.kcbTeam.R;
 
 public class HomeActivity extends Activity {
@@ -13,7 +11,13 @@ public class HomeActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        Intent intent=new Intent(HomeActivity.this,SignActivity.class);
+        Intent intent = new Intent(HomeActivity.this, HomePageActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        finish();
     }
 }

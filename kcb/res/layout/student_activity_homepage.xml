@@ -7,7 +7,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
-        android:text="@string/projectName"
+        android:text="@string/app_name_chinese"
         android:textSize="20sp" />
     <Button
         android:id="@+id/exitbtn"
@@ -20,14 +20,14 @@
     <fragment
         android:id="@+id/sign"
         android:layout_below="@id/projectName"
-        android:name="com.kcb.common.base.SignFragment"
+        android:name="com.kcb.student.fragment.SignFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="10" />
     <fragment
         android:id="@+id/test"
         android:layout_below="@id/projectName"
-        android:name="com.kcb.common.base.TestFragment"
+        android:name="com.kcb.student.fragment.TestFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="10" />
