@@ -1,25 +1,7 @@
-/**
- * Copyright© 2011-2014 DewMobile USA Inc.All Rights Reserved.
- * 
- * @Title: HomePageActivity.java
- * @Package com.kcb.student.activity
- * @Description:Sign in and Test
- * @author: Ding
- * @date: 2015年4月24日 下午2:48:19
- * @version V1.0
- */
-
 package com.kcb.student.activity;
 
-/**
- * @className: HomePageActivity
- * @description: Sign in and Test
- * @author: Ding
- * @date: 2015年4月24日 下午2:48:19
- */
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
@@ -29,6 +11,7 @@ import android.widget.Button;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 
+import com.kcb.common.base.BaseFragmentActivity;
 import com.kcbTeam.R;
 
 /**
@@ -37,7 +20,10 @@ import com.kcbTeam.R;
  * @author: Ding
  * @date: 2015年4月23日 上午11:03:21
  */
-public class HomePageActivity extends FragmentActivity {
+public class HomePageActivity extends BaseFragmentActivity {
+    
+    private final int INDEX_CHECKIN=0;
+    private final int INDEX_TEST=1;
 
     private Fragment[] mFragments;
     private FragmentManager fragmentManager;
@@ -50,20 +36,22 @@ public class HomePageActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.student_activity_homepage);
-        mFragments = new Fragment[2];
-        fragmentManager = getSupportFragmentManager();
-        mFragments[0] = fragmentManager.findFragmentById(R.id.sign);
-        mFragments[1] = fragmentManager.findFragmentById(R.id.test);
-        fragmentTransaction =
-                fragmentManager.beginTransaction().hide(mFragments[0]).hide(mFragments[1]);
-        fragmentTransaction.show(mFragments[0]).commit();
-        setFragmentIndicator();
+        
+        initView();
     }
 
-    private void setFragmentIndicator() {
+    @Override
+    protected void initView() {
         buttonexit = (Button) findViewById(R.id.exitbtn);
         radioGroup = (RadioGroup) findViewById(R.id.bottomRg);
-
+        
+        mFragments = new Fragment[2];
+        fragmentManager = getSupportFragmentManager();
+        mFragments[INDEX_CHECKIN] = fragmentManager.findFragmentById(R.id.sign);
+        mFragments[INDEX_TEST] = fragmentManager.findFragmentById(R.id.test);
+        fragmentTransaction =
+                fragmentManager.beginTransaction().hide(mFragments[INDEX_TEST]);
+        
         buttonexit.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,17 +60,16 @@ public class HomePageActivity extends FragmentActivity {
         });
 
         radioGroup.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 fragmentTransaction =
-                        fragmentManager.beginTransaction().hide(mFragments[0]).hide(mFragments[1]);
+                        fragmentManager.beginTransaction().hide(mFragments[INDEX_CHECKIN]).hide(mFragments[INDEX_TEST]);
                 switch (checkedId) {
                     case R.id.signbtn:
-                        fragmentTransaction.show(mFragments[0]).commit();
+                        fragmentTransaction.show(mFragments[INDEX_CHECKIN]).commit();
                         break;
                     case R.id.testbtn:
-                        fragmentTransaction.show(mFragments[1]).commit();
+                        fragmentTransaction.show(mFragments[INDEX_TEST]).commit();
                         break;
                     default:
                         break;
@@ -90,4 +77,7 @@ public class HomePageActivity extends FragmentActivity {
             }
         });
     }
+
+    @Override
+    protected void initData() {}
 }
