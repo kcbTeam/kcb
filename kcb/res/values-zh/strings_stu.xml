@@ -1,25 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- CheckinActivity Start -->
+    <string name="checkin">课堂签到</string>
+    <string name="tip_inputnum">请输入正确的四位数字</string>
+    <string name="button_finish">完成</string>
+    <string name="button_login">登录</string>
+    <string name="hint_password">密码</string>
+    <string name="hint_stuid">学号</string>
+    <!-- CheckinActivity End -->
+
+
+    <!-- HomePageActivity Start -->
     <string name="signbtn">课堂签到</string>
     <string name="testbtn">课堂小测试</string>
     <string name="start">开始签到  </string>
     <string name="check">查看我的签到</string>
     <string name="start1">开始答题</string>
     <string name="check1">查看测试结果</string>
-	
-    <!-- HomeActivity Start -->
-    <string name="appname_chs">课程宝</string>
-    <string name="hint_stuid">学号</string>
-    <string name="hint_password">密码</string>
-    <string name="button_login">登录</string>
-    <!-- HomeActivity End -->
+    <!-- HomePageActivity End -->
 
-
-    <!-- CheckinActivity Start -->
-    <string name="checkin_chs">课堂签到</string>
-    <string name="tip_inputnum">请输入正确的四位数字</string>
-    <string name="button_finish">完成</string>
-
-    <!-- CheckinActivity End -->
 </resources>
