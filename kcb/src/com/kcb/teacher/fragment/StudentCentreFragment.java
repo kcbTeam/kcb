@@ -10,14 +10,14 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.kcb.common.base.BaseFragment;
-import com.kcb.common.util.StudentInfo;
 import com.kcb.teacher.adapter.ListAdapterStudent;
+import com.kcb.teacher.model.StudentInfo;
 import com.kcbTeam.R;
 
 /**
  * 
  * @className: StudentCentreFragment
- * @description: 
+ * @description:
  * @author: ZQJ
  * @date: 2015年4月24日 下午3:24:10
  */

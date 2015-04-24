@@ -1,11 +1,11 @@
-package com.kcb.common.util;
+package com.kcb.teacher.model;
 
 /**
  * 
  * @className: StudentInfo
- * @description: student information object
+ * @description:
  * @author: ZQJ
- * @date: 2015Äê4ÔÂ22ÈÕ ÏÂÎç4:04:50
+ * @date: 2015å¹´4æœˆ24æ—¥ ä¸‹åˆ7:08:09
  */
 public class StudentInfo {
     private String mStudentName;

@@ -60,13 +60,17 @@ public class SignFragment extends BaseFragment {
         }
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see com.kcb.common.base.BaseFragment#initView()
      */
     @Override
     protected void initView() {}
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see com.kcb.common.base.BaseFragment#initData()
      */
     @Override

@@ -1,17 +1,17 @@
-package com.kcb.common.util;
+package com.kcb.teacher.model;
 
 /**
  * 
- * @className: SignRecordInfo
- * @description: every time sign info recorder
+ * @className: CheckInRecordInfo
+ * @description:
  * @author: ZQJ
- * @date: 2015ƒÍ4‘¬22»’ œ¬ŒÁ5:26:57
+ * @date: 2015Âπ¥4Êúà24Êó• ‰∏ãÂçà7:08:01
  */
-public class SignRecordInfo {
+public class CheckInRecordInfo {
     private String mSignDate;
     private String mSignRate;
 
-    public SignRecordInfo(String signDate, String signRate) {
+    public CheckInRecordInfo(String signDate, String signRate) {
         mSignDate = signDate;
         mSignRate = signRate;
     }
