@@ -12,97 +12,56 @@ import android.widget.TextView;
 import com.kcb.student.util.ItemBeam;
 import com.kcbTeam.R;
 
-// TODO
-// 1, rename to CheckinRecyclerAdapter
-// 2, why implements View.OnclickListener?
-public class MyRecycleAdapter extends RecyclerView.Adapter<MyRecycleAdapter.TextHoler>
-        implements
-            View.OnClickListener {
 
-    private List<ItemBeam> mItemBeams;
-    public static MyItemClickListener mItemClickListener = null;
+public class MyRecycleAdapter extends RecyclerView.Adapter<MyRecycleAdapter.CheckinViewHolder> {
+    private String[] ItemStrings;
+    public ItemClickListener mItemClickListener = null;
 
-    // TODO rename to ItemClickListener
-    public interface MyItemClickListener {
+    public interface ItemClickListener {
         public void onItemClick(View view, int postion);
     }
 
-    public MyRecycleAdapter(List<ItemBeam> itemBeams) {
+    public MyRecycleAdapter(String[] itemStrings) {
         super();
-        // TODO delete this.
-        this.mItemBeams = itemBeams;
+        ItemStrings = itemStrings;
     }
 
-    public void setOnItemClickListener(MyItemClickListener listener) {
+    public void setOnItemClickListener(ItemClickListener listener) {
         mItemClickListener = listener;
     }
 
     @Override
     public int getItemCount() {
-        return mItemBeams.size();
-
+        return ItemStrings.length;
     }
 
     @Override
-    public TextHoler onCreateViewHolder(ViewGroup arg0, int arg1) {
-        // TODO
-        // 1, rename v to view
-        // 2, rename student_vhitem to item_stu_checkin
-        View v = LayoutInflater.from(arg0.getContext()).inflate(R.layout.student_vhitem, null);
-        TextHoler mh = new TextHoler(v, mItemClickListener);
+    public CheckinViewHolder onCreateViewHolder(ViewGroup arg0, int arg1) {
+        View view = LayoutInflater.from(arg0.getContext()).inflate(R.layout.student_vhitem, null);
+        CheckinViewHolder mh = new CheckinViewHolder(view);
         return mh;
     }
 
-    // TODO
-    // 1, rename arg0 to viewHolder
-    // 2, rename arg1 to position
     @Override
-    public void onBindViewHolder(TextHoler arg0, int arg1) {
-        ItemBeam item = mItemBeams.get(arg1);
-        arg0.textView1.setText(item.itemInt1);
+    public void onBindViewHolder(CheckinViewHolder viewHolder, int position) {
+        String itemString = ItemStrings[position];
+        viewHolder.textView.setText(itemString);
     }
 
-    @Override
-    public void onClick(View arg0) {}
+    public class CheckinViewHolder extends RecyclerView.ViewHolder {
+        public TextView textView;
 
-    // TODO
-    // 1, rename TextHoler to CheckinViewHolder
-    // 2, needn't implements OnClickListener
-    public class TextHoler extends RecyclerView.ViewHolder implements OnClickListener {
-        // TODO rename textView1 to textView;
-        public TextView textView1;
-
-        // TODO needn't mListener
-        private MyItemClickListener mListener;
-
-        // TODO
-        // rename textview to view
-        public TextHoler(View textview, MyItemClickListener listener) {
+        public CheckinViewHolder(View textview) {
             super(textview);
-            this.textView1 = (TextView) textview.findViewById(R.id.textview_clicknum1);
-            this.mListener = listener;
-            this.textView1.setOnClickListener(this);
-
-            // use below code
-            // textview.setOnClickListener(new OnClickListener() {
-            //
-            // @Override
-            // public void onClick(View v) {
-            // if (null!=mListener) {
-            // mListener.onItemClick(v, getPosition());
-            // }
-            // }
-            // });
-
+            textView = (TextView) textview.findViewById(R.id.textview_clicknum1);
+            textView.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (null != mItemClickListener) {
+                        mItemClickListener.onItemClick(v, getPosition());
+                    }
+                }
+            });
         }
-
-        @Override
-        public void onClick(View v) {
-            if (mListener != null) {
-                mListener.onItemClick(v, getPosition());
-            }
-        }
-
     }
-
 }
