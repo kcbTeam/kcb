@@ -47,7 +47,7 @@ public class ListAdapterStudent extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View view = View.inflate(mContext, R.layout.teacher_listitem_studentcentre, null);
+        View view = View.inflate(mContext, R.layout.teacher_listitem_stucentre, null);
         TextView studentName = (TextView) view.findViewById(R.id.textview_studentname);
         studentName.setText(mList.get(position).getStudentName());
         TextView studentId = (TextView) view.findViewById(R.id.textview_studentid);

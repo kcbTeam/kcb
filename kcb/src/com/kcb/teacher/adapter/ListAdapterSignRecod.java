@@ -47,7 +47,7 @@ public class ListAdapterSignRecod extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View view = View.inflate(mContext, R.layout.teacher_listitem_signrecord, null);
+        View view = View.inflate(mContext, R.layout.teacher_listitem_checkinrecord, null);
         TextView signDate = (TextView) view.findViewById(R.id.textview_signdate);
         TextView signRate = (TextView) view.findViewById(R.id.textview_signrate);
         signDate.setText(mList.get(position).getSignDate());
