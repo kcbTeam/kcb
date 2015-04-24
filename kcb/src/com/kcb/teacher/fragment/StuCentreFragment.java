@@ -36,7 +36,7 @@ public class StuCentreFragment extends BaseFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.teacher_fragment_stucentre, container, false);
+        View view = inflater.inflate(R.layout.tch_fragment_stucentre, container, false);
         mStudentList = (ListView) view.findViewById(R.id.listview_student);
         mAdapter = new ListAdapterStudent(getActivity(), mList);
         mStudentList.setAdapter(mAdapter);

@@ -25,7 +25,7 @@ public class CheckInFragment extends BaseFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.teacher_fragment_checkin, container, false);
+        View view = inflater.inflate(R.layout.tch_fragment_checkin, container, false);
         startSign = (Button) view.findViewById(R.id.button_begin_signin);
         checkSignResult = (Button) view.findViewById(R.id.button_signin_result);
         startSign.setOnClickListener(this);

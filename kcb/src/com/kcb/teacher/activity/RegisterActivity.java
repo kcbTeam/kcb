@@ -22,7 +22,7 @@ public class RegisterActivity extends Activity {
         // TODO
         // define in manifest.xml, use android:theme
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.teacher_activity_register);
+        setContentView(R.layout.tch_activity_register);
     }
 
 

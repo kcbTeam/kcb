@@ -18,7 +18,7 @@ import com.kcbTeam.R;
 public class TestFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.teacher_fragment_course_test, container, false);
+        return inflater.inflate(R.layout.tch_fragment_course_test, container, false);
     }
 
     @Override

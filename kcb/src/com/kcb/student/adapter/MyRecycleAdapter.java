@@ -34,7 +34,7 @@ public class MyRecycleAdapter extends RecyclerView.Adapter<MyRecycleAdapter.Chec
 
     @Override
     public CheckinViewHolder onCreateViewHolder(ViewGroup arg0, int arg1) {
-        View view = LayoutInflater.from(arg0.getContext()).inflate(R.layout.student_vhitem, null);
+        View view = LayoutInflater.from(arg0.getContext()).inflate(R.layout.stu_vhitem, null);
         CheckinViewHolder mh = new CheckinViewHolder(view);
         return mh;
     }

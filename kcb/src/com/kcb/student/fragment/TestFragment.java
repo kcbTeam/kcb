@@ -22,7 +22,7 @@ public class TestFragment extends BaseFragment{
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.student_fragment_test, container, false);
+        View view=inflater.inflate(R.layout.stu_fragment_test, container, false);
         buttonstart = (Button) getView().findViewById(R.id.startTest);
         buttoncheck = (Button) getView().findViewById(R.id.checkTest);
         buttonstart.setOnClickListener(this);

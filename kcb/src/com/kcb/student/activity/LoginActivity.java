@@ -27,7 +27,7 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.student_activity_home);
+        setContentView(R.layout.stu_activity_home);
         initView();
     }
 

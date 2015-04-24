@@ -36,7 +36,7 @@ public class CheckinActivity extends BaseActivity implements ItemClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.student_activity_checkin);
+        setContentView(R.layout.stu_activity_checkin);
         initView();
         initData();
     }

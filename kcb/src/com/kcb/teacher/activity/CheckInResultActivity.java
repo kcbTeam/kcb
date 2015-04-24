@@ -31,7 +31,7 @@ public class CheckInResultActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.teacher_activity_checkinresult);
+        setContentView(R.layout.tch_activity_checkinresult);
         initData();
         initView();
     }

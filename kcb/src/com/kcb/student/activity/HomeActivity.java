@@ -11,7 +11,7 @@ public class HomeActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.student_activity_home);
+        setContentView(R.layout.stu_activity_home);
         Intent intent = new Intent(HomeActivity.this, HomePageActivity.class);
         startActivity(intent);
     }

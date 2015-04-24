@@ -39,7 +39,7 @@ public class HomeActivity extends BaseFragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.teacher_activity_home);
+        setContentView(R.layout.tch_activity_home);
         initView();
     }
 

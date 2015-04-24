@@ -35,7 +35,7 @@ public class HomePageActivity extends BaseFragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.student_activity_homepage);
+        setContentView(R.layout.stu_activity_homepage);
         
         initView();
     }

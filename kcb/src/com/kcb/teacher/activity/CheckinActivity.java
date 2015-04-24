@@ -29,7 +29,7 @@ public class CheckinActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.teacher_activity_checkin);
+        setContentView(R.layout.tch_activity_checkin);
 
         numTextview = (TextView) findViewById(R.id.num);
         getNumButton = (Button) findViewById(R.id.getnumber);
