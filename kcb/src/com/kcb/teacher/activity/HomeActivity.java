@@ -14,7 +14,7 @@ import com.kcbTeam.R;
 
 /**
  * 
- * @className: HomePageActivity
+ * @className: HomeActivity
  * @description:
  * @author: ZQJ
  * @date: 2015年4月24日 下午3:21:55
@@ -119,4 +119,5 @@ public class HomeActivity extends BaseFragmentActivity {
                 break;
         }
     }
+
 }

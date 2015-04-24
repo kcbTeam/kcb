@@ -46,5 +46,25 @@
 
 
     <!-- TEACHER END -->
+ 
+
+    <!-- Students Start -->
+    <!-- HomeActivity Start -->
+    <string name="appname_chs">课程宝</string>
+    <string name="hint_stuid">学号</string>
+    <string name="hint_password">密码</string>
+    <string name="button_login">登录</string>
+    <!-- HomeActivity End -->
+
+
+    <!-- CheckinActivity Start -->
+    <string name="checkin_chs">课堂签到</string>
+    <string name="tip_inputnum">请输入正确的四位数字</string>
+    <string name="button_finish">完成</string>
+
+    <!-- CheckinActivity End -->
+
+
+    <!-- Student End -->
 
 </resources>
