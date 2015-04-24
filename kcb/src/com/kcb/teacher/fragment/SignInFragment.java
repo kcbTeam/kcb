@@ -14,9 +14,9 @@ import com.kcbTeam.R;
 /**
  * 
  * @className: SignInFragment
- * @description: sign in fragment
+ * @description: 
  * @author: ZQJ
- * @date: 2015Äê4ÔÂ22ÈÕ ÏÂÎç4:28:05
+ * @date: 2015å¹´4æœˆ24æ—¥ ä¸‹åˆ3:21:09
  */
 public class SignInFragment extends BaseFragment {
 

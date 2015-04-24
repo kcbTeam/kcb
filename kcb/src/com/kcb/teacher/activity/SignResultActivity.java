@@ -16,9 +16,9 @@ import com.kcbTeam.R;
 /**
  * 
  * @className: SignResultActivity
- * @description: sign result activity
+ * @description: 
  * @author: ZQJ
- * @date: 2015Äê4ÔÂ22ÈÕ ÏÂÎç5:04:02
+ * @date: 2015å¹´4æœˆ24æ—¥ ä¸‹åˆ3:22:02
  */
 public class SignResultActivity extends BaseActivity {
 
@@ -49,7 +49,7 @@ public class SignResultActivity extends BaseActivity {
     protected void initData() {
         mList = new ArrayList<SignRecordInfo>();
         mList.clear();
-        mList.add(new SignRecordInfo("Ç©µ½ÈÕÆÚ", "µ½¿ÎÂÊ"));
+        mList.add(new SignRecordInfo("ç­¾åˆ°æ—¥æœŸ", "ç­¾åˆ°ç‡"));
         mList.add(new SignRecordInfo("2015-01-01", "0%"));
         mList.add(new SignRecordInfo("2015-01-02", "0%"));
     }

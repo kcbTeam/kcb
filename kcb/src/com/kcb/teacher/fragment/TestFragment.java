@@ -11,9 +11,9 @@ import com.kcbTeam.R;
 /**
  * 
  * @className: TestFragment
- * @description: course test fragment
+ * @description: 
  * @author: ZQJ
- * @date: 2015Äê4ÔÂ22ÈÕ ÏÂÎç4:28:32
+ * @date: 2015å¹´4æœˆ24æ—¥ ä¸‹åˆ3:24:15
  */
 public class TestFragment extends BaseFragment {
     @Override

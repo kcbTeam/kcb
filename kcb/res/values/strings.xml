@@ -1,25 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-<<<<<<< HEAD
     <string name="app_name">kechengbao</string>
     <string name="app_name_chinese">课程宝</string>
+    <string name="exit">退出</string>
+    <!-- STUDENT START -->
+    <string name="projectName">课程宝</string>
+    <string name="signbtn">课堂签到</string>
+    <string name="testbtn">课堂小测试</string>
+    <string name="start">开始签到  </string>
+    <string name="check">查看我的签到</string>
+    <string name="start1">开始答题</string>
+    <string name="check1">查看测试结果</string>
+    <!-- STUDENT END -->
+
 
     <!-- TEACHER START -->
-    
+
+
     <!-- register activty start -->
 
     <string name="myname">课程宝</string>
     <string name="username">用户名</string>
     <string name="password">密码</string>
     <string name="registerin">登陆</string>
-   
+
     <!-- register activty end -->
 
 
     <!-- home page activty start -->
 
-    <string name="exit">退出</string>
     <string name="course_signin">课堂签到</string>
     <string name="course_test">课堂小测试</string>
     <string name="student_center">学生中心</string>
@@ -29,23 +39,13 @@
     <string name="test_result">查看测试</string>
     <string name="hint_studentcenter_search">搜索学生姓名</string>
     <!-- home page activty end -->
-    
+
+
     <!-- sign result activity start -->
     <string name="back">返回</string>
-	<!-- sign result activity end -->
+    <!-- sign result activity end -->
+
 
     <!-- TEACHER END -->
 
 </resources>
-=======
-    <string name="app_name">Kechengbao</string>
-    <string name="projectName">课程宝</string>
-    <string name="exit">退出</string>
-    <string name="signbtn">课堂签到</string>
-    <string name="testbtn">课堂小测试</string>
-    <string name="start">开始签到  </string>
-    <string name="check">查看我的签到</string>
-    <string name="start1">开始答题</string>
-    <string name="check1">查看测试结果</string>
-</resources>
->>>>>>> dyk_test
