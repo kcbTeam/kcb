@@ -1,7 +1,9 @@
 package com.kcb.student.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+
 import com.kcbTeam.R;
 
 public class HomeActivity extends Activity {
