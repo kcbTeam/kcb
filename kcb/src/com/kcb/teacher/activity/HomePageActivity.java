@@ -17,21 +17,22 @@ import com.kcbTeam.R;
  * @className: HomePageActivity
  * @description: home page
  * @author: ZQJ
- * @date: 2015Äê4ÔÂ22ÈÕ ÉÏÎç9:39:56
+ * @date: 2015ï¿½ï¿½4ï¿½ï¿½22ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½9:39:56
  */
+//TODO if delete HomeActivity, rename HomePageActivity to HomeActivity
 public class HomePageActivity extends BaseFragmentActivity {
 
     private Button exitButton;
-    private Button courseSignInButton;
-    private Button courseTestButton;
-    private Button studentCenterButton;
+    private Button courseSignInButton; //TODO checkInButton
+    private Button courseTestButton; //TODO testButton
+    private Button studentCenterButton; //TODO stuCenterButton
 
-    private SignInFragment mSignInFragment;
+    private SignInFragment mSignInFragment; //TODO mCheckInFragment
     private TestFragment mTestFragment;
-    private StudentCentreFragment mStudentCentreFragment;
+    private StudentCentreFragment mStudentCentreFragment; //TODO mStuCenterFragment
 
     private FragmentManager mFragmentManager;
-    private FragmentTransaction mFragmentTransaction;
+    private FragmentTransaction mFragmentTransaction; //TODO use temp variable
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,7 +95,11 @@ public class HomePageActivity extends BaseFragmentActivity {
         mFragmentTransaction.commit();
     }
 
+    //TODO move to onClick's top
     private void setDefaultFragment() {
+        //TODO
+        //you can invoked onClick(courseSignInButton); to replace below codes;
+        
         setButtonTextColor(1);
         mFragmentManager = getSupportFragmentManager();
         mFragmentTransaction = mFragmentManager.beginTransaction();
@@ -103,8 +108,12 @@ public class HomePageActivity extends BaseFragmentActivity {
         mFragmentTransaction.commit();
     }
 
+    //TODO use constant to replace 1,2,3
+    //for example, INDEX_CHECKIN, INDEX_TEST, INDEX_STUCENTER
     private void setButtonTextColor(int index) {
         switch (index) {
+            //TODO
+            // set all button black first, then set selected button blue;
             case 1:
                 courseSignInButton.setTextColor(getResources().getColor(R.color.blue));
                 courseTestButton.setTextColor(getResources().getColor(R.color.black));
