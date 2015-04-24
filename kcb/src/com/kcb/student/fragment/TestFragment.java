@@ -1,24 +1,12 @@
-/**
- * Copyright© 2011-2014 DewMobile USA Inc.All Rights Reserved.
- * 
- * @Title: TestFragment.java
- * @Package com.kcb.common.base
- * @Description: Test fragment
- * @author: Ding
- * @date: 2015年4月23日 上午10:17:44
- * @version V1.0
- */
-
 package com.kcb.student.fragment;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.kcb.common.base.BaseFragment;
 import com.kcbTeam.R;
 
 /**
@@ -27,37 +15,39 @@ import com.kcbTeam.R;
  * @author: Ding
  * @date: 2015年4月23日 上午10:17:44
  */
-public class TestFragment extends Fragment implements OnClickListener {
+public class TestFragment extends BaseFragment{
 
     private Button buttonstart;
     private Button buttoncheck;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.student_fragment_test, container, false);
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+        View view=inflater.inflate(R.layout.student_fragment_test, container, false);
         buttonstart = (Button) getView().findViewById(R.id.startTest);
         buttoncheck = (Button) getView().findViewById(R.id.checkTest);
-
         buttonstart.setOnClickListener(this);
         buttoncheck.setOnClickListener(this);
+        return view;
     }
+    
+    @Override
+    protected void initView() {}
+
+    @Override
+    protected void initData() {}
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.startTest:
-                // TODO
+                // TODO go to test
                 break;
             case R.id.checkTest:
-                // TODO
+                // TODO go to check the result of test
                 break;
             default:
                 break;
         }
     }
+
 }
