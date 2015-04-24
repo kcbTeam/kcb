@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/text_size5dp"
         android:layout_marginTop="@dimen/text_size5dp"
-        android:text="@string/checkin_chs"
+        android:text="@string/checkin"
         android:textSize="@dimen/text_size25dp" />
 
     <TextView
