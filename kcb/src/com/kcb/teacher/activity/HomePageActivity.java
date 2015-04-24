@@ -15,7 +15,7 @@ import com.kcbTeam.R;
 /**
  * 
  * @className: HomePageActivity
- * @description: 
+ * @description:
  * @author: ZQJ
  * @date: 2015年4月24日 下午3:21:55
  */

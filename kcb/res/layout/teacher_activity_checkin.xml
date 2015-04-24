@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/textview_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/signclass"
+        android:textColor="#ff4500"
+        android:textSize="30sp" />
+
+    <Button
+        android:id="@+id/button_giveup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@id/textview_label"
+        android:text="@string/giveupsign"
+        android:textColor="#ff4500"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/textview_step1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/button_giveup"
+        android:layout_marginTop="25dp"
+        android:text="1"
+        android:textColor="#ff4500"
+        android:textSize="25sp" />
+
+    <Button
+        android:id="@+id/getnumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/textview_step1"
+        android:layout_centerHorizontal="true"
+        android:text="@string/getnumber"
+        android:textColor="#ff4500"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/tipforteacher1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/getnumber"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="@string/tipforteacher1"
+        android:textColor="#ff4500"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tipforteacher1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text=""
+        android:textColor="#ff4500"
+        android:textSize="25sp" />
+
+    <View
+        android:id="@+id/view1"
+        android:layout_width="fill_parent"
+        android:layout_height="1.0px"
+        android:layout_below="@id/num"
+        android:layout_marginLeft="1.0px"
+        android:layout_marginRight="1.0px"
+        android:layout_marginTop="15dp"
+        android:background="#ff4500" />
+
+    <TextView
+        android:id="@+id/textview_step2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/view1"
+        android:layout_marginTop="15dp"
+        android:text="2"
+        android:textColor="#ff4500"
+        android:textSize="25sp" />
+
+    <Button
+        android:id="@+id/startsign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/textview_step2"
+        android:layout_centerHorizontal="true"
+        android:text="@string/startsign"
+        android:textColor="#ff4500"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/tipforteacher2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@id/startsign"
+        android:layout_below="@id/startsign"
+        android:layout_marginTop="10dp"
+        android:text="@string/tipforteacher2"
+        android:textColor="#ff4500"
+        android:textSize="15sp" />
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="fill_parent"
+        android:layout_height="1.0px"
+        android:layout_below="@id/tipforteacher2"
+        android:layout_marginLeft="1.0px"
+        android:layout_marginRight="1.0px"
+        android:layout_marginTop="25dp"
+        android:background="#ff4500" />
+
+    <TextView
+        android:id="@+id/textview_step3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/view2"
+        android:layout_marginTop="15dp"
+        android:text="3"
+        android:textColor="#ff4500"
+        android:textSize="25sp" />
+
+    <Button
+        android:id="@+id/button_rate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/textview_step3"
+        android:layout_centerHorizontal="true"
+        android:text="@string/classrate"
+        android:textColor="#ff4500"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/tipforteacher3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@id/button_rate"
+        android:layout_below="@id/button_rate"
+        android:layout_marginTop="10dp"
+        android:text="@string/tipforteacher3"
+        android:textColor="#ff4500"
+        android:textSize="15sp" />
+
+    <Button
+        android:id="@+id/finish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tipforteacher3"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="@string/finish"
+        android:textColor="#ff4500"
+        android:textSize="25sp" />
+
+</RelativeLayout>

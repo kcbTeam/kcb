@@ -18,6 +18,7 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+        <!-- common start -->
         <activity
             android:name="com.kcb.student.activity.HomeActivity"
             android:screenOrientation="portrait" >
@@ -31,6 +32,16 @@
             android:name="com.kcb.common.activity.StartActivity"
             android:screenOrientation="portrait" >
         </activity>
+        <!-- common end -->
+        
+        <!-- teacher start -->
+        
+        <!-- teacher end -->
+        
+        <!-- student start -->
+        
+        <!-- student end -->
+
         <activity
             android:name="com.kcb.teacher.activity.HomePageActivity"
             android:screenOrientation="portrait" >
@@ -43,6 +54,17 @@
             android:name="com.kcb.student.activity.HomePageActivity"
             android:screenOrientation="portrait" >
         </activity>
+        <activity 
+            android:name="com.kcb.teacher.activity.LoginActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            ></activity>
+        
+        <activity 
+            android:name="com.kcb.teacher.activity.CheckinActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            android:screenOrientation="portrait"
+            ></activity>
     </application>
 
 </manifest>

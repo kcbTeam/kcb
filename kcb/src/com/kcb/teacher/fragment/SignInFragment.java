@@ -14,7 +14,7 @@ import com.kcbTeam.R;
 /**
  * 
  * @className: SignInFragment
- * @description: 
+ * @description:
  * @author: ZQJ
  * @date: 2015年4月24日 下午3:21:09
  */

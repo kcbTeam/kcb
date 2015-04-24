@@ -1,19 +1,21 @@
 package com.kcb.teacher.adapter;
 
 import java.util.List;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
 import com.kcb.common.util.SignRecordInfo;
 import com.kcbTeam.R;
 
 /**
  * 
  * @className: ListAdapterSignRecod
- * @description: 
+ * @description:
  * @author: ZQJ
  * @date: 2015年4月24日 下午3:23:50
  */

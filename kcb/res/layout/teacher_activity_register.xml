@@ -5,27 +5,26 @@
    android:layout_height= "match_parent"  > 
 
 <TextView 
-	android:id ="@+id/myname" 
+	android:id ="@+id/textview_appname" 
 	android:layout_width ="wrap_content" 
 	android:layout_height ="wrap_content" 
-	android:layout_alignParentLeft="true"
-	android:text = "@string/myname" 
+	android:text = "@string/app_name"
 	android:textColor ="#ff4500" 
 	android:textSize ="25sp" /> 
    
 <ImageView 
-	android:id ="@+id/register_login_pic" 
+	android:id ="@+id/imageview_login" 
 	android:layout_width ="wrap_content" 
 	android:layout_height ="wrap_content" 
-	android:layout_below="@id/myname" 
+	android:layout_below="@id/textview_appname" 
 	android:layout_centerHorizontal ="true" 
-	android:src ="@drawable/register" /> 
+	android:src ="@drawable/tch_login" /> 
     
 <EditText 
-	android:id ="@+id/usernameEditText" 
+	android:id ="@+id/edittext_id" 
 	android:layout_width ="fill_parent" 
 	android:layout_height ="wrap_content" 
-	android:layout_below="@id/register_login_pic"
+	android:layout_below="@id/imageview_login"
 	android:layout_marginLeft="50dp"
 	android:layout_marginRight="50dp"
     android:layout_marginTop="100dp"
@@ -35,26 +34,25 @@
 	android:textSize ="16sp" /> 
 	
 <EditText 
-	android:id ="@+id/passwordEditText" 
+	android:id ="@+id/edittext_password" 
 	android:layout_width ="fill_parent" 
 	android:layout_height ="wrap_content" 
-	android:layout_below="@id/usernameEditText"
-	android:layout_alignLeft="@id/usernameEditText"
+	android:layout_below="@id/edittext_id"
     android:layout_marginTop="20dp"
+    android:layout_marginLeft="50dp"
     android:layout_marginRight="50dp"
 	android:hint="@string/password" 
 	android:inputType="textPassword"
 	android:textSize ="16sp" /> 
     
 <Button 
-	android:id ="@+id/buton_register" 
+	android:id ="@+id/buton_login" 
 	android:layout_width ="wrap_content" 
 	android:layout_height ="wrap_content" 
-	android:layout_alignRight="@id/passwordEditText"
-	android:layout_below="@id/passwordEditText"
+	android:layout_alignRight="@id/edittext_password"
+	android:layout_below="@id/edittext_password"
 	android:layout_marginTop="60dp"
 	android:textSize ="20dp" 
 	android:text = "@string/registerin" />     
-    
     
 </RelativeLayout>
