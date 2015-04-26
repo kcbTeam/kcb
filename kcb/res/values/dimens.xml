@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-   <dimen name="text_size25dp">25dp</dimen>  
-     <dimen name="text_size5dp">5dp</dimen>
-      <dimen name="text_size40dp">40dp</dimen>
-       <dimen name="text_size10dp">10dp</dimen>
+
+    <dimen name="dp_16">16dp</dimen>
+    <dimen name="text_size25dp">25dp</dimen>
+    <dimen name="text_size5dp">5dp</dimen>
+    <dimen name="text_size40dp">40dp</dimen>
+    <dimen name="text_size10dp">10dp</dimen>
+
 </resources>
