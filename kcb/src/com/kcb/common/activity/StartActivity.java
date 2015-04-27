@@ -1,16 +1,12 @@
 package com.kcb.common.activity;
 
-import java.text.BreakIterator;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.webkit.WebChromeClient.CustomViewCallback;
 import android.widget.ImageView;
 
 import com.kcb.common.base.BaseActivity;

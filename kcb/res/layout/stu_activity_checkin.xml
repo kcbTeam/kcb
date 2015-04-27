@@ -8,29 +8,29 @@
         android:id="@+id/textview_checkin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/text_size5dp"
-        android:layout_marginTop="@dimen/text_size5dp"
+        android:layout_marginLeft="@dimen/dp_5"
+        android:layout_marginTop="@dimen/dp_5"
         android:text="@string/checkin"
-        android:textSize="@dimen/text_size25dp" />
+        android:textSize="@dimen/dp_25" />
 
     <TextView
         android:id="@+id/textview_inputnum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/textview_checkin"
-        android:layout_marginLeft="@dimen/text_size5dp"
-        android:layout_marginTop="@dimen/text_size25dp"
+        android:layout_marginLeft="@dimen/dp_5"
+        android:layout_marginTop="@dimen/dp_25"
         android:text="@string/tip_inputnum"
-        android:textSize="@dimen/text_size25dp" />
+        android:textSize="@dimen/dp_25" />
 
     <LinearLayout
         android:id="@+id/linearlayout_shownum"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/textview_inputnum"
-        android:layout_marginLeft="@dimen/text_size10dp"
-        android:layout_marginRight="@dimen/text_size10dp"
-        android:layout_marginTop="@dimen/text_size25dp"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_25"
         android:orientation="horizontal" >
 
         <TextView
@@ -40,7 +40,7 @@
             android:layout_weight="1"
             android:background="@drawable/textview_border"
             android:gravity="center"
-            android:textSize="@dimen/text_size40dp" />
+            android:textSize="@dimen/dp_40" />
 
         <TextView
             android:id="@+id/textview_shownum2"
@@ -49,7 +49,7 @@
             android:layout_weight="1"
             android:background="@drawable/textview_border"
             android:gravity="center"
-            android:textSize="@dimen/text_size40dp" />
+            android:textSize="@dimen/dp_40" />
 
         <TextView
             android:id="@+id/textview_shownum3"
@@ -58,7 +58,7 @@
             android:layout_weight="1"
             android:background="@drawable/textview_border"
             android:gravity="center"
-            android:textSize="@dimen/text_size40dp" />
+            android:textSize="@dimen/dp_40" />
 
         <TextView
             android:id="@+id/textview_shownum4"
@@ -67,7 +67,7 @@
             android:layout_weight="1"
             android:background="@drawable/textview_border"
             android:gravity="center"
-            android:textSize="@dimen/text_size40dp" />
+            android:textSize="@dimen/dp_40" />
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
@@ -75,9 +75,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/linearlayout_shownum"
-        android:layout_marginLeft="@dimen/text_size10dp"
-        android:layout_marginRight="@dimen/text_size10dp"
-        android:layout_marginTop="@dimen/text_size25dp" />
+        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginRight="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_25" />
 
     <Button
         android:id="@+id/button_finish"
@@ -88,6 +88,6 @@
         android:layout_marginBottom="20dp"
         android:layout_marginRight="20dp"
         android:text="@string/button_finish"
-        android:textSize="@dimen/text_size25dp" />
+        android:textSize="@dimen/dp_25" />
 
 </RelativeLayout>

@@ -52,7 +52,7 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.kcb.student.activity.HomePageActivity"
+            android:name="com.kcb.student.activity.HomeActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity

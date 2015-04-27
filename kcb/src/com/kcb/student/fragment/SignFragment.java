@@ -22,14 +22,14 @@ public class SignFragment extends BaseFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstaceState) {
-        View view=inflater.inflate(R.layout.stu_fragment_sign, container, false);
+        View view = inflater.inflate(R.layout.stu_fragment_sign, container, false);
         buttonstart = (Button) getView().findViewById(R.id.startSign);
         buttoncheck = (Button) getView().findViewById(R.id.checkSign);
         buttonstart.setOnClickListener(this);
         buttoncheck.setOnClickListener(this);
         return view;
     }
-    
+
     @Override
     protected void initView() {}
 
@@ -49,5 +49,5 @@ public class SignFragment extends BaseFragment {
                 break;
         }
     }
- 
+
 }
