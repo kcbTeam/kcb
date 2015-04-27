@@ -1,17 +1,22 @@
 package com.kcb.common.activity;
 
+import java.text.BreakIterator;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.webkit.WebChromeClient.CustomViewCallback;
 import android.widget.ImageView;
 
 import com.kcb.common.base.BaseActivity;
-import com.kcb.common.view.ColorAnimationView;
+import com.kcb.common.listener.CustomOnClickListener;
+import com.kcb.library.view.ColorAnimationView;
+import com.kcb.library.view.PaperButton;
 import com.kcb.student.activity.LoginActivity;
 import com.kcbTeam.R;
 
@@ -43,7 +48,7 @@ public class StartActivity extends BaseActivity {
     @Override
     protected void initData() {}
 
-    private class StartViewPagerAdapter extends PagerAdapter implements OnClickListener {
+    private class StartViewPagerAdapter extends PagerAdapter {
 
         private int[] mBackgroundBitmapIds = new int[] {R.drawable.ic_launcher,
                 R.drawable.ic_launcher, R.drawable.ic_launcher};
@@ -60,12 +65,12 @@ public class StartActivity extends BaseActivity {
                     (ImageView) view.findViewById(R.id.imageview_background);
             backgroundImageView.setImageResource(mBackgroundBitmapIds[position]);
             if (position == getCount() - 1) {
-                Button stuButton = (Button) view.findViewById(R.id.button_stu);
-                Button tchButton = (Button) view.findViewById(R.id.button_tch);
-                stuButton.setVisibility(View.VISIBLE);
-                stuButton.setOnClickListener(this);
-                tchButton.setVisibility(View.VISIBLE);
-                tchButton.setOnClickListener(this);
+                PaperButton stuPaperButton = (PaperButton) view.findViewById(R.id.pagerbutton_stu);
+                PaperButton tchPaperButton = (PaperButton) view.findViewById(R.id.pagerbutton_tch);
+                stuPaperButton.setVisibility(View.VISIBLE);
+                stuPaperButton.setOnClickListener(mOnClickListener);
+                tchPaperButton.setVisibility(View.VISIBLE);
+                tchPaperButton.setOnClickListener(mOnClickListener);
             }
             container.addView(view);
             return view;
@@ -76,19 +81,28 @@ public class StartActivity extends BaseActivity {
             return arg0 == arg1;
         }
 
-        @Override
-        public void onClick(View v) {
-            switch (v.getId()) {
-                case R.id.button_stu:
-                    gotoStuModule();
-                    break;
-                case R.id.button_tch:
-                    gotoTchModule();
-                    break;
-                default:
-                    break;
+        private CustomOnClickListener mOnClickListener = new CustomOnClickListener() {
+
+            @Override
+            public void doClick(final View v) {
+                new Handler().postDelayed(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        switch (v.getId()) {
+                            case R.id.pagerbutton_stu:
+                                gotoStuModule();
+                                break;
+                            case R.id.pagerbutton_tch:
+                                gotoTchModule();
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }, 400);
             }
-        }
+        };
 
         private void gotoStuModule() {
             // TODO detect stu login, sharedPreference;
