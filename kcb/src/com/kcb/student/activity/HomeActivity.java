@@ -47,11 +47,16 @@ public class HomeActivity extends BaseFragmentActivity {
 
     @Override
     protected void initView() {
+        //TODO rename exitbtn to button_exit
+        //rename bottomRg to radiogroup
         buttonexit = (Button) findViewById(R.id.exitbtn);
         radioGroup = (RadioGroup) findViewById(R.id.bottomRg);
 
         mFragments = new Fragment[2];
         fragmentManager = getSupportFragmentManager();
+        
+        //TODO rename sign to fragment_sign
+        //rename test to fragment_test
         mFragments[INDEX_CHECKIN] = fragmentManager.findFragmentById(R.id.sign);
         mFragments[INDEX_TEST] = fragmentManager.findFragmentById(R.id.test);
         fragmentTransaction = fragmentManager.beginTransaction().hide(mFragments[INDEX_TEST]);
@@ -59,6 +64,8 @@ public class HomeActivity extends BaseFragmentActivity {
         buttonexit.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                //TODO 
+                //show dialog
                 finish();
             }
         });

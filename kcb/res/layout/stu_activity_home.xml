@@ -2,6 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
+
+     <!-- rename to textview_appname -->
     <TextView
         android:id="@+id/projectName"
         android:layout_width="wrap_content"
@@ -9,51 +11,61 @@
         android:layout_marginLeft="30dp"
         android:text="@string/app_name"
         android:textSize="20sp" />
+
+     <!-- rename to buttoon_exit -->
     <Button
         android:id="@+id/exitbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/exit"
+        android:layout_alignBaseline="@id/projectName"
         android:layout_alignParentRight="true"
-        android:textSize="20sp"
-        android:layout_alignBaseline="@id/projectName"/>
+        android:text="@string/exit"
+        android:textSize="20sp" />
+
     <fragment
         android:id="@+id/sign"
-        android:layout_below="@id/projectName"
         android:name="com.kcb.student.fragment.SignFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@id/projectName"
         android:layout_weight="10" />
+
     <fragment
         android:id="@+id/test"
-        android:layout_below="@id/projectName"
         android:name="com.kcb.student.fragment.TestFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@id/projectName"
         android:layout_weight="10" />
+
     <RadioGroup
         android:id="@+id/bottomRg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.5"
         android:layout_alignParentBottom="true"
-        android:orientation="horizontal">
+        android:layout_weight="0.5"
+        android:orientation="horizontal" >
+
+        <!-- rename to radiobutton_sign -->
         <RadioButton
             android:id="@+id/signbtn"
-            android:button="@null"
             android:layout_width="160dp"
             android:layout_height="wrap_content"
+            android:button="@null"
             android:checked="true"
-            android:textSize="20sp"
             android:gravity="center"
-            android:text="@string/signbtn" />
+            android:text="@string/signbtn"
+            android:textSize="20sp" />
+
+         <!-- rename to radiobutton_test -->
         <RadioButton
             android:id="@+id/testbtn"
-            android:button="@null"
             android:layout_width="160dp"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
+            android:button="@null"
             android:gravity="center"
-            android:text="@string/testbtn" />
-     </RadioGroup>
+            android:text="@string/testbtn"
+            android:textSize="20sp" />
+    </RadioGroup>
+
 </RelativeLayout>
