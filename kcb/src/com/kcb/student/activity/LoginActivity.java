@@ -21,20 +21,22 @@ import com.kcbTeam.R;
 public class LoginActivity extends BaseActivity {
 
     private EditText idEditText;
-    private EditText passWordEditText;
+    private EditText passwordEditText;
     private Button loginButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.stu_activity_home);
+        // TODO tuning xml
+        setContentView(R.layout.stu_activity_login);
+
         initView();
     }
 
     @Override
     protected void initView() {
         idEditText = (EditText) findViewById(R.id.edittext_stuid);
-        passWordEditText = (EditText) findViewById(R.id.edittext_password);
+        passwordEditText = (EditText) findViewById(R.id.edittext_password);
         loginButton = (Button) findViewById(R.id.button_login);
         loginButton.setOnClickListener(this);
     }
@@ -44,8 +46,9 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     public void onClick(View v) {
+        // TODO
         if (!TextUtils.isEmpty(idEditText.getText())
-                & !TextUtils.isEmpty(passWordEditText.getText())) {
+                & !TextUtils.isEmpty(passwordEditText.getText())) {
             // if(need request server;){
             // SharedPreferences sharedPref = getSharedPreferences("AppLoginData",
             // MODE_PRIVATE);
@@ -57,5 +60,4 @@ public class LoginActivity extends BaseActivity {
             startActivity(intent);
         } else {}
     }
-
 }

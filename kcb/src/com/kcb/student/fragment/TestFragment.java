@@ -15,21 +15,21 @@ import com.kcbTeam.R;
  * @author: Ding
  * @date: 2015年4月23日 上午10:17:44
  */
-public class TestFragment extends BaseFragment{
+public class TestFragment extends BaseFragment {
 
     private Button buttonstart;
     private Button buttoncheck;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.stu_fragment_test, container, false);
+        View view = inflater.inflate(R.layout.stu_fragment_test, container, false);
         buttonstart = (Button) getView().findViewById(R.id.startTest);
         buttoncheck = (Button) getView().findViewById(R.id.checkTest);
         buttonstart.setOnClickListener(this);
         buttoncheck.setOnClickListener(this);
         return view;
     }
-    
+
     @Override
     protected void initView() {}
 
