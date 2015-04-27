@@ -4,7 +4,6 @@ package com.kcb.teacher.activity;
 import java.util.ArrayList;
 
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -14,7 +13,6 @@ import android.widget.TextView;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
-import com.github.mikephil.charting.components.Legend.LegendPosition;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
@@ -28,7 +26,7 @@ import com.kcbTeam.R;
 /**
  * 
  * @className: CheckInDetailsActivity
- * @description: 
+ * @description:
  * @author: ZQJ
  * @date: 2015年4月27日 下午11:14:41
  */
@@ -45,8 +43,6 @@ public class CheckInDetailsActivity extends BaseFragmentActivity
     private int mCheckInRate = 45;
 
     private String[] mParties = new String[] {"已签", "未签"};
-    
-    private Typeface tf;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,7 +86,6 @@ public class CheckInDetailsActivity extends BaseFragmentActivity
     }
 
     private void initPieChart() {
-        tf = Typeface.createFromAsset(getAssets(), "OpenSans-Regular.ttf");
         mChart = (PieChart) findViewById(R.id.piechart);
         mChart.setUsePercentValues(true);
         mChart.setDescription("");
@@ -99,8 +94,8 @@ public class CheckInDetailsActivity extends BaseFragmentActivity
 
         mChart.setTransparentCircleColor(Color.WHITE);
 
-        mChart.setHoleRadius(48f);
-        mChart.setTransparentCircleRadius(51f);
+        mChart.setHoleRadius(1f);
+        mChart.setTransparentCircleRadius(2f);
         mChart.setHoleColor(Color.WHITE);
 
         mChart.setDrawCenterText(true);
@@ -111,12 +106,13 @@ public class CheckInDetailsActivity extends BaseFragmentActivity
         setData(1, mCheckInRate);
         mChart.animateY(1500, Easing.EasingOption.EaseInOutQuad);
         // mChart.spin(2000, 0, 360);
-
+        //
         Legend l = mChart.getLegend();
-        l.setPosition(LegendPosition.PIECHART_CENTER);
-        l.setXEntrySpace(7f);
-        l.setYEntrySpace(5f);
-        
+        l.setEnabled(false);
+        // l.setPosition(LegendPosition.PIECHART_CENTER);
+        // l.setXEntrySpace(7f);
+        // l.setYEntrySpace(5f);
+
     }
 
     private void setData(int count, float range) {
@@ -124,14 +120,14 @@ public class CheckInDetailsActivity extends BaseFragmentActivity
         float mult = range;
 
         ArrayList<Entry> yVals1 = new ArrayList<Entry>();
-        yVals1.add(new Entry(mult/100, 0));
-        yVals1.add(new Entry((float)(1 - mult/100), 1));
+        yVals1.add(new Entry(mult / 100, 0));
+        yVals1.add(new Entry((float) (1 - mult / 100), 1));
         // IMPORTANT: In a PieChart, no values (Entry) should have the same
         // xIndex (even if from different DataSets), since no values can be
         // drawn above each other.
-//        for (int i = 0; i < count + 1; i++) {
-//            yVals1.add(new Entry((float) (Math.random() * mult) + mult / 5, i));
-//        }
+        // for (int i = 0; i < count + 1; i++) {
+        // yVals1.add(new Entry((float) (Math.random() * mult) + mult / 5, i));
+        // }
 
         ArrayList<String> xVals = new ArrayList<String>();
 
@@ -145,23 +141,23 @@ public class CheckInDetailsActivity extends BaseFragmentActivity
         // add a lot of colors
 
         ArrayList<Integer> colors = new ArrayList<Integer>();
-        
+
         colors.add(Color.rgb(192, 255, 140));
         colors.add(Color.GRAY);
-//        for (int c : ColorTemplate.VORDIPLOM_COLORS)
-//            colors.add(c);
+        // for (int c : ColorTemplate.VORDIPLOM_COLORS)
+        // colors.add(c);
 
-//        for (int c : ColorTemplate.JOYFUL_COLORS)
-//            colors.add(c);
-//
-//        for (int c : ColorTemplate.COLORFUL_COLORS)
-//            colors.add(c);
-//
-//        for (int c : ColorTemplate.LIBERTY_COLORS)
-//            colors.add(c);
-//
-//        for (int c : ColorTemplate.PASTEL_COLORS)
-//            colors.add(c);
+        // for (int c : ColorTemplate.JOYFUL_COLORS)
+        // colors.add(c);
+        //
+        // for (int c : ColorTemplate.COLORFUL_COLORS)
+        // colors.add(c);
+        //
+        // for (int c : ColorTemplate.LIBERTY_COLORS)
+        // colors.add(c);
+        //
+        // for (int c : ColorTemplate.PASTEL_COLORS)
+        // colors.add(c);
 
         colors.add(ColorTemplate.getHoloBlue());
 
@@ -171,7 +167,6 @@ public class CheckInDetailsActivity extends BaseFragmentActivity
         data.setValueFormatter(new PercentFormatter());
         data.setValueTextSize(11f);
         data.setValueTextColor(Color.BLUE);
-        data.setValueTypeface(tf);
         mChart.setData(data);
         // undo all highlights
         mChart.highlightValues(null);

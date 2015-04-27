@@ -9,6 +9,7 @@ import android.widget.Button;
 
 import com.kcb.common.base.BaseFragment;
 import com.kcb.teacher.activity.CheckInResultActivity;
+import com.kcb.teacher.activity.CheckinActivity;
 import com.kcbTeam.R;
 
 /**
@@ -41,12 +42,14 @@ public class CheckInFragment extends BaseFragment {
 
     @Override
     public void onClick(View v) {
+        Intent intent;
         switch (v.getId()) {
             case R.id.button_begin_signin:
-                // TODO go to begin sign activity
+                intent = new Intent(getActivity(), CheckinActivity.class);
+                startActivity(intent);
                 break;
             case R.id.button_signin_result:
-                Intent intent = new Intent(getActivity(), CheckInResultActivity.class);
+                intent = new Intent(getActivity(), CheckInResultActivity.class);
                 startActivity(intent);
                 break;
             default:
