@@ -29,10 +29,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="com.kcb.student.activity.LoginActivity"
-            android:screenOrientation="portrait" >
-        </activity>
         <!-- common end -->
 
 
@@ -64,7 +60,10 @@
 
 
         <!-- student end -->
-
+        <activity
+            android:name="com.kcb.student.activity.LoginActivity"
+            android:screenOrientation="portrait" >
+        </activity>
         <activity
             android:name="com.kcb.student.activity.HomeActivity"
             android:screenOrientation="portrait" >
