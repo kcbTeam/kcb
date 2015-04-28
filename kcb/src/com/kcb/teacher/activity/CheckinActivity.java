@@ -50,7 +50,7 @@ public class CheckinActivity extends BaseActivity {
                 numTextview.setText(String.valueOf(intnum));
             }
         });
-// add by zqj ,for test
+        // add by zqj ,for test
         rateButton = (Button) findViewById(R.id.button_rate);
         rateButton.setOnClickListener(new OnClickListener() {
 

@@ -22,23 +22,23 @@ import com.kcbTeam.R;
  */
 public class HomeActivity extends BaseFragmentActivity {
 
-    //TODO change define sort
+    // TODO change define sort
     private final int INDEX_CHECKIN = 0;
     private final int INDEX_TEST = 1;
 
     private Fragment[] mFragments;
     private FragmentManager fragmentManager;
-    
-    //TODO change to temp
+
+    // TODO change to temp
     private FragmentTransaction fragmentTransaction;
-    //TODO rename to exitButton
+    // TODO rename to exitButton
     private Button buttonexit;
     private RadioGroup radioGroup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //TODO delete it
+        // TODO delete it
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.stu_activity_home);
 
@@ -47,16 +47,16 @@ public class HomeActivity extends BaseFragmentActivity {
 
     @Override
     protected void initView() {
-        //TODO rename exitbtn to button_exit
-        //rename bottomRg to radiogroup
+        // TODO rename exitbtn to button_exit
+        // rename bottomRg to radiogroup
         buttonexit = (Button) findViewById(R.id.exitbtn);
         radioGroup = (RadioGroup) findViewById(R.id.bottomRg);
 
         mFragments = new Fragment[2];
         fragmentManager = getSupportFragmentManager();
-        
-        //TODO rename sign to fragment_sign
-        //rename test to fragment_test
+
+        // TODO rename sign to fragment_sign
+        // rename test to fragment_test
         mFragments[INDEX_CHECKIN] = fragmentManager.findFragmentById(R.id.sign);
         mFragments[INDEX_TEST] = fragmentManager.findFragmentById(R.id.test);
         fragmentTransaction = fragmentManager.beginTransaction().hide(mFragments[INDEX_TEST]);
@@ -64,8 +64,8 @@ public class HomeActivity extends BaseFragmentActivity {
         buttonexit.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO 
-                //show dialog
+                // TODO
+                // show dialog
                 finish();
             }
         });

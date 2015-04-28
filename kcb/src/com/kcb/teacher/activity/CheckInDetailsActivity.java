@@ -2,12 +2,14 @@ package com.kcb.teacher.activity;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.animation.Easing;
@@ -21,6 +23,8 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.Highlight;
 import com.github.mikephil.charting.utils.PercentFormatter;
 import com.kcb.common.base.BaseFragmentActivity;
+import com.kcb.teacher.adapter.ListAdapterMissCheckIn;
+import com.kcb.teacher.model.StudentInfo;
 import com.kcbTeam.R;
 
 /**
@@ -38,16 +42,20 @@ public class CheckInDetailsActivity extends BaseFragmentActivity
     private PieChart mChart;
     private TextView hintTextView;
     private Button backButton;
+    private ListView missCheckInListView;
 
     private String mHintFormat = "本次到课率为%d%%";
-    private int mCheckInRate = 45;
+    private int mCheckInRate = 70;
 
     private String[] mParties = new String[] {"已签", "未签"};
+    private List<StudentInfo> mList;
+    private ListAdapterMissCheckIn mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tch_activity_checkindetails);
+        initData();
         initView();
     }
 
@@ -64,12 +72,19 @@ public class CheckInDetailsActivity extends BaseFragmentActivity
                 finish();
             }
         });
+        missCheckInListView = (ListView) findViewById(R.id.listview_not_ckeckin_stu);
+        mAdapter = new ListAdapterMissCheckIn(this, mList);
+        missCheckInListView.setAdapter(mAdapter);
     }
 
 
 
     @Override
-    protected void initData() {}
+    protected void initData() {
+        mList = new ArrayList<StudentInfo>();
+        mList.clear();
+        mList.add(new StudentInfo("123", "123456", 1, 0));
+    }
 
     @Override
     public void onBackPressed() {

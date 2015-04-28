@@ -50,7 +50,6 @@ public class StuCentreFragment extends BaseFragment {
     protected void initData() {
         mList = new ArrayList<StudentInfo>();
         mList.clear();
-        mList.add(new StudentInfo("NAME", "STUDENT ID"));
         mList.add(new StudentInfo("zqj", "1004210254"));
         mList.add(new StudentInfo("zh", "1104210256"));
     }

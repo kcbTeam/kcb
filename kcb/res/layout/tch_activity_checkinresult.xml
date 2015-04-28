@@ -22,11 +22,31 @@
             android:textSize="22dp" />
     </LinearLayout>
 
-    <ListView
+    <LinearLayout
+        android:id="@+id/table_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@id/title"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="@string/checkin_date" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="135dp"
+            android:text="@string/checkin_rate" />
+    </LinearLayout>
+
+    <ListView
         android:id="@+id/listview_sign_record"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:layout_below="@id/table_title" >
     </ListView>
 
 </RelativeLayout>
