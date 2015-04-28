@@ -28,7 +28,7 @@ public class HomeActivity extends BaseFragmentActivity {
 
     private Fragment[] mFragments;
     private FragmentManager fragmentManager;
-    
+
     private Button exitButton;
     private RadioGroup radioGroup;
 
@@ -47,31 +47,31 @@ public class HomeActivity extends BaseFragmentActivity {
 
         mFragments = new Fragment[2];
         fragmentManager = getSupportFragmentManager();
-        
+
         mFragments[INDEX_CHECKIN] = fragmentManager.findFragmentById(R.id.fragment_sign);
         mFragments[INDEX_TEST] = fragmentManager.findFragmentById(R.id.fragment_test);
-        
-FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.hide(mFragments[INDEX_CHECKIN]).hide(mFragments[INDEX_TEST]);
+
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.hide(mFragments[INDEX_CHECKIN]).hide(mFragments[INDEX_TEST]);
         fragmentTransaction.show(mFragments[INDEX_CHECKIN]).commit();
 
         exitButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog dialog=new AlertDialog.Builder(HomeActivity.this).
-                        setTitle("确定退出？").
-                        setPositiveButton("确定",new DialogInterface.OnClickListener(){
-                            @Override
-                            public void onClick(DialogInterface dialog,int which){
-                                finish();
-                            }
-                        }).setNegativeButton("取消",new DialogInterface.OnClickListener(){
-                            @Override
-                            public void onClick(DialogInterface dialog,int which){
-                                
-                            }
-                        }).create();
-                       dialog.show();
+                AlertDialog dialog =
+                        new AlertDialog.Builder(HomeActivity.this).setTitle("确定退出？")
+                                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        finish();
+                                    }
+                                }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+
+                                    }
+                                }).create();
+                dialog.show();
             }
         });
 

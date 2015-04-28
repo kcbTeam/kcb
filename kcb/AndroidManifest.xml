@@ -37,8 +37,26 @@
 
 
         <!-- teacher start -->
-
-
+        <activity
+            android:name="com.kcb.teacher.activity.CheckInResultActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.kcb.teacher.activity.LoginActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.kcb.teacher.activity.CheckinActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.kcb.teacher.activity.CheckInDetailsActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.kcb.teacher.activity.HomeActivity"
+            android:screenOrientation="portrait" >
+        </activity>
         <!-- teacher end -->
 
 
@@ -48,23 +66,11 @@
         <!-- student end -->
 
         <activity
-            android:name="com.kcb.teacher.activity.CheckInResultActivity"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
             android:name="com.kcb.student.activity.HomeActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="com.kcb.student.activity.CheckinActivity"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
-            android:name="com.kcb.student.activity.CheckInResultActivity"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
-            android:name="com.kcb.teacher.activity.CheckinActivity"
             android:screenOrientation="portrait" >
         </activity>
     </application>

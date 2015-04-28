@@ -75,21 +75,21 @@ public class HomeActivity extends BaseFragmentActivity {
                 finish();
                 break;
             case R.id.button_course_signin:
-                setButtonTextColor(1);
+                setButtonTextColor(INDEX_CHECKIN);
                 if (null == mCheckInFragment) {
                     mCheckInFragment = new CheckInFragment();
                 }
                 mFragmentTransaction.replace(R.id.fragment_content, mCheckInFragment);
                 break;
             case R.id.button_course_test:
-                setButtonTextColor(2);
+                setButtonTextColor(INDEX_TEST);
                 if (null == mTestFragment) {
                     mTestFragment = new TestFragment();
                 }
                 mFragmentTransaction.replace(R.id.fragment_content, mTestFragment);
                 break;
             case R.id.button_student_center:
-                setButtonTextColor(3);
+                setButtonTextColor(INDEX_STUCENTER);
                 if (null == mStuCentreFragment) {
                     mStuCentreFragment = new StuCentreFragment();
                 }

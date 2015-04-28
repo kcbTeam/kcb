@@ -8,6 +8,12 @@
 package com.kcbTeam.kcblibrary;
 
 public final class R {
+    public static final class anim {
+        public static int move_left_in_activity=0x7f020000;
+        public static int move_left_out_activity=0x7f020001;
+        public static int move_right_in_activity=0x7f020002;
+        public static int move_right_out_activity=0x7f020003;
+    }
     public static final class attr {
         /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
@@ -98,19 +104,19 @@ containing a value of this type.
         public static int paper_text_size=0x7f010001;
     }
     public static final class color {
-        public static int paper_button_color=0x7f030001;
-        public static int paper_button_shadow_color=0x7f030002;
-        public static int paper_text_color=0x7f030000;
+        public static int paper_button_color=0x7f040001;
+        public static int paper_button_shadow_color=0x7f040002;
+        public static int paper_text_color=0x7f040000;
     }
     public static final class dimen {
-        public static int paper_button_corner_radius=0x7f020001;
-        public static int paper_padding=0x7f020002;
+        public static int paper_button_corner_radius=0x7f030001;
+        public static int paper_padding=0x7f030002;
         /**  PaperButton Default 
          */
-        public static int paper_text_size=0x7f020000;
+        public static int paper_text_size=0x7f030000;
     }
     public static final class string {
-        public static int app_name=0x7f040000;
+        public static int app_name=0x7f050000;
     }
     public static final class style {
         /** 
@@ -123,11 +129,11 @@ containing a value of this type.
             backward-compatibility can go here.
         
          */
-        public static int AppBaseTheme=0x7f050000;
+        public static int AppBaseTheme=0x7f060000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static int AppTheme=0x7f050001;
+        public static int AppTheme=0x7f060001;
     }
     public static final class styleable {
         /**  PaperButton Attribute 
