@@ -26,7 +26,6 @@ public class HomeActivity extends BaseFragmentActivity {
     private final int INDEX_CHECKIN = 0;
     private final int INDEX_TEST = 1;
 
-    private FragmentTransaction fragmentTransaction;
     private Fragment[] mFragments;
     private FragmentManager fragmentManager;
     
@@ -51,7 +50,9 @@ public class HomeActivity extends BaseFragmentActivity {
         
         mFragments[INDEX_CHECKIN] = fragmentManager.findFragmentById(R.id.fragment_sign);
         mFragments[INDEX_TEST] = fragmentManager.findFragmentById(R.id.fragment_test);
-        fragmentTransaction = fragmentManager.beginTransaction().hide(mFragments[INDEX_CHECKIN]).hide(mFragments[INDEX_TEST]);
+        
+FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.hide(mFragments[INDEX_CHECKIN]).hide(mFragments[INDEX_TEST]);
         fragmentTransaction.show(mFragments[INDEX_CHECKIN]).commit();
 
         exitButton.setOnClickListener(new OnClickListener() {
@@ -77,6 +78,7 @@ public class HomeActivity extends BaseFragmentActivity {
         radioGroup.setOnCheckedChangeListener(new OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction =
                         fragmentManager.beginTransaction().hide(mFragments[INDEX_CHECKIN])
                                 .hide(mFragments[INDEX_TEST]);
