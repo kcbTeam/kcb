@@ -8,6 +8,17 @@
     <string name="registerin">登陆</string>
     <!-- register activty end -->
 
+    <!-- test activty start -->
+    <string name="tch_tip">距离测试结束还有10分钟。\n测试结束后课程宝将会自动终止测试并统计测试结果，您可以到测试结果中查询。</string>
+    <string name="warmtip">温馨提示</string>
+    <string name="tipmessage">一旦点击“开始测试”按钮后学生就可以开始答题。您确定需要现在开始吗？</string>
+    <string name="tipyes">是的，请这样做。</string>
+    <string name="tipno">不，谢谢。</string>
+    <string name="classtest">课堂小测试</string>
+    <string name="edit">编辑测试内容</string>
+    <string name="starttest">开始测试</string>
+    <!-- test activty end -->
+
 
     <!-- home page activty start -->
     <string name="course_signin">课堂签到</string>
