@@ -11,12 +11,32 @@
         android:layout_marginTop="20dp"
         android:hint="@string/hint_studentcenter_search" />
 
+    <LinearLayout
+        android:id="@+id/table_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edittext_search"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="80dp"
+            android:text="@string/stu_centre_name" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="100dp"
+            android:text="@string/stu_centre_stuId" />
+    </LinearLayout>
+
     <ListView
         android:id="@+id/listview_student"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/edittext_search"
-        android:layout_marginTop="20dp" >
+        android:layout_below="@id/table_title"
+        android:layout_marginTop="5dp" >
     </ListView>
 
 </RelativeLayout>

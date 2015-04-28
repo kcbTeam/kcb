@@ -49,7 +49,6 @@ public class CheckInResultActivity extends BaseActivity {
     protected void initData() {
         mList = new ArrayList<CheckInRecordInfo>();
         mList.clear();
-        mList.add(new CheckInRecordInfo("签到日期", "签到率"));
         mList.add(new CheckInRecordInfo("2015-01-01", "0%"));
         mList.add(new CheckInRecordInfo("2015-01-02", "0%"));
     }

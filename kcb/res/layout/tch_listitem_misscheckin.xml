@@ -4,15 +4,15 @@
     android:layout_height="match_parent" >
 
     <TextView
-        android:id="@+id/textview_signdate"
+        android:id="@+id/textview_studentname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp" />
+        android:layout_marginLeft="5dp" />
 
     <TextView
-        android:id="@+id/textview_signrate"
+        android:id="@+id/textview_studentid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="200dp" />
+        android:layout_marginLeft="155dp" />
 
 </RelativeLayout>

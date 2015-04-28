@@ -1,5 +1,6 @@
 package com.kcb.teacher.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.kcb.common.base.BaseActivity;
@@ -23,11 +24,16 @@ public class LoginActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tch_activity_register);
+        // for test ,by zqj;
+        Intent intent = new Intent(this, HomeActivity.class);
+        startActivity(intent);
     }
 
-    @Override
-    protected void initView() {}
 
     @Override
     protected void initData() {}
+
+
+    @Override
+    protected void initView() {}
 }
