@@ -8,25 +8,25 @@ import com.android.volley.toolbox.Volley;
 import com.kcb.common.application.KApplication;
 import com.kcb.common.util.LogUtil;
 
-public class ServerUtil {
+public class RequestUtil {
 
     private String TAG_REQUEST = "volley_request";
 
-    private static ServerUtil instance;
+    private static RequestUtil instance;
     private RequestQueue mRequestQueue;
 
-    public static ServerUtil getInstance() {
+    public static RequestUtil getInstance() {
         if (null == instance) {
-            synchronized (ServerUtil.class) {
+            synchronized (RequestUtil.class) {
                 if (null == instance) {
-                    instance = new ServerUtil();
+                    instance = new RequestUtil();
                 }
             }
         }
         return instance;
     }
 
-    private ServerUtil() {
+    private RequestUtil() {
         mRequestQueue = Volley.newRequestQueue(KApplication.getInstance());
     }
 
