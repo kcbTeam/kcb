@@ -1,5 +1,6 @@
 package com.kcb.student.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.kcb.common.base.BaseFragment;
+import com.kcb.student.activity.CheckInResultActivity;
+import com.kcb.student.activity.CheckinActivity;
 import com.kcbTeam.R;
 
 /**
@@ -22,12 +25,16 @@ public class SignFragment extends BaseFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstaceState) {
-        View view = inflater.inflate(R.layout.stu_fragment_sign, container, false);
+        return inflater.inflate(R.layout.stu_fragment_sign, container, false);
+    }
+    
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
         buttonstart = (Button) getView().findViewById(R.id.startSign);
         buttoncheck = (Button) getView().findViewById(R.id.checkSign);
         buttonstart.setOnClickListener(this);
         buttoncheck.setOnClickListener(this);
-        return view;
     }
 
     @Override
@@ -38,12 +45,15 @@ public class SignFragment extends BaseFragment {
 
     @Override
     public void onClick(View v) {
+        Intent intent;
         switch (v.getId()) {
             case R.id.startSign:
-                // TODO go to sign in
+                intent=new Intent(getActivity(),CheckinActivity.class);
+                startActivity(intent);
                 break;
             case R.id.checkSign:
-                // TODO go to check the result of sign in
+                intent=new Intent(getActivity(),CheckInResultActivity.class);
+                startActivity(intent);
                 break;
             default:
                 break;

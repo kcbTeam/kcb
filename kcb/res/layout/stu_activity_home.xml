@@ -5,7 +5,7 @@
 
      <!-- rename to textview_appname -->
     <TextView
-        android:id="@+id/projectName"
+        android:id="@+id/textview_appname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
@@ -14,32 +14,32 @@
 
      <!-- rename to buttoon_exit -->
     <Button
-        android:id="@+id/exitbtn"
+        android:id="@+id/button_exit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@id/projectName"
+        android:layout_alignBaseline="@id/textview_appname"
         android:layout_alignParentRight="true"
         android:text="@string/exit"
         android:textSize="20sp" />
 
     <fragment
-        android:id="@+id/sign"
+        android:id="@+id/fragment_sign"
         android:name="com.kcb.student.fragment.SignFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/projectName"
+        android:layout_below="@id/textview_appname"
         android:layout_weight="10" />
 
     <fragment
-        android:id="@+id/test"
+        android:id="@+id/fragment_test"
         android:name="com.kcb.student.fragment.TestFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/projectName"
+        android:layout_below="@id/textview_appname"
         android:layout_weight="10" />
 
     <RadioGroup
-        android:id="@+id/bottomRg"
+        android:id="@+id/radiogroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -48,7 +48,7 @@
 
         <!-- rename to radiobutton_sign -->
         <RadioButton
-            android:id="@+id/signbtn"
+            android:id="@+id/radiobutton_sign"
             android:layout_width="160dp"
             android:layout_height="wrap_content"
             android:button="@null"
@@ -59,7 +59,7 @@
 
          <!-- rename to radiobutton_test -->
         <RadioButton
-            android:id="@+id/testbtn"
+            android:id="@+id/radiobutton_test"
             android:layout_width="160dp"
             android:layout_height="wrap_content"
             android:button="@null"

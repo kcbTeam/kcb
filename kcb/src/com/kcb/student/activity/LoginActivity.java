@@ -56,7 +56,7 @@ public class LoginActivity extends BaseActivity {
             // mEditor.putString("UserId", stuIDEditText.getText().toString());
             // mEditor.putString("UserPassword", stuPassWordEditText.getText().toString());
             // mEditor.commit();}
-            Intent intent = new Intent(LoginActivity.this, CheckinActivity.class);
+            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
             startActivity(intent);
         } else {}
     }
