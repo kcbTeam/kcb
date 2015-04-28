@@ -27,7 +27,7 @@ public class SignFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstaceState) {
         return inflater.inflate(R.layout.stu_fragment_sign, container, false);
     }
-    
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -48,11 +48,11 @@ public class SignFragment extends BaseFragment {
         Intent intent;
         switch (v.getId()) {
             case R.id.startSign:
-                intent=new Intent(getActivity(),CheckinActivity.class);
+                intent = new Intent(getActivity(), CheckinActivity.class);
                 startActivity(intent);
                 break;
             case R.id.checkSign:
-                intent=new Intent(getActivity(),CheckInResultActivity.class);
+                intent = new Intent(getActivity(), CheckInResultActivity.class);
                 startActivity(intent);
                 break;
             default:

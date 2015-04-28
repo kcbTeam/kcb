@@ -1,33 +1,30 @@
 /*
  * Copyright (C) 2011 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License. You may obtain a copy of the License at
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed under the License
+ * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing permissions and limitations under
+ * the License.
  */
 
 package com.android.volley;
 
-import android.os.Process;
-
 import java.util.concurrent.BlockingQueue;
+
+import android.os.Process;
 
 /**
  * Provides a thread for performing cache triage on a queue of requests.
  *
- * Requests added to the specified cache queue are resolved from cache.
- * Any deliverable response is posted back to the caller via a
- * {@link ResponseDelivery}.  Cache misses and responses that require
- * refresh are enqueued on the specified network queue for processing
- * by a {@link NetworkDispatcher}.
+ * Requests added to the specified cache queue are resolved from cache. Any deliverable response is
+ * posted back to the caller via a {@link ResponseDelivery}. Cache misses and responses that require
+ * refresh are enqueued on the specified network queue for processing by a {@link NetworkDispatcher}
+ * .
  */
 public class CacheDispatcher extends Thread {
 
@@ -49,17 +46,16 @@ public class CacheDispatcher extends Thread {
     private volatile boolean mQuit = false;
 
     /**
-     * Creates a new cache triage dispatcher thread.  You must call {@link #start()}
-     * in order to begin processing.
+     * Creates a new cache triage dispatcher thread. You must call {@link #start()} in order to
+     * begin processing.
      *
      * @param cacheQueue Queue of incoming requests for triage
      * @param networkQueue Queue to post requests that require network to
      * @param cache Cache interface to use for resolution
      * @param delivery Delivery interface to use for posting responses
      */
-    public CacheDispatcher(
-            BlockingQueue<Request<?>> cacheQueue, BlockingQueue<Request<?>> networkQueue,
-            Cache cache, ResponseDelivery delivery) {
+    public CacheDispatcher(BlockingQueue<Request<?>> cacheQueue,
+            BlockingQueue<Request<?>> networkQueue, Cache cache, ResponseDelivery delivery) {
         mCacheQueue = cacheQueue;
         mNetworkQueue = networkQueue;
         mCache = cache;
@@ -67,8 +63,8 @@ public class CacheDispatcher extends Thread {
     }
 
     /**
-     * Forces this dispatcher to quit immediately.  If any requests are still in
-     * the queue, they are not guaranteed to be processed.
+     * Forces this dispatcher to quit immediately. If any requests are still in the queue, they are
+     * not guaranteed to be processed.
      */
     public void quit() {
         mQuit = true;
@@ -115,8 +111,9 @@ public class CacheDispatcher extends Thread {
 
                 // We have a cache hit; parse its data for delivery back to the request.
                 request.addMarker("cache-hit");
-                Response<?> response = request.parseNetworkResponse(
-                        new NetworkResponse(entry.data, entry.responseHeaders));
+                Response<?> response =
+                        request.parseNetworkResponse(new NetworkResponse(entry.data,
+                                entry.responseHeaders));
                 request.addMarker("cache-hit-parsed");
 
                 if (!entry.refreshNeeded()) {

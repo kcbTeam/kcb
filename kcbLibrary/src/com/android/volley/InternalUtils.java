@@ -5,9 +5,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /**
- * User: mcxiaoke
- * Date: 15/3/17
- * Time: 14:47
+ * User: mcxiaoke Date: 15/3/17 Time: 14:47
  */
 class InternalUtils {
 

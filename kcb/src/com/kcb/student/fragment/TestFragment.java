@@ -24,7 +24,7 @@ public class TestFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.stu_fragment_test, container, false);
     }
-    
+
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         buttonstart = (Button) getView().findViewById(R.id.startTest);

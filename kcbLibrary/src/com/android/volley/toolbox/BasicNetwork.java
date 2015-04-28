@@ -1,20 +1,36 @@
 /*
  * Copyright (C) 2011 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License. You may obtain a copy of the License at
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed under the License
+ * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing permissions and limitations under
+ * the License.
  */
 
 package com.android.volley.toolbox;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.SocketTimeoutException;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
+
+import org.apache.http.Header;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
+import org.apache.http.StatusLine;
+import org.apache.http.conn.ConnectTimeoutException;
+import org.apache.http.impl.cookie.DateUtils;
 
 import android.os.SystemClock;
 
@@ -31,24 +47,6 @@ import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
-
-import org.apache.http.Header;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpStatus;
-import org.apache.http.StatusLine;
-import org.apache.http.conn.ConnectTimeoutException;
-import org.apache.http.impl.cookie.DateUtils;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.SocketTimeoutException;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.TreeMap;
 
 /**
  * A network performing Volley requests over an {@link HttpStack}.
@@ -104,8 +102,7 @@ public class BasicNetwork implements Network {
                     Entry entry = request.getCacheEntry();
                     if (entry == null) {
                         return new NetworkResponse(HttpStatus.SC_NOT_MODIFIED, null,
-                                responseHeaders, true,
-                                SystemClock.elapsedRealtime() - requestStart);
+                                responseHeaders, true, SystemClock.elapsedRealtime() - requestStart);
                     }
 
                     // A HTTP 304 response does not have all header fields. We
@@ -114,23 +111,24 @@ public class BasicNetwork implements Network {
                     // http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.3.5
                     entry.responseHeaders.putAll(responseHeaders);
                     return new NetworkResponse(HttpStatus.SC_NOT_MODIFIED, entry.data,
-                            entry.responseHeaders, true,
-                            SystemClock.elapsedRealtime() - requestStart);
-                }
-                
-                // Handle moved resources
-                if (statusCode == HttpStatus.SC_MOVED_PERMANENTLY || statusCode == HttpStatus.SC_MOVED_TEMPORARILY) {
-                	String newUrl = responseHeaders.get("Location");
-                	request.setRedirectUrl(newUrl);
+                            entry.responseHeaders, true, SystemClock.elapsedRealtime()
+                                    - requestStart);
                 }
 
-                // Some responses such as 204s do not have content.  We must check.
+                // Handle moved resources
+                if (statusCode == HttpStatus.SC_MOVED_PERMANENTLY
+                        || statusCode == HttpStatus.SC_MOVED_TEMPORARILY) {
+                    String newUrl = responseHeaders.get("Location");
+                    request.setRedirectUrl(newUrl);
+                }
+
+                // Some responses such as 204s do not have content. We must check.
                 if (httpResponse.getEntity() != null) {
-                  responseContents = entityToBytes(httpResponse.getEntity());
+                    responseContents = entityToBytes(httpResponse.getEntity());
                 } else {
-                  // Add 0 byte response as a way of honestly representing a
-                  // no-content request.
-                  responseContents = new byte[0];
+                    // Add 0 byte response as a way of honestly representing a
+                    // no-content request.
+                    responseContents = new byte[0];
                 }
 
                 // if the request is slow, log it.
@@ -156,23 +154,25 @@ public class BasicNetwork implements Network {
                 } else {
                     throw new NoConnectionError(e);
                 }
-                if (statusCode == HttpStatus.SC_MOVED_PERMANENTLY || 
-                		statusCode == HttpStatus.SC_MOVED_TEMPORARILY) {
-                	VolleyLog.e("Request at %s has been redirected to %s", request.getOriginUrl(), request.getUrl());
+                if (statusCode == HttpStatus.SC_MOVED_PERMANENTLY
+                        || statusCode == HttpStatus.SC_MOVED_TEMPORARILY) {
+                    VolleyLog.e("Request at %s has been redirected to %s", request.getOriginUrl(),
+                            request.getUrl());
                 } else {
-                	VolleyLog.e("Unexpected response code %d for %s", statusCode, request.getUrl());
+                    VolleyLog.e("Unexpected response code %d for %s", statusCode, request.getUrl());
                 }
                 if (responseContents != null) {
-                    networkResponse = new NetworkResponse(statusCode, responseContents,
-                            responseHeaders, false, SystemClock.elapsedRealtime() - requestStart);
-                    if (statusCode == HttpStatus.SC_UNAUTHORIZED ||
-                            statusCode == HttpStatus.SC_FORBIDDEN) {
-                        attemptRetryOnException("auth",
-                                request, new AuthFailureError(networkResponse));
-                    } else if (statusCode == HttpStatus.SC_MOVED_PERMANENTLY || 
-                    			statusCode == HttpStatus.SC_MOVED_TEMPORARILY) {
-                        attemptRetryOnException("redirect",
-                                request, new AuthFailureError(networkResponse));
+                    networkResponse =
+                            new NetworkResponse(statusCode, responseContents, responseHeaders,
+                                    false, SystemClock.elapsedRealtime() - requestStart);
+                    if (statusCode == HttpStatus.SC_UNAUTHORIZED
+                            || statusCode == HttpStatus.SC_FORBIDDEN) {
+                        attemptRetryOnException("auth", request, new AuthFailureError(
+                                networkResponse));
+                    } else if (statusCode == HttpStatus.SC_MOVED_PERMANENTLY
+                            || statusCode == HttpStatus.SC_MOVED_TEMPORARILY) {
+                        attemptRetryOnException("redirect", request, new AuthFailureError(
+                                networkResponse));
                     } else {
                         // TODO: Only throw ServerError for 5xx status codes.
                         throw new ServerError(networkResponse);
@@ -187,11 +187,11 @@ public class BasicNetwork implements Network {
     /**
      * Logs requests that took over SLOW_REQUEST_THRESHOLD_MS to complete.
      */
-    private void logSlowRequests(long requestLifetime, Request<?> request,
-            byte[] responseContents, StatusLine statusLine) {
+    private void logSlowRequests(long requestLifetime, Request<?> request, byte[] responseContents,
+            StatusLine statusLine) {
         if (DEBUG || requestLifetime > SLOW_REQUEST_THRESHOLD_MS) {
-            VolleyLog.d("HTTP response for request=<%s> [lifetime=%d], [size=%s], " +
-                    "[rc=%d], [retryCount=%s]", request, requestLifetime,
+            VolleyLog.d("HTTP response for request=<%s> [lifetime=%d], [size=%s], "
+                    + "[rc=%d], [retryCount=%s]", request, requestLifetime,
                     responseContents != null ? responseContents.length : "null",
                     statusLine.getStatusCode(), request.getRetryPolicy().getCurrentRetryCount());
         }
@@ -200,6 +200,7 @@ public class BasicNetwork implements Network {
     /**
      * Attempts to prepare the request for a retry. If there are no more attempts remaining in the
      * request's retry policy, a timeout exception is thrown.
+     * 
      * @param request The request to use.
      */
     private static void attemptRetryOnException(String logPrefix, Request<?> request,
@@ -210,8 +211,8 @@ public class BasicNetwork implements Network {
         try {
             retryPolicy.retry(exception);
         } catch (VolleyError e) {
-            request.addMarker(
-                    String.format("%s-timeout-giveup [timeout=%s]", logPrefix, oldTimeout));
+            request.addMarker(String
+                    .format("%s-timeout-giveup [timeout=%s]", logPrefix, oldTimeout));
             throw e;
         }
         request.addMarker(String.format("%s-retry [timeout=%s]", logPrefix, oldTimeout));

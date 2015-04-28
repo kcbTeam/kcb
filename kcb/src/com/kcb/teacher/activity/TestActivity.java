@@ -14,9 +14,9 @@ import com.kcbTeam.R;
 /**
  * 
  * @className: TestActivity
- * @description: 
+ * @description:
  * @author: ljx
- * @date: 2015Äê4ÔÂ28ÈÕ ÏÂÎç10:24:15
+ * @date: 2015ï¿½ï¿½4ï¿½ï¿½28ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½10:24:15
  */
 
 public class TestActivity extends BaseActivity {
