@@ -1,0 +1,62 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    
+     <Button
+        android:id="@+id/button_return"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/back"
+        android:textColor="#ff4500"
+        android:textSize="15dp" />
+    
+     <TextView
+        android:id="@+id/textview_testinclass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/button_return"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="35dp"
+        android:text="@string/classtest"
+        android:textColor="#ff4500"
+        android:textSize="25sp" />
+     
+     
+      <Button
+          android:id="@+id/button_edit"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_below="@+id/button_return"
+          android:layout_marginTop="70dp"
+	      android:layout_centerHorizontal="true"
+          android:text="@string/edit"
+          android:textColor="#ff4500"
+          android:textSize="25sp" />
+      
+      <Button
+        android:id="@+id/button_starttest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/button_edit"
+        android:layout_alignRight="@id/button_edit"
+        android:layout_below="@id/button_edit"
+        android:layout_marginTop="70dp"
+        android:text="@string/starttest"
+        android:textColor="#ff4500"
+        android:textSize="25sp" />
+       
+      <TextView
+        android:id="@+id/textview_tip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:layout_below="@id/button_edit"
+        android:layout_marginTop="65dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:text="@string/tch_tip"
+        android:textColor="#ff4500"
+        android:textSize="25sp" />
+
+</RelativeLayout>
