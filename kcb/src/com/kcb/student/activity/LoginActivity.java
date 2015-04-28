@@ -1,13 +1,24 @@
 package com.kcb.student.activity;
 
+import org.json.JSONObject;
+
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.android.volley.Request.Method;
+import com.android.volley.Response.ErrorListener;
+import com.android.volley.Response.Listener;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.kcb.common.base.BaseActivity;
+import com.kcb.common.server.RequestUtil;
+import com.kcb.common.server.UrlUtil;
 import com.kcbTeam.R;
 
 /**
@@ -46,18 +57,37 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     public void onClick(View v) {
-        // TODO
-        if (!TextUtils.isEmpty(idEditText.getText())
-                & !TextUtils.isEmpty(passwordEditText.getText())) {
-            // if(need request server;){
-            // SharedPreferences sharedPref = getSharedPreferences("AppLoginData",
-            // MODE_PRIVATE);
-            // Editor mEditor = sharedPref.edit();
-            // mEditor.putString("UserId", stuIDEditText.getText().toString());
-            // mEditor.putString("UserPassword", stuPassWordEditText.getText().toString());
-            // mEditor.commit();}
-            Intent intent = new Intent(LoginActivity.this, CheckinActivity.class);
-            startActivity(intent);
-        } else {}
+        // TODO do animation when empty
+        final String id = idEditText.getText().toString().trim();
+        final String password = passwordEditText.getText().toString();
+        if (TextUtils.isEmpty(id)) {
+
+        } else if (TextUtils.isEmpty(password)) {
+
+        } else {
+            JsonObjectRequest request =
+                    new JsonObjectRequest(Method.POST, UrlUtil.getStuLoginUrl(id, password), "",
+                            new Listener<JSONObject>() {
+
+                                @Override
+                                public void onResponse(JSONObject response) {
+                                    // TODO
+                                    SharedPreferences sharedPref =
+                                            getSharedPreferences("AppLoginData", MODE_PRIVATE);
+                                    Editor mEditor = sharedPref.edit();
+                                    mEditor.putString("id", id);
+                                    mEditor.putString("password", password);
+                                    mEditor.commit();
+                                    Intent intent =
+                                            new Intent(LoginActivity.this, HomeActivity.class);
+                                    startActivity(intent);
+                                }
+                            }, new ErrorListener() {
+
+                                @Override
+                                public void onErrorResponse(VolleyError error) {}
+                            });
+            RequestUtil.getInstance().addToRequestQueue(request);
+        }
     }
 }
