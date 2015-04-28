@@ -22,12 +22,15 @@ public class TestFragment extends BaseFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.stu_fragment_test, container, false);
+        return inflater.inflate(R.layout.stu_fragment_test, container, false);
+    }
+    
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
         buttonstart = (Button) getView().findViewById(R.id.startTest);
         buttoncheck = (Button) getView().findViewById(R.id.checkTest);
         buttonstart.setOnClickListener(this);
         buttoncheck.setOnClickListener(this);
-        return view;
     }
 
     @Override

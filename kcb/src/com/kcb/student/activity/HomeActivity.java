@@ -1,12 +1,13 @@
 package com.kcb.student.activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
@@ -22,24 +23,18 @@ import com.kcbTeam.R;
  */
 public class HomeActivity extends BaseFragmentActivity {
 
-    //TODO change define sort
     private final int INDEX_CHECKIN = 0;
     private final int INDEX_TEST = 1;
 
     private Fragment[] mFragments;
     private FragmentManager fragmentManager;
     
-    //TODO change to temp
-    private FragmentTransaction fragmentTransaction;
-    //TODO rename to exitButton
-    private Button buttonexit;
+    private Button exitButton;
     private RadioGroup radioGroup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //TODO delete it
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.stu_activity_home);
 
         initView();
@@ -47,40 +42,51 @@ public class HomeActivity extends BaseFragmentActivity {
 
     @Override
     protected void initView() {
-        //TODO rename exitbtn to button_exit
-        //rename bottomRg to radiogroup
-        buttonexit = (Button) findViewById(R.id.exitbtn);
-        radioGroup = (RadioGroup) findViewById(R.id.bottomRg);
+        exitButton = (Button) findViewById(R.id.button_exit);
+        radioGroup = (RadioGroup) findViewById(R.id.radiogroup);
 
         mFragments = new Fragment[2];
         fragmentManager = getSupportFragmentManager();
         
-        //TODO rename sign to fragment_sign
-        //rename test to fragment_test
-        mFragments[INDEX_CHECKIN] = fragmentManager.findFragmentById(R.id.sign);
-        mFragments[INDEX_TEST] = fragmentManager.findFragmentById(R.id.test);
-        fragmentTransaction = fragmentManager.beginTransaction().hide(mFragments[INDEX_TEST]);
+        mFragments[INDEX_CHECKIN] = fragmentManager.findFragmentById(R.id.fragment_sign);
+        mFragments[INDEX_TEST] = fragmentManager.findFragmentById(R.id.fragment_test);
+        
+FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.hide(mFragments[INDEX_CHECKIN]).hide(mFragments[INDEX_TEST]);
+        fragmentTransaction.show(mFragments[INDEX_CHECKIN]).commit();
 
-        buttonexit.setOnClickListener(new OnClickListener() {
+        exitButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO 
-                //show dialog
-                finish();
+                AlertDialog dialog=new AlertDialog.Builder(HomeActivity.this).
+                        setTitle("确定退出？").
+                        setPositiveButton("确定",new DialogInterface.OnClickListener(){
+                            @Override
+                            public void onClick(DialogInterface dialog,int which){
+                                finish();
+                            }
+                        }).setNegativeButton("取消",new DialogInterface.OnClickListener(){
+                            @Override
+                            public void onClick(DialogInterface dialog,int which){
+                                
+                            }
+                        }).create();
+                       dialog.show();
             }
         });
 
         radioGroup.setOnCheckedChangeListener(new OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction =
                         fragmentManager.beginTransaction().hide(mFragments[INDEX_CHECKIN])
                                 .hide(mFragments[INDEX_TEST]);
                 switch (checkedId) {
-                    case R.id.signbtn:
+                    case R.id.radiobutton_sign:
                         fragmentTransaction.show(mFragments[INDEX_CHECKIN]).commit();
                         break;
-                    case R.id.testbtn:
+                    case R.id.radiobutton_test:
                         fragmentTransaction.show(mFragments[INDEX_TEST]).commit();
                         break;
                     default:
