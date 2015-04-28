@@ -4,7 +4,7 @@ kcb/gen
 kcb/.classpath
 kcb/project.properties
 kcbLibrary/.settings
-kcbLibrary/bin/*
+kcbLibrary/bin
 kcbLibrary/gen
 kcbLibrary/.classpath
 kcbLibrary/project.properties
