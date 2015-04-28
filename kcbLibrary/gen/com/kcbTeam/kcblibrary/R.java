@@ -183,7 +183,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.kcbTeam.kcblibrary:paper_color
         */
-        public static final int PaperButton_paper_color = 4;
+        public static int PaperButton_paper_color = 4;
         /**
           <p>This symbol is the offset where the {@link com.kcbTeam.kcblibrary.R.attr#paper_corner_radius}
           attribute's value can be found in the {@link #PaperButton} array.
@@ -199,7 +199,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.kcbTeam.kcblibrary:paper_corner_radius
         */
-        public static final int PaperButton_paper_corner_radius = 5;
+        public static int PaperButton_paper_corner_radius = 5;
         /**
           <p>This symbol is the offset where the {@link com.kcbTeam.kcblibrary.R.attr#paper_font}
           attribute's value can be found in the {@link #PaperButton} array.
@@ -213,7 +213,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.kcbTeam.kcblibrary:paper_font
         */
-        public static final int PaperButton_paper_font = 3;
+        public static int PaperButton_paper_font = 3;
         /**
           <p>This symbol is the offset where the {@link com.kcbTeam.kcblibrary.R.attr#paper_shadow_color}
           attribute's value can be found in the {@link #PaperButton} array.
@@ -228,7 +228,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.kcbTeam.kcblibrary:paper_shadow_color
         */
-        public static final int PaperButton_paper_shadow_color = 9;
+        public static int PaperButton_paper_shadow_color = 9;
         /**
           <p>This symbol is the offset where the {@link com.kcbTeam.kcblibrary.R.attr#paper_shadow_offset_x}
           attribute's value can be found in the {@link #PaperButton} array.
@@ -242,7 +242,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.kcbTeam.kcblibrary:paper_shadow_offset_x
         */
-        public static final int PaperButton_paper_shadow_offset_x = 7;
+        public static int PaperButton_paper_shadow_offset_x = 7;
         /**
           <p>This symbol is the offset where the {@link com.kcbTeam.kcblibrary.R.attr#paper_shadow_offset_y}
           attribute's value can be found in the {@link #PaperButton} array.
@@ -256,7 +256,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.kcbTeam.kcblibrary:paper_shadow_offset_y
         */
-        public static final int PaperButton_paper_shadow_offset_y = 8;
+        public static int PaperButton_paper_shadow_offset_y = 8;
         /**
           <p>This symbol is the offset where the {@link com.kcbTeam.kcblibrary.R.attr#paper_shadow_radius}
           attribute's value can be found in the {@link #PaperButton} array.
@@ -270,7 +270,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.kcbTeam.kcblibrary:paper_shadow_radius
         */
-        public static final int PaperButton_paper_shadow_radius = 6;
+        public static int PaperButton_paper_shadow_radius = 6;
         /**
           <p>This symbol is the offset where the {@link com.kcbTeam.kcblibrary.R.attr#paper_text}
           attribute's value can be found in the {@link #PaperButton} array.
@@ -284,7 +284,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.kcbTeam.kcblibrary:paper_text
         */
-        public static final int PaperButton_paper_text = 0;
+        public static int PaperButton_paper_text = 0;
         /**
           <p>This symbol is the offset where the {@link com.kcbTeam.kcblibrary.R.attr#paper_text_color}
           attribute's value can be found in the {@link #PaperButton} array.
@@ -299,7 +299,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.kcbTeam.kcblibrary:paper_text_color
         */
-        public static final int PaperButton_paper_text_color = 2;
+        public static int PaperButton_paper_text_color = 2;
         /**
           <p>This symbol is the offset where the {@link com.kcbTeam.kcblibrary.R.attr#paper_text_size}
           attribute's value can be found in the {@link #PaperButton} array.
@@ -315,6 +315,6 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.kcbTeam.kcblibrary:paper_text_size
         */
-        public static final int PaperButton_paper_text_size = 1;
+        public static int PaperButton_paper_text_size = 1;
     };
 }
