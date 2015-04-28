@@ -20,16 +20,18 @@ import com.kcbTeam.R;
  * @author: Tao Li
  * @date: 2015-4-24 下午9:16:22
  */
-
 public class CheckinActivity extends BaseActivity implements ItemClickListener {
 
-    private String[] itemStrings;
     private TextView num1TextView;
     private TextView num2TextView;
     private TextView num3TextView;
     private TextView num4TextView;
-    private Button finishButton;
+    // TODO rename to recyclerView
     private RecyclerView mRecyclerView;
+    private Button finishButton;
+
+    // TODO rename to mItems
+    private String[] itemStrings;
     private MyRecycleAdapter mAdapter;
     private int currentInputIndex = 0;
 
@@ -37,6 +39,7 @@ public class CheckinActivity extends BaseActivity implements ItemClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.stu_activity_checkin);
+
         initView();
         initData();
     }
