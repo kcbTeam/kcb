@@ -48,6 +48,11 @@
     <string name="checkin_detail">签到详情</string>
     <!-- checkin details activity start -->
     
+    <!-- student details activty start -->
+    <string name="studetails_title_format">学生中心— —%1$s</string>
+    <string name="checkin_rate_format"> %1$s的到课率为%2$d%%</string>
+    <string name="correct_rate_format"> %1$s的选择题正确率为%2$d%%</string>
+    <!-- student details activty end -->
 
     <string name="signclass">课堂签到</string>
     <string name="giveupsign">放弃签到</string>
