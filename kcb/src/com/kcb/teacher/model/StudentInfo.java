@@ -1,5 +1,7 @@
 package com.kcb.teacher.model;
 
+import java.io.Serializable;
+
 /**
  * 
  * @className: StudentInfo
@@ -7,7 +9,8 @@ package com.kcb.teacher.model;
  * @author: ZQJ
  * @date: 2015年4月24日 下午7:08:09
  */
-public class StudentInfo {
+public class StudentInfo implements Serializable {
+    private static final long serialVersionUID = 1L;
     private String mStudentName;
     private String mStudentID;
     private int mCheckInTimes;
