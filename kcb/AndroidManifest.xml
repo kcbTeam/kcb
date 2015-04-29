@@ -32,6 +32,22 @@
         <!-- common end -->
 
 
+        <!-- student start -->
+        <activity
+            android:name="com.kcb.student.activity.LoginActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.kcb.student.activity.HomeActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.kcb.student.activity.CheckinActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- student end -->
+
+
         <!-- teacher start -->
         <activity
             android:name="com.kcb.teacher.activity.CheckInResultActivity"
@@ -62,24 +78,6 @@
             android:screenOrientation="portrait" >
         </activity>
         <!-- teacher end -->
-
-
-        <!-- student start -->
-
-
-        <!-- student end -->
-        <activity
-            android:name="com.kcb.student.activity.LoginActivity"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
-            android:name="com.kcb.student.activity.HomeActivity"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
-            android:name="com.kcb.student.activity.CheckinActivity"
-            android:screenOrientation="portrait" >
-        </activity>
     </application>
 
 </manifest>

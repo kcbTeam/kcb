@@ -3,8 +3,6 @@ package com.kcb.student.activity;
 import org.json.JSONObject;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -14,9 +12,11 @@ import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.kcb.common.application.KAccount;
 import com.kcb.common.base.BaseActivity;
 import com.kcb.common.server.RequestUtil;
 import com.kcb.common.server.UrlUtil;
+import com.kcb.common.util.AnimationUtil;
 import com.kcb.library.view.FloatingEditText;
 import com.kcb.library.view.PaperButton;
 import com.kcbTeam.R;
@@ -55,23 +55,28 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     public void onClick(View v) {
-        // TODO do animation when empty
         final String id = idEditText.getText().toString().trim();
         final String password = passwordEditText.getText().toString();
-        if (TextUtils.isEmpty(id)) {} else if (TextUtils.isEmpty(password)) {} else {
+        if (TextUtils.isEmpty(id)) {
+            idEditText.requestFocus();
+            AnimationUtil.shake(idEditText);
+        } else if (TextUtils.isEmpty(password)) {
+            passwordEditText.requestFocus();
+            AnimationUtil.shake(passwordEditText);
+        } else {
+            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+            startActivity(intent);
+
+            // TODO request server
             JsonObjectRequest request =
                     new JsonObjectRequest(Method.POST, UrlUtil.getStuLoginUrl(id, password), "",
                             new Listener<JSONObject>() {
 
                                 @Override
                                 public void onResponse(JSONObject response) {
-                                    // TODO
-                                    SharedPreferences sharedPref =
-                                            getSharedPreferences("AppLoginData", MODE_PRIVATE);
-                                    Editor mEditor = sharedPref.edit();
-                                    mEditor.putString("id", id);
-                                    mEditor.putString("password", password);
-                                    mEditor.commit();
+                                    KAccount account =
+                                            new KAccount(KAccount.TYPE_STU, id, password);
+                                    account.saveAccount();
                                     Intent intent =
                                             new Intent(LoginActivity.this, HomeActivity.class);
                                     startActivity(intent);
