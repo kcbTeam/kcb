@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:widget="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:ignore="contentDescription" >
@@ -21,25 +22,20 @@
 
     <com.kcb.library.view.FloatingEditText
         android:id="@+id/edittext_id"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        style="@style/login_edittext_id"
         android:layout_below="@id/imageview_login"
-        android:hint="@string/username"
-        android:singleLine="true" />
+        android:hint="@string/username" />
 
     <com.kcb.library.view.FloatingEditText
         android:id="@+id/edittext_password"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        style="@style/login_edittext_password"
         android:layout_below="@id/edittext_id"
-        android:hint="@string/password"
-        android:inputType="textPassword" />
+        android:hint="@string/password" />
 
     <com.kcb.library.view.PaperButton
         android:id="@+id/buton_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/login_button"
         android:layout_below="@id/edittext_password"
-        android:text="@string/registerin" />
+        widget:paper_text="@string/registerin" />
 
 </RelativeLayout>
