@@ -5,8 +5,9 @@
     <string name="myname">课程宝</string>
     <string name="username">用户名</string>
     <string name="password">密码</string>
-    <string name="registerin">登陆</string>
+    <string name="registerin">登录</string>
     <!-- register activty end -->
+
 
     <!-- test activty start -->
     <string name="tch_tip">距离测试结束还有10分钟。\n测试结束后课程宝将会自动终止测试并统计测试结果，您可以到测试结果中查询。</string>
@@ -39,15 +40,15 @@
     <string name="checkin_date">签到日期</string>
     <string name="checkin_rate">到课率</string>
     <!-- checkin result activity end -->
-	
-	
+
 
     <!-- checkin details activity start -->
     <string name="checkin_missed_hint">以下为没有到课学生名单</string>
     <string name="stu_info">学生信息</string>
     <string name="checkin_detail">签到详情</string>
     <!-- checkin details activity start -->
-    
+
+
     <!-- student details activty start -->
     <string name="studetails_title_format">学生中心— —%1$s</string>
     <string name="checkin_rate_format"> %1$s的到课率为%2$d%%</string>
