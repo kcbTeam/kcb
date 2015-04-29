@@ -8,8 +8,6 @@ import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 
 import com.android.volley.Request.Method;
 import com.android.volley.Response.ErrorListener;
@@ -19,6 +17,8 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.kcb.common.base.BaseActivity;
 import com.kcb.common.server.RequestUtil;
 import com.kcb.common.server.UrlUtil;
+import com.kcb.library.view.FloatingEditText;
+import com.kcb.library.view.PaperButton;
 import com.kcbTeam.R;
 
 /**
@@ -31,9 +31,9 @@ import com.kcbTeam.R;
 
 public class LoginActivity extends BaseActivity {
 
-    private EditText idEditText;
-    private EditText passwordEditText;
-    private Button loginButton;
+    private FloatingEditText idEditText;
+    private FloatingEditText passwordEditText;
+    private PaperButton loginButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,9 +46,9 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        idEditText = (EditText) findViewById(R.id.edittext_stuid);
-        passwordEditText = (EditText) findViewById(R.id.edittext_password);
-        loginButton = (Button) findViewById(R.id.button_login);
+        idEditText = (FloatingEditText) findViewById(R.id.edittext_stuid);
+        passwordEditText = (FloatingEditText) findViewById(R.id.edittext_password);
+        loginButton = (PaperButton) findViewById(R.id.button_login);
         loginButton.setOnClickListener(this);
     }
 
