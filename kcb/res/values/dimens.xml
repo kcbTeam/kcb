@@ -6,5 +6,5 @@
     <dimen name="dp_16">16dp</dimen>
     <dimen name="dp_25">25dp</dimen>
     <dimen name="dp_40">40dp</dimen>
-
-</resources>
+    <dimen name="dp_54">54dp</dimen>
+</resources>
