@@ -23,6 +23,61 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
+        public static int floating_edit_text_color=0x7f01000b;
+        /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static int floating_edit_text_error_color=0x7f01000d;
+        /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static int floating_edit_text_highlighted_color=0x7f01000c;
+        /** <p>Must be a floating point value, such as "<code>1.2</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static int floating_edit_text_hint_scale=0x7f01000a;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static int floating_edit_text_underline_height=0x7f01000e;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static int floating_edit_text_underline_highlighted_height=0x7f01000f;
+        /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
         public static int paper_color=0x7f010004;
         /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
 Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
@@ -104,11 +159,18 @@ containing a value of this type.
         public static int paper_text_size=0x7f010001;
     }
     public static final class color {
+        /**  FloatingEditText Default 
+         */
+        public static int floating_edit_text_color=0x7f040003;
+        public static int floating_edit_text_error_color=0x7f040005;
+        public static int floating_edit_text_highlighted_color=0x7f040004;
         public static int paper_button_color=0x7f040001;
         public static int paper_button_shadow_color=0x7f040002;
         public static int paper_text_color=0x7f040000;
     }
     public static final class dimen {
+        public static int floating_edit_text_underline_height=0x7f030003;
+        public static int floating_edit_text_underline_highlighted_height=0x7f030004;
         public static int paper_button_corner_radius=0x7f030001;
         public static int paper_padding=0x7f030002;
         /**  PaperButton Default 
@@ -136,6 +198,121 @@ containing a value of this type.
         public static int AppTheme=0x7f060001;
     }
     public static final class styleable {
+        /**  FloatingEditText Attribute 
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #FloatingEditText_floating_edit_text_color com.kcbTeam.kcblibrary:floating_edit_text_color}</code></td><td></td></tr>
+           <tr><td><code>{@link #FloatingEditText_floating_edit_text_error_color com.kcbTeam.kcblibrary:floating_edit_text_error_color}</code></td><td></td></tr>
+           <tr><td><code>{@link #FloatingEditText_floating_edit_text_highlighted_color com.kcbTeam.kcblibrary:floating_edit_text_highlighted_color}</code></td><td></td></tr>
+           <tr><td><code>{@link #FloatingEditText_floating_edit_text_hint_scale com.kcbTeam.kcblibrary:floating_edit_text_hint_scale}</code></td><td></td></tr>
+           <tr><td><code>{@link #FloatingEditText_floating_edit_text_underline_height com.kcbTeam.kcblibrary:floating_edit_text_underline_height}</code></td><td></td></tr>
+           <tr><td><code>{@link #FloatingEditText_floating_edit_text_underline_highlighted_height com.kcbTeam.kcblibrary:floating_edit_text_underline_highlighted_height}</code></td><td></td></tr>
+           </table>
+           @see #FloatingEditText_floating_edit_text_color
+           @see #FloatingEditText_floating_edit_text_error_color
+           @see #FloatingEditText_floating_edit_text_highlighted_color
+           @see #FloatingEditText_floating_edit_text_hint_scale
+           @see #FloatingEditText_floating_edit_text_underline_height
+           @see #FloatingEditText_floating_edit_text_underline_highlighted_height
+         */
+        public static final int[] FloatingEditText = {
+            0x7f01000a, 0x7f01000b, 0x7f01000c, 0x7f01000d,
+            0x7f01000e, 0x7f01000f
+        };
+        /**
+          <p>This symbol is the offset where the {@link com.kcbTeam.kcblibrary.R.attr#floating_edit_text_color}
+          attribute's value can be found in the {@link #FloatingEditText} array.
+
+
+          <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.kcbTeam.kcblibrary:floating_edit_text_color
+        */
+        public static int FloatingEditText_floating_edit_text_color = 1;
+        /**
+          <p>This symbol is the offset where the {@link com.kcbTeam.kcblibrary.R.attr#floating_edit_text_error_color}
+          attribute's value can be found in the {@link #FloatingEditText} array.
+
+
+          <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.kcbTeam.kcblibrary:floating_edit_text_error_color
+        */
+        public static int FloatingEditText_floating_edit_text_error_color = 3;
+        /**
+          <p>This symbol is the offset where the {@link com.kcbTeam.kcblibrary.R.attr#floating_edit_text_highlighted_color}
+          attribute's value can be found in the {@link #FloatingEditText} array.
+
+
+          <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.kcbTeam.kcblibrary:floating_edit_text_highlighted_color
+        */
+        public static int FloatingEditText_floating_edit_text_highlighted_color = 2;
+        /**
+          <p>This symbol is the offset where the {@link com.kcbTeam.kcblibrary.R.attr#floating_edit_text_hint_scale}
+          attribute's value can be found in the {@link #FloatingEditText} array.
+
+
+          <p>Must be a floating point value, such as "<code>1.2</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.kcbTeam.kcblibrary:floating_edit_text_hint_scale
+        */
+        public static int FloatingEditText_floating_edit_text_hint_scale = 0;
+        /**
+          <p>This symbol is the offset where the {@link com.kcbTeam.kcblibrary.R.attr#floating_edit_text_underline_height}
+          attribute's value can be found in the {@link #FloatingEditText} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.kcbTeam.kcblibrary:floating_edit_text_underline_height
+        */
+        public static int FloatingEditText_floating_edit_text_underline_height = 4;
+        /**
+          <p>This symbol is the offset where the {@link com.kcbTeam.kcblibrary.R.attr#floating_edit_text_underline_highlighted_height}
+          attribute's value can be found in the {@link #FloatingEditText} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.kcbTeam.kcblibrary:floating_edit_text_underline_highlighted_height
+        */
+        public static int FloatingEditText_floating_edit_text_underline_highlighted_height = 5;
         /**  PaperButton Attribute 
            <p>Includes the following attributes:</p>
            <table>
