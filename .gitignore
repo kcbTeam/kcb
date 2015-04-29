@@ -1,9 +1,11 @@
-kcb/.settings
-bin/
-kcb/gen
+*.class
+kcb/bin/*
+kcb/gen/*
+kcb/.settings/*
 kcb/.classpath
 kcb/project.properties
-kcbLibrary/.settings
-kcbLibrary/gen
+kcbLibrary/bin/*
+kcbLibrary/gen/*
+kcbLibrary/.settings/*
 kcbLibrary/.classpath
 kcbLibrary/project.properties
