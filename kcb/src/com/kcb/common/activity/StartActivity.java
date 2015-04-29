@@ -2,20 +2,28 @@ package com.kcb.common.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.kcb.common.application.KAccount;
 import com.kcb.common.base.BaseActivity;
 import com.kcb.common.listener.CustomOnClickListener;
 import com.kcb.library.view.ColorAnimationView;
 import com.kcb.library.view.PaperButton;
+import com.kcb.student.activity.HomeActivity;
 import com.kcb.student.activity.LoginActivity;
 import com.kcbTeam.R;
 
+/**
+ * 
+ * @className: StartActivity
+ * @description: first activity of app;
+ * @author: wanghang
+ * @date: 2015-4-29 下午9:01:59
+ */
 public class StartActivity extends BaseActivity {
 
     private ColorAnimationView colorAnimationView;
@@ -24,9 +32,19 @@ public class StartActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.comm_activity_start);
 
-        initView();
+        if (!KAccount.hasAccount()) {
+            setContentView(R.layout.comm_activity_start);
+            initView();
+        } else {
+            Intent intent;
+            if (KAccount.getAccountType() == KAccount.TYPE_STU) {
+                intent = new Intent(this, HomeActivity.class);
+            } else {
+                intent = new Intent(this, com.kcb.teacher.activity.HomeActivity.class);
+            }
+            startActivity(intent);
+        }
     }
 
     @Override
@@ -77,48 +95,25 @@ public class StartActivity extends BaseActivity {
             return arg0 == arg1;
         }
 
-        private CustomOnClickListener mOnClickListener = new CustomOnClickListener() {
+        private CustomOnClickListener mOnClickListener = new CustomOnClickListener(400) {
 
             @Override
             public void doClick(final View v) {
-                new Handler().postDelayed(new Runnable() {
-
-                    @Override
-                    public void run() {
-                        switch (v.getId()) {
-                            case R.id.pagerbutton_stu:
-                                gotoStuModule();
-                                break;
-                            case R.id.pagerbutton_tch:
-                                gotoTchModule();
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-                }, 400);
+                Intent intent = null;
+                switch (v.getId()) {
+                    case R.id.pagerbutton_stu:
+                        intent = new Intent(StartActivity.this, LoginActivity.class);
+                        break;
+                    case R.id.pagerbutton_tch:
+                        intent =
+                                new Intent(StartActivity.this,
+                                        com.kcb.teacher.activity.LoginActivity.class);
+                        break;
+                    default:
+                        break;
+                }
+                startActivity(intent);
             }
         };
-
-        private void gotoStuModule() {
-            // TODO detect stu login, sharedPreference;
-            // if not login, goto Login
-            Intent intent = new Intent(StartActivity.this, LoginActivity.class);
-            startActivity(intent);
-            // else if login, goto Home
-            // Intent intent = new Intent(StartActivity.this, HomeActivity.class);
-            // startActivity(intent);
-        }
-
-        private void gotoTchModule() {
-            // TODO detect tch login, sharedPreference;
-            Intent intent =
-                    new Intent(StartActivity.this, com.kcb.teacher.activity.LoginActivity.class);
-            startActivity(intent);
-            // else if login, goto Home
-            // Intent intent = new Intent(StartActivity.this,
-            // com.kcb.teacher.activity.HomeActivity.class);
-            // startActivity(intent);
-        }
     }
 }
