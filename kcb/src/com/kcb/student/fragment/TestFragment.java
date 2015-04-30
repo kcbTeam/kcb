@@ -1,12 +1,14 @@
 package com.kcb.student.fragment;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.kcb.common.base.BaseFragment;
+import com.kcb.common.listener.CustomOnClickListener;
+import com.kcb.library.view.PaperButton;
 import com.kcbTeam.R;
 
 /**
@@ -17,40 +19,43 @@ import com.kcbTeam.R;
  */
 public class TestFragment extends BaseFragment {
 
-    private Button buttonstart;
-    private Button buttoncheck;
+    private PaperButton startTestButton;
+    private PaperButton lookTestButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.stu_fragment_test, container, false);
     }
 
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        buttonstart = (Button) getView().findViewById(R.id.startTest);
-        buttoncheck = (Button) getView().findViewById(R.id.checkTest);
-        buttonstart.setOnClickListener(this);
-        buttoncheck.setOnClickListener(this);
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        initView();
     }
 
     @Override
-    protected void initView() {}
+    protected void initView() {
+        View view = getView();
+        startTestButton = (PaperButton) view.findViewById(R.id.button_start_test);
+        startTestButton.setOnClickListener(mClickListener);
+        lookTestButton = (PaperButton) view.findViewById(R.id.button_look_test);
+        lookTestButton.setOnClickListener(mClickListener);
+    }
 
     @Override
     protected void initData() {}
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.startTest:
-                // TODO go to test
-                break;
-            case R.id.checkTest:
-                // TODO go to check the result of test
-                break;
-            default:
-                break;
-        }
-    }
+    private CustomOnClickListener mClickListener = new CustomOnClickListener(
+            CustomOnClickListener.DELAY_PAPER_BUTTON) {
 
+        @Override
+        public void doClick(View v) {
+            if (v == startTestButton) {
+
+            } else if (v == lookTestButton) {
+
+            }
+        }
+    };
 }

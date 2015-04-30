@@ -95,7 +95,8 @@ public class StartActivity extends BaseActivity {
             return arg0 == arg1;
         }
 
-        private CustomOnClickListener mOnClickListener = new CustomOnClickListener(400) {
+        private CustomOnClickListener mOnClickListener = new CustomOnClickListener(
+                CustomOnClickListener.DELAY_PAPER_BUTTON) {
 
             @Override
             public void doClick(final View v) {

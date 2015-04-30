@@ -1,22 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:widget="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center" >
-    <Button
-        android:id="@+id/startSign"
-        android:layout_width="130dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="45dp"
-        android:layout_marginRight="45dp"
-        android:text="@string/start" />
-    <Button
-        android:id="@+id/checkSign"
-        android:layout_width="130dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="45dp"
-        android:layout_marginRight="45dp"
-        android:text="@string/check"
-        android:layout_below="@id/startSign" />
+
+    <com.kcb.library.view.PaperButton
+        android:id="@+id/button_start_checkin"
+        style="@style/home_button"
+        widget:paper_text="@string/start" />
+
+    <com.kcb.library.view.PaperButton
+        android:id="@+id/button_look_checkin"
+        style="@style/home_button"
+        android:layout_below="@id/button_start_checkin"
+        widget:paper_text="@string/check" />
+
 </RelativeLayout>

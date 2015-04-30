@@ -6,6 +6,8 @@ import android.view.View.OnClickListener;
 
 public abstract class CustomOnClickListener implements OnClickListener {
 
+    public static final long DELAY_PAPER_BUTTON = 400;
+
     private long mLastClickTime = 0;
     private long mDelayTime = 0; // delay for show button click animation;
 

@@ -20,7 +20,7 @@ import com.kcbTeam.R;
  * @author: Tao Li
  * @date: 2015-4-24 下午9:16:22
  */
-public class CheckinActivity extends BaseActivity implements ItemClickListener {
+public class CheckInActivity extends BaseActivity implements ItemClickListener {
 
     private TextView num1TextView;
     private TextView num2TextView;

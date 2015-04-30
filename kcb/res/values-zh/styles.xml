@@ -39,6 +39,12 @@
         <item name="android:layout_weight">1</item>
     </style>
 
+    <style name="home_button">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/home_button_height</item>
+        <item name="android:layout_marginRight">@dimen/home_button_horizontal_margin</item>
+        <item name="android:layout_marginLeft">@dimen/home_button_horizontal_margin</item>
+    </style>
     <!-- Home end -->
 
 </resources>
