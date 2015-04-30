@@ -42,7 +42,11 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.kcb.student.activity.CheckinActivity"
+            android:name="com.kcb.student.activity.CheckInActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.kcb.student.activity.CheckInResultActivity"
             android:screenOrientation="portrait" >
         </activity>
         <!-- student end -->
@@ -50,11 +54,11 @@
 
         <!-- teacher start -->
         <activity
-            android:name="com.kcb.teacher.activity.CheckInResultActivity"
+            android:name="com.kcb.teacher.activity.LoginActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.kcb.teacher.activity.LoginActivity"
+            android:name="com.kcb.teacher.activity.HomeActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
@@ -62,11 +66,11 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.kcb.teacher.activity.CheckInDetailsActivity"
+            android:name="com.kcb.teacher.activity.CheckInResultActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.kcb.teacher.activity.HomeActivity"
+            android:name="com.kcb.teacher.activity.CheckInDetailsActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity

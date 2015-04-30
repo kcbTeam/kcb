@@ -17,6 +17,8 @@
 
     <!-- Home start -->
     <dimen name="home_tab_height">54dp</dimen>
+    <dimen name="home_button_horizontal_margin">36dp</dimen>
+    <dimen name="home_button_height">60dp</dimen>
     <!-- Home end -->
 
 </resources>

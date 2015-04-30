@@ -12,6 +12,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.kcb.common.application.KAccount;
 import com.kcb.common.base.BaseActivity;
+import com.kcb.common.listener.CustomOnClickListener;
 import com.kcb.common.server.RequestUtil;
 import com.kcb.common.server.UrlUtil;
 import com.kcb.common.util.AnimationUtil;
@@ -45,46 +46,50 @@ public class LoginActivity extends BaseActivity {
         idEditText = (FloatingEditText) findViewById(R.id.edittext_id);
         passwordEditText = (FloatingEditText) findViewById(R.id.edittext_password);
         loginButton = (PaperButton) findViewById(R.id.buton_login);
-        loginButton.setOnClickListener(this);
+        loginButton.setOnClickListener(mClickListener);
     }
 
     @Override
     protected void initData() {}
 
-    @Override
-    public void onClick(View v) {
-        final String id = idEditText.getText().toString();
-        final String password = passwordEditText.getText().toString();
-        if (TextUtils.isEmpty(id)) {
-            idEditText.requestFocus();
-            AnimationUtil.shake(idEditText);
-        } else if (TextUtils.isEmpty(password)) {
-            passwordEditText.requestFocus();
-            AnimationUtil.shake(passwordEditText);
-        } else {
-            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-            startActivity(intent);
+    private CustomOnClickListener mClickListener = new CustomOnClickListener(
+            CustomOnClickListener.DELAY_PAPER_BUTTON) {
 
-            // TODO request server
-            JsonObjectRequest request =
-                    new JsonObjectRequest(Method.POST, UrlUtil.getStuLoginUrl(id, password), "",
-                            new Listener<JSONObject>() {
+        @Override
+        public void doClick(View v) {
+            final String id = idEditText.getText().toString();
+            final String password = passwordEditText.getText().toString();
+            if (TextUtils.isEmpty(id)) {
+                idEditText.requestFocus();
+                AnimationUtil.shake(idEditText);
+            } else if (TextUtils.isEmpty(password)) {
+                passwordEditText.requestFocus();
+                AnimationUtil.shake(passwordEditText);
+            } else {
+                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                startActivity(intent);
 
-                                @Override
-                                public void onResponse(JSONObject response) {
-                                    KAccount account =
-                                            new KAccount(KAccount.TYPE_TCH, id, password);
-                                    account.saveAccount();
-                                    Intent intent =
-                                            new Intent(LoginActivity.this, HomeActivity.class);
-                                    startActivity(intent);
-                                }
-                            }, new ErrorListener() {
+                // TODO request server
+                JsonObjectRequest request =
+                        new JsonObjectRequest(Method.POST, UrlUtil.getStuLoginUrl(id, password),
+                                "", new Listener<JSONObject>() {
 
-                                @Override
-                                public void onErrorResponse(VolleyError error) {}
-                            });
-            RequestUtil.getInstance().addToRequestQueue(request);
+                                    @Override
+                                    public void onResponse(JSONObject response) {
+                                        KAccount account =
+                                                new KAccount(KAccount.TYPE_TCH, id, password);
+                                        account.saveAccount();
+                                        Intent intent =
+                                                new Intent(LoginActivity.this, HomeActivity.class);
+                                        startActivity(intent);
+                                    }
+                                }, new ErrorListener() {
+
+                                    @Override
+                                    public void onErrorResponse(VolleyError error) {}
+                                });
+                RequestUtil.getInstance().addToRequestQueue(request);
+            }
         }
-    }
+    };
 }
