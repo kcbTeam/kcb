@@ -31,4 +31,14 @@
     </style>
     <!-- Login start -->
 
+
+    <!-- Home start -->
+    <style name="home_tab">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/home_tab_height</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <!-- Home end -->
+
 </resources>
