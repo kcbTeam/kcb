@@ -9,10 +9,10 @@ package com.kcbTeam.kcblibrary;
 
 public final class R {
     public static final class anim {
-        public static int move_left_in_activity=0x7f020000;
-        public static int move_left_out_activity=0x7f020001;
-        public static int move_right_in_activity=0x7f020002;
-        public static int move_right_out_activity=0x7f020003;
+        public static int move_left_in_activity=0x7f030000;
+        public static int move_left_out_activity=0x7f030001;
+        public static int move_right_in_activity=0x7f030002;
+        public static int move_right_out_activity=0x7f030003;
     }
     public static final class attr {
         /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
@@ -23,7 +23,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static int floating_edit_text_color=0x7f01000b;
+        public static int floating_edit_text_color=0x7f010001;
         /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
 <p>This may also be a reference to a resource (in the form
@@ -32,7 +32,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static int floating_edit_text_error_color=0x7f01000d;
+        public static int floating_edit_text_error_color=0x7f010003;
         /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
 <p>This may also be a reference to a resource (in the form
@@ -41,7 +41,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static int floating_edit_text_highlighted_color=0x7f01000c;
+        public static int floating_edit_text_highlighted_color=0x7f010002;
         /** <p>Must be a floating point value, such as "<code>1.2</code>".
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -49,7 +49,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static int floating_edit_text_hint_scale=0x7f01000a;
+        public static int floating_edit_text_hint_scale=0x7f010000;
         /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
 Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
 in (inches), mm (millimeters).
@@ -59,7 +59,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static int floating_edit_text_underline_height=0x7f01000e;
+        public static int floating_edit_text_underline_height=0x7f010004;
         /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
 Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
 in (inches), mm (millimeters).
@@ -69,7 +69,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static int floating_edit_text_underline_highlighted_height=0x7f01000f;
+        public static int floating_edit_text_underline_highlighted_height=0x7f010005;
         /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
 <p>This may also be a reference to a resource (in the form
@@ -78,7 +78,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static int paper_color=0x7f010004;
+        public static int paper_color=0x7f01000a;
         /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
 Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
 in (inches), mm (millimeters).
@@ -88,7 +88,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static int paper_corner_radius=0x7f010005;
+        public static int paper_corner_radius=0x7f01000b;
         /** <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -96,7 +96,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static int paper_font=0x7f010003;
+        public static int paper_font=0x7f010009;
         /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
 <p>This may also be a reference to a resource (in the form
@@ -105,7 +105,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static int paper_shadow_color=0x7f010009;
+        public static int paper_shadow_color=0x7f01000f;
         /** <p>Must be a floating point value, such as "<code>1.2</code>".
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -113,7 +113,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static int paper_shadow_offset_x=0x7f010007;
+        public static int paper_shadow_offset_x=0x7f01000d;
         /** <p>Must be a floating point value, such as "<code>1.2</code>".
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -121,7 +121,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static int paper_shadow_offset_y=0x7f010008;
+        public static int paper_shadow_offset_y=0x7f01000e;
         /** <p>Must be a floating point value, such as "<code>1.2</code>".
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -129,7 +129,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static int paper_shadow_radius=0x7f010006;
+        public static int paper_shadow_radius=0x7f01000c;
         /** <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -137,7 +137,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static int paper_text=0x7f010000;
+        public static int paper_text=0x7f010006;
         /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
 <p>This may also be a reference to a resource (in the form
@@ -146,7 +146,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static int paper_text_color=0x7f010002;
+        public static int paper_text_color=0x7f010008;
         /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
 Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
 in (inches), mm (millimeters).
@@ -156,29 +156,35 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static int paper_text_size=0x7f010001;
+        public static int paper_text_size=0x7f010007;
     }
     public static final class color {
         /**  FloatingEditText Default 
          */
-        public static int floating_edit_text_color=0x7f040003;
-        public static int floating_edit_text_error_color=0x7f040005;
-        public static int floating_edit_text_highlighted_color=0x7f040004;
-        public static int paper_button_color=0x7f040001;
-        public static int paper_button_shadow_color=0x7f040002;
-        public static int paper_text_color=0x7f040000;
+        public static int floating_edit_text_color=0x7f050003;
+        public static int floating_edit_text_error_color=0x7f050005;
+        public static int floating_edit_text_highlighted_color=0x7f050004;
+        public static int paper_button_color=0x7f050001;
+        public static int paper_button_shadow_color=0x7f050002;
+        public static int paper_text_color=0x7f050000;
     }
     public static final class dimen {
-        public static int floating_edit_text_underline_height=0x7f030003;
-        public static int floating_edit_text_underline_highlighted_height=0x7f030004;
-        public static int paper_button_corner_radius=0x7f030001;
-        public static int paper_padding=0x7f030002;
+        public static int floating_edit_text_underline_height=0x7f040003;
+        public static int floating_edit_text_underline_highlighted_height=0x7f040004;
+        public static int paper_button_corner_radius=0x7f040001;
+        public static int paper_padding=0x7f040002;
         /**  PaperButton Default 
          */
-        public static int paper_text_size=0x7f030000;
+        public static int paper_text_size=0x7f040000;
+    }
+    public static final class drawable {
+        public static int background_transparent=0x7f020000;
+    }
+    public static final class id {
+        public static int shape_bacground=0x7f080000;
     }
     public static final class string {
-        public static int app_name=0x7f050000;
+        public static int app_name=0x7f060000;
     }
     public static final class style {
         /** 
@@ -191,11 +197,11 @@ containing a value of this type.
             backward-compatibility can go here.
         
          */
-        public static int AppBaseTheme=0x7f060000;
+        public static int AppBaseTheme=0x7f070000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static int AppTheme=0x7f060001;
+        public static int AppTheme=0x7f070001;
     }
     public static final class styleable {
         /**  FloatingEditText Attribute 
@@ -219,8 +225,8 @@ containing a value of this type.
            @see #FloatingEditText_floating_edit_text_underline_highlighted_height
          */
         public static final int[] FloatingEditText = {
-            0x7f01000a, 0x7f01000b, 0x7f01000c, 0x7f01000d,
-            0x7f01000e, 0x7f01000f
+            0x7f010000, 0x7f010001, 0x7f010002, 0x7f010003,
+            0x7f010004, 0x7f010005
         };
         /**
           <p>This symbol is the offset where the {@link com.kcbTeam.kcblibrary.R.attr#floating_edit_text_color}
@@ -342,9 +348,9 @@ containing a value of this type.
            @see #PaperButton_paper_text_size
          */
         public static final int[] PaperButton = {
-            0x7f010000, 0x7f010001, 0x7f010002, 0x7f010003,
-            0x7f010004, 0x7f010005, 0x7f010006, 0x7f010007,
-            0x7f010008, 0x7f010009
+            0x7f010006, 0x7f010007, 0x7f010008, 0x7f010009,
+            0x7f01000a, 0x7f01000b, 0x7f01000c, 0x7f01000d,
+            0x7f01000e, 0x7f01000f
         };
         /**
           <p>This symbol is the offset where the {@link com.kcbTeam.kcblibrary.R.attr#paper_color}
