@@ -9,22 +9,21 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import com.kcbTeam.R;
 
-//TODO
-//rename to CheckinRecyclerAdapter
-public class MyRecycleAdapter extends RecyclerView.Adapter<MyRecycleAdapter.CheckinViewHolder> {
-    
-    //TODO rename to mItems
-    private String[] ItemStrings;
-    //TODO needn't =null, default is null
-    public ItemClickListener mItemClickListener = null;
+
+public class CheckinRecycleAdapter
+        extends RecyclerView.Adapter<CheckinRecycleAdapter.CheckinViewHolder> {
+
+
+    private String[] mItems;
+    public ItemClickListener mItemClickListener;
 
     public interface ItemClickListener {
         public void onItemClick(View view, int postion);
     }
 
-    public MyRecycleAdapter(String[] itemStrings) {
+    public CheckinRecycleAdapter(String[] itemStrings) {
         super();
-        ItemStrings = itemStrings;
+        mItems = itemStrings;
     }
 
     public void setOnItemClickListener(ItemClickListener listener) {
@@ -33,36 +32,38 @@ public class MyRecycleAdapter extends RecyclerView.Adapter<MyRecycleAdapter.Chec
 
     @Override
     public int getItemCount() {
-        return ItemStrings.length;
+        return mItems.length;
     }
 
-    //TODO rename arg0 to viewGroup, rename arg1 to position
-    //rename stu_vhitem to stu_view_checkin_recycler
+
+
     @SuppressLint("InflateParams")
     @Override
-    public CheckinViewHolder onCreateViewHolder(ViewGroup arg0, int arg1) {
-        View view = LayoutInflater.from(arg0.getContext()).inflate(R.layout.stu_vhitem, null);
-        //TODO rename mh to viewHolder
-        CheckinViewHolder mh = new CheckinViewHolder(view);
-        return mh;
+    public CheckinViewHolder onCreateViewHolder(ViewGroup viewGroup, int position) {
+        View view =
+                LayoutInflater.from(viewGroup.getContext()).inflate(
+                        R.layout.stu_view_checkin_recycler, null);
+        CheckinViewHolder viewHolder = new CheckinViewHolder(view);
+        return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(CheckinViewHolder viewHolder, int position) {
-        String itemString = ItemStrings[position];
-        //TODO use viewHolder.setText(mItems[position]);
-        viewHolder.textView.setText(itemString);
+        viewHolder.textView.setText(mItems[position]);
     }
 
     public class CheckinViewHolder extends RecyclerView.ViewHolder {
-        //TODO public to private
-        //add public void setText(); function
-        public TextView textView;
+
+
+        private TextView textView;
+
+        public void setText(String strings) {
+            textView.setText(strings);
+        }
 
         public CheckinViewHolder(View textview) {
             super(textview);
-            //TODO rename textview_clicknum1 to textview
-            textView = (TextView) textview.findViewById(R.id.textview_clicknum1);
+            textView = (TextView) textview.findViewById(R.id.textview);
             textView.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {

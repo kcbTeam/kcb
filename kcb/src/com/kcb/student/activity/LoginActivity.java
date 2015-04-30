@@ -19,6 +19,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.kcb.common.base.BaseActivity;
 import com.kcb.common.server.RequestUtil;
 import com.kcb.common.server.UrlUtil;
+import com.kcb.student.util.AnimationUtil;
 import com.kcbTeam.R;
 
 /**
@@ -38,9 +39,7 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // TODO tuning xml
         setContentView(R.layout.stu_activity_login);
-
         initView();
     }
 
@@ -57,13 +56,13 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     public void onClick(View v) {
-        // TODO do animation when empty
+
         final String id = idEditText.getText().toString().trim();
         final String password = passwordEditText.getText().toString();
         if (TextUtils.isEmpty(id)) {
-
+            AnimationUtil.smallShake(idEditText);
         } else if (TextUtils.isEmpty(password)) {
-
+            AnimationUtil.smallShake(passwordEditText);
         } else {
             JsonObjectRequest request =
                     new JsonObjectRequest(Method.POST, UrlUtil.getStuLoginUrl(id, password), "",

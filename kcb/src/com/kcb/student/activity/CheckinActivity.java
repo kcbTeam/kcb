@@ -9,8 +9,8 @@ import android.widget.TextView;
 
 import com.kcb.common.base.BaseActivity;
 import com.kcb.common.util.ToastUtil;
-import com.kcb.student.adapter.MyRecycleAdapter;
-import com.kcb.student.adapter.MyRecycleAdapter.ItemClickListener;
+import com.kcb.student.adapter.CheckinRecycleAdapter;
+import com.kcb.student.adapter.CheckinRecycleAdapter.ItemClickListener;
 import com.kcbTeam.R;
 
 /**
@@ -26,13 +26,12 @@ public class CheckinActivity extends BaseActivity implements ItemClickListener {
     private TextView num2TextView;
     private TextView num3TextView;
     private TextView num4TextView;
-    // TODO rename to recyclerView
-    private RecyclerView mRecyclerView;
+    private RecyclerView recyclerView;
     private Button finishButton;
 
     // TODO rename to mItems
-    private String[] itemStrings;
-    private MyRecycleAdapter mAdapter;
+    private String[] mItems;
+    private CheckinRecycleAdapter mAdapter;
     private int currentInputIndex = 0;
 
     @Override
@@ -52,11 +51,11 @@ public class CheckinActivity extends BaseActivity implements ItemClickListener {
         num4TextView = (TextView) findViewById(R.id.textview_shownum4);
         finishButton = (Button) findViewById(R.id.button_finish);
         finishButton.setOnClickListener(this);
-        mRecyclerView = (RecyclerView) findViewById(R.id.my_recyclerview);
-        mRecyclerView.setLayoutManager(new GridLayoutManager(this, 3));
-        itemStrings = new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "清除", "0", "×"};
-        mAdapter = new MyRecycleAdapter(itemStrings);
-        mRecyclerView.setAdapter(mAdapter);
+        recyclerView = (RecyclerView) findViewById(R.id.my_recyclerview);
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
+        mItems = new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "清除", "0", "×"};
+        mAdapter = new CheckinRecycleAdapter(mItems);
+        recyclerView.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener(this);
     }
 
