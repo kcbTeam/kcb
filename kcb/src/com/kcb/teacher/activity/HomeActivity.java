@@ -1,5 +1,6 @@
 package com.kcb.teacher.activity;
 
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -7,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.kcb.common.base.BaseFragmentActivity;
+import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.teacher.fragment.CheckInFragment;
 import com.kcb.teacher.fragment.StuCentreFragment;
 import com.kcb.teacher.fragment.TestFragment;
@@ -26,9 +28,9 @@ public class HomeActivity extends BaseFragmentActivity {
     private final int INDEX_STUCENTER = 2;
 
     private Button exitButton;
-    private Button checkInButton;
-    private Button testButton;
-    private Button stuCenterButton;
+    private ButtonFlat checkInButton;
+    private ButtonFlat testButton;
+    private ButtonFlat stuCenterButton;
 
     private CheckInFragment mCheckInFragment;
     private TestFragment mTestFragment;
@@ -40,21 +42,22 @@ public class HomeActivity extends BaseFragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tch_activity_home);
+
         initView();
     }
 
     @Override
     protected void initView() {
-
         exitButton = (Button) findViewById(R.id.button_exit);
-        checkInButton = (Button) findViewById(R.id.button_course_signin);
-        testButton = (Button) findViewById(R.id.button_course_test);
-        stuCenterButton = (Button) findViewById(R.id.button_student_center);
-
         exitButton.setOnClickListener(this);
+        checkInButton = (ButtonFlat) findViewById(R.id.button_checkin);
         checkInButton.setOnClickListener(this);
+        testButton = (ButtonFlat) findViewById(R.id.button_test);
         testButton.setOnClickListener(this);
+        stuCenterButton = (ButtonFlat) findViewById(R.id.button_stucenter);
         stuCenterButton.setOnClickListener(this);
+
+        mFragmentManager = getSupportFragmentManager();
 
         setDefaultFragment();
     }
@@ -68,27 +71,26 @@ public class HomeActivity extends BaseFragmentActivity {
 
     @Override
     public void onClick(View v) {
-        mFragmentManager = getSupportFragmentManager();
         FragmentTransaction mFragmentTransaction = mFragmentManager.beginTransaction();
         switch (v.getId()) {
             case R.id.button_exit:
                 finish();
                 break;
-            case R.id.button_course_signin:
+            case R.id.button_checkin:
                 setButtonTextColor(INDEX_CHECKIN);
                 if (null == mCheckInFragment) {
                     mCheckInFragment = new CheckInFragment();
                 }
                 mFragmentTransaction.replace(R.id.fragment_content, mCheckInFragment);
                 break;
-            case R.id.button_course_test:
+            case R.id.button_test:
                 setButtonTextColor(INDEX_TEST);
                 if (null == mTestFragment) {
                     mTestFragment = new TestFragment();
                 }
                 mFragmentTransaction.replace(R.id.fragment_content, mTestFragment);
                 break;
-            case R.id.button_student_center:
+            case R.id.button_stucenter:
                 setButtonTextColor(INDEX_STUCENTER);
                 if (null == mStuCentreFragment) {
                     mStuCentreFragment = new StuCentreFragment();
@@ -102,22 +104,22 @@ public class HomeActivity extends BaseFragmentActivity {
     }
 
     private void setButtonTextColor(int index) {
-        checkInButton.setTextColor(getResources().getColor(R.color.black));
-        testButton.setTextColor(getResources().getColor(R.color.black));
-        stuCenterButton.setTextColor(getResources().getColor(R.color.black));
+        Resources res = getResources();
+        checkInButton.setTextColor(res.getColor(R.color.black));
+        testButton.setTextColor(res.getColor(R.color.black));
+        stuCenterButton.setTextColor(res.getColor(R.color.black));
         switch (index) {
             case INDEX_CHECKIN:
-                checkInButton.setTextColor(getResources().getColor(R.color.blue));
+                checkInButton.setTextColor(res.getColor(R.color.blue));
                 break;
             case INDEX_TEST:
-                testButton.setTextColor(getResources().getColor(R.color.blue));
+                testButton.setTextColor(res.getColor(R.color.blue));
                 break;
             case INDEX_STUCENTER:
-                stuCenterButton.setTextColor(getResources().getColor(R.color.blue));
+                stuCenterButton.setTextColor(res.getColor(R.color.blue));
                 break;
             default:
                 break;
         }
     }
-
 }

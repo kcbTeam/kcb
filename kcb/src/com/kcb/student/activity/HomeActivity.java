@@ -2,17 +2,16 @@ package com.kcb.student.activity;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.RadioGroup;
-import android.widget.RadioGroup.OnCheckedChangeListener;
 
 import com.kcb.common.base.BaseFragmentActivity;
+import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcbTeam.R;
 
 /**
@@ -26,11 +25,12 @@ public class HomeActivity extends BaseFragmentActivity {
     private final int INDEX_CHECKIN = 0;
     private final int INDEX_TEST = 1;
 
-    private Fragment[] mFragments;
-    private FragmentManager fragmentManager;
-
     private Button exitButton;
-    private RadioGroup radioGroup;
+    private ButtonFlat checkInButton;
+    private ButtonFlat testButton;
+
+    private Fragment[] mFragments;
+    private FragmentManager mFragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,59 +43,68 @@ public class HomeActivity extends BaseFragmentActivity {
     @Override
     protected void initView() {
         exitButton = (Button) findViewById(R.id.button_exit);
-        radioGroup = (RadioGroup) findViewById(R.id.radiogroup);
+        exitButton.setOnClickListener(this);
+        checkInButton = (ButtonFlat) findViewById(R.id.button_checkin);
+        checkInButton.setOnClickListener(this);
+        checkInButton.setRippleSpeed(18f);
+        testButton = (ButtonFlat) findViewById(R.id.button_test);
+        testButton.setOnClickListener(this);
+        testButton.setRippleSpeed(18f);
+
+        mFragmentManager = getSupportFragmentManager();
 
         mFragments = new Fragment[2];
-        fragmentManager = getSupportFragmentManager();
+        mFragments[INDEX_CHECKIN] = mFragmentManager.findFragmentById(R.id.fragment_sign);
+        mFragments[INDEX_TEST] = mFragmentManager.findFragmentById(R.id.fragment_test);
 
-        mFragments[INDEX_CHECKIN] = fragmentManager.findFragmentById(R.id.fragment_sign);
-        mFragments[INDEX_TEST] = fragmentManager.findFragmentById(R.id.fragment_test);
-
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.hide(mFragments[INDEX_CHECKIN]).hide(mFragments[INDEX_TEST]);
-        fragmentTransaction.show(mFragments[INDEX_CHECKIN]).commit();
-
-        exitButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog dialog =
-                        new AlertDialog.Builder(HomeActivity.this).setTitle("确定退出？")
-                                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        finish();
-                                    }
-                                }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-
-                                    }
-                                }).create();
-                dialog.show();
-            }
-        });
-
-        radioGroup.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction =
-                        fragmentManager.beginTransaction().hide(mFragments[INDEX_CHECKIN])
-                                .hide(mFragments[INDEX_TEST]);
-                switch (checkedId) {
-                    case R.id.radiobutton_sign:
-                        fragmentTransaction.show(mFragments[INDEX_CHECKIN]).commit();
-                        break;
-                    case R.id.radiobutton_test:
-                        fragmentTransaction.show(mFragments[INDEX_TEST]).commit();
-                        break;
-                    default:
-                        break;
-                }
-            }
-        });
+        showDefaultFragment();
     }
 
     @Override
     protected void initData() {}
+
+    private void showDefaultFragment() {
+        onClick(checkInButton);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v == exitButton) {
+            AlertDialog dialog =
+                    new AlertDialog.Builder(HomeActivity.this).setTitle("确定退出？")
+                            .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    finish();
+                                }
+                            }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            }).create();
+            dialog.show();
+        } else {
+            FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
+            fragmentTransaction.hide(mFragments[INDEX_CHECKIN]).hide(mFragments[INDEX_TEST]);
+            if (v == checkInButton) {
+                setButtonTextColor(INDEX_CHECKIN);
+                fragmentTransaction.show(mFragments[INDEX_CHECKIN]).commit();
+            } else if (v == testButton) {
+                setButtonTextColor(INDEX_TEST);
+                fragmentTransaction.show(mFragments[INDEX_TEST]).commit();
+            }
+        }
+    }
+
+    private void setButtonTextColor(int index) {
+        Resources resources = getResources();
+        checkInButton.setTextColor(resources.getColor(R.color.gray));
+        testButton.setTextColor(resources.getColor(R.color.gray));
+        if (index == INDEX_CHECKIN) {
+            checkInButton.setTextColor(resources.getColor(R.color.blue));
+        } else {
+            testButton.setTextColor(resources.getColor(R.color.blue));
+        }
+    }
 }

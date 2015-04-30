@@ -14,4 +14,9 @@
     <dimen name="login_button_height">54dp</dimen>
     <!-- Login end -->
 
+
+    <!-- Home start -->
+    <dimen name="home_tab_height">54dp</dimen>
+    <!-- Home end -->
+
 </resources>

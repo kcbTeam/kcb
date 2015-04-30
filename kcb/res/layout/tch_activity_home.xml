@@ -33,46 +33,24 @@
     </FrameLayout>
 
     <LinearLayout
-        android:id="@+id/button_bar"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal" >
 
-        <Button
-            android:id="@+id/button_course_signin"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/white"
+        <com.kcb.library.view.buttonflat.ButtonFlat
+            android:id="@+id/button_checkin"
+            style="@style/home_tab"
             android:text="@string/course_signin" />
 
-        <View
-            android:layout_width="2dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center_vertical"
-            android:background="@color/gray" />
-
-        <Button
-            android:id="@+id/button_course_test"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/white"
+        <com.kcb.library.view.buttonflat.ButtonFlat
+            android:id="@+id/button_test"
+            style="@style/home_tab"
             android:text="@string/course_test" />
 
-        <View
-            android:layout_width="2dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center_vertical"
-            android:background="@color/gray" />
-
-        <Button
-            android:id="@+id/button_student_center"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/white"
+        <com.kcb.library.view.buttonflat.ButtonFlat
+            android:id="@+id/button_stucenter"
+            style="@style/home_tab"
             android:text="@string/student_center" />
     </LinearLayout>
 
