@@ -20,7 +20,7 @@ import com.kcbTeam.R;
  * @author: Ding
  * @date: 2015年4月23日 上午10:17:01
  */
-public class SignFragment extends BaseFragment {
+public class CheckInFragment extends BaseFragment {
 
     private PaperButton startCheckInButton;
     private PaperButton lookCheckInButton;

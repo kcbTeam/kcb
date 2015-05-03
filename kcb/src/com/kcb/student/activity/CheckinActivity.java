@@ -5,6 +5,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
+
 import com.kcb.common.base.BaseActivity;
 import com.kcb.common.util.ToastUtil;
 import com.kcb.library.view.PaperButton;
@@ -57,6 +58,9 @@ public class CheckInActivity extends BaseActivity {
     }
 
     @Override
+    protected void initData() {}
+
+    @Override
     public void onClick(View v) {
         String passwordString =
                 new String(num1TextView.getText().toString() + num2TextView.getText().toString()
@@ -64,62 +68,56 @@ public class CheckInActivity extends BaseActivity {
         ToastUtil.toast(passwordString);
     }
 
-    @Override
-    protected void initData() {}
-
     private RecyclerItemClickListener mRecyclerItemClickListener = new RecyclerItemClickListener() {
 
         @Override
         public void onItemClick(View view, int postion) {
-            if (postion == 9) {
+            if (postion == 9) { // clean all num
                 num1TextView.setText("");
                 num2TextView.setText("");
                 num3TextView.setText("");
                 num4TextView.setText("");
                 currentInputIndex = 0;
-            } else {
-                if (postion == 11) {
+            } else if (postion == 11) { // clean last num
+                switch (currentInputIndex) {
+                    case 1:
+                        num1TextView.setText("");
+                        break;
+                    case 2:
+                        num2TextView.setText("");
+                        break;
+                    case 3:
+                        num3TextView.setText("");
+                        break;
+                    case 4:
+                        num4TextView.setText("");
+                        break;
+                    default:
+                        break;
+                }
+                currentInputIndex--;
+            } else { // input num
+                if (postion == 10) {
+                    postion = -1;
+                }
+                if (currentInputIndex != 4) {
+                    currentInputIndex++;
                     switch (currentInputIndex) {
                         case 1:
-                            num1TextView.setText("");
+                            num1TextView.setText(String.valueOf(postion + 1));
                             break;
                         case 2:
-                            num2TextView.setText("");
+                            num2TextView.setText(String.valueOf(postion + 1));
                             break;
                         case 3:
-                            num3TextView.setText("");
+                            num3TextView.setText(String.valueOf(postion + 1));
                             break;
                         case 4:
-                            num4TextView.setText("");
+                            num4TextView.setText(String.valueOf(postion + 1));
                             break;
                         default:
                             break;
                     }
-                    currentInputIndex--;
-                } else {
-                    if (postion == 10) {
-                        postion = -1;
-                    }
-                    if (currentInputIndex != 4) {
-                        currentInputIndex++;
-                        switch (currentInputIndex) {
-                            case 1:
-                                num1TextView.setText(String.valueOf(postion + 1));
-                                break;
-                            case 2:
-                                num2TextView.setText(String.valueOf(postion + 1));
-                                break;
-                            case 3:
-                                num3TextView.setText(String.valueOf(postion + 1));
-                                break;
-                            case 4:
-                                num4TextView.setText(String.valueOf(postion + 1));
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-
                 }
             }
         }

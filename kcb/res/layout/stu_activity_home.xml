@@ -15,11 +15,11 @@
         android:layout_height="48dp"
         android:layout_alignParentRight="true"
         android:padding="@dimen/dp_16"
-        android:text="@string/exit" />0
+        android:text="@string/exit" />
 
     <fragment
         android:id="@+id/fragment_sign"
-        android:name="com.kcb.student.fragment.SignFragment"
+        android:name="com.kcb.student.fragment.CheckInFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/button_exit" />

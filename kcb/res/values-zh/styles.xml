@@ -25,7 +25,7 @@
 
     <style name="login_button">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">@dimen/login_button_height</item>
+        <item name="android:layout_height">@dimen/common_button_height</item>
         <item name="android:layout_marginRight">@dimen/login_button_horizontal_margin</item>
         <item name="android:layout_marginLeft">@dimen/login_button_horizontal_margin</item>
     </style>
@@ -46,5 +46,26 @@
         <item name="android:layout_marginLeft">@dimen/home_button_horizontal_margin</item>
     </style>
     <!-- Home end -->
+
+
+    <!-- CheckIn start -->
+    <style name="shownum_textview">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/checkin_recycler_item_height</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/stu_checkin_textview</item>
+    </style>
+    <!-- CheckIn end -->
+
+
+    <!-- Common start -->
+    <style name="common_button">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/common_button_height</item>
+        <item name="android:layout_marginRight">@dimen/common_button_horizontal_margin</item>
+        <item name="android:layout_marginLeft">@dimen/common_button_horizontal_margin</item>
+    </style>
+    <!-- Common end -->
 
 </resources>

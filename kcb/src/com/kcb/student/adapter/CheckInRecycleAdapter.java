@@ -6,8 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.TextView;
-
+import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcbTeam.R;
 
 public class CheckInRecycleAdapter
@@ -50,12 +49,13 @@ public class CheckInRecycleAdapter
     }
 
     public class CheckinViewHolder extends RecyclerView.ViewHolder {
-        private TextView numTextView;
+        private ButtonFlat numButton;
 
-        public CheckinViewHolder(View textview) {
-            super(textview);
-            numTextView = (TextView) textview.findViewById(R.id.textview_num);
-            numTextView.setOnClickListener(new OnClickListener() {
+        public CheckinViewHolder(View view) {
+            super(view);
+            numButton = (ButtonFlat) view.findViewById(R.id.button_num);
+            numButton.setBackgroundResource(R.drawable.stu_checkin_textview);
+            numButton.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (null != mItemClickListener) {
@@ -66,7 +66,7 @@ public class CheckInRecycleAdapter
         }
 
         public void setText(String num) {
-            numTextView.setText(num);
+            numButton.setText(num);
         }
     }
 }

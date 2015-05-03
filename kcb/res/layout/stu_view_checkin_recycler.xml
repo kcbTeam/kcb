@@ -1,13 +1,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="wrap_content" >
 
-    <TextView
-        android:id="@+id/textview_num"
+    <com.kcb.library.view.buttonflat.ButtonFlat
+        android:id="@+id/button_num"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/textview_border"
-        android:gravity="center" />
+        android:layout_height="@dimen/checkin_recycler_item_height"
+        android:text="" />
 
 </LinearLayout>
