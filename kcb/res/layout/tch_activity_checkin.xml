@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:widget="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
@@ -8,51 +9,37 @@
         android:id="@+id/textview_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/signclass"
-        android:textColor="#ff4500"
-        android:textSize="30sp" />
+        android:text="@string/signclass" />
 
-    <Button
+    <com.kcb.library.view.buttonflat.ButtonFlat
         android:id="@+id/button_giveup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/common_top_longtext_button"
         android:layout_alignParentRight="true"
         android:layout_alignTop="@id/textview_label"
-        android:text="@string/giveupsign"
-        android:textColor="#ff4500"
-        android:textSize="20dp" />
+        android:text="@string/giveupsign" />
 
     <TextView
         android:id="@+id/textview_step1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
         android:layout_below="@id/button_giveup"
-        android:layout_marginTop="25dp"
-        android:text="1"
-        android:textColor="#ff4500"
-        android:textSize="25sp" />
+        android:layout_marginTop="@dimen/dp_32"
+        android:text="@string/num_1" />
 
-    <Button
-        android:id="@+id/getnumber"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <com.kcb.library.view.PaperButton
+        android:id="@+id/button_getnum"
+        style="@style/common_button"
         android:layout_alignTop="@id/textview_step1"
         android:layout_centerHorizontal="true"
-        android:text="@string/getnumber"
-        android:textColor="#ff4500"
-        android:textSize="25sp" />
+        widget:paper_text="@string/getnumber" />
 
     <TextView
         android:id="@+id/tipforteacher1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/getnumber"
+        android:layout_below="@id/button_getnum"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:text="@string/tipforteacher1"
-        android:textColor="#ff4500"
-        android:textSize="20sp" />
+        android:text="@string/tipforteacher1" />
 
     <TextView
         android:id="@+id/num"
@@ -60,105 +47,66 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/tipforteacher1"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:text=""
-        android:textColor="#ff4500"
-        android:textSize="25sp" />
-
-    <View
-        android:id="@+id/view1"
-        android:layout_width="fill_parent"
-        android:layout_height="1.0px"
-        android:layout_below="@id/num"
-        android:layout_marginLeft="1.0px"
-        android:layout_marginRight="1.0px"
-        android:layout_marginTop="15dp"
-        android:background="#ff4500" />
+        android:text="" />
 
     <TextView
         android:id="@+id/textview_step2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@id/view1"
-        android:layout_marginTop="15dp"
-        android:text="2"
-        android:textColor="#ff4500"
-        android:textSize="25sp" />
+        android:layout_below="@id/num"
+        android:layout_marginTop="@dimen/dp_32"
+        android:text="@string/num_2" />
 
-    <Button
-        android:id="@+id/startsign"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <com.kcb.library.view.PaperButton
+        android:id="@+id/button_startstop"
+        style="@style/common_button"
         android:layout_alignTop="@id/textview_step2"
         android:layout_centerHorizontal="true"
-        android:text="@string/startsign"
-        android:textColor="#ff4500"
-        android:textSize="25sp" />
+        widget:paper_text="@string/startsign" />
 
     <TextView
         android:id="@+id/tipforteacher2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@id/startsign"
-        android:layout_below="@id/startsign"
-        android:layout_marginTop="10dp"
-        android:text="@string/tipforteacher2"
-        android:textColor="#ff4500"
-        android:textSize="15sp" />
-
-    <View
-        android:id="@+id/view2"
-        android:layout_width="fill_parent"
-        android:layout_height="1.0px"
-        android:layout_below="@id/tipforteacher2"
-        android:layout_marginLeft="1.0px"
-        android:layout_marginRight="1.0px"
-        android:layout_marginTop="25dp"
-        android:background="#ff4500" />
+        android:layout_alignRight="@id/button_startstop"
+        android:layout_below="@id/button_startstop"
+        android:text="@string/tipforteacher2" />
 
     <TextView
         android:id="@+id/textview_step3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@id/view2"
-        android:layout_marginTop="15dp"
-        android:text="3"
-        android:textColor="#ff4500"
-        android:textSize="25sp" />
+        android:layout_below="@id/tipforteacher2"
+        android:layout_marginTop="@dimen/dp_32"
+        android:text="@string/num_3" />
 
-    <Button
-        android:id="@+id/button_rate"
+    <RelativeLayout
+        android:id="@+id/layout_rate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@id/textview_step3"
-        android:layout_centerHorizontal="true"
-        android:text="@string/classrate"
-        android:textColor="#ff4500"
-        android:textSize="25sp" />
+        android:layout_centerHorizontal="true" >
 
-    <TextView
-        android:id="@+id/tipforteacher3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@id/button_rate"
-        android:layout_below="@id/button_rate"
-        android:layout_marginTop="10dp"
-        android:text="@string/tipforteacher3"
-        android:textColor="#ff4500"
-        android:textSize="15sp" />
+        <com.kcb.library.view.PaperButton
+            android:id="@+id/button_rate"
+            style="@style/common_button"
+            widget:paper_text="@string/classrate" />
 
-    <Button
-        android:id="@+id/finish"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tipforteacher3"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@id/button_rate"
+            android:layout_centerVertical="true"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:text="@string/classrate_look" />
+    </RelativeLayout>
+
+    <com.kcb.library.view.PaperButton
+        android:id="@+id/button_finish"
+        style="@style/common_button"
+        android:layout_below="@id/layout_rate"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
-        android:text="@string/finish"
-        android:textColor="#ff4500"
-        android:textSize="25sp" />
+        widget:paper_text="@string/finish" />
 
 </RelativeLayout>

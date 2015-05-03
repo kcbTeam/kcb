@@ -5,5 +5,8 @@
     <string name="exit">退出</string>
     <string name="i_am_stu">我是学生</string>
     <string name="i_am_tch">我是老师</string>
+    <string name="num_1">1</string>
+    <string name="num_2">2</string>
+    <string name="num_3">3</string>
 
 </resources>

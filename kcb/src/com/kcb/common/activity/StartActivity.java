@@ -26,6 +26,8 @@ import com.kcbTeam.R;
  */
 public class StartActivity extends BaseActivity {
 
+    public static final String INTENT_ACTION = "backFromLogin";
+
     private ColorAnimationView colorAnimationView;
     private ViewPager viewPager;
 
@@ -47,6 +49,8 @@ public class StartActivity extends BaseActivity {
         }
     }
 
+    private int[] backgroundColors = new int[] {0xffff0000, 0xff00ff00, 0xff0000ff};
+
     @Override
     protected void initView() {
         colorAnimationView = (ColorAnimationView) findViewById(R.id.color_animation_view);
@@ -55,8 +59,12 @@ public class StartActivity extends BaseActivity {
         StartViewPagerAdapter adapter = new StartViewPagerAdapter();
         viewPager.setAdapter(adapter);
         viewPager.setOffscreenPageLimit(adapter.getCount());
-        colorAnimationView.setmViewPager(viewPager, adapter.getCount(), new int[] {0xff8080FF,
-                0xff80ff80, 0xffffffff});
+        colorAnimationView.setmViewPager(viewPager, adapter.getCount(), backgroundColors);
+
+        Intent intent = getIntent();
+        if (null != intent && intent.getAction() == INTENT_ACTION) {
+            viewPager.setCurrentItem(adapter.getCount() - 1);
+        }
     }
 
     @Override
@@ -104,11 +112,13 @@ public class StartActivity extends BaseActivity {
                 switch (v.getId()) {
                     case R.id.pagerbutton_stu:
                         intent = new Intent(StartActivity.this, LoginActivity.class);
+                        finish();
                         break;
                     case R.id.pagerbutton_tch:
                         intent =
                                 new Intent(StartActivity.this,
                                         com.kcb.teacher.activity.LoginActivity.class);
+                        finish();
                         break;
                     default:
                         break;

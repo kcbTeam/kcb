@@ -62,7 +62,7 @@
     <string name="startsign">开始签到/停止签到</string>
     <string name="tipforteacher2">已经开始签到30秒</string>
     <string name="classrate">本次到课率为70%</string>
-    <string name="tipforteacher3">点击按钮可以查看没有到课学生名单</string>
+    <string name="classrate_look">>></string>
     <string name="finish">完成</string>
 
 </resources>
