@@ -7,12 +7,12 @@
 
     <com.kcb.library.view.PaperButton
         android:id="@+id/button_start_test"
-        style="@style/home_button"
+        style="@style/home_center_button"
         widget:paper_text="@string/start1" />
 
     <com.kcb.library.view.PaperButton
         android:id="@+id/button_look_test"
-        style="@style/home_button"
+        style="@style/home_center_button"
         android:layout_below="@id/button_start_test"
         widget:paper_text="@string/check1" />
 

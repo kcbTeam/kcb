@@ -6,7 +6,7 @@
     <com.kcb.library.view.buttonflat.ButtonFlat
         android:id="@+id/button_num"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/checkin_recycler_item_height"
+        android:layout_height="54dp"
         android:text="" />
 
 </LinearLayout>

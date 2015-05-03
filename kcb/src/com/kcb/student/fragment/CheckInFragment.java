@@ -10,8 +10,8 @@ import android.view.ViewGroup;
 import com.kcb.common.base.BaseFragment;
 import com.kcb.common.listener.CustomOnClickListener;
 import com.kcb.library.view.PaperButton;
-import com.kcb.student.activity.CheckInResultActivity;
 import com.kcb.student.activity.CheckInActivity;
+import com.kcb.student.activity.CheckInResultActivity;
 import com.kcbTeam.R;
 
 /**

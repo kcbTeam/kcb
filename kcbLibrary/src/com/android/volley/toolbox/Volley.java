@@ -33,7 +33,7 @@ public class Volley {
     /**
      * Creates a default instance of the worker pool and calls {@link RequestQueue#start()} on it.
      * You may set a maximum size of the disk cache in bytes.
-     *
+     * 
      * @param context A {@link Context} to use for creating the cache dir.
      * @param stack An {@link HttpStack} to use for the network, or null for default.
      * @param maxDiskCacheBytes the maximum size of the disk cache, in bytes. Use -1 for default
@@ -80,7 +80,7 @@ public class Volley {
     /**
      * Creates a default instance of the worker pool and calls {@link RequestQueue#start()} on it.
      * You may set a maximum size of the disk cache in bytes.
-     *
+     * 
      * @param context A {@link Context} to use for creating the cache dir.
      * @param maxDiskCacheBytes the maximum size of the disk cache, in bytes. Use -1 for default
      *        size.
@@ -92,7 +92,7 @@ public class Volley {
 
     /**
      * Creates a default instance of the worker pool and calls {@link RequestQueue#start()} on it.
-     *
+     * 
      * @param context A {@link Context} to use for creating the cache dir.
      * @param stack An {@link HttpStack} to use for the network, or null for default.
      * @return A started {@link RequestQueue} instance.
@@ -103,7 +103,7 @@ public class Volley {
 
     /**
      * Creates a default instance of the worker pool and calls {@link RequestQueue#start()} on it.
-     *
+     * 
      * @param context A {@link Context} to use for creating the cache dir.
      * @return A started {@link RequestQueue} instance.
      */

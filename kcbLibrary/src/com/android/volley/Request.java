@@ -30,7 +30,7 @@ import com.android.volley.VolleyLog.MarkerLog;
 
 /**
  * Base class for all network requests.
- *
+ * 
  * @param <T> The type of parsed response this request expects.
  */
 public abstract class Request<T> implements Comparable<Request<T>> {
@@ -117,7 +117,7 @@ public abstract class Request<T> implements Comparable<Request<T>> {
      * Creates a new request with the given URL and error listener. Note that the normal response
      * listener is not provided here as delivery of responses is provided by subclasses, who have a
      * better idea of how to deliver an already-parsed response.
-     *
+     * 
      * @deprecated Use {@link #Request(int, String, com.android.volley.Response.ErrorListener)}.
      */
     @Deprecated
@@ -151,7 +151,7 @@ public abstract class Request<T> implements Comparable<Request<T>> {
     /**
      * Set a tag on this request. Can be used to cancel all requests with this tag by
      * {@link RequestQueue#cancelAll(Object)}.
-     *
+     * 
      * @return This Request object to allow for chaining.
      */
     public Request<?> setTag(Object tag) {
@@ -200,7 +200,7 @@ public abstract class Request<T> implements Comparable<Request<T>> {
 
     /**
      * Sets the retry policy for this request.
-     *
+     * 
      * @return This Request object to allow for chaining.
      */
     public Request<?> setRetryPolicy(RetryPolicy retryPolicy) {
@@ -221,7 +221,7 @@ public abstract class Request<T> implements Comparable<Request<T>> {
 
     /**
      * Notifies the request queue that this request has finished (successfully or with error).
-     *
+     * 
      * <p>
      * Also dumps all events from this request's event log; for debugging.
      * </p>
@@ -259,7 +259,7 @@ public abstract class Request<T> implements Comparable<Request<T>> {
     /**
      * Associates this request with the given queue. The request queue will be notified when this
      * request has finished.
-     *
+     * 
      * @return This Request object to allow for chaining.
      */
     public Request<?> setRequestQueue(RequestQueue requestQueue) {
@@ -269,7 +269,7 @@ public abstract class Request<T> implements Comparable<Request<T>> {
 
     /**
      * Sets the sequence number of this request. Used by {@link RequestQueue}.
-     *
+     * 
      * @return This Request object to allow for chaining.
      */
     public final Request<?> setSequence(int sequence) {
@@ -325,7 +325,7 @@ public abstract class Request<T> implements Comparable<Request<T>> {
     /**
      * Annotates this request with an entry retrieved for it from cache. Used for cache coherency
      * support.
-     *
+     * 
      * @return This Request object to allow for chaining.
      */
     public Request<?> setCacheEntry(Cache.Entry entry) {
@@ -368,13 +368,13 @@ public abstract class Request<T> implements Comparable<Request<T>> {
      * Returns a Map of POST parameters to be used for this request, or null if a simple GET should
      * be used. Can throw {@link AuthFailureError} as authentication may be required to provide
      * these values.
-     *
+     * 
      * <p>
      * Note that only one of getPostParams() and getPostBody() can return a non-null value.
      * </p>
      * 
      * @throws AuthFailureError In the event of auth failure
-     *
+     * 
      * @deprecated Use {@link #getParams()} instead.
      */
     @Deprecated
@@ -385,7 +385,7 @@ public abstract class Request<T> implements Comparable<Request<T>> {
     /**
      * Returns which encoding should be used when converting POST parameters returned by
      * {@link #getPostParams()} into a raw POST body.
-     *
+     * 
      * <p>
      * This controls both encodings:
      * <ol>
@@ -394,7 +394,7 @@ public abstract class Request<T> implements Comparable<Request<T>> {
      * <li>The string encoding used when converting the URL encoded parameters into a raw byte
      * array.</li>
      * </ol>
-     *
+     * 
      * @deprecated Use {@link #getParamsEncoding()} instead.
      */
     @Deprecated
@@ -412,9 +412,9 @@ public abstract class Request<T> implements Comparable<Request<T>> {
 
     /**
      * Returns the raw POST body to be sent.
-     *
+     * 
      * @throws AuthFailureError In the event of auth failure
-     *
+     * 
      * @deprecated Use {@link #getBody()} instead.
      */
     @Deprecated
@@ -433,11 +433,11 @@ public abstract class Request<T> implements Comparable<Request<T>> {
     /**
      * Returns a Map of parameters to be used for a POST or PUT request. Can throw
      * {@link AuthFailureError} as authentication may be required to provide these values.
-     *
+     * 
      * <p>
      * Note that you can directly override {@link #getBody()} for custom data.
      * </p>
-     *
+     * 
      * @throws AuthFailureError in the event of auth failure
      */
     protected Map<String, String> getParams() throws AuthFailureError {
@@ -447,7 +447,7 @@ public abstract class Request<T> implements Comparable<Request<T>> {
     /**
      * Returns which encoding should be used when converting POST or PUT parameters returned by
      * {@link #getParams()} into a raw POST or PUT body.
-     *
+     * 
      * <p>
      * This controls both encodings:
      * <ol>
@@ -470,12 +470,12 @@ public abstract class Request<T> implements Comparable<Request<T>> {
 
     /**
      * Returns the raw POST or PUT body to be sent.
-     *
+     * 
      * <p>
      * By default, the body consists of the request parameters in application/x-www-form-urlencoded
      * format. When overriding this method, consider overriding {@link #getBodyContentType()} as
      * well to match the new body format.
-     *
+     * 
      * @throws AuthFailureError in the event of auth failure
      */
     public byte[] getBody() throws AuthFailureError {
@@ -506,7 +506,7 @@ public abstract class Request<T> implements Comparable<Request<T>> {
 
     /**
      * Set whether or not responses to this request should be cached.
-     *
+     * 
      * @return This Request object to allow for chaining.
      */
     public final Request<?> setShouldCache(boolean shouldCache) {
@@ -579,11 +579,11 @@ public abstract class Request<T> implements Comparable<Request<T>> {
 
     /**
      * Subclasses can override this method to parse 'networkError' and return a more specific error.
-     *
+     * 
      * <p>
      * The default implementation just returns the passed 'networkError'.
      * </p>
-     *
+     * 
      * @param volleyError the error retrieved from the network
      * @return an NetworkError augmented with additional information
      */
@@ -603,7 +603,7 @@ public abstract class Request<T> implements Comparable<Request<T>> {
 
     /**
      * Delivers error message to the ErrorListener that the Request was initialized with.
-     *
+     * 
      * @param error Error details
      */
     public void deliverError(VolleyError error) {

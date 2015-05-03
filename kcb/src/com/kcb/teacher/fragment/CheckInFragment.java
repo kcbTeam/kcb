@@ -2,14 +2,16 @@ package com.kcb.teacher.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.kcb.common.base.BaseFragment;
+import com.kcb.common.listener.CustomOnClickListener;
+import com.kcb.library.view.PaperButton;
 import com.kcb.teacher.activity.CheckInResultActivity;
-import com.kcb.teacher.activity.CheckinActivity;
+import com.kcb.teacher.activity.CheckInActivity;
 import com.kcbTeam.R;
 
 /**
@@ -21,39 +23,47 @@ import com.kcbTeam.R;
  */
 public class CheckInFragment extends BaseFragment {
 
-    private Button startSign;
-    private Button checkSignResult;
+    private PaperButton startCheckInButton;
+    private PaperButton lookCheckInButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.tch_fragment_checkin, container, false);
-        startSign = (Button) view.findViewById(R.id.button_begin_signin);
-        checkSignResult = (Button) view.findViewById(R.id.button_signin_result);
-        startSign.setOnClickListener(this);
-        checkSignResult.setOnClickListener(this);
         return view;
     }
 
     @Override
-    protected void initView() {}
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        initView();
+    }
+
+    @Override
+    protected void initView() {
+        View view = getView();
+        startCheckInButton = (PaperButton) view.findViewById(R.id.button_start_checkin);
+        startCheckInButton.setOnClickListener(mClickListener);
+        lookCheckInButton = (PaperButton) view.findViewById(R.id.button_look_checkin);
+        lookCheckInButton.setOnClickListener(mClickListener);
+    }
 
     @Override
     protected void initData() {}
 
-    @Override
-    public void onClick(View v) {
-        Intent intent;
-        switch (v.getId()) {
-            case R.id.button_begin_signin:
-                intent = new Intent(getActivity(), CheckinActivity.class);
+    private CustomOnClickListener mClickListener = new CustomOnClickListener(
+            CustomOnClickListener.DELAY_PAPER_BUTTON) {
+
+        @Override
+        public void doClick(View v) {
+            Intent intent;
+            if (v == startCheckInButton) {
+                intent = new Intent(getActivity(), CheckInActivity.class);
                 startActivity(intent);
-                break;
-            case R.id.button_signin_result:
+            } else if (v == lookCheckInButton) {
                 intent = new Intent(getActivity(), CheckInResultActivity.class);
                 startActivity(intent);
-                break;
-            default:
-                break;
+            }
         }
-    }
+    };
 }

@@ -22,7 +22,7 @@ import com.android.volley.AuthFailureError;
 public interface Authenticator {
     /**
      * Synchronously retrieves an auth token.
-     *
+     * 
      * @throws AuthFailureError If authentication did not succeed
      */
     public String getAuthToken() throws AuthFailureError;

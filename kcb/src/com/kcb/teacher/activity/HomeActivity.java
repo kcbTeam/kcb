@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
-import android.widget.Button;
 
 import com.kcb.common.base.BaseFragmentActivity;
 import com.kcb.library.view.buttonflat.ButtonFlat;
@@ -27,7 +26,7 @@ public class HomeActivity extends BaseFragmentActivity {
     private final int INDEX_TEST = 1;
     private final int INDEX_STUCENTER = 2;
 
-    private Button exitButton;
+    private ButtonFlat exitButton;
     private ButtonFlat checkInButton;
     private ButtonFlat testButton;
     private ButtonFlat stuCenterButton;
@@ -48,8 +47,9 @@ public class HomeActivity extends BaseFragmentActivity {
 
     @Override
     protected void initView() {
-        exitButton = (Button) findViewById(R.id.button_exit);
+        exitButton = (ButtonFlat) findViewById(R.id.button_exit);
         exitButton.setOnClickListener(this);
+        exitButton.setRippleSpeed(6f);
         checkInButton = (ButtonFlat) findViewById(R.id.button_checkin);
         checkInButton.setOnClickListener(this);
         testButton = (ButtonFlat) findViewById(R.id.button_test);

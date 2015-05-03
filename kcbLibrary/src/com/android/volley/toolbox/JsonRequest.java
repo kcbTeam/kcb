@@ -26,7 +26,7 @@ import com.android.volley.VolleyLog;
 /**
  * A request for retrieving a T type response body at a given URL that also optionally sends along a
  * JSON body in the request specified.
- *
+ * 
  * @param <T> JSON type of response expected
  */
 public abstract class JsonRequest<T> extends Request<T> {
@@ -43,7 +43,7 @@ public abstract class JsonRequest<T> extends Request<T> {
     /**
      * Deprecated constructor for a JsonRequest which defaults to GET unless {@link #getPostBody()}
      * or {@link #getPostParams()} is overridden (which defaults to POST).
-     *
+     * 
      * @deprecated Use {@link #JsonRequest(int, String, String, Listener, ErrorListener)}.
      */
     public JsonRequest(String url, String requestBody, Listener<T> listener,

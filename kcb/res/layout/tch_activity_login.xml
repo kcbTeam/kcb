@@ -34,7 +34,7 @@
 
     <com.kcb.library.view.PaperButton
         android:id="@+id/buton_login"
-        style="@style/login_button"
+        style="@style/common_button"
         android:layout_below="@id/edittext_password"
         widget:paper_text="@string/registerin" />
 

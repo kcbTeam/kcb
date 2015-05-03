@@ -24,7 +24,7 @@ import android.os.SystemClock;
 
 /**
  * Provides a thread for performing network dispatch from a queue of requests.
- *
+ * 
  * Requests added to the specified queue are processed from the network via a specified
  * {@link Network} interface. Responses are committed to cache, if eligible, using a specified
  * {@link Cache} interface. Valid responses and errors are posted back to the caller via a
@@ -45,7 +45,7 @@ public class NetworkDispatcher extends Thread {
     /**
      * Creates a new network dispatcher thread. You must call {@link #start()} in order to begin
      * processing.
-     *
+     * 
      * @param queue Queue of incoming requests for triage
      * @param network Network interface to use for performing requests
      * @param cache Cache interface to use for writing responses to cache

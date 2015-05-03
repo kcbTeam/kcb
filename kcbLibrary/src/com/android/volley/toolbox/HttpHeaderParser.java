@@ -30,7 +30,7 @@ public class HttpHeaderParser {
 
     /**
      * Extracts a {@link Cache.Entry} from a {@link NetworkResponse}.
-     *
+     * 
      * @param response The network response to parse headers from
      * @return a cache entry for the given response, or null if the response is not cacheable.
      */
@@ -129,7 +129,7 @@ public class HttpHeaderParser {
 
     /**
      * Retrieve a charset from headers
-     *
+     * 
      * @param headers An {@link java.util.Map} of headers
      * @param defaultCharset Charset to return if none can be found
      * @return Returns the charset specified in the Content-Type of this header, or the
