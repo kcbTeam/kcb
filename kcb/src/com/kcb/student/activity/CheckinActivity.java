@@ -4,13 +4,13 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.kcb.common.base.BaseActivity;
 import com.kcb.common.util.ToastUtil;
-import com.kcb.student.adapter.MyRecycleAdapter;
-import com.kcb.student.adapter.MyRecycleAdapter.ItemClickListener;
+import com.kcb.library.view.PaperButton;
+import com.kcb.student.adapter.CheckInRecycleAdapter;
+import com.kcb.student.adapter.CheckInRecycleAdapter.RecyclerItemClickListener;
 import com.kcbTeam.R;
 
 /**
@@ -20,19 +20,16 @@ import com.kcbTeam.R;
  * @author: Tao Li
  * @date: 2015-4-24 下午9:16:22
  */
-public class CheckInActivity extends BaseActivity implements ItemClickListener {
+public class CheckInActivity extends BaseActivity {
 
     private TextView num1TextView;
     private TextView num2TextView;
     private TextView num3TextView;
     private TextView num4TextView;
-    // TODO rename to recyclerView
-    private RecyclerView mRecyclerView;
-    private Button finishButton;
+    private RecyclerView recyclerView;
+    private PaperButton finishButton;
 
-    // TODO rename to mItems
-    private String[] itemStrings;
-    private MyRecycleAdapter mAdapter;
+    private CheckInRecycleAdapter mAdapter;
     private int currentInputIndex = 0;
 
     @Override
@@ -50,15 +47,18 @@ public class CheckInActivity extends BaseActivity implements ItemClickListener {
         num2TextView = (TextView) findViewById(R.id.textview_shownum2);
         num3TextView = (TextView) findViewById(R.id.textview_shownum3);
         num4TextView = (TextView) findViewById(R.id.textview_shownum4);
-        finishButton = (Button) findViewById(R.id.button_finish);
+        finishButton = (PaperButton) findViewById(R.id.button_finish);
         finishButton.setOnClickListener(this);
-        mRecyclerView = (RecyclerView) findViewById(R.id.my_recyclerview);
-        mRecyclerView.setLayoutManager(new GridLayoutManager(this, 3));
-        itemStrings = new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "清除", "0", "×"};
-        mAdapter = new MyRecycleAdapter(itemStrings);
-        mRecyclerView.setAdapter(mAdapter);
-        mAdapter.setOnItemClickListener(this);
+
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
+        mAdapter = new CheckInRecycleAdapter();
+        mAdapter.setRecyclerItemClickListener(mRecyclerItemClickListener);
+        recyclerView.setAdapter(mAdapter);
     }
+
+    @Override
+    protected void initData() {}
 
     @Override
     public void onClick(View v) {
@@ -68,20 +68,17 @@ public class CheckInActivity extends BaseActivity implements ItemClickListener {
         ToastUtil.toast(passwordString);
     }
 
-    @Override
-    protected void initData() {}
+    private RecyclerItemClickListener mRecyclerItemClickListener = new RecyclerItemClickListener() {
 
-    @Override
-    public void onItemClick(View view, int postion) {
-
-        if (postion == 9) {
-            num1TextView.setText("");
-            num2TextView.setText("");
-            num3TextView.setText("");
-            num4TextView.setText("");
-            currentInputIndex = 0;
-        } else {
-            if (postion == 11) {
+        @Override
+        public void onItemClick(View view, int postion) {
+            if (postion == 9) { // clean all num
+                num1TextView.setText("");
+                num2TextView.setText("");
+                num3TextView.setText("");
+                num4TextView.setText("");
+                currentInputIndex = 0;
+            } else if (postion == 11) { // clean last num
                 switch (currentInputIndex) {
                     case 1:
                         num1TextView.setText("");
@@ -99,7 +96,7 @@ public class CheckInActivity extends BaseActivity implements ItemClickListener {
                         break;
                 }
                 currentInputIndex--;
-            } else {
+            } else { // input num
                 if (postion == 10) {
                     postion = -1;
                 }
@@ -122,8 +119,7 @@ public class CheckInActivity extends BaseActivity implements ItemClickListener {
                             break;
                     }
                 }
-
             }
         }
-    }
+    };
 }

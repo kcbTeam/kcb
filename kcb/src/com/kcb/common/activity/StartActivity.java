@@ -117,4 +117,13 @@ public class StartActivity extends BaseActivity {
             }
         };
     }
+
+    /**
+     * exit app;
+     */
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        System.exit(0);
+    }
 }

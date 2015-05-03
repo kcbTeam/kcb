@@ -1,24 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <dimen name="dp_5">5dp</dimen>
-    <dimen name="dp_10">10dp</dimen>
+    <!-- Common start -->
     <dimen name="dp_16">16dp</dimen>
-    <dimen name="dp_25">25dp</dimen>
-    <dimen name="dp_40">40dp</dimen>
-    <dimen name="dp_54">54dp</dimen>
+    <dimen name="dp_32">32dp</dimen>
+    <dimen name="common_button_height">54dp</dimen>
+    <dimen name="common_button_horizontal_margin">36dp</dimen>
+    <!-- Common end -->
+
 
     <!-- Login start -->
     <dimen name="login_edittext_horizontal_margin">40dp</dimen>
     <dimen name="login_button_horizontal_margin">36dp</dimen>
-    <dimen name="login_button_height">54dp</dimen>
     <!-- Login end -->
 
 
     <!-- Home start -->
+    <dimen name="home_exit_height">48dp</dimen>
     <dimen name="home_tab_height">54dp</dimen>
     <dimen name="home_button_horizontal_margin">36dp</dimen>
     <dimen name="home_button_height">60dp</dimen>
     <!-- Home end -->
+
+
+    <!-- CheckIn start -->
+    <dimen name="checkin_recycler_height">216dp</dimen>
+    <dimen name="checkin_recycler_item_height">54dp</dimen>
+    <!-- CheckIn end -->
 
 </resources>
