@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:widget="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
-    <Button 
+    android:layout_height="match_parent"
+    android:gravity="center" >
+
+    <com.kcb.library.view.PaperButton
         android:id="@+id/button_begin_test"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="@string/begin_test"
-        android:layout_marginTop="150dp"/>
-    <Button 
+        style="@style/home_center_button"
+        widget:paper_text="@string/start" />
+
+    <com.kcb.library.view.PaperButton
         android:id="@+id/button_test_result"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="@string/test_result"
-        android:layout_marginTop="250dp"/>
+        style="@style/home_center_button"
+        android:layout_below="@id/button_begin_test"
+        widget:paper_text="@string/test_result" />
 
 </RelativeLayout>

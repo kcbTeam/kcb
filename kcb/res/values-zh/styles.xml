@@ -9,8 +9,8 @@
     <style name="login_edittext">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginRight">@dimen/login_edittext_horizontal_margin</item>
-        <item name="android:layout_marginLeft">@dimen/login_edittext_horizontal_margin</item>
+        <item name="android:layout_marginRight">40dp</item>
+        <item name="android:layout_marginLeft">40dp</item>
         <item name="android:maxLines">1</item>
         <item name="android:maxLength">15</item>
     </style>
@@ -22,28 +22,21 @@
     <style name="login_edittext_password" parent="@style/login_edittext">
         <item name="android:inputType">textPassword</item>
     </style>
-
-    <style name="login_button">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">@dimen/common_button_height</item>
-        <item name="android:layout_marginRight">@dimen/login_button_horizontal_margin</item>
-        <item name="android:layout_marginLeft">@dimen/login_button_horizontal_margin</item>
-    </style>
     <!-- Login start -->
 
 
     <!-- Home start -->
     <style name="home_tab">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">@dimen/home_tab_height</item>
+        <item name="android:layout_height">54dp</item>
         <item name="android:layout_weight">1</item>
     </style>
 
-    <style name="home_button">
+    <style name="home_center_button">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">@dimen/home_button_height</item>
-        <item name="android:layout_marginRight">@dimen/home_button_horizontal_margin</item>
-        <item name="android:layout_marginLeft">@dimen/home_button_horizontal_margin</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:layout_marginRight">36dp</item>
+        <item name="android:layout_marginLeft">36dp</item>
     </style>
     <!-- Home end -->
 
@@ -51,7 +44,7 @@
     <!-- CheckIn start -->
     <style name="shownum_textview">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">@dimen/checkin_recycler_item_height</item>
+        <item name="android:layout_height">54dp</item>
         <item name="android:layout_weight">1</item>
         <item name="android:gravity">center</item>
         <item name="android:background">@drawable/stu_checkin_textview</item>
@@ -62,9 +55,19 @@
     <!-- Common start -->
     <style name="common_button">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">@dimen/common_button_height</item>
-        <item name="android:layout_marginRight">@dimen/common_button_horizontal_margin</item>
-        <item name="android:layout_marginLeft">@dimen/common_button_horizontal_margin</item>
+        <item name="android:layout_height">54dp</item>
+        <item name="android:layout_marginRight">36dp</item>
+        <item name="android:layout_marginLeft">36dp</item>
+    </style>
+
+    <style name="common_top_button">
+        <item name="android:layout_width">72dp</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:padding">16dp</item>
+    </style>
+
+    <style name="common_top_longtext_button" parent="@style/common_top_button">
+        <item name="android:layout_width">144dp</item>
     </style>
     <!-- Common end -->
 

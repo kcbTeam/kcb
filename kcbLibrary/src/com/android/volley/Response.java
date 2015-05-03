@@ -16,7 +16,7 @@ package com.android.volley;
 
 /**
  * Encapsulates a parsed response for delivery.
- *
+ * 
  * @param <T> Parsed type of this response
  */
 public class Response<T> {

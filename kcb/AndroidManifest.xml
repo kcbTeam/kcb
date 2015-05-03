@@ -62,7 +62,7 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.kcb.teacher.activity.CheckinActivity"
+            android:name="com.kcb.teacher.activity.CheckInActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity

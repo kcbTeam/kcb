@@ -20,7 +20,7 @@ import android.os.Process;
 
 /**
  * Provides a thread for performing cache triage on a queue of requests.
- *
+ * 
  * Requests added to the specified cache queue are resolved from cache. Any deliverable response is
  * posted back to the caller via a {@link ResponseDelivery}. Cache misses and responses that require
  * refresh are enqueued on the specified network queue for processing by a {@link NetworkDispatcher}
@@ -48,7 +48,7 @@ public class CacheDispatcher extends Thread {
     /**
      * Creates a new cache triage dispatcher thread. You must call {@link #start()} in order to
      * begin processing.
-     *
+     * 
      * @param cacheQueue Queue of incoming requests for triage
      * @param networkQueue Queue to post requests that require network to
      * @param cache Cache interface to use for resolution

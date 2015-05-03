@@ -25,7 +25,7 @@ import com.android.volley.VolleyError;
 
 /**
  * A Future that represents a Volley request.
- *
+ * 
  * Used by providing as your response and error listeners. For example:
  * 
  * <pre>
@@ -47,7 +47,7 @@ import com.android.volley.VolleyError;
  *   // handle the error
  * }
  * </pre>
- *
+ * 
  * @param <T> The type of parsed response this future expects.
  */
 public class RequestFuture<T> implements Future<T>, Response.Listener<T>, Response.ErrorListener {

@@ -54,7 +54,7 @@ public class ImageRequest extends Request<Bitmap> {
      * nonzero, that dimension will be clamped and the other one will be set to preserve the image's
      * aspect ratio. If both width and height are nonzero, the image will be decoded to be fit in
      * the rectangle of dimensions width x height while keeping its aspect ratio.
-     *
+     * 
      * @param url URL of the image
      * @param listener Listener to receive the decoded bitmap
      * @param maxWidth Maximum width to decode this bitmap to, or zero for none
@@ -94,7 +94,7 @@ public class ImageRequest extends Request<Bitmap> {
 
     /**
      * Scales one side of a rectangle to fit aspect ratio.
-     *
+     * 
      * @param maxPrimary Maximum size of the primary dimension (i.e. width for max width), or zero
      *        to maintain aspect ratio with secondary dimension
      * @param maxSecondary Maximum size of the secondary dimension, or zero to maintain aspect ratio
@@ -217,7 +217,7 @@ public class ImageRequest extends Request<Bitmap> {
     /**
      * Returns the largest power-of-two divisor for use in downscaling a bitmap that will not result
      * in the scaling past the desired dimensions.
-     *
+     * 
      * @param actualWidth Actual width of the bitmap
      * @param actualHeight Actual height of the bitmap
      * @param desiredWidth Desired width of the bitmap

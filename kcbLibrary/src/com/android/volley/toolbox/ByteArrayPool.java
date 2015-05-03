@@ -80,7 +80,7 @@ public class ByteArrayPool {
     /**
      * Returns a buffer from the pool if one is available in the requested size, or allocates a new
      * one if a pooled one is not available.
-     *
+     * 
      * @param len the minimum size, in bytes, of the requested buffer. The returned buffer may be
      *        larger.
      * @return a byte[] buffer is always returned.
@@ -101,7 +101,7 @@ public class ByteArrayPool {
     /**
      * Returns a buffer to the pool, throwing away old buffers if the pool would exceed its allotted
      * size.
-     *
+     * 
      * @param buf the buffer to return to the pool.
      */
     public synchronized void returnBuf(byte[] buf) {

@@ -11,10 +11,8 @@
 
     <com.kcb.library.view.buttonflat.ButtonFlat
         android:id="@+id/button_exit"
-        android:layout_width="72dp"
-        android:layout_height="48dp"
+        style="@style/common_top_button"
         android:layout_alignParentRight="true"
-        android:padding="@dimen/dp_16"
         android:text="@string/exit" />
 
     <fragment

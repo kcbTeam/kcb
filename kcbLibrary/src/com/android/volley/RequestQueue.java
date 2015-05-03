@@ -30,7 +30,7 @@ import android.os.Looper;
 
 /**
  * A request dispatch queue with a thread pool of dispatchers.
- *
+ * 
  * Calling {@link #add(Request)} will enqueue the given Request for dispatch, resolving from either
  * cache or network on a worker thread, and then delivering a parsed response on the main thread.
  */
@@ -47,7 +47,7 @@ public class RequestQueue {
 
     /**
      * Staging area for requests that already have a duplicate request in flight.
-     *
+     * 
      * <ul>
      * <li>containsKey(cacheKey) indicates that there is a request in flight for the given cache
      * key.</li>
@@ -95,7 +95,7 @@ public class RequestQueue {
 
     /**
      * Creates the worker pool. Processing will not begin until {@link #start()} is called.
-     *
+     * 
      * @param cache A Cache to use for persisting responses to disk
      * @param network A Network interface for performing HTTP requests
      * @param threadPoolSize Number of network dispatcher threads to create
@@ -110,7 +110,7 @@ public class RequestQueue {
 
     /**
      * Creates the worker pool. Processing will not begin until {@link #start()} is called.
-     *
+     * 
      * @param cache A Cache to use for persisting responses to disk
      * @param network A Network interface for performing HTTP requests
      * @param threadPoolSize Number of network dispatcher threads to create
@@ -122,7 +122,7 @@ public class RequestQueue {
 
     /**
      * Creates the worker pool. Processing will not begin until {@link #start()} is called.
-     *
+     * 
      * @param cache A Cache to use for persisting responses to disk
      * @param network A Network interface for performing HTTP requests
      */
@@ -265,7 +265,7 @@ public class RequestQueue {
     /**
      * Called from {@link Request#finish(String)}, indicating that processing of the given request
      * has finished.
-     *
+     * 
      * <p>
      * Releases waiting requests for <code>request.getCacheKey()</code> if
      * <code>request.shouldCache()</code>.
