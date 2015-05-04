@@ -71,6 +71,7 @@ public class LoginActivity extends BaseActivity {
             } else {
                 Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                 startActivity(intent);
+                finish();
 
                 // TODO request server
                 JsonObjectRequest request =
@@ -99,8 +100,6 @@ public class LoginActivity extends BaseActivity {
     @Override
     public void onBackPressed() {
         finish();
-        Intent intent = new Intent(this, StartActivity.class);
-        intent.setAction(StartActivity.INTENT_ACTION);
-        startActivity(intent);
-    };
+        StartActivity.restart(this);
+    }
 }

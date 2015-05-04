@@ -1,15 +1,16 @@
 package com.kcb.student.activity;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Toast;
 
 import com.kcb.common.base.BaseFragmentActivity;
+import com.kcb.library.view.MaterialDialog;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcbTeam.R;
 
@@ -70,20 +71,7 @@ public class HomeActivity extends BaseFragmentActivity {
     @Override
     public void onClick(View v) {
         if (v == exitButton) {
-            AlertDialog dialog =
-                    new AlertDialog.Builder(HomeActivity.this).setTitle("确定退出？")
-                            .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    finish();
-                                }
-                            }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-
-                                }
-                            }).create();
-            dialog.show();
+            
         } else {
             FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
             fragmentTransaction.hide(mFragments[INDEX_CHECKIN]).hide(mFragments[INDEX_TEST]);

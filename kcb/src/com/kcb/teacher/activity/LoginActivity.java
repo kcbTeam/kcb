@@ -12,6 +12,7 @@ import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.kcb.common.activity.StartActivity;
 import com.kcb.common.application.KAccount;
 import com.kcb.common.base.BaseActivity;
 import com.kcb.common.listener.CustomOnClickListener;
@@ -59,7 +60,7 @@ public class LoginActivity extends BaseActivity {
 
         @Override
         public void doClick(View v) {
-            final String id = idEditText.getText().toString();
+            final String id = idEditText.getText().toString().trim();
             final String password = passwordEditText.getText().toString();
             if (TextUtils.isEmpty(id)) {
                 idEditText.requestFocus();
@@ -70,6 +71,7 @@ public class LoginActivity extends BaseActivity {
             } else {
                 Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                 startActivity(intent);
+                finish();
 
                 // TODO request server
                 JsonObjectRequest request =
@@ -94,4 +96,10 @@ public class LoginActivity extends BaseActivity {
             }
         }
     };
+
+    @Override
+    public void onBackPressed() {
+        finish();
+        StartActivity.restart(this);
+    }
 }

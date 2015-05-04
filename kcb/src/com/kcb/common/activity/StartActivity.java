@@ -1,5 +1,6 @@
 package com.kcb.common.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
@@ -26,8 +27,6 @@ import com.kcbTeam.R;
  */
 public class StartActivity extends BaseActivity {
 
-    public static final String INTENT_ACTION = "backFromLogin";
-
     private ColorAnimationView colorAnimationView;
     private ViewPager viewPager;
 
@@ -49,8 +48,6 @@ public class StartActivity extends BaseActivity {
         }
     }
 
-    private int[] backgroundColors = new int[] {0xffff0000, 0xff00ff00, 0xff0000ff};
-
     @Override
     protected void initView() {
         colorAnimationView = (ColorAnimationView) findViewById(R.id.color_animation_view);
@@ -59,10 +56,11 @@ public class StartActivity extends BaseActivity {
         StartViewPagerAdapter adapter = new StartViewPagerAdapter();
         viewPager.setAdapter(adapter);
         viewPager.setOffscreenPageLimit(adapter.getCount());
-        colorAnimationView.setmViewPager(viewPager, adapter.getCount(), backgroundColors);
+        colorAnimationView.setmViewPager(viewPager, adapter.getCount(), new int[] {0xffffffff,
+                0xffffffff, 0xffffffff});
 
         Intent intent = getIntent();
-        if (null != intent && intent.getAction() == INTENT_ACTION) {
+        if (null != intent && intent.getAction() == INTENT_ACTION_RESTART) {
             viewPager.setCurrentItem(adapter.getCount() - 1);
         }
     }
@@ -71,7 +69,6 @@ public class StartActivity extends BaseActivity {
     protected void initData() {}
 
     private class StartViewPagerAdapter extends PagerAdapter {
-
         private int[] mBackgroundBitmapIds = new int[] {R.drawable.ic_launcher,
                 R.drawable.ic_launcher, R.drawable.ic_launcher};
 
@@ -112,18 +109,17 @@ public class StartActivity extends BaseActivity {
                 switch (v.getId()) {
                     case R.id.pagerbutton_stu:
                         intent = new Intent(StartActivity.this, LoginActivity.class);
-                        finish();
                         break;
                     case R.id.pagerbutton_tch:
                         intent =
                                 new Intent(StartActivity.this,
                                         com.kcb.teacher.activity.LoginActivity.class);
-                        finish();
                         break;
                     default:
                         break;
                 }
                 startActivity(intent);
+                finish();
             }
         };
     }
@@ -135,5 +131,22 @@ public class StartActivity extends BaseActivity {
     public void onBackPressed() {
         super.onBackPressed();
         System.exit(0);
+    }
+
+    /**
+     * 
+     * @title: restart
+     * @description: finish this activity when goto LoginActivity, but if user click back, we need
+     *               restart this activity and show third page;
+     * @author: wanghang
+     * @date: 2015-5-4 下午8:39:21
+     * @param context
+     */
+    public static final String INTENT_ACTION_RESTART = "restartFromLogin";
+
+    public static void restart(Context context) {
+        Intent intent = new Intent(context, StartActivity.class);
+        intent.setAction(StartActivity.INTENT_ACTION_RESTART);
+        context.startActivity(intent);
     }
 }

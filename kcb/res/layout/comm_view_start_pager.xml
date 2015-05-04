@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="@dimen/dp_16"
     tools:ignore="contentDescription" >
 
     <ImageView
@@ -16,16 +15,14 @@
 
     <com.kcb.library.view.PaperButton
         android:id="@+id/pagerbutton_stu"
-        android:layout_width="match_parent"
-        android:layout_height="54dp"
+        style="@style/common_button"
         android:layout_above="@+id/pagerbutton_tch"
         android:visibility="gone"
         widget:paper_text="@string/i_am_stu" />
 
     <com.kcb.library.view.PaperButton
         android:id="@+id/pagerbutton_tch"
-        android:layout_width="match_parent"
-        android:layout_height="54dp"
+        style="@style/common_button"
         android:layout_alignParentBottom="true"
         android:visibility="gone"
         widget:paper_text="@string/i_am_tch" />
