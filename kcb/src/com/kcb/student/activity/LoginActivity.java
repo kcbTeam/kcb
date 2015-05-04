@@ -12,6 +12,7 @@ import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.kcb.common.activity.StartActivity;
 import com.kcb.common.application.KAccount;
 import com.kcb.common.base.BaseActivity;
 import com.kcb.common.listener.CustomOnClickListener;
@@ -93,5 +94,13 @@ public class LoginActivity extends BaseActivity {
                 RequestUtil.getInstance().addToRequestQueue(request);
             }
         }
+    };
+
+    @Override
+    public void onBackPressed() {
+        finish();
+        Intent intent = new Intent(this, StartActivity.class);
+        intent.setAction(StartActivity.INTENT_ACTION);
+        startActivity(intent);
     };
 }
