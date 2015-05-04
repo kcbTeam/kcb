@@ -9,10 +9,14 @@ package com.kcbTeam.kcblibrary;
 
 public final class R {
     public static final class anim {
-        public static int move_left_in_activity=0x7f030000;
-        public static int move_left_out_activity=0x7f030001;
-        public static int move_right_in_activity=0x7f030002;
-        public static int move_right_out_activity=0x7f030003;
+        public static int dialog_main_hide=0x7f040000;
+        public static int dialog_main_show=0x7f040001;
+        public static int dialog_root_hide=0x7f040002;
+        public static int dialog_root_show=0x7f040003;
+        public static int move_left_in_activity=0x7f040004;
+        public static int move_left_out_activity=0x7f040005;
+        public static int move_right_in_activity=0x7f040006;
+        public static int move_right_out_activity=0x7f040007;
     }
     public static final class attr {
         /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
@@ -161,30 +165,44 @@ containing a value of this type.
     public static final class color {
         /**  FloatingEditText Default 
          */
-        public static int floating_edit_text_color=0x7f050003;
-        public static int floating_edit_text_error_color=0x7f050005;
-        public static int floating_edit_text_highlighted_color=0x7f050004;
-        public static int paper_button_color=0x7f050001;
-        public static int paper_button_shadow_color=0x7f050002;
-        public static int paper_text_color=0x7f050000;
+        public static int floating_edit_text_color=0x7f050004;
+        public static int floating_edit_text_error_color=0x7f050006;
+        public static int floating_edit_text_highlighted_color=0x7f050005;
+        public static int material_dialog_thumbColor=0x7f050000;
+        public static int paper_button_color=0x7f050002;
+        public static int paper_button_shadow_color=0x7f050003;
+        public static int paper_text_color=0x7f050001;
     }
     public static final class dimen {
-        public static int floating_edit_text_underline_height=0x7f040003;
-        public static int floating_edit_text_underline_highlighted_height=0x7f040004;
-        public static int paper_button_corner_radius=0x7f040001;
-        public static int paper_padding=0x7f040002;
+        public static int floating_edit_text_underline_height=0x7f060003;
+        public static int floating_edit_text_underline_highlighted_height=0x7f060004;
+        public static int paper_button_corner_radius=0x7f060001;
+        public static int paper_padding=0x7f060002;
         /**  PaperButton Default 
          */
-        public static int paper_text_size=0x7f040000;
+        public static int paper_text_size=0x7f060000;
     }
     public static final class drawable {
         public static int background_transparent=0x7f020000;
+        public static int material_dialog_background=0x7f020001;
     }
     public static final class id {
-        public static int shape_bacground=0x7f080000;
+        public static int button_accept=0x7f090005;
+        public static int button_cancel=0x7f090006;
+        public static int contentDialog=0x7f090001;
+        public static int dialog_rootView=0x7f090000;
+        public static int message=0x7f090004;
+        public static int message_scrollView=0x7f090003;
+        public static int shape_bacground=0x7f090007;
+        public static int title=0x7f090002;
+    }
+    public static final class layout {
+        public static int material_dialog=0x7f030000;
     }
     public static final class string {
-        public static int app_name=0x7f060000;
+        public static int app_name=0x7f070000;
+        public static int cancel=0x7f070002;
+        public static int sure=0x7f070001;
     }
     public static final class style {
         /** 
@@ -197,11 +215,11 @@ containing a value of this type.
             backward-compatibility can go here.
         
          */
-        public static int AppBaseTheme=0x7f070000;
+        public static int AppBaseTheme=0x7f080000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static int AppTheme=0x7f070001;
+        public static int AppTheme=0x7f080001;
     }
     public static final class styleable {
         /**  FloatingEditText Attribute 

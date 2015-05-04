@@ -95,8 +95,12 @@ public class ButtonFlat extends Button {
         return Color.parseColor("#88DDDDDD");
     }
 
-    public void setText(String text) {
-        textButton.setText(text.toUpperCase());
+    public void setText(int resid) {
+        textButton.setText(resid);
+    }
+
+    public void setText(CharSequence text) {
+        textButton.setText(text);
     }
 
     // Set color of background

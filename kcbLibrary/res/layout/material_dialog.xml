@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dialog_rootView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#55000000"
+    android:padding="32dp" >
+
+    <RelativeLayout
+        android:id="@+id/contentDialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/material_dialog_background"
+        android:padding="24dp" >
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#000" />
+
+        <ScrollView
+            android:id="@+id/message_scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/title"
+            android:scrollbarSize="2dp"
+            android:scrollbarThumbVertical="@color/material_dialog_thumbColor" >
+
+            <TextView
+                android:id="@+id/message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#000"
+                android:textSize="18dp" />
+        </ScrollView>
+
+        <com.github.views.ButtonFlat
+            android:id="@+id/button_accept"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/message_scrollView"
+            android:layout_marginTop="24dp"
+            android:background="#1E88E5"
+            android:text="@string/sure" />
+
+        <com.github.views.ButtonFlat
+            android:id="@+id/button_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/button_accept"
+            android:layout_toLeftOf="@id/button_accept"
+            android:background="#000000"
+            android:text="@string/cancel"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+</RelativeLayout>
