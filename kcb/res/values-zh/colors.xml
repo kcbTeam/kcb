@@ -8,4 +8,8 @@
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
 
+    <!-- common start -->
+    <color name="activity_background">#fff</color>
+    <!-- common end -->
+
 </resources>

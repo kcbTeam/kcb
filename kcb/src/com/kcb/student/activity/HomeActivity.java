@@ -7,10 +7,10 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Toast;
 
 import com.kcb.common.base.BaseFragmentActivity;
-import com.kcb.library.view.MaterialDialog;
+import com.kcb.common.util.DialogUtil;
+import com.kcb.common.util.ToastUtil;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcbTeam.R;
 
@@ -71,7 +71,18 @@ public class HomeActivity extends BaseFragmentActivity {
     @Override
     public void onClick(View v) {
         if (v == exitButton) {
-            
+            DialogUtil
+                    .showDialog(
+                            this,
+                            "exit",
+                            "you want to exit app or exit account? if you exit account, need login when open app next time.",
+                            "sure", new OnClickListener() {
+
+                                @Override
+                                public void onClick(View v) {
+                                    ToastUtil.toast("click sure");
+                                }
+                            }, "cancel", null);
         } else {
             FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
             fragmentTransaction.hide(mFragments[INDEX_CHECKIN]).hide(mFragments[INDEX_TEST]);

@@ -20,7 +20,7 @@ import com.kcbTeam.R;
  * @author: ZQJ
  * @date: 2015年4月24日 下午3:22:02
  */
-//TODO change button to ButtonFlat
+// TODO change button to ButtonFlat
 public class CheckInResultActivity extends BaseActivity {
 
     private Button backButton;
