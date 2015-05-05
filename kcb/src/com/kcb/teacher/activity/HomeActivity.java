@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
+import android.widget.Button;
 
 import com.kcb.common.base.BaseFragmentActivity;
 import com.kcb.library.view.buttonflat.ButtonFlat;
@@ -27,9 +28,12 @@ public class HomeActivity extends BaseFragmentActivity {
     private final int INDEX_STUCENTER = 2;
 
     private ButtonFlat exitButton;
-    private ButtonFlat checkInButton;
-    private ButtonFlat testButton;
-    private ButtonFlat stuCenterButton;
+//    private ButtonFlat checkInButton;
+//    private ButtonFlat testButton;
+//    private ButtonFlat stuCenterButton;
+    private Button checkInButton;
+    private Button testButton;
+    private Button stuCenterButton;
 
     private CheckInFragment mCheckInFragment;
     private TestFragment mTestFragment;
@@ -40,7 +44,7 @@ public class HomeActivity extends BaseFragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.tch_activity_home);
+        setContentView(R.layout.test);
 
         initView();
     }
@@ -50,11 +54,11 @@ public class HomeActivity extends BaseFragmentActivity {
         exitButton = (ButtonFlat) findViewById(R.id.button_exit);
         exitButton.setOnClickListener(this);
         exitButton.setRippleSpeed(6f);
-        checkInButton = (ButtonFlat) findViewById(R.id.button_checkin);
+        checkInButton = (Button) findViewById(R.id.button_checkin);
         checkInButton.setOnClickListener(this);
-        testButton = (ButtonFlat) findViewById(R.id.button_test);
+        testButton = (Button) findViewById(R.id.button_test);
         testButton.setOnClickListener(this);
-        stuCenterButton = (ButtonFlat) findViewById(R.id.button_stucenter);
+        stuCenterButton = (Button) findViewById(R.id.button_stucenter);
         stuCenterButton.setOnClickListener(this);
 
         mFragmentManager = getSupportFragmentManager();
@@ -105,18 +109,18 @@ public class HomeActivity extends BaseFragmentActivity {
 
     private void setButtonTextColor(int index) {
         Resources res = getResources();
-        checkInButton.setTextColor(res.getColor(R.color.black));
-        testButton.setTextColor(res.getColor(R.color.black));
-        stuCenterButton.setTextColor(res.getColor(R.color.black));
+        checkInButton.setTextColor(res.getColor(R.color.gray));
+        testButton.setTextColor(res.getColor(R.color.gray));
+        stuCenterButton.setTextColor(res.getColor(R.color.gray));
         switch (index) {
             case INDEX_CHECKIN:
-                checkInButton.setTextColor(res.getColor(R.color.blue));
+                checkInButton.setTextColor(res.getColor(R.color.white));
                 break;
             case INDEX_TEST:
-                testButton.setTextColor(res.getColor(R.color.blue));
+                testButton.setTextColor(res.getColor(R.color.white));
                 break;
             case INDEX_STUCENTER:
-                stuCenterButton.setTextColor(res.getColor(R.color.blue));
+                stuCenterButton.setTextColor(res.getColor(R.color.white));
                 break;
             default:
                 break;

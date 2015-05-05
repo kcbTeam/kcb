@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/activity_background" >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/activity_header_shadow"
+        android:text="@string/app_name" />
+
+    <com.kcb.library.view.buttonflat.ButtonFlat
+        android:id="@+id/button_exit"
+        style="@style/common_top_button"
+        android:layout_alignParentRight="true"
+        android:text="@string/exit" />
+
+    <FrameLayout
+        android:id="@+id/fragment_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/button_exit" >
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical" >
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/black"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/button_checkin"
+                style="@style/home_tab"
+                android:background="@color/black"
+                android:text="@string/course_signin"
+                android:textColor="@color/white" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center_vertical"
+                android:background="@color/gray" />
+
+            <Button
+                android:id="@+id/button_test"
+                style="@style/home_tab"
+                android:background="@color/black"
+                android:text="@string/course_test"
+                android:textColor="@color/white" />
+            <View
+                android:layout_width="1dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center_vertical"
+                android:background="@color/gray" />
+
+            <Button
+                android:id="@+id/button_stucenter"
+                style="@style/home_tab"
+                android:background="@color/black"
+                android:text="@string/student_center"
+                android:textColor="@color/white" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray" />
+    </LinearLayout>
+
+</RelativeLayout>

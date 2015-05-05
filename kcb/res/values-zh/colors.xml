@@ -11,5 +11,9 @@
     <!-- common start -->
     <color name="activity_background">#fff</color>
     <!-- common end -->
+    
+    <!-- tch home activity start -->
+    <color name="selected_bottom">#FF696969</color>
+    <!-- tch home activity end-->
 
 </resources>
