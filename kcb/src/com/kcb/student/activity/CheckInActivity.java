@@ -1,5 +1,6 @@
 package com.kcb.student.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -66,6 +67,8 @@ public class CheckInActivity extends BaseActivity {
                 new String(num1TextView.getText().toString() + num2TextView.getText().toString()
                         + num3TextView.getText().toString() + num4TextView.getText().toString());
         ToastUtil.toast(passwordString);
+        Intent intent=new Intent(CheckInActivity.this,HomeActivity.class);
+        startActivity(intent);
     }
 
     private RecyclerItemClickListener mRecyclerItemClickListener = new RecyclerItemClickListener() {
@@ -95,7 +98,10 @@ public class CheckInActivity extends BaseActivity {
                     default:
                         break;
                 }
-                currentInputIndex--;
+                if (currentInputIndex > 0)
+                    currentInputIndex--;
+                else
+                    currentInputIndex = 0;
             } else { // input num
                 if (postion == 10) {
                     postion = -1;

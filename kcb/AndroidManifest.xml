@@ -49,6 +49,10 @@
             android:name="com.kcb.student.activity.CheckInResultActivity"
             android:screenOrientation="portrait" >
         </activity>
+         <activity
+            android:name="com.kcb.student.activity.TestActivity"
+            android:screenOrientation="portrait" >
+        </activity>
         <!-- student end -->
 
 
