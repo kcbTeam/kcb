@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- Commom Start -->
+    <string name="cancel">取消</string>
+    <string name="confirm">确定</string>
+    <!-- Commom End -->
+
+
     <!-- CheckinActivity Start -->
     <string name="checkin">课堂签到</string>
     <string name="tip_inputnum">请输入正确的四位数字</string>
@@ -21,9 +27,23 @@
     <!-- HomePageActivity End -->
 
 
+    <!-- TestActivity Start -->
+    <string name="first_question">已经是第一题</string>
+    <string name="last_question">已经是最后一题</string>
+    <string name="pre_question">上一题</string>
+    <string name="next_question">下一题</string>
+    <string name="time_counter">倒计时：</string>
+    <string name="if_submit_answer">是否提交答案？</string>
+    <string name="to_submit_answer">请提交答案</string>
+    <string name="end">结束!</string>
+    <string name="tip">提醒</string>
+    <!-- TestActivity End -->
+
+
     <!-- CheckInResultActivity Start -->
     <string name="signresult">查看我的签到</string>
     <string name="statistics">Y老师一共用课程宝签到10次，其中你签到成功8次。到课率为80%。</string>
     <string name="piechart">饼图，用来直观表现该学生的到课率</string>
     <!-- CheckInResultActivity End -->
+
 </resources>
