@@ -4,12 +4,14 @@
     xmlns:widget="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/activity_background"
     tools:ignore="contentDescription" >
 
     <TextView
         android:id="@+id/textview_appname"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/activity_header_shadow"
         android:text="@string/app_name" />
 
     <ImageView

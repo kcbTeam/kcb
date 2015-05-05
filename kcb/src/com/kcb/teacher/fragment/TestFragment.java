@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.kcb.common.base.BaseFragment;
 import com.kcb.library.view.PaperButton;
 import com.kcb.teacher.activity.TestActivity;

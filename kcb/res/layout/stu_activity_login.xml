@@ -3,13 +3,15 @@
     xmlns:widget="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="${relativePackage}.${activityClass}"
+    android:background="@color/activity_background"
     tools:ignore="contentDescription" >
 
     <TextView
         android:id="@+id/textview_appname"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/activity_header_shadow"
+        android:gravity="center_vertical"
         android:text="@string/app_name" />
 
     <ImageView
@@ -17,6 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/textview_appname"
+        android:layout_marginTop="30dp"
         android:src="@drawable/ic_launcher" />
 
     <com.kcb.library.view.FloatingEditText

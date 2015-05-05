@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+
 import com.kcb.common.base.BaseActivity;
 import com.kcb.common.listener.CustomOnClickListener;
 import com.kcb.library.view.PaperButton;
@@ -39,7 +40,7 @@ public class CheckInActivity extends BaseActivity {
         giveupButton = (ButtonFlat) findViewById(R.id.button_giveup);
         giveupButton.setOnClickListener(this);
         giveupButton.setRippleSpeed(6f);
-        
+
         getNumButton = (PaperButton) findViewById(R.id.button_getnum);
         getNumButton.setOnClickListener(mClickListener);
 

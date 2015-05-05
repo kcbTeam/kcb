@@ -92,7 +92,7 @@ public class CheckInDetailsActivity extends BaseFragmentActivity
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        //TODO need anim?
+        // TODO need anim?
         overridePendingTransition(R.anim.move_left_in_activity, R.anim.move_right_out_activity);
     }
 

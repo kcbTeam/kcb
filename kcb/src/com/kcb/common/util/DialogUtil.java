@@ -33,10 +33,10 @@ public class DialogUtil {
             @NonNull String sureText, OnClickListener sureListener, String cancelText,
             OnClickListener cancelListener) {
         MaterialDialog dialog = new MaterialDialog(context);
+        dialog.show();
         dialog.setTitle(title);
         dialog.setMessage(message);
         dialog.setSureButton(sureText, sureListener);
         dialog.setCancelButton(cancelText, cancelListener);
-        dialog.show();
     }
 }

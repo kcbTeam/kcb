@@ -14,6 +14,7 @@ import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcbTeam.kcblibrary.R;
 
@@ -107,7 +108,7 @@ public class MaterialDialog extends android.app.Dialog {
         titleTextView.setText(resid);
     }
 
-    public void setTtile(CharSequence text) {
+    public void setTitle(CharSequence text) {
         titleTextView.setText(text);
     }
 

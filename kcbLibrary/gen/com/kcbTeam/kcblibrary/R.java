@@ -13,10 +13,6 @@ public final class R {
         public static int dialog_main_show=0x7f040001;
         public static int dialog_root_hide=0x7f040002;
         public static int dialog_root_show=0x7f040003;
-        public static int move_left_in_activity=0x7f040004;
-        public static int move_left_out_activity=0x7f040005;
-        public static int move_right_in_activity=0x7f040006;
-        public static int move_right_out_activity=0x7f040007;
     }
     public static final class attr {
         /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
@@ -184,7 +180,6 @@ containing a value of this type.
     }
     public static final class drawable {
         public static int background_transparent=0x7f020000;
-        public static int material_dialog_background=0x7f020001;
     }
     public static final class id {
         public static int button_accept=0x7f090005;
