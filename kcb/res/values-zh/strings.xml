@@ -3,6 +3,7 @@
 
     <string name="app_name">课程宝</string>
     <string name="exit">退出</string>
+    <string name="back">返回</string>
     <string name="i_am_stu">我是学生</string>
     <string name="i_am_tch">我是老师</string>
     <string name="num_1">1</string>

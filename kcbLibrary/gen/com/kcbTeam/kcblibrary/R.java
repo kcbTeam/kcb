@@ -14,6 +14,11 @@ public final class R {
         public static int dialog_root_hide=0x7f040002;
         public static int dialog_root_show=0x7f040003;
     }
+    public static final class array {
+        /**  SmoothProgressBar 
+         */
+        public static int gplus_colors=0x7f060000;
+    }
     public static final class attr {
         /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
@@ -157,64 +162,205 @@ theme attribute (in the form
 containing a value of this type.
          */
         public static int paper_text_size=0x7f010007;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static int spbStyle=0x7f010010;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static int spb_background=0x7f01001d;
+        /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static int spb_color=0x7f010011;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static int spb_colors=0x7f01001b;
+        /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static int spb_generate_background_with_colors=0x7f01001e;
+        /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static int spb_gradients=0x7f01001f;
+        /** <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>spb_interpolator_accelerate</code></td><td>0</td><td></td></tr>
+<tr><td><code>spb_interpolator_linear</code></td><td>1</td><td></td></tr>
+<tr><td><code>spb_interpolator_acceleratedecelerate</code></td><td>2</td><td></td></tr>
+<tr><td><code>spb_interpolator_decelerate</code></td><td>3</td><td></td></tr>
+</table>
+         */
+        public static int spb_interpolator=0x7f010018;
+        /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static int spb_mirror_mode=0x7f01001a;
+        /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static int spb_progressiveStart_activated=0x7f01001c;
+        /** <p>Must be a floating point value, such as "<code>1.2</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static int spb_progressiveStart_speed=0x7f010016;
+        /** <p>Must be a floating point value, such as "<code>1.2</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static int spb_progressiveStop_speed=0x7f010017;
+        /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static int spb_reversed=0x7f010019;
+        /** <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static int spb_sections_count=0x7f010014;
+        /** <p>Must be a floating point value, such as "<code>1.2</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static int spb_speed=0x7f010015;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static int spb_stroke_separator_length=0x7f010013;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static int spb_stroke_width=0x7f010012;
+    }
+    public static final class bool {
+        public static int spb_default_mirror_mode=0x7f0a0001;
+        public static int spb_default_progressiveStart_activated=0x7f0a0002;
+        public static int spb_default_reversed=0x7f0a0000;
     }
     public static final class color {
         /**  FloatingEditText Default 
          */
-        public static int floating_edit_text_color=0x7f050004;
-        public static int floating_edit_text_error_color=0x7f050006;
-        public static int floating_edit_text_highlighted_color=0x7f050005;
+        public static int floating_edit_text_color=0x7f050008;
+        public static int floating_edit_text_error_color=0x7f05000a;
+        public static int floating_edit_text_highlighted_color=0x7f050009;
+        public static int gplus_color_1=0x7f050001;
+        public static int gplus_color_2=0x7f050002;
+        public static int gplus_color_3=0x7f050003;
+        public static int gplus_color_4=0x7f050004;
         public static int material_dialog_thumbColor=0x7f050000;
-        public static int paper_button_color=0x7f050002;
-        public static int paper_button_shadow_color=0x7f050003;
-        public static int paper_text_color=0x7f050001;
+        public static int paper_button_color=0x7f050006;
+        public static int paper_button_shadow_color=0x7f050007;
+        public static int paper_text_color=0x7f050005;
+        /**  SmoothProgressBar 
+         */
+        public static int spb_default_color=0x7f05000b;
     }
     public static final class dimen {
-        public static int floating_edit_text_underline_height=0x7f060003;
-        public static int floating_edit_text_underline_highlighted_height=0x7f060004;
-        public static int paper_button_corner_radius=0x7f060001;
-        public static int paper_padding=0x7f060002;
+        public static int floating_edit_text_underline_height=0x7f070003;
+        public static int floating_edit_text_underline_highlighted_height=0x7f070004;
+        public static int paper_button_corner_radius=0x7f070001;
+        public static int paper_padding=0x7f070002;
         /**  PaperButton Default 
          */
-        public static int paper_text_size=0x7f060000;
+        public static int paper_text_size=0x7f070000;
+        public static int spb_default_stroke_separator_length=0x7f070005;
+        public static int spb_default_stroke_width=0x7f070006;
     }
     public static final class drawable {
         public static int background_transparent=0x7f020000;
     }
     public static final class id {
-        public static int button_accept=0x7f090005;
-        public static int button_cancel=0x7f090006;
-        public static int contentDialog=0x7f090001;
-        public static int dialog_rootView=0x7f090000;
-        public static int message=0x7f090004;
-        public static int message_scrollView=0x7f090003;
-        public static int shape_bacground=0x7f090007;
-        public static int title=0x7f090002;
+        public static int button_accept=0x7f0c0009;
+        public static int button_cancel=0x7f0c000a;
+        public static int contentDialog=0x7f0c0005;
+        public static int dialog_rootView=0x7f0c0004;
+        public static int message=0x7f0c0008;
+        public static int message_scrollView=0x7f0c0007;
+        public static int shape_bacground=0x7f0c000b;
+        public static int spb_interpolator_accelerate=0x7f0c0000;
+        public static int spb_interpolator_acceleratedecelerate=0x7f0c0001;
+        public static int spb_interpolator_decelerate=0x7f0c0002;
+        public static int spb_interpolator_linear=0x7f0c0003;
+        public static int title=0x7f0c0006;
+    }
+    public static final class integer {
+        public static int spb_default_interpolator=0x7f080001;
+        public static int spb_default_sections_count=0x7f080000;
     }
     public static final class layout {
         public static int material_dialog=0x7f030000;
     }
     public static final class string {
-        public static int app_name=0x7f070000;
-        public static int cancel=0x7f070002;
-        public static int sure=0x7f070001;
+        public static int app_name=0x7f090001;
+        public static int cancel=0x7f090003;
+        public static int spb_default_speed=0x7f090000;
+        public static int sure=0x7f090002;
     }
     public static final class style {
-        /** 
-        Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
-    
-
-            Theme customizations available in newer API levels can go in
-            res/values-vXX/styles.xml, while customizations related to
-            backward-compatibility can go here.
-        
-         */
-        public static int AppBaseTheme=0x7f080000;
+        public static int AppBaseTheme=0x7f0b0000;
         /**  Application theme. 
- All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static int AppTheme=0x7f080001;
+        public static int AppTheme=0x7f0b0001;
+        /**  SmoothProgressBar 
+         */
+        public static int SmoothProgressBar=0x7f0b0002;
     }
     public static final class styleable {
         /**  FloatingEditText Attribute 
@@ -512,5 +658,273 @@ containing a value of this type.
           @attr name com.kcbTeam.kcblibrary:paper_text_size
         */
         public static int PaperButton_paper_text_size = 1;
+        /**  SmoothProgressBar 
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #SmoothProgressBar_spbStyle com.kcbTeam.kcblibrary:spbStyle}</code></td><td></td></tr>
+           <tr><td><code>{@link #SmoothProgressBar_spb_background com.kcbTeam.kcblibrary:spb_background}</code></td><td></td></tr>
+           <tr><td><code>{@link #SmoothProgressBar_spb_color com.kcbTeam.kcblibrary:spb_color}</code></td><td></td></tr>
+           <tr><td><code>{@link #SmoothProgressBar_spb_colors com.kcbTeam.kcblibrary:spb_colors}</code></td><td></td></tr>
+           <tr><td><code>{@link #SmoothProgressBar_spb_generate_background_with_colors com.kcbTeam.kcblibrary:spb_generate_background_with_colors}</code></td><td></td></tr>
+           <tr><td><code>{@link #SmoothProgressBar_spb_gradients com.kcbTeam.kcblibrary:spb_gradients}</code></td><td></td></tr>
+           <tr><td><code>{@link #SmoothProgressBar_spb_interpolator com.kcbTeam.kcblibrary:spb_interpolator}</code></td><td></td></tr>
+           <tr><td><code>{@link #SmoothProgressBar_spb_mirror_mode com.kcbTeam.kcblibrary:spb_mirror_mode}</code></td><td></td></tr>
+           <tr><td><code>{@link #SmoothProgressBar_spb_progressiveStart_activated com.kcbTeam.kcblibrary:spb_progressiveStart_activated}</code></td><td></td></tr>
+           <tr><td><code>{@link #SmoothProgressBar_spb_progressiveStart_speed com.kcbTeam.kcblibrary:spb_progressiveStart_speed}</code></td><td></td></tr>
+           <tr><td><code>{@link #SmoothProgressBar_spb_progressiveStop_speed com.kcbTeam.kcblibrary:spb_progressiveStop_speed}</code></td><td></td></tr>
+           <tr><td><code>{@link #SmoothProgressBar_spb_reversed com.kcbTeam.kcblibrary:spb_reversed}</code></td><td></td></tr>
+           <tr><td><code>{@link #SmoothProgressBar_spb_sections_count com.kcbTeam.kcblibrary:spb_sections_count}</code></td><td></td></tr>
+           <tr><td><code>{@link #SmoothProgressBar_spb_speed com.kcbTeam.kcblibrary:spb_speed}</code></td><td></td></tr>
+           <tr><td><code>{@link #SmoothProgressBar_spb_stroke_separator_length com.kcbTeam.kcblibrary:spb_stroke_separator_length}</code></td><td></td></tr>
+           <tr><td><code>{@link #SmoothProgressBar_spb_stroke_width com.kcbTeam.kcblibrary:spb_stroke_width}</code></td><td></td></tr>
+           </table>
+           @see #SmoothProgressBar_spbStyle
+           @see #SmoothProgressBar_spb_background
+           @see #SmoothProgressBar_spb_color
+           @see #SmoothProgressBar_spb_colors
+           @see #SmoothProgressBar_spb_generate_background_with_colors
+           @see #SmoothProgressBar_spb_gradients
+           @see #SmoothProgressBar_spb_interpolator
+           @see #SmoothProgressBar_spb_mirror_mode
+           @see #SmoothProgressBar_spb_progressiveStart_activated
+           @see #SmoothProgressBar_spb_progressiveStart_speed
+           @see #SmoothProgressBar_spb_progressiveStop_speed
+           @see #SmoothProgressBar_spb_reversed
+           @see #SmoothProgressBar_spb_sections_count
+           @see #SmoothProgressBar_spb_speed
+           @see #SmoothProgressBar_spb_stroke_separator_length
+           @see #SmoothProgressBar_spb_stroke_width
+         */
+        public static final int[] SmoothProgressBar = {
+            0x7f010010, 0x7f010011, 0x7f010012, 0x7f010013,
+            0x7f010014, 0x7f010015, 0x7f010016, 0x7f010017,
+            0x7f010018, 0x7f010019, 0x7f01001a, 0x7f01001b,
+            0x7f01001c, 0x7f01001d, 0x7f01001e, 0x7f01001f
+        };
+        /**
+          <p>This symbol is the offset where the {@link com.kcbTeam.kcblibrary.R.attr#spbStyle}
+          attribute's value can be found in the {@link #SmoothProgressBar} array.
+
+
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          @attr name com.kcbTeam.kcblibrary:spbStyle
+        */
+        public static int SmoothProgressBar_spbStyle = 0;
+        /**
+          <p>This symbol is the offset where the {@link com.kcbTeam.kcblibrary.R.attr#spb_background}
+          attribute's value can be found in the {@link #SmoothProgressBar} array.
+
+
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          @attr name com.kcbTeam.kcblibrary:spb_background
+        */
+        public static int SmoothProgressBar_spb_background = 13;
+        /**
+          <p>This symbol is the offset where the {@link com.kcbTeam.kcblibrary.R.attr#spb_color}
+          attribute's value can be found in the {@link #SmoothProgressBar} array.
+
+
+          <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.kcbTeam.kcblibrary:spb_color
+        */
+        public static int SmoothProgressBar_spb_color = 1;
+        /**
+          <p>This symbol is the offset where the {@link com.kcbTeam.kcblibrary.R.attr#spb_colors}
+          attribute's value can be found in the {@link #SmoothProgressBar} array.
+
+
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          @attr name com.kcbTeam.kcblibrary:spb_colors
+        */
+        public static int SmoothProgressBar_spb_colors = 11;
+        /**
+          <p>This symbol is the offset where the {@link com.kcbTeam.kcblibrary.R.attr#spb_generate_background_with_colors}
+          attribute's value can be found in the {@link #SmoothProgressBar} array.
+
+
+          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.kcbTeam.kcblibrary:spb_generate_background_with_colors
+        */
+        public static int SmoothProgressBar_spb_generate_background_with_colors = 14;
+        /**
+          <p>This symbol is the offset where the {@link com.kcbTeam.kcblibrary.R.attr#spb_gradients}
+          attribute's value can be found in the {@link #SmoothProgressBar} array.
+
+
+          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.kcbTeam.kcblibrary:spb_gradients
+        */
+        public static int SmoothProgressBar_spb_gradients = 15;
+        /**
+          <p>This symbol is the offset where the {@link com.kcbTeam.kcblibrary.R.attr#spb_interpolator}
+          attribute's value can be found in the {@link #SmoothProgressBar} array.
+
+
+          <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>spb_interpolator_accelerate</code></td><td>0</td><td></td></tr>
+<tr><td><code>spb_interpolator_linear</code></td><td>1</td><td></td></tr>
+<tr><td><code>spb_interpolator_acceleratedecelerate</code></td><td>2</td><td></td></tr>
+<tr><td><code>spb_interpolator_decelerate</code></td><td>3</td><td></td></tr>
+</table>
+          @attr name com.kcbTeam.kcblibrary:spb_interpolator
+        */
+        public static int SmoothProgressBar_spb_interpolator = 8;
+        /**
+          <p>This symbol is the offset where the {@link com.kcbTeam.kcblibrary.R.attr#spb_mirror_mode}
+          attribute's value can be found in the {@link #SmoothProgressBar} array.
+
+
+          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.kcbTeam.kcblibrary:spb_mirror_mode
+        */
+        public static int SmoothProgressBar_spb_mirror_mode = 10;
+        /**
+          <p>This symbol is the offset where the {@link com.kcbTeam.kcblibrary.R.attr#spb_progressiveStart_activated}
+          attribute's value can be found in the {@link #SmoothProgressBar} array.
+
+
+          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.kcbTeam.kcblibrary:spb_progressiveStart_activated
+        */
+        public static int SmoothProgressBar_spb_progressiveStart_activated = 12;
+        /**
+          <p>This symbol is the offset where the {@link com.kcbTeam.kcblibrary.R.attr#spb_progressiveStart_speed}
+          attribute's value can be found in the {@link #SmoothProgressBar} array.
+
+
+          <p>Must be a floating point value, such as "<code>1.2</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.kcbTeam.kcblibrary:spb_progressiveStart_speed
+        */
+        public static int SmoothProgressBar_spb_progressiveStart_speed = 6;
+        /**
+          <p>This symbol is the offset where the {@link com.kcbTeam.kcblibrary.R.attr#spb_progressiveStop_speed}
+          attribute's value can be found in the {@link #SmoothProgressBar} array.
+
+
+          <p>Must be a floating point value, such as "<code>1.2</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.kcbTeam.kcblibrary:spb_progressiveStop_speed
+        */
+        public static int SmoothProgressBar_spb_progressiveStop_speed = 7;
+        /**
+          <p>This symbol is the offset where the {@link com.kcbTeam.kcblibrary.R.attr#spb_reversed}
+          attribute's value can be found in the {@link #SmoothProgressBar} array.
+
+
+          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.kcbTeam.kcblibrary:spb_reversed
+        */
+        public static int SmoothProgressBar_spb_reversed = 9;
+        /**
+          <p>This symbol is the offset where the {@link com.kcbTeam.kcblibrary.R.attr#spb_sections_count}
+          attribute's value can be found in the {@link #SmoothProgressBar} array.
+
+
+          <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.kcbTeam.kcblibrary:spb_sections_count
+        */
+        public static int SmoothProgressBar_spb_sections_count = 4;
+        /**
+          <p>This symbol is the offset where the {@link com.kcbTeam.kcblibrary.R.attr#spb_speed}
+          attribute's value can be found in the {@link #SmoothProgressBar} array.
+
+
+          <p>Must be a floating point value, such as "<code>1.2</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.kcbTeam.kcblibrary:spb_speed
+        */
+        public static int SmoothProgressBar_spb_speed = 5;
+        /**
+          <p>This symbol is the offset where the {@link com.kcbTeam.kcblibrary.R.attr#spb_stroke_separator_length}
+          attribute's value can be found in the {@link #SmoothProgressBar} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.kcbTeam.kcblibrary:spb_stroke_separator_length
+        */
+        public static int SmoothProgressBar_spb_stroke_separator_length = 3;
+        /**
+          <p>This symbol is the offset where the {@link com.kcbTeam.kcblibrary.R.attr#spb_stroke_width}
+          attribute's value can be found in the {@link #SmoothProgressBar} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.kcbTeam.kcblibrary:spb_stroke_width
+        */
+        public static int SmoothProgressBar_spb_stroke_width = 2;
     };
 }

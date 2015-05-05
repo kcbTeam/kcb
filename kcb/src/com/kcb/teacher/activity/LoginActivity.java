@@ -21,6 +21,7 @@ import com.kcb.common.server.UrlUtil;
 import com.kcb.common.util.AnimationUtil;
 import com.kcb.library.view.FloatingEditText;
 import com.kcb.library.view.PaperButton;
+import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
 import com.kcbTeam.R;
 
 /**
@@ -35,6 +36,7 @@ public class LoginActivity extends BaseActivity {
     private FloatingEditText idEditText;
     private FloatingEditText passwordEditText;
     private PaperButton loginButton;
+    private SmoothProgressBar loginProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,8 +50,9 @@ public class LoginActivity extends BaseActivity {
     protected void initView() {
         idEditText = (FloatingEditText) findViewById(R.id.edittext_id);
         passwordEditText = (FloatingEditText) findViewById(R.id.edittext_password);
-        loginButton = (PaperButton) findViewById(R.id.buton_login);
+        loginButton = (PaperButton) findViewById(R.id.button_login);
         loginButton.setOnClickListener(mClickListener);
+        loginProgressBar = (SmoothProgressBar) findViewById(R.id.progressbar_login);
     }
 
     @Override
@@ -69,6 +72,8 @@ public class LoginActivity extends BaseActivity {
                 passwordEditText.requestFocus();
                 AnimationUtil.shake(passwordEditText);
             } else {
+                loginProgressBar.setVisibility(View.VISIBLE);
+
                 Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                 startActivity(intent);
                 finish();
@@ -80,6 +85,7 @@ public class LoginActivity extends BaseActivity {
 
                                     @Override
                                     public void onResponse(JSONObject response) {
+                                        loginProgressBar.hide(LoginActivity.this);
                                         KAccount account =
                                                 new KAccount(KAccount.TYPE_TCH, id, password);
                                         account.saveAccount();
@@ -90,7 +96,9 @@ public class LoginActivity extends BaseActivity {
                                 }, new ErrorListener() {
 
                                     @Override
-                                    public void onErrorResponse(VolleyError error) {}
+                                    public void onErrorResponse(VolleyError error) {
+                                        loginProgressBar.hide(LoginActivity.this);
+                                    }
                                 });
                 RequestUtil.getInstance().addToRequestQueue(request);
             }

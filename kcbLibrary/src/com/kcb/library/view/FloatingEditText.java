@@ -53,7 +53,8 @@ public class FloatingEditText extends EditText {
         this(context, attrs, android.R.attr.editTextStyle);
     }
 
-    @SuppressLint("NewApi")
+    @SuppressWarnings("deprecation")
+    @SuppressLint({"NewApi", "Recycle"})
     public FloatingEditText(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, android.R.attr.editTextStyle);
         TypedArray attributes = context.obtainStyledAttributes(attrs, R.styleable.FloatingEditText);
