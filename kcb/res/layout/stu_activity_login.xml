@@ -40,4 +40,12 @@
         android:layout_below="@id/edittext_password"
         widget:paper_text="@string/button_login" />
 
+    <com.kcb.library.view.smoothprogressbar.SmoothProgressBar
+        android:id="@+id/progressbar_login"
+        style="@style/SmoothProgressBar"
+        android:layout_alignBottom="@id/button_login"
+        android:layout_alignLeft="@id/button_login"
+        android:layout_alignRight="@id/button_login"
+        android:visibility="gone" />
+
 </RelativeLayout>

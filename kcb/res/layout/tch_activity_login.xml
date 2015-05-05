@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/textview_appname"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/tch_login" />
+        android:src="@drawable/ic_launcher" />
 
     <com.kcb.library.view.FloatingEditText
         android:id="@+id/edittext_id"
@@ -35,9 +35,17 @@
         android:hint="@string/password" />
 
     <com.kcb.library.view.PaperButton
-        android:id="@+id/buton_login"
+        android:id="@+id/button_login"
         style="@style/common_button"
         android:layout_below="@id/edittext_password"
         widget:paper_text="@string/registerin" />
+
+    <com.kcb.library.view.smoothprogressbar.SmoothProgressBar
+        android:id="@+id/progressbar_login"
+        style="@style/SmoothProgressBar"
+        android:layout_alignBottom="@id/button_login"
+        android:layout_alignLeft="@id/button_login"
+        android:layout_alignRight="@id/button_login"
+        android:visibility="gone" />
 
 </RelativeLayout>

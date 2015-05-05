@@ -7,15 +7,14 @@ import org.achartengine.renderer.DefaultRenderer;
 import org.achartengine.renderer.SimpleSeriesRenderer;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
-import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.kcb.common.base.BaseActivity;
+import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcbTeam.R;
 
 /**
@@ -29,7 +28,7 @@ public class CheckInResultActivity extends BaseActivity {
     private int[] colors = new int[] {Color.RED, Color.GREEN};
     private GraphicalView graphicalView;
     private LinearLayout layout;
-    private Button backbutton;
+    private ButtonFlat backbutton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,12 +41,14 @@ public class CheckInResultActivity extends BaseActivity {
     @Override
     protected void initView() {
         layout = (LinearLayout) findViewById(R.id.linearlayout);
-        backbutton = (Button) findViewById(R.id.signinresult);
+        backbutton = (ButtonFlat) findViewById(R.id.button_back);
+        backbutton.setOnClickListener(this);
+        backbutton.setRippleSpeed(6f);
+
         graphicalView = execute(this);
         layout.removeAllViews();
         layout.addView(graphicalView, new LayoutParams(LayoutParams.MATCH_PARENT,
                 LayoutParams.MATCH_PARENT));
-        backbutton.setOnClickListener(this);
     }
 
     @Override
@@ -55,8 +56,8 @@ public class CheckInResultActivity extends BaseActivity {
 
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent(this, HomeActivity.class);
-        startActivity(intent);
+        // Intent intent = new Intent(this, HomeActivity.class);
+        // startActivity(intent);
     }
 
     public GraphicalView execute(Context context) {
@@ -80,5 +81,4 @@ public class CheckInResultActivity extends BaseActivity {
         }
         return renderer;
     }
-
 }
