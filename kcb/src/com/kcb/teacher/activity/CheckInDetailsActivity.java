@@ -86,7 +86,12 @@ public class CheckInDetailsActivity extends BaseFragmentActivity
     protected void initData() {
         mList = new ArrayList<StudentInfo>();
         mList.clear();
-        mList.add(new StudentInfo("123", "123456", 1, 0));
+        mList.add(new StudentInfo("wd", "123456", 1, 0));
+        mList.add(new StudentInfo("asd", "123456", 1, 0));
+        mList.add(new StudentInfo("qw", "123456", 1, 0));
+        mList.add(new StudentInfo("wdc", "123456", 1, 0));
+        mList.add(new StudentInfo("asw", "123456", 1, 0));
+        mList.add(new StudentInfo("awe", "123456", 1, 0));
     }
 
     @Override

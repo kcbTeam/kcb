@@ -44,32 +44,38 @@
         android:layout_marginTop="20dp"
         android:text="@string/checkin_missed_hint" />
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/table_title"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/textview"
-        android:orientation="horizontal" >
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:background="@color/gray" >
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:text="@string/stu_info" />
+            style="@style/tch_listtitle_textview"
+            android:layout_gravity="left"
+            android:text="@string/stu_id" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="100dp"
-            android:text="@string/checkin_detail" />
-    </LinearLayout>
+            style="@style/tch_listtitle_textview"
+            android:layout_centerHorizontal="true"
+            android:text="@string/stu_name" />
+
+        <TextView
+            style="@style/tch_listtitle_textview"
+            android:layout_alignParentRight="true"
+            android:text="@string/miss_checkin_times" />
+    </RelativeLayout>
 
     <ListView
         android:id="@+id/listview_not_ckeckin_stu"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/table_title"
-        android:layout_marginTop="20dp" >
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp" >
     </ListView>
 
 </RelativeLayout>

@@ -44,7 +44,9 @@
 
     <!-- checkin details activity start -->
     <string name="checkin_missed_hint">以下为没有到课学生名单</string>
-    <string name="stu_info">学生信息</string>
+    <string name="miss_checkin_times">未到课次数</string>
+    <string name="stu_id">学生学号</string>
+    <string name="stu_name">学生姓名</string>
     <string name="checkin_detail">签到详情</string>
     <!-- checkin details activity start -->
 

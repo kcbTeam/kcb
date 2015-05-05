@@ -48,12 +48,23 @@ public class ListAdapterMissCheckIn extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = View.inflate(mContext, R.layout.tch_listitem_misscheckin, null);
-        TextView studentName = (TextView) view.findViewById(R.id.textview_studentname);
-        studentName.setText(mList.get(position).getStudentID()
-                + mList.get(position).getStudentName());
-        TextView studentId = (TextView) view.findViewById(R.id.textview_studentid);
-        studentId.setText(String.valueOf(mList.get(position).getMissTimes()) + '/'
+        TextView studentName = (TextView) view.findViewById(R.id.textview_stu_name);
+        studentName.setText(mList.get(position).getStudentName());
+        
+        TextView studentId = (TextView) view.findViewById(R.id.textview_stu_id);
+        studentId.setText(mList.get(position).getStudentID());
+        
+        TextView studentMissTime = (TextView) view.findViewById(R.id.textview_stu_miss_time);
+        studentMissTime.setText(String.valueOf(mList.get(position).getMissTimes()) + '/'
                 + String.valueOf(mList.get(position).getCheckInTimes()));
+        switch (position % 2) {
+            case 0:
+                view.setBackgroundColor(mContext.getResources().getColor(R.color.green));
+                break;
+            default:
+                view.setBackgroundColor(mContext.getResources().getColor(R.color.gray));
+                break;
+        }
         return view;
     }
 }
