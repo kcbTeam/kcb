@@ -71,18 +71,14 @@ public class HomeActivity extends BaseFragmentActivity {
     @Override
     public void onClick(View v) {
         if (v == exitButton) {
-            DialogUtil
-                    .showDialog(
-                            this,
-                            "exit",
-                            "you want to exit app or exit account? if you exit account, need login when open app next time.",
-                            "sure", new OnClickListener() {
+            DialogUtil.showDialog(this, "退出", "退出程序还是注销账号？注销账号后，下次进入程序需要重新登录。", "注销",
+                    new OnClickListener() {
 
-                                @Override
-                                public void onClick(View v) {
-                                    ToastUtil.toast("click sure");
-                                }
-                            }, "cancel", null);
+                        @Override
+                        public void onClick(View v) {
+                            ToastUtil.toast("click sure");
+                        }
+                    }, "退出", null);
         } else {
             FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
             fragmentTransaction.hide(mFragments[INDEX_CHECKIN]).hide(mFragments[INDEX_TEST]);
