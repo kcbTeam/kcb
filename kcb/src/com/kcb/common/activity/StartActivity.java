@@ -45,6 +45,7 @@ public class StartActivity extends BaseActivity {
                 intent = new Intent(this, com.kcb.teacher.activity.HomeActivity.class);
             }
             startActivity(intent);
+            finish();
         }
     }
 
