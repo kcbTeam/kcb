@@ -48,12 +48,4 @@
     <!-- CheckInResultActivity End -->
 
 
-    <!-- EditTestActivity Start -->
-    <string name="edittest">编辑测试内容</string>
-    <string name="last_item">上一题</string>
-    <string name="next_item">下一题</string>
-    <string name="problem_hint">请在下面输入题目</string>
-    <string name="options_hint">请在下面输入选项</string>
-    <!-- EditTestActivity End -->
-
 </resources>

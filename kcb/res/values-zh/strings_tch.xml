@@ -55,6 +55,16 @@
     <string name="correct_rate_format"> %1$s的选择题正确率为%2$d%%</string>
     <!-- student details activty end -->
 
+
+    <!-- EditTestActivity Start -->
+    <string name="edittest">编辑测试内容</string>
+    <string name="last_item">上一题</string>
+    <string name="next_item">下一题</string>
+    <string name="problem_hint">请输入题目</string>
+    <string name="options_hint">请输入选项</string>
+    <string name="format_question_num">选择题%1$d</string>
+    <!-- EditTestActivity End -->
+
     <string name="signclass">课堂签到</string>
     <string name="giveupsign">放弃签到</string>
     <string name="getnumber">获取签到数字</string>
