@@ -27,4 +27,27 @@
         android:inputType="textMultiLine"
         android:maxLines="6" />
 
+    <TextView
+        android:id="@+id/input_options_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edittext_question"
+        android:text="@string/options_hint" />
+
+    <TextView
+        android:id="@+id/option_A"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="A" />
+
+    <EditText
+        android:id="@+id/edittext_A"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:focusable="false"
+        android:layout_toRightOf="@id/option_A"
+        android:layout_alignBaseline="@id/option_A"
+        android:inputType="textMultiLine"
+        android:maxLines="6" />
+
 </RelativeLayout>

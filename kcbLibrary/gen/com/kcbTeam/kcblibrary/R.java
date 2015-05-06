@@ -324,7 +324,11 @@ containing a value of this type.
         public static int spb_default_stroke_width=0x7f070006;
     }
     public static final class drawable {
-        public static int background_transparent=0x7f020000;
+        public static int background_checkbox=0x7f020000;
+        public static int background_checkbox_check=0x7f020001;
+        public static int background_checkbox_uncheck=0x7f020002;
+        public static int background_transparent=0x7f020003;
+        public static int sprite_check=0x7f020004;
     }
     public static final class id {
         public static int button_accept=0x7f0c0009;

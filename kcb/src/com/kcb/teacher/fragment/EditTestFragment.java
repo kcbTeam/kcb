@@ -22,8 +22,14 @@ public class EditTestFragment extends BaseFragment {
 
     private DialogBackListener mSureClickListener;
     private OnClickListener mCancelClickListener;
+    
+    private final int IndexOfQuestion = 1;
+    private final int IndexOfA = 2;
+    private final int IndexOfB = 3;
+    private final int IndexOfC = 4;
+    private final int IndexOfD = 5;
 
-    private int mPositionIndex = 1;
+    private int mPositionIndex = IndexOfQuestion;
 
     public EditTestFragment() {
         
@@ -44,7 +50,7 @@ public class EditTestFragment extends BaseFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
     }
-
+    
     @Override
     protected void initView() {
         mSureClickListener = new DialogBackListener() {
@@ -52,10 +58,21 @@ public class EditTestFragment extends BaseFragment {
             @Override
             public void refreshActivity(String text) {
                 switch (mPositionIndex) {
-                    case 1:
+                    case IndexOfQuestion:
                         questionEditText.setText(text);
                         break;
-
+                    case IndexOfA:
+                        //TODO :add op
+                        break;
+                    case IndexOfB:
+                        //TODO :add op
+                        break;
+                    case IndexOfC:
+                        //TODO :add op
+                        break;
+                    case IndexOfD:
+                        //TODO :add op
+                        break;
                     default:
                         break;
                 }
@@ -70,7 +87,7 @@ public class EditTestFragment extends BaseFragment {
             }
         };
     }
-
+    
     @Override
     protected void initData() {}
 
