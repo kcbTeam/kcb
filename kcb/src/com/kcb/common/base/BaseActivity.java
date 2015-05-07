@@ -13,10 +13,11 @@ import android.view.View.OnClickListener;
  */
 public abstract class BaseActivity extends Activity implements OnClickListener {
 
-    protected abstract void initView();
+	protected abstract void initView();
 
-    protected abstract void initData();
+	protected abstract void initData();
 
-    @Override
-    public void onClick(View v) {}
+	@Override
+	public void onClick(View v) {
+	}
 }

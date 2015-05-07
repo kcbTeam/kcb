@@ -95,19 +95,29 @@
         android:longClickable="false"
         widget:paper_text="@string/stopsign" />
 
-    <TextView
-        android:id="@+id/tipforteacher2"
+     <ProgressBar   
+         android:id="@+id/ProgressBar"    
+         style="@android:style/Widget.ProgressBar.Horizontal"
+         android:layout_below="@id/button_stop"
+         android:layout_width="fill_parent"   
+         android:layout_height="wrap_content" 
+         android:layout_alignRight="@id/button_stop" 
+         android:layout_alignLeft="@id/button_stop"
+         android:visibility="invisible"  />  
+    
+     <TextView
+        android:id="@+id/textview_timetip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@id/button_start"
-        android:layout_below="@id/button_start"
-        android:text="@string/tipforteacher2" />
+        android:layout_alignTop="@id/ProgressBar" />
+     
+     
 
     <TextView
         android:id="@+id/textview_step3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tipforteacher2"
+        android:layout_below="@id/button_stop"
         android:layout_marginTop="@dimen/dp_32"
         android:text="@string/num_3" />
 

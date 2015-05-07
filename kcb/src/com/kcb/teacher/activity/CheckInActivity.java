@@ -9,11 +9,13 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.kcb.common.base.BaseActivity;
 import com.kcb.common.listener.CustomOnClickListener;
 import com.kcb.common.util.DialogUtil;
+import com.kcb.common.util.ToastUtil;
 import com.kcb.library.view.PaperButton;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcbTeam.R;
@@ -31,6 +33,13 @@ public class CheckInActivity extends BaseActivity {
 	private PaperButton getNumButton;
 	private PaperButton startButton;
 	private PaperButton stopButton;
+	private ProgressBar progressBar;
+	private TextView timetip;
+
+	protected static final int STOP = 0x10000;
+	protected static final int NEXT = 0x10001;
+	private int iCount = 0;
+
 	private TextView signnum1TextView;
 	private TextView signnum2TextView;
 	private TextView signnum3TextView;
@@ -47,6 +56,24 @@ public class CheckInActivity extends BaseActivity {
 
 		initView();
 	}
+
+	private Handler mHandler = new Handler() {
+		public void handleMessage(Message msg) {
+			switch (msg.what) {
+			case STOP:
+				progressBar.setVisibility(View.GONE);
+				timetip.setVisibility(View.GONE);
+				Thread.currentThread().interrupt();
+				break;
+			case NEXT:
+				if (!Thread.currentThread().isInterrupted()) {
+					progressBar.setProgress(iCount);
+					timetip.setText(iCount + "/120");
+				}
+				break;
+			}
+		}
+	};
 
 	@Override
 	protected void initView() {
@@ -67,6 +94,10 @@ public class CheckInActivity extends BaseActivity {
 		startButton.setOnClickListener(mClickListener);
 
 		stopButton = (PaperButton) findViewById(R.id.button_stop);
+		stopButton.setOnClickListener(mClickListener);
+
+		progressBar = (ProgressBar) findViewById(R.id.ProgressBar);
+		timetip = (TextView) findViewById(R.id.textview_timetip);
 
 		rateButton = (PaperButton) findViewById(R.id.button_rate);
 		rateButton.setOnClickListener(mClickListener);
@@ -82,7 +113,8 @@ public class CheckInActivity extends BaseActivity {
 	@Override
 	public void onClick(View v) {
 		if (v == giveupButton) {
-
+			Intent intent = new Intent(CheckInActivity.this, HomeActivity.class);
+			startActivity(intent);
 		}
 	}
 
@@ -174,9 +206,49 @@ public class CheckInActivity extends BaseActivity {
 				stopButton.setVisibility(View.VISIBLE);
 				stopButton.setClickable(true);
 
+				iCount = 0;
+				progressBar.setVisibility(View.VISIBLE);
+				progressBar.setMax(120);
+				progressBar.setProgress(0);
+
+				Thread mThread = new Thread(new Runnable() {
+
+					public void run() {
+
+						for (int i = 0; i < 120; i++) {
+							try {
+								iCount = (i + 1);
+								Thread.sleep(1000);
+								if (i == 119) {
+									Message msg = new Message();
+									msg.what = STOP;
+									mHandler.sendMessage(msg);
+									break;
+								} else {
+									Message msg = new Message();
+									msg.what = NEXT;
+									mHandler.sendMessage(msg);
+								}
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+						}
+
+					}
+				});
+				mThread.start();
+
 			} else if (v == stopButton) {
-				// DialogUtil.showDialog(this,"停止签到","是否真的停止签到？","是",new
-				// OnClickListener(){},"否",new OnClickListener(){});
+				DialogUtil.showDialog(CheckInActivity.this, "停止签到",
+						"是否真的停止签到？", "是", new OnClickListener() {
+
+							@Override
+							public void onClick(View v) {
+								ToastUtil.toast("停止签到");
+								progressBar.setVisibility(View.GONE);
+								timetip.setVisibility(View.GONE);
+							}
+						}, "否", null);
 
 			} else if (v == rateButton) {
 				Intent intent = new Intent(CheckInActivity.this,
