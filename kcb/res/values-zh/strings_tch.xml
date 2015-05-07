@@ -64,6 +64,10 @@
     <string name="options_hint">请输入选项</string>
     <string name="format_question_num">选择题%1$d</string>
     <string name="option_A">A</string>
+    <string name="option_B">B</string>
+    <string name="option_C">C</string>
+    <string name="option_D">D</string>
+    <string name="select_hint">在正确的选项后面打钩</string>
     <!-- EditTestActivity End -->
 
     <string name="signclass">课堂签到</string>

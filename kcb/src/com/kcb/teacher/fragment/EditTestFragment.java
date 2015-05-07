@@ -1,9 +1,12 @@
 package com.kcb.teacher.fragment;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -17,13 +20,23 @@ import com.kcbTeam.R;
 
 public class EditTestFragment extends BaseFragment {
 
-    private EditText questionEditText;
     private TextView questionNnm;
+
     private CheckBox checkBoxA;
+    private CheckBox checkBoxB;
+    private CheckBox checkBoxC;
+    private CheckBox checkBoxD;
+
+    private EditText questionEditText;
+    private EditText optionAEditText;
+    private EditText optionBEditText;
+    private EditText optionCEditText;
+    private EditText optionDEditText;
+
 
     private DialogBackListener mSureClickListener;
     private OnClickListener mCancelClickListener;
-    
+
     private final int IndexOfQuestion = 1;
     private final int IndexOfA = 2;
     private final int IndexOfB = 3;
@@ -31,21 +44,43 @@ public class EditTestFragment extends BaseFragment {
     private final int IndexOfD = 5;
 
     private int mPositionIndex = IndexOfQuestion;
+    
+    private int backgroundColor = Color.parseColor("#4CAF50");
 
     public EditTestFragment() {
-        
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         initView();
         View view = inflater.inflate(R.layout.tch_fragment_edittest, container, false);
-        questionEditText = (EditText) view.findViewById(R.id.edittext_question);
-        questionEditText.setOnClickListener(this);
         questionNnm = (TextView) view.findViewById(R.id.textview_question_num);
-        questionNnm.setText(String.format(getResources().getString(R.string.format_question_num), 1));
+        questionNnm.setText(String
+                .format(getResources().getString(R.string.format_question_num), 1));
+
+        questionEditText = (EditText) view.findViewById(R.id.edittext_question);
+        optionAEditText = (EditText) view.findViewById(R.id.edittext_A);
+        optionBEditText = (EditText) view.findViewById(R.id.edittext_B);
+        optionCEditText = (EditText) view.findViewById(R.id.edittext_C);
+        optionDEditText = (EditText) view.findViewById(R.id.edittext_D);
+
+        questionEditText.setOnClickListener(this);
+        optionAEditText.setOnClickListener(this);
+        optionBEditText.setOnClickListener(this);
+        optionCEditText.setOnClickListener(this);
+        optionDEditText.setOnClickListener(this);
+
         checkBoxA = (CheckBox) view.findViewById(R.id.checkBox_A);
+        checkBoxB = (CheckBox) view.findViewById(R.id.checkBox_B);
+        checkBoxC = (CheckBox) view.findViewById(R.id.checkBox_C);
+        checkBoxD = (CheckBox) view.findViewById(R.id.checkBox_D);
+        
         checkBoxA.setChecked(true);
+        
+//        checkBoxA.setBackgroundColor(backgroundColor);
+
+
         return view;
     }
 
@@ -53,7 +88,7 @@ public class EditTestFragment extends BaseFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
     }
-    
+
     @Override
     protected void initView() {
         mSureClickListener = new DialogBackListener() {
@@ -65,16 +100,16 @@ public class EditTestFragment extends BaseFragment {
                         questionEditText.setText(text);
                         break;
                     case IndexOfA:
-                        //TODO :add op
+                        optionAEditText.setText(text);
                         break;
                     case IndexOfB:
-                        //TODO :add op
+                        optionBEditText.setText(text);
                         break;
                     case IndexOfC:
-                        //TODO :add op
+                        optionCEditText.setText(text);
                         break;
                     case IndexOfD:
-                        //TODO :add op
+                        optionDEditText.setText(text);
                         break;
                     default:
                         break;
@@ -90,21 +125,46 @@ public class EditTestFragment extends BaseFragment {
             }
         };
     }
-    
+
     @Override
     protected void initData() {}
 
 
     @Override
     public void onClick(View v) {
+        String text;
+        String title;
         if (v == questionEditText) {
-            mPositionIndex = 1;
-            EditTestDialog dialog = new EditTestDialog(getActivity(), questionEditText.getText().toString());
-            dialog.show();
-            dialog.setTitle("输入题目");
-            dialog.setSureButton("保存", mSureClickListener);
-            dialog.setCancelButton("取消", mCancelClickListener);
+            mPositionIndex = IndexOfQuestion;
+            text = questionEditText.getText().toString();
+            title = "输入题目";
+        } else if (v == optionAEditText) {
+            mPositionIndex = IndexOfA;
+            text = optionAEditText.getText().toString();
+            title = "输入A选项";
+        } else if (v == optionBEditText) {
+            mPositionIndex = IndexOfB;
+            text = optionBEditText.getText().toString();
+            title = "输入B选项";
+        } else if (v == optionCEditText) {
+            mPositionIndex = IndexOfC;
+            text = optionCEditText.getText().toString();
+            title = "输入C选项";
+        } else {
+            mPositionIndex = IndexOfD;
+            text = optionDEditText.getText().toString();
+            title = "输入D选项";
         }
+        makeEditDialog(text,title);
+    }
+
+    private void makeEditDialog(String text,String title) {
+        EditTestDialog dialog =
+                new EditTestDialog(getActivity(), text);
+        dialog.show();
+        dialog.setTitle(title);
+        dialog.setSureButton("保存", mSureClickListener);
+        dialog.setCancelButton("取消", mCancelClickListener);
     }
 
 }

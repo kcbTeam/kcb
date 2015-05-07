@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:materialdesign="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
@@ -35,20 +36,29 @@
         android:text="@string/options_hint" />
 
     <RelativeLayout
+        android:id="@+id/layout_A"
         android:layout_width="fill_parent"
-        android:layout_height="48dp"
+        android:layout_height="40dp"
         android:layout_below="@id/input_options_hint"
         android:layout_marginTop="10dp" >
+
+        <TextView
+            android:id="@+id/textview_A"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingTop="10dp"
+            android:text="@string/option_A" />
 
         <EditText
             android:id="@+id/edittext_A"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
             android:layout_marginRight="40dp"
+            android:layout_toRightOf="@id/textview_A"
             android:focusable="false"
             android:inputType="textMultiLine"
-            android:maxLines="6"
-            android:text="A." />
+            android:maxLines="6" />
 
         <com.kcb.library.view.checkbox.CheckBox
             android:id="@+id/checkBox_A"
@@ -58,5 +68,115 @@
             android:layout_centerInParent="true"
             android:background="#1E88E5" />
     </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout_B"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_below="@id/layout_A"
+        android:layout_marginTop="10dp" >
+
+        <TextView
+            android:id="@+id/textview_B"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingTop="5dp"
+            android:text="@string/option_B" />
+
+        <EditText
+            android:id="@+id/edittext_B"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="40dp"
+            android:layout_toRightOf="@id/textview_B"
+            android:focusable="false"
+            android:inputType="textMultiLine"
+            android:maxLines="6" />
+
+        <com.kcb.library.view.checkbox.CheckBox
+            android:id="@+id/checkBox_B"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:background="#1E88E5" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout_C"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_below="@id/layout_B"
+        android:layout_marginTop="5dp" >
+
+        <TextView
+            android:id="@+id/textview_C"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingTop="10dp"
+            android:text="@string/option_C" />
+
+        <EditText
+            android:id="@+id/edittext_C"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="40dp"
+            android:layout_toRightOf="@id/textview_C"
+            android:focusable="false"
+            android:inputType="textMultiLine"
+            android:maxLines="6" />
+
+        <com.kcb.library.view.checkbox.CheckBox
+            android:id="@+id/checkBox_C"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:background="#1E88E5" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout_D"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_below="@id/layout_C"
+        android:layout_marginTop="5dp" >
+
+        <TextView
+            android:id="@+id/textview_D"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingTop="10dp"
+            android:text="@string/option_D" />
+
+        <EditText
+            android:id="@+id/edittext_D"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="40dp"
+            android:layout_toRightOf="@id/textview_D"
+            android:focusable="false"
+            android:inputType="textMultiLine"
+            android:maxLines="6" />
+
+        <com.kcb.library.view.checkbox.CheckBox
+            android:id="@+id/checkBox_D"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:background="#1E88E5" />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/layout_D"
+        android:layout_marginRight="15dp"
+        android:text="@string/select_hint" />
 
 </RelativeLayout>
