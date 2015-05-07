@@ -11,11 +11,13 @@ import android.view.View.OnClickListener;
  * @author: ZQJ
  * @date: 2015年4月24日 下午3:20:57
  */
-public abstract class BaseFragmentActivity extends FragmentActivity implements OnClickListener {
-    protected abstract void initView();
+public abstract class BaseFragmentActivity extends FragmentActivity implements
+		OnClickListener {
+	protected abstract void initView();
 
-    protected abstract void initData();
+	protected abstract void initData();
 
-    @Override
-    public void onClick(View v) {}
+	@Override
+	public void onClick(View v) {
+	}
 }
