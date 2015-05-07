@@ -34,20 +34,29 @@
         android:layout_below="@id/edittext_question"
         android:text="@string/options_hint" />
 
-    <TextView
-        android:id="@+id/option_A"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="A" />
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="48dp"
+        android:layout_below="@id/input_options_hint"
+        android:layout_marginTop="10dp" >
 
-    <EditText
-        android:id="@+id/edittext_A"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:focusable="false"
-        android:layout_toRightOf="@id/option_A"
-        android:layout_alignBaseline="@id/option_A"
-        android:inputType="textMultiLine"
-        android:maxLines="6" />
+        <EditText
+            android:id="@+id/edittext_A"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="40dp"
+            android:focusable="false"
+            android:inputType="textMultiLine"
+            android:maxLines="6"
+            android:text="A." />
+
+        <com.kcb.library.view.checkbox.CheckBox
+            android:id="@+id/checkBox_A"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:background="#1E88E5" />
+    </RelativeLayout>
 
 </RelativeLayout>

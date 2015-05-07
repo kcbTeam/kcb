@@ -63,6 +63,7 @@
     <string name="problem_hint">请输入题目</string>
     <string name="options_hint">请输入选项</string>
     <string name="format_question_num">选择题%1$d</string>
+    <string name="option_A">A</string>
     <!-- EditTestActivity End -->
 
     <string name="signclass">课堂签到</string>

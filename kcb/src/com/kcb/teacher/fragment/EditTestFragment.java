@@ -1,6 +1,5 @@
 package com.kcb.teacher.fragment;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.kcb.library.view.checkbox.CheckBox;
 import com.kcb.common.base.BaseFragment;
 import com.kcb.common.util.ToastUtil;
 import com.kcb.teacher.util.DialogBackListener;
@@ -19,6 +19,7 @@ public class EditTestFragment extends BaseFragment {
 
     private EditText questionEditText;
     private TextView questionNnm;
+    private CheckBox checkBoxA;
 
     private DialogBackListener mSureClickListener;
     private OnClickListener mCancelClickListener;
@@ -43,6 +44,8 @@ public class EditTestFragment extends BaseFragment {
         questionEditText.setOnClickListener(this);
         questionNnm = (TextView) view.findViewById(R.id.textview_question_num);
         questionNnm.setText(String.format(getResources().getString(R.string.format_question_num), 1));
+        checkBoxA = (CheckBox) view.findViewById(R.id.checkBox_A);
+        checkBoxA.setChecked(true);
         return view;
     }
 

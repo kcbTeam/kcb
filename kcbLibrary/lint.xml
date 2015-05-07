@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+    <issue id="DrawAllocation">
+        <ignore path="src/com/kcb/library/view/checkbox/CheckBox.java" />
+    </issue>
+    <issue id="NewApi">
+        <ignore path="src/com/kcb/library/view/checkbox/CheckBox.java" />
+    </issue>
+</lint>
