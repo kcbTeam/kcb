@@ -148,7 +148,8 @@ public class TestActivity extends BaseFragmentActivity {
         @Override
         public void onFinish() {
             timeTextView.setText(R.string.end);
-            new AlertDialog.Builder(TestActivity.this).setTitle(R.string.tip).setMessage(R.string.to_submit_answer)
+            new AlertDialog.Builder(TestActivity.this).setTitle(R.string.tip)
+                    .setMessage(R.string.to_submit_answer)
                     .setPositiveButton(R.string.confirm, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {

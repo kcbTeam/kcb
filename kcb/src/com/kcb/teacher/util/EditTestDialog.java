@@ -25,23 +25,23 @@ public class EditTestDialog extends android.app.Dialog {
     private View contentView;
 
     private TextView titleTextView;
-    
+
     private EditText contentEditText;
-    
+
     private ButtonFlat sureButton;
     private ButtonFlat cancelButton;
 
     private Context mContext;
     private String mEditString;
-    
 
-    public EditTestDialog(Context context,String editString) {
+
+    public EditTestDialog(Context context, String editString) {
         super(context, android.R.style.Theme_Translucent);
 
         mContext = context;
         mEditString = editString;
     }
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -70,7 +70,7 @@ public class EditTestDialog extends android.app.Dialog {
         contentEditText.setSelection(mEditString.length());
         sureButton = (ButtonFlat) findViewById(R.id.button_accept);
         cancelButton = (ButtonFlat) findViewById(R.id.button_cancel);
-        
+
     }
 
     @Override
@@ -172,9 +172,9 @@ public class EditTestDialog extends android.app.Dialog {
             }
         });
     }
+
     public interface DialogBackListener {
         public void refreshActivity(String text);
-        
+
     }
 }
-

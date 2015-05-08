@@ -67,7 +67,7 @@ public class CheckInActivity extends BaseActivity {
                 new String(num1TextView.getText().toString() + num2TextView.getText().toString()
                         + num3TextView.getText().toString() + num4TextView.getText().toString());
         ToastUtil.toast(passwordString);
-        Intent intent=new Intent(CheckInActivity.this,HomeActivity.class);
+        Intent intent = new Intent(CheckInActivity.this, HomeActivity.class);
         startActivity(intent);
     }
 

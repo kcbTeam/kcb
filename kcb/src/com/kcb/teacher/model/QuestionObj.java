@@ -22,6 +22,15 @@ public class QuestionObj implements Serializable {
     // TODO is multi selected?
     private boolean[] mCorrectId;
 
+    public QuestionObj() {
+        mQuestion = "";
+        mOptionA = "";
+        mOptionB = "";
+        mOptionC = "";
+        mOptionD = "";
+        mCorrectId = new boolean[] {false, false, false, false};
+    }
+
     public QuestionObj(String question, String optionA, String optionB, String optionC,
             String optionD, boolean[] correctOption) {
         mQuestion = question;
@@ -89,6 +98,7 @@ public class QuestionObj implements Serializable {
                 && mCorrectId[1] == questionObj.getCorrectId()[1]
                 && mCorrectId[2] == questionObj.getCorrectId()[2]
                 && mCorrectId[3] == questionObj.getCorrectId()[3]
+                && mQuestion.equals(questionObj.getQuestion())
                 && mOptionA.equals(questionObj.getOptionA())
                 && mOptionB.equals(questionObj.getOptionB())
                 && mOptionC.equals(questionObj.getOptionC())

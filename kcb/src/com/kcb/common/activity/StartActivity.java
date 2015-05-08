@@ -33,16 +33,11 @@ public class StartActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // for test by zqj
-        Intent intent;
-        intent = new Intent(this, com.kcb.teacher.activity.EditTestActivity.class);
-        startActivity(intent);
-        finish();
         if (!KAccount.hasAccount()) {
             setContentView(R.layout.comm_activity_start);
             initView();
         } else {
-//            Intent intent;
+            Intent intent;
             if (KAccount.getAccountType() == KAccount.TYPE_STU) {
                 intent = new Intent(this, HomeActivity.class);
             } else {

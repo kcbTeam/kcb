@@ -112,6 +112,9 @@ public class EditTestActivity extends BaseActivity {
     @Override
     protected void initData() {
         mQuestionList = new ArrayList<QuestionObj>();
+        for (int i = 0; i < MaxFragmentNum; i++) {
+            mQuestionList.add(getCurrentObj());
+        }
         mCurrentPosition = 0;
         mSureClickListener = new DialogBackListener() {
 
@@ -203,12 +206,20 @@ public class EditTestActivity extends BaseActivity {
 
     private void clickAdd() {
         MaxFragmentNum++;
-        mCurrentPosition--;
+        mQuestionList.add(new QuestionObj());
+        if (!mQuestionList.get(mCurrentPosition).equal(getCurrentObj())) {
+            mQuestionList.set(mCurrentPosition, getCurrentObj());
+            ToastUtil.toast("第" + (1 + mCurrentPosition) + "题已保存");
+        }
+        mCurrentPosition++;
         refreshInfo(mQuestionList.get(mCurrentPosition));
     }
 
     private void clickNext() {
-        if (mCurrentPosition >= MaxFragmentNum) {
+        if (mCurrentPosition + 1 >= MaxFragmentNum) {
+            if (!getCurrentObj().equal(mQuestionList.get(mCurrentPosition))) {
+                mQuestionList.set(mCurrentPosition, getCurrentObj());
+            }
             String info = "";
             for (int i = 0; i < mQuestionList.size(); i++) {
                 if (!mQuestionList.get(i).isLegal()) {
@@ -219,18 +230,12 @@ public class EditTestActivity extends BaseActivity {
             }
             questionEditText.setText(info);
         } else {
-            if (mCurrentPosition < mQuestionList.size()) {
-                if (!getCurrentObj().equal(mQuestionList.get(mCurrentPosition))) {
-                    mQuestionList.set(mCurrentPosition, getCurrentObj());
-                    ToastUtil.toast("第" + (1 + mCurrentPosition) + "题已保存");
-                }
-            } else {
-                mQuestionList.add(getCurrentObj());
+            if (!getCurrentObj().equal(mQuestionList.get(mCurrentPosition))) {
+                mQuestionList.set(mCurrentPosition, getCurrentObj());
+                ToastUtil.toast("第" + (1 + mCurrentPosition) + "题已保存");
             }
-            mNextObj = null;
-            if (mCurrentPosition + 1 < mQuestionList.size())
-                mNextObj = mQuestionList.get(mCurrentPosition + 1);
             mCurrentPosition++;
+            mNextObj = mQuestionList.get(mCurrentPosition);
             refreshInfo(mNextObj);
         }
 
@@ -238,13 +243,9 @@ public class EditTestActivity extends BaseActivity {
 
     private void clickLast() {
         if (mCurrentPosition != 0) {
-            if (mCurrentPosition < mQuestionList.size()) {
-                if (!mQuestionList.get(mCurrentPosition).equal(getCurrentObj())) {
-                    mQuestionList.set(mCurrentPosition, getCurrentObj());
-                    ToastUtil.toast("第" + (1 + mCurrentPosition) + "题已保存");
-                }
-            } else {
-                mQuestionList.add(getCurrentObj());
+            if (!mQuestionList.get(mCurrentPosition).equal(getCurrentObj())) {
+                mQuestionList.set(mCurrentPosition, getCurrentObj());
+                ToastUtil.toast("第" + (1 + mCurrentPosition) + "题已保存");
             }
             mNextObj = mQuestionList.get(mCurrentPosition - 1);
             mCurrentPosition--;
@@ -253,21 +254,19 @@ public class EditTestActivity extends BaseActivity {
     }
 
     private void clickDelete() {
-        MaxFragmentNum--;
-        if (mQuestionList.size() == 0) {
-            refreshInfo(null);
-        } else {
+        if (MaxFragmentNum > 1) {
+            MaxFragmentNum--;
+            mQuestionList.remove(mCurrentPosition);
             if (mCurrentPosition == 0) {
-                mQuestionList.remove(0);
                 refreshInfo(mQuestionList.get(mCurrentPosition));
             } else {
-                mQuestionList.remove(mCurrentPosition);
                 mCurrentPosition--;
                 refreshInfo(mQuestionList.get(mCurrentPosition));
             }
+            ToastUtil.toast("删除成功");
+        } else {
+            // TODO go back to up activity;
         }
-
-        ToastUtil.toast("删除成功");
     }
 
     private QuestionObj getCurrentObj() {
@@ -307,7 +306,7 @@ public class EditTestActivity extends BaseActivity {
         checkBoxB.setChecked(correctId[1]);
         checkBoxC.setChecked(correctId[2]);
         checkBoxD.setChecked(correctId[3]);
-        if (mCurrentPosition >= MaxFragmentNum) {
+        if (mCurrentPosition + 1 >= MaxFragmentNum) {
             nextButton.setText("完成");
             addButton.setVisibility(View.VISIBLE);
         } else {
