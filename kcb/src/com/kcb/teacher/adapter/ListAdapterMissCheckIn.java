@@ -21,42 +21,39 @@ import com.kcbTeam.R;
  */
 public class ListAdapterMissCheckIn extends BaseAdapter {
 
-	private List<StudentInfo> mList;
-	private Context mContext;
+    private List<StudentInfo> mList;
+    private Context mContext;
 
-	public ListAdapterMissCheckIn(Context context, List<StudentInfo> list) {
-		mContext = context;
-		mList = list;
-	}
+    public ListAdapterMissCheckIn(Context context, List<StudentInfo> list) {
+        mContext = context;
+        mList = list;
+    }
 
-	@Override
-	public int getCount() {
-		return mList.size();
-	}
+    @Override
+    public int getCount() {
+        return mList.size();
+    }
 
-	@Override
-	public Object getItem(int position) {
-		return mList.get(position);
-	}
+    @Override
+    public Object getItem(int position) {
+        return mList.get(position);
+    }
 
-	@Override
-	public long getItemId(int position) {
-		return position;
-	}
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
 
-	@SuppressLint("ViewHolder")
-	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
-		View view = View.inflate(mContext, R.layout.tch_listitem_misscheckin,
-				null);
-		TextView studentName = (TextView) view
-				.findViewById(R.id.textview_studentname);
-		studentName.setText(mList.get(position).getStudentID()
-				+ mList.get(position).getStudentName());
-		TextView studentId = (TextView) view
-				.findViewById(R.id.textview_studentid);
-		studentId.setText(String.valueOf(mList.get(position).getMissTimes())
-				+ '/' + String.valueOf(mList.get(position).getCheckInTimes()));
-		return view;
-	}
+    @SuppressLint("ViewHolder")
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        View view = View.inflate(mContext, R.layout.tch_listitem_misscheckin, null);
+        TextView studentName = (TextView) view.findViewById(R.id.textview_studentname);
+        studentName.setText(mList.get(position).getStudentID()
+                + mList.get(position).getStudentName());
+        TextView studentId = (TextView) view.findViewById(R.id.textview_studentid);
+        studentId.setText(String.valueOf(mList.get(position).getMissTimes()) + '/'
+                + String.valueOf(mList.get(position).getCheckInTimes()));
+        return view;
+    }
 }

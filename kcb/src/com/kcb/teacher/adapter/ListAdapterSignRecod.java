@@ -22,39 +22,36 @@ import com.kcbTeam.R;
 @SuppressLint("ViewHolder")
 public class ListAdapterSignRecod extends BaseAdapter {
 
-	private Context mContext;
-	private List<CheckInRecordInfo> mList;
+    private Context mContext;
+    private List<CheckInRecordInfo> mList;
 
-	public ListAdapterSignRecod(Context context, List<CheckInRecordInfo> list) {
-		mContext = context;
-		mList = list;
-	}
+    public ListAdapterSignRecod(Context context, List<CheckInRecordInfo> list) {
+        mContext = context;
+        mList = list;
+    }
 
-	@Override
-	public int getCount() {
-		return mList.size();
-	}
+    @Override
+    public int getCount() {
+        return mList.size();
+    }
 
-	@Override
-	public Object getItem(int position) {
-		return mList.get(position);
-	}
+    @Override
+    public Object getItem(int position) {
+        return mList.get(position);
+    }
 
-	@Override
-	public long getItemId(int position) {
-		return position;
-	}
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
 
-	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
-		View view = View.inflate(mContext, R.layout.tch_listitem_checkinrecord,
-				null);
-		TextView signDate = (TextView) view
-				.findViewById(R.id.textview_signdate);
-		TextView signRate = (TextView) view
-				.findViewById(R.id.textview_signrate);
-		signDate.setText(mList.get(position).getSignDate());
-		signRate.setText(mList.get(position).getSignRate());
-		return view;
-	}
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        View view = View.inflate(mContext, R.layout.tch_listitem_checkinrecord, null);
+        TextView signDate = (TextView) view.findViewById(R.id.textview_signdate);
+        TextView signRate = (TextView) view.findViewById(R.id.textview_signrate);
+        signDate.setText(mList.get(position).getSignDate());
+        signRate.setText(mList.get(position).getSignRate());
+        return view;
+    }
 }

@@ -21,44 +21,41 @@ import com.kcbTeam.R;
  */
 public class TestFragment extends BaseFragment {
 
-	private PaperButton testButton;
+    private PaperButton testButton;
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.tch_fragment_course_test,
-				container, false);
-		return view;
-	}
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.tch_fragment_course_test, container, false);
+        return view;
+    }
 
-	@Override
-	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-		super.onViewCreated(view, savedInstanceState);
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
-		initView();
-	}
+        initView();
+    }
 
-	@Override
-	protected void initView() {
-		View view = getView();
-		testButton = (PaperButton) view.findViewById(R.id.button_begin_test);
-		testButton.setOnClickListener(this);
-	}
+    @Override
+    protected void initView() {
+        View view = getView();
+        testButton = (PaperButton) view.findViewById(R.id.button_begin_test);
+        testButton.setOnClickListener(this);
+    }
 
-	@Override
-	protected void initData() {
-	}
+    @Override
+    protected void initData() {}
 
-	@Override
-	public void onClick(View v) {
-		Intent intent;
-		switch (v.getId()) {
-		case R.id.button_begin_test:
-			intent = new Intent(getActivity(), TestActivity.class);
-			startActivity(intent);
-			break;
-		default:
-			break;
-		}
-	}
+    @Override
+    public void onClick(View v) {
+        Intent intent;
+        switch (v.getId()) {
+            case R.id.button_begin_test:
+                intent = new Intent(getActivity(), TestActivity.class);
+                startActivity(intent);
+                break;
+            default:
+                break;
+        }
+    }
 }

@@ -26,105 +26,101 @@ import com.kcbTeam.R;
  * @author: Ding
  * @date: 2015年5月5日 下午3:45:54
  */
-public class CheckInResultActivity extends BaseActivity implements
-		OnChartValueSelectedListener {
+public class CheckInResultActivity extends BaseActivity implements OnChartValueSelectedListener {
 
-	private ButtonFlat backbutton;
-	private PieChart mChart;
-	private String[] mParties = new String[] { "Sign", "Not Sign" };
-	private float[] quarterly = new float[] { 80, 20 };
+    private ButtonFlat backbutton;
+    private PieChart mChart;
+    private String[] mParties = new String[] {"Sign", "Not Sign"};
+    private float[] quarterly = new float[] {80, 20};
 
-	@Override
-	protected void onCreate(android.os.Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.stu_activity_checkinresult);
+    @Override
+    protected void onCreate(android.os.Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.stu_activity_checkinresult);
 
-		initView();
-	}
+        initView();
+    }
 
-	@Override
-	protected void initView() {
-		backbutton = (ButtonFlat) findViewById(R.id.button_back);
-		backbutton.setOnClickListener(this);
+    @Override
+    protected void initView() {
+        backbutton = (ButtonFlat) findViewById(R.id.button_back);
+        backbutton.setOnClickListener(this);
 
-		mChart = (PieChart) findViewById(R.id.chart);
+        mChart = (PieChart) findViewById(R.id.chart);
 
-		PieData mPieData = setData(2, 100);
-		showChart(mChart, mPieData);
-	}
+        PieData mPieData = setData(2, 100);
+        showChart(mChart, mPieData);
+    }
 
-	@Override
-	protected void initData() {
-	}
+    @Override
+    protected void initData() {}
 
-	@Override
-	public void onClick(View v) {
-		Intent intent = new Intent(this, HomeActivity.class);
-		startActivity(intent);
-	}
+    @Override
+    public void onClick(View v) {
+        Intent intent = new Intent(this, HomeActivity.class);
+        startActivity(intent);
+    }
 
-	private void showChart(PieChart pieChart, PieData pieData) {
-		pieChart.setUsePercentValues(true);
-		pieChart.setDescription("");
+    private void showChart(PieChart pieChart, PieData pieData) {
+        pieChart.setUsePercentValues(true);
+        pieChart.setDescription("");
 
-		pieChart.setDrawHoleEnabled(false);
-		pieChart.setHoleColorTransparent(true);
+        pieChart.setDrawHoleEnabled(false);
+        pieChart.setHoleColorTransparent(true);
 
-		if (pieChart.isDrawCenterTextEnabled()) {
-			pieChart.setDrawCenterText(false);
-		} else {
-			pieChart.setDrawCenterText(true);
-		}
+        if (pieChart.isDrawCenterTextEnabled()) {
+            pieChart.setDrawCenterText(false);
+        } else {
+            pieChart.setDrawCenterText(true);
+        }
 
-		pieChart.setRotationAngle(0);
-		pieChart.setRotationEnabled(true);
-		pieChart.setOnChartValueSelectedListener(this);
+        pieChart.setRotationAngle(0);
+        pieChart.setRotationEnabled(true);
+        pieChart.setOnChartValueSelectedListener(this);
 
-		pieChart.setCenterText("MPAndroidChart\nby Philipp Jahoda");
+        pieChart.setCenterText("MPAndroidChart\nby Philipp Jahoda");
 
-		pieChart.setData(pieData);
-		pieChart.highlightValues(null);
-		pieChart.invalidate();
+        pieChart.setData(pieData);
+        pieChart.highlightValues(null);
+        pieChart.invalidate();
 
-		Legend mLegend = pieChart.getLegend();
-		mLegend.setPosition(LegendPosition.RIGHT_OF_CHART);
-		mLegend.setXEntrySpace(7f);
-		mLegend.setYEntrySpace(5f);
+        Legend mLegend = pieChart.getLegend();
+        mLegend.setPosition(LegendPosition.RIGHT_OF_CHART);
+        mLegend.setXEntrySpace(7f);
+        mLegend.setYEntrySpace(5f);
 
-		pieChart.animateXY(1800, 1800);
-	}
+        pieChart.animateXY(1800, 1800);
+    }
 
-	private PieData setData(int count, float range) {
-		ArrayList<String> xValues = new ArrayList<String>();
-		for (int i = 0; i < count; i++) {
-			xValues.add(mParties[i]);
-		}
-		ArrayList<Entry> yValues = new ArrayList<Entry>();
-		for (int i = 0; i < count; i++) {
-			yValues.add(new Entry(quarterly[i], i));
-		}
+    private PieData setData(int count, float range) {
+        ArrayList<String> xValues = new ArrayList<String>();
+        for (int i = 0; i < count; i++) {
+            xValues.add(mParties[i]);
+        }
+        ArrayList<Entry> yValues = new ArrayList<Entry>();
+        for (int i = 0; i < count; i++) {
+            yValues.add(new Entry(quarterly[i], i));
+        }
 
-		PieDataSet pieDataSet = new PieDataSet(yValues, null);
-		pieDataSet.setSliceSpace(0f);
+        PieDataSet pieDataSet = new PieDataSet(yValues, null);
+        pieDataSet.setSliceSpace(0f);
 
-		ArrayList<Integer> colors = new ArrayList<Integer>();
-		colors.add(Color.RED);
-		colors.add(Color.GREEN);
-		pieDataSet.setColors(colors);
+        ArrayList<Integer> colors = new ArrayList<Integer>();
+        colors.add(Color.RED);
+        colors.add(Color.GREEN);
+        pieDataSet.setColors(colors);
 
-		DisplayMetrics metrics = getResources().getDisplayMetrics();
-		float px = 5 * (metrics.densityDpi / 160f);
-		pieDataSet.setSelectionShift(px);
-		PieData pieData = new PieData(xValues, pieDataSet);
-		return pieData;
-	}
+        DisplayMetrics metrics = getResources().getDisplayMetrics();
+        float px = 5 * (metrics.densityDpi / 160f);
+        pieDataSet.setSelectionShift(px);
+        PieData pieData = new PieData(xValues, pieDataSet);
+        return pieData;
+    }
 
-	@Override
-	public void onNothingSelected() {
-	}
+    @Override
+    public void onNothingSelected() {}
 
-	@Override
-	public void onValueSelected(Entry arg0, int arg1, Highlight arg2) {
-	}
+    @Override
+    public void onValueSelected(Entry arg0, int arg1, Highlight arg2) {}
 
 }

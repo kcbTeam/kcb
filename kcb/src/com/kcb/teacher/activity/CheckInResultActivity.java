@@ -23,41 +23,41 @@ import com.kcbTeam.R;
 // TODO change button to ButtonFlat
 public class CheckInResultActivity extends BaseActivity {
 
-	private Button backButton;
-	private ListView checkInRecordList;
+    private Button backButton;
+    private ListView checkInRecordList;
 
-	private List<CheckInRecordInfo> mList;
-	private ListAdapterSignRecod mAdapter;
+    private List<CheckInRecordInfo> mList;
+    private ListAdapterSignRecod mAdapter;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.tch_activity_checkinresult);
-		initData();
-		initView();
-	}
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.tch_activity_checkinresult);
+        initData();
+        initView();
+    }
 
-	@Override
-	protected void initView() {
-		backButton = (Button) findViewById(R.id.button_back);
-		backButton.setOnClickListener(this);
-		checkInRecordList = (ListView) findViewById(R.id.listview_sign_record);
-		mAdapter = new ListAdapterSignRecod(this, mList);
-		checkInRecordList.setAdapter(mAdapter);
-	}
+    @Override
+    protected void initView() {
+        backButton = (Button) findViewById(R.id.button_back);
+        backButton.setOnClickListener(this);
+        checkInRecordList = (ListView) findViewById(R.id.listview_sign_record);
+        mAdapter = new ListAdapterSignRecod(this, mList);
+        checkInRecordList.setAdapter(mAdapter);
+    }
 
-	@Override
-	protected void initData() {
-		mList = new ArrayList<CheckInRecordInfo>();
-		mList.clear();
-		mList.add(new CheckInRecordInfo("2015-01-01", "0%"));
-		mList.add(new CheckInRecordInfo("2015-01-02", "0%"));
-	}
+    @Override
+    protected void initData() {
+        mList = new ArrayList<CheckInRecordInfo>();
+        mList.clear();
+        mList.add(new CheckInRecordInfo("2015-01-01", "0%"));
+        mList.add(new CheckInRecordInfo("2015-01-02", "0%"));
+    }
 
-	@Override
-	public void onClick(View v) {
-		if (v.getId() == R.id.button_back) {
-			finish();
-		}
-	}
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.button_back) {
+            finish();
+        }
+    }
 }

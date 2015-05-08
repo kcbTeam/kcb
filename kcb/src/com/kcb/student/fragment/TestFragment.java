@@ -7,11 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.kcb.common.activity.StartActivity;
 import com.kcb.common.base.BaseFragment;
 import com.kcb.common.listener.CustomOnClickListener;
 import com.kcb.library.view.PaperButton;
-import com.kcb.student.activity.CheckInResultActivity;
 import com.kcb.student.activity.TestActivity;
 import com.kcbTeam.R;
 
@@ -23,48 +21,45 @@ import com.kcbTeam.R;
  */
 public class TestFragment extends BaseFragment {
 
-	private PaperButton startTestButton;
-	private PaperButton lookTestButton;
+    private PaperButton startTestButton;
+    private PaperButton lookTestButton;
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		return inflater.inflate(R.layout.stu_fragment_test, container, false);
-	}
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.stu_fragment_test, container, false);
+    }
 
-	@Override
-	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-		super.onViewCreated(view, savedInstanceState);
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
-		initView();
-	}
+        initView();
+    }
 
-	@Override
-	protected void initView() {
-		View view = getView();
-		startTestButton = (PaperButton) view
-				.findViewById(R.id.button_start_test);
-		startTestButton.setOnClickListener(mClickListener);
-		lookTestButton = (PaperButton) view.findViewById(R.id.button_look_test);
-		lookTestButton.setOnClickListener(mClickListener);
-	}
+    @Override
+    protected void initView() {
+        View view = getView();
+        startTestButton = (PaperButton) view.findViewById(R.id.button_start_test);
+        startTestButton.setOnClickListener(mClickListener);
+        lookTestButton = (PaperButton) view.findViewById(R.id.button_look_test);
+        lookTestButton.setOnClickListener(mClickListener);
+    }
 
-	@Override
-	protected void initData() {
-	}
+    @Override
+    protected void initData() {}
 
-	private CustomOnClickListener mClickListener = new CustomOnClickListener(
-			CustomOnClickListener.DELAY_PAPER_BUTTON) {
+    private CustomOnClickListener mClickListener = new CustomOnClickListener(
+            CustomOnClickListener.DELAY_PAPER_BUTTON) {
 
-		@Override
-		public void doClick(View v) {
-			Intent intent;
-			if (v == startTestButton) {
-				intent = new Intent(getActivity(), TestActivity.class);
-				startActivity(intent);
-			} else if (v == lookTestButton) {
+        @Override
+        public void doClick(View v) {
+            Intent intent;
+            if (v == startTestButton) {
+                intent = new Intent(getActivity(), TestActivity.class);
+                startActivity(intent);
+            } else if (v == lookTestButton) {
 
-			}
-		}
-	};
+            }
+        }
+    };
 }

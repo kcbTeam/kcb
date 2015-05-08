@@ -11,16 +11,16 @@ import android.app.Application;
  */
 public class KApplication extends Application {
 
-	private static KApplication instance;
+    private static KApplication instance;
 
-	@Override
-	public void onCreate() {
-		super.onCreate();
+    @Override
+    public void onCreate() {
+        super.onCreate();
 
-		instance = this;
-	}
+        instance = this;
+    }
 
-	public static KApplication getInstance() {
-		return instance;
-	}
+    public static KApplication getInstance() {
+        return instance;
+    }
 }
