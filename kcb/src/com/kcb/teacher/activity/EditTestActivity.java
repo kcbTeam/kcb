@@ -31,7 +31,6 @@ public class EditTestActivity extends BaseFragmentActivity {
     private PaperButton nextButton;
     private ImageButton deleteButton;
 
-
     private FragmentManager mFragmentManager;
     private EditTestFragment mCurrentFragment;
 
@@ -45,190 +44,202 @@ public class EditTestActivity extends BaseFragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tch_activity_edittest);
-        initData();
+
         initView();
+        initData();
     }
 
     // Initialisation of the view
+    // TODO add Button in last page
     @Override
     protected void initView() {
         lastButton = (PaperButton) findViewById(R.id.pagerbutton_last);
-        nextButton = (PaperButton) findViewById(R.id.pagerbutton_next);
-        deleteButton = (ImageButton) findViewById(R.id.delete_button);
-
         lastButton.setOnClickListener(this);
-        nextButton.setOnClickListener(this);
-        deleteButton.setOnClickListener(this);
-
         lastButton.setTextColor(getResources().getColor(R.color.gray));
+
+        nextButton = (PaperButton) findViewById(R.id.pagerbutton_next);
+        nextButton.setOnClickListener(this);
         nextButton.setTextColor(getResources().getColor(R.color.black));
 
-        mFragmentManager = getSupportFragmentManager();
-        FragmentTransaction transaction = mFragmentManager.beginTransaction();
-        transaction.replace(R.id.fragment_content, mCurrentFragment);
-        transaction.commit();
-
+        deleteButton = (ImageButton) findViewById(R.id.delete_button);
+        deleteButton.setOnClickListener(this);
     }
 
     @Override
     protected void initData() {
         mFragmentList = new ArrayList<EditTestFragment>();
         mQuestionList = new ArrayList<QuestionObj>();
+        // TODO needn't clear()
         mFragmentList.clear();
         mQuestionList.clear();
+        // TODO from 0
         mCurrentPosition = 1;
         mCurrentFragment = new EditTestFragment(mCurrentPosition);
+
+        mFragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = mFragmentManager.beginTransaction();
+        transaction.replace(R.id.fragment_content, mCurrentFragment);
+        transaction.commit();
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.delete_button:
-                /*
-                 * make sure mCurrentPositon at the right range
-                 */
-                if (mCurrentPosition > MaxFragmentNum) {
-                    mCurrentPosition = MaxFragmentNum;
-                }
-                if (mCurrentPosition == 1) {
-                    /*
-                     * if the lists only contain one or less record clear list,otherwise delete
-                     * first record and reset the questionNum of remain fragments
-                     */
-                    if (mFragmentList.size() <= 1) {
-                        mFragmentList.clear();
-                        mQuestionList.clear();
-                    } else {
-                        mFragmentList.remove(0);
-                        mQuestionList.remove(0);
-                        for (int i = mCurrentPosition - 1; i < mFragmentList.size(); i++) {
-                            mFragmentList.get(i).questionNumReduce();
-                        }
-                    }
-                } else {
-                    // remove current fragment
-                    if (mCurrentPosition <= mFragmentList.size()) {
-                        mFragmentList.remove(mCurrentPosition - 1);
-                        mQuestionList.remove(mCurrentPosition - 1);
-                    }
-                    // reset questionNum of the rest fragments
-                    for (int i = mCurrentPosition - 1; i < mFragmentList.size(); i++) {
-                        mFragmentList.get(i).questionNumReduce();
-                    }
-                    mCurrentPosition--;
-                }
-                refreshButtonBar(); // change the "下一题" to "已完成" if the condition is satisfied.
-                refreshFragment(); // display the fragment that need to be seen next.
+                clickDelete();
                 break;
             case R.id.pagerbutton_last:
-                if (mCurrentPosition > MaxFragmentNum) {
-                    mCurrentPosition = MaxFragmentNum;
+                clickLast();
+                break;
+            case R.id.pagerbutton_next:
+                clickNext();
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void clickDelete() {
+        /*
+         * make sure mCurrentPositon at the right range
+         */
+        if (mCurrentPosition > MaxFragmentNum) {
+            mCurrentPosition = MaxFragmentNum;
+        }
+        if (mCurrentPosition == 1) {
+            /*
+             * if the lists only contain one or less record clear list,otherwise delete first record
+             * and reset the questionNum of remain fragments
+             */
+            if (mFragmentList.size() <= 1) {
+                mFragmentList.clear();
+                mQuestionList.clear();
+            } else {
+                mFragmentList.remove(0);
+                mQuestionList.remove(0);
+                for (int i = mCurrentPosition - 1; i < mFragmentList.size(); i++) {
+                    mFragmentList.get(i).questionNumReduce();
                 }
-                final QuestionObj temp = mCurrentFragment.getQuestionObj();
-                if (mCurrentPosition > 1 &&  null != temp) { // lastButton , need not action while the current
-                                            // position = 1.
-                    if (mCurrentPosition > mFragmentList.size()) {
-                        mQuestionList.add(temp);
-                        mFragmentList.add(mCurrentFragment);
-                        ToastUtil.toast("第" + mCurrentPosition + "题已保存");
-                        if (mCurrentPosition == 1) {
-                            lastButton.setTextColor(getResources().getColor(R.color.gray));
-                        }
-                        mCurrentPosition--;
-                        refreshFragment();
-                    } else {
-                        /*
-                         * compare if the current is modified.haven't modified display the last
-                         * fragment
-                         */
-                        if (mQuestionList.get(mCurrentPosition - 1).equal(temp)) {
+            }
+        } else {
+            // remove current fragment
+            if (mCurrentPosition <= mFragmentList.size()) {
+                mFragmentList.remove(mCurrentPosition - 1);
+                mQuestionList.remove(mCurrentPosition - 1);
+            }
+            // reset questionNum of the rest fragments
+            for (int i = mCurrentPosition - 1; i < mFragmentList.size(); i++) {
+                mFragmentList.get(i).questionNumReduce();
+            }
+            mCurrentPosition--;
+        }
+        refreshButtonText(); // change the "下一题" to "已完成" if the condition is satisfied.
+        switchFragment(); // display the fragment that need to be seen next.
+    }
+
+    private void clickLast() {
+        if (mCurrentPosition > MaxFragmentNum) {
+            mCurrentPosition = MaxFragmentNum;
+        }
+        final QuestionObj temp = mCurrentFragment.getQuestionObj();
+        if (mCurrentPosition > 1 && null != temp) { // lastButton , need not action while the
+                                                    // current
+            // position = 1.
+            if (mCurrentPosition > mFragmentList.size()) {
+                mQuestionList.add(temp);
+                mFragmentList.add(mCurrentFragment);
+                ToastUtil.toast("第" + mCurrentPosition + "题已保存");
+                if (mCurrentPosition == 1) {
+                    lastButton.setTextColor(getResources().getColor(R.color.gray));
+                }
+                mCurrentPosition--;
+                switchFragment();
+            } else {
+                /*
+                 * compare if the current is modified.haven't modified display the last fragment
+                 */
+                if (mQuestionList.get(mCurrentPosition - 1).equal(temp)) {
+                    mCurrentPosition--;
+                    if (mCurrentPosition == 1) {
+                        lastButton.setTextColor(getResources().getColor(R.color.gray));
+                    }
+                    switchFragment();
+                } else {
+                    /*
+                     * have modified ,make dialog for user to save or give up the modifications
+                     */
+                    //TODO only toast
+                    OnClickListener sure = new OnClickListener() {
+
+                        @Override
+                        public void onClick(View v) {
+                            mQuestionList.set(mCurrentPosition - 1, temp);
+                            mFragmentList.set(mCurrentPosition - 1, mCurrentFragment);
+                            ToastUtil.toast("第" + mCurrentPosition + "题已保存");
                             mCurrentPosition--;
                             if (mCurrentPosition == 1) {
                                 lastButton.setTextColor(getResources().getColor(R.color.gray));
                             }
-                            refreshFragment();
-                        } else {
-                            /*
-                             * have modified ,make dialog for user to save or give up the
-                             * modifications
-                             */
-                            OnClickListener sure = new OnClickListener() {
-
-                                @Override
-                                public void onClick(View v) {
-                                    mQuestionList.set(mCurrentPosition - 1, temp);
-                                    mFragmentList.set(mCurrentPosition - 1, mCurrentFragment);
-                                    ToastUtil.toast("第" + mCurrentPosition + "题已保存");
-                                    mCurrentPosition--;
-                                    if (mCurrentPosition == 1) {
-                                        lastButton.setTextColor(getResources().getColor(
-                                                R.color.gray));
-                                    }
-                                    refreshFragment();
-                                }
-                            };
-                            OnClickListener cancel = new OnClickListener() {
-
-                                @Override
-                                public void onClick(View v) {
-                                    
-                                    if (mCurrentPosition == 1) {
-                                        lastButton.setTextColor(getResources().getColor(
-                                                R.color.gray));
-                                    }
-                                    mCurrentPosition--;
-                                    refreshFragment();
-                                }
-                            };
-                            DialogUtil.showDialog(this, "提示", "是否保存修改", "确定", sure, "取消", cancel);
+                            switchFragment();
                         }
-                    }
-                }
-                refreshButtonBar();
-                break;
-            case R.id.pagerbutton_next:
-                if (mCurrentPosition <= MaxFragmentNum) {
-                    QuestionObj currentObj = mCurrentFragment.getQuestionObj();
-                    if (null != currentObj) {
-                        /*
-                         * if the current fragment is correct ,save it and make a new fragment.while
-                         * if mCurrentPosition > MaxFragment,go to complete situation
-                         */
-                        lastButton.setTextColor(getResources().getColor(R.color.black));
-                        if (mCurrentPosition > mFragmentList.size()) {
-                            mQuestionList.add(currentObj);
-                            mFragmentList.add(mCurrentFragment);
-                            ToastUtil.toast("第" + mCurrentPosition + "题已保存");
-                        } else {
-                            if (!mQuestionList.get(mCurrentPosition - 1).equal(currentObj)) {
-                                mQuestionList.set(mCurrentPosition - 1, currentObj);
-                                mFragmentList.set(mCurrentPosition - 1, mCurrentFragment);
-                                ToastUtil.toast("第" + mCurrentPosition + "题已保存");
+                    };
+                    OnClickListener cancel = new OnClickListener() {
+
+                        @Override
+                        public void onClick(View v) {
+
+                            if (mCurrentPosition == 1) {
+                                lastButton.setTextColor(getResources().getColor(R.color.gray));
                             }
+                            mCurrentPosition--;
+                            switchFragment();
                         }
-                        mCurrentPosition++;
-                        refreshFragment();
-                    }
+                    };
+                    DialogUtil.showDialog(this, "提示", "是否保存修改", "确定", sure, "取消", cancel);
+                }
+            }
+        }
+        refreshButtonText();
+    }
+
+    private void clickNext() {
+        if (mCurrentPosition <= MaxFragmentNum) {
+            QuestionObj currentObj = mCurrentFragment.getQuestionObj();
+            if (null != currentObj) {
+                /*
+                 * if the current fragment is correct ,save it and make a new fragment.while if
+                 * mCurrentPosition > MaxFragment,go to complete situation
+                 */
+                lastButton.setTextColor(getResources().getColor(R.color.black));
+                if (mCurrentPosition > mFragmentList.size()) {
+                    mQuestionList.add(currentObj);
+                    mFragmentList.add(mCurrentFragment);
+                    ToastUtil.toast("第" + mCurrentPosition + "题已保存");
                 } else {
-                    mCurrentPosition = MaxFragmentNum;
-                    QuestionObj currentObj = mCurrentFragment.getQuestionObj();
                     if (!mQuestionList.get(mCurrentPosition - 1).equal(currentObj)) {
                         mQuestionList.set(mCurrentPosition - 1, currentObj);
                         mFragmentList.set(mCurrentPosition - 1, mCurrentFragment);
                         ToastUtil.toast("第" + mCurrentPosition + "题已保存");
                     }
-                    // TODO add complete edit situation
-                    ToastUtil.toast("建设中。。。");
                 }
-                refreshButtonBar();
-                break;
-            default:
-                break;
+                mCurrentPosition++;
+                switchFragment();
+            }
+        } else {
+            mCurrentPosition = MaxFragmentNum;
+            QuestionObj currentObj = mCurrentFragment.getQuestionObj();
+            if (!mQuestionList.get(mCurrentPosition - 1).equal(currentObj)) {
+                mQuestionList.set(mCurrentPosition - 1, currentObj);
+                mFragmentList.set(mCurrentPosition - 1, mCurrentFragment);
+                ToastUtil.toast("第" + mCurrentPosition + "题已保存");
+            }
+            // TODO add complete edit situation
+            ToastUtil.toast("建设中。。。");
         }
-
+        refreshButtonText();
     }
 
-    private void refreshButtonBar() {
+    private void refreshButtonText() {
         if (mCurrentPosition > MaxFragmentNum) {
             nextButton.setText("已完成！");
         } else {
@@ -236,7 +247,7 @@ public class EditTestActivity extends BaseFragmentActivity {
         }
     }
 
-    private void refreshFragment() {
+    private void switchFragment() {
         if (mCurrentPosition <= MaxFragmentNum) {
             FragmentTransaction transaction = mFragmentManager.beginTransaction();
             /*

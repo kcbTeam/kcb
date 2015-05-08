@@ -35,9 +35,9 @@ public class StartActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         // for test by zqj
         Intent intent;
-        intent = new Intent(this, com.kcb.teacher.activity.EditTestActivity.class);
-        startActivity(intent);
-        finish();
+//        intent = new Intent(this, com.kcb.teacher.activity.EditTestActivity.class);
+//        startActivity(intent);
+//        finish();
         if (!KAccount.hasAccount()) {
             setContentView(R.layout.comm_activity_start);
             initView();

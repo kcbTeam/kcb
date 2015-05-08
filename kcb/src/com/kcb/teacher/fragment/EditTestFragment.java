@@ -3,16 +3,13 @@ package com.kcb.teacher.fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.kcb.common.base.BaseFragment;
 import com.kcb.common.util.AnimationUtil;
-import com.kcb.common.util.ToastUtil;
 import com.kcb.library.view.checkbox.CheckBox;
-import com.kcb.library.view.checkbox.CheckBox.OnCheckListener;
 import com.kcb.teacher.model.QuestionObj;
 import com.kcb.teacher.util.DialogBackListener;
 import com.kcb.teacher.util.EditTestDialog;
@@ -42,7 +39,6 @@ public class EditTestFragment extends BaseFragment {
     private EditText optionDEditText;
 
     private DialogBackListener mSureClickListener;
-    private OnClickListener mCancelClickListener;
 
     private final int IndexOfQuestion = 1;
     private final int IndexOfA = 2;
@@ -62,7 +58,20 @@ public class EditTestFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         initView();
-        View view = inflater.inflate(R.layout.tch_fragment_edittest, container, false);
+        return inflater.inflate(R.layout.tch_fragment_edittest, container, false);
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        initView();
+        initData();
+    }
+
+    @Override
+    protected void initView() {
+        View view = getView();
         numHintTextView = (TextView) view.findViewById(R.id.textview_question_num);
         numHintTextView.setText(String.format(getResources()
                 .getString(R.string.format_question_num), questionNum));
@@ -83,72 +92,10 @@ public class EditTestFragment extends BaseFragment {
         checkBoxB = (CheckBox) view.findViewById(R.id.checkBox_B);
         checkBoxC = (CheckBox) view.findViewById(R.id.checkBox_C);
         checkBoxD = (CheckBox) view.findViewById(R.id.checkBox_D);
-        initCheckBox();
-
-        checkBoxA.setOncheckListener(new OnCheckListener() {
-            @Override
-            public void onCheck(boolean check) {
-                setCheckId(IndexOfA);
-                initCheckBox();
-            }
-        });
-        checkBoxB.setOncheckListener(new OnCheckListener() {
-
-            @Override
-            public void onCheck(boolean check) {
-                setCheckId(IndexOfB);
-                initCheckBox();
-            }
-        });
-        checkBoxC.setOncheckListener(new OnCheckListener() {
-
-            @Override
-            public void onCheck(boolean check) {
-                setCheckId(IndexOfC);
-                initCheckBox();
-            }
-        });
-        checkBoxD.setOncheckListener(new OnCheckListener() {
-
-            @Override
-            public void onCheck(boolean check) {
-                setCheckId(IndexOfD);
-                initCheckBox();
-            }
-        });
-        return view;
-    }
-
-    private void initCheckBox() {
-        checkBoxA.setChecked(false);
-        checkBoxB.setChecked(false);
-        checkBoxC.setChecked(false);
-        checkBoxD.setChecked(false);
-        switch (checkedId) {
-            case IndexOfA:
-                checkBoxA.setChecked(true);
-                break;
-            case IndexOfB:
-                checkBoxB.setChecked(true);
-                break;
-            case IndexOfC:
-                checkBoxC.setChecked(true);
-                break;
-            case IndexOfD:
-                checkBoxD.setChecked(true);
-                break;
-            default:
-                break;
-        }
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-    }
-
-    @Override
-    protected void initView() {
+    protected void initData() {
         mSureClickListener = new DialogBackListener() {
 
             @Override
@@ -174,33 +121,22 @@ public class EditTestFragment extends BaseFragment {
                 }
             }
         };
-
-        mCancelClickListener = new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                ToastUtil.toast("Edit Canceled");
-            }
-        };
     }
 
     @Override
     public void onResume() {
         super.onResume();
         numHintTextView.setText(String.format(getResources()
-            .getString(R.string.format_question_num), questionNum));
+                .getString(R.string.format_question_num), questionNum));
     }
-    
+
     public void questionNumPlus() {
         questionNum++;
     }
+
     public void questionNumReduce() {
         questionNum--;
     }
-
-    @Override
-    protected void initData() {}
-
 
     @Override
     public void onClick(View v) {
@@ -235,7 +171,7 @@ public class EditTestFragment extends BaseFragment {
         dialog.show();
         dialog.setTitle(title);
         dialog.setSureButton("保存", mSureClickListener);
-        dialog.setCancelButton("取消", mCancelClickListener);
+        dialog.setCancelButton("取消", null);
     }
 
     public QuestionObj getQuestionObj() {

@@ -19,6 +19,7 @@ public class QuestionObj implements Serializable {
     private String mOptionC;
     private String mOptionD;
 
+    //TODO is multi selected?
     private int mCorrectId;
 
     public QuestionObj(String question, String optionA, String optionB, String optionC,
