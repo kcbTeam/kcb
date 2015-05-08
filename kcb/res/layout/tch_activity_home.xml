@@ -24,6 +24,7 @@
     </FrameLayout>
 
     <LinearLayout
+        android:id="@+id/buttonbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -34,15 +35,35 @@
             style="@style/home_tab"
             android:text="@string/course_signin" />
 
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:background="@color/gray"
+            android:visibility="invisible" />
+
         <com.kcb.library.view.buttonflat.ButtonFlat
             android:id="@+id/button_test"
             style="@style/home_tab"
             android:text="@string/course_test" />
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:background="@color/gray"
+            android:visibility="invisible" />
 
         <com.kcb.library.view.buttonflat.ButtonFlat
             android:id="@+id/button_stucenter"
             style="@style/home_tab"
             android:text="@string/student_center" />
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_above="@id/buttonbar"
+        android:background="@color/divider" />
 
 </RelativeLayout>

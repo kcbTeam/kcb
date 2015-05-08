@@ -62,6 +62,7 @@ public class CheckInActivity extends BaseActivity {
 	protected void initData() {
 	}
 
+
 	@Override
 	public void onClick(View v) {
 		String passwordString = new String(num1TextView.getText().toString()
@@ -72,6 +73,7 @@ public class CheckInActivity extends BaseActivity {
 		Intent intent = new Intent(CheckInActivity.this, HomeActivity.class);
 		startActivity(intent);
 	}
+
 
 	private RecyclerItemClickListener mRecyclerItemClickListener = new RecyclerItemClickListener() {
 
