@@ -19,11 +19,11 @@ public class QuestionObj implements Serializable {
     private String mOptionC;
     private String mOptionD;
 
-    //TODO is multi selected?
-    private int mCorrectId;
+    // TODO is multi selected?
+    private boolean[] mCorrectId;
 
     public QuestionObj(String question, String optionA, String optionB, String optionC,
-            String optionD, int correctOption) {
+            String optionD, boolean[] correctOption) {
         mQuestion = question;
         mOptionA = optionA;
         mOptionB = optionB;
@@ -65,7 +65,7 @@ public class QuestionObj implements Serializable {
         this.mOptionC = mOptionC;
     }
 
-    public String getmOptionD() {
+    public String getOptionD() {
         return mOptionD;
     }
 
@@ -73,11 +73,11 @@ public class QuestionObj implements Serializable {
         this.mOptionD = mOptionD;
     }
 
-    public int getCorrectId() {
+    public boolean[] getCorrectId() {
         return mCorrectId;
     }
 
-    public void setCorrectId(int mCorrectOption) {
+    public void setCorrectId(boolean[] mCorrectOption) {
         this.mCorrectId = mCorrectOption;
     }
 
@@ -85,11 +85,14 @@ public class QuestionObj implements Serializable {
         if (this == questionObj) {
             return true;
         }
-        if (this.mCorrectId == questionObj.getCorrectId()
-                && this.mOptionA.equals(questionObj.getOptionA())
-                && this.mOptionB.equals(questionObj.getOptionB())
-                && this.mOptionC.equals(questionObj.getOptionC())
-                && this.mOptionD.equals(questionObj.getmOptionD())) {
+        if (mCorrectId[0] == questionObj.getCorrectId()[0]
+                && mCorrectId[1] == questionObj.getCorrectId()[1]
+                && mCorrectId[2] == questionObj.getCorrectId()[2]
+                && mCorrectId[3] == questionObj.getCorrectId()[3]
+                && mOptionA.equals(questionObj.getOptionA())
+                && mOptionB.equals(questionObj.getOptionB())
+                && mOptionC.equals(questionObj.getOptionC())
+                && mOptionD.equals(questionObj.getOptionD())) {
             return true;
         }
         return false;

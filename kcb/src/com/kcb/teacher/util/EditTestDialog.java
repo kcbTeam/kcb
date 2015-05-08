@@ -174,5 +174,9 @@ public class EditTestDialog extends android.app.Dialog {
             }
         });
     }
+    public interface DialogBackListener {
+        public void refreshActivity(String text);
+        
+    }
 }
 

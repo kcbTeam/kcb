@@ -11,8 +11,8 @@ import com.kcb.common.base.BaseFragment;
 import com.kcb.common.util.AnimationUtil;
 import com.kcb.library.view.checkbox.CheckBox;
 import com.kcb.teacher.model.QuestionObj;
-import com.kcb.teacher.util.DialogBackListener;
 import com.kcb.teacher.util.EditTestDialog;
+import com.kcb.teacher.util.EditTestDialog.DialogBackListener;
 import com.kcbTeam.R;
 
 
@@ -197,7 +197,7 @@ public class EditTestFragment extends BaseFragment {
             AnimationUtil.shake(checkBoxC);
             AnimationUtil.shake(checkBoxD);
         } else {
-            return new QuestionObj(question, optionA, optionB, optionC, optionD, correctOption);
+//            return new QuestionObj(question, optionA, optionB, optionC, optionD, correctOption);
         }
         return null;
     }

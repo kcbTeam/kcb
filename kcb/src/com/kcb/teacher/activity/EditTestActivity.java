@@ -4,18 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.view.View;
-import android.view.View.OnClickListener;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
-import com.kcb.common.base.BaseFragmentActivity;
-import com.kcb.common.util.DialogUtil;
+import com.kcb.common.base.BaseActivity;
 import com.kcb.common.util.ToastUtil;
 import com.kcb.library.view.PaperButton;
-import com.kcb.teacher.fragment.EditTestFragment;
+import com.kcb.library.view.checkbox.CheckBox;
 import com.kcb.teacher.model.QuestionObj;
+import com.kcb.teacher.util.EditTestDialog;
+import com.kcb.teacher.util.EditTestDialog.DialogBackListener;
 import com.kcbTeam.R;
 
 /**
@@ -25,20 +25,41 @@ import com.kcbTeam.R;
  * @author: ZQJ
  * @date: 2015年5月8日 下午6:03:59
  */
-public class EditTestActivity extends BaseFragmentActivity {
+public class EditTestActivity extends BaseActivity {
 
     private PaperButton lastButton;
     private PaperButton nextButton;
+    private ImageButton addButton;
     private ImageButton deleteButton;
 
-    private FragmentManager mFragmentManager;
-    private EditTestFragment mCurrentFragment;
-
     private int mCurrentPosition;
-    private List<EditTestFragment> mFragmentList;
+    private QuestionObj mNextObj;
     private List<QuestionObj> mQuestionList;
 
-    private int MaxFragmentNum = 3; // set max question num
+    private int MaxFragmentNum = 3; // set max question !!!!num from 0
+
+    private TextView numHintTextView;
+
+    private CheckBox checkBoxA;
+    private CheckBox checkBoxB;
+    private CheckBox checkBoxC;
+    private CheckBox checkBoxD;
+
+    private EditText questionEditText;
+    private EditText optionAEditText;
+    private EditText optionBEditText;
+    private EditText optionCEditText;
+    private EditText optionDEditText;
+
+    private DialogBackListener mSureClickListener;
+
+    private final int IndexOfQuestion = 1;
+    private final int IndexOfA = 2;
+    private final int IndexOfB = 3;
+    private final int IndexOfC = 4;
+    private final int IndexOfD = 5;
+
+    private int mPositionIndex = IndexOfQuestion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +70,6 @@ public class EditTestActivity extends BaseFragmentActivity {
         initData();
     }
 
-    // Initialisation of the view
-    // TODO add Button in last page
     @Override
     protected void initView() {
         lastButton = (PaperButton) findViewById(R.id.pagerbutton_last);
@@ -61,29 +80,71 @@ public class EditTestActivity extends BaseFragmentActivity {
         nextButton.setOnClickListener(this);
         nextButton.setTextColor(getResources().getColor(R.color.black));
 
+        addButton = (ImageButton) findViewById(R.id.add_button);
+        addButton.setOnClickListener(this);
+
         deleteButton = (ImageButton) findViewById(R.id.delete_button);
         deleteButton.setOnClickListener(this);
+
+        numHintTextView = (TextView) findViewById(R.id.textview_question_num);
+        numHintTextView.setText(String.format(getResources()
+                .getString(R.string.format_question_num), mCurrentPosition + 1));
+
+        questionEditText = (EditText) findViewById(R.id.edittext_question);
+        questionEditText.setOnClickListener(this);
+        optionAEditText = (EditText) findViewById(R.id.edittext_A);
+        optionAEditText.setOnClickListener(this);
+        optionBEditText = (EditText) findViewById(R.id.edittext_B);
+        optionBEditText.setOnClickListener(this);
+        optionCEditText = (EditText) findViewById(R.id.edittext_C);
+        optionCEditText.setOnClickListener(this);
+        optionDEditText = (EditText) findViewById(R.id.edittext_D);
+        optionDEditText.setOnClickListener(this);
+
+        checkBoxA = (CheckBox) findViewById(R.id.checkBox_A);
+        checkBoxB = (CheckBox) findViewById(R.id.checkBox_B);
+        checkBoxC = (CheckBox) findViewById(R.id.checkBox_C);
+        checkBoxD = (CheckBox) findViewById(R.id.checkBox_D);
+
+        refreshInfo(null);
     }
 
     @Override
     protected void initData() {
-        mFragmentList = new ArrayList<EditTestFragment>();
         mQuestionList = new ArrayList<QuestionObj>();
-        // TODO needn't clear()
-        mFragmentList.clear();
-        mQuestionList.clear();
-        // TODO from 0
-        mCurrentPosition = 1;
-        mCurrentFragment = new EditTestFragment(mCurrentPosition);
+        mCurrentPosition = 0;
+        mSureClickListener = new DialogBackListener() {
 
-        mFragmentManager = getSupportFragmentManager();
-        FragmentTransaction transaction = mFragmentManager.beginTransaction();
-        transaction.replace(R.id.fragment_content, mCurrentFragment);
-        transaction.commit();
+            @Override
+            public void refreshActivity(String text) {
+                switch (mPositionIndex) {
+                    case IndexOfQuestion:
+                        questionEditText.setText(text);
+                        break;
+                    case IndexOfA:
+                        optionAEditText.setText(text);
+                        break;
+                    case IndexOfB:
+                        optionBEditText.setText(text);
+                        break;
+                    case IndexOfC:
+                        optionCEditText.setText(text);
+                        break;
+                    case IndexOfD:
+                        optionDEditText.setText(text);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        };
+
     }
 
     @Override
     public void onClick(View v) {
+        String text;
+        String title;
         switch (v.getId()) {
             case R.id.delete_button:
                 clickDelete();
@@ -94,174 +155,139 @@ public class EditTestActivity extends BaseFragmentActivity {
             case R.id.pagerbutton_next:
                 clickNext();
                 break;
+            case R.id.add_button:
+                clickAdd();
+                break;
+            case R.id.edittext_question:
+                mPositionIndex = IndexOfQuestion;
+                text = questionEditText.getText().toString();
+                title = "输入题目";
+                makeEditDialog(text, title);
+                break;
+            case R.id.edittext_A:
+                mPositionIndex = IndexOfA;
+                text = optionAEditText.getText().toString();
+                title = "输入A选项";
+                makeEditDialog(text, title);
+                break;
+            case R.id.edittext_B:
+                mPositionIndex = IndexOfB;
+                text = optionBEditText.getText().toString();
+                title = "输入B选项";
+                makeEditDialog(text, title);
+                break;
+            case R.id.edittext_C:
+                mPositionIndex = IndexOfC;
+                text = optionCEditText.getText().toString();
+                title = "输入C选项";
+                makeEditDialog(text, title);
+                break;
+            case R.id.edittext_D:
+                mPositionIndex = IndexOfD;
+                text = optionDEditText.getText().toString();
+                title = "输入D选项";
+                makeEditDialog(text, title);
+                break;
             default:
                 break;
         }
     }
 
-    private void clickDelete() {
-        /*
-         * make sure mCurrentPositon at the right range
-         */
-        if (mCurrentPosition > MaxFragmentNum) {
-            mCurrentPosition = MaxFragmentNum;
-        }
-        if (mCurrentPosition == 1) {
-            /*
-             * if the lists only contain one or less record clear list,otherwise delete first record
-             * and reset the questionNum of remain fragments
-             */
-            if (mFragmentList.size() <= 1) {
-                mFragmentList.clear();
-                mQuestionList.clear();
-            } else {
-                mFragmentList.remove(0);
-                mQuestionList.remove(0);
-                for (int i = mCurrentPosition - 1; i < mFragmentList.size(); i++) {
-                    mFragmentList.get(i).questionNumReduce();
-                }
-            }
-        } else {
-            // remove current fragment
-            if (mCurrentPosition <= mFragmentList.size()) {
-                mFragmentList.remove(mCurrentPosition - 1);
-                mQuestionList.remove(mCurrentPosition - 1);
-            }
-            // reset questionNum of the rest fragments
-            for (int i = mCurrentPosition - 1; i < mFragmentList.size(); i++) {
-                mFragmentList.get(i).questionNumReduce();
-            }
-            mCurrentPosition--;
-        }
-        refreshButtonText(); // change the "下一题" to "已完成" if the condition is satisfied.
-        switchFragment(); // display the fragment that need to be seen next.
+    private void makeEditDialog(String text, String title) {
+        EditTestDialog dialog = new EditTestDialog(this, text);
+        dialog.show();
+        dialog.setTitle(title);
+        dialog.setSureButton("保存", mSureClickListener);
+        dialog.setCancelButton("取消", null);
     }
 
-    private void clickLast() {
-        if (mCurrentPosition > MaxFragmentNum) {
-            mCurrentPosition = MaxFragmentNum;
-        }
-        final QuestionObj temp = mCurrentFragment.getQuestionObj();
-        if (mCurrentPosition > 1 && null != temp) { // lastButton , need not action while the
-                                                    // current
-            // position = 1.
-            if (mCurrentPosition > mFragmentList.size()) {
-                mQuestionList.add(temp);
-                mFragmentList.add(mCurrentFragment);
-                ToastUtil.toast("第" + mCurrentPosition + "题已保存");
-                if (mCurrentPosition == 1) {
-                    lastButton.setTextColor(getResources().getColor(R.color.gray));
-                }
-                mCurrentPosition--;
-                switchFragment();
-            } else {
-                /*
-                 * compare if the current is modified.haven't modified display the last fragment
-                 */
-                if (mQuestionList.get(mCurrentPosition - 1).equal(temp)) {
-                    mCurrentPosition--;
-                    if (mCurrentPosition == 1) {
-                        lastButton.setTextColor(getResources().getColor(R.color.gray));
-                    }
-                    switchFragment();
-                } else {
-                    /*
-                     * have modified ,make dialog for user to save or give up the modifications
-                     */
-                    //TODO only toast
-                    OnClickListener sure = new OnClickListener() {
+    private void clickAdd() {
 
-                        @Override
-                        public void onClick(View v) {
-                            mQuestionList.set(mCurrentPosition - 1, temp);
-                            mFragmentList.set(mCurrentPosition - 1, mCurrentFragment);
-                            ToastUtil.toast("第" + mCurrentPosition + "题已保存");
-                            mCurrentPosition--;
-                            if (mCurrentPosition == 1) {
-                                lastButton.setTextColor(getResources().getColor(R.color.gray));
-                            }
-                            switchFragment();
-                        }
-                    };
-                    OnClickListener cancel = new OnClickListener() {
-
-                        @Override
-                        public void onClick(View v) {
-
-                            if (mCurrentPosition == 1) {
-                                lastButton.setTextColor(getResources().getColor(R.color.gray));
-                            }
-                            mCurrentPosition--;
-                            switchFragment();
-                        }
-                    };
-                    DialogUtil.showDialog(this, "提示", "是否保存修改", "确定", sure, "取消", cancel);
-                }
-            }
-        }
-        refreshButtonText();
     }
 
     private void clickNext() {
-        if (mCurrentPosition <= MaxFragmentNum) {
-            QuestionObj currentObj = mCurrentFragment.getQuestionObj();
-            if (null != currentObj) {
-                /*
-                 * if the current fragment is correct ,save it and make a new fragment.while if
-                 * mCurrentPosition > MaxFragment,go to complete situation
-                 */
-                lastButton.setTextColor(getResources().getColor(R.color.black));
-                if (mCurrentPosition > mFragmentList.size()) {
-                    mQuestionList.add(currentObj);
-                    mFragmentList.add(mCurrentFragment);
-                    ToastUtil.toast("第" + mCurrentPosition + "题已保存");
-                } else {
-                    if (!mQuestionList.get(mCurrentPosition - 1).equal(currentObj)) {
-                        mQuestionList.set(mCurrentPosition - 1, currentObj);
-                        mFragmentList.set(mCurrentPosition - 1, mCurrentFragment);
-                        ToastUtil.toast("第" + mCurrentPosition + "题已保存");
-                    }
-                }
-                mCurrentPosition++;
-                switchFragment();
-            }
+        if (mCurrentPosition >= MaxFragmentNum) {
+            ToastUtil.toast("待建");
         } else {
-            mCurrentPosition = MaxFragmentNum;
-            QuestionObj currentObj = mCurrentFragment.getQuestionObj();
-            if (!mQuestionList.get(mCurrentPosition - 1).equal(currentObj)) {
-                mQuestionList.set(mCurrentPosition - 1, currentObj);
-                mFragmentList.set(mCurrentPosition - 1, mCurrentFragment);
-                ToastUtil.toast("第" + mCurrentPosition + "题已保存");
+            if (mCurrentPosition < mQuestionList.size()) {
+                if (!getCurrentObj().equal(mQuestionList.get(mCurrentPosition))) {
+                    mQuestionList.set(mCurrentPosition, getCurrentObj());
+                    ToastUtil.toast("第" + (1 + mCurrentPosition) + "题已保存");
+                }
+            } else {
+                mQuestionList.add(getCurrentObj());
             }
-            // TODO add complete edit situation
-            ToastUtil.toast("建设中。。。");
+            mNextObj = null;
+            if (mCurrentPosition + 1 < mQuestionList.size())
+                mNextObj = mQuestionList.get(mCurrentPosition + 1);
+            mCurrentPosition++;
+            refreshInfo(mNextObj);
         }
-        refreshButtonText();
+
     }
 
-    private void refreshButtonText() {
-        if (mCurrentPosition > MaxFragmentNum) {
-            nextButton.setText("已完成！");
+    private void clickLast() {
+        if (mCurrentPosition != 0) {
+            if (mCurrentPosition < mQuestionList.size()) {
+                if (!mQuestionList.get(mCurrentPosition).equal(getCurrentObj())) {
+                    mQuestionList.set(mCurrentPosition, getCurrentObj());
+                    ToastUtil.toast("第" + (1 + mCurrentPosition) + "题已保存");
+                }
+            } else {
+                mQuestionList.add(getCurrentObj());
+            }
+            mNextObj = mQuestionList.get(mCurrentPosition - 1);
+            mCurrentPosition--;
+            refreshInfo(mNextObj);
+        }
+    }
+
+    private void clickDelete() {
+
+    }
+
+    private QuestionObj getCurrentObj() {
+        String question = questionEditText.getText().toString();
+        String optionA = optionAEditText.getText().toString();
+        String optionB = optionBEditText.getText().toString();
+        String optionC = optionCEditText.getText().toString();
+        String optionD = optionDEditText.getText().toString();
+        boolean[] correctOption =
+                {checkBoxA.isCheck(), checkBoxB.isCheck(), checkBoxC.isCheck(), checkBoxD.isCheck()};
+        return new QuestionObj(question, optionA, optionB, optionC, optionD, correctOption);
+    }
+
+    private void refreshInfo(QuestionObj currentObj) {
+        String question = "";
+        String optionA = "";
+        String optionB = "";
+        String optionC = "";
+        String optionD = "";
+        boolean[] correctId = {false, false, false, false};
+        if (null != currentObj) {
+            question = currentObj.getQuestion();
+            optionA = currentObj.getOptionA();
+            optionB = currentObj.getOptionB();
+            optionC = currentObj.getOptionC();
+            optionD = currentObj.getOptionD();
+            correctId = currentObj.getCorrectId();
+        }
+        numHintTextView.setText(String.format(getResources()
+                .getString(R.string.format_question_num), mCurrentPosition + 1));
+        questionEditText.setText(question);
+        optionAEditText.setText(optionA);
+        optionBEditText.setText(optionB);
+        optionCEditText.setText(optionC);
+        optionDEditText.setText(optionD);
+        checkBoxA.setChecked(correctId[0]);
+        checkBoxB.setChecked(correctId[1]);
+        checkBoxC.setChecked(correctId[2]);
+        checkBoxD.setChecked(correctId[3]);
+        if (mCurrentPosition >= MaxFragmentNum) {
+            nextButton.setText("完成");
         } else {
             nextButton.setText("下一题");
         }
     }
 
-    private void switchFragment() {
-        if (mCurrentPosition <= MaxFragmentNum) {
-            FragmentTransaction transaction = mFragmentManager.beginTransaction();
-            /*
-             * if mCurrentPosition > mFragmentList.size() add a new fragment , otherwise get a
-             * fragment form fragment list.
-             */
-            if (mCurrentPosition > mFragmentList.size()) {
-                mCurrentFragment = new EditTestFragment(mCurrentPosition);
-            } else {
-                mCurrentFragment = mFragmentList.get(mCurrentPosition - 1);
-                mCurrentFragment.setCheckId(mQuestionList.get(mCurrentPosition - 1).getCorrectId());
-            }
-            transaction.replace(R.id.fragment_content, mCurrentFragment);
-            transaction.commit();
-        }
-    }
 }
