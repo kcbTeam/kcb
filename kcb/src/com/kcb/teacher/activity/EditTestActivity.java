@@ -202,12 +202,22 @@ public class EditTestActivity extends BaseActivity {
     }
 
     private void clickAdd() {
-
+        MaxFragmentNum++;
+        mCurrentPosition--;
+        refreshInfo(mQuestionList.get(mCurrentPosition));
     }
 
     private void clickNext() {
         if (mCurrentPosition >= MaxFragmentNum) {
-            ToastUtil.toast("待建");
+            String info = "";
+            for (int i = 0; i < mQuestionList.size(); i++) {
+                if (!mQuestionList.get(i).isLegal()) {
+                    ToastUtil.toast("第" + (i + 1) + "题有空选项哦");
+                    return;
+                }
+                info = info + mQuestionList.get(i).toString();
+            }
+            questionEditText.setText(info);
         } else {
             if (mCurrentPosition < mQuestionList.size()) {
                 if (!getCurrentObj().equal(mQuestionList.get(mCurrentPosition))) {
@@ -243,7 +253,21 @@ public class EditTestActivity extends BaseActivity {
     }
 
     private void clickDelete() {
+        MaxFragmentNum--;
+        if (mQuestionList.size() == 0) {
+            refreshInfo(null);
+        } else {
+            if (mCurrentPosition == 0) {
+                mQuestionList.remove(0);
+                refreshInfo(mQuestionList.get(mCurrentPosition));
+            } else {
+                mQuestionList.remove(mCurrentPosition);
+                mCurrentPosition--;
+                refreshInfo(mQuestionList.get(mCurrentPosition));
+            }
+        }
 
+        ToastUtil.toast("删除成功");
     }
 
     private QuestionObj getCurrentObj() {
@@ -285,8 +309,10 @@ public class EditTestActivity extends BaseActivity {
         checkBoxD.setChecked(correctId[3]);
         if (mCurrentPosition >= MaxFragmentNum) {
             nextButton.setText("完成");
+            addButton.setVisibility(View.VISIBLE);
         } else {
             nextButton.setText("下一题");
+            addButton.setVisibility(View.INVISIBLE);
         }
     }
 

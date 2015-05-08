@@ -34,8 +34,6 @@ public class EditTestDialog extends android.app.Dialog {
     private Context mContext;
     private String mEditString;
     
-    private boolean mIsQuestion = false;
-    
 
     public EditTestDialog(Context context,String editString) {
         super(context, android.R.style.Theme_Translucent);

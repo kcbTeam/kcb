@@ -98,6 +98,25 @@ public class QuestionObj implements Serializable {
         return false;
     }
 
+    public String toString() {
+
+        return mQuestion + '\n' + mOptionA + '\n' + mOptionB + '\n' + mOptionC + '\n' + mOptionD
+                + '\n' + mCorrectId[0] + '\n' + mCorrectId[1] + '\n' + mCorrectId[2] + '\n'
+                + mCorrectId[3] + '\n';
+    }
+
+    public boolean isLegal() {
+        if (mCorrectId[0] == false && mCorrectId[1] == false && mCorrectId[2] == false
+                && mCorrectId[3] == false) {
+            return false;
+        }
+        if (!mQuestion.equals("") && !mOptionA.equals("") && !mOptionB.equals("")
+                && !mOptionC.equals("") && !mOptionD.equals("")) {
+            return true;
+        }
+        return false;
+    }
+
 
 
 }
