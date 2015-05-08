@@ -53,18 +53,7 @@ public class CheckBox extends CustomView {
             int background = attrs.getAttributeIntValue(ANDROIDXML, "background", -1);
             if (background != -1) setBackgroundColor(background);
         }
-
-        final boolean check = attrs.getAttributeBooleanValue(MATERIALDESIGNXML, "check", false);
-        post(new Runnable() {
-
-            @Override
-            public void run() {
-                setChecked(check);
-                setPressed(false);
-                changeBackgroundColor(getResources().getColor(android.R.color.transparent));
-            }
-        });
-
+        changeBackgroundColor(getResources().getColor(android.R.color.transparent));
         checkView = new Check(getContext());
         checkView.setId(View.generateViewId());
         RelativeLayout.LayoutParams params =
@@ -120,7 +109,7 @@ public class CheckBox extends CustomView {
                         && (event.getY() <= getHeight() && event.getY() >= 0)) {
                     isLastTouch = false;
                     check = !check;
-//                    if (onCheckListener != null) onCheckListener.onCheck(check);
+                    if (onCheckListener != null) onCheckListener.onCheck(check);
                     if (check) {
                         step = 0;
                     }

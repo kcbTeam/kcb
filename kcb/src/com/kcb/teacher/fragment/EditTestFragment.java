@@ -1,26 +1,34 @@
 package com.kcb.teacher.fragment;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.kcb.library.view.checkbox.CheckBox;
 import com.kcb.common.base.BaseFragment;
+import com.kcb.common.util.AnimationUtil;
 import com.kcb.common.util.ToastUtil;
+import com.kcb.library.view.checkbox.CheckBox;
+import com.kcb.library.view.checkbox.CheckBox.OnCheckListener;
+import com.kcb.teacher.model.QuestionObj;
 import com.kcb.teacher.util.DialogBackListener;
 import com.kcb.teacher.util.EditTestDialog;
 import com.kcbTeam.R;
 
+
+/**
+ * 
+ * @className: EditTestFragment
+ * @description:
+ * @author: ZQJ
+ * @date: 2015年5月8日 上午10:14:21
+ */
 public class EditTestFragment extends BaseFragment {
 
-    private TextView questionNnm;
+    private TextView numHintTextView;
 
     private CheckBox checkBoxA;
     private CheckBox checkBoxB;
@@ -33,7 +41,6 @@ public class EditTestFragment extends BaseFragment {
     private EditText optionCEditText;
     private EditText optionDEditText;
 
-
     private DialogBackListener mSureClickListener;
     private OnClickListener mCancelClickListener;
 
@@ -43,21 +50,22 @@ public class EditTestFragment extends BaseFragment {
     private final int IndexOfC = 4;
     private final int IndexOfD = 5;
 
+    private int checkedId = 0;
+
     private int mPositionIndex = IndexOfQuestion;
-    
-    private int backgroundColor = Color.parseColor("#4CAF50");
+    private int questionNum;
 
-    public EditTestFragment() {
-
+    public EditTestFragment(int questionNum) {
+        this.questionNum = questionNum;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         initView();
         View view = inflater.inflate(R.layout.tch_fragment_edittest, container, false);
-        questionNnm = (TextView) view.findViewById(R.id.textview_question_num);
-        questionNnm.setText(String
-                .format(getResources().getString(R.string.format_question_num), 1));
+        numHintTextView = (TextView) view.findViewById(R.id.textview_question_num);
+        numHintTextView.setText(String.format(getResources()
+                .getString(R.string.format_question_num), questionNum));
 
         questionEditText = (EditText) view.findViewById(R.id.edittext_question);
         optionAEditText = (EditText) view.findViewById(R.id.edittext_A);
@@ -75,13 +83,63 @@ public class EditTestFragment extends BaseFragment {
         checkBoxB = (CheckBox) view.findViewById(R.id.checkBox_B);
         checkBoxC = (CheckBox) view.findViewById(R.id.checkBox_C);
         checkBoxD = (CheckBox) view.findViewById(R.id.checkBox_D);
-        
-        checkBoxA.setChecked(true);
-        
-//        checkBoxA.setBackgroundColor(backgroundColor);
+        initCheckBox();
 
+        checkBoxA.setOncheckListener(new OnCheckListener() {
+            @Override
+            public void onCheck(boolean check) {
+                setCheckId(IndexOfA);
+                initCheckBox();
+            }
+        });
+        checkBoxB.setOncheckListener(new OnCheckListener() {
 
+            @Override
+            public void onCheck(boolean check) {
+                setCheckId(IndexOfB);
+                initCheckBox();
+            }
+        });
+        checkBoxC.setOncheckListener(new OnCheckListener() {
+
+            @Override
+            public void onCheck(boolean check) {
+                setCheckId(IndexOfC);
+                initCheckBox();
+            }
+        });
+        checkBoxD.setOncheckListener(new OnCheckListener() {
+
+            @Override
+            public void onCheck(boolean check) {
+                setCheckId(IndexOfD);
+                initCheckBox();
+            }
+        });
         return view;
+    }
+
+    private void initCheckBox() {
+        checkBoxA.setChecked(false);
+        checkBoxB.setChecked(false);
+        checkBoxC.setChecked(false);
+        checkBoxD.setChecked(false);
+        switch (checkedId) {
+            case IndexOfA:
+                checkBoxA.setChecked(true);
+                break;
+            case IndexOfB:
+                checkBoxB.setChecked(true);
+                break;
+            case IndexOfC:
+                checkBoxC.setChecked(true);
+                break;
+            case IndexOfD:
+                checkBoxD.setChecked(true);
+                break;
+            default:
+                break;
+        }
     }
 
     @Override
@@ -127,6 +185,20 @@ public class EditTestFragment extends BaseFragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        numHintTextView.setText(String.format(getResources()
+            .getString(R.string.format_question_num), questionNum));
+    }
+    
+    public void questionNumPlus() {
+        questionNum++;
+    }
+    public void questionNumReduce() {
+        questionNum--;
+    }
+
+    @Override
     protected void initData() {}
 
 
@@ -155,16 +227,63 @@ public class EditTestFragment extends BaseFragment {
             text = optionDEditText.getText().toString();
             title = "输入D选项";
         }
-        makeEditDialog(text,title);
+        makeEditDialog(text, title);
     }
 
-    private void makeEditDialog(String text,String title) {
-        EditTestDialog dialog =
-                new EditTestDialog(getActivity(), text);
+    private void makeEditDialog(String text, String title) {
+        EditTestDialog dialog = new EditTestDialog(getActivity(), text);
         dialog.show();
         dialog.setTitle(title);
         dialog.setSureButton("保存", mSureClickListener);
         dialog.setCancelButton("取消", mCancelClickListener);
+    }
+
+    public QuestionObj getQuestionObj() {
+        String question = questionEditText.getText().toString();
+        String optionA = optionAEditText.getText().toString();
+        String optionB = optionBEditText.getText().toString();
+        String optionC = optionCEditText.getText().toString();
+        String optionD = optionDEditText.getText().toString();
+        int correctOption = getCorrectOption();
+        if (question.equals("")) {
+            AnimationUtil.shake(questionEditText);
+        } else if (optionA.equals("")) {
+            AnimationUtil.shake(optionAEditText);
+        } else if (optionB.equals("")) {
+            AnimationUtil.shake(optionBEditText);
+        } else if (optionC.equals("")) {
+            AnimationUtil.shake(optionCEditText);
+        } else if (optionD.equals("")) {
+            AnimationUtil.shake(optionDEditText);
+        } else if (correctOption == 0) {
+            AnimationUtil.shake(checkBoxA);
+            AnimationUtil.shake(checkBoxB);
+            AnimationUtil.shake(checkBoxC);
+            AnimationUtil.shake(checkBoxD);
+        } else {
+            return new QuestionObj(question, optionA, optionB, optionC, optionD, correctOption);
+        }
+        return null;
+    }
+
+    public void setCheckId(int checkedId) {
+        this.checkedId = checkedId;
+    }
+
+    private int getCorrectOption() {
+        if (checkBoxA.isCheck()) {
+            return IndexOfA;
+        }
+        if (checkBoxB.isCheck()) {
+            return IndexOfB;
+        }
+        if (checkBoxC.isCheck()) {
+            return IndexOfC;
+        }
+        if (checkBoxD.isCheck()) {
+            return IndexOfD;
+        }
+        return 0;
     }
 
 }
