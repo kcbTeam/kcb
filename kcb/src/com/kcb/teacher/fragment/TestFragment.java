@@ -1,61 +1,127 @@
 package com.kcb.teacher.fragment;
 
+import java.util.ArrayList;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.kcb.common.base.BaseFragment;
+import com.kcb.common.util.DialogUtil;
+import com.kcb.common.util.ToastUtil;
 import com.kcb.library.view.PaperButton;
-import com.kcb.teacher.activity.TestActivity;
+import com.kcb.teacher.adapter.ListAdapterEdit;
 import com.kcbTeam.R;
 
 /**
  * 
  * @className: TestFragment
  * @description:
- * @author: ZQJ
+ * @author: ZQJ & ljx
  * @date: 2015年4月24日 下午3:24:15
  */
 public class TestFragment extends BaseFragment {
 
-    private PaperButton testButton;
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.tch_fragment_course_test, container, false);
-        return view;
-    }
+	private PaperButton testButton;
+	private PaperButton editButton;
+	private PaperButton testresultButton;
+	private TextView tipTextView;
 
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+	private ArrayList<String> mList;
 
-        initView();
-    }
+	private ListAdapterEdit mAdapter;
 
-    @Override
-    protected void initView() {
-        View view = getView();
-        testButton = (PaperButton) view.findViewById(R.id.button_begin_test);
-        testButton.setOnClickListener(this);
-    }
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		View view = inflater.inflate(R.layout.tch_fragment_course_test,
+				container, false);
+		return view;
+	}
 
-    @Override
-    protected void initData() {}
+	@Override
+	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
 
-    @Override
-    public void onClick(View v) {
-        Intent intent;
-        switch (v.getId()) {
-            case R.id.button_begin_test:
-                intent = new Intent(getActivity(), TestActivity.class);
-                startActivity(intent);
-                break;
-            default:
-                break;
-        }
-    }
+		initView();
+	}
+
+	@Override
+	protected void initView() {
+		View view = getView();
+		editButton = (PaperButton) view.findViewById(R.id.button_edit_test);
+		testButton = (PaperButton) view.findViewById(R.id.button_begin_test);
+		testresultButton = (PaperButton) view
+				.findViewById(R.id.button_test_result);
+		editButton.setOnClickListener(this);
+		testButton.setOnClickListener(this);
+		testresultButton.setOnClickListener(this);
+		tipTextView = (TextView) view.findViewById(R.id.textview_tip);
+
+	}
+
+	@Override
+	protected void initData() {
+	}
+
+	@Override
+	public void onClick(View v) {
+		//Intent intent;
+		switch (v.getId()) {
+		case R.id.button_edit_test:
+			mList = new ArrayList<String>();
+			mList.add("新测试");
+			mList.add("第一次测试");
+			mList.add("第二次测试");
+			mList.add("第三次测试");
+			mAdapter = new ListAdapterEdit(getActivity(), mList);
+
+			DialogUtil.showListDialog(getActivity(), "编辑测试内容", mAdapter, "确定",
+					new OnClickListener() {
+
+						@Override
+						public void onClick(View v) {
+							ToastUtil.toast("click sure");
+						}
+					}, "取消", null);
+
+			break;
+		case R.id.button_begin_test:
+			mList = new ArrayList<String>();
+			mList.add("第一次测试");
+			mList.add("第二次测试");
+			mList.add("第三次测试");
+			mAdapter = new ListAdapterEdit(getActivity(), mList);
+
+			DialogUtil.showListDialog(getActivity(), "开始测试", mAdapter, "确定",
+					new OnClickListener() {
+
+						@Override
+						public void onClick(View v) {
+							ToastUtil.toast("click sure");
+							// testButton.setVisibility(View.GONE);
+
+							tipTextView.setVisibility(View.VISIBLE);
+
+						}
+					}, "取消", null);
+
+			// intent = new Intent(getActivity(), TestActivity.class);
+			// startActivity(intent);
+			break;
+
+		case R.id.button_test_result:
+
+			break;
+		default:
+			break;
+		}
+	}
+
 }
