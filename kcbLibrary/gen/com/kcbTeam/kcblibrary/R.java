@@ -331,9 +331,10 @@ containing a value of this type.
         public static int button_cancel=0x7f05000a;
         public static int contentDialog=0x7f050005;
         public static int dialog_rootView=0x7f050004;
+        public static int listmessage=0x7f05000b;
         public static int message=0x7f050008;
         public static int message_scrollView=0x7f050007;
-        public static int shape_bacground=0x7f05000b;
+        public static int shape_bacground=0x7f05000c;
         public static int spb_interpolator_accelerate=0x7f050000;
         public static int spb_interpolator_acceleratedecelerate=0x7f050002;
         public static int spb_interpolator_decelerate=0x7f050003;
@@ -346,6 +347,7 @@ containing a value of this type.
     }
     public static final class layout {
         public static int material_dialog=0x7f030000;
+        public static int material_list_dialog=0x7f030001;
     }
     public static final class string {
         public static int app_name=0x7f0a0001;

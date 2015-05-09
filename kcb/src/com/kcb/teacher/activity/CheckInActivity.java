@@ -113,8 +113,15 @@ public class CheckInActivity extends BaseActivity {
 	@Override
 	public void onClick(View v) {
 		if (v == giveupButton) {
-			Intent intent = new Intent(CheckInActivity.this, HomeActivity.class);
-			startActivity(intent);
+			DialogUtil.showDialog(this, "放弃签到", "是否放弃签到？如果放弃，将返回上一界面。", "放弃",
+					new OnClickListener() {
+
+						@Override
+						public void onClick(View v) {
+							finish();
+						}
+					}, "取消", null);
+
 		}
 	}
 
@@ -246,6 +253,7 @@ public class CheckInActivity extends BaseActivity {
 							public void onClick(View v) {
 								ToastUtil.toast("停止签到");
 								progressBar.setVisibility(View.GONE);
+								timetip.setText(""); // important
 								timetip.setVisibility(View.GONE);
 							}
 						}, "否", null);

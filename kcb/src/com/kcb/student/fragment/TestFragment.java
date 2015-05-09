@@ -7,11 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.kcb.common.activity.StartActivity;
 import com.kcb.common.base.BaseFragment;
 import com.kcb.common.listener.CustomOnClickListener;
 import com.kcb.library.view.PaperButton;
-import com.kcb.student.activity.CheckInResultActivity;
 import com.kcb.student.activity.TestActivity;
 import com.kcbTeam.R;
 
