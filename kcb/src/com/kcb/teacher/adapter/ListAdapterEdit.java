@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.TextView;
 
 import com.kcbTeam.R;
@@ -64,7 +66,7 @@ public class ListAdapterEdit extends BaseAdapter {
 	}
 
 	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
+	public View getView(final int position, View convertView, ViewGroup parent) {
 		ViewHolder holder = null;
 		if (convertView == null) {
 			holder = new ViewHolder();
@@ -72,14 +74,39 @@ public class ListAdapterEdit extends BaseAdapter {
 			holder.testname = (TextView) convertView
 					.findViewById(R.id.textview_testname);
 			holder.testchosen = (CheckBox) convertView
-					.findViewById(R.id.textview_testchosen);
+					.findViewById(R.id.checkBox_testchosen);
 			convertView.setTag(holder);
 
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
 		holder.testname.setText(mList.get(position));
+
+		holder.testchosen
+				.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+
+					@Override
+					public void onCheckedChanged(CompoundButton buttonView,
+							boolean isChecked) {
+						// TODO Auto-generated method stub
+						// getIsSelected().put(position, isChecked);
+
+						isSelected.put(position, isChecked);
+						if (buttonView.isChecked()) {
+							for (int i = 0; i < mList.size(); i++) {
+								if (i != position) {
+									isSelected.put(i, false);
+								}
+							}
+						}
+						ListAdapterEdit.this.notifyDataSetChanged();// update
+																	// checkbox
+
+					}
+
+				});
 		holder.testchosen.setChecked(getIsSelected().get(position));
+
 		return convertView;
 	}
 
