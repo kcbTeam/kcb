@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 
 import com.kcb.common.base.BaseFragment;
 import com.kcb.library.view.PaperButton;
-import com.kcb.teacher.activity.TestActivity;
+import com.kcb.teacher.activity.EditTestActivity;
 import com.kcbTeam.R;
 
 /**
@@ -51,7 +51,8 @@ public class TestFragment extends BaseFragment {
         Intent intent;
         switch (v.getId()) {
             case R.id.button_begin_test:
-                intent = new Intent(getActivity(), TestActivity.class);
+                //TODO for test , remember change EditTestActivity to TestActivity.
+                intent = new Intent(getActivity(), EditTestActivity.class);
                 startActivity(intent);
                 break;
             default:
