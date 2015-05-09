@@ -5,11 +5,13 @@ import java.util.List;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.kcb.common.base.BaseActivity;
+import com.kcb.common.util.DialogUtil;
 import com.kcb.common.util.ToastUtil;
 import com.kcb.library.view.PaperButton;
 import com.kcb.library.view.checkbox.CheckBox;
@@ -220,15 +222,13 @@ public class EditTestActivity extends BaseActivity {
             if (!getCurrentObj().equal(mQuestionList.get(mCurrentPosition))) {
                 mQuestionList.set(mCurrentPosition, getCurrentObj());
             }
-            String info = "";
             for (int i = 0; i < mQuestionList.size(); i++) {
                 if (!mQuestionList.get(i).isLegal()) {
                     ToastUtil.toast("第" + (i + 1) + "题有空选项哦");
                     return;
                 }
-                info = info + mQuestionList.get(i).toString();
             }
-            questionEditText.setText(info);
+            completeEdit();
         } else {
             if (!getCurrentObj().equal(mQuestionList.get(mCurrentPosition))) {
                 mQuestionList.set(mCurrentPosition, getCurrentObj());
@@ -247,8 +247,8 @@ public class EditTestActivity extends BaseActivity {
                 mQuestionList.set(mCurrentPosition, getCurrentObj());
                 ToastUtil.toast("第" + (1 + mCurrentPosition) + "题已保存");
             }
-            mNextObj = mQuestionList.get(mCurrentPosition - 1);
             mCurrentPosition--;
+            mNextObj = mQuestionList.get(mCurrentPosition);
             refreshInfo(mNextObj);
         }
     }
@@ -265,7 +265,14 @@ public class EditTestActivity extends BaseActivity {
             }
             ToastUtil.toast("删除成功");
         } else {
-            // TODO go back to up activity;
+            OnClickListener sureListener = new OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    finish();
+                }
+            };
+            DialogUtil.showDialog(this, "离开", "确认放弃此次编辑吗？", "确定", sureListener, "取消", null);
         }
     }
 
@@ -313,6 +320,10 @@ public class EditTestActivity extends BaseActivity {
             nextButton.setText("下一题");
             addButton.setVisibility(View.INVISIBLE);
         }
+    }
+
+    private void completeEdit() {
+        ToastUtil.toast("need for speed!!!");
     }
 
 }
