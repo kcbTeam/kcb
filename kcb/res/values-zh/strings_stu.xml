@@ -4,7 +4,7 @@
     <!-- Commom Start -->
     <string name="cancel">取消</string>
     <string name="confirm">确定</string>
-    <string name="exit">退出</string>
+    <string name="destroy">注销</string>
     <!-- Commom End -->
 
 
@@ -46,6 +46,5 @@
     <string name="statistics">Y老师一共用课程宝签到10次，其中你签到成功8次。到课率为80%。</string>
     <string name="piechart">饼图，用来直观表现该学生的到课率</string>
     <!-- CheckInResultActivity End -->
-
 
 </resources>

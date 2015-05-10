@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.kcb.common.base.BaseFragment;
-import com.kcb.common.listener.CustomOnClickListener;
+import com.kcb.common.listener.DelayClickListener;
 import com.kcb.library.view.PaperButton;
 import com.kcb.student.activity.TestActivity;
 import com.kcbTeam.R;
@@ -48,8 +48,8 @@ public class TestFragment extends BaseFragment {
     @Override
     protected void initData() {}
 
-    private CustomOnClickListener mClickListener = new CustomOnClickListener(
-            CustomOnClickListener.DELAY_PAPER_BUTTON) {
+    private DelayClickListener mClickListener = new DelayClickListener(
+            DelayClickListener.DELAY_PAPER_BUTTON) {
 
         @Override
         public void doClick(View v) {

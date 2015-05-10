@@ -1,13 +1,17 @@
 package com.kcb.student.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.view.View.OnClickListener;
 
+import com.kcb.common.application.KAccount;
 import com.kcb.common.base.BaseFragmentActivity;
 import com.kcb.common.util.DialogUtil;
 import com.kcb.common.util.ToastUtil;
@@ -44,18 +48,15 @@ public class HomeActivity extends BaseFragmentActivity {
     protected void initView() {
         exitButton = (ButtonFlat) findViewById(R.id.button_exit);
         exitButton.setOnClickListener(this);
-        exitButton.setRippleSpeed(6f);
         checkInButton = (ButtonFlat) findViewById(R.id.button_checkin);
         checkInButton.setOnClickListener(this);
-        checkInButton.setRippleSpeed(18f);
         testButton = (ButtonFlat) findViewById(R.id.button_test);
         testButton.setOnClickListener(this);
-        testButton.setRippleSpeed(18f);
 
         mFragmentManager = getSupportFragmentManager();
 
         mFragments = new Fragment[2];
-        mFragments[INDEX_CHECKIN] = mFragmentManager.findFragmentById(R.id.fragment_sign);
+        mFragments[INDEX_CHECKIN] = mFragmentManager.findFragmentById(R.id.fragment_checkin);
         mFragments[INDEX_TEST] = mFragmentManager.findFragmentById(R.id.fragment_test);
 
         showDefaultFragment();
@@ -70,26 +71,35 @@ public class HomeActivity extends BaseFragmentActivity {
 
     @Override
     public void onClick(View v) {
-        if (v == exitButton) {
-            DialogUtil.showDialog(this, "退出", "退出程序还是注销账号？注销账号后，下次进入程序需要重新登录。", "注销",
-                    new OnClickListener() {
+        switch (v.getId()) {
+            case R.id.button_exit:
+                DialogUtil.showDialog(this, "注销", "注销账号后，下次使用时需要重新登录。", "确定",
+                        new OnClickListener() {
 
-                        @Override
-                        public void onClick(View v) {
-                            ToastUtil.toast("click sure");
-                        }
-                    }, "退出", null);
-        } else {
-            FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
-            fragmentTransaction.hide(mFragments[INDEX_CHECKIN]).hide(mFragments[INDEX_TEST]);
-            if (v == checkInButton) {
-                setButtonTextColor(INDEX_CHECKIN);
-                fragmentTransaction.show(mFragments[INDEX_CHECKIN]).commit();
-            } else if (v == testButton) {
-                setButtonTextColor(INDEX_TEST);
-                fragmentTransaction.show(mFragments[INDEX_TEST]).commit();
-            }
+                            @Override
+                            public void onClick(View v) {
+                                KAccount.deleteAccount();
+                                LoginActivity.start(HomeActivity.this);
+                                finish();
+                            }
+                        }, "取消", null);
+                break;
+            case R.id.button_checkin:
+                switchFragment(INDEX_CHECKIN);
+                break;
+            case R.id.button_test:
+                switchFragment(INDEX_TEST);
+                break;
+            default:
+                break;
         }
+    }
+
+    private void switchFragment(int index) {
+        FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
+        fragmentTransaction.hide(mFragments[INDEX_CHECKIN]).hide(mFragments[INDEX_TEST]);
+        fragmentTransaction.show(mFragments[index]).commit();
+        setButtonTextColor(index);
     }
 
     private void setButtonTextColor(int index) {
@@ -101,5 +111,37 @@ public class HomeActivity extends BaseFragmentActivity {
         } else {
             testButton.setTextColor(resources.getColor(R.color.blue));
         }
+    }
+
+    private boolean hasClickBack = false;
+
+    @Override
+    public void onBackPressed() {
+        if (!hasClickBack) {
+            hasClickBack = true;
+            ToastUtil.toast(R.string.click_again_exit_app);
+            new Handler().postDelayed(new Runnable() {
+
+                @Override
+                public void run() {
+                    hasClickBack = false;
+                }
+            }, 2000);
+        } else {
+            System.exit(0);
+        }
+    }
+
+    /**
+     * 
+     * @title: start
+     * @description: start HomeActivity from StartActivity or LoginActivity
+     * @author: wanghang
+     * @date: 2015-5-10 上午11:27:53
+     * @param context
+     */
+    public static void start(Context context) {
+        Intent intent = new Intent(context, HomeActivity.class);
+        context.startActivity(intent);
     }
 }

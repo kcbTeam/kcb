@@ -7,11 +7,11 @@ import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.Window;
 import android.view.View.OnTouchListener;
+import android.view.Window;
 import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.view.animation.Animation.AnimationListener;
+import android.view.animation.AnimationUtils;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -25,7 +25,7 @@ import com.kcbTeam.kcblibrary.R;
  * @className: MaterialListDialog
  * @description:
  * @author: ljx
- * @date: 2015Äê5ÔÂ7ÈÕ ÏÂÎç10:27:09
+ * @date: 2015ï¿½ï¿½5ï¿½ï¿½7ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½10:27:09
  */
 
 public class MaterialListDialog extends android.app.Dialog {
@@ -125,11 +125,11 @@ public class MaterialListDialog extends android.app.Dialog {
     /**
      * step 2
      */
-    
+
     public void setAdapter(ListAdapter adapter) {
-    	messageListView.setAdapter(adapter);
-    } 
-    
+        messageListView.setAdapter(adapter);
+    }
+
     /**
      * step 3
      */

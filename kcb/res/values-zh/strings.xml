@@ -2,6 +2,7 @@
 <resources>
 
     <string name="app_name">课程宝</string>
+    <string name="click_again_exit_app">再按一次退出课程宝</string>
     <string name="exit">退出</string>
     <string name="back">返回</string>
     <string name="i_am_stu">我是学生</string>

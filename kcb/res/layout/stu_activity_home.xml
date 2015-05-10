@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:buttonflat="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/activity_background" >
@@ -15,10 +16,11 @@
         android:id="@+id/button_exit"
         style="@style/common_top_button"
         android:layout_alignParentRight="true"
-        android:text="@string/exit" />
+        android:text="@string/destroy"
+        buttonflat:rippleSpeed="6" />
 
     <fragment
-        android:id="@+id/fragment_sign"
+        android:id="@+id/fragment_checkin"
         android:name="com.kcb.student.fragment.CheckInFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -40,12 +42,14 @@
         <com.kcb.library.view.buttonflat.ButtonFlat
             android:id="@+id/button_checkin"
             style="@style/home_tab"
-            android:text="@string/signbtn" />
+            android:text="@string/signbtn"
+            buttonflat:rippleSpeed="18" />
 
         <com.kcb.library.view.buttonflat.ButtonFlat
             android:id="@+id/button_test"
             style="@style/home_tab"
-            android:text="@string/testbtn" />
+            android:text="@string/testbtn"
+            buttonflat:rippleSpeed="18" />
     </LinearLayout>
 
 </RelativeLayout>

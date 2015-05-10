@@ -33,7 +33,9 @@ public abstract class Button extends CustomView {
     public Button(Context context, AttributeSet attrs) {
         super(context, attrs);
         setDefaultProperties();
-        clickAfterRipple = attrs.getAttributeBooleanValue(MATERIALDESIGNXML, "animate", true);
+        clickAfterRipple =
+                attrs.getAttributeBooleanValue(MATERIALDESIGNXML, "clickAfterRipple", true);
+        rippleSpeed = attrs.getAttributeFloatValue(MATERIALDESIGNXML, "rippleSpeed", 12f);
         setAttributes(attrs);
         beforeBackground = backgroundColor;
         if (rippleColor == null) rippleColor = makePressColor();
@@ -167,10 +169,6 @@ public abstract class Button extends CustomView {
     }
 
     abstract public TextView getTextView();
-
-    public void setRippleSpeed(float rippleSpeed) {
-        this.rippleSpeed = rippleSpeed;
-    }
 
     public float getRippleSpeed() {
         return this.rippleSpeed;

@@ -4,16 +4,16 @@ import android.os.Handler;
 import android.view.View;
 import android.view.View.OnClickListener;
 
-public abstract class CustomOnClickListener implements OnClickListener {
+public abstract class DelayClickListener implements OnClickListener {
 
     public static final long DELAY_PAPER_BUTTON = 400;
 
     private long mLastClickTime = 0;
     private long mDelayTime = 0; // delay for show button click animation;
 
-    public CustomOnClickListener() {}
+    public DelayClickListener() {}
 
-    public CustomOnClickListener(long delayTime) {
+    public DelayClickListener(long delayTime) {
         mDelayTime = delayTime;
     }
 

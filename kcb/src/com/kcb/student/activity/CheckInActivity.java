@@ -1,6 +1,5 @@
 package com.kcb.student.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -8,6 +7,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.kcb.common.base.BaseActivity;
+import com.kcb.common.listener.DelayClickListener;
 import com.kcb.common.util.ToastUtil;
 import com.kcb.library.view.PaperButton;
 import com.kcb.student.adapter.CheckInRecycleAdapter;
@@ -49,7 +49,7 @@ public class CheckInActivity extends BaseActivity {
         num3TextView = (TextView) findViewById(R.id.textview_shownum3);
         num4TextView = (TextView) findViewById(R.id.textview_shownum4);
         finishButton = (PaperButton) findViewById(R.id.button_finish);
-        finishButton.setOnClickListener(this);
+        finishButton.setOnClickListener(mClickListener);
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
@@ -61,17 +61,19 @@ public class CheckInActivity extends BaseActivity {
     @Override
     protected void initData() {}
 
+    private DelayClickListener mClickListener = new DelayClickListener(
+            DelayClickListener.DELAY_PAPER_BUTTON) {
 
-    @Override
-    public void onClick(View v) {
-        String passwordString =
-                new String(num1TextView.getText().toString() + num2TextView.getText().toString()
-                        + num3TextView.getText().toString() + num4TextView.getText().toString());
-        ToastUtil.toast(passwordString);
-        Intent intent = new Intent(CheckInActivity.this, HomeActivity.class);
-        startActivity(intent);
-    }
-
+        @Override
+        public void doClick(View v) {
+            // TODO request server
+            String passwordString =
+                    new String(num1TextView.getText().toString()
+                            + num2TextView.getText().toString() + num3TextView.getText().toString()
+                            + num4TextView.getText().toString());
+            ToastUtil.toast(passwordString);
+        }
+    };
 
     private RecyclerItemClickListener mRecyclerItemClickListener = new RecyclerItemClickListener() {
 

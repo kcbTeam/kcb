@@ -1,12 +1,16 @@
 package com.kcb.teacher.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 
 import com.kcb.common.base.BaseFragmentActivity;
+import com.kcb.common.util.ToastUtil;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.teacher.fragment.CheckInFragment;
 import com.kcb.teacher.fragment.StuCentreFragment;
@@ -49,7 +53,6 @@ public class HomeActivity extends BaseFragmentActivity {
     protected void initView() {
         exitButton = (ButtonFlat) findViewById(R.id.button_exit);
         exitButton.setOnClickListener(this);
-        exitButton.setRippleSpeed(6f);
         checkInButton = (ButtonFlat) findViewById(R.id.button_checkin);
         checkInButton.setOnClickListener(this);
         testButton = (ButtonFlat) findViewById(R.id.button_test);
@@ -121,5 +124,37 @@ public class HomeActivity extends BaseFragmentActivity {
             default:
                 break;
         }
+    }
+
+    private boolean hasClickBack = false;
+
+    @Override
+    public void onBackPressed() {
+        if (!hasClickBack) {
+            hasClickBack = true;
+            ToastUtil.toast(R.string.click_again_exit_app);
+            new Handler().postDelayed(new Runnable() {
+
+                @Override
+                public void run() {
+                    hasClickBack = false;
+                }
+            }, 2000);
+        } else {
+            System.exit(0);
+        }
+    }
+
+    /**
+     * 
+     * @title: start
+     * @description: start HomeActivity from StartActivity or LoginActivity
+     * @author: wanghang
+     * @date: 2015-5-10 上午11:27:53
+     * @param context
+     */
+    public static void start(Context context) {
+        Intent intent = new Intent(context, HomeActivity.class);
+        context.startActivity(intent);
     }
 }

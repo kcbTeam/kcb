@@ -11,7 +11,7 @@ import android.widget.ImageView;
 
 import com.kcb.common.application.KAccount;
 import com.kcb.common.base.BaseActivity;
-import com.kcb.common.listener.CustomOnClickListener;
+import com.kcb.common.listener.DelayClickListener;
 import com.kcb.library.view.ColorAnimationView;
 import com.kcb.library.view.PaperButton;
 import com.kcb.student.activity.HomeActivity;
@@ -29,6 +29,7 @@ public class StartActivity extends BaseActivity {
 
     private ColorAnimationView colorAnimationView;
     private ViewPager viewPager;
+    private StartViewPagerAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,13 +39,11 @@ public class StartActivity extends BaseActivity {
             setContentView(R.layout.comm_activity_start);
             initView();
         } else {
-            Intent intent;
             if (KAccount.getAccountType() == KAccount.TYPE_STU) {
-                intent = new Intent(this, HomeActivity.class);
+                HomeActivity.start(this);
             } else {
-                intent = new Intent(this, com.kcb.teacher.activity.HomeActivity.class);
+                com.kcb.teacher.activity.HomeActivity.start(this);
             }
-            startActivity(intent);
             finish();
         }
     }
@@ -54,15 +53,15 @@ public class StartActivity extends BaseActivity {
         colorAnimationView = (ColorAnimationView) findViewById(R.id.color_animation_view);
         viewPager = (ViewPager) findViewById(R.id.viewpager);
 
-        StartViewPagerAdapter adapter = new StartViewPagerAdapter();
-        viewPager.setAdapter(adapter);
-        viewPager.setOffscreenPageLimit(adapter.getCount());
-        colorAnimationView.setmViewPager(viewPager, adapter.getCount(), new int[] {0xffffffff,
+        mAdapter = new StartViewPagerAdapter();
+        viewPager.setAdapter(mAdapter);
+        viewPager.setOffscreenPageLimit(mAdapter.getCount());
+        colorAnimationView.setmViewPager(viewPager, mAdapter.getCount(), new int[] {0xffffffff,
                 0xffffffff, 0xffffffff});
 
         Intent intent = getIntent();
         if (null != intent && intent.getAction() == INTENT_ACTION_RESTART) {
-            viewPager.setCurrentItem(adapter.getCount() - 1);
+            viewPager.setCurrentItem(mAdapter.getCount() - 1);
         }
     }
 
@@ -88,9 +87,9 @@ public class StartActivity extends BaseActivity {
                 PaperButton stuPaperButton = (PaperButton) view.findViewById(R.id.pagerbutton_stu);
                 PaperButton tchPaperButton = (PaperButton) view.findViewById(R.id.pagerbutton_tch);
                 stuPaperButton.setVisibility(View.VISIBLE);
-                stuPaperButton.setOnClickListener(mOnClickListener);
+                stuPaperButton.setOnClickListener(mClickListener);
                 tchPaperButton.setVisibility(View.VISIBLE);
-                tchPaperButton.setOnClickListener(mOnClickListener);
+                tchPaperButton.setOnClickListener(mClickListener);
             }
             container.addView(view);
             return view;
@@ -101,8 +100,8 @@ public class StartActivity extends BaseActivity {
             return arg0 == arg1;
         }
 
-        private CustomOnClickListener mOnClickListener = new CustomOnClickListener(
-                CustomOnClickListener.DELAY_PAPER_BUTTON) {
+        private DelayClickListener mClickListener = new DelayClickListener(
+                DelayClickListener.DELAY_PAPER_BUTTON) {
 
             @Override
             public void doClick(final View v) {

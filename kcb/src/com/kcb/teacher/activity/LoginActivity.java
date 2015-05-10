@@ -4,6 +4,7 @@ import org.json.JSONObject;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
 
@@ -15,7 +16,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.kcb.common.activity.StartActivity;
 import com.kcb.common.application.KAccount;
 import com.kcb.common.base.BaseActivity;
-import com.kcb.common.listener.CustomOnClickListener;
+import com.kcb.common.listener.DelayClickListener;
 import com.kcb.common.server.RequestUtil;
 import com.kcb.common.server.UrlUtil;
 import com.kcb.common.util.AnimationUtil;
@@ -60,8 +61,8 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void initData() {}
 
-    private CustomOnClickListener mClickListener = new CustomOnClickListener(
-            CustomOnClickListener.DELAY_PAPER_BUTTON) {
+    private DelayClickListener mClickListener = new DelayClickListener(
+            DelayClickListener.DELAY_PAPER_BUTTON) {
 
         @Override
         public void doClick(View v) {
@@ -75,10 +76,17 @@ public class LoginActivity extends BaseActivity {
                 AnimationUtil.shake(passwordEditText);
             } else {
                 loginProgressBar.setVisibility(View.VISIBLE);
+                new Handler().postDelayed(new Runnable() {
 
-                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                startActivity(intent);
-                finish();
+                    @Override
+                    public void run() {
+                        KAccount account = new KAccount(KAccount.TYPE_TCH, id);
+                        account.saveAccount();
+                        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                }, 1000);
 
                 // TODO request server
                 JsonObjectRequest request =
@@ -86,20 +94,12 @@ public class LoginActivity extends BaseActivity {
                                 "", new Listener<JSONObject>() {
 
                                     @Override
-                                    public void onResponse(JSONObject response) {
-                                        loginProgressBar.hide(LoginActivity.this);
-                                        KAccount account =
-                                                new KAccount(KAccount.TYPE_TCH, id, password);
-                                        account.saveAccount();
-                                        Intent intent =
-                                                new Intent(LoginActivity.this, HomeActivity.class);
-                                        startActivity(intent);
-                                    }
+                                    public void onResponse(JSONObject response) {}
                                 }, new ErrorListener() {
 
                                     @Override
                                     public void onErrorResponse(VolleyError error) {
-                                        loginProgressBar.hide(LoginActivity.this);
+                                        //loginProgressBar.hide(LoginActivity.this);
                                     }
                                 });
                 RequestUtil.getInstance().addToRequestQueue(request, TAG);
