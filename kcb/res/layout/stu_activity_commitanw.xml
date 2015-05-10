@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/textview_testname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/activity_header_shadow"
+        android:text="@string/textview_testname" />
+
+    <com.kcb.library.view.buttonflat.ButtonFlat
+        android:id="@+id/button_commit"
+        style="@style/common_top_button"
+        android:layout_alignParentRight="true"
+        android:text="@string/commit" />
+
+    <com.kcb.library.view.observablescrollview.ParallaxScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/textview_testname"
+        android:layout_marginTop="5dp"
+        app:parallexOffset=".3" >
+
+        <com.kcb.library.view.observablescrollview.ObservableScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <LinearLayout
+                android:id="@+id/scroll_view1"
+                android:layout_width="260dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="24dp"
+                android:paddingTop="24dp" >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"
+                    android:gravity="left"
+                    android:paddingLeft="24dp"
+                    android:paddingRight="24dp"
+                    android:paddingTop="24dp"
+                    android:text="Change Parallex Factor"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"
+                    android:padding="24dp"
+                    android:text="hello_world1"
+                    tools:ignore="NewApi" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:background="@android:color/white"
+                    android:padding="24dp"
+                    android:text="hello_world2"
+                    tools:ignore="NewApi" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:background="@android:color/white"
+                    android:padding="24dp"
+                    android:text="hello_world3"
+                    tools:ignore="NewApi" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:background="@android:color/white"
+                    android:padding="24dp"
+                    android:text="hello_world4"
+                    tools:ignore="NewApi" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:background="@android:color/white"
+                    android:padding="24dp"
+                    android:text="hello_world5"
+                    tools:ignore="NewApi" />
+            </LinearLayout>
+        </com.kcb.library.view.observablescrollview.ObservableScrollView>
+    </com.kcb.library.view.observablescrollview.ParallaxScrollView>
+
+</RelativeLayout>

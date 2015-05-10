@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.kcb.common.base.BaseActivity;
-import com.kcb.common.util.ToastUtil;
 import com.kcb.library.view.PaperButton;
 import com.kcb.student.adapter.CheckInRecycleAdapter;
 import com.kcb.student.adapter.CheckInRecycleAdapter.RecyclerItemClickListener;
@@ -66,8 +65,7 @@ public class CheckInActivity extends BaseActivity {
         String passwordString =
                 new String(num1TextView.getText().toString() + num2TextView.getText().toString()
                         + num3TextView.getText().toString() + num4TextView.getText().toString());
-        ToastUtil.toast(passwordString);
-        Intent intent=new Intent(CheckInActivity.this,HomeActivity.class);
+        Intent intent = new Intent(CheckInActivity.this, HomeActivity.class);
         startActivity(intent);
     }
 
@@ -75,13 +73,13 @@ public class CheckInActivity extends BaseActivity {
 
         @Override
         public void onItemClick(View view, int postion) {
-            if (postion == 9) { // clean all num
+            if (postion == 9) { // clean all number
                 num1TextView.setText("");
                 num2TextView.setText("");
                 num3TextView.setText("");
                 num4TextView.setText("");
                 currentInputIndex = 0;
-            } else if (postion == 11) { // clean last num
+            } else if (postion == 11) { // clean last number
                 switch (currentInputIndex) {
                     case 1:
                         num1TextView.setText("");
@@ -102,7 +100,7 @@ public class CheckInActivity extends BaseActivity {
                     currentInputIndex--;
                 else
                     currentInputIndex = 0;
-            } else { // input num
+            } else { // input number
                 if (postion == 10) {
                     postion = -1;
                 }

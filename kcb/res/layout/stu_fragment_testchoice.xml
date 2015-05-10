@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:materialdesign="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
@@ -7,16 +8,117 @@
         android:id="@+id/textview_choice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="5dp" />
+        android:layout_margin="5dp"
+        android:text="选择题"
+        android:textSize="25dp" />
 
-    <TextView
-        android:id="@+id/textview_choice_question"
+    <ScrollView
+        android:id="@+id/scrollview_choice_question"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_below="@id/textview_choice"
+        android:layout_margin="5dp"
+        android:scrollbars="none" >
+
+        <TextView
+            android:id="@+id/textview_choice_question"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="30dp" />
+    </ScrollView>
+
+    <RelativeLayout
+        android:id="@+id/relativelayout_one"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textview_choice"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginTop="5dp"/>
+        android:layout_below="@id/scrollview_choice_question"
+        android:layout_margin="5dp" >
+
+        <TextView
+            android:id="@+id/textview_choice_one"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="40dp"/>
+
+        <com.kcb.library.view.checkbox.CheckBox
+            android:id="@+id/checkbox_one"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_alignTop="@id/textview_choice_one"
+            android:layout_alignParentRight="true"
+            android:background="#1E88E5"
+            android:gravity="center" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativelayout_two"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/relativelayout_one"
+        android:layout_margin="5dp" >
+
+        <TextView
+            android:id="@+id/textview_choice_two"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="40dp"
+           />
+
+        <com.kcb.library.view.checkbox.CheckBox
+            android:id="@+id/checkbox_two"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_alignTop="@id/textview_choice_two"
+            android:layout_alignParentRight="true"
+            android:background="#1E88E5"
+            android:gravity="center" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativelayout_three"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/relativelayout_two"
+        android:layout_margin="5dp" >
+
+        <TextView
+            android:id="@+id/textview_choice_three"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="40dp"
+             />
+
+        <com.kcb.library.view.checkbox.CheckBox
+            android:id="@+id/checkbox_three"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_alignTop="@id/textview_choice_three"
+            android:layout_alignParentRight="true"
+            android:background="#1E88E5"
+            android:gravity="center" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativelayout_four"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/relativelayout_three"
+        android:layout_margin="5dp" >
+
+        <TextView
+            android:id="@+id/textview_choice_four"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="40dp" />
+
+        <com.kcb.library.view.checkbox.CheckBox
+            android:id="@+id/checkbox_four"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@id/textview_choice_four"
+            android:background="#1E88E5"
+            android:gravity="center" />
+    </RelativeLayout>
 
 </RelativeLayout>

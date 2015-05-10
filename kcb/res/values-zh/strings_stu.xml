@@ -46,4 +46,10 @@
     <string name="piechart">饼图，用来直观表现该学生的到课率</string>
     <!-- CheckInResultActivity End -->
 
+
+    <!-- CommitAnwActivity Start -->
+    <string name="textview_testname">测试名称</string>
+    <string name="commit">提交</string>
+    <!-- CommitAnwActivity End -->
+
 </resources>

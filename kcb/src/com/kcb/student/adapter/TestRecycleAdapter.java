@@ -31,6 +31,7 @@ public class TestRecycleAdapter extends RecyclerView.Adapter<TestRecycleAdapter.
         View view =
                 LayoutInflater.from(viewGroup.getContext()).inflate(
                         R.layout.stu_view_test_recycler, null);
+        
         TestViewHolder viewHolder = new TestViewHolder(view);
         return viewHolder;
     }
@@ -41,7 +42,8 @@ public class TestRecycleAdapter extends RecyclerView.Adapter<TestRecycleAdapter.
         public TestViewHolder(View v) {
             super(v);
             textView = (TextView) v.findViewById(R.id.viewblank);
-        }
+            textView.setBackgroundResource(R.drawable.stu_checkin_textview);
+;        }
     }
 
     @Override
