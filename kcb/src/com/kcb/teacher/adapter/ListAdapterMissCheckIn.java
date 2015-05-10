@@ -23,6 +23,7 @@ public class ListAdapterMissCheckIn extends BaseAdapter {
 
     private List<StudentInfo> mList;
     private Context mContext;
+    private final String FORMAT_CHECKIN_DETAIL = "%1$d/%2$d";
 
     public ListAdapterMissCheckIn(Context context, List<StudentInfo> list) {
         mContext = context;
@@ -49,11 +50,14 @@ public class ListAdapterMissCheckIn extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = View.inflate(mContext, R.layout.tch_listitem_misscheckin, null);
         TextView studentName = (TextView) view.findViewById(R.id.textview_studentname);
-        studentName.setText(mList.get(position).getStudentID()
-                + mList.get(position).getStudentName());
+        studentName.setText(mList.get(position).getStudentID());
+
         TextView studentId = (TextView) view.findViewById(R.id.textview_studentid);
-        studentId.setText(String.valueOf(mList.get(position).getMissTimes()) + '/'
-                + String.valueOf(mList.get(position).getCheckInTimes()));
+        studentId.setText(mList.get(position).getStudentName());
+
+        TextView checkinDetail = (TextView) view.findViewById(R.id.textview_checkin_detail);
+        checkinDetail.setText(String.format(FORMAT_CHECKIN_DETAIL, mList.get(position)
+                .getMissTimes(), mList.get(position).getCheckInTimes()));
         return view;
     }
 }

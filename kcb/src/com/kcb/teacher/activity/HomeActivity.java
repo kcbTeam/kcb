@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.FragmentManager;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -42,7 +42,7 @@ public class HomeActivity extends BaseFragmentActivity {
     private TestFragment mTestFragment;
     private StuCentreFragment mStuCentreFragment;
 
-    private FragmentManager mFragmentManager;
+    private Fragment mCurrentFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,8 +63,6 @@ public class HomeActivity extends BaseFragmentActivity {
         stuCenterButton = (ButtonFlat) findViewById(R.id.button_stucenter);
         stuCenterButton.setOnClickListener(this);
 
-        mFragmentManager = getSupportFragmentManager();
-
         setDefaultFragment();
     }
 
@@ -72,12 +70,12 @@ public class HomeActivity extends BaseFragmentActivity {
     protected void initData() {}
 
     private void setDefaultFragment() {
+        mCurrentFragment = new CheckInFragment();
         onClick(checkInButton);
     }
 
     @Override
     public void onClick(View v) {
-        FragmentTransaction mFragmentTransaction = mFragmentManager.beginTransaction();
         switch (v.getId()) {
             case R.id.button_exit:
                 DialogUtil.showNormalDialog(this, R.string.destroy, R.string.destroy_tip,
@@ -96,26 +94,38 @@ public class HomeActivity extends BaseFragmentActivity {
                 if (null == mCheckInFragment) {
                     mCheckInFragment = new CheckInFragment();
                 }
-                mFragmentTransaction.replace(R.id.fragment_content, mCheckInFragment);
+                switchContent(mCheckInFragment);
                 break;
             case R.id.button_test:
                 setButtonTextColor(INDEX_TEST);
                 if (null == mTestFragment) {
                     mTestFragment = new TestFragment();
                 }
-                mFragmentTransaction.replace(R.id.fragment_content, mTestFragment);
+                switchContent(mTestFragment);
                 break;
             case R.id.button_stucenter:
                 setButtonTextColor(INDEX_STUCENTER);
                 if (null == mStuCentreFragment) {
                     mStuCentreFragment = new StuCentreFragment();
                 }
-                mFragmentTransaction.replace(R.id.fragment_content, mStuCentreFragment);
+                switchContent(mStuCentreFragment);
                 break;
             default:
                 break;
         }
-        mFragmentTransaction.commit();
+    }
+
+    private void switchContent(Fragment nextFragment) {
+        if (mCurrentFragment != nextFragment) {
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            if (!nextFragment.isAdded()) {
+                transaction.hide(mCurrentFragment).add(R.id.fragment_content, nextFragment)
+                        .commit();
+            } else {
+                transaction.hide(mCurrentFragment).show(nextFragment).commit();
+            }
+            mCurrentFragment = nextFragment;
+        }
     }
 
     private void setButtonTextColor(int index) {

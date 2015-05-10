@@ -111,7 +111,9 @@ public class TestActivity extends BaseFragmentActivity {
                                     new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
-                                            Intent intent=new Intent(TestActivity.this,SubmitActivity.class);
+                                            Intent intent =
+                                                    new Intent(TestActivity.this,
+                                                            SubmitActivity.class);
                                             startActivity(intent);
                                             dialog.cancel();
                                             finish();

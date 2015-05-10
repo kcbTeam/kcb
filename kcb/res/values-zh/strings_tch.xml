@@ -46,6 +46,7 @@
     <string name="checkin_missed_hint">以下为没有到课学生名单</string>
     <string name="stu_info">学生信息</string>
     <string name="checkin_detail">签到详情</string>
+    <string name="checkinRate_hint">本次到课率为%1$d%%</string>
     <!-- checkin details activity start -->
 
 
@@ -68,6 +69,16 @@
     <string name="option_C">C</string>
     <string name="option_D">D</string>
     <string name="select_hint">在正确的选项后面打钩</string>
+    <string name="leave">离开</string>
+    <string name="sureLeave">确认放弃此次编辑吗？</string>
+    <string name="format_edit_save">第%1$d题已保存</string>
+    <string name="format_edit_empty_hint">第%1$d题有空哦</string>
+    <string name="dialog_title_question">输入题目</string>
+    <string name="dialog_title_optionA">输入A选项</string>
+    <string name="dialog_title_optionB">输入B选项</string>
+    <string name="dialog_title_optionC">输入C选项</string>
+    <string name="dialog_title_optionD">输入D选项</string>
+    <string name="delete_success">删除成功</string>
     <!-- EditTestActivity End -->
 
     <string name="signclass">课堂签到</string>

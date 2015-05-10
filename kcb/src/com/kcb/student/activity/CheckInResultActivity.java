@@ -88,7 +88,7 @@ public class CheckInResultActivity extends BaseActivity implements OnChartValueS
 
         Legend mLegend = pieChart.getLegend();
         mLegend.setEnabled(false);
-        
+
         pieChart.animateXY(1800, 1800);
     }
 

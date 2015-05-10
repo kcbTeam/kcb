@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -17,12 +16,12 @@ import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
-import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
-import com.github.mikephil.charting.utils.Highlight;
 import com.github.mikephil.charting.utils.PercentFormatter;
 import com.kcb.common.base.BaseFragmentActivity;
+import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.teacher.adapter.ListAdapterMissCheckIn;
+import com.kcb.teacher.model.CheckInRecordInfo;
 import com.kcb.teacher.model.StudentInfo;
 import com.kcbTeam.R;
 
@@ -33,21 +32,18 @@ import com.kcbTeam.R;
  * @author: ZQJ
  * @date: 2015年4月27日 下午11:14:41
  */
-public class CheckInDetailsActivity extends BaseFragmentActivity
-        implements
-            OnChartValueSelectedListener,
-            OnClickListener {
+public class CheckInDetailsActivity extends BaseFragmentActivity implements OnClickListener {
 
     private PieChart mChart;
     private TextView hintTextView;
-    private Button backButton;
+    private ButtonFlat backButton;
     private ListView missCheckInListView;
 
-    private String mHintFormat = "本次到课率为%d%%";
-    private float mCheckInRate = 0.7f;
+    private CheckInRecordInfo mCurrentCheckInRecordInfo;
+    private float mCheckInRate;
 
     private String[] mInfoStrings = new String[] {"已签", "未签"};
-    private List<StudentInfo> mList;
+    private List<StudentInfo> mMissedCheckInStusList;
     private ListAdapterMissCheckIn mAdapter;
 
     private final int mDealy = 150;
@@ -65,8 +61,9 @@ public class CheckInDetailsActivity extends BaseFragmentActivity
     protected void initView() {
         initPieChart();
         hintTextView = (TextView) findViewById(R.id.textview_attendance_rate_hint);
-        hintTextView.setText(String.format(mHintFormat, (int) (100 * mCheckInRate)));
-        backButton = (Button) findViewById(R.id.button_back);
+        hintTextView.setText(String.format(getResources().getString(R.string.checkinRate_hint),
+                (int) (100 * mCheckInRate)));
+        backButton = (ButtonFlat) findViewById(R.id.button_back);
         backButton.setOnClickListener(new OnClickListener() {
 
             @Override
@@ -75,29 +72,27 @@ public class CheckInDetailsActivity extends BaseFragmentActivity
             }
         });
         missCheckInListView = (ListView) findViewById(R.id.listview_not_ckeckin_stu);
-        mAdapter = new ListAdapterMissCheckIn(this, mList);
+        mAdapter = new ListAdapterMissCheckIn(this, mMissedCheckInStusList);
         missCheckInListView.setAdapter(mAdapter);
     }
 
     @Override
     protected void initData() {
-        mList = new ArrayList<StudentInfo>();
-        mList.clear();
-        mList.add(new StudentInfo("123", "123456", 1, 0));
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        // TODO need anim?
-        overridePendingTransition(R.anim.move_left_in_activity, R.anim.move_right_out_activity);
-    }
-
-    @Override
-    public void onNothingSelected() {}
-
-    @Override
-    public void onValueSelected(Entry arg0, int arg1, Highlight arg2) {
+        String flagString = getIntent().getStringExtra("ACTIVITY_TAG");
+        mMissedCheckInStusList = new ArrayList<StudentInfo>();
+        if (flagString.equals(CheckInResultActivity.TAG)) {
+            mCurrentCheckInRecordInfo =
+                    (CheckInRecordInfo) getIntent().getSerializableExtra(
+                            CheckInResultActivity.CURRENT_CHECKIN_RECORD_KEY);
+            mMissedCheckInStusList = mCurrentCheckInRecordInfo.getMissedCheckInStus();
+            mCheckInRate = mCurrentCheckInRecordInfo.getSignRate();
+        } else if (flagString.equals(CheckInActivity.TAG)) {
+            mCurrentCheckInRecordInfo =
+                    (CheckInRecordInfo) getIntent().getSerializableExtra(
+                            CheckInActivity.CURRENT_CHECKIN_RECORD_KEY);
+            mMissedCheckInStusList = mCurrentCheckInRecordInfo.getMissedCheckInStus();
+            mCheckInRate = mCurrentCheckInRecordInfo.getSignRate();
+        }
 
     }
 
@@ -145,15 +140,12 @@ public class CheckInDetailsActivity extends BaseFragmentActivity
 
     private void setDefaultPieChartStyle(PieChart pieChart) {
         pieChart.setUsePercentValues(true);
+        pieChart.setClickable(false);
+        pieChart.setTouchEnabled(false);
         pieChart.setDescription("");
-        pieChart.setDrawHoleEnabled(true);
-        pieChart.setHoleColorTransparent(true);
-        pieChart.setTransparentCircleColor(Color.WHITE);
-        pieChart.setHoleRadius(1f);
-        pieChart.setTransparentCircleRadius(2f);
-        pieChart.setHoleColor(Color.WHITE);
+        pieChart.setDrawHoleEnabled(false);
         pieChart.setRotationAngle(0);
-        pieChart.setRotationEnabled(true);
+        pieChart.setRotationEnabled(false);
         pieChart.setVisibility(View.INVISIBLE);
         Legend l = pieChart.getLegend();
         l.setEnabled(false);

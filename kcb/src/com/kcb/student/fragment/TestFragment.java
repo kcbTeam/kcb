@@ -59,7 +59,7 @@ public class TestFragment extends BaseFragment {
                 intent = new Intent(getActivity(), TestActivity.class);
                 startActivity(intent);
             } else if (v == lookTestButton) {
-                intent=new Intent(getActivity(),TestResultActivity.class);
+                intent = new Intent(getActivity(), TestResultActivity.class);
                 startActivity(intent);
             }
         }
