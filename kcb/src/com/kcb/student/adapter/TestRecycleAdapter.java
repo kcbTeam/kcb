@@ -1,7 +1,5 @@
 package com.kcb.student.adapter;
 
-import java.util.List;
-
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,16 +11,23 @@ import com.kcbTeam.R;
 
 public class TestRecycleAdapter extends RecyclerView.Adapter<TestRecycleAdapter.TestViewHolder> {
 
-    public List<String> mItems;
+    private int mSize;
+    private int mCurrentIndex;
 
-    public TestRecycleAdapter(List<String> items) {
+    public TestRecycleAdapter(int size) {
         super();
-        mItems = items;
+        mSize = size;
+        mCurrentIndex = 0;
     }
-
+    
     @Override
     public int getItemCount() {
-        return mItems.size();
+        return mSize;
+    }
+
+    public void setCurrentIndex(int index) {
+        mCurrentIndex = index;
+        notifyDataSetChanged();
     }
 
     @Override
@@ -34,17 +39,29 @@ public class TestRecycleAdapter extends RecyclerView.Adapter<TestRecycleAdapter.
         return viewHolder;
     }
 
-    public class TestViewHolder extends RecyclerView.ViewHolder {
-        private TextView textView;
-
-        public TestViewHolder(View v) {
-            super(v);
-            textView = (TextView) v.findViewById(R.id.viewblank);
+    @Override
+    public void onBindViewHolder(TestViewHolder viewHolder, int position) {
+        if (position == mCurrentIndex) {
+            viewHolder.setViewSelectColor();
+        } else {
+            viewHolder.setViewNormalColor();
         }
     }
 
-    @Override
-    public void onBindViewHolder(TestViewHolder viewHolder, int position) {
-        viewHolder.textView.setBackgroundColor(Color.parseColor(mItems.get(position)));
+    public class TestViewHolder extends RecyclerView.ViewHolder {
+        private TextView view;
+
+        public TestViewHolder(View v) {
+            super(v);
+            view = (TextView)v.findViewById(R.id.viewblank);
+        }
+
+        public void setViewSelectColor() {
+            view.setBackgroundColor(Color.parseColor("#00cc00"));
+        }
+
+        public void setViewNormalColor() {
+            view.setBackgroundColor(Color.parseColor("#ffffff"));
+        }
     }
 }

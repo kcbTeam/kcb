@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.kcb.common.base.BaseFragment;
-import com.kcb.common.listener.CustomOnClickListener;
+import com.kcb.common.listener.DelayClickListener;
 import com.kcb.library.view.PaperButton;
 import com.kcb.student.activity.CheckInActivity;
 import com.kcb.student.activity.CheckInResultActivity;
@@ -49,19 +49,18 @@ public class CheckInFragment extends BaseFragment {
     @Override
     protected void initData() {}
 
-    private CustomOnClickListener mClickListener = new CustomOnClickListener(
-            CustomOnClickListener.DELAY_PAPER_BUTTON) {
+    private DelayClickListener mClickListener = new DelayClickListener(
+            DelayClickListener.DELAY_PAPER_BUTTON) {
 
         @Override
         public void doClick(View v) {
-            Intent intent;
+            Intent intent = null;
             if (v == startCheckInButton) {
                 intent = new Intent(getActivity(), CheckInActivity.class);
-                startActivity(intent);
             } else if (v == lookCheckInButton) {
                 intent = new Intent(getActivity(), CheckInResultActivity.class);
-                startActivity(intent);
             }
+            startActivity(intent);
         }
     };
 }

@@ -36,18 +36,11 @@
         android:layout_below="@id/layout"
         android:singleLine="false"
         android:text="@string/statistics" />
-    
+
     <com.github.mikephil.charting.charts.PieChart
         android:id="@+id/chart"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/view1" />
-    
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:gravity="center"
-        android:text="@string/piechart" />
 
 </RelativeLayout>

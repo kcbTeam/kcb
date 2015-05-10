@@ -127,6 +127,9 @@ public class MaterialDialog extends android.app.Dialog {
      * step 3
      */
     public void setSureButton(@NonNull int resid, final View.OnClickListener listener) {
+        if (resid < 0) {
+            return;
+        }
         setSureButton(mContext.getResources().getString(resid), listener);
     }
 

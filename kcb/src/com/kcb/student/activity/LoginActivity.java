@@ -2,8 +2,10 @@ package com.kcb.student.activity;
 
 import org.json.JSONObject;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
 
@@ -15,7 +17,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.kcb.common.activity.StartActivity;
 import com.kcb.common.application.KAccount;
 import com.kcb.common.base.BaseActivity;
-import com.kcb.common.listener.CustomOnClickListener;
+import com.kcb.common.listener.DelayClickListener;
 import com.kcb.common.server.RequestUtil;
 import com.kcb.common.server.UrlUtil;
 import com.kcb.common.util.AnimationUtil;
@@ -60,8 +62,8 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void initData() {}
 
-    private CustomOnClickListener mClickListener = new CustomOnClickListener(
-            CustomOnClickListener.DELAY_PAPER_BUTTON) {
+    private DelayClickListener mClickListener = new DelayClickListener(
+            DelayClickListener.DELAY_PAPER_BUTTON) {
 
         @Override
         public void doClick(View v) {
@@ -74,10 +76,18 @@ public class LoginActivity extends BaseActivity {
                 passwordEditText.requestFocus();
                 AnimationUtil.shake(passwordEditText);
             } else {
+                // test
                 loginProgressBar.setVisibility(View.VISIBLE);
-                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                startActivity(intent);
-                finish();
+                new Handler().postDelayed(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        KAccount account = new KAccount(KAccount.TYPE_STU, id);
+                        account.saveAccount();
+                        HomeActivity.start(LoginActivity.this);
+                        finish();
+                    }
+                }, 1000);
 
                 // TODO request server
                 JsonObjectRequest request =
@@ -85,20 +95,12 @@ public class LoginActivity extends BaseActivity {
                                 "", new Listener<JSONObject>() {
 
                                     @Override
-                                    public void onResponse(JSONObject response) {
-                                        loginProgressBar.hide(LoginActivity.this);
-                                        KAccount account =
-                                                new KAccount(KAccount.TYPE_STU, id, password);
-                                        account.saveAccount();
-                                        Intent intent =
-                                                new Intent(LoginActivity.this, HomeActivity.class);
-                                        startActivity(intent);
-                                    }
+                                    public void onResponse(JSONObject response) {}
                                 }, new ErrorListener() {
 
                                     @Override
                                     public void onErrorResponse(VolleyError error) {
-                                        loginProgressBar.hide(LoginActivity.this);
+                                        // loginProgressBar.hide(LoginActivity.this);
                                     }
                                 });
                 RequestUtil.getInstance().addToRequestQueue(request, TAG);
@@ -108,13 +110,26 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        finish();
         StartActivity.restart(this);
+        finish();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         RequestUtil.getInstance().cancelPendingRequests(TAG);
+    }
+
+    /**
+     * 
+     * @title: start
+     * @description: if delete account in HomeActivity, need show this Activity;
+     * @author: wanghang
+     * @date: 2015-5-10 上午11:13:50
+     * @param context
+     */
+    public static void start(Context context) {
+        Intent intent = new Intent(context, LoginActivity.class);
+        context.startActivity(intent);
     }
 }

@@ -22,7 +22,7 @@ public class CheckInRecycleAdapter
 
     public CheckInRecycleAdapter() {
         super();
-        mItems = new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "清除", "0", "×"};
+        mItems = new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "清除", "0", "<--"};
     }
 
     public void setRecyclerItemClickListener(RecyclerItemClickListener listener) {

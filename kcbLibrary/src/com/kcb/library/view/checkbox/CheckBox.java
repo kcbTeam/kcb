@@ -141,7 +141,7 @@ public class CheckBox extends CustomView {
 
     /**
      * Make a dark color to press effect
-     *
+     * 
      * @return
      */
     protected int makePressColor() {

@@ -16,7 +16,8 @@
         style="@style/common_top_longtext_button"
         android:layout_alignParentRight="true"
         android:layout_alignTop="@id/textview_label"
-        android:text="@string/giveupsign" />
+        android:text="@string/giveupsign"
+        widget:rippleSpeed="6" />
 
     <TextView
         android:id="@+id/textview_step1"
@@ -40,7 +41,7 @@
         android:layout_below="@id/button_getnum"
         android:layout_centerHorizontal="true"
         android:text="@string/tipforteacher1" />
-    
+
     <LinearLayout
         android:id="@+id/linearlayout_showsignnum"
         android:layout_width="match_parent"
@@ -67,8 +68,7 @@
             android:id="@+id/textview_showsignnum4"
             style="@style/shownum_textview" />
     </LinearLayout>
-    
-    
+
     <TextView
         android:id="@+id/textview_step2"
         android:layout_width="wrap_content"
@@ -84,34 +84,32 @@
         android:layout_centerHorizontal="true"
         android:visibility="visible"
         widget:paper_text="@string/startsign" />
-    
+
     <com.kcb.library.view.PaperButton
         android:id="@+id/button_stop"
         style="@style/common_button"
         android:layout_alignTop="@id/textview_step2"
         android:layout_centerHorizontal="true"
-        android:visibility="invisible"
         android:clickable="false"
         android:longClickable="false"
+        android:visibility="invisible"
         widget:paper_text="@string/stopsign" />
 
-     <ProgressBar   
-         android:id="@+id/ProgressBar"    
-         style="@android:style/Widget.ProgressBar.Horizontal"
-         android:layout_below="@id/button_stop"
-         android:layout_width="fill_parent"   
-         android:layout_height="wrap_content" 
-         android:layout_alignRight="@id/button_stop" 
-         android:layout_alignLeft="@id/button_stop"
-         android:visibility="invisible"  />  
-    
-     <TextView
+    <ProgressBar
+        android:id="@+id/ProgressBar"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/button_stop"
+        android:layout_alignRight="@id/button_stop"
+        android:layout_below="@id/button_stop"
+        android:visibility="invisible" />
+
+    <TextView
         android:id="@+id/textview_timetip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@id/ProgressBar" />
-     
-     
 
     <TextView
         android:id="@+id/textview_step3"

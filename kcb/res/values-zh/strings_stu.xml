@@ -4,7 +4,7 @@
     <!-- Commom Start -->
     <string name="cancel">取消</string>
     <string name="confirm">确定</string>
-    <string name="exit">退出</string>
+    <string name="destroy">注销</string>
     <!-- Commom End -->
 
 
@@ -22,7 +22,7 @@
     <string name="signbtn">课堂签到</string>
     <string name="testbtn">课堂小测试</string>
     <string name="start">开始签到  </string>
-    <string name="check">查看我的签到</string>
+    <string name="check">查看签到结果</string>
     <string name="start1">开始答题</string>
     <string name="check1">查看测试结果</string>
     <!-- HomePageActivity End -->
@@ -44,8 +44,6 @@
     <!-- CheckInResultActivity Start -->
     <string name="signresult">查看我的签到</string>
     <string name="statistics">Y老师一共用课程宝签到10次，其中你签到成功8次。到课率为80%。</string>
-    <string name="piechart">饼图，用来直观表现该学生的到课率</string>
     <!-- CheckInResultActivity End -->
-
 
 </resources>
