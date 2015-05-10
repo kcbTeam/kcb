@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/activity_background">
+    <TextView
+        android:id="@+id/testname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/testsubmit" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/testname"
+        android:layout_below="@id/testname"
+        android:text="@string/remainingtime" />
+    <com.kcb.library.view.buttonflat.ButtonFlat
+        android:id="@+id/button_submit"
+        style="@style/common_top_button"
+        android:layout_alignParentRight="true"
+        android:text="@string/submit" />
+    <com.kcb.library.view.parallaxview.ParallaxScrollView
+        android:id="@+id/scrollview_submit"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/button_submit">
+        <RelativeLayout
+            android:id="@+id/layout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/green">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:hint="@string/num1" />
+            <com.kcb.library.view.buttonflat.ButtonFlat
+                android:id="@+id/button_modify1"
+                style="@style/common_top_button"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="140dp"
+                android:text="@string/modify" />
+         </RelativeLayout>
+         <RelativeLayout
+            android:id="@+id/layout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/layout1"
+            android:layout_marginTop="10dp"
+            android:background="@color/red">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:hint="@string/num2" />
+            <com.kcb.library.view.buttonflat.ButtonFlat
+                android:id="@+id/button_modify2"
+                style="@style/common_top_button"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="140dp"
+                android:text="@string/modify" />
+         </RelativeLayout>
+         <RelativeLayout
+            android:id="@+id/layout3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/layout2"
+            android:layout_marginTop="10dp"
+            android:background="@color/blue">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:hint="@string/num3" />
+            <com.kcb.library.view.buttonflat.ButtonFlat
+                android:id="@+id/button_modify3"
+                style="@style/common_top_button"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="140dp"
+                android:text="@string/modify" />
+         </RelativeLayout>
+     </com.kcb.library.view.parallaxview.ParallaxScrollView>
+</RelativeLayout>

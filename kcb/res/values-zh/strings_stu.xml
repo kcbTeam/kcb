@@ -45,5 +45,25 @@
     <string name="statistics">Y老师一共用课程宝签到10次，其中你签到成功8次。到课率为80%。</string>
     <string name="piechart">饼图，用来直观表现该学生的到课率</string>
     <!-- CheckInResultActivity End -->
+    
+    
+    <!-- SubmitActivity Start -->
+    <string name="testsubmit">课堂小测试---拉普拉斯变换</string>
+    <string name="remainingtime">离答题结束还有5分钟</string>
+    <string name="submit">提交！</string>
+    <string name="num1">选择题1</string>
+    <string name="num2">选择题2</string>
+    <string name="num3">选择题3</string>
+    <string name="modify">去修改</string>
+    <!-- SubmitActivity End -->
+    
+    
+    <!-- TestResultActivity Start -->
+    <string name="comeback">返回</string>
+    <string name="testresult">查看测试结果</string>
+    <string name="search">搜索关键字</string>
+    <string name="headertext">最新测试结果</string>
+    <string name="checktest">去查看</string>
+    <!-- TestResultActivity End --> 
 
 </resources>

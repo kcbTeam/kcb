@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <lint>
+    <issue id="InflateParams">
+        <ignore path="src/com/kcb/student/activity/TestResultActivity.java" />
+        <ignore path="src/com/kcb/student/activity/TestResultActivity.java" />
+    </issue>
     <issue id="SuspiciousImport">
         <ignore path="src/com/kcb/teacher/activity/SignActivity.java" />
     </issue>

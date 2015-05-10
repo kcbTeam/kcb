@@ -5,6 +5,7 @@ import java.util.List;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
@@ -120,8 +121,10 @@ public class TestActivity extends BaseFragmentActivity {
                                     new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
-                                            // TODO Submit data to database
+                                            Intent intent=new Intent(TestActivity.this,SubmitActivity.class);
+                                            startActivity(intent);
                                             dialog.cancel();
+                                            finish();
                                         }
                                     }).create().show();
                 }
@@ -130,7 +133,6 @@ public class TestActivity extends BaseFragmentActivity {
             default:
                 break;
         }
-
     }
 
     protected class fiveCountDownTimer extends CountDownTimer {

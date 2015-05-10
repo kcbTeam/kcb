@@ -7,12 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.kcb.common.activity.StartActivity;
 import com.kcb.common.base.BaseFragment;
 import com.kcb.common.listener.CustomOnClickListener;
 import com.kcb.library.view.PaperButton;
-import com.kcb.student.activity.CheckInResultActivity;
 import com.kcb.student.activity.TestActivity;
+import com.kcb.student.activity.TestResultActivity;
 import com.kcbTeam.R;
 
 /**
@@ -60,6 +59,8 @@ public class TestFragment extends BaseFragment {
                 intent = new Intent(getActivity(), TestActivity.class);
                 startActivity(intent);
             } else if (v == lookTestButton) {
+                intent=new Intent(getActivity(),TestResultActivity.class);
+                startActivity(intent);
                 
             }
         }
