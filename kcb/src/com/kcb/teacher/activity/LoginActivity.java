@@ -33,6 +33,8 @@ import com.kcbTeam.R;
  */
 public class LoginActivity extends BaseActivity {
 
+    private static final String TAG = LoginActivity.class.getName();
+
     private FloatingEditText idEditText;
     private FloatingEditText passwordEditText;
     private PaperButton loginButton;
@@ -100,7 +102,7 @@ public class LoginActivity extends BaseActivity {
                                         loginProgressBar.hide(LoginActivity.this);
                                     }
                                 });
-                RequestUtil.getInstance().addToRequestQueue(request);
+                RequestUtil.getInstance().addToRequestQueue(request, TAG);
             }
         }
     };
@@ -109,5 +111,11 @@ public class LoginActivity extends BaseActivity {
     public void onBackPressed() {
         finish();
         StartActivity.restart(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        RequestUtil.getInstance().cancelPendingRequests(TAG);
     }
 }

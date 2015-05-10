@@ -47,5 +47,4 @@ public class TestRecycleAdapter extends RecyclerView.Adapter<TestRecycleAdapter.
     public void onBindViewHolder(TestViewHolder viewHolder, int position) {
         viewHolder.textView.setBackgroundColor(Color.parseColor(mItems.get(position)));
     }
-
 }

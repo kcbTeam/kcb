@@ -29,5 +29,4 @@ public class TestShortAnwFragment extends BaseFragment {
 
     @Override
     protected void initData() {}
-
 }
