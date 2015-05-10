@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.kcb.common.base.BaseFragment;
+import com.kcb.common.listener.DelayClickListener;
 import com.kcb.common.util.DialogUtil;
 import com.kcb.common.util.ToastUtil;
 import com.kcb.library.view.PaperButton;
@@ -55,18 +56,22 @@ public class TestFragment extends BaseFragment {
         editButton = (PaperButton) view.findViewById(R.id.button_edit_test);
         testButton = (PaperButton) view.findViewById(R.id.button_begin_test);
         testresultButton = (PaperButton) view.findViewById(R.id.button_test_result);
-        editButton.setOnClickListener(this);
-        testButton.setOnClickListener(this);
-        testresultButton.setOnClickListener(this);
+        editButton.setOnClickListener(mClickListener);
+        testButton.setOnClickListener(mClickListener);
+        testresultButton.setOnClickListener(mClickListener);
         tipTextView = (TextView) view.findViewById(R.id.textview_tip);
 
     }
 
     @Override
     protected void initData() {}
+    
+    private DelayClickListener mClickListener = new DelayClickListener(
+            DelayClickListener.DELAY_PAPER_BUTTON) {
+    
 
     @Override
-    public void onClick(View v) {
+    public void doClick(View v) {
         // Intent intent;
         switch (v.getId()) {
             case R.id.button_edit_test:
@@ -119,4 +124,6 @@ public class TestFragment extends BaseFragment {
         }
     }
 
+  };
 }
+

@@ -72,12 +72,12 @@
 
     <string name="signclass">课堂签到</string>
     <string name="giveupsign">放弃签到</string>
-    <string name="giveup_sign_tip">放弃签到后，将返回上一界面。</string>
+    <string name="giveup_sign_tip">放弃签到后，将返回上一页面。</string>
     <string name="getnumber">获取签到数字</string>
     <string name="tipforteacher1">请告诉在场学生本次签到数字为：</string>
     <string name="startsign">开始签到</string>
     <string name="stopsign">停止签到</string>
-    <string name="stop_sign_tip">停止签到后，学生无法继续签到。</string>
+    <string name="stop_sign_tip">停止签到后，同学们将无法继续签到。</string>
     <string name="tipforteacher2">已经开始签到30秒</string>
     <string name="classrate">本次到课率为70%</string>
     <string name="classrate_look">>></string>
