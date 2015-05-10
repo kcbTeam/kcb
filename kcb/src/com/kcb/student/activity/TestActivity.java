@@ -120,7 +120,6 @@ public class TestActivity extends BaseFragmentActivity {
             default:
                 break;
         }
-
     }
 
     protected class fiveCountDownTimer extends CountDownTimer {
