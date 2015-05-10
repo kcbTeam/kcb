@@ -9,7 +9,6 @@ import android.view.View;
 
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
-import com.github.mikephil.charting.components.Legend.LegendPosition;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
@@ -69,6 +68,7 @@ public class CheckInResultActivity extends BaseActivity implements OnChartValueS
 
         pieChart.setDrawHoleEnabled(false);
         pieChart.setHoleColorTransparent(true);
+        pieChart.setTouchEnabled(false);
 
         if (pieChart.isDrawCenterTextEnabled()) {
             pieChart.setDrawCenterText(false);
@@ -77,7 +77,7 @@ public class CheckInResultActivity extends BaseActivity implements OnChartValueS
         }
 
         pieChart.setRotationAngle(0);
-        pieChart.setRotationEnabled(true);
+        pieChart.setRotationEnabled(false);
         pieChart.setOnChartValueSelectedListener(this);
 
         pieChart.setCenterText("MPAndroidChart\nby Philipp Jahoda");
@@ -87,10 +87,8 @@ public class CheckInResultActivity extends BaseActivity implements OnChartValueS
         pieChart.invalidate();
 
         Legend mLegend = pieChart.getLegend();
-        mLegend.setPosition(LegendPosition.RIGHT_OF_CHART);
-        mLegend.setXEntrySpace(7f);
-        mLegend.setYEntrySpace(5f);
-
+        mLegend.setEnabled(false);
+        
         pieChart.animateXY(1800, 1800);
     }
 

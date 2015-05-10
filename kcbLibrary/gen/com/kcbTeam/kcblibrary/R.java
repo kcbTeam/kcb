@@ -484,14 +484,19 @@ containing a value of this type.
         public static int sprite_check=0x7f020009;
     }
     public static final class id {
+        public static int background=0x7f0c000d;
+        public static int background_content=0x7f0c000e;
         public static int button_accept=0x7f0c0009;
         public static int button_cancel=0x7f0c000a;
+        public static int content=0x7f0c0010;
         public static int contentDialog=0x7f0c0005;
         public static int dialog_rootView=0x7f0c0004;
+        public static int foreground=0x7f0c000f;
         public static int listmessage=0x7f0c000b;
         public static int message=0x7f0c0008;
         public static int message_scrollView=0x7f0c0007;
-        public static int shape_bacground=0x7f0c000c;
+        public static int parallax_scroll_widget=0x7f0c000c;
+        public static int shape_bacground=0x7f0c0011;
         public static int spb_interpolator_accelerate=0x7f0c0000;
         public static int spb_interpolator_acceleratedecelerate=0x7f0c0001;
         public static int spb_interpolator_decelerate=0x7f0c0002;
@@ -505,6 +510,7 @@ containing a value of this type.
     public static final class layout {
         public static int material_dialog=0x7f030000;
         public static int material_list_dialog=0x7f030001;
+        public static int view_parallaxscroll=0x7f030002;
     }
     public static final class string {
         public static int app_name=0x7f090001;

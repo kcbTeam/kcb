@@ -45,5 +45,30 @@
     <string name="signresult">查看我的签到</string>
     <string name="statistics">Y老师一共用课程宝签到10次，其中你签到成功8次。到课率为80%。</string>
     <!-- CheckInResultActivity End -->
+    
+    
+    <!-- SubmitActivity Start -->
+    <string name="testsubmit">课堂小测试---拉普拉斯变换</string>
+    <string name="remainingtime">离答题结束还有5分钟</string>
+    <string name="submit">提交！</string>
+    <string name="num1">选择题1</string>
+    <string name="num2">选择题2</string>
+    <string name="num3">选择题3</string>
+    <string name="modify">去修改</string>
+    <string name="submittip">是否提交？</string>
+    <string name="reject">取消</string>
+    <string name="ok">确定</string>
+    <string name="askcontent">请问你是否确认提交本次测试内容？</string>
+    <string name="submitsuccess">提交成功</string>
+    <!-- SubmitActivity End -->
+    
+    
+    <!-- TestResultActivity Start -->
+    <string name="comeback">返回</string>
+    <string name="testresult">查看测试结果</string>
+    <string name="search">搜索关键字</string>
+    <string name="headertext">最新测试结果</string>
+    <string name="checktest">去查看</string>
+    <!-- TestResultActivity End -->
 
 </resources>
