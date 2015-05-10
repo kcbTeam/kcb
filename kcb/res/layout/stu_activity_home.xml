@@ -34,6 +34,7 @@
         android:layout_below="@id/button_exit" />
 
     <LinearLayout
+        android:id="@+id/buttonflats"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -51,5 +52,11 @@
             android:text="@string/testbtn"
             buttonflat:rippleSpeed="18" />
     </LinearLayout>
+    
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_above="@id/buttonflats"
+        android:background="@color/divider" />
 
 </RelativeLayout>
