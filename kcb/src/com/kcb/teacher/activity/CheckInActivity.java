@@ -1,5 +1,7 @@
 package com.kcb.teacher.activity;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -18,6 +20,8 @@ import com.kcb.common.util.DialogUtil;
 import com.kcb.common.util.ToastUtil;
 import com.kcb.library.view.PaperButton;
 import com.kcb.library.view.buttonflat.ButtonFlat;
+import com.kcb.teacher.model.CheckInRecordInfo;
+import com.kcb.teacher.model.StudentInfo;
 import com.kcbTeam.R;
 
 /**
@@ -25,7 +29,7 @@ import com.kcbTeam.R;
  * @className: CheckinActivity
  * @description:
  * @author: ljx
- * @date: 2015年4月24日 下午9:05:06
+ * @date: 2015年4月24日 下午9:05:06 add something by zqj.
  */
 public class CheckInActivity extends BaseActivity {
 
@@ -48,6 +52,10 @@ public class CheckInActivity extends BaseActivity {
     // private TextView numTextview;
     private PaperButton rateButton;
     private PaperButton finishButton;
+
+    // add by zqj
+    public final static String CURRENT_CHECKIN_RECORD_KEY = "current record";
+    public final static String TAG = "CheckInActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -247,6 +255,16 @@ public class CheckInActivity extends BaseActivity {
 
             } else if (v == rateButton) {
                 Intent intent = new Intent(CheckInActivity.this, CheckInDetailsActivity.class);
+                /*
+                 * add by zqj, save the checkInRecord ,than go to checkInDetailActivity with the
+                 * data;
+                 */
+                List<StudentInfo> missedCheckInStus = new ArrayList<StudentInfo>();
+                missedCheckInStus.add(new StudentInfo("testNameq", "0003", 12, 5));
+                CheckInRecordInfo currentInfo =
+                        new CheckInRecordInfo("2015 - 1", 0.9f, missedCheckInStus);
+                intent.putExtra("ACTIVITY_TAG", TAG);
+                intent.putExtra(CURRENT_CHECKIN_RECORD_KEY, currentInfo);
                 startActivity(intent);
             } else if (v == finishButton) {
                 finish();

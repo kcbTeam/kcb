@@ -19,7 +19,7 @@ public class TestRecycleAdapter extends RecyclerView.Adapter<TestRecycleAdapter.
         mSize = size;
         mCurrentIndex = 0;
     }
-    
+
     @Override
     public int getItemCount() {
         return mSize;
@@ -53,7 +53,7 @@ public class TestRecycleAdapter extends RecyclerView.Adapter<TestRecycleAdapter.
 
         public TestViewHolder(View v) {
             super(v);
-            view = (TextView)v.findViewById(R.id.viewblank);
+            view = (TextView) v.findViewById(R.id.viewblank);
         }
 
         public void setViewSelectColor() {

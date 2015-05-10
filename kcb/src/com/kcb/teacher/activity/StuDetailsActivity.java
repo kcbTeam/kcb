@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.PieChart;
@@ -18,6 +17,7 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.PercentFormatter;
 import com.kcb.common.base.BaseActivity;
+import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.teacher.fragment.StuCentreFragment;
 import com.kcb.teacher.model.StudentInfo;
 import com.kcbTeam.R;
@@ -38,7 +38,7 @@ public class StuDetailsActivity extends BaseActivity {
     private TextView checkInRateText;
     private TextView correctRateText;
 
-    private Button backButton;
+    private ButtonFlat backButton;
 
     private StudentInfo mCurrentStuInfo;
 
@@ -78,7 +78,7 @@ public class StuDetailsActivity extends BaseActivity {
                 .getString(R.string.correct_rate_format), mCurrentStuInfo.getStudentName(),
                 (int) (100 * mCorrectRate)));
 
-        backButton = (Button) findViewById(R.id.button_back);
+        backButton = (ButtonFlat) findViewById(R.id.button_back);
         backButton.setOnClickListener(new OnClickListener() {
 
             @Override
@@ -90,7 +90,6 @@ public class StuDetailsActivity extends BaseActivity {
     }
 
     private void initCurrentStu() {
-        // mCurrentStuInfo = new StudentInfo("testName", "testId", 10, 1);
         mCurrentStuInfo =
                 (StudentInfo) getIntent().getSerializableExtra(StuCentreFragment.CURRENT_STU_KEY);
         mCheckInRate =
@@ -151,13 +150,10 @@ public class StuDetailsActivity extends BaseActivity {
         pieChart.setUsePercentValues(true);
         pieChart.setDescription("");
         pieChart.setDrawHoleEnabled(false);
-        pieChart.setHoleColorTransparent(true);
-        pieChart.setTransparentCircleColor(Color.WHITE);
-        pieChart.setHoleRadius(1f);
-        pieChart.setTransparentCircleRadius(2f);
-        pieChart.setHoleColor(Color.WHITE);
+        pieChart.setClickable(false);
+        pieChart.setTouchEnabled(false);
         pieChart.setRotationAngle(0);
-        pieChart.setRotationEnabled(true);
+        pieChart.setRotationEnabled(false);
         pieChart.setVisibility(View.INVISIBLE);
         Legend l = pieChart.getLegend();
         l.setEnabled(false);

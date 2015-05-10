@@ -4,12 +4,12 @@ import java.io.Serializable;
 
 /**
  * 
- * @className: QuestionObj
+ * @className: ChoiceQuestion
  * @description:
  * @author: ZQJ
  * @date: 2015年5月8日 上午10:08:21
  */
-public class QuestionObj implements Serializable {
+public class ChoiceQuestion implements Serializable {
 
     private static final long serialVersionUID = 2L;
 
@@ -22,7 +22,7 @@ public class QuestionObj implements Serializable {
     // TODO is multi selected?
     private boolean[] mCorrectId;
 
-    public QuestionObj() {
+    public ChoiceQuestion() {
         mQuestion = "";
         mOptionA = "";
         mOptionB = "";
@@ -31,7 +31,7 @@ public class QuestionObj implements Serializable {
         mCorrectId = new boolean[] {false, false, false, false};
     }
 
-    public QuestionObj(String question, String optionA, String optionB, String optionC,
+    public ChoiceQuestion(String question, String optionA, String optionB, String optionC,
             String optionD, boolean[] correctOption) {
         mQuestion = question;
         mOptionA = optionA;
@@ -90,7 +90,7 @@ public class QuestionObj implements Serializable {
         this.mCorrectId = mCorrectOption;
     }
 
-    public boolean equal(QuestionObj questionObj) {
+    public boolean equal(ChoiceQuestion questionObj) {
         if (this == questionObj) {
             return true;
         }

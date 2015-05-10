@@ -11,10 +11,11 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.kcb.common.base.BaseActivity;
+import com.kcb.common.util.DialogUtil;
 import com.kcb.common.util.ToastUtil;
 import com.kcb.library.view.PaperButton;
 import com.kcb.library.view.checkbox.CheckBox;
-import com.kcb.teacher.model.QuestionObj;
+import com.kcb.teacher.model.ChoiceQuestion;
 import com.kcb.teacher.util.EditTestDialog;
 import com.kcb.teacher.util.EditTestDialog.DialogBackListener;
 import com.kcbTeam.R;
@@ -34,10 +35,10 @@ public class EditTestActivity extends BaseActivity {
     private ImageButton deleteButton;
 
     private int mCurrentPosition;
-    private QuestionObj mNextObj;
-    private List<QuestionObj> mQuestionList;
+    private ChoiceQuestion mNextObj;
+    private List<ChoiceQuestion> mQuestionList;
 
-    private int MaxFragmentNum = 3; // set max question !!!!num from 0
+    private int MaxFragmentNum = 3;
 
     private TextView numHintTextView;
 
@@ -112,7 +113,7 @@ public class EditTestActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        mQuestionList = new ArrayList<QuestionObj>();
+        mQuestionList = new ArrayList<ChoiceQuestion>();
         for (int i = 0; i < MaxFragmentNum; i++) {
             mQuestionList.add(getCurrentObj());
         }
@@ -147,8 +148,6 @@ public class EditTestActivity extends BaseActivity {
 
     @Override
     public void onClick(View v) {
-        String text;
-        String title;
         switch (v.getId()) {
             case R.id.delete_button:
                 clickDelete();
@@ -164,33 +163,28 @@ public class EditTestActivity extends BaseActivity {
                 break;
             case R.id.edittext_question:
                 mPositionIndex = IndexOfQuestion;
-                text = questionEditText.getText().toString();
-                title = "输入题目";
-                makeEditDialog(text, title);
+                makeEditDialog(questionEditText.getText().toString(),
+                        getResources().getString(R.string.dialog_title_question));
                 break;
             case R.id.edittext_A:
                 mPositionIndex = IndexOfA;
-                text = optionAEditText.getText().toString();
-                title = "输入A选项";
-                makeEditDialog(text, title);
+                makeEditDialog(optionAEditText.getText().toString(),
+                        getResources().getString(R.string.dialog_title_optionA));
                 break;
             case R.id.edittext_B:
                 mPositionIndex = IndexOfB;
-                text = optionBEditText.getText().toString();
-                title = "输入B选项";
-                makeEditDialog(text, title);
+                makeEditDialog(optionBEditText.getText().toString(),
+                        getResources().getString(R.string.dialog_title_optionB));
                 break;
             case R.id.edittext_C:
                 mPositionIndex = IndexOfC;
-                text = optionCEditText.getText().toString();
-                title = "输入C选项";
-                makeEditDialog(text, title);
+                makeEditDialog(optionCEditText.getText().toString(),
+                        getResources().getString(R.string.dialog_title_optionC));
                 break;
             case R.id.edittext_D:
                 mPositionIndex = IndexOfD;
-                text = optionDEditText.getText().toString();
-                title = "输入D选项";
-                makeEditDialog(text, title);
+                makeEditDialog(optionDEditText.getText().toString(),
+                        getResources().getString(R.string.dialog_title_optionD));
                 break;
             default:
                 break;
@@ -201,16 +195,17 @@ public class EditTestActivity extends BaseActivity {
         EditTestDialog dialog = new EditTestDialog(this, text);
         dialog.show();
         dialog.setTitle(title);
-        dialog.setSureButton("保存", mSureClickListener);
-        dialog.setCancelButton("取消", null);
+        dialog.setSureButton(getResources().getString(R.string.save), mSureClickListener);
+        dialog.setCancelButton(getResources().getString(R.string.cancel), null);
     }
 
     private void clickAdd() {
         MaxFragmentNum++;
-        mQuestionList.add(new QuestionObj());
+        mQuestionList.add(new ChoiceQuestion());
         if (!mQuestionList.get(mCurrentPosition).equal(getCurrentObj())) {
             mQuestionList.set(mCurrentPosition, getCurrentObj());
-            ToastUtil.toast("第" + (1 + mCurrentPosition) + "题已保存");
+            ToastUtil.toast(String.format(getResources().getString(R.string.format_edit_save),
+                    1 + mCurrentPosition));
         }
         mCurrentPosition++;
         refreshInfo(mQuestionList.get(mCurrentPosition));
@@ -223,7 +218,8 @@ public class EditTestActivity extends BaseActivity {
             }
             for (int i = 0; i < mQuestionList.size(); i++) {
                 if (!mQuestionList.get(i).isLegal()) {
-                    ToastUtil.toast("第" + (i + 1) + "题有空选项哦");
+                    ToastUtil.toast(String.format(
+                            getResources().getString(R.string.format_edit_empty_hint), 1 + i));
                     return;
                 }
             }
@@ -231,7 +227,8 @@ public class EditTestActivity extends BaseActivity {
         } else {
             if (!getCurrentObj().equal(mQuestionList.get(mCurrentPosition))) {
                 mQuestionList.set(mCurrentPosition, getCurrentObj());
-                ToastUtil.toast("第" + (1 + mCurrentPosition) + "题已保存");
+                ToastUtil.toast(String.format(getResources().getString(R.string.format_edit_save),
+                        1 + mCurrentPosition));
             }
             mCurrentPosition++;
             mNextObj = mQuestionList.get(mCurrentPosition);
@@ -244,7 +241,8 @@ public class EditTestActivity extends BaseActivity {
         if (mCurrentPosition != 0) {
             if (!mQuestionList.get(mCurrentPosition).equal(getCurrentObj())) {
                 mQuestionList.set(mCurrentPosition, getCurrentObj());
-                ToastUtil.toast("第" + (1 + mCurrentPosition) + "题已保存");
+                ToastUtil.toast(String.format(getResources().getString(R.string.format_edit_save),
+                        1 + mCurrentPosition));
             }
             mCurrentPosition--;
             mNextObj = mQuestionList.get(mCurrentPosition);
@@ -262,7 +260,7 @@ public class EditTestActivity extends BaseActivity {
                 mCurrentPosition--;
                 refreshInfo(mQuestionList.get(mCurrentPosition));
             }
-            ToastUtil.toast("删除成功");
+            ToastUtil.toast(R.string.delete_success);
         } else {
             OnClickListener sureListener = new OnClickListener() {
 
@@ -271,13 +269,12 @@ public class EditTestActivity extends BaseActivity {
                     finish();
                 }
             };
-            // TODO
-            // DialogUtil.showNormalDialog(this, "离开", "确认放弃此次编辑吗？", "确定", sureListener, "取消",
-            // null);
+            DialogUtil.showNormalDialog(this, R.string.leave, R.string.sureLeave, R.string.sure,
+                    sureListener, R.string.cancel, null);
         }
     }
 
-    private QuestionObj getCurrentObj() {
+    private ChoiceQuestion getCurrentObj() {
         String question = questionEditText.getText().toString();
         String optionA = optionAEditText.getText().toString();
         String optionB = optionBEditText.getText().toString();
@@ -285,10 +282,10 @@ public class EditTestActivity extends BaseActivity {
         String optionD = optionDEditText.getText().toString();
         boolean[] correctOption =
                 {checkBoxA.isCheck(), checkBoxB.isCheck(), checkBoxC.isCheck(), checkBoxD.isCheck()};
-        return new QuestionObj(question, optionA, optionB, optionC, optionD, correctOption);
+        return new ChoiceQuestion(question, optionA, optionB, optionC, optionD, correctOption);
     }
 
-    private void refreshInfo(QuestionObj currentObj) {
+    private void refreshInfo(ChoiceQuestion currentObj) {
         String question = "";
         String optionA = "";
         String optionB = "";
@@ -315,10 +312,10 @@ public class EditTestActivity extends BaseActivity {
         checkBoxC.setChecked(correctId[2]);
         checkBoxD.setChecked(correctId[3]);
         if (mCurrentPosition + 1 >= MaxFragmentNum) {
-            nextButton.setText("完成");
+            nextButton.setText(getResources().getString(R.string.complete));
             addButton.setVisibility(View.VISIBLE);
         } else {
-            nextButton.setText("下一题");
+            nextButton.setText(getResources().getString(R.string.next_item));
             addButton.setVisibility(View.INVISIBLE);
         }
     }

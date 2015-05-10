@@ -24,6 +24,7 @@ public class ListAdapterSignRecod extends BaseAdapter {
 
     private Context mContext;
     private List<CheckInRecordInfo> mList;
+    private final String FORMAT_RATE = "%1$d%%";
 
     public ListAdapterSignRecod(Context context, List<CheckInRecordInfo> list) {
         mContext = context;
@@ -51,7 +52,8 @@ public class ListAdapterSignRecod extends BaseAdapter {
         TextView signDate = (TextView) view.findViewById(R.id.textview_signdate);
         TextView signRate = (TextView) view.findViewById(R.id.textview_signrate);
         signDate.setText(mList.get(position).getSignDate());
-        signRate.setText(mList.get(position).getSignRate());
+        signRate.setText(String
+                .format(FORMAT_RATE, (int) (100 * mList.get(position).getSignRate())));
         return view;
     }
 }
