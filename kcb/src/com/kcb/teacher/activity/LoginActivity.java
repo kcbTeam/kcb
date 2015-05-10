@@ -2,6 +2,7 @@ package com.kcb.teacher.activity;
 
 import org.json.JSONObject;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -99,7 +100,7 @@ public class LoginActivity extends BaseActivity {
 
                                     @Override
                                     public void onErrorResponse(VolleyError error) {
-                                        //loginProgressBar.hide(LoginActivity.this);
+                                        // loginProgressBar.hide(LoginActivity.this);
                                     }
                                 });
                 RequestUtil.getInstance().addToRequestQueue(request, TAG);
@@ -117,5 +118,18 @@ public class LoginActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         RequestUtil.getInstance().cancelPendingRequests(TAG);
+    }
+
+    /**
+     * 
+     * @title: start
+     * @description: if delete account in HomeActivity, need show this Activity;
+     * @author: wanghang
+     * @date: 2015-5-10 上午11:13:50
+     * @param context
+     */
+    public static void start(Context context) {
+        Intent intent = new Intent(context, LoginActivity.class);
+        context.startActivity(intent);
     }
 }

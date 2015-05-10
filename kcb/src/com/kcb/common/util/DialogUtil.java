@@ -24,24 +24,23 @@ public class DialogUtil {
      * @author: wanghang
      * @date: 2015-5-4 下午10:29:45
      * @param context
-     * @param title
-     * @param message
-     * @param sureText , cannot be null;
+     * @param titleResId
+     * @param messageResId
+     * @param sureResId , cannot be null;
      * @param sureListener , can be null(only dismiss after click);
-     * @param cancelText , can be null(don't show cancel button);
+     * @param cancelResId , can be null(don't show cancel button);
      * @param cancelListener , can be null(only dismiss after click);
      */
-    public static void showDialog(Context context, String title, String message,
-            @NonNull String sureText, OnClickListener sureListener, String cancelText,
+    public static void showNormalDialog(Context context, int titleResId, int messageResId,
+            @NonNull int sureResId, OnClickListener sureListener, int cancelResId,
             OnClickListener cancelListener) {
         MaterialDialog dialog = new MaterialDialog(context);
         dialog.show();
-        dialog.setTitle(title);
-        dialog.setMessage(message);
-        dialog.setSureButton(sureText, sureListener);
-        dialog.setCancelButton(cancelText, cancelListener);
+        dialog.setTitle(titleResId);
+        dialog.setMessage(messageResId);
+        dialog.setSureButton(sureResId, sureListener);
+        dialog.setCancelButton(cancelResId, cancelListener);
     }
-
 
     /**
      * 
@@ -58,7 +57,6 @@ public class DialogUtil {
      * @param cancelListener , can be null(only dismiss after click);
      * 
      */
-
     public static void showListDialog(Context context, String title, ListAdapterEdit adapter,
             @NonNull String sureText, OnClickListener sureListener, String cancelText,
             OnClickListener cancelListener) {

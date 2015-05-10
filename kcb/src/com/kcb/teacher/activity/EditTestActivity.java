@@ -11,7 +11,6 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.kcb.common.base.BaseActivity;
-import com.kcb.common.util.DialogUtil;
 import com.kcb.common.util.ToastUtil;
 import com.kcb.library.view.PaperButton;
 import com.kcb.library.view.checkbox.CheckBox;
@@ -272,7 +271,9 @@ public class EditTestActivity extends BaseActivity {
                     finish();
                 }
             };
-            DialogUtil.showDialog(this, "离开", "确认放弃此次编辑吗？", "确定", sureListener, "取消", null);
+            // TODO
+            // DialogUtil.showNormalDialog(this, "离开", "确认放弃此次编辑吗？", "确定", sureListener, "取消",
+            // null);
         }
     }
 

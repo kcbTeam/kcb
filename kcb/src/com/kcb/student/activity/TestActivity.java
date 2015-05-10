@@ -23,6 +23,10 @@ import com.kcb.student.fragment.TestChoiceFragment;
 import com.kcb.student.fragment.TestShortAnwFragment;
 import com.kcbTeam.R;
 
+// TODO 如果是最后一题，右边的按钮变成"完成"。
+// 没有简答题，只有选择题。
+// 提交答案的对话框，参考HomeActivity中的注销对话框。
+// 每一道题目不需要一个Fragment，这个问一下章勤杰，他的出题页面讨论后做了改动。
 public class TestActivity extends BaseFragmentActivity {
 
     private TextView timeTextView;
@@ -30,8 +34,7 @@ public class TestActivity extends BaseFragmentActivity {
     private TestRecycleAdapter mAdapter;
     private Button preButton;
     private Button nextButton;
-    private List<String> colorItems;
-    private static int questionNum = 5;
+    private int questionNum = 5;
     private int currentPageIndex;
     private List<Fragment> mFragments;
     private FragmentManager fragmentManager;
@@ -54,13 +57,7 @@ public class TestActivity extends BaseFragmentActivity {
         recyclerView.setLayoutManager(new GridLayoutManager(this, questionNum));
         fiveCountDownTimer timeCountDown = new fiveCountDownTimer(300000, 1000);
         timeCountDown.start();
-        colorItems = new ArrayList<String>();
-        colorItems.add(new String("#00cc00"));
-        colorItems.add(new String("#ffffff"));
-        colorItems.add(new String("#ffffff"));
-        colorItems.add(new String("#ffffff"));
-        colorItems.add(new String("#ffffff"));
-        mAdapter = new TestRecycleAdapter(colorItems);
+        mAdapter = new TestRecycleAdapter(questionNum);
         recyclerView.setAdapter(mAdapter);
         // TODO request data from Network
         mFragments = new ArrayList<Fragment>();
@@ -73,7 +70,6 @@ public class TestActivity extends BaseFragmentActivity {
         FragmentTransaction beginTransaction = fragmentManager.beginTransaction();
         beginTransaction.add(R.id.fragment_content, mFragments.get(currentPageIndex));
         beginTransaction.commit();
-
     }
 
     @Override
@@ -90,10 +86,7 @@ public class TestActivity extends BaseFragmentActivity {
                     beginTransaction.replace(R.id.fragment_content,
                             mFragments.get(currentPageIndex));
                     beginTransaction.commit();
-                    colorItems.set(currentPageIndex, "#00cc00");
-                    mAdapter.notifyItemChanged(currentPageIndex);
-                    colorItems.set(currentPageIndex + 1, "#ffffff");
-                    mAdapter.notifyItemChanged(currentPageIndex + 1);
+                    mAdapter.setCurrentIndex(currentPageIndex);
                 } else {
                     ToastUtil.toast(R.string.first_question);
                 }
@@ -106,10 +99,7 @@ public class TestActivity extends BaseFragmentActivity {
                     beginTransaction.replace(R.id.fragment_content,
                             mFragments.get(currentPageIndex));
                     beginTransaction.commit();
-                    colorItems.set(currentPageIndex - 1, "#ffffff");
-                    mAdapter.notifyItemChanged(currentPageIndex - 1);
-                    colorItems.set(currentPageIndex, "#00cc00");
-                    mAdapter.notifyItemChanged(currentPageIndex);
+                    mAdapter.setCurrentIndex(currentPageIndex);
                 } else {
                     ToastUtil.toast(R.string.last_question);
                     new AlertDialog.Builder(TestActivity.this)

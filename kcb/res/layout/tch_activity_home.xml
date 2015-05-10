@@ -15,7 +15,7 @@
         android:id="@+id/button_exit"
         style="@style/common_top_button"
         android:layout_alignParentRight="true"
-        android:text="@string/exit"
+        android:text="@string/destroy"
         buttonflat:rippleSpeed="6" />
 
     <FrameLayout

@@ -54,14 +54,13 @@ public class CheckInFragment extends BaseFragment {
 
         @Override
         public void doClick(View v) {
-            Intent intent;
+            Intent intent = null;
             if (v == startCheckInButton) {
                 intent = new Intent(getActivity(), CheckInActivity.class);
-                startActivity(intent);
             } else if (v == lookCheckInButton) {
                 intent = new Intent(getActivity(), CheckInResultActivity.class);
-                startActivity(intent);
             }
+            startActivity(intent);
         }
     };
 }

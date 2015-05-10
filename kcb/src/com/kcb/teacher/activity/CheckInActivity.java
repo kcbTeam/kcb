@@ -29,7 +29,6 @@ import com.kcbTeam.R;
  */
 public class CheckInActivity extends BaseActivity {
 
-
     private ButtonFlat giveupButton;
     private PaperButton getNumButton;
     private PaperButton startButton;
@@ -112,15 +111,14 @@ public class CheckInActivity extends BaseActivity {
     @Override
     public void onClick(View v) {
         if (v == giveupButton) {
-            DialogUtil.showDialog(this, "放弃签到", "是否放弃签到？如果放弃，将返回上一界面。", "放弃",
-                    new OnClickListener() {
+            DialogUtil.showNormalDialog(this, R.string.giveupsign, R.string.giveup_sign_tip,
+                    R.string.sure, new OnClickListener() {
 
                         @Override
                         public void onClick(View v) {
                             finish();
                         }
-                    }, "取消", null);
-
+                    }, R.string.cancel, null);
         }
     }
 
@@ -160,7 +158,6 @@ public class CheckInActivity extends BaseActivity {
                 TimerTask task1 = new TimerTask() {
                     @Override
                     public void run() {
-                        // TODO Auto-generated method stub
                         Message message = new Message();
                         message.what = 0x1000;
                         handler.sendMessage(message);
@@ -170,7 +167,6 @@ public class CheckInActivity extends BaseActivity {
                 TimerTask task2 = new TimerTask() {
                     @Override
                     public void run() {
-                        // TODO Auto-generated method stub
                         Message message = new Message();
                         message.what = 0x1111;
                         handler.sendMessage(message);
@@ -180,7 +176,6 @@ public class CheckInActivity extends BaseActivity {
                 TimerTask task3 = new TimerTask() {
                     @Override
                     public void run() {
-                        // TODO Auto-generated method stub
                         Message message = new Message();
                         message.what = 0x1222;
                         handler.sendMessage(message);
@@ -190,7 +185,6 @@ public class CheckInActivity extends BaseActivity {
                 TimerTask task4 = new TimerTask() {
                     @Override
                     public void run() {
-                        // TODO Auto-generated method stub
                         Message message = new Message();
                         message.what = 0x1333;
                         handler.sendMessage(message);
@@ -238,10 +232,9 @@ public class CheckInActivity extends BaseActivity {
                     }
                 });
                 mThread.start();
-
             } else if (v == stopButton) {
-                DialogUtil.showDialog(CheckInActivity.this, "停止签到", "是否真的停止签到？", "是",
-                        new OnClickListener() {
+                DialogUtil.showNormalDialog(CheckInActivity.this, R.string.stopsign,
+                        R.string.stop_sign_tip, R.string.sure, new OnClickListener() {
 
                             @Override
                             public void onClick(View v) {
@@ -250,7 +243,7 @@ public class CheckInActivity extends BaseActivity {
                                 timetip.setText(""); // important
                                 timetip.setVisibility(View.GONE);
                             }
-                        }, "否", null);
+                        }, R.string.cancel, null);
 
             } else if (v == rateButton) {
                 Intent intent = new Intent(CheckInActivity.this, CheckInDetailsActivity.class);

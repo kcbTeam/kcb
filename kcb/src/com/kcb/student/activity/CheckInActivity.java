@@ -21,6 +21,8 @@ import com.kcbTeam.R;
  * @author: Tao Li
  * @date: 2015-4-24 下午9:16:22
  */
+// TODO add activity_header_shadow
+// TODO add SmoothProgressBar below finishButton, see in LoginActivity
 public class CheckInActivity extends BaseActivity {
 
     private TextView num1TextView;

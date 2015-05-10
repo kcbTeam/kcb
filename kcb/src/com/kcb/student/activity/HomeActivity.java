@@ -73,8 +73,8 @@ public class HomeActivity extends BaseFragmentActivity {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.button_exit:
-                DialogUtil.showDialog(this, "注销", "注销账号后，下次使用时需要重新登录。", "确定",
-                        new OnClickListener() {
+                DialogUtil.showNormalDialog(this, R.string.destroy, R.string.destroy_tip,
+                        R.string.sure, new OnClickListener() {
 
                             @Override
                             public void onClick(View v) {
@@ -82,7 +82,7 @@ public class HomeActivity extends BaseFragmentActivity {
                                 LoginActivity.start(HomeActivity.this);
                                 finish();
                             }
-                        }, "取消", null);
+                        }, R.string.cancel, null);
                 break;
             case R.id.button_checkin:
                 switchFragment(INDEX_CHECKIN);

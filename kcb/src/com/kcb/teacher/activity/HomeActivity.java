@@ -8,8 +8,11 @@ import android.os.Handler;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
+import android.view.View.OnClickListener;
 
+import com.kcb.common.application.KAccount;
 import com.kcb.common.base.BaseFragmentActivity;
+import com.kcb.common.util.DialogUtil;
 import com.kcb.common.util.ToastUtil;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.teacher.fragment.CheckInFragment;
@@ -77,7 +80,16 @@ public class HomeActivity extends BaseFragmentActivity {
         FragmentTransaction mFragmentTransaction = mFragmentManager.beginTransaction();
         switch (v.getId()) {
             case R.id.button_exit:
-                finish();
+                DialogUtil.showNormalDialog(this, R.string.destroy, R.string.destroy_tip,
+                        R.string.sure, new OnClickListener() {
+
+                            @Override
+                            public void onClick(View v) {
+                                KAccount.deleteAccount();
+                                LoginActivity.start(HomeActivity.this);
+                                finish();
+                            }
+                        }, R.string.cancel, null);
                 break;
             case R.id.button_checkin:
                 setButtonTextColor(INDEX_CHECKIN);
