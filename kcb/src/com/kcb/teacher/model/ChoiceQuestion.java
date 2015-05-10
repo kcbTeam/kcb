@@ -19,7 +19,6 @@ public class ChoiceQuestion implements Serializable {
     private String mOptionC;
     private String mOptionD;
 
-    // TODO is multi selected?
     private boolean[] mCorrectId;
 
     public ChoiceQuestion() {
