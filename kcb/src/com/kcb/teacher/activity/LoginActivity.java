@@ -81,8 +81,9 @@ public class LoginActivity extends BaseActivity {
 
                     @Override
                     public void run() {
-                        KAccount account = new KAccount(KAccount.TYPE_TCH, id);
-                        account.saveAccount();
+                        // TODO save teacher's name after login success
+                        KAccount account = new KAccount(KAccount.TYPE_TCH, id, "name");
+                        KAccount.saveAccount(account);
                         Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                         startActivity(intent);
                         finish();
