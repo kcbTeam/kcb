@@ -31,7 +31,7 @@ import com.kcbTeam.R;
  * @author: ljx
  * @date: 2015年4月24日 下午9:05:06 add something by zqj.
  */
-public class CheckInActivity extends BaseActivity {
+public class StartCheckInActivity extends BaseActivity {
 
     private ButtonFlat giveupButton;
     private PaperButton getNumButton;
@@ -60,7 +60,7 @@ public class CheckInActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.tch_activity_checkin);
+        setContentView(R.layout.tch_activity_startcheckin);
 
         initView();
     }
@@ -241,7 +241,7 @@ public class CheckInActivity extends BaseActivity {
                 });
                 mThread.start();
             } else if (v == stopButton) {
-                DialogUtil.showNormalDialog(CheckInActivity.this, R.string.stopsign,
+                DialogUtil.showNormalDialog(StartCheckInActivity.this, R.string.stopsign,
                         R.string.stop_sign_tip, R.string.sure, new OnClickListener() {
 
                             @Override
@@ -254,7 +254,7 @@ public class CheckInActivity extends BaseActivity {
                         }, R.string.cancel, null);
 
             } else if (v == rateButton) {
-                Intent intent = new Intent(CheckInActivity.this, CheckInDetailsActivity.class);
+                Intent intent = new Intent(StartCheckInActivity.this, CheckInDetailsActivity.class);
                 /*
                  * add by zqj, save the checkInRecord ,than go to checkInDetailActivity with the
                  * data;

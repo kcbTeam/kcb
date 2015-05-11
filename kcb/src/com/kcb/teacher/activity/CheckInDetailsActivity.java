@@ -80,16 +80,16 @@ public class CheckInDetailsActivity extends BaseFragmentActivity implements OnCl
     protected void initData() {
         String flagString = getIntent().getStringExtra("ACTIVITY_TAG");
         mMissedCheckInStusList = new ArrayList<StudentInfo>();
-        if (flagString.equals(CheckInResultActivity.TAG)) {
+        if (flagString.equals(LookCheckInActivity.TAG)) {
             mCurrentCheckInRecordInfo =
                     (CheckInRecordInfo) getIntent().getSerializableExtra(
-                            CheckInResultActivity.CURRENT_CHECKIN_RECORD_KEY);
+                            LookCheckInActivity.CURRENT_CHECKIN_RECORD_KEY);
             mMissedCheckInStusList = mCurrentCheckInRecordInfo.getMissedCheckInStus();
             mCheckInRate = mCurrentCheckInRecordInfo.getSignRate();
-        } else if (flagString.equals(CheckInActivity.TAG)) {
+        } else if (flagString.equals(StartCheckInActivity.TAG)) {
             mCurrentCheckInRecordInfo =
                     (CheckInRecordInfo) getIntent().getSerializableExtra(
-                            CheckInActivity.CURRENT_CHECKIN_RECORD_KEY);
+                            StartCheckInActivity.CURRENT_CHECKIN_RECORD_KEY);
             mMissedCheckInStusList = mCurrentCheckInRecordInfo.getMissedCheckInStus();
             mCheckInRate = mCurrentCheckInRecordInfo.getSignRate();
         }

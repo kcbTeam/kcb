@@ -74,11 +74,11 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.kcb.teacher.activity.CheckInActivity"
+            android:name="com.kcb.teacher.activity.StartCheckInActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.kcb.teacher.activity.CheckInResultActivity"
+            android:name="com.kcb.teacher.activity.LookCheckInActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity

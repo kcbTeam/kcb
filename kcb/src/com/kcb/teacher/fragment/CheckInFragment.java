@@ -10,8 +10,8 @@ import android.view.ViewGroup;
 import com.kcb.common.base.BaseFragment;
 import com.kcb.common.listener.DelayClickListener;
 import com.kcb.library.view.PaperButton;
-import com.kcb.teacher.activity.CheckInActivity;
-import com.kcb.teacher.activity.CheckInResultActivity;
+import com.kcb.teacher.activity.StartCheckInActivity;
+import com.kcb.teacher.activity.LookCheckInActivity;
 import com.kcbTeam.R;
 
 /**
@@ -56,14 +56,18 @@ public class CheckInFragment extends BaseFragment {
 
         @Override
         public void doClick(View v) {
-            Intent intent;
-            if (v == startCheckInButton) {
-                intent = new Intent(getActivity(), CheckInActivity.class);
-                startActivity(intent);
-            } else if (v == lookCheckInButton) {
-                intent = new Intent(getActivity(), CheckInResultActivity.class);
-                startActivity(intent);
+            Intent intent = null;
+            switch (v.getId()) {
+                case R.id.button_start_checkin:
+                    intent = new Intent(getActivity(), StartCheckInActivity.class);
+                    break;
+                case R.id.button_look_checkin:
+                    intent = new Intent(getActivity(), LookCheckInActivity.class);
+                    break;
+                default:
+                    break;
             }
+            startActivity(intent);
         }
     };
 }

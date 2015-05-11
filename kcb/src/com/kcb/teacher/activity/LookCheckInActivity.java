@@ -24,7 +24,7 @@ import com.kcbTeam.R;
  * @author: ZQJ
  * @date: 2015年4月24日 下午3:22:02
  */
-public class CheckInResultActivity extends BaseActivity implements OnItemClickListener {
+public class LookCheckInActivity extends BaseActivity implements OnItemClickListener {
 
     public final static String TAG = "CheckInResultActivity";
     public final static String CURRENT_CHECKIN_RECORD_KEY = "current_clicked_record";
@@ -38,7 +38,8 @@ public class CheckInResultActivity extends BaseActivity implements OnItemClickLi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.tch_activity_checkinresult);
+        setContentView(R.layout.tch_activity_lookcheckin);
+
         initData();
         initView();
     }
