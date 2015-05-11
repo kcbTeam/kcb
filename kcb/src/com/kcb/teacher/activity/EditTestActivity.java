@@ -3,6 +3,7 @@ package com.kcb.teacher.activity;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -16,6 +17,7 @@ import com.kcb.common.util.ToastUtil;
 import com.kcb.library.view.PaperButton;
 import com.kcb.library.view.checkbox.CheckBox;
 import com.kcb.teacher.model.ChoiceQuestion;
+import com.kcb.teacher.model.CourseTest;
 import com.kcb.teacher.util.EditTestDialog;
 import com.kcb.teacher.util.EditTestDialog.DialogBackListener;
 import com.kcbTeam.R;
@@ -62,6 +64,7 @@ public class EditTestActivity extends BaseActivity {
     private final int IndexOfD = 5;
 
     private int mPositionIndex = IndexOfQuestion;
+    public final static String COURSE_TEST_KEY = "current_course_key";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -321,7 +324,11 @@ public class EditTestActivity extends BaseActivity {
     }
 
     private void completeEdit() {
-        ToastUtil.toast("need for speed!!!");
+        CourseTest test = new CourseTest("TestName1", mQuestionList);
+        Intent intent = new Intent(this,SubmitTest.class);
+        intent.putExtra(COURSE_TEST_KEY, test);
+        startActivity(intent);
+        finish();
     }
 
 }

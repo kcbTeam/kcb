@@ -109,9 +109,8 @@ public class ChoiceQuestion implements Serializable {
 
     public String toString() {
 
-        return mQuestion + '\n' + mOptionA + '\n' + mOptionB + '\n' + mOptionC + '\n' + mOptionD
-                + '\n' + mCorrectId[0] + '\n' + mCorrectId[1] + '\n' + mCorrectId[2] + '\n'
-                + mCorrectId[3] + '\n';
+        return "." + mQuestion + '\n' + "A." + mOptionA + '\n' + "B." + mOptionB + '\n' + "C." + mOptionC
+                + '\n' + "D." + mOptionD + '\n' + "答案：" + getCorrectOption();
     }
 
     public boolean isLegal() {
@@ -126,6 +125,22 @@ public class ChoiceQuestion implements Serializable {
         return false;
     }
 
+    private String getCorrectOption() {
+        String tempString = "";
+        if (mCorrectId[0]) {
+            tempString += "A、";
+        }
+        if (mCorrectId[1]) {
+            tempString += "B、";
+        }
+        if (mCorrectId[2]) {
+            tempString += "C、";
+        }
+        if (mCorrectId[3]) {
+            tempString += "D、";
+        }
 
+        return tempString.substring(0, tempString.length() - 1);
+    }
 
 }

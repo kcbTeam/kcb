@@ -11,9 +11,7 @@ import java.util.List;
  * @date: 2015年4月24日 下午7:08:01
  */
 public class CheckInRecordInfo implements Serializable {
-    /**
-     * 
-     */
+
     private static final long serialVersionUID = 3L;
     private String mSignDate;
     private float mSignRate;

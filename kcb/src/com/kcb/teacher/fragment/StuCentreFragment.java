@@ -3,7 +3,6 @@ package com.kcb.teacher.fragment;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +12,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import com.kcb.common.base.BaseFragment;
-import com.kcb.teacher.activity.StuDetailsActivity;
+import com.kcb.library.view.FloatingEditText;
 import com.kcb.teacher.adapter.ListAdapterStudent;
 import com.kcb.teacher.model.StudentInfo;
 import com.kcbTeam.R;
@@ -31,6 +30,8 @@ public class StuCentreFragment extends BaseFragment implements OnItemClickListen
     private ListAdapterStudent mAdapter;
     private List<StudentInfo> mList;
 
+    private FloatingEditText searchEditText;
+
     public static final String CURRENT_STU_KEY = "cunrrent_stu";
 
     @Override
@@ -47,14 +48,19 @@ public class StuCentreFragment extends BaseFragment implements OnItemClickListen
         mAdapter = new ListAdapterStudent(getActivity(), mList);
         mStudentList.setAdapter(mAdapter);
         mStudentList.setOnItemClickListener(this);
+
+        searchEditText = (FloatingEditText) view.findViewById(R.id.edittext_search);
+
         return view;
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Intent intent = new Intent(getActivity(), StuDetailsActivity.class);
-        intent.putExtra(CURRENT_STU_KEY, mList.get(position));
-        startActivity(intent);
+        // Intent intent = new Intent(getActivity(), StuDetailsActivity.class);
+        // intent.putExtra(CURRENT_STU_KEY, mList.get(position));
+        // startActivity(intent);
+        view.setBackgroundColor(getResources().getColor(R.color.list_blue_background));
+
     }
 
     @Override
@@ -64,7 +70,7 @@ public class StuCentreFragment extends BaseFragment implements OnItemClickListen
     protected void initData() {
         mList = new ArrayList<StudentInfo>();
         mList.clear();
-        mList.add(new StudentInfo("zqj", "1004210254", 10, 3));
-        mList.add(new StudentInfo("zh", "1104210256", 10, 4));
+        mList.add(new StudentInfo("zqj", "1004210254", 10, 3, 10, 20));
+        mList.add(new StudentInfo("zh", "1104210256", 10, 4, 5, 8));
     }
 }

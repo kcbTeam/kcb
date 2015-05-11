@@ -83,9 +83,7 @@ public class LoginActivity extends BaseActivity {
                     public void run() {
                         KAccount account = new KAccount(KAccount.TYPE_TCH, id);
                         account.saveAccount();
-                        //TODO for test ,by zqj 
-//                        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                        Intent intent = new Intent(LoginActivity.this, SubmitTest.class);
+                        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                         startActivity(intent);
                         finish();
                     }

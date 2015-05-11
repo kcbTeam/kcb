@@ -14,6 +14,12 @@
     
     <!-- tch home activity start -->
     <color name="divider">#5777</color>
+    <color name="list_blue_background">#500f</color>
     <!-- tch home activity end -->
+    
+    <!-- tch submit test activity start -->
+    <color name="questionItem">#4777</color>
+    <!-- tch submit test activity end -->
+    
 
 </resources>
