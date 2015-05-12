@@ -14,15 +14,24 @@ import android.text.TextUtils;
  */
 public class KAccount {
 
+    /**
+     * sharedPreference keys
+     */
     private static final String ACCOUNT = "account";
 
     private static final String TYPE = "type";
     private static final String ID = "id";
     private static final String NAME = "name";
 
+    /**
+     * account type
+     */
     public static final int TYPE_STU = 0;
     public static final int TYPE_TCH = 1;
 
+    /**
+     * account content
+     */
     private int mType;
     private String mId;
     private String mName;
@@ -34,7 +43,7 @@ public class KAccount {
     }
 
     /**
-     * below are some static util functions;
+     * below are some static util functions: save/delete/has/get account
      */
     public static void saveAccount(KAccount account) {
         SharedPreferences sPreferences =
@@ -60,9 +69,30 @@ public class KAccount {
         return !TextUtils.isEmpty(sPreferences.getString(ID, ""));
     }
 
+    public static KAccount getAccount() {
+        SharedPreferences sPreferences =
+                KApplication.getInstance().getSharedPreferences(ACCOUNT, Context.MODE_PRIVATE);
+        int type = sPreferences.getInt(TYPE, -1);
+        String id = sPreferences.getString(ID, "");
+        String name = sPreferences.getString(NAME, "");
+        return new KAccount(type, id, name);
+    }
+
     public static int getAccountType() {
         SharedPreferences sPreferences =
                 KApplication.getInstance().getSharedPreferences(ACCOUNT, Context.MODE_PRIVATE);
-        return sPreferences.getInt(TYPE, TYPE_STU);
+        return sPreferences.getInt(TYPE, -1);
+    }
+
+    public static String getAccountId() {
+        SharedPreferences sPreferences =
+                KApplication.getInstance().getSharedPreferences(ACCOUNT, Context.MODE_PRIVATE);
+        return sPreferences.getString(ID, "");
+    }
+
+    public static String getAccountName() {
+        SharedPreferences sPreferences =
+                KApplication.getInstance().getSharedPreferences(ACCOUNT, Context.MODE_PRIVATE);
+        return sPreferences.getString(NAME, "");
     }
 }
