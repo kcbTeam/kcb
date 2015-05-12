@@ -6,15 +6,14 @@ import java.util.HashMap;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.RadioButton;
 import android.widget.TextView;
 
-import com.kcb.library.view.checkbox.CheckBox;
-import com.kcb.library.view.checkbox.CheckBox.OnCheckListener;
+import com.kcb.teacher.util.RadioButton;
+import com.kcb.teacher.util.RadioButton.OnCheckedChangeListener;
 import com.kcbTeam.R;
 
 /**
@@ -64,8 +63,8 @@ public class ListAdapterEdit extends BaseAdapter {
 
 	static class ViewHolder {
 		TextView testname;
-		CheckBox testchosen;
-		
+		// com.kcb.teacher.util.RadioButton testchosen;
+		RadioButton testchosen;
 	}
 
 	@Override
@@ -76,48 +75,36 @@ public class ListAdapterEdit extends BaseAdapter {
 			convertView = inflater.inflate(R.layout.tch_listitem_dialog, null);
 			holder.testname = (TextView) convertView
 					.findViewById(R.id.textview_testname);
-			holder.testchosen = (CheckBox) convertView
+			holder.testchosen = (RadioButton) convertView
 					.findViewById(R.id.checkBox_testchosen);
 			convertView.setTag(holder);
 
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
-		holder.testname.setText(mList.get(position));
-		
-		holder.testchosen.setOncheckListener(new OnCheckListener(){
 
-			@Override
-			public void onCheck(View view, boolean check) {
-				// TODO Auto-generated method stub
-				isSelected.put(position, check);
-				if (((CheckBox) view).isCheck()) {
-					for (int i = 0; i < mList.size(); i++) {
-						if (i != position) {
-							isSelected.put(i, false);
-						}
-					}
-				}
-				ListAdapterEdit.this.notifyDataSetChanged();// update
-															// checkbox
-
-			}
-
-			
-			
-		});
-		
-		
-	/*  holder.testchosen.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+		// holder.testname.setText(mList.get(position));
+		/*
+		 * holder.testchosen.setOncheckListener(new OnCheckListener() {
+		 * 
+		 * @Override public void onCheck(View view, boolean check) { // TODO
+		 * Auto-generated method stub isSelected.put(position, check); if
+		 * (((CheckBox) view).isCheck()) { for (int i = 0; i < mList.size();
+		 * i++) { if (i != position) { isSelected.put(i, false); } } }
+		 * ListAdapterEdit.this.notifyDataSetChanged();// update // checkbox
+		 * 
+		 * }
+		 * 
+		 * });
+		 */
+		holder.testchosen
+				.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
 					@Override
-					public void onCheckedChanged(CompoundButton buttonView,
-							boolean isChecked) {
-						// TODO Auto-generated method stub
-						// getIsSelected().put(position, isChecked);
+					public void onCheckedChanged(boolean isChecked) {
 
 						isSelected.put(position, isChecked);
-						if (buttonView.isChecked()) {
+						if (isChecked) {
 							for (int i = 0; i < mList.size(); i++) {
 								if (i != position) {
 									isSelected.put(i, false);
@@ -125,13 +112,11 @@ public class ListAdapterEdit extends BaseAdapter {
 							}
 						}
 						ListAdapterEdit.this.notifyDataSetChanged();// update
-																	// checkbox
-
+						// checkbox
 					}
-
-				});*/
+				});
+		holder.testname.setText(mList.get(position));
 		holder.testchosen.setChecked(getIsSelected().get(position));
-
 		return convertView;
 	}
 
