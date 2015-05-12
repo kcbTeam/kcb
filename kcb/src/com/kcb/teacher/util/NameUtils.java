@@ -9,7 +9,7 @@ import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombi
 
 public class NameUtils {
     @SuppressWarnings("unused")
-    private static final String TAG = "ChineseNameUtils";
+    private static final String TAG = "NameUtils";
 
     @SuppressWarnings("deprecation")
     // return zhangqinjie

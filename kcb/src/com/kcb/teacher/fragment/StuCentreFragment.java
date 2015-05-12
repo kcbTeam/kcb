@@ -38,6 +38,7 @@ public class StuCentreFragment extends BaseFragment implements OnItemClickListen
     private List<StudentInfo> mTempList;
 
     private FloatingEditText searchEditText;
+    private View mCurrentView = null;
 
     public static final String CURRENT_STU_KEY = "cunrrent_stu";
 
@@ -67,8 +68,13 @@ public class StuCentreFragment extends BaseFragment implements OnItemClickListen
         // Intent intent = new Intent(getActivity(), StuDetailsActivity.class);
         // intent.putExtra(CURRENT_STU_KEY, mList.get(position));
         // startActivity(intent);
+        if(null == mCurrentView){
+            mCurrentView = view;
+        } else {
+            mCurrentView.setBackgroundColor(getResources().getColor(R.color.white));
+        }
         view.setBackgroundColor(getResources().getColor(R.color.list_blue_background));
-
+        mCurrentView = view;
     }
 
     @Override
@@ -79,15 +85,15 @@ public class StuCentreFragment extends BaseFragment implements OnItemClickListen
         mList = new ArrayList<StudentInfo>();
         mList.clear();
         mList.add(new StudentInfo("令狐", "1004210254", 10, 3, 10, 20));
-        mList.add(new StudentInfo("杨过", "1104210256", 10, 4, 5, 8));
-        mList.add(new StudentInfo("萧远山", "1104210256", 10, 4, 5, 8));
-        mList.add(new StudentInfo("慕容博", "1104210256", 10, 4, 5, 8));
-        mList.add(new StudentInfo("扫地僧", "1104210256", 10, 4, 5, 8));
-        mList.add(new StudentInfo("向问天", "1104210256", 10, 4, 5, 8));
-        mList.add(new StudentInfo("任我行", "1104210256", 10, 4, 5, 8));
-        mList.add(new StudentInfo("萧峰", "1104210256", 10, 4, 5, 8));
-        mList.add(new StudentInfo("东方", "1104210256", 10, 4, 5, 8));
-        mList.add(new StudentInfo("查良镛", "1104210256", 10, 4, 5, 8));
+        mList.add(new StudentInfo("杨过", "1004210256", 10, 4, 5, 8));
+        mList.add(new StudentInfo("萧远山", "1004210257", 10, 4, 5, 8));
+        mList.add(new StudentInfo("慕容博", "1004210258", 10, 4, 5, 8));
+        mList.add(new StudentInfo("扫地僧", "1004210259", 10, 4, 5, 8));
+        mList.add(new StudentInfo("向问天", "1004210245", 10, 4, 5, 8));
+        mList.add(new StudentInfo("任我行", "1004210221", 10, 4, 5, 8));
+        mList.add(new StudentInfo("萧峰", "1004210232", 10, 4, 5, 8));
+        mList.add(new StudentInfo("东方", "1004210214", 10, 4, 5, 8));
+        mList.add(new StudentInfo("查良镛", "1004210228", 10, 4, 5, 8));
         mTempList = new ArrayList<StudentInfo>();
         mTempList.addAll(mList);
     }
