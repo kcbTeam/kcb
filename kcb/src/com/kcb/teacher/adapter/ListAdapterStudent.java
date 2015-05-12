@@ -22,56 +22,61 @@ import com.kcbTeam.R;
 @SuppressLint("ViewHolder")
 public class ListAdapterStudent extends BaseAdapter {
 
-	private List<StudentInfo> mList;
-	private Context mContext;
+    private List<StudentInfo> mList;
+    private Context mContext;
 
-	private final String FORMAT_RATE = "%1$d%%";
+    private final String FORMAT_RATE = "%1$d%%";
 
-	public ListAdapterStudent(Context context, List<StudentInfo> list) {
-		mContext = context;
-		mList = list;
-	}
+    public ListAdapterStudent(Context context, List<StudentInfo> list) {
+        mContext = context;
+        mList = list;
+    }
 
-	@Override
-	public int getCount() {
-		return mList.size();
-	}
+    @Override
+    public int getCount() {
+        return mList.size();
+    }
 
-	@Override
-	public Object getItem(int position) {
-		return mList.get(position);
-	}
+    @Override
+    public Object getItem(int position) {
+        return mList.get(position);
+    }
 
-	@Override
-	public long getItemId(int position) {
-		return position;
-	}
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
 
-	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
 
-		View view = View.inflate(mContext, R.layout.tch_listitem_stucentre,
-				null);
+        ViewHolder holder = null;
+        if (convertView == null) {
+            convertView = View.inflate(mContext, R.layout.tch_listitem_stucentre, null);
+            holder = new ViewHolder();
+            holder.studentName = (TextView) convertView.findViewById(R.id.textview_studentname);
+            holder.studentId = (TextView) convertView.findViewById(R.id.textview_studentid);
+            holder.checkInRate = (TextView) convertView.findViewById(R.id.textview_checkinRate);
+            holder.correctRate = (TextView) convertView.findViewById(R.id.textview_correctRate);
+            convertView.setTag(holder);
+        } else {
+            holder = (ViewHolder) convertView.getTag();
+        }
+        holder.studentName.setText(mList.get(position).getStudentName());
+        holder.studentId.setText(mList.get(position).getStudentID());
+        holder.checkInRate.setText(String.format(FORMAT_RATE, (int) (100 * mList.get(position)
+                .getCheckInRate())));
+        holder.correctRate.setText(String.format(FORMAT_RATE, (int) (100 * mList.get(position)
+                .getCorrectRate())));
+        return convertView;
+    }
 
-		TextView studentName = (TextView) view
-				.findViewById(R.id.textview_studentname);
-		studentName.setText(mList.get(position).getStudentName());
+    static class ViewHolder {
+        TextView studentName;
+        TextView studentId;
+        TextView checkInRate;
+        TextView correctRate;
+    }
 
-		TextView studentId = (TextView) view
-				.findViewById(R.id.textview_studentid);
-		studentId.setText(mList.get(position).getStudentID());
-
-		TextView checkInRate = (TextView) view
-				.findViewById(R.id.textview_checkinRate);
-		checkInRate.setText(String.format(FORMAT_RATE,
-				(int) (100 * mList.get(position).getCheckInRate())));
-
-		TextView correctRate = (TextView) view
-				.findViewById(R.id.textview_correctRate);
-		correctRate.setText(String.format(FORMAT_RATE,
-				(int) (100 * mList.get(position).getCorrectRate())));
-
-		return view;
-	}
 
 }
