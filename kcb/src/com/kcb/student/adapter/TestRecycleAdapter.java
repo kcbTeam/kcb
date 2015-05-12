@@ -57,7 +57,7 @@ public class TestRecycleAdapter extends RecyclerView.Adapter<TestRecycleAdapter.
         }
 
         public void setViewSelectColor() {
-            view.setBackgroundColor(Color.parseColor("#00cc00"));
+            view.setBackgroundColor(Color.parseColor("#db7093"));
         }
 
         public void setViewNormalColor() {
