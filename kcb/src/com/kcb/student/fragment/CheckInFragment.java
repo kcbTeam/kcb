@@ -22,45 +22,49 @@ import com.kcbTeam.R;
  */
 public class CheckInFragment extends BaseFragment {
 
-    private PaperButton startCheckInButton;
-    private PaperButton lookCheckInButton;
+	private PaperButton startCheckInButton;
+	private PaperButton lookCheckInButton;
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstaceState) {
-        return inflater.inflate(R.layout.stu_fragment_sign, container, false);
-    }
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstaceState) {
+		return inflater.inflate(R.layout.stu_fragment_sign, container, false);
+	}
 
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+	@Override
+	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
 
-        initView();
-    }
+		initView();
+	}
 
-    @Override
-    protected void initView() {
-        View view = getView();
-        startCheckInButton = (PaperButton) view.findViewById(R.id.button_start_checkin);
-        startCheckInButton.setOnClickListener(mClickListener);
-        lookCheckInButton = (PaperButton) view.findViewById(R.id.button_look_checkin);
-        lookCheckInButton.setOnClickListener(mClickListener);
-    }
+	@Override
+	protected void initView() {
+		View view = getView();
+		startCheckInButton = (PaperButton) view
+				.findViewById(R.id.button_start_checkin);
+		startCheckInButton.setOnClickListener(mClickListener);
+		lookCheckInButton = (PaperButton) view
+				.findViewById(R.id.button_look_checkin);
+		lookCheckInButton.setOnClickListener(mClickListener);
+	}
 
-    @Override
-    protected void initData() {}
+	@Override
+	protected void initData() {
+	}
 
-    private DelayClickListener mClickListener = new DelayClickListener(
-            DelayClickListener.DELAY_PAPER_BUTTON) {
+	private DelayClickListener mClickListener = new DelayClickListener(
+			DelayClickListener.DELAY_PAPER_BUTTON) {
 
-        @Override
-        public void doClick(View v) {
-            Intent intent = null;
-            if (v == startCheckInButton) {
-                intent = new Intent(getActivity(), CheckInActivity.class);
-            } else if (v == lookCheckInButton) {
-                intent = new Intent(getActivity(), CheckInResultActivity.class);
-            }
-            startActivity(intent);
-        }
-    };
+		@Override
+		public void doClick(View v) {
+			Intent intent = null;
+			if (v == startCheckInButton) {
+				intent = new Intent(getActivity(), CheckInActivity.class);
+			} else if (v == lookCheckInButton) {
+				intent = new Intent(getActivity(), CheckInResultActivity.class);
+			}
+			startActivity(intent);
+		}
+	};
 }

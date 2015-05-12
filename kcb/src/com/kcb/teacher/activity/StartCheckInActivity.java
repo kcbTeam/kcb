@@ -17,12 +17,11 @@ import android.widget.TextView;
 import com.kcb.common.base.BaseActivity;
 import com.kcb.common.listener.DelayClickListener;
 import com.kcb.common.util.DialogUtil;
-import com.kcb.common.util.ToastUtil;
 import com.kcb.library.view.PaperButton;
 import com.kcb.library.view.buttonflat.ButtonFlat;
+import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
 import com.kcb.teacher.model.CheckInRecordInfo;
 import com.kcb.teacher.model.StudentInfo;
-import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
 import com.kcbTeam.R;
 
 /**
@@ -55,10 +54,10 @@ public class StartCheckInActivity extends BaseActivity {
 	// private TextView numTextview;
 	private PaperButton rateButton;
 	private PaperButton finishButton;
-	
-    // add by zqj
-    public final static String CURRENT_CHECKIN_RECORD_KEY = "current record";
-    public final static String TAG = "CheckInActivity";
+
+	// add by zqj
+	public final static String CURRENT_CHECKIN_RECORD_KEY = "current record";
+	public final static String TAG = "CheckInActivity";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -270,21 +269,23 @@ public class StartCheckInActivity extends BaseActivity {
 							@Override
 							public void onClick(View v) {
 								finish();
-								//progressBar.setVisibility(View.GONE);
-								//timetip.setText(""); // important
-								//timetip.setVisibility(View.GONE);
+								// progressBar.setVisibility(View.GONE);
+								// timetip.setText(""); // important
+								// timetip.setVisibility(View.GONE);
 							}
 						}, R.string.cancel, null);
 
 			} else if (v == rateButton) {
-				Intent intent = new Intent(StartCheckInActivity.this, CheckInDetailsActivity.class);
-                List<StudentInfo> missedCheckInStus = new ArrayList<StudentInfo>();
-                missedCheckInStus.add(new StudentInfo("testNameq", "0003", 12, 5));
-                CheckInRecordInfo currentInfo =
-                        new CheckInRecordInfo("2015 - 1", 0.9f, missedCheckInStus);
-                intent.putExtra("ACTIVITY_TAG", TAG);
-                intent.putExtra(CURRENT_CHECKIN_RECORD_KEY, currentInfo);
-                startActivity(intent);
+				Intent intent = new Intent(StartCheckInActivity.this,
+						CheckInDetailsActivity.class);
+				List<StudentInfo> missedCheckInStus = new ArrayList<StudentInfo>();
+				missedCheckInStus.add(new StudentInfo("testNameq", "0003", 12,
+						5));
+				CheckInRecordInfo currentInfo = new CheckInRecordInfo(
+						"2015 - 1", 0.9f, missedCheckInStus);
+				intent.putExtra("ACTIVITY_TAG", TAG);
+				intent.putExtra(CURRENT_CHECKIN_RECORD_KEY, currentInfo);
+				startActivity(intent);
 			} else if (v == finishButton) {
 				finish();
 			}

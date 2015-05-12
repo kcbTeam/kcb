@@ -32,122 +32,126 @@ import com.kcbTeam.R;
  * @author: ZQJ
  * @date: 2015年4月27日 下午11:14:41
  */
-public class CheckInDetailsActivity extends BaseFragmentActivity implements OnClickListener {
+public class CheckInDetailsActivity extends BaseFragmentActivity implements
+		OnClickListener {
 
-    private PieChart mChart;
-    private TextView hintTextView;
-    private ButtonFlat backButton;
-    private ListView missCheckInListView;
+	private PieChart mChart;
+	private TextView hintTextView;
+	private ButtonFlat backButton;
+	private ListView missCheckInListView;
 
-    private CheckInRecordInfo mCurrentCheckInRecordInfo;
-    private float mCheckInRate;
+	private CheckInRecordInfo mCurrentCheckInRecordInfo;
+	private float mCheckInRate;
 
-    private String[] mInfoStrings = new String[] {"已签", "未签"};
-    private List<StudentInfo> mMissedCheckInStusList;
-    private ListAdapterMissCheckIn mAdapter;
+	private String[] mInfoStrings = new String[] { "已签", "未签" };
+	private List<StudentInfo> mMissedCheckInStusList;
+	private ListAdapterMissCheckIn mAdapter;
 
-    private final int mDealy = 150;
-    private final int mAnimateDuration = 1800;
+	private final int mDealy = 150;
+	private final int mAnimateDuration = 1800;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.tch_activity_checkindetails);
-        initData();
-        initView();
-    }
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.tch_activity_checkindetails);
+		initData();
+		initView();
+	}
 
-    @Override
-    protected void initView() {
-        initPieChart();
-        hintTextView = (TextView) findViewById(R.id.textview_attendance_rate_hint);
-        hintTextView.setText(String.format(getResources().getString(R.string.checkinRate_hint),
-                (int) (100 * mCheckInRate)));
-        backButton = (ButtonFlat) findViewById(R.id.button_back);
-        backButton.setOnClickListener(new OnClickListener() {
+	@Override
+	protected void initView() {
+		initPieChart();
+		hintTextView = (TextView) findViewById(R.id.textview_attendance_rate_hint);
+		hintTextView.setText(String.format(
+				getResources().getString(R.string.checkinRate_hint),
+				(int) (100 * mCheckInRate)));
+		backButton = (ButtonFlat) findViewById(R.id.button_back);
+		backButton.setOnClickListener(new OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-        missCheckInListView = (ListView) findViewById(R.id.listview_not_ckeckin_stu);
-        mAdapter = new ListAdapterMissCheckIn(this, mMissedCheckInStusList);
-        missCheckInListView.setAdapter(mAdapter);
-    }
+			@Override
+			public void onClick(View v) {
+				finish();
+			}
+		});
+		missCheckInListView = (ListView) findViewById(R.id.listview_not_ckeckin_stu);
+		mAdapter = new ListAdapterMissCheckIn(this, mMissedCheckInStusList);
+		missCheckInListView.setAdapter(mAdapter);
+	}
 
-    @Override
-    protected void initData() {
-        String flagString = getIntent().getStringExtra("ACTIVITY_TAG");
-        mMissedCheckInStusList = new ArrayList<StudentInfo>();
-        if (flagString.equals(LookCheckInActivity.TAG)) {
-            mCurrentCheckInRecordInfo =
-                    (CheckInRecordInfo) getIntent().getSerializableExtra(
-                            LookCheckInActivity.CURRENT_CHECKIN_RECORD_KEY);
-            mMissedCheckInStusList = mCurrentCheckInRecordInfo.getMissedCheckInStus();
-            mCheckInRate = mCurrentCheckInRecordInfo.getSignRate();
-        } else if (flagString.equals(StartCheckInActivity.TAG)) {
-            mCurrentCheckInRecordInfo =
-                    (CheckInRecordInfo) getIntent().getSerializableExtra(
-                            StartCheckInActivity.CURRENT_CHECKIN_RECORD_KEY);
-            mMissedCheckInStusList = mCurrentCheckInRecordInfo.getMissedCheckInStus();
-            mCheckInRate = mCurrentCheckInRecordInfo.getSignRate();
-        }
+	@Override
+	protected void initData() {
+		String flagString = getIntent().getStringExtra("ACTIVITY_TAG");
+		mMissedCheckInStusList = new ArrayList<StudentInfo>();
+		if (flagString.equals(LookCheckInActivity.TAG)) {
+			mCurrentCheckInRecordInfo = (CheckInRecordInfo) getIntent()
+					.getSerializableExtra(
+							LookCheckInActivity.CURRENT_CHECKIN_RECORD_KEY);
+			mMissedCheckInStusList = mCurrentCheckInRecordInfo
+					.getMissedCheckInStus();
+			mCheckInRate = mCurrentCheckInRecordInfo.getSignRate();
+		} else if (flagString.equals(StartCheckInActivity.TAG)) {
+			mCurrentCheckInRecordInfo = (CheckInRecordInfo) getIntent()
+					.getSerializableExtra(
+							StartCheckInActivity.CURRENT_CHECKIN_RECORD_KEY);
+			mMissedCheckInStusList = mCurrentCheckInRecordInfo
+					.getMissedCheckInStus();
+			mCheckInRate = mCurrentCheckInRecordInfo.getSignRate();
+		}
 
-    }
+	}
 
-    private void initPieChart() {
-        mChart = (PieChart) findViewById(R.id.piechart);
-        setData(mChart, mInfoStrings);
-        setDefaultPieChartStyle(mChart);
-        new Handler().postDelayed(new Runnable() {
+	private void initPieChart() {
+		mChart = (PieChart) findViewById(R.id.piechart);
+		setData(mChart, mInfoStrings);
+		setDefaultPieChartStyle(mChart);
+		new Handler().postDelayed(new Runnable() {
 
-            @Override
-            public void run() {
-                mChart.animateY(mAnimateDuration);
-                mChart.setVisibility(View.VISIBLE);
-            }
-        }, mDealy);
-    }
+			@Override
+			public void run() {
+				mChart.animateY(mAnimateDuration);
+				mChart.setVisibility(View.VISIBLE);
+			}
+		}, mDealy);
+	}
 
-    private void setData(PieChart pieChart, String[] infoStrings) {
+	private void setData(PieChart pieChart, String[] infoStrings) {
 
-        ArrayList<Entry> yVals1 = new ArrayList<Entry>();
-        yVals1.add(new Entry(mCheckInRate, 0));
-        yVals1.add(new Entry(1.0f - mCheckInRate, 1));
-        ArrayList<String> xVals = new ArrayList<String>();
-        for (int i = 0; i < 2; i++)
-            xVals.add(infoStrings[i % infoStrings.length]);
+		ArrayList<Entry> yVals1 = new ArrayList<Entry>();
+		yVals1.add(new Entry(mCheckInRate, 0));
+		yVals1.add(new Entry(1.0f - mCheckInRate, 1));
+		ArrayList<String> xVals = new ArrayList<String>();
+		for (int i = 0; i < 2; i++)
+			xVals.add(infoStrings[i % infoStrings.length]);
 
-        PieDataSet dataSet = new PieDataSet(yVals1, " ");
-        dataSet.setSliceSpace(3f);
-        dataSet.setSelectionShift(5f);
-        ArrayList<Integer> colors = new ArrayList<Integer>();
-        colors.add(Color.rgb(192, 255, 140));
-        colors.add(Color.GRAY);
-        colors.add(ColorTemplate.getHoloBlue());
-        dataSet.setColors(colors);
+		PieDataSet dataSet = new PieDataSet(yVals1, " ");
+		dataSet.setSliceSpace(3f);
+		dataSet.setSelectionShift(5f);
+		ArrayList<Integer> colors = new ArrayList<Integer>();
+		colors.add(Color.rgb(192, 255, 140));
+		colors.add(Color.GRAY);
+		colors.add(ColorTemplate.getHoloBlue());
+		dataSet.setColors(colors);
 
-        PieData data = new PieData(xVals, dataSet);
-        data.setValueFormatter(new PercentFormatter());
-        data.setValueTextSize(11f);
-        data.setValueTextColor(Color.BLUE);
+		PieData data = new PieData(xVals, dataSet);
+		data.setValueFormatter(new PercentFormatter());
+		data.setValueTextSize(11f);
+		data.setValueTextColor(Color.BLUE);
 
-        pieChart.setData(data);
-        pieChart.highlightValues(null);
-        pieChart.invalidate();
-    }
+		pieChart.setData(data);
+		pieChart.highlightValues(null);
+		pieChart.invalidate();
+	}
 
-    private void setDefaultPieChartStyle(PieChart pieChart) {
-        pieChart.setUsePercentValues(true);
-        pieChart.setClickable(false);
-        pieChart.setTouchEnabled(false);
-        pieChart.setDescription("");
-        pieChart.setDrawHoleEnabled(false);
-        pieChart.setRotationAngle(0);
-        pieChart.setRotationEnabled(false);
-        pieChart.setVisibility(View.INVISIBLE);
-        Legend l = pieChart.getLegend();
-        l.setEnabled(false);
-    }
+	private void setDefaultPieChartStyle(PieChart pieChart) {
+		pieChart.setUsePercentValues(true);
+		pieChart.setClickable(false);
+		pieChart.setTouchEnabled(false);
+		pieChart.setDescription("");
+		pieChart.setDrawHoleEnabled(false);
+		pieChart.setRotationAngle(0);
+		pieChart.setRotationEnabled(false);
+		pieChart.setVisibility(View.INVISIBLE);
+		Legend l = pieChart.getLegend();
+		l.setEnabled(false);
+	}
 }

@@ -21,59 +21,60 @@ import com.kcbTeam.R;
 
 public class TestActivity extends BaseActivity {
 
-    private Button startButton;
+	private Button startButton;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.tch_activity_test);
-        initData();
-        initView();
-    }
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.tch_activity_test);
+		initData();
+		initView();
+	}
 
-    @Override
-    protected void initView() {
-        startButton = (Button) findViewById(R.id.button_starttest);
-        startButton.setOnClickListener(this);
+	@Override
+	protected void initView() {
+		startButton = (Button) findViewById(R.id.button_starttest);
+		startButton.setOnClickListener(this);
 
-    }
+	}
 
-    @Override
-    protected void initData() {
+	@Override
+	protected void initData() {
 
-    }
+	}
 
-    @Override
-    public void onClick(View v) {
+	@Override
+	public void onClick(View v) {
 
-        if (v.getId() == R.id.button_starttest) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(TestActivity.this);
-            builder.setTitle(R.string.warmtip).setIcon(R.drawable.ic_launcher)
-                    .setMessage(R.string.tipmessage);
+		if (v.getId() == R.id.button_starttest) {
+			AlertDialog.Builder builder = new AlertDialog.Builder(
+					TestActivity.this);
+			builder.setTitle(R.string.warmtip).setIcon(R.drawable.ic_launcher)
+					.setMessage(R.string.tipmessage);
 
-            builder.setPositiveButton(R.string.tipyes, new OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
+			builder.setPositiveButton(R.string.tipyes, new OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
 
-                    startButton.setVisibility(View.GONE);
-                    TextView tipTextView = (TextView) findViewById(R.id.textview_tip);
-                    tipTextView.setVisibility(View.VISIBLE);
-                }
+					startButton.setVisibility(View.GONE);
+					TextView tipTextView = (TextView) findViewById(R.id.textview_tip);
+					tipTextView.setVisibility(View.VISIBLE);
+				}
 
-            });
+			});
 
-            builder.setNegativeButton(R.string.tipno, new OnClickListener() {
+			builder.setNegativeButton(R.string.tipno, new OnClickListener() {
 
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
 
-                }
+				}
 
-            });
+			});
 
-            builder.create().show();
+			builder.create().show();
 
-        }
-    }
+		}
+	}
 
 }
