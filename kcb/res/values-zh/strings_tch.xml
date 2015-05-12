@@ -32,6 +32,8 @@
     <string name="hint_studentcenter_search">搜索学生姓名</string>
     <string name="stu_centre_name">姓名</string>
     <string name="stu_centre_stuId">学号</string>
+    <string name="stu_centre_checkinrate">签到率</string>
+    <string name="stu_centre_correctrate">正确率</string>
     <!-- home page activty end -->
 
 
@@ -80,6 +82,14 @@
     <string name="dialog_title_optionD">输入D选项</string>
     <string name="delete_success">删除成功</string>
     <!-- EditTestActivity End -->
+
+
+    <!-- Submit Activity Start -->
+    <string name="Go_modify">去修改</string>
+    <string name="settime_hint">请您设置本次答题总时间:</string>
+    <string name="editCouseTest">编辑课堂小测试</string>
+    <string name="sure_submit">确认提交</string>
+    <!-- Submit Activity End -->
 
     <string name="signclass">课堂签到</string>
     <string name="giveupsign">放弃签到</string>
