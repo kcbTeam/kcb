@@ -6,17 +6,16 @@
     android:background="@color/activity_background" >
 
     <TextView
-        android:id="@+id/textview_appname"
+        android:id="@+id/textview_username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/activity_header_shadow"
-        android:text="@string/app_name" />
+        android:background="@drawable/activity_header_shadow" />
 
     <com.kcb.library.view.buttonflat.ButtonFlat
-        android:id="@+id/button_exit"
+        android:id="@+id/button_setting"
         style="@style/common_top_button"
         android:layout_alignParentRight="true"
-        android:text="@string/destroy"
+        android:text="@string/setting"
         buttonflat:rippleSpeed="6" />
 
     <fragment
@@ -24,14 +23,14 @@
         android:name="com.kcb.student.fragment.CheckInFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/button_exit" />
+        android:layout_below="@id/button_setting" />
 
     <fragment
         android:id="@+id/fragment_test"
         android:name="com.kcb.student.fragment.TestFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/button_exit" />
+        android:layout_below="@id/textview_username" />
 
     <LinearLayout
         android:id="@+id/buttonflats"
@@ -52,7 +51,7 @@
             android:text="@string/testbtn"
             buttonflat:rippleSpeed="18" />
     </LinearLayout>
-    
+
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"

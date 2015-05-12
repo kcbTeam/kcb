@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.TextView;
 
 import com.kcb.common.application.KAccount;
 import com.kcb.common.base.BaseFragmentActivity;
@@ -33,7 +34,8 @@ public class HomeActivity extends BaseFragmentActivity {
     private final int INDEX_TEST = 1;
     private final int INDEX_STUCENTER = 2;
 
-    private ButtonFlat exitButton;
+    private TextView userNameTextView;
+    private ButtonFlat settingButton;
     private ButtonFlat checkInButton;
     private ButtonFlat testButton;
     private ButtonFlat stuCenterButton;
@@ -42,6 +44,7 @@ public class HomeActivity extends BaseFragmentActivity {
     private TestFragment mTestFragment;
     private StuCentreFragment mStuCentreFragment;
 
+    // TODO why need? can replace by index?
     private Fragment mCurrentFragment;
 
     @Override
@@ -54,8 +57,12 @@ public class HomeActivity extends BaseFragmentActivity {
 
     @Override
     protected void initView() {
-        exitButton = (ButtonFlat) findViewById(R.id.button_exit);
-        exitButton.setOnClickListener(this);
+        userNameTextView = (TextView) findViewById(R.id.textview_username);
+        userNameTextView.setText(KAccount.getAccountName());
+
+        settingButton = (ButtonFlat) findViewById(R.id.button_setting);
+        settingButton.setOnClickListener(this);
+
         checkInButton = (ButtonFlat) findViewById(R.id.button_checkin);
         checkInButton.setOnClickListener(this);
         testButton = (ButtonFlat) findViewById(R.id.button_test);
@@ -77,7 +84,8 @@ public class HomeActivity extends BaseFragmentActivity {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.button_exit:
+            case R.id.button_setting:
+                // TODO goto setting activity;
                 DialogUtil.showNormalDialog(this, R.string.destroy, R.string.destroy_tip,
                         R.string.sure, new OnClickListener() {
 

@@ -4,7 +4,7 @@
     <!-- Commom Start -->
     <string name="cancel">取消</string>
     <string name="confirm">确定</string>
-    <string name="destroy">注销</string>
+    <string name="setting">设置</string>
     <!-- Commom End -->
 
 
@@ -45,8 +45,8 @@
     <string name="signresult">查看我的签到</string>
     <string name="statistics">Y老师一共用课程宝签到10次，其中你签到成功8次。到课率为80%。</string>
     <!-- CheckInResultActivity End -->
-    
-    
+
+
     <!-- SubmitActivity Start -->
     <string name="testsubmit">课堂小测试---拉普拉斯变换</string>
     <string name="remainingtime">离答题结束还有5分钟</string>
@@ -61,8 +61,8 @@
     <string name="askcontent">请问你是否确认提交本次测试内容？</string>
     <string name="submitsuccess">提交成功</string>
     <!-- SubmitActivity End -->
-    
-    
+
+
     <!-- TestResultActivity Start -->
     <string name="comeback">返回</string>
     <string name="testresult">查看测试结果</string>
