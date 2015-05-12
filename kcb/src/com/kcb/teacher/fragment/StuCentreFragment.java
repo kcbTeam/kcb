@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,11 +26,12 @@ import com.kcbTeam.R;
  * @author: ZQJ
  * @date: 2015年4月24日 下午3:24:10
  */
-public class StuCentreFragment extends BaseFragment implements OnItemClickListener {
+public class StuCentreFragment extends BaseFragment implements OnItemClickListener, TextWatcher {
 
     private ListView mStudentList;
     private ListAdapterStudent mAdapter;
     private List<StudentInfo> mList;
+    private List<StudentInfo> mTempList;
 
     private FloatingEditText searchEditText;
 
@@ -45,11 +48,12 @@ public class StuCentreFragment extends BaseFragment implements OnItemClickListen
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.tch_fragment_stucentre, container, false);
         mStudentList = (ListView) view.findViewById(R.id.listview_student);
-        mAdapter = new ListAdapterStudent(getActivity(), mList);
+        mAdapter = new ListAdapterStudent(getActivity(), mTempList);
         mStudentList.setAdapter(mAdapter);
         mStudentList.setOnItemClickListener(this);
 
         searchEditText = (FloatingEditText) view.findViewById(R.id.edittext_search);
+        searchEditText.addTextChangedListener(this);
 
         return view;
     }
@@ -72,5 +76,30 @@ public class StuCentreFragment extends BaseFragment implements OnItemClickListen
         mList.clear();
         mList.add(new StudentInfo("zqj", "1004210254", 10, 3, 10, 20));
         mList.add(new StudentInfo("zh", "1104210256", 10, 4, 5, 8));
+        mList.add(new StudentInfo("萧远山", "1104210256", 10, 4, 5, 8));
+        mList.add(new StudentInfo("慕容博", "1104210256", 10, 4, 5, 8));
+        mList.add(new StudentInfo("扫地僧", "1104210256", 10, 4, 5, 8));
+        mTempList = new ArrayList<StudentInfo>();
+        mTempList.addAll(mList);
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {}
+
+    @Override
+    public void afterTextChanged(Editable s) {
+        mTempList.clear();
+        mTempList.addAll(mList);
+        String searchContent = searchEditText.getText().toString();
+        for (int i = 0; i < mTempList.size(); i++) {
+            if (!mTempList.get(i).getStudentName().startsWith(searchContent)) {
+                mTempList.remove(i);
+                i--;
+            }
+        }
+        mAdapter.notifyDataSetChanged();
     }
 }

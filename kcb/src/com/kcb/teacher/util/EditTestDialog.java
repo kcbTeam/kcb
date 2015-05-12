@@ -19,6 +19,13 @@ import android.widget.TextView;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcbTeam.R;
 
+/**
+ * 
+ * @className: EditTestDialog
+ * @description: 
+ * @author: ZQJ
+ * @date: 2015年5月12日 下午3:07:37
+ */
 public class EditTestDialog extends android.app.Dialog {
 
     private View backgroundView;
