@@ -12,40 +12,39 @@ import java.util.List;
  */
 public class CheckInRecordInfo implements Serializable {
 
-	private static final long serialVersionUID = 3L;
-	private String mSignDate;
-	private float mSignRate;
-	private List<StudentInfo> mMissedCheckInStus;
+    private static final long serialVersionUID = 3L;
+    private String mSignDate;
+    private float mSignRate;
+    private List<StudentInfo> mMissedCheckInStus;
 
-	public CheckInRecordInfo(String signDate, float signRate,
-			List<StudentInfo> missedCheckInStus) {
-		mSignDate = signDate;
-		mSignRate = signRate;
-		mMissedCheckInStus = missedCheckInStus;
-	}
+    public CheckInRecordInfo(String signDate, float signRate, List<StudentInfo> missedCheckInStus) {
+        mSignDate = signDate;
+        mSignRate = signRate;
+        mMissedCheckInStus = missedCheckInStus;
+    }
 
-	public void setSignDate(String signDate) {
-		mSignDate = signDate;
-	}
+    public void setSignDate(String signDate) {
+        mSignDate = signDate;
+    }
 
-	public void setSignRate(float signRate) {
-		mSignRate = signRate;
-	}
+    public void setSignRate(float signRate) {
+        mSignRate = signRate;
+    }
 
-	public String getSignDate() {
-		return this.mSignDate;
-	}
+    public String getSignDate() {
+        return this.mSignDate;
+    }
 
-	public float getSignRate() {
-		return this.mSignRate;
-	}
+    public float getSignRate() {
+        return this.mSignRate;
+    }
 
-	public List<StudentInfo> getMissedCheckInStus() {
-		return this.mMissedCheckInStus;
-	}
+    public List<StudentInfo> getMissedCheckInStus() {
+        return this.mMissedCheckInStus;
+    }
 
-	public void setMissedCheckInStus(List<StudentInfo> mMissedCheckInStus) {
-		this.mMissedCheckInStus = mMissedCheckInStus;
-	}
+    public void setMissedCheckInStus(List<StudentInfo> mMissedCheckInStus) {
+        this.mMissedCheckInStus = mMissedCheckInStus;
+    }
 
 }
