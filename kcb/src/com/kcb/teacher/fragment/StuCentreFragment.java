@@ -44,22 +44,22 @@ public class StuCentreFragment extends BaseFragment implements OnItemClickListen
     private final int INDEX_CHECKIN_RATE = 1;
     private final int INDEX_CORRECT_RATE = 2;
 
-    private ListView mStudentList;
-    private ListAdapterStudent mAdapter;
-    private List<StudentInfo> mList;
-    private List<StudentInfo> mTempList;
-
     private FloatingEditText searchEditText;
     private ButtonFlat sortButton;
     private TextView stuId;
     private TextView stuCheckInRate;
     private TextView stuCorrectRate;
     private View mCurrentView = null;
-    private int sortSwitch = INDEX_ID;
 
+    private int mSortSwitch = INDEX_ID;
+    private ListView mStudentList;
+    private ListAdapterStudent mAdapter;
+    private List<StudentInfo> mList;
+    private List<StudentInfo> mTempList;
     private CompareById idComparator;
     private CompareByCheckInRate checkInRateComparator;
     private CompareByCorrectRate correctRateComparator;
+
     public static final String CURRENT_STU_KEY = "cunrrent_stu";
 
     @Override
@@ -110,6 +110,11 @@ public class StuCentreFragment extends BaseFragment implements OnItemClickListen
 
     @Override
     protected void initData() {
+
+        idComparator = new CompareById();
+        correctRateComparator = new CompareByCorrectRate();
+        checkInRateComparator = new CompareByCheckInRate();
+
         mList = new ArrayList<StudentInfo>();
         mList.clear();
         mList.add(new StudentInfo("令狐", "1004210254", 10, 3, 10, 20));
@@ -122,11 +127,9 @@ public class StuCentreFragment extends BaseFragment implements OnItemClickListen
         mList.add(new StudentInfo("萧峰", "1004210232", 10, 8, 5, 15));
         mList.add(new StudentInfo("东方", "1004210214", 10, 9, 5, 16));
         mList.add(new StudentInfo("查良镛", "1004210228", 10, 10, 5, 13));
+        Collections.sort(mList, idComparator);
         mTempList = new ArrayList<StudentInfo>();
         mTempList.addAll(mList);
-        idComparator = new CompareById();
-        correctRateComparator = new CompareByCorrectRate();
-        checkInRateComparator = new CompareByCheckInRate();
     }
 
     @Override
@@ -153,6 +156,8 @@ public class StuCentreFragment extends BaseFragment implements OnItemClickListen
             mTempList.remove(i);
             i--;
         }
+        mSortSwitch = 0;
+        onClick(sortButton);
         mAdapter.notifyDataSetChanged();
     }
 
@@ -160,8 +165,8 @@ public class StuCentreFragment extends BaseFragment implements OnItemClickListen
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.button_sort:
-                sortSwitch = sortSwitch % 3;
-                switch (sortSwitch) {
+                mSortSwitch = mSortSwitch % 3;
+                switch (mSortSwitch) {
                     case INDEX_ID:
                         Collections.sort(mTempList, idComparator);
                         setTextViewColor(INDEX_ID);
@@ -180,7 +185,7 @@ public class StuCentreFragment extends BaseFragment implements OnItemClickListen
                     default:
                         break;
                 }
-                sortSwitch++;
+                mSortSwitch++;
                 break;
             default:
                 break;
