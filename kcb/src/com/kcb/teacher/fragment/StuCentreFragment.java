@@ -1,6 +1,7 @@
 package com.kcb.teacher.fragment;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
@@ -16,8 +17,12 @@ import android.widget.ListView;
 
 import com.kcb.common.base.BaseFragment;
 import com.kcb.library.view.FloatingEditText;
+import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.teacher.adapter.ListAdapterStudent;
 import com.kcb.teacher.model.StudentInfo;
+import com.kcb.teacher.util.CompareByCheckInRate;
+import com.kcb.teacher.util.CompareByCorrectRate;
+import com.kcb.teacher.util.CompareById;
 import com.kcb.teacher.util.NameUtils;
 import com.kcbTeam.R;
 
@@ -38,8 +43,13 @@ public class StuCentreFragment extends BaseFragment implements OnItemClickListen
     private List<StudentInfo> mTempList;
 
     private FloatingEditText searchEditText;
+    private ButtonFlat sortButton;
     private View mCurrentView = null;
+    private int sortSwitch = 0;
 
+    private CompareById idComparator;
+    private CompareByCheckInRate checkInRateComparator;
+    private CompareByCorrectRate correctRateComparator;
     public static final String CURRENT_STU_KEY = "cunrrent_stu";
 
     @Override
@@ -60,6 +70,8 @@ public class StuCentreFragment extends BaseFragment implements OnItemClickListen
         searchEditText = (FloatingEditText) view.findViewById(R.id.edittext_search);
         searchEditText.addTextChangedListener(this);
 
+        sortButton = (ButtonFlat) view.findViewById(R.id.button_sort);
+        sortButton.setOnClickListener(this);
         return view;
     }
 
@@ -85,17 +97,21 @@ public class StuCentreFragment extends BaseFragment implements OnItemClickListen
         mList = new ArrayList<StudentInfo>();
         mList.clear();
         mList.add(new StudentInfo("令狐", "1004210254", 10, 3, 10, 20));
-        mList.add(new StudentInfo("杨过", "1004210256", 10, 4, 5, 8));
-        mList.add(new StudentInfo("萧远山", "1004210257", 10, 4, 5, 8));
-        mList.add(new StudentInfo("慕容博", "1004210258", 10, 4, 5, 8));
-        mList.add(new StudentInfo("扫地僧", "1004210259", 10, 4, 5, 8));
-        mList.add(new StudentInfo("向问天", "1004210245", 10, 4, 5, 8));
-        mList.add(new StudentInfo("任我行", "1004210221", 10, 4, 5, 8));
-        mList.add(new StudentInfo("萧峰", "1004210232", 10, 4, 5, 8));
-        mList.add(new StudentInfo("东方", "1004210214", 10, 4, 5, 8));
-        mList.add(new StudentInfo("查良镛", "1004210228", 10, 4, 5, 8));
+        mList.add(new StudentInfo("杨过", "1004210256", 10, 4, 5, 23));
+        mList.add(new StudentInfo("萧远山", "1004210257", 10, 1, 5, 14));
+        mList.add(new StudentInfo("慕容博", "1004210258", 10, 2, 5, 13));
+        mList.add(new StudentInfo("扫地僧", "1004210259", 10, 6, 5, 14));
+        mList.add(new StudentInfo("向问天", "1004210245", 10, 7, 5, 15));
+        mList.add(new StudentInfo("任我行", "1004210221", 10, 5, 5, 14));
+        mList.add(new StudentInfo("萧峰", "1004210232", 10, 8, 5, 15));
+        mList.add(new StudentInfo("东方", "1004210214", 10, 9, 5, 16));
+        mList.add(new StudentInfo("查良镛", "1004210228", 10, 10, 5, 13));
         mTempList = new ArrayList<StudentInfo>();
         mTempList.addAll(mList);
+        idComparator = new CompareById();
+        correctRateComparator = new CompareByCorrectRate();
+        checkInRateComparator = new CompareByCheckInRate();
+        Collections.sort(mTempList, idComparator);
     }
 
     @Override
@@ -118,11 +134,38 @@ public class StuCentreFragment extends BaseFragment implements OnItemClickListen
             } catch (BadHanyuPinyinOutputFormatCombination e) {
                 e.printStackTrace();
             }
-            if (!name.startsWith(searchContent)) {
-                mTempList.remove(i);
-                i--;
-            }
+
+            mTempList.remove(i);
+            i--;
         }
         mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.button_sort:
+                sortSwitch = sortSwitch % 3;
+                switch (sortSwitch) {
+                    case 0:
+                        Collections.sort(mTempList, idComparator);
+                        mAdapter.notifyDataSetChanged();
+                        break;
+                    case 1:
+                        Collections.sort(mTempList, checkInRateComparator);
+                        mAdapter.notifyDataSetChanged();
+                        break;
+                    case 2:
+                        Collections.sort(mTempList, correctRateComparator);
+                        mAdapter.notifyDataSetChanged();
+                        break;
+                    default:
+                        break;
+                }
+                sortSwitch++;
+                break;
+            default:
+                break;
+        }
     }
 }
