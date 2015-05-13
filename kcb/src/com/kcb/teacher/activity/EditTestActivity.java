@@ -153,7 +153,15 @@ public class EditTestActivity extends BaseActivity {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.delete_button:
-                clickDelete();
+                DialogUtil.showNormalDialog(this, R.string.dialog_title_delete,
+                        R.string.delete_msg, R.string.sure, new OnClickListener() {
+
+                            @Override
+                            public void onClick(View v) {
+                                clickDelete();
+                            }
+                        }, R.string.cancel, null);
+
                 break;
             case R.id.pagerbutton_last:
                 clickLast();
@@ -162,7 +170,14 @@ public class EditTestActivity extends BaseActivity {
                 clickNext();
                 break;
             case R.id.add_button:
-                clickAdd();
+                DialogUtil.showNormalDialog(this, R.string.dialog_title_add, R.string.add_msg,
+                        R.string.sure, new OnClickListener() {
+
+                            @Override
+                            public void onClick(View v) {
+                                clickAdd();
+                            }
+                        }, R.string.cancel, null);
                 break;
             case R.id.edittext_question:
                 mPositionIndex = IndexOfQuestion;
