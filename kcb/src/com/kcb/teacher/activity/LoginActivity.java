@@ -35,106 +35,105 @@ import com.kcbTeam.R;
  */
 public class LoginActivity extends BaseActivity {
 
-	private static final String TAG = LoginActivity.class.getName();
+    private static final String TAG = LoginActivity.class.getName();
 
-	private FloatingEditText idEditText;
-	private FloatingEditText passwordEditText;
-	private PaperButton loginButton;
-	private SmoothProgressBar loginProgressBar;
+    private FloatingEditText idEditText;
+    private FloatingEditText passwordEditText;
+    private PaperButton loginButton;
+    private SmoothProgressBar loginProgressBar;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.tch_activity_login);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.tch_activity_login);
 
-		initView();
-	}
+        initView();
+    }
 
-	@Override
-	protected void initView() {
-		idEditText = (FloatingEditText) findViewById(R.id.edittext_id);
-		passwordEditText = (FloatingEditText) findViewById(R.id.edittext_password);
-		loginButton = (PaperButton) findViewById(R.id.button_login);
-		loginButton.setOnClickListener(mClickListener);
-		loginProgressBar = (SmoothProgressBar) findViewById(R.id.progressbar_login);
-	}
+    @Override
+    protected void initView() {
+        idEditText = (FloatingEditText) findViewById(R.id.edittext_id);
+        passwordEditText = (FloatingEditText) findViewById(R.id.edittext_password);
+        loginButton = (PaperButton) findViewById(R.id.button_login);
+        loginButton.setOnClickListener(mClickListener);
+        loginProgressBar = (SmoothProgressBar) findViewById(R.id.progressbar_login);
+    }
 
-	@Override
-	protected void initData() {
-	}
+    @Override
+    protected void initData() {}
 
-	private DelayClickListener mClickListener = new DelayClickListener(
-			DelayClickListener.DELAY_PAPER_BUTTON) {
+    private DelayClickListener mClickListener = new DelayClickListener(
+            DelayClickListener.DELAY_PAPER_BUTTON) {
 
-		@Override
-		public void doClick(View v) {
-			final String id = idEditText.getText().toString().trim();
-			final String password = passwordEditText.getText().toString();
-			if (TextUtils.isEmpty(id)) {
-				idEditText.requestFocus();
-				AnimationUtil.shake(idEditText);
-			} else if (TextUtils.isEmpty(password)) {
-				passwordEditText.requestFocus();
-				AnimationUtil.shake(passwordEditText);
-			} else {
-				loginProgressBar.setVisibility(View.VISIBLE);
-				new Handler().postDelayed(new Runnable() {
+        @Override
+        public void doClick(View v) {
+            final String id = idEditText.getText().toString().trim();
+            final String password = passwordEditText.getText().toString();
+            if (TextUtils.isEmpty(id)) {
+                idEditText.requestFocus();
+                AnimationUtil.shake(idEditText);
+            } else if (TextUtils.isEmpty(password)) {
+                passwordEditText.requestFocus();
+                AnimationUtil.shake(passwordEditText);
+            } else {
+                if (loginProgressBar.getVisibility() == View.VISIBLE) {
+                    return;
+                }
+                loginProgressBar.setVisibility(View.VISIBLE);
+                new Handler().postDelayed(new Runnable() {
 
-					@Override
-					public void run() {
-						// TODO save teacher's name after login success
-						KAccount account = new KAccount(KAccount.TYPE_TCH, id,
-								"name");
-						KAccount.saveAccount(account);
-						Intent intent = new Intent(LoginActivity.this,
-								HomeActivity.class);
-						startActivity(intent);
-						finish();
-					}
-				}, 1000);
+                    @Override
+                    public void run() {
+                        // TODO save teacher's name after login success
+                        KAccount account = new KAccount(KAccount.TYPE_TCH, id, "name");
+                        KAccount.saveAccount(account);
+                        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                }, 1000);
 
-				// TODO request server
-				JsonObjectRequest request = new JsonObjectRequest(Method.POST,
-						UrlUtil.getStuLoginUrl(id, password), "",
-						new Listener<JSONObject>() {
+                // TODO request server
+                JsonObjectRequest request =
+                        new JsonObjectRequest(Method.POST, UrlUtil.getStuLoginUrl(id, password),
+                                "", new Listener<JSONObject>() {
 
-							@Override
-							public void onResponse(JSONObject response) {
-							}
-						}, new ErrorListener() {
+                                    @Override
+                                    public void onResponse(JSONObject response) {}
+                                }, new ErrorListener() {
 
-							@Override
-							public void onErrorResponse(VolleyError error) {
-								// loginProgressBar.hide(LoginActivity.this);
-							}
-						});
-				RequestUtil.getInstance().addToRequestQueue(request, TAG);
-			}
-		}
-	};
+                                    @Override
+                                    public void onErrorResponse(VolleyError error) {
+                                        // loginProgressBar.hide(LoginActivity.this);
+                                    }
+                                });
+                RequestUtil.getInstance().addToRequestQueue(request, TAG);
+            }
+        }
+    };
 
-	@Override
-	public void onBackPressed() {
-		finish();
-		StartActivity.restart(this);
-	}
+    @Override
+    public void onBackPressed() {
+        finish();
+        StartActivity.restart(this);
+    }
 
-	@Override
-	protected void onDestroy() {
-		super.onDestroy();
-		RequestUtil.getInstance().cancelPendingRequests(TAG);
-	}
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        RequestUtil.getInstance().cancelPendingRequests(TAG);
+    }
 
-	/**
-	 * 
-	 * @title: start
-	 * @description: if delete account in HomeActivity, need show this Activity;
-	 * @author: wanghang
-	 * @date: 2015-5-10 上午11:13:50
-	 * @param context
-	 */
-	public static void start(Context context) {
-		Intent intent = new Intent(context, LoginActivity.class);
-		context.startActivity(intent);
-	}
+    /**
+     * 
+     * @title: start
+     * @description: if delete account in HomeActivity, need show this Activity;
+     * @author: wanghang
+     * @date: 2015-5-10 上午11:13:50
+     * @param context
+     */
+    public static void start(Context context) {
+        Intent intent = new Intent(context, LoginActivity.class);
+        context.startActivity(intent);
+    }
 }

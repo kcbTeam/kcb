@@ -1,4 +1,6 @@
-package com.kcb.library.view;
+package com.kcb.common.view;
+
+import java.util.List;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -12,25 +14,40 @@ import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.kcb.library.view.buttonflat.ButtonFlat;
-import com.kcbTeam.kcblibrary.R;
+import com.kcb.teacher.adapter.ListAdapterEdit;
+import com.kcbTeam.R;
 
-public class MaterialDialog extends android.app.Dialog {
+/**
+ * 
+ * @className: MaterialListDialog
+ * @description:
+ * @author: ljx
+ * @date: 2015��5��7�� ����10:27:09
+ */
+
+public class MaterialListDialog extends android.app.Dialog {
 
     private View backgroundView;
     private View contentView;
 
     private TextView titleTextView;
-    private TextView messageTextView;
+    private ListView messageListView;
     private ButtonFlat sureButton;
     private ButtonFlat cancelButton;
 
     private Context mContext;
+    private ListAdapterEdit mAdapter;
 
-    public MaterialDialog(Context context) {
+    public interface OnClickSureListener {
+        void onClick(View view, int position);
+    }
+
+    public MaterialListDialog(Context context) {
         super(context, android.R.style.Theme_Translucent);
 
         mContext = context;
@@ -40,7 +57,7 @@ public class MaterialDialog extends android.app.Dialog {
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.material_dialog);
+        setContentView(R.layout.material_list_dialog);
 
         backgroundView = (RelativeLayout) findViewById(R.id.dialog_rootView);
         backgroundView.setOnTouchListener(new OnTouchListener() {
@@ -59,7 +76,7 @@ public class MaterialDialog extends android.app.Dialog {
         contentView = (RelativeLayout) findViewById(R.id.contentDialog);
 
         titleTextView = (TextView) findViewById(R.id.title);
-        messageTextView = (TextView) findViewById(R.id.message);
+        messageListView = (ListView) findViewById(R.id.listmessage);
         sureButton = (ButtonFlat) findViewById(R.id.button_accept);
         cancelButton = (ButtonFlat) findViewById(R.id.button_cancel);
     }
@@ -88,7 +105,7 @@ public class MaterialDialog extends android.app.Dialog {
                 contentView.post(new Runnable() {
                     @Override
                     public void run() {
-                        MaterialDialog.super.dismiss();
+                        MaterialListDialog.super.dismiss();
                     }
                 });
             }
@@ -115,32 +132,27 @@ public class MaterialDialog extends android.app.Dialog {
     /**
      * step 2
      */
-    public void setMessage(int resid) {
-        messageTextView.setText(resid);
-    }
 
-    public void setMessage(CharSequence text) {
-        messageTextView.setText(text);
+    public void setAdapter(List<String> mStrings) {
+        mAdapter = new ListAdapterEdit(mContext, mStrings);
+        messageListView.setAdapter(mAdapter);
     }
 
     /**
      * step 3
      */
-    public void setSureButton(@NonNull int resid, final View.OnClickListener listener) {
-        if (resid < 0) {
-            return;
-        }
+    public void setSureButton(@NonNull int resid, OnClickSureListener listener) {
         setSureButton(mContext.getResources().getString(resid), listener);
     }
 
-    public void setSureButton(@NonNull CharSequence text, final View.OnClickListener listener) {
+    public void setSureButton(@NonNull CharSequence text, final OnClickSureListener listener) {
         sureButton.setText(text);
         sureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dismiss();
                 if (null != listener) {
-                    listener.onClick(v);
+                    listener.onClick(v, mAdapter.getSelectedIndex());
                 }
             }
         });

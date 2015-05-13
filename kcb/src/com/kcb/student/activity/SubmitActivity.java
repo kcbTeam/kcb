@@ -19,46 +19,46 @@ import com.kcbTeam.R;
  */
 public class SubmitActivity extends BaseActivity {
 
-	private ButtonFlat submitButton;
-	private ButtonFlat modifyButton1;
-	private ButtonFlat modifyButton2;
-	private ButtonFlat modifyButton3;
+    private ButtonFlat submitButton;
+    private ButtonFlat modifyButton1;
+    private ButtonFlat modifyButton2;
+    private ButtonFlat modifyButton3;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.stu_activity_submit);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.stu_activity_submit);
 
-		initView();
-	}
+        initView();
+    }
 
-	@Override
-	protected void initView() {
-		ParallaxScrollView parallaxScrollView = (ParallaxScrollView) findViewById(R.id.scrollview_submit);
-		submitButton = (ButtonFlat) findViewById(R.id.button_submit);
-		modifyButton1 = (ButtonFlat) findViewById(R.id.button_modify1);
-		modifyButton2 = (ButtonFlat) findViewById(R.id.button_modify2);
-		modifyButton3 = (ButtonFlat) findViewById(R.id.button_modify3);
+    @Override
+    protected void initView() {
+        ParallaxScrollView parallaxScrollView =
+                (ParallaxScrollView) findViewById(R.id.scrollview_submit);
+        submitButton = (ButtonFlat) findViewById(R.id.button_submit);
+        modifyButton1 = (ButtonFlat) findViewById(R.id.button_modify1);
+        modifyButton2 = (ButtonFlat) findViewById(R.id.button_modify2);
+        modifyButton3 = (ButtonFlat) findViewById(R.id.button_modify3);
 
-		parallaxScrollView.setDiffFactor(0.3f);
-		submitButton.setOnClickListener(this);
-	}
+        parallaxScrollView.setDiffFactor(0.3f);
+        submitButton.setOnClickListener(this);
+    }
 
-	@Override
-	protected void initData() {
-	}
+    @Override
+    protected void initData() {}
 
-	@Override
-	public void onClick(View v) {
-		DialogUtil.showNormalDialog(this, R.string.submittip,
-				R.string.askcontent, R.string.ok, new OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        DialogUtil.showNormalDialog(this, R.string.submittip, R.string.askcontent, R.string.ok,
+                new OnClickListener() {
 
-					@Override
-					public void onClick(View v) {
-						ToastUtil.toast(R.string.submitsuccess);
-						finish();
-					}
-				}, R.string.reject, null);
-	}
+                    @Override
+                    public void onClick(View v) {
+                        ToastUtil.toast(R.string.submitsuccess);
+                        finish();
+                    }
+                }, R.string.reject, null);
+    }
 
 }

@@ -8,16 +8,10 @@
 package com.kcbTeam.kcblibrary;
 
 public final class R {
-    public static final class anim {
-        public static int dialog_main_hide=0x7f040000;
-        public static int dialog_main_show=0x7f040001;
-        public static int dialog_root_hide=0x7f040002;
-        public static int dialog_root_show=0x7f040003;
-    }
     public static final class array {
         /**  SmoothProgressBar 
          */
-        public static int gplus_colors=0x7f060000;
+        public static int gplus_colors=0x7f050000;
     }
     public static final class attr {
         /**  in float button indicate if must start with animation 
@@ -437,39 +431,39 @@ containing a value of this type.
         public static int value=0x7f010015;
     }
     public static final class bool {
-        public static int spb_default_mirror_mode=0x7f0a0001;
-        public static int spb_default_progressiveStart_activated=0x7f0a0002;
-        public static int spb_default_reversed=0x7f0a0000;
+        public static int spb_default_mirror_mode=0x7f090001;
+        public static int spb_default_progressiveStart_activated=0x7f090002;
+        public static int spb_default_reversed=0x7f090000;
     }
     public static final class color {
         /**  FloatingEditText Default 
          */
-        public static int floating_edit_text_color=0x7f050009;
-        public static int floating_edit_text_error_color=0x7f05000b;
-        public static int floating_edit_text_highlighted_color=0x7f05000a;
-        public static int gplus_color_1=0x7f050001;
-        public static int gplus_color_2=0x7f050002;
-        public static int gplus_color_3=0x7f050003;
-        public static int gplus_color_4=0x7f050004;
-        public static int material_dialog_thumbColor=0x7f050000;
-        public static int paper_button_color=0x7f050007;
-        public static int paper_button_shadow_color=0x7f050008;
-        public static int paper_text_color=0x7f050006;
+        public static int floating_edit_text_color=0x7f040009;
+        public static int floating_edit_text_error_color=0x7f04000b;
+        public static int floating_edit_text_highlighted_color=0x7f04000a;
+        public static int gplus_color_1=0x7f040001;
+        public static int gplus_color_2=0x7f040002;
+        public static int gplus_color_3=0x7f040003;
+        public static int gplus_color_4=0x7f040004;
+        public static int material_dialog_thumbColor=0x7f040000;
+        public static int paper_button_color=0x7f040007;
+        public static int paper_button_shadow_color=0x7f040008;
+        public static int paper_text_color=0x7f040006;
         /**  SmoothProgressBar 
          */
-        public static int spb_default_color=0x7f05000c;
-        public static int thumbColor=0x7f050005;
+        public static int spb_default_color=0x7f04000c;
+        public static int thumbColor=0x7f040005;
     }
     public static final class dimen {
-        public static int floating_edit_text_underline_height=0x7f070003;
-        public static int floating_edit_text_underline_highlighted_height=0x7f070004;
-        public static int paper_button_corner_radius=0x7f070001;
-        public static int paper_padding=0x7f070002;
+        public static int floating_edit_text_underline_height=0x7f060003;
+        public static int floating_edit_text_underline_highlighted_height=0x7f060004;
+        public static int paper_button_corner_radius=0x7f060001;
+        public static int paper_padding=0x7f060002;
         /**  PaperButton Default 
          */
-        public static int paper_text_size=0x7f070000;
-        public static int spb_default_stroke_separator_length=0x7f070005;
-        public static int spb_default_stroke_width=0x7f070006;
+        public static int paper_text_size=0x7f060000;
+        public static int spb_default_stroke_separator_length=0x7f060005;
+        public static int spb_default_stroke_width=0x7f060006;
     }
     public static final class drawable {
         public static int background_checkbox=0x7f020000;
@@ -484,28 +478,28 @@ containing a value of this type.
         public static int sprite_check=0x7f020009;
     }
     public static final class id {
-        public static int background=0x7f0c000d;
-        public static int background_content=0x7f0c000e;
-        public static int button_accept=0x7f0c0009;
-        public static int button_cancel=0x7f0c000a;
-        public static int content=0x7f0c0010;
-        public static int contentDialog=0x7f0c0005;
-        public static int dialog_rootView=0x7f0c0004;
-        public static int foreground=0x7f0c000f;
-        public static int listmessage=0x7f0c000b;
-        public static int message=0x7f0c0008;
-        public static int message_scrollView=0x7f0c0007;
-        public static int parallax_scroll_widget=0x7f0c000c;
-        public static int shape_bacground=0x7f0c0011;
-        public static int spb_interpolator_accelerate=0x7f0c0000;
-        public static int spb_interpolator_acceleratedecelerate=0x7f0c0001;
-        public static int spb_interpolator_decelerate=0x7f0c0002;
-        public static int spb_interpolator_linear=0x7f0c0003;
-        public static int title=0x7f0c0006;
+        public static int background=0x7f0b000d;
+        public static int background_content=0x7f0b000e;
+        public static int button_accept=0x7f0b0009;
+        public static int button_cancel=0x7f0b000a;
+        public static int content=0x7f0b0010;
+        public static int contentDialog=0x7f0b0005;
+        public static int dialog_rootView=0x7f0b0004;
+        public static int foreground=0x7f0b000f;
+        public static int listmessage=0x7f0b000b;
+        public static int message=0x7f0b0008;
+        public static int message_scrollView=0x7f0b0007;
+        public static int parallax_scroll_widget=0x7f0b000c;
+        public static int shape_bacground=0x7f0b0011;
+        public static int spb_interpolator_accelerate=0x7f0b0000;
+        public static int spb_interpolator_acceleratedecelerate=0x7f0b0001;
+        public static int spb_interpolator_decelerate=0x7f0b0002;
+        public static int spb_interpolator_linear=0x7f0b0003;
+        public static int title=0x7f0b0006;
     }
     public static final class integer {
-        public static int spb_default_interpolator=0x7f080001;
-        public static int spb_default_sections_count=0x7f080000;
+        public static int spb_default_interpolator=0x7f070001;
+        public static int spb_default_sections_count=0x7f070000;
     }
     public static final class layout {
         public static int material_dialog=0x7f030000;
@@ -513,19 +507,19 @@ containing a value of this type.
         public static int view_parallaxscroll=0x7f030002;
     }
     public static final class string {
-        public static int app_name=0x7f090001;
-        public static int cancel=0x7f090003;
-        public static int spb_default_speed=0x7f090000;
-        public static int sure=0x7f090002;
+        public static int app_name=0x7f080001;
+        public static int cancel=0x7f080003;
+        public static int spb_default_speed=0x7f080000;
+        public static int sure=0x7f080002;
     }
     public static final class style {
-        public static int AppBaseTheme=0x7f0b0000;
+        public static int AppBaseTheme=0x7f0a0000;
         /**  Application theme. 
          */
-        public static int AppTheme=0x7f0b0001;
+        public static int AppTheme=0x7f0a0001;
         /**  SmoothProgressBar 
          */
-        public static int SmoothProgressBar=0x7f0b0002;
+        public static int SmoothProgressBar=0x7f0a0002;
     }
     public static final class styleable {
         /**  ButtonFlat Attribute 
