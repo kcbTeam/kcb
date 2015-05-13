@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -14,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.kcb.common.base.BaseFragment;
 import com.kcb.library.view.FloatingEditText;
@@ -37,6 +39,11 @@ public class StuCentreFragment extends BaseFragment implements OnItemClickListen
 
     @SuppressWarnings("unused")
     private static final String TAG = "StuCentreFragment";
+
+    private final int INDEX_ID = 0;
+    private final int INDEX_CHECKIN_RATE = 1;
+    private final int INDEX_CORRECT_RATE = 2;
+
     private ListView mStudentList;
     private ListAdapterStudent mAdapter;
     private List<StudentInfo> mList;
@@ -44,8 +51,11 @@ public class StuCentreFragment extends BaseFragment implements OnItemClickListen
 
     private FloatingEditText searchEditText;
     private ButtonFlat sortButton;
+    private TextView stuId;
+    private TextView stuCheckInRate;
+    private TextView stuCorrectRate;
     private View mCurrentView = null;
-    private int sortSwitch = 0;
+    private int sortSwitch = INDEX_ID;
 
     private CompareById idComparator;
     private CompareByCheckInRate checkInRateComparator;
@@ -72,6 +82,12 @@ public class StuCentreFragment extends BaseFragment implements OnItemClickListen
 
         sortButton = (ButtonFlat) view.findViewById(R.id.button_sort);
         sortButton.setOnClickListener(this);
+
+        stuId = (TextView) view.findViewById(R.id.textview_stuid);
+        stuCheckInRate = (TextView) view.findViewById(R.id.textview_stucheckinrate);
+        stuCorrectRate = (TextView) view.findViewById(R.id.textview_correctrate);
+
+        onClick(sortButton);
         return view;
     }
 
@@ -111,7 +127,6 @@ public class StuCentreFragment extends BaseFragment implements OnItemClickListen
         idComparator = new CompareById();
         correctRateComparator = new CompareByCorrectRate();
         checkInRateComparator = new CompareByCheckInRate();
-        Collections.sort(mTempList, idComparator);
     }
 
     @Override
@@ -147,22 +162,45 @@ public class StuCentreFragment extends BaseFragment implements OnItemClickListen
             case R.id.button_sort:
                 sortSwitch = sortSwitch % 3;
                 switch (sortSwitch) {
-                    case 0:
+                    case INDEX_ID:
                         Collections.sort(mTempList, idComparator);
+                        setTextViewColor(INDEX_ID);
                         mAdapter.notifyDataSetChanged();
                         break;
-                    case 1:
+                    case INDEX_CHECKIN_RATE:
                         Collections.sort(mTempList, checkInRateComparator);
+                        setTextViewColor(INDEX_CHECKIN_RATE);
                         mAdapter.notifyDataSetChanged();
                         break;
-                    case 2:
+                    case INDEX_CORRECT_RATE:
                         Collections.sort(mTempList, correctRateComparator);
+                        setTextViewColor(INDEX_CORRECT_RATE);
                         mAdapter.notifyDataSetChanged();
                         break;
                     default:
                         break;
                 }
                 sortSwitch++;
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void setTextViewColor(int index) {
+        Resources res = getResources();
+        stuId.setTextColor(res.getColor(R.color.black));
+        stuCheckInRate.setTextColor(res.getColor(R.color.black));
+        stuCorrectRate.setTextColor(res.getColor(R.color.black));
+        switch (index) {
+            case INDEX_ID:
+                stuId.setTextColor(res.getColor(R.color.blue));
+                break;
+            case INDEX_CHECKIN_RATE:
+                stuCheckInRate.setTextColor(res.getColor(R.color.blue));
+                break;
+            case INDEX_CORRECT_RATE:
+                stuCorrectRate.setTextColor(res.getColor(R.color.blue));
                 break;
             default:
                 break;

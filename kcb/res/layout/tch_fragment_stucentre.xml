@@ -43,18 +43,21 @@
             android:text="@string/stu_centre_name" />
 
         <TextView
+            android:id="@+id/textview_stuid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
             android:text="@string/stu_centre_stuId" />
 
         <TextView
+            android:id="@+id/textview_stucheckinrate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="70dp"
             android:text="@string/stu_centre_checkinrate" />
 
         <TextView
+            android:id="@+id/textview_correctrate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
