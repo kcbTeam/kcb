@@ -102,6 +102,10 @@
             android:name="com.kcb.teacher.activity.SubmitTest"
             android:screenOrientation="portrait" >
         </activity>
+        <activity
+            android:name="com.kcb.teacher.activity.CheckTest"
+            android:screenOrientation="portrait" >
+        </activity>
         <!-- teacher end -->
     </application>
 
