@@ -32,6 +32,7 @@ public class HomeActivity extends BaseFragmentActivity {
 
     private TextView userNameTextView;
     private ButtonFlat settingButton;
+
     private ButtonFlat checkInButton;
     private ButtonFlat testButton;
 
