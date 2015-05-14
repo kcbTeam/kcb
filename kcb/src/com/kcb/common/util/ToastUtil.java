@@ -6,8 +6,8 @@ import android.widget.Toast;
 import com.kcb.common.application.KApplication;
 
 /**
- * @className: KToast
- * @description: include easy use of toast in UI Thread & child Thread;
+ * @className: ToastUtil
+ * @description: include easy use of toast in UI thread & child Thread (not UI thread);
  * @author: wanghang
  * @date: 2015-3-21 下午9:38:15
  */
@@ -32,7 +32,7 @@ public class ToastUtil {
     /**
      * 
      * @title: toastInThread
-     * @description: toast in child thread;
+     * @description: toast in child thread (not UI thread);
      * @author: hang.wang
      * @date: 2015-4-20 上午10:34:06
      * @param activity

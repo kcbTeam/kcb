@@ -13,7 +13,7 @@ import com.kcb.common.view.MaterialListDialog.OnClickSureListener;
 /**
  * 
  * @className: DialogUtil
- * @description: used for create dialog and show it;
+ * @description: used for create and show reused dialog
  * @author: wanghang
  * @date: 2015-5-4 下午10:31:27
  */
@@ -22,16 +22,16 @@ public class DialogUtil {
     /**
      * 
      * @title: showDialog
-     * @description: show a dialog
+     * @description: show a dialog with title/message/sure button/cancel button
      * @author: wanghang
      * @date: 2015-5-4 下午10:29:45
      * @param context
      * @param titleResId
      * @param messageResId
      * @param sureResId , cannot be null;
-     * @param sureListener , can be null(only dismiss after click);
-     * @param cancelResId , can be null(don't show cancel button);
-     * @param cancelListener , can be null(only dismiss after click);
+     * @param sureListener , can be null (only dismiss after click);
+     * @param cancelResId , can be null (don't show cancel button);
+     * @param cancelListener , can be null (only dismiss after click);
      */
     public static void showNormalDialog(Context context, int titleResId, int messageResId,
             @NonNull int sureResId, OnClickListener sureListener, int cancelResId,
@@ -47,16 +47,16 @@ public class DialogUtil {
     /**
      * 
      * @title: showDialog
-     * @description: show a dialog
+     * @description: show a dialog with title/list/sure Button/cancel Button
      * @author: ljx
      * @date: 2015年5月7日 下午8:06:42
      * @param context
      * @param title
      * @param adapter
      * @param sureText , cannot be null;
-     * @param sureListener , can be null(only dismiss after click);
-     * @param cancelText , can be null(don't show cancel button);
-     * @param cancelListener , can be null(only dismiss after click);
+     * @param sureListener , can be null (only dismiss after click);
+     * @param cancelText , can be null (don't show cancel button);
+     * @param cancelListener , can be null (only dismiss after click);
      * 
      */
     public static void showListDialog(Context context, String title, List<String> adapter,

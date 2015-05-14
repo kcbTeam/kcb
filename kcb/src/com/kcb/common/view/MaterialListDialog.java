@@ -25,9 +25,9 @@ import com.kcbTeam.R;
 /**
  * 
  * @className: MaterialListDialog
- * @description:
+ * @description: use new -> show -> step1,2,3,4
  * @author: ljx
- * @date: 2015��5��7�� ����10:27:09
+ * @date: 2015-5-7 下午10:27:09
  */
 
 public class MaterialListDialog extends android.app.Dialog {
@@ -57,7 +57,7 @@ public class MaterialListDialog extends android.app.Dialog {
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.material_list_dialog);
+        setContentView(R.layout.comm_material_list_dialog);
 
         backgroundView = (RelativeLayout) findViewById(R.id.dialog_rootView);
         backgroundView.setOnTouchListener(new OnTouchListener() {
@@ -84,14 +84,15 @@ public class MaterialListDialog extends android.app.Dialog {
     @Override
     public void show() {
         super.show();
-        contentView.startAnimation(AnimationUtils.loadAnimation(mContext, R.anim.dialog_main_show));
+        contentView.startAnimation(AnimationUtils.loadAnimation(mContext,
+                R.anim.material_dialog_main_show));
         backgroundView.startAnimation(AnimationUtils.loadAnimation(mContext,
-                R.anim.dialog_root_show));
+                R.anim.material_dialog_root_show));
     }
 
     @Override
     public void dismiss() {
-        Animation anim = AnimationUtils.loadAnimation(mContext, R.anim.dialog_main_hide);
+        Animation anim = AnimationUtils.loadAnimation(mContext, R.anim.material_dialog_main_hide);
         anim.setAnimationListener(new AnimationListener() {
 
             @Override
@@ -111,7 +112,8 @@ public class MaterialListDialog extends android.app.Dialog {
             }
         });
         contentView.startAnimation(anim);
-        Animation backAnim = AnimationUtils.loadAnimation(mContext, R.anim.dialog_root_hide);
+        Animation backAnim =
+                AnimationUtils.loadAnimation(mContext, R.anim.material_dialog_root_hide);
         backgroundView.startAnimation(backAnim);
     }
 

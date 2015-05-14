@@ -17,8 +17,16 @@ import android.widget.TextView;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcbTeam.R;
 
+/**
+ * 
+ * @className: MaterialDialog
+ * @description: use new -> show -> step1,2,3,4
+ * @author: wanghang
+ * @date: 2015-5-14 下午1:59:21
+ */
 public class MaterialDialog extends android.app.Dialog {
 
+    // a dialog includes black background and content
     private View backgroundView;
     private View contentView;
 
@@ -39,7 +47,7 @@ public class MaterialDialog extends android.app.Dialog {
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.material_dialog);
+        setContentView(R.layout.comm_material_dialog);
 
         backgroundView = (RelativeLayout) findViewById(R.id.dialog_rootView);
         backgroundView.setOnTouchListener(new OnTouchListener() {
@@ -66,14 +74,15 @@ public class MaterialDialog extends android.app.Dialog {
     @Override
     public void show() {
         super.show();
-        contentView.startAnimation(AnimationUtils.loadAnimation(mContext, R.anim.dialog_main_show));
+        contentView.startAnimation(AnimationUtils.loadAnimation(mContext,
+                R.anim.material_dialog_main_show));
         backgroundView.startAnimation(AnimationUtils.loadAnimation(mContext,
-                R.anim.dialog_root_show));
+                R.anim.material_dialog_root_show));
     }
 
     @Override
     public void dismiss() {
-        Animation anim = AnimationUtils.loadAnimation(mContext, R.anim.dialog_main_hide);
+        Animation anim = AnimationUtils.loadAnimation(mContext, R.anim.material_dialog_main_hide);
         anim.setAnimationListener(new AnimationListener() {
 
             @Override
@@ -93,7 +102,8 @@ public class MaterialDialog extends android.app.Dialog {
             }
         });
         contentView.startAnimation(anim);
-        Animation backAnim = AnimationUtils.loadAnimation(mContext, R.anim.dialog_root_hide);
+        Animation backAnim =
+                AnimationUtils.loadAnimation(mContext, R.anim.material_dialog_root_hide);
         backgroundView.startAnimation(backAnim);
     }
 
