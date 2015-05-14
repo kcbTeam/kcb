@@ -30,7 +30,7 @@
         android:name="com.kcb.student.fragment.TestFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/textview_username" />
+        android:layout_below="@id/button_setting" />
 
     <LinearLayout
         android:id="@+id/buttonflats"
