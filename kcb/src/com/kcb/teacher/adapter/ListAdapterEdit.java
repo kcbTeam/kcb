@@ -1,10 +1,8 @@
 package com.kcb.teacher.adapter;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.List;
 
 import android.content.Context;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -21,37 +19,27 @@ import com.kcbTeam.R;
  * @author: ljx
  * @date: 2015年5月7日 下午8:19:23
  */
+// TODO use RecyclerView for better performance, learn how RecyclerView works;
+// you can ask TaoLi;
 public class ListAdapterEdit extends BaseAdapter {
 
-    private ArrayList<String> mList;
     private Context mContext;
-    private static HashMap<Integer, Boolean> isSelected;
-    private LayoutInflater inflater;
+    private List<String> mTestNames;
+    private int selectedIndex = 0;
 
-    public ListAdapterEdit(Context context, ArrayList<String> list) {
+    public ListAdapterEdit(Context context, List<String> list) {
         mContext = context;
-        mList = list;
-        inflater = LayoutInflater.from(context);
-        isSelected = new HashMap<Integer, Boolean>();
-
-        initDate();
-    }
-
-    private void initDate() {
-
-        for (int i = 0; i < mList.size(); i++) {
-            getIsSelected().put(i, false);
-        }
+        mTestNames = list;
     }
 
     @Override
     public int getCount() {
-        return mList.size();
+        return mTestNames.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return mList.get(position);
+        return mTestNames.get(position);
     }
 
     @Override
@@ -59,9 +47,8 @@ public class ListAdapterEdit extends BaseAdapter {
         return position;
     }
 
-    static class ViewHolder {
+    private class ViewHolder {
         TextView testname;
-        // com.kcb.teacher.util.RadioButton testchosen;
         RadioButton testchosen;
     }
 
@@ -70,56 +57,33 @@ public class ListAdapterEdit extends BaseAdapter {
         ViewHolder holder = null;
         if (convertView == null) {
             holder = new ViewHolder();
-            convertView = inflater.inflate(R.layout.tch_listitem_dialog, null);
+            convertView = View.inflate(mContext, R.layout.tch_listitem_dialog, null);
             holder.testname = (TextView) convertView.findViewById(R.id.textview_testname);
             holder.testchosen = (RadioButton) convertView.findViewById(R.id.checkBox_testchosen);
             convertView.setTag(holder);
-
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-
-        // holder.testname.setText(mList.get(position));
-        /*
-         * holder.testchosen.setOncheckListener(new OnCheckListener() {
-         * 
-         * @Override public void onCheck(View view, boolean check) { // TODO Auto-generated method
-         * stub isSelected.put(position, check); if (((CheckBox) view).isCheck()) { for (int i = 0;
-         * i < mList.size(); i++) { if (i != position) { isSelected.put(i, false); } } }
-         * ListAdapterEdit.this.notifyDataSetChanged();// update // checkbox
-         * 
-         * }
-         * 
-         * });
-         */
         holder.testchosen.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
             @Override
             public void onCheckedChanged(boolean isChecked) {
-
-                isSelected.put(position, isChecked);
                 if (isChecked) {
-                    for (int i = 0; i < mList.size(); i++) {
-                        if (i != position) {
-                            isSelected.put(i, false);
-                        }
-                    }
+                    selectedIndex = position;
                 }
-                ListAdapterEdit.this.notifyDataSetChanged();// update
-                // checkbox
+                notifyDataSetChanged();
             }
         });
-        holder.testname.setText(mList.get(position));
-        holder.testchosen.setChecked(getIsSelected().get(position));
+        holder.testname.setText(mTestNames.get(position));
+        if (selectedIndex == position) {
+            holder.testchosen.setChecked(true);
+        } else {
+            holder.testchosen.setChecked(false);
+        }
         return convertView;
     }
 
-    public static HashMap<Integer, Boolean> getIsSelected() {
-        return isSelected;
+    public int getSelectedIndex() {
+        return selectedIndex;
     }
-
-    public static void setIsSelected(HashMap<Integer, Boolean> isSelected) {
-        ListAdapterEdit.isSelected = isSelected;
-    }
-
 }

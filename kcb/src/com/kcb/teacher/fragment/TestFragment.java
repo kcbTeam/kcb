@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
@@ -14,8 +13,9 @@ import com.kcb.common.base.BaseFragment;
 import com.kcb.common.listener.DelayClickListener;
 import com.kcb.common.util.DialogUtil;
 import com.kcb.common.util.ToastUtil;
+import com.kcb.common.view.MaterialListDialog.OnClickSureListener;
 import com.kcb.library.view.PaperButton;
-import com.kcb.teacher.adapter.ListAdapterEdit;
+import com.kcb.teacher.activity.EditTestActivity;
 import com.kcbTeam.R;
 
 /**
@@ -27,14 +27,12 @@ import com.kcbTeam.R;
  */
 public class TestFragment extends BaseFragment {
 
-    private PaperButton testButton;
     private PaperButton editButton;
+    private PaperButton testButton;
     private PaperButton testresultButton;
     private TextView tipTextView;
 
     private ArrayList<String> mList;
-
-    private ListAdapterEdit mAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -53,13 +51,13 @@ public class TestFragment extends BaseFragment {
     protected void initView() {
         View view = getView();
         editButton = (PaperButton) view.findViewById(R.id.button_edit_test);
-        testButton = (PaperButton) view.findViewById(R.id.button_begin_test);
-        testresultButton = (PaperButton) view.findViewById(R.id.button_test_result);
         editButton.setOnClickListener(mClickListener);
+        testButton = (PaperButton) view.findViewById(R.id.button_begin_test);
         testButton.setOnClickListener(mClickListener);
+        testresultButton = (PaperButton) view.findViewById(R.id.button_test_result);
         testresultButton.setOnClickListener(mClickListener);
-        tipTextView = (TextView) view.findViewById(R.id.textview_tip);
 
+        tipTextView = (TextView) view.findViewById(R.id.textview_tip);
     }
 
     @Override
@@ -73,54 +71,50 @@ public class TestFragment extends BaseFragment {
             // Intent intent;
             switch (v.getId()) {
                 case R.id.button_edit_test:
+                    // TODO get title from sharedPreference;
                     mList = new ArrayList<String>();
                     mList.add("新测试");
                     mList.add("第一次测试");
                     mList.add("第二次测试");
                     mList.add("第三次测试");
-                    mAdapter = new ListAdapterEdit(getActivity(), mList);
 
-                    DialogUtil.showListDialog(getActivity(), "编辑测试内容", mAdapter, "确定",
-                            new OnClickListener() {
+                    DialogUtil.showListDialog(getActivity(), "编辑测试内容", mList, "确定",
+                            new OnClickSureListener() {
 
                                 @Override
-                                public void onClick(View v) {
-                                    ToastUtil.toast("click sure");
+                                public void onClick(View view, int position) {
+                                    if (position == 0) {
+                                        EditTestActivity.startAddTest(getActivity());
+                                    } else {
+                                        // TODO set selected testId
+                                        EditTestActivity.startEditTest(getActivity(), "1");
+                                    }
                                 }
                             }, "取消", null);
-
                     break;
                 case R.id.button_begin_test:
+                    // TODO get title from sharedPreference;
+                    // if null ,toast;
                     mList = new ArrayList<String>();
                     mList.add("第一次测试");
                     mList.add("第二次测试");
                     mList.add("第三次测试");
-                    mAdapter = new ListAdapterEdit(getActivity(), mList);
-
-                    DialogUtil.showListDialog(getActivity(), "开始测试", mAdapter, "确定",
-                            new OnClickListener() {
+                    DialogUtil.showListDialog(getActivity(), "开始测试", mList, "确定",
+                            new OnClickSureListener() {
 
                                 @Override
-                                public void onClick(View v) {
-                                    ToastUtil.toast("click sure");
-                                    // testButton.setVisibility(View.GONE);
-
-                                    tipTextView.setVisibility(View.VISIBLE);
-
+                                public void onClick(View view, int position) {
+                                    ToastUtil.toast("" + position);
                                 }
                             }, "取消", null);
-
                     // intent = new Intent(getActivity(), TestActivity.class);
                     // startActivity(intent);
                     break;
-
                 case R.id.button_test_result:
-
                     break;
                 default:
                     break;
             }
         }
-
     };
 }

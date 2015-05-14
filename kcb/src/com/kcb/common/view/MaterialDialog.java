@@ -1,4 +1,4 @@
-package com.kcb.library.view;
+package com.kcb.common.view;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -12,35 +12,24 @@ import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
-import android.widget.ListAdapter;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import com.kcb.library.view.buttonflat.ButtonFlat;
-import com.kcbTeam.kcblibrary.R;
+import com.kcbTeam.R;
 
-/**
- * 
- * @className: MaterialListDialog
- * @description:
- * @author: ljx
- * @date: 2015��5��7�� ����10:27:09
- */
-
-public class MaterialListDialog extends android.app.Dialog {
+public class MaterialDialog extends android.app.Dialog {
 
     private View backgroundView;
     private View contentView;
 
     private TextView titleTextView;
-    private ListView messageListView;
+    private TextView messageTextView;
     private ButtonFlat sureButton;
     private ButtonFlat cancelButton;
 
     private Context mContext;
 
-    public MaterialListDialog(Context context) {
+    public MaterialDialog(Context context) {
         super(context, android.R.style.Theme_Translucent);
 
         mContext = context;
@@ -50,7 +39,7 @@ public class MaterialListDialog extends android.app.Dialog {
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.material_list_dialog);
+        setContentView(R.layout.material_dialog);
 
         backgroundView = (RelativeLayout) findViewById(R.id.dialog_rootView);
         backgroundView.setOnTouchListener(new OnTouchListener() {
@@ -69,7 +58,7 @@ public class MaterialListDialog extends android.app.Dialog {
         contentView = (RelativeLayout) findViewById(R.id.contentDialog);
 
         titleTextView = (TextView) findViewById(R.id.title);
-        messageListView = (ListView) findViewById(R.id.listmessage);
+        messageTextView = (TextView) findViewById(R.id.message);
         sureButton = (ButtonFlat) findViewById(R.id.button_accept);
         cancelButton = (ButtonFlat) findViewById(R.id.button_cancel);
     }
@@ -98,7 +87,7 @@ public class MaterialListDialog extends android.app.Dialog {
                 contentView.post(new Runnable() {
                     @Override
                     public void run() {
-                        MaterialListDialog.super.dismiss();
+                        MaterialDialog.super.dismiss();
                     }
                 });
             }
@@ -125,15 +114,21 @@ public class MaterialListDialog extends android.app.Dialog {
     /**
      * step 2
      */
+    public void setMessage(int resid) {
+        messageTextView.setText(resid);
+    }
 
-    public void setAdapter(ListAdapter adapter) {
-        messageListView.setAdapter(adapter);
+    public void setMessage(CharSequence text) {
+        messageTextView.setText(text);
     }
 
     /**
      * step 3
      */
     public void setSureButton(@NonNull int resid, final View.OnClickListener listener) {
+        if (resid < 0) {
+            return;
+        }
         setSureButton(mContext.getResources().getString(resid), listener);
     }
 

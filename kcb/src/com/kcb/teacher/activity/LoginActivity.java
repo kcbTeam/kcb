@@ -76,6 +76,9 @@ public class LoginActivity extends BaseActivity {
                 passwordEditText.requestFocus();
                 AnimationUtil.shake(passwordEditText);
             } else {
+                if (loginProgressBar.getVisibility() == View.VISIBLE) {
+                    return;
+                }
                 loginProgressBar.setVisibility(View.VISIBLE);
                 new Handler().postDelayed(new Runnable() {
 

@@ -1,12 +1,14 @@
 package com.kcb.common.util;
 
+import java.util.List;
+
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.view.View.OnClickListener;
 
-import com.kcb.library.view.MaterialDialog;
-import com.kcb.library.view.MaterialListDialog;
-import com.kcb.teacher.adapter.ListAdapterEdit;
+import com.kcb.common.view.MaterialDialog;
+import com.kcb.common.view.MaterialListDialog;
+import com.kcb.common.view.MaterialListDialog.OnClickSureListener;
 
 /**
  * 
@@ -57,8 +59,8 @@ public class DialogUtil {
      * @param cancelListener , can be null(only dismiss after click);
      * 
      */
-    public static void showListDialog(Context context, String title, ListAdapterEdit adapter,
-            @NonNull String sureText, OnClickListener sureListener, String cancelText,
+    public static void showListDialog(Context context, String title, List<String> adapter,
+            @NonNull String sureText, OnClickSureListener sureListener, String cancelText,
             OnClickListener cancelListener) {
         MaterialListDialog dialog = new MaterialListDialog(context);
         dialog.show();
