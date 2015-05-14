@@ -401,7 +401,7 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
     private static final String TEST_ID = "testId";
 
     public static void startAddTest(Context context) {
-        Intent intent = new Intent(context, EditTestActivity.class);
+        Intent intent = new Intent(context, EditTestFirstActivity.class);
         context.startActivity(intent);
     }
 
