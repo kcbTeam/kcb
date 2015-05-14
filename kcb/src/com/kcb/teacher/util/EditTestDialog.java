@@ -82,7 +82,8 @@ public class EditTestDialog extends android.app.Dialog {
     @Override
     public void show() {
         super.show();
-        contentView.startAnimation(AnimationUtils.loadAnimation(mContext, R.anim.material_dialog_main_show));
+        contentView.startAnimation(AnimationUtils.loadAnimation(mContext,
+                R.anim.material_dialog_main_show));
         backgroundView.startAnimation(AnimationUtils.loadAnimation(mContext,
                 R.anim.material_dialog_root_show));
     }
@@ -109,7 +110,8 @@ public class EditTestDialog extends android.app.Dialog {
             }
         });
         contentView.startAnimation(anim);
-        Animation backAnim = AnimationUtils.loadAnimation(mContext, R.anim.material_dialog_root_hide);
+        Animation backAnim =
+                AnimationUtils.loadAnimation(mContext, R.anim.material_dialog_root_hide);
         backgroundView.startAnimation(backAnim);
     }
 
