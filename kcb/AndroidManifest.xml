@@ -54,7 +54,7 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.kcb.student.activity.SubmitActivity"
+            android:name="com.kcb.student.activity.ModifyPasswordActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity

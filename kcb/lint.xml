@@ -2,7 +2,39 @@
 <lint>
     <issue id="ClickableViewAccessibility" severity="ignore" />
     <issue id="DefaultLocale" severity="ignore" />
+    <issue id="Deprecated">
+        <ignore path="res/layout/stu_activity_modifypassword.xml" />
+    </issue>
+    <issue id="InflateParams">
+        <ignore path="src/com/kcb/student/activity/HomeActivity.java" />
+        <ignore path="src/com/kcb/student/activity/TestResultActivity.java" />
+    </issue>
+    <issue id="ObsoleteLayoutParam">
+        <ignore path="res/layout/stu_activity_modifypassword.xml" />
+        <ignore path="res/layout/stu_activity_setting.xml" />
+    </issue>
+    <issue id="RtlHardcoded">
+        <ignore path="res/layout/stu_activity_checkinresult.xml" />
+        <ignore path="res/layout/stu_activity_checkinresult.xml" />
+        <ignore path="res/layout/stu_activity_home.xml" />
+        <ignore path="res/layout/stu_activity_home.xml" />
+        <ignore path="res/layout/stu_activity_modifypassword.xml" />
+        <ignore path="res/layout/stu_activity_setting.xml" />
+        <ignore path="res/layout/stu_activity_submit.xml" />
+        <ignore path="res/layout/stu_activity_testresult.xml" />
+        <ignore path="res/layout/stu_fragment_looktest.xml" />
+    </issue>
+    <issue id="SpUsage">
+        <ignore path="res/layout/stu_activity_submit.xml" />
+    </issue>
     <issue id="SuspiciousImport">
         <ignore path="src/com/kcb/teacher/activity/SignActivity.java" />
+    </issue>
+    <issue id="TextFields">
+        <ignore path="res/layout/stu_activity_modifypassword.xml" />
+        <ignore path="res/layout/stu_activity_setting.xml" />
+    </issue>
+    <issue id="UselessParent">
+        <ignore path="res/layout/stu_activity_setting.xml" />
     </issue>
 </lint>

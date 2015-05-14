@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -26,10 +27,11 @@ import com.kcbTeam.R;
  * @author: Ding
  * @date: 2015年5月7日 下午5:09:20
  */
-public class TestResultActivity extends BaseActivity {
+public class TestResultActivity extends BaseActivity{
 
 	private ListView listView;
 	private ButtonFlat backButton;
+	private EditText mEditText;
 	ArrayList<HashMap<String, Object>> listItem;
 	private String[] testTitle = { "微积分", "导数", "导数复习" };
 
@@ -39,6 +41,7 @@ public class TestResultActivity extends BaseActivity {
 		setContentView(R.layout.stu_activity_testresult);
 
 		initView();
+		//setListener();
 	}
 
 	@Override
@@ -51,9 +54,11 @@ public class TestResultActivity extends BaseActivity {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
-
+			    
 			}
 		});
+		listView.setTextFilterEnabled(true);
+		
 		backButton = (ButtonFlat) findViewById(R.id.button_comeback);
 		backButton.setOnClickListener(new OnClickListener() {
 			@Override
@@ -61,11 +66,15 @@ public class TestResultActivity extends BaseActivity {
 				finish();
 			}
 		});
+		
+		mEditText=(EditText) findViewById(R.id.search);
 	}
 
 	@Override
 	protected void initData() {
 	}
+	
+	//private void set
 
 	private ArrayList<HashMap<String, Object>> getDate() {
 		ArrayList<HashMap<String, Object>> listItem = new ArrayList<HashMap<String, Object>>();
@@ -76,6 +85,8 @@ public class TestResultActivity extends BaseActivity {
 		}
 		return listItem;
 	}
+	
+	
 
 	private class MyAdapter extends BaseAdapter {
 
