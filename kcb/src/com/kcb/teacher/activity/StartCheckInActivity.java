@@ -17,9 +17,9 @@ import android.widget.TextView;
 import com.kcb.common.base.BaseActivity;
 import com.kcb.common.listener.DelayClickListener;
 import com.kcb.common.util.DialogUtil;
-import com.kcb.common.util.ToastUtil;
 import com.kcb.library.view.PaperButton;
 import com.kcb.library.view.buttonflat.ButtonFlat;
+import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
 import com.kcb.teacher.model.CheckInRecordInfo;
 import com.kcb.teacher.model.StudentInfo;
 import com.kcbTeam.R;
@@ -35,6 +35,8 @@ public class StartCheckInActivity extends BaseActivity {
 
     private ButtonFlat giveupButton;
     private PaperButton getNumButton;
+    private SmoothProgressBar getNumProgressBar;
+
     private PaperButton startButton;
     private PaperButton stopButton;
     private ProgressBar progressBar;
@@ -92,6 +94,8 @@ public class StartCheckInActivity extends BaseActivity {
 
         getNumButton.setOnClickListener(mClickListener);
 
+        getNumProgressBar = (SmoothProgressBar) findViewById(R.id.progressbar_getnum);
+
         signnum1TextView = (TextView) findViewById(R.id.textview_showsignnum1);
         signnum2TextView = (TextView) findViewById(R.id.textview_showsignnum2);
         signnum3TextView = (TextView) findViewById(R.id.textview_showsignnum3);
@@ -137,71 +141,84 @@ public class StartCheckInActivity extends BaseActivity {
         public void doClick(View v) {
 
             if (v == getNumButton) {
-                final int intnum = (int) (Math.random() * 9000 + 1000);
 
-                signnum1TextView.setText("");
-                signnum2TextView.setText("");
-                signnum3TextView.setText("");
-                signnum4TextView.setText("");
+                getNumProgressBar.setVisibility(View.VISIBLE);
+                new Handler().postDelayed(new Runnable() {
 
-                final Timer timer = new Timer();
-
-                final Handler handler = new Handler() {
-                    public void handleMessage(android.os.Message msg) {
-                        if (msg.what == 0x1000) {
-                            signnum1TextView.setText(String.valueOf(intnum / 1000));
-                        }
-                        if (msg.what == 0x1111) {
-                            signnum2TextView.setText(String.valueOf(intnum % 1000 / 100));
-                        }
-                        if (msg.what == 0x1222) {
-                            signnum3TextView.setText(String.valueOf(intnum % 1000 % 100 / 10));
-                        }
-                        if (msg.what == 0x1333) {
-                            signnum4TextView.setText(String.valueOf(intnum % 1000 % 100 % 10));
-                        }
-                    }
-                };
-
-                TimerTask task1 = new TimerTask() {
                     @Override
                     public void run() {
-                        Message message = new Message();
-                        message.what = 0x1000;
-                        handler.sendMessage(message);
-                    }
-                };
 
-                TimerTask task2 = new TimerTask() {
-                    @Override
-                    public void run() {
-                        Message message = new Message();
-                        message.what = 0x1111;
-                        handler.sendMessage(message);
-                    }
-                };
+                        getNumProgressBar.setVisibility(View.INVISIBLE);
+                        final int intnum = (int) (Math.random() * 9000 + 1000);
 
-                TimerTask task3 = new TimerTask() {
-                    @Override
-                    public void run() {
-                        Message message = new Message();
-                        message.what = 0x1222;
-                        handler.sendMessage(message);
-                    }
-                };
+                        signnum1TextView.setText("");
+                        signnum2TextView.setText("");
+                        signnum3TextView.setText("");
+                        signnum4TextView.setText("");
 
-                TimerTask task4 = new TimerTask() {
-                    @Override
-                    public void run() {
-                        Message message = new Message();
-                        message.what = 0x1333;
-                        handler.sendMessage(message);
+                        final Timer timer = new Timer();
+
+                        final Handler handler = new Handler() {
+                            public void handleMessage(android.os.Message msg) {
+                                if (msg.what == 0x1000) {
+                                    signnum1TextView.setText(String.valueOf(intnum / 1000));
+                                }
+                                if (msg.what == 0x1111) {
+                                    signnum2TextView.setText(String.valueOf(intnum % 1000 / 100));
+                                }
+                                if (msg.what == 0x1222) {
+                                    signnum3TextView.setText(String
+                                            .valueOf(intnum % 1000 % 100 / 10));
+                                }
+                                if (msg.what == 0x1333) {
+                                    signnum4TextView.setText(String
+                                            .valueOf(intnum % 1000 % 100 % 10));
+                                }
+                            }
+                        };
+
+                        TimerTask task1 = new TimerTask() {
+                            @Override
+                            public void run() {
+                                Message message = new Message();
+                                message.what = 0x1000;
+                                handler.sendMessage(message);
+                            }
+                        };
+
+                        TimerTask task2 = new TimerTask() {
+                            @Override
+                            public void run() {
+                                Message message = new Message();
+                                message.what = 0x1111;
+                                handler.sendMessage(message);
+                            }
+                        };
+
+                        TimerTask task3 = new TimerTask() {
+                            @Override
+                            public void run() {
+                                Message message = new Message();
+                                message.what = 0x1222;
+                                handler.sendMessage(message);
+                            }
+                        };
+
+                        TimerTask task4 = new TimerTask() {
+                            @Override
+                            public void run() {
+                                Message message = new Message();
+                                message.what = 0x1333;
+                                handler.sendMessage(message);
+                            }
+                        };
+                        timer.schedule(task1, 300);
+                        timer.schedule(task2, 600);
+                        timer.schedule(task3, 900);
+                        timer.schedule(task4, 1200);
+
                     }
-                };
-                timer.schedule(task1, 500);
-                timer.schedule(task2, 1000);
-                timer.schedule(task3, 1500);
-                timer.schedule(task4, 2000);
+                }, 2000);
 
             } else if (v == startButton) {
 
@@ -246,19 +263,15 @@ public class StartCheckInActivity extends BaseActivity {
 
                             @Override
                             public void onClick(View v) {
-                                ToastUtil.toast("停止签到");
-                                progressBar.setVisibility(View.GONE);
-                                timetip.setText(""); // important
-                                timetip.setVisibility(View.GONE);
+                                finish();
+                                // progressBar.setVisibility(View.GONE);
+                                // timetip.setText(""); // important
+                                // timetip.setVisibility(View.GONE);
                             }
                         }, R.string.cancel, null);
 
             } else if (v == rateButton) {
                 Intent intent = new Intent(StartCheckInActivity.this, CheckInDetailsActivity.class);
-                /*
-                 * add by zqj, save the checkInRecord ,than go to checkInDetailActivity with the
-                 * data;
-                 */
                 List<StudentInfo> missedCheckInStus = new ArrayList<StudentInfo>();
                 missedCheckInStus.add(new StudentInfo("testNameq", "0003", 12, 5));
                 CheckInRecordInfo currentInfo =

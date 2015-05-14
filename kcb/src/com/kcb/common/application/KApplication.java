@@ -6,11 +6,12 @@ import android.app.Application;
  * 
  * @className: KApplication
  * @description: this app's application;
- * @author: hang.wang
+ * @author: wanghang
  * @date: 2015-4-20 上午9:54:21
  */
 public class KApplication extends Application {
 
+    // don't use this instance casually, we use for toast context, but can't use for dialog context
     private static KApplication instance;
 
     @Override

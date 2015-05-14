@@ -58,7 +58,6 @@ public class ChoiceQuestion implements Serializable {
         this.mQuestion = mQuestion;
     }
 
-
     public String getOptionA() {
         return mOptionA;
     }

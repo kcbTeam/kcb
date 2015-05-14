@@ -122,10 +122,9 @@ public class StudentInfo implements Serializable {
     public float getCheckInRate() {
         return (float) mCheckInTimes / (mCheckInTimes + mMissTimes);
     }
-    
+
     public float getCorrectRate() {
         return (float) mCorrectTimes / mTotalTimes;
     }
-
 
 }

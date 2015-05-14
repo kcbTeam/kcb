@@ -15,7 +15,7 @@ import com.kcbTeam.R;
 /**
  * 
  * @className: ListAdapterQuestions
- * @description: 
+ * @description:
  * @author: ZQJ
  * @date: 2015年5月11日 下午10:34:21
  */
@@ -30,7 +30,6 @@ public class ListAdapterQuestions extends BaseAdapter {
         mList = list;
         mContext = context;
     }
-
 
     @Override
     public int getCount() {

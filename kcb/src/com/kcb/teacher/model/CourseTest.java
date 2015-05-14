@@ -56,6 +56,4 @@ public class CourseTest implements Serializable {
         this.mTestTime = mTestTime;
     }
 
-
-
 }

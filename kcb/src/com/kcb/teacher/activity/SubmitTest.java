@@ -56,7 +56,8 @@ public class SubmitTest extends BaseActivity {
 
     @Override
     protected void initData() {
-        mCurrentTest = (CourseTest) getIntent().getSerializableExtra(EditTestActivity.COURSE_TEST_KEY);
+        mCurrentTest =
+                (CourseTest) getIntent().getSerializableExtra(EditTestActivity.COURSE_TEST_KEY);
         mList = mCurrentTest.getQuestionList();
     }
 }

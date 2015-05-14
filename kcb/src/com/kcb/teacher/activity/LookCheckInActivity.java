@@ -58,7 +58,8 @@ public class LookCheckInActivity extends BaseActivity implements OnItemClickList
     protected void initData() {
         mList = new ArrayList<CheckInRecordInfo>();
         mList.clear();
-        // test data.mList is a CheckInRecord list,and one CheckInRecord object contains a
+        // test data.mList is a CheckInRecord list,and one CheckInRecord object
+        // contains a
         // StudentInfo list which record the missed CheckIn students
         List<StudentInfo> missedCheckInStus = new ArrayList<StudentInfo>();
         missedCheckInStus.add(new StudentInfo("testName1", "00001", 12, 10));

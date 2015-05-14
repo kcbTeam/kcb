@@ -8,8 +8,9 @@ import net.sourceforge.pinyin4j.format.HanyuPinyinVCharType;
 import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
 
 public class NameUtils {
+
     @SuppressWarnings("unused")
-    private static final String TAG = "ChineseNameUtils";
+    private static final String TAG = "NameUtils";
 
     @SuppressWarnings("deprecation")
     // return zhangqinjie
@@ -34,11 +35,22 @@ public class NameUtils {
 
     public static boolean isMatch(String name, String compare)
             throws BadHanyuPinyinOutputFormatCombination {
+        if (name.startsWith(compare) || name.toUpperCase().startsWith(compare)
+                || name.startsWith(compare) || name.toUpperCase().startsWith(compare)) {
+            return true;
+        }
         if (NameUtils.getEnName(name).startsWith(compare)
                 || NameUtils.getEnName(name).toUpperCase().startsWith(compare)
                 || NameUtils.getNameAbbr(name).startsWith(compare)
                 || NameUtils.getNameAbbr(name).toUpperCase().startsWith(compare)) {
             return true;
+        }
+        for (int i = 0; i < name.length(); i++) {
+            if (String.valueOf(name.charAt(i)).startsWith(compare)
+                    || NameUtils.getEnName(String.valueOf(name.charAt(i))).startsWith(compare)) {
+                return true;
+            }
+
         }
         return false;
     }

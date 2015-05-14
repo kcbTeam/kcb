@@ -7,8 +7,8 @@ import com.kcb.common.application.GlobalConstant;
 /**
  * 
  * @className: LogUtil
- * @description: log util, only log when enable log;
- * @author: hang.wang
+ * @description: only log when enable log in GlobalConstant.java
+ * @author: wanghang
  * @date: 2015-4-20 上午11:10:07
  */
 public class LogUtil {

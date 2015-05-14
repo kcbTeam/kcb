@@ -50,24 +50,33 @@ public class ListAdapterStudent extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        View view = View.inflate(mContext, R.layout.tch_listitem_stucentre, null);
-
-        TextView studentName = (TextView) view.findViewById(R.id.textview_studentname);
-        studentName.setText(mList.get(position).getStudentName());
-
-        TextView studentId = (TextView) view.findViewById(R.id.textview_studentid);
-        studentId.setText(mList.get(position).getStudentID());
-
-        TextView checkInRate = (TextView) view.findViewById(R.id.textview_checkinRate);
-        checkInRate.setText(String.format(FORMAT_RATE, (int) (100 * mList.get(position)
+        ViewHolder holder = null;
+        if (convertView == null) {
+            convertView = View.inflate(mContext, R.layout.tch_listitem_stucentre, null);
+            holder = new ViewHolder();
+            holder.studentName = (TextView) convertView.findViewById(R.id.textview_studentname);
+            holder.studentId = (TextView) convertView.findViewById(R.id.textview_studentid);
+            holder.checkInRate = (TextView) convertView.findViewById(R.id.textview_checkinRate);
+            holder.correctRate = (TextView) convertView.findViewById(R.id.textview_correctRate);
+            convertView.setTag(holder);
+        } else {
+            holder = (ViewHolder) convertView.getTag();
+        }
+        holder.studentName.setText(mList.get(position).getStudentName());
+        holder.studentId.setText(mList.get(position).getStudentID());
+        holder.checkInRate.setText(String.format(FORMAT_RATE, (int) (100 * mList.get(position)
                 .getCheckInRate())));
-
-        TextView correctRate = (TextView) view.findViewById(R.id.textview_correctRate);
-        correctRate.setText(String.format(FORMAT_RATE, (int) (100 * mList.get(position)
+        holder.correctRate.setText(String.format(FORMAT_RATE, (int) (100 * mList.get(position)
                 .getCorrectRate())));
-
-
-        return view;
+        return convertView;
     }
+
+    static class ViewHolder {
+        TextView studentName;
+        TextView studentId;
+        TextView checkInRate;
+        TextView correctRate;
+    }
+
 
 }

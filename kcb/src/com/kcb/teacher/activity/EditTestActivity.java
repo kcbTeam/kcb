@@ -1,12 +1,17 @@
 package com.kcb.teacher.activity;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -29,7 +34,7 @@ import com.kcbTeam.R;
  * @author: ZQJ
  * @date: 2015年5月8日 下午6:03:59
  */
-public class EditTestActivity extends BaseActivity {
+public class EditTestActivity extends BaseActivity implements OnLongClickListener {
 
     private PaperButton lastButton;
     private PaperButton nextButton;
@@ -97,6 +102,8 @@ public class EditTestActivity extends BaseActivity {
 
         questionEditText = (EditText) findViewById(R.id.edittext_question);
         questionEditText.setOnClickListener(this);
+        questionEditText.setOnLongClickListener(this);
+
         optionAEditText = (EditText) findViewById(R.id.edittext_A);
         optionAEditText.setOnClickListener(this);
         optionBEditText = (EditText) findViewById(R.id.edittext_B);
@@ -146,7 +153,6 @@ public class EditTestActivity extends BaseActivity {
                 }
             }
         };
-
     }
 
     @Override
@@ -194,12 +200,52 @@ public class EditTestActivity extends BaseActivity {
         }
     }
 
+    @Override
+    public boolean onLongClick(View v) {
+        takePhoto();
+        return false;
+    }
+
     private void makeEditDialog(String text, String title) {
         EditTestDialog dialog = new EditTestDialog(this, text);
         dialog.show();
         dialog.setTitle(title);
         dialog.setSureButton(getResources().getString(R.string.save), mSureClickListener);
         dialog.setCancelButton(getResources().getString(R.string.cancel), null);
+    }
+
+    private final int REQUEST_TAKEPHOTO = 100;
+
+    private void takePhoto() {
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, getCacheDir());
+        // intent.putExtra(MediaStore.EXTRA_OUTPUT,
+        // Uri.fromFile(new File(getCacheDir().getPath() + File.separator + "temp.jpg")));
+        if (intent.resolveActivity(getPackageManager()) == null) {
+            ToastUtil.toast("没有可以拍照的应用程序");
+            return;
+        }
+        startActivityForResult(intent, REQUEST_TAKEPHOTO);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_CANCELED) {
+            ToastUtil.toast("拍照取消了");
+            return;
+        }
+        // after camera, we need to cut the picture
+        if (requestCode == REQUEST_TAKEPHOTO) {
+            // TODO get bitmap form data
+            File picture = new File(getCacheDir().getPath() + File.separator + "temp.jpg");
+            cutPicture(Uri.fromFile(picture));
+        }
+    }
+
+    // TODO github开源代码
+    public void cutPicture(Uri uri) {
+        ToastUtil.toast("需要裁剪图片");
     }
 
     private void clickAdd() {
@@ -237,7 +283,6 @@ public class EditTestActivity extends BaseActivity {
             mNextObj = mQuestionList.get(mCurrentPosition);
             refreshInfo(mNextObj);
         }
-
     }
 
     private void clickLast() {
@@ -325,10 +370,25 @@ public class EditTestActivity extends BaseActivity {
 
     private void completeEdit() {
         CourseTest test = new CourseTest("TestName1", mQuestionList);
-        Intent intent = new Intent(this,SubmitTest.class);
+        Intent intent = new Intent(this, SubmitTest.class);
         intent.putExtra(COURSE_TEST_KEY, test);
         startActivity(intent);
         finish();
     }
 
+    /**
+     * for add a new Test or Edit Test;
+     */
+    private static final String TEST_ID = "testId";
+
+    public static void startAddTest(Context context) {
+        Intent intent = new Intent(context, EditTestActivity.class);
+        context.startActivity(intent);
+    }
+
+    public static void startEditTest(Context context, String testId) {
+        Intent intent = new Intent(context, EditTestActivity.class);
+        intent.putExtra(TEST_ID, testId);
+        context.startActivity(intent);
+    }
 }

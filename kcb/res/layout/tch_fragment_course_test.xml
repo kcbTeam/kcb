@@ -4,12 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center" >
-    
+
     <com.kcb.library.view.PaperButton
         android:id="@+id/button_edit_test"
         style="@style/home_center_button"
         widget:paper_text="@string/edit" />
-    
+
     <com.kcb.library.view.PaperButton
         android:id="@+id/button_begin_test"
         style="@style/home_center_button"
@@ -21,15 +21,15 @@
         style="@style/home_center_button"
         android:layout_below="@id/button_begin_test"
         widget:paper_text="@string/test_result" />
-    
+
     <TextView
         android:id="@+id/textview_tip"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="invisible"
-        android:layout_below="@id/button_test_result"
-        android:layout_alignRight="@id/button_edit_test"
         android:layout_alignLeft="@id/button_edit_test"
-        android:text="@string/tch_tip"/>
+        android:layout_alignRight="@id/button_edit_test"
+        android:layout_below="@id/button_test_result"
+        android:text="@string/tch_tip"
+        android:visibility="gone" />
 
 </RelativeLayout>

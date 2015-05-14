@@ -1,4 +1,6 @@
-package com.kcb.library.view;
+package com.kcb.common.view;
+
+import java.util.List;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -12,20 +14,20 @@ import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.kcb.library.view.buttonflat.ButtonFlat;
-import com.kcbTeam.kcblibrary.R;
+import com.kcb.teacher.adapter.ListAdapterEdit;
+import com.kcbTeam.R;
 
 /**
  * 
  * @className: MaterialListDialog
- * @description:
+ * @description: use new -> show -> step1,2,3,4
  * @author: ljx
- * @date: 2015��5��7�� ����10:27:09
+ * @date: 2015-5-7 下午10:27:09
  */
 
 public class MaterialListDialog extends android.app.Dialog {
@@ -39,6 +41,11 @@ public class MaterialListDialog extends android.app.Dialog {
     private ButtonFlat cancelButton;
 
     private Context mContext;
+    private ListAdapterEdit mAdapter;
+
+    public interface OnClickSureListener {
+        void onClick(View view, int position);
+    }
 
     public MaterialListDialog(Context context) {
         super(context, android.R.style.Theme_Translucent);
@@ -50,7 +57,7 @@ public class MaterialListDialog extends android.app.Dialog {
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.material_list_dialog);
+        setContentView(R.layout.comm_material_list_dialog);
 
         backgroundView = (RelativeLayout) findViewById(R.id.dialog_rootView);
         backgroundView.setOnTouchListener(new OnTouchListener() {
@@ -77,14 +84,15 @@ public class MaterialListDialog extends android.app.Dialog {
     @Override
     public void show() {
         super.show();
-        contentView.startAnimation(AnimationUtils.loadAnimation(mContext, R.anim.dialog_main_show));
+        contentView.startAnimation(AnimationUtils.loadAnimation(mContext,
+                R.anim.material_dialog_main_show));
         backgroundView.startAnimation(AnimationUtils.loadAnimation(mContext,
-                R.anim.dialog_root_show));
+                R.anim.material_dialog_root_show));
     }
 
     @Override
     public void dismiss() {
-        Animation anim = AnimationUtils.loadAnimation(mContext, R.anim.dialog_main_hide);
+        Animation anim = AnimationUtils.loadAnimation(mContext, R.anim.material_dialog_main_hide);
         anim.setAnimationListener(new AnimationListener() {
 
             @Override
@@ -104,7 +112,8 @@ public class MaterialListDialog extends android.app.Dialog {
             }
         });
         contentView.startAnimation(anim);
-        Animation backAnim = AnimationUtils.loadAnimation(mContext, R.anim.dialog_root_hide);
+        Animation backAnim =
+                AnimationUtils.loadAnimation(mContext, R.anim.material_dialog_root_hide);
         backgroundView.startAnimation(backAnim);
     }
 
@@ -126,25 +135,26 @@ public class MaterialListDialog extends android.app.Dialog {
      * step 2
      */
 
-    public void setAdapter(ListAdapter adapter) {
-        messageListView.setAdapter(adapter);
+    public void setAdapter(List<String> mStrings) {
+        mAdapter = new ListAdapterEdit(mContext, mStrings);
+        messageListView.setAdapter(mAdapter);
     }
 
     /**
      * step 3
      */
-    public void setSureButton(@NonNull int resid, final View.OnClickListener listener) {
+    public void setSureButton(@NonNull int resid, OnClickSureListener listener) {
         setSureButton(mContext.getResources().getString(resid), listener);
     }
 
-    public void setSureButton(@NonNull CharSequence text, final View.OnClickListener listener) {
+    public void setSureButton(@NonNull CharSequence text, final OnClickSureListener listener) {
         sureButton.setText(text);
         sureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dismiss();
                 if (null != listener) {
-                    listener.onClick(v);
+                    listener.onClick(v, mAdapter.getSelectedIndex());
                 }
             }
         });

@@ -1,18 +1,15 @@
 package com.kcb.teacher.adapter;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.List;
 
 import android.content.Context;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.TextView;
 
+import com.kcb.library.view.radioButton.RadioButton;
+import com.kcb.library.view.radioButton.RadioButton.OnCheckedChangeListener;
 import com.kcbTeam.R;
 
 /**
@@ -22,96 +19,75 @@ import com.kcbTeam.R;
  * @author: ljx
  * @date: 2015年5月7日 下午8:19:23
  */
+// TODO use RecyclerView for better performance, learn how RecyclerView works;
+// you can ask TaoLi;
 public class ListAdapterEdit extends BaseAdapter {
 
-    private ArrayList<String> mList;
-    private Context mContext;
-    private static HashMap<Integer, Boolean> isSelected;
-    private LayoutInflater inflater;
+	private Context mContext;
+	private List<String> mTestNames;
+	private int selectedIndex = 0;
 
-    public ListAdapterEdit(Context context, ArrayList<String> list) {
-        mContext = context;
-        mList = list;
-        inflater = LayoutInflater.from(context);
-        isSelected = new HashMap<Integer, Boolean>();
+	public ListAdapterEdit(Context context, List<String> list) {
+		mContext = context;
+		mTestNames = list;
+	}
 
-        initDate();
-    }
+	@Override
+	public int getCount() {
+		return mTestNames.size();
+	}
 
-    private void initDate() {
+	@Override
+	public Object getItem(int position) {
+		return mTestNames.get(position);
+	}
 
-        for (int i = 0; i < mList.size(); i++) {
-            getIsSelected().put(i, false);
-        }
-    }
+	@Override
+	public long getItemId(int position) {
+		return position;
+	}
 
-    @Override
-    public int getCount() {
-        return mList.size();
-    }
+	private class ViewHolder {
+		TextView testname;
+		RadioButton testchosen;
+	}
 
-    @Override
-    public Object getItem(int position) {
-        return mList.get(position);
-    }
+	@Override
+	public View getView(final int position, View convertView, ViewGroup parent) {
+		ViewHolder holder = null;
+		if (convertView == null) {
+			holder = new ViewHolder();
+			convertView = View.inflate(mContext, R.layout.tch_listitem_dialog,
+					null);
+			holder.testname = (TextView) convertView
+					.findViewById(R.id.textview_testname);
+			holder.testchosen = (RadioButton) convertView
+					.findViewById(R.id.checkBox_testchosen);
+			convertView.setTag(holder);
+		} else {
+			holder = (ViewHolder) convertView.getTag();
+		}
+		holder.testchosen
+				.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
+					@Override
+					public void onCheckedChanged(boolean isChecked) {
+						if (isChecked) {
+							selectedIndex = position;
+						}
+						notifyDataSetChanged();
+					}
+				});
+		holder.testname.setText(mTestNames.get(position));
+		if (selectedIndex == position) {
+			holder.testchosen.setChecked(true);
+		} else {
+			holder.testchosen.setChecked(false);
+		}
+		return convertView;
+	}
 
-    static class ViewHolder {
-        TextView testname;
-        CheckBox testchosen;
-    }
-
-    @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
-        ViewHolder holder = null;
-        if (convertView == null) {
-            holder = new ViewHolder();
-            convertView = inflater.inflate(R.layout.tch_listitem_dialog, null);
-            holder.testname = (TextView) convertView.findViewById(R.id.textview_testname);
-            holder.testchosen = (CheckBox) convertView.findViewById(R.id.checkBox_testchosen);
-            convertView.setTag(holder);
-
-        } else {
-            holder = (ViewHolder) convertView.getTag();
-        }
-        holder.testname.setText(mList.get(position));
-
-        holder.testchosen.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                // TODO Auto-generated method stub
-                // getIsSelected().put(position, isChecked);
-
-                isSelected.put(position, isChecked);
-                if (buttonView.isChecked()) {
-                    for (int i = 0; i < mList.size(); i++) {
-                        if (i != position) {
-                            isSelected.put(i, false);
-                        }
-                    }
-                }
-                ListAdapterEdit.this.notifyDataSetChanged();// update
-                                                            // checkbox
-
-            }
-
-        });
-        holder.testchosen.setChecked(getIsSelected().get(position));
-
-        return convertView;
-    }
-
-    public static HashMap<Integer, Boolean> getIsSelected() {
-        return isSelected;
-    }
-
-    public static void setIsSelected(HashMap<Integer, Boolean> isSelected) {
-        ListAdapterEdit.isSelected = isSelected;
-    }
-
+	public int getSelectedIndex() {
+		return selectedIndex;
+	}
 }
