@@ -11,7 +11,7 @@ public final class R {
     public static final class array {
         /**  SmoothProgressBar 
          */
-        public static int gplus_colors=0x7f050000;
+        public static int gplus_colors=0x7f060000;
     }
     public static final class attr {
         /**  in float button indicate if must start with animation 
@@ -22,7 +22,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static int animate=0x7f01001d;
+        public static int animate=0x7f01001f;
         /**  in switche's view indicate state of view 
          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
 <p>This may also be a reference to a resource (in the form
@@ -31,7 +31,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static int check=0x7f010018;
+        public static int check=0x7f01001a;
         /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
 Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
 in (inches), mm (millimeters).
@@ -41,7 +41,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static int checkBoxSize=0x7f010019;
+        public static int checkBoxSize=0x7f01001b;
         /**  if true, delays calls to OnClickListeners until ripple effect ends 
          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
 <p>This may also be a reference to a resource (in the form
@@ -50,7 +50,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static int clickAfterRipple=0x7f01001f;
+        public static int clickAfterRipple=0x7f010021;
         /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
 <p>This may also be a reference to a resource (in the form
@@ -114,7 +114,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static int iconDrawable=0x7f01001b;
+        public static int iconDrawable=0x7f01001d;
         /**  in button whitch contains drawable indicate icon resource 
          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
 Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
@@ -125,7 +125,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static int iconSize=0x7f01001c;
+        public static int iconSize=0x7f01001e;
         /**  in progress view indicate max value of progress 
          <p>Must be an integer value, such as "<code>100</code>".
 <p>This may also be a reference to a resource (in the form
@@ -134,7 +134,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static int max=0x7f010013;
+        public static int max=0x7f010015;
         /**  in progress view indicate min value of progress 
          <p>Must be an integer value, such as "<code>100</code>".
 <p>This may also be a reference to a resource (in the form
@@ -143,7 +143,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static int min=0x7f010014;
+        public static int min=0x7f010016;
         /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
 <p>This may also be a reference to a resource (in the form
@@ -239,7 +239,25 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static int progress=0x7f010016;
+        public static int progress=0x7f010018;
+        /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static int radio_checked_color=0x7f010011;
+        /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static int radio_color=0x7f010010;
         /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
 Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
 in (inches), mm (millimeters).
@@ -249,7 +267,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static int ringWidth=0x7f010017;
+        public static int ringWidth=0x7f010019;
         /**  set the border of the ripple frame 
          <p>Must be a floating point value, such as "<code>1.2</code>".
 <p>This may also be a reference to a resource (in the form
@@ -258,14 +276,14 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static int rippleBorderRadius=0x7f01001e;
+        public static int rippleBorderRadius=0x7f010020;
         /**  Color of ripple animation 
          <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
          */
-        public static int rippleColor=0x7f010010;
+        public static int rippleColor=0x7f010012;
         /**  Speed of ripple animation 
          <p>Must be a floating point value, such as "<code>1.2</code>".
 <p>This may also be a reference to a resource (in the form
@@ -274,7 +292,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static int rippleSpeed=0x7f010011;
+        public static int rippleSpeed=0x7f010013;
         /**  indicate if the slider must show number indicator 
          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
 <p>This may also be a reference to a resource (in the form
@@ -283,15 +301,15 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static int showNumberIndicator=0x7f010012;
+        public static int showNumberIndicator=0x7f010014;
         /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static int spbStyle=0x7f010020;
+        public static int spbStyle=0x7f010022;
         /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static int spb_background=0x7f01002d;
+        public static int spb_background=0x7f01002f;
         /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
 <p>This may also be a reference to a resource (in the form
@@ -300,11 +318,11 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static int spb_color=0x7f010021;
+        public static int spb_color=0x7f010023;
         /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static int spb_colors=0x7f01002b;
+        public static int spb_colors=0x7f01002d;
         /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -312,7 +330,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static int spb_generate_background_with_colors=0x7f01002e;
+        public static int spb_generate_background_with_colors=0x7f010030;
         /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -320,7 +338,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static int spb_gradients=0x7f01002f;
+        public static int spb_gradients=0x7f010031;
         /** <p>Must be one of the following constant values.</p>
 <table>
 <colgroup align="left" />
@@ -333,7 +351,7 @@ containing a value of this type.
 <tr><td><code>spb_interpolator_decelerate</code></td><td>3</td><td></td></tr>
 </table>
          */
-        public static int spb_interpolator=0x7f010028;
+        public static int spb_interpolator=0x7f01002a;
         /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -341,7 +359,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static int spb_mirror_mode=0x7f01002a;
+        public static int spb_mirror_mode=0x7f01002c;
         /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -349,7 +367,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static int spb_progressiveStart_activated=0x7f01002c;
+        public static int spb_progressiveStart_activated=0x7f01002e;
         /** <p>Must be a floating point value, such as "<code>1.2</code>".
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -357,7 +375,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static int spb_progressiveStart_speed=0x7f010026;
+        public static int spb_progressiveStart_speed=0x7f010028;
         /** <p>Must be a floating point value, such as "<code>1.2</code>".
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -365,7 +383,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static int spb_progressiveStop_speed=0x7f010027;
+        public static int spb_progressiveStop_speed=0x7f010029;
         /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -373,7 +391,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static int spb_reversed=0x7f010029;
+        public static int spb_reversed=0x7f01002b;
         /** <p>Must be an integer value, such as "<code>100</code>".
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -381,7 +399,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static int spb_sections_count=0x7f010024;
+        public static int spb_sections_count=0x7f010026;
         /** <p>Must be a floating point value, such as "<code>1.2</code>".
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -389,7 +407,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static int spb_speed=0x7f010025;
+        public static int spb_speed=0x7f010027;
         /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
 Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
 in (inches), mm (millimeters).
@@ -399,7 +417,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static int spb_stroke_separator_length=0x7f010023;
+        public static int spb_stroke_separator_length=0x7f010025;
         /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
 Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
 in (inches), mm (millimeters).
@@ -409,7 +427,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static int spb_stroke_width=0x7f010022;
+        public static int spb_stroke_width=0x7f010024;
         /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
 Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
 in (inches), mm (millimeters).
@@ -419,7 +437,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static int thumbSize=0x7f01001a;
+        public static int thumbSize=0x7f01001c;
         /**  in progress view indicate value of progress 
          <p>Must be an integer value, such as "<code>100</code>".
 <p>This may also be a reference to a resource (in the form
@@ -428,42 +446,54 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static int value=0x7f010015;
+        public static int value=0x7f010017;
     }
     public static final class bool {
-        public static int spb_default_mirror_mode=0x7f090001;
-        public static int spb_default_progressiveStart_activated=0x7f090002;
-        public static int spb_default_reversed=0x7f090000;
+        public static int spb_default_mirror_mode=0x7f0a0001;
+        public static int spb_default_progressiveStart_activated=0x7f0a0002;
+        public static int spb_default_reversed=0x7f0a0000;
     }
     public static final class color {
         /**  FloatingEditText Default 
          */
-        public static int floating_edit_text_color=0x7f040009;
-        public static int floating_edit_text_error_color=0x7f04000b;
-        public static int floating_edit_text_highlighted_color=0x7f04000a;
-        public static int gplus_color_1=0x7f040001;
-        public static int gplus_color_2=0x7f040002;
-        public static int gplus_color_3=0x7f040003;
-        public static int gplus_color_4=0x7f040004;
-        public static int material_dialog_thumbColor=0x7f040000;
-        public static int paper_button_color=0x7f040007;
-        public static int paper_button_shadow_color=0x7f040008;
-        public static int paper_text_color=0x7f040006;
+        public static int floating_edit_text_color=0x7f05000b;
+        public static int floating_edit_text_error_color=0x7f05000d;
+        public static int floating_edit_text_highlighted_color=0x7f05000c;
+        public static int gplus_color_1=0x7f050001;
+        public static int gplus_color_2=0x7f050002;
+        public static int gplus_color_3=0x7f050003;
+        public static int gplus_color_4=0x7f050004;
+        public static int material_dialog_thumbColor=0x7f050000;
+        public static int paper_button_color=0x7f050009;
+        public static int paper_button_shadow_color=0x7f05000a;
+        public static int paper_text_color=0x7f050008;
+        public static int radio_checked_color=0x7f050007;
+        /**  RadioButton Default 
+         */
+        public static int radio_color=0x7f050006;
         /**  SmoothProgressBar 
          */
-        public static int spb_default_color=0x7f04000c;
-        public static int thumbColor=0x7f040005;
+        public static int spb_default_color=0x7f05000e;
+        public static int thumbColor=0x7f050005;
     }
     public static final class dimen {
-        public static int floating_edit_text_underline_height=0x7f060003;
-        public static int floating_edit_text_underline_highlighted_height=0x7f060004;
-        public static int paper_button_corner_radius=0x7f060001;
-        public static int paper_padding=0x7f060002;
+        public static int floating_edit_text_underline_height=0x7f070003;
+        public static int floating_edit_text_underline_highlighted_height=0x7f070004;
+        public static int paper_button_corner_radius=0x7f070001;
+        public static int paper_padding=0x7f070002;
         /**  PaperButton Default 
          */
-        public static int paper_text_size=0x7f060000;
-        public static int spb_default_stroke_separator_length=0x7f060005;
-        public static int spb_default_stroke_width=0x7f060006;
+        public static int paper_text_size=0x7f070000;
+        public static int radio_border_radius=0x7f070009;
+        public static int radio_height=0x7f070008;
+        public static int radio_ripple_radius=0x7f07000b;
+        public static int radio_stroke_width=0x7f07000c;
+        public static int radio_thumb_radius=0x7f07000a;
+        /**  RadioButton  
+         */
+        public static int radio_width=0x7f070007;
+        public static int spb_default_stroke_separator_length=0x7f070005;
+        public static int spb_default_stroke_width=0x7f070006;
     }
     public static final class drawable {
         public static int background_checkbox=0x7f020000;
@@ -478,38 +508,38 @@ containing a value of this type.
         public static int sprite_check=0x7f020009;
     }
     public static final class id {
-        public static int background=0x7f0b0005;
-        public static int background_content=0x7f0b0006;
-        public static int content=0x7f0b0008;
-        public static int foreground=0x7f0b0007;
-        public static int parallax_scroll_widget=0x7f0b0004;
-        public static int shape_bacground=0x7f0b0009;
-        public static int spb_interpolator_accelerate=0x7f0b0000;
-        public static int spb_interpolator_acceleratedecelerate=0x7f0b0001;
-        public static int spb_interpolator_decelerate=0x7f0b0002;
-        public static int spb_interpolator_linear=0x7f0b0003;
+        public static int background=0x7f040005;
+        public static int background_content=0x7f040006;
+        public static int content=0x7f040008;
+        public static int foreground=0x7f040007;
+        public static int parallax_scroll_widget=0x7f040004;
+        public static int shape_bacground=0x7f040009;
+        public static int spb_interpolator_accelerate=0x7f040000;
+        public static int spb_interpolator_acceleratedecelerate=0x7f040002;
+        public static int spb_interpolator_decelerate=0x7f040003;
+        public static int spb_interpolator_linear=0x7f040001;
     }
     public static final class integer {
-        public static int spb_default_interpolator=0x7f070001;
-        public static int spb_default_sections_count=0x7f070000;
+        public static int spb_default_interpolator=0x7f080001;
+        public static int spb_default_sections_count=0x7f080000;
     }
     public static final class layout {
         public static int view_parallaxscroll=0x7f030000;
     }
     public static final class string {
-        public static int app_name=0x7f080001;
-        public static int cancel=0x7f080003;
-        public static int spb_default_speed=0x7f080000;
-        public static int sure=0x7f080002;
+        public static int app_name=0x7f090001;
+        public static int cancel=0x7f090003;
+        public static int spb_default_speed=0x7f090000;
+        public static int sure=0x7f090002;
     }
     public static final class style {
-        public static int AppBaseTheme=0x7f0a0000;
+        public static int AppBaseTheme=0x7f0b0000;
         /**  Application theme. 
          */
-        public static int AppTheme=0x7f0a0001;
+        public static int AppTheme=0x7f0b0001;
         /**  SmoothProgressBar 
          */
-        public static int SmoothProgressBar=0x7f0a0002;
+        public static int SmoothProgressBar=0x7f0b0002;
     }
     public static final class styleable {
         /**  ButtonFlat Attribute 
@@ -553,10 +583,10 @@ containing a value of this type.
            @see #CustomAttributes_value
          */
         public static final int[] CustomAttributes = {
-            0x7f010010, 0x7f010011, 0x7f010012, 0x7f010013,
-            0x7f010014, 0x7f010015, 0x7f010016, 0x7f010017,
-            0x7f010018, 0x7f010019, 0x7f01001a, 0x7f01001b,
-            0x7f01001c, 0x7f01001d, 0x7f01001e, 0x7f01001f
+            0x7f010012, 0x7f010013, 0x7f010014, 0x7f010015,
+            0x7f010016, 0x7f010017, 0x7f010018, 0x7f010019,
+            0x7f01001a, 0x7f01001b, 0x7f01001c, 0x7f01001d,
+            0x7f01001e, 0x7f01001f, 0x7f010020, 0x7f010021
         };
         /**
           <p>
@@ -573,7 +603,7 @@ containing a value of this type.
           <p>This is a private symbol.
           @attr name com.kcbTeam.kcblibrary:animate
         */
-        public static int CustomAttributes_animate = 13;
+        public static final int CustomAttributes_animate = 13;
         /**
           <p>
           @attr description
@@ -589,7 +619,7 @@ containing a value of this type.
           <p>This is a private symbol.
           @attr name com.kcbTeam.kcblibrary:check
         */
-        public static int CustomAttributes_check = 8;
+        public static final int CustomAttributes_check = 8;
         /**
           <p>This symbol is the offset where the {@link com.kcbTeam.kcblibrary.R.attr#checkBoxSize}
           attribute's value can be found in the {@link #CustomAttributes} array.
@@ -605,7 +635,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.kcbTeam.kcblibrary:checkBoxSize
         */
-        public static int CustomAttributes_checkBoxSize = 9;
+        public static final int CustomAttributes_checkBoxSize = 9;
         /**
           <p>
           @attr description
@@ -621,7 +651,7 @@ containing a value of this type.
           <p>This is a private symbol.
           @attr name com.kcbTeam.kcblibrary:clickAfterRipple
         */
-        public static int CustomAttributes_clickAfterRipple = 15;
+        public static final int CustomAttributes_clickAfterRipple = 15;
         /**
           <p>
           @attr description
@@ -637,7 +667,7 @@ containing a value of this type.
           <p>This is a private symbol.
           @attr name com.kcbTeam.kcblibrary:iconDrawable
         */
-        public static int CustomAttributes_iconDrawable = 11;
+        public static final int CustomAttributes_iconDrawable = 11;
         /**
           <p>
           @attr description
@@ -655,7 +685,7 @@ containing a value of this type.
           <p>This is a private symbol.
           @attr name com.kcbTeam.kcblibrary:iconSize
         */
-        public static int CustomAttributes_iconSize = 12;
+        public static final int CustomAttributes_iconSize = 12;
         /**
           <p>
           @attr description
@@ -671,7 +701,7 @@ containing a value of this type.
           <p>This is a private symbol.
           @attr name com.kcbTeam.kcblibrary:max
         */
-        public static int CustomAttributes_max = 3;
+        public static final int CustomAttributes_max = 3;
         /**
           <p>
           @attr description
@@ -687,7 +717,7 @@ containing a value of this type.
           <p>This is a private symbol.
           @attr name com.kcbTeam.kcblibrary:min
         */
-        public static int CustomAttributes_min = 4;
+        public static final int CustomAttributes_min = 4;
         /**
           <p>
           @attr description
@@ -703,7 +733,7 @@ containing a value of this type.
           <p>This is a private symbol.
           @attr name com.kcbTeam.kcblibrary:progress
         */
-        public static int CustomAttributes_progress = 6;
+        public static final int CustomAttributes_progress = 6;
         /**
           <p>This symbol is the offset where the {@link com.kcbTeam.kcblibrary.R.attr#ringWidth}
           attribute's value can be found in the {@link #CustomAttributes} array.
@@ -719,7 +749,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.kcbTeam.kcblibrary:ringWidth
         */
-        public static int CustomAttributes_ringWidth = 7;
+        public static final int CustomAttributes_ringWidth = 7;
         /**
           <p>
           @attr description
@@ -735,7 +765,7 @@ containing a value of this type.
           <p>This is a private symbol.
           @attr name com.kcbTeam.kcblibrary:rippleBorderRadius
         */
-        public static int CustomAttributes_rippleBorderRadius = 14;
+        public static final int CustomAttributes_rippleBorderRadius = 14;
         /**
           <p>
           @attr description
@@ -749,7 +779,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           <p>This is a private symbol.
           @attr name com.kcbTeam.kcblibrary:rippleColor
         */
-        public static int CustomAttributes_rippleColor = 0;
+        public static final int CustomAttributes_rippleColor = 0;
         /**
           <p>
           @attr description
@@ -765,7 +795,7 @@ containing a value of this type.
           <p>This is a private symbol.
           @attr name com.kcbTeam.kcblibrary:rippleSpeed
         */
-        public static int CustomAttributes_rippleSpeed = 1;
+        public static final int CustomAttributes_rippleSpeed = 1;
         /**
           <p>
           @attr description
@@ -781,7 +811,7 @@ containing a value of this type.
           <p>This is a private symbol.
           @attr name com.kcbTeam.kcblibrary:showNumberIndicator
         */
-        public static int CustomAttributes_showNumberIndicator = 2;
+        public static final int CustomAttributes_showNumberIndicator = 2;
         /**
           <p>This symbol is the offset where the {@link com.kcbTeam.kcblibrary.R.attr#thumbSize}
           attribute's value can be found in the {@link #CustomAttributes} array.
@@ -797,7 +827,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.kcbTeam.kcblibrary:thumbSize
         */
-        public static int CustomAttributes_thumbSize = 10;
+        public static final int CustomAttributes_thumbSize = 10;
         /**
           <p>
           @attr description
@@ -813,7 +843,7 @@ containing a value of this type.
           <p>This is a private symbol.
           @attr name com.kcbTeam.kcblibrary:value
         */
-        public static int CustomAttributes_value = 5;
+        public static final int CustomAttributes_value = 5;
         /**  FloatingEditText Attribute 
            <p>Includes the following attributes:</p>
            <table>
@@ -852,7 +882,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.kcbTeam.kcblibrary:floating_edit_text_color
         */
-        public static int FloatingEditText_floating_edit_text_color = 1;
+        public static final int FloatingEditText_floating_edit_text_color = 1;
         /**
           <p>This symbol is the offset where the {@link com.kcbTeam.kcblibrary.R.attr#floating_edit_text_error_color}
           attribute's value can be found in the {@link #FloatingEditText} array.
@@ -867,7 +897,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.kcbTeam.kcblibrary:floating_edit_text_error_color
         */
-        public static int FloatingEditText_floating_edit_text_error_color = 3;
+        public static final int FloatingEditText_floating_edit_text_error_color = 3;
         /**
           <p>This symbol is the offset where the {@link com.kcbTeam.kcblibrary.R.attr#floating_edit_text_highlighted_color}
           attribute's value can be found in the {@link #FloatingEditText} array.
@@ -882,7 +912,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.kcbTeam.kcblibrary:floating_edit_text_highlighted_color
         */
-        public static int FloatingEditText_floating_edit_text_highlighted_color = 2;
+        public static final int FloatingEditText_floating_edit_text_highlighted_color = 2;
         /**
           <p>This symbol is the offset where the {@link com.kcbTeam.kcblibrary.R.attr#floating_edit_text_hint_scale}
           attribute's value can be found in the {@link #FloatingEditText} array.
@@ -896,7 +926,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.kcbTeam.kcblibrary:floating_edit_text_hint_scale
         */
-        public static int FloatingEditText_floating_edit_text_hint_scale = 0;
+        public static final int FloatingEditText_floating_edit_text_hint_scale = 0;
         /**
           <p>This symbol is the offset where the {@link com.kcbTeam.kcblibrary.R.attr#floating_edit_text_underline_height}
           attribute's value can be found in the {@link #FloatingEditText} array.
@@ -912,7 +942,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.kcbTeam.kcblibrary:floating_edit_text_underline_height
         */
-        public static int FloatingEditText_floating_edit_text_underline_height = 4;
+        public static final int FloatingEditText_floating_edit_text_underline_height = 4;
         /**
           <p>This symbol is the offset where the {@link com.kcbTeam.kcblibrary.R.attr#floating_edit_text_underline_highlighted_height}
           attribute's value can be found in the {@link #FloatingEditText} array.
@@ -928,7 +958,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.kcbTeam.kcblibrary:floating_edit_text_underline_highlighted_height
         */
-        public static int FloatingEditText_floating_edit_text_underline_highlighted_height = 5;
+        public static final int FloatingEditText_floating_edit_text_underline_highlighted_height = 5;
         /**  PaperButton Attribute 
            <p>Includes the following attributes:</p>
            <table>
@@ -976,7 +1006,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.kcbTeam.kcblibrary:paper_color
         */
-        public static int PaperButton_paper_color = 4;
+        public static final int PaperButton_paper_color = 4;
         /**
           <p>This symbol is the offset where the {@link com.kcbTeam.kcblibrary.R.attr#paper_corner_radius}
           attribute's value can be found in the {@link #PaperButton} array.
@@ -992,7 +1022,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.kcbTeam.kcblibrary:paper_corner_radius
         */
-        public static int PaperButton_paper_corner_radius = 5;
+        public static final int PaperButton_paper_corner_radius = 5;
         /**
           <p>This symbol is the offset where the {@link com.kcbTeam.kcblibrary.R.attr#paper_font}
           attribute's value can be found in the {@link #PaperButton} array.
@@ -1006,7 +1036,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.kcbTeam.kcblibrary:paper_font
         */
-        public static int PaperButton_paper_font = 3;
+        public static final int PaperButton_paper_font = 3;
         /**
           <p>This symbol is the offset where the {@link com.kcbTeam.kcblibrary.R.attr#paper_shadow_color}
           attribute's value can be found in the {@link #PaperButton} array.
@@ -1021,7 +1051,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.kcbTeam.kcblibrary:paper_shadow_color
         */
-        public static int PaperButton_paper_shadow_color = 9;
+        public static final int PaperButton_paper_shadow_color = 9;
         /**
           <p>This symbol is the offset where the {@link com.kcbTeam.kcblibrary.R.attr#paper_shadow_offset_x}
           attribute's value can be found in the {@link #PaperButton} array.
@@ -1035,7 +1065,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.kcbTeam.kcblibrary:paper_shadow_offset_x
         */
-        public static int PaperButton_paper_shadow_offset_x = 7;
+        public static final int PaperButton_paper_shadow_offset_x = 7;
         /**
           <p>This symbol is the offset where the {@link com.kcbTeam.kcblibrary.R.attr#paper_shadow_offset_y}
           attribute's value can be found in the {@link #PaperButton} array.
@@ -1049,7 +1079,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.kcbTeam.kcblibrary:paper_shadow_offset_y
         */
-        public static int PaperButton_paper_shadow_offset_y = 8;
+        public static final int PaperButton_paper_shadow_offset_y = 8;
         /**
           <p>This symbol is the offset where the {@link com.kcbTeam.kcblibrary.R.attr#paper_shadow_radius}
           attribute's value can be found in the {@link #PaperButton} array.
@@ -1063,7 +1093,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.kcbTeam.kcblibrary:paper_shadow_radius
         */
-        public static int PaperButton_paper_shadow_radius = 6;
+        public static final int PaperButton_paper_shadow_radius = 6;
         /**
           <p>This symbol is the offset where the {@link com.kcbTeam.kcblibrary.R.attr#paper_text}
           attribute's value can be found in the {@link #PaperButton} array.
@@ -1077,7 +1107,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.kcbTeam.kcblibrary:paper_text
         */
-        public static int PaperButton_paper_text = 0;
+        public static final int PaperButton_paper_text = 0;
         /**
           <p>This symbol is the offset where the {@link com.kcbTeam.kcblibrary.R.attr#paper_text_color}
           attribute's value can be found in the {@link #PaperButton} array.
@@ -1092,7 +1122,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.kcbTeam.kcblibrary:paper_text_color
         */
-        public static int PaperButton_paper_text_color = 2;
+        public static final int PaperButton_paper_text_color = 2;
         /**
           <p>This symbol is the offset where the {@link com.kcbTeam.kcblibrary.R.attr#paper_text_size}
           attribute's value can be found in the {@link #PaperButton} array.
@@ -1108,7 +1138,52 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.kcbTeam.kcblibrary:paper_text_size
         */
-        public static int PaperButton_paper_text_size = 1;
+        public static final int PaperButton_paper_text_size = 1;
+        /**  RadioButton Attribute 
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #RadioButton_radio_checked_color com.kcbTeam.kcblibrary:radio_checked_color}</code></td><td></td></tr>
+           <tr><td><code>{@link #RadioButton_radio_color com.kcbTeam.kcblibrary:radio_color}</code></td><td></td></tr>
+           </table>
+           @see #RadioButton_radio_checked_color
+           @see #RadioButton_radio_color
+         */
+        public static final int[] RadioButton = {
+            0x7f010010, 0x7f010011
+        };
+        /**
+          <p>This symbol is the offset where the {@link com.kcbTeam.kcblibrary.R.attr#radio_checked_color}
+          attribute's value can be found in the {@link #RadioButton} array.
+
+
+          <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.kcbTeam.kcblibrary:radio_checked_color
+        */
+        public static final int RadioButton_radio_checked_color = 1;
+        /**
+          <p>This symbol is the offset where the {@link com.kcbTeam.kcblibrary.R.attr#radio_color}
+          attribute's value can be found in the {@link #RadioButton} array.
+
+
+          <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.kcbTeam.kcblibrary:radio_color
+        */
+        public static final int RadioButton_radio_color = 0;
         /**  SmoothProgressBar 
            <p>Includes the following attributes:</p>
            <table>
@@ -1150,10 +1225,10 @@ containing a value of this type.
            @see #SmoothProgressBar_spb_stroke_width
          */
         public static final int[] SmoothProgressBar = {
-            0x7f010020, 0x7f010021, 0x7f010022, 0x7f010023,
-            0x7f010024, 0x7f010025, 0x7f010026, 0x7f010027,
-            0x7f010028, 0x7f010029, 0x7f01002a, 0x7f01002b,
-            0x7f01002c, 0x7f01002d, 0x7f01002e, 0x7f01002f
+            0x7f010022, 0x7f010023, 0x7f010024, 0x7f010025,
+            0x7f010026, 0x7f010027, 0x7f010028, 0x7f010029,
+            0x7f01002a, 0x7f01002b, 0x7f01002c, 0x7f01002d,
+            0x7f01002e, 0x7f01002f, 0x7f010030, 0x7f010031
         };
         /**
           <p>This symbol is the offset where the {@link com.kcbTeam.kcblibrary.R.attr#spbStyle}
@@ -1164,7 +1239,7 @@ containing a value of this type.
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           @attr name com.kcbTeam.kcblibrary:spbStyle
         */
-        public static int SmoothProgressBar_spbStyle = 0;
+        public static final int SmoothProgressBar_spbStyle = 0;
         /**
           <p>This symbol is the offset where the {@link com.kcbTeam.kcblibrary.R.attr#spb_background}
           attribute's value can be found in the {@link #SmoothProgressBar} array.
@@ -1174,7 +1249,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           @attr name com.kcbTeam.kcblibrary:spb_background
         */
-        public static int SmoothProgressBar_spb_background = 13;
+        public static final int SmoothProgressBar_spb_background = 13;
         /**
           <p>This symbol is the offset where the {@link com.kcbTeam.kcblibrary.R.attr#spb_color}
           attribute's value can be found in the {@link #SmoothProgressBar} array.
@@ -1189,7 +1264,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.kcbTeam.kcblibrary:spb_color
         */
-        public static int SmoothProgressBar_spb_color = 1;
+        public static final int SmoothProgressBar_spb_color = 1;
         /**
           <p>This symbol is the offset where the {@link com.kcbTeam.kcblibrary.R.attr#spb_colors}
           attribute's value can be found in the {@link #SmoothProgressBar} array.
@@ -1199,7 +1274,7 @@ containing a value of this type.
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
           @attr name com.kcbTeam.kcblibrary:spb_colors
         */
-        public static int SmoothProgressBar_spb_colors = 11;
+        public static final int SmoothProgressBar_spb_colors = 11;
         /**
           <p>This symbol is the offset where the {@link com.kcbTeam.kcblibrary.R.attr#spb_generate_background_with_colors}
           attribute's value can be found in the {@link #SmoothProgressBar} array.
@@ -1213,7 +1288,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.kcbTeam.kcblibrary:spb_generate_background_with_colors
         */
-        public static int SmoothProgressBar_spb_generate_background_with_colors = 14;
+        public static final int SmoothProgressBar_spb_generate_background_with_colors = 14;
         /**
           <p>This symbol is the offset where the {@link com.kcbTeam.kcblibrary.R.attr#spb_gradients}
           attribute's value can be found in the {@link #SmoothProgressBar} array.
@@ -1227,7 +1302,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.kcbTeam.kcblibrary:spb_gradients
         */
-        public static int SmoothProgressBar_spb_gradients = 15;
+        public static final int SmoothProgressBar_spb_gradients = 15;
         /**
           <p>This symbol is the offset where the {@link com.kcbTeam.kcblibrary.R.attr#spb_interpolator}
           attribute's value can be found in the {@link #SmoothProgressBar} array.
@@ -1246,7 +1321,7 @@ containing a value of this type.
 </table>
           @attr name com.kcbTeam.kcblibrary:spb_interpolator
         */
-        public static int SmoothProgressBar_spb_interpolator = 8;
+        public static final int SmoothProgressBar_spb_interpolator = 8;
         /**
           <p>This symbol is the offset where the {@link com.kcbTeam.kcblibrary.R.attr#spb_mirror_mode}
           attribute's value can be found in the {@link #SmoothProgressBar} array.
@@ -1260,7 +1335,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.kcbTeam.kcblibrary:spb_mirror_mode
         */
-        public static int SmoothProgressBar_spb_mirror_mode = 10;
+        public static final int SmoothProgressBar_spb_mirror_mode = 10;
         /**
           <p>This symbol is the offset where the {@link com.kcbTeam.kcblibrary.R.attr#spb_progressiveStart_activated}
           attribute's value can be found in the {@link #SmoothProgressBar} array.
@@ -1274,7 +1349,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.kcbTeam.kcblibrary:spb_progressiveStart_activated
         */
-        public static int SmoothProgressBar_spb_progressiveStart_activated = 12;
+        public static final int SmoothProgressBar_spb_progressiveStart_activated = 12;
         /**
           <p>This symbol is the offset where the {@link com.kcbTeam.kcblibrary.R.attr#spb_progressiveStart_speed}
           attribute's value can be found in the {@link #SmoothProgressBar} array.
@@ -1288,7 +1363,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.kcbTeam.kcblibrary:spb_progressiveStart_speed
         */
-        public static int SmoothProgressBar_spb_progressiveStart_speed = 6;
+        public static final int SmoothProgressBar_spb_progressiveStart_speed = 6;
         /**
           <p>This symbol is the offset where the {@link com.kcbTeam.kcblibrary.R.attr#spb_progressiveStop_speed}
           attribute's value can be found in the {@link #SmoothProgressBar} array.
@@ -1302,7 +1377,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.kcbTeam.kcblibrary:spb_progressiveStop_speed
         */
-        public static int SmoothProgressBar_spb_progressiveStop_speed = 7;
+        public static final int SmoothProgressBar_spb_progressiveStop_speed = 7;
         /**
           <p>This symbol is the offset where the {@link com.kcbTeam.kcblibrary.R.attr#spb_reversed}
           attribute's value can be found in the {@link #SmoothProgressBar} array.
@@ -1316,7 +1391,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.kcbTeam.kcblibrary:spb_reversed
         */
-        public static int SmoothProgressBar_spb_reversed = 9;
+        public static final int SmoothProgressBar_spb_reversed = 9;
         /**
           <p>This symbol is the offset where the {@link com.kcbTeam.kcblibrary.R.attr#spb_sections_count}
           attribute's value can be found in the {@link #SmoothProgressBar} array.
@@ -1330,7 +1405,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.kcbTeam.kcblibrary:spb_sections_count
         */
-        public static int SmoothProgressBar_spb_sections_count = 4;
+        public static final int SmoothProgressBar_spb_sections_count = 4;
         /**
           <p>This symbol is the offset where the {@link com.kcbTeam.kcblibrary.R.attr#spb_speed}
           attribute's value can be found in the {@link #SmoothProgressBar} array.
@@ -1344,7 +1419,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.kcbTeam.kcblibrary:spb_speed
         */
-        public static int SmoothProgressBar_spb_speed = 5;
+        public static final int SmoothProgressBar_spb_speed = 5;
         /**
           <p>This symbol is the offset where the {@link com.kcbTeam.kcblibrary.R.attr#spb_stroke_separator_length}
           attribute's value can be found in the {@link #SmoothProgressBar} array.
@@ -1360,7 +1435,7 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.kcbTeam.kcblibrary:spb_stroke_separator_length
         */
-        public static int SmoothProgressBar_spb_stroke_separator_length = 3;
+        public static final int SmoothProgressBar_spb_stroke_separator_length = 3;
         /**
           <p>This symbol is the offset where the {@link com.kcbTeam.kcblibrary.R.attr#spb_stroke_width}
           attribute's value can be found in the {@link #SmoothProgressBar} array.
@@ -1376,6 +1451,6 @@ theme attribute (in the form
 containing a value of this type.
           @attr name com.kcbTeam.kcblibrary:spb_stroke_width
         */
-        public static int SmoothProgressBar_spb_stroke_width = 2;
+        public static final int SmoothProgressBar_spb_stroke_width = 2;
     };
 }

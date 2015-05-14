@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="80dp" />
 
-    <com.kcb.teacher.util.RadioButton
+    <com.kcb.library.view.radioButton.RadioButton
         android:id="@+id/checkBox_testchosen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

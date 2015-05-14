@@ -16,4 +16,10 @@
     <color name="gplus_color_3">#427fed</color>
     <color name="gplus_color_4">#b23424</color>
 	<color name="thumbColor">#66aaaaaa</color>
+	
+	<!-- RadioButton Default -->
+    
+     <color name="radio_color">#6d6d6d</color> 
+     <color name="radio_checked_color">#55b03d</color> 
+    
 </resources>

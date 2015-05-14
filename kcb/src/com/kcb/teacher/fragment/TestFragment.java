@@ -2,6 +2,7 @@ package com.kcb.teacher.fragment;
 
 import java.util.ArrayList;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import com.kcb.common.util.ToastUtil;
 import com.kcb.common.view.MaterialListDialog.OnClickSureListener;
 import com.kcb.library.view.PaperButton;
 import com.kcb.teacher.activity.EditTestActivity;
+import com.kcb.teacher.activity.EditTestFirstActivity;
 import com.kcbTeam.R;
 
 /**
@@ -111,6 +113,8 @@ public class TestFragment extends BaseFragment {
                     // startActivity(intent);
                     break;
                 case R.id.button_test_result:
+                	//Intent intent = new Intent(getActivity(), EditTestFirstActivity.class);
+                    //startActivity(intent);
                     break;
                 default:
                     break;
