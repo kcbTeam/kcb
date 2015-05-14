@@ -153,14 +153,18 @@ public class EditTestActivity extends BaseActivity {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.delete_button:
-                DialogUtil.showNormalDialog(this, R.string.dialog_title_delete,
-                        R.string.delete_msg, R.string.sure, new OnClickListener() {
+                if (MaxFragmentNum != 1) {
+                    DialogUtil.showNormalDialog(this, R.string.dialog_title_delete,
+                            R.string.delete_msg, R.string.sure, new OnClickListener() {
 
-                            @Override
-                            public void onClick(View v) {
-                                clickDelete();
-                            }
-                        }, R.string.cancel, null);
+                                @Override
+                                public void onClick(View v) {
+                                    clickDelete();
+                                }
+                            }, R.string.cancel, null);
+                } else {
+                    clickDelete();
+                }
 
                 break;
             case R.id.pagerbutton_last:

@@ -15,5 +15,7 @@
     <color name="gplus_color_2">#f4b400</color>
     <color name="gplus_color_3">#427fed</color>
     <color name="gplus_color_4">#b23424</color>
-	<color name="thumbColor">#66aaaaaa</color>
+    <color name="thumbColor">#66aaaaaa</color>
+    <color name="black_translucent">#50000000</color>
+
 </resources>

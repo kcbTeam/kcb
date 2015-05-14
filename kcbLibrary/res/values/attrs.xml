@@ -27,7 +27,8 @@
 
     <!-- ButtonFlat Attribute -->
     <declare-styleable name="CustomAttributes">
-        <!-- Color of ripple animation -->
+
+        <!-- Color of ripple animation -->
         <attr name="rippleColor" format="color|reference" />
         <!-- Speed of ripple animation -->
         <attr name="rippleSpeed" format="float" />
@@ -81,6 +82,17 @@
         <attr name="spb_background" format="reference" />
         <attr name="spb_generate_background_with_colors" format="boolean" />
         <attr name="spb_gradients" format="boolean" />
+    </declare-styleable>
+    <declare-styleable name="CropImageView">
+        <attr name="guidelines">
+            <enum name="on" value="2" />
+            <enum name="onTouch" value="1" />
+            <enum name="off" value="0" />
+        </attr>
+        <attr name="fixAspectRatio" format="boolean" />
+        <attr name="aspectRatioX" format="integer" />
+        <attr name="aspectRatioY" format="integer" />
+        <attr name="imageResource" format="reference" />
     </declare-styleable>
 
 </resources>

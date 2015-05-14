@@ -2,6 +2,7 @@ package com.kcb.teacher.fragment;
 
 import java.util.ArrayList;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import com.kcb.common.listener.DelayClickListener;
 import com.kcb.common.util.DialogUtil;
 import com.kcb.common.util.ToastUtil;
 import com.kcb.library.view.PaperButton;
+import com.kcb.teacher.activity.EditTestActivity;
 import com.kcb.teacher.adapter.ListAdapterEdit;
 import com.kcbTeam.R;
 
@@ -86,6 +88,8 @@ public class TestFragment extends BaseFragment {
                                 @Override
                                 public void onClick(View v) {
                                     ToastUtil.toast("click sure");
+                                    Intent intent = new Intent(getActivity(),EditTestActivity.class);
+                                    startActivity(intent);
                                 }
                             }, "取消", null);
 
