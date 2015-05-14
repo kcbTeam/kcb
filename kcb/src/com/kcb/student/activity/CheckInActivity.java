@@ -104,10 +104,11 @@ public class CheckInActivity extends BaseActivity {
                     default:
                         break;
                 }
-                if (currentInputIndex > 0)
+                if (currentInputIndex > 0) {
                     currentInputIndex--;
-                else
+                } else {
                     currentInputIndex = 0;
+                }
             } else { // input num
                 if (postion == 10) {
                     postion = -1;

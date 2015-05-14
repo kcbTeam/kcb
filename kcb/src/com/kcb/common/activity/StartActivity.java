@@ -21,7 +21,7 @@ import com.kcbTeam.R;
 /**
  * 
  * @className: StartActivity
- * @description: first activity of app;
+ * @description: first activity of app, show three description page
  * @author: wanghang
  * @date: 2015-4-29 下午9:01:59
  */
@@ -29,12 +29,14 @@ public class StartActivity extends BaseActivity {
 
     private ColorAnimationView colorAnimationView;
     private ViewPager viewPager;
+
     private StartViewPagerAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // if has account (has login), goto HomeActivity
         if (!KAccount.hasAccount()) {
             setContentView(R.layout.comm_activity_start);
             initView();
@@ -59,6 +61,7 @@ public class StartActivity extends BaseActivity {
         colorAnimationView.setmViewPager(viewPager, mAdapter.getCount(), new int[] {0xffffffff,
                 0xffffffff, 0xffffffff});
 
+        // user click back in LoginActivity, restart this activity and show third page
         Intent intent = getIntent();
         if (null != intent && intent.getAction() == INTENT_ACTION_RESTART) {
             viewPager.setCurrentItem(mAdapter.getCount() - 1);
@@ -83,6 +86,7 @@ public class StartActivity extends BaseActivity {
             ImageView backgroundImageView =
                     (ImageView) view.findViewById(R.id.imageview_background);
             backgroundImageView.setImageResource(mBackgroundBitmapIds[position]);
+            // two button only show in third page
             if (position == getCount() - 1) {
                 PaperButton stuPaperButton = (PaperButton) view.findViewById(R.id.pagerbutton_stu);
                 PaperButton tchPaperButton = (PaperButton) view.findViewById(R.id.pagerbutton_tch);
@@ -100,6 +104,7 @@ public class StartActivity extends BaseActivity {
             return arg0 == arg1;
         }
 
+        // goto stu/tch LoginActivity according user's selection
         private DelayClickListener mClickListener = new DelayClickListener(
                 DelayClickListener.DELAY_PAPER_BUTTON) {
 
@@ -119,7 +124,8 @@ public class StartActivity extends BaseActivity {
                         break;
                 }
                 startActivity(intent);
-                finish();
+                finish(); // finish this activity, if user click back in LoginActivity, restart this
+                          // activity
             }
         };
     }
@@ -136,8 +142,8 @@ public class StartActivity extends BaseActivity {
     /**
      * 
      * @title: restart
-     * @description: finish this activity when goto LoginActivity, but if user click back, we need
-     *               restart this activity and show third page;
+     * @description: finish this activity when goto LoginActivity, but if user click back in
+     *               LoginActivity, we need restart this activity and show third page;
      * @author: wanghang
      * @date: 2015-5-4 下午8:39:21
      * @param context

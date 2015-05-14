@@ -1,11 +1,46 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <!-- ********** Application theme. ********** -->
     <style name="AppBaseTheme" parent="android:Theme.Light.NoTitleBar"></style>
 
-    <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme"></style>
+    <!-- ********** Application theme. ********** -->
 
-    <!-- Login start -->
+
+    <!-- **************************************** Common module Start **************************************** -->
+    <!-- ********** Common start ********** -->
+    <style name="common_paper_button">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">54dp</item>
+        <item name="android:layout_marginRight">36dp</item>
+        <item name="android:layout_marginLeft">36dp</item>
+    </style>
+
+    <style name="common_back_button">
+        <item name="android:layout_width">56dp</item>
+        <item name="android:layout_height">56dp</item>
+    </style>
+
+    <style name="common_back_imageview">
+        <item name="android:layout_width">32dp</item>
+        <item name="android:layout_height">32dp</item>
+        <item name="android:src">@drawable/ic_action_back</item>
+        <item name="android:layout_centerInParent">true</item>
+    </style>
+
+    <style name="common_top_button">
+        <item name="android:layout_width">72dp</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:padding">0dp</item>
+    </style>
+
+    <style name="common_top_longtext_button" parent="@style/common_top_button">
+        <item name="android:layout_width">90dp</item>
+    </style>
+    <!-- ********** Common end ********** -->
+
+
+    <!-- ********** Login start ********** -->
     <style name="login_edittext">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -19,21 +54,13 @@
         <item name="android:inputType">text</item>
     </style>
 
-    <style name="edittest_edittext_problem">
-        <item name="android:inputType">text</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:maxLines">10</item>
-        <item name="android:lines">10</item>
-    </style>
-
     <style name="login_edittext_password" parent="@style/login_edittext">
         <item name="android:inputType">textPassword</item>
     </style>
-    <!-- Login start -->
+    <!-- ********** Login start ********** -->
 
 
-    <!-- Home start -->
+    <!-- ********** Home start ********** -->
     <style name="home_tab">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">54dp</item>
@@ -46,10 +73,12 @@
         <item name="android:layout_marginRight">36dp</item>
         <item name="android:layout_marginLeft">36dp</item>
     </style>
-    <!-- Home end -->
+    <!-- ********** Home end ********** -->
+    <!-- **************************************** Common module End **************************************** -->
 
 
-    <!-- CheckIn start -->
+    <!-- **************************************** Student module Start **************************************** -->
+    <!-- ********** CheckIn start ********** -->
     <style name="shownum_textview">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">54dp</item>
@@ -57,34 +86,25 @@
         <item name="android:gravity">center</item>
         <item name="android:background">@drawable/stu_checkin_textview</item>
     </style>
-    <!-- CheckIn end -->
+    <!-- ********** CheckIn end ********** -->
+    <!-- **************************************** Student module End **************************************** -->
 
 
-    <!-- Common start -->
-    <style name="common_button">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">54dp</item>
-        <item name="android:layout_marginRight">36dp</item>
-        <item name="android:layout_marginLeft">36dp</item>
-    </style>
-
-    <style name="common_top_button">
-        <item name="android:layout_width">72dp</item>
-        <item name="android:layout_height">48dp</item>
-        <item name="android:padding">0dp</item>
-    </style>
-
-    <style name="common_top_longtext_button" parent="@style/common_top_button">
-        <item name="android:layout_width">90dp</item>
-    </style>
-    <!-- Common end -->
-
-
+    <!-- **************************************** Teacher module End **************************************** -->
     <!-- Tch start -->
     <style name="bottom_button">
         <item name="android:layout_width">150dp</item>
         <item name="android:layout_height">54dp</item>
     </style>
     <!-- Tch end -->
+    <!-- **************************************** Teacher module End **************************************** -->
+
+    <style name="edittest_edittext_problem">
+        <item name="android:inputType">text</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:maxLines">10</item>
+        <item name="android:lines">10</item>
+    </style>
 
 </resources>
