@@ -7,7 +7,7 @@ import android.view.View.OnClickListener;
 /**
  * 
  * @className: BaseFragmentActivity
- * @description:
+ * @description: extends this when define a new FragmentActivity
  * @author: ZQJ
  * @date: 2015年4月24日 下午3:20:57
  */

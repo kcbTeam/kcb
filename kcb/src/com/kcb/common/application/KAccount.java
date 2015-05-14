@@ -8,11 +8,19 @@ import android.text.TextUtils;
 /**
  * 
  * @className: KAccount
- * @description: account save current user info;
+ * @description: stu/tch login success, save their account in local SharedPreference; when start
+ *               app, detect if need login according account; when user exit current account in
+ *               setting, delete saved account;
  * @author: wanghang
  * @date: 2015-4-29 下午8:41:44
  */
 public class KAccount {
+
+    /**
+     * account type
+     */
+    public static final int TYPE_STU = 0;
+    public static final int TYPE_TCH = 1;
 
     /**
      * sharedPreference keys
@@ -24,13 +32,7 @@ public class KAccount {
     private static final String NAME = "name";
 
     /**
-     * account type
-     */
-    public static final int TYPE_STU = 0;
-    public static final int TYPE_TCH = 1;
-
-    /**
-     * account content
+     * account content, don't need save password local;
      */
     private int mType;
     private String mId;

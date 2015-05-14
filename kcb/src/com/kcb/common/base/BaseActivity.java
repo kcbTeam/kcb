@@ -8,7 +8,7 @@ import android.view.View.OnClickListener;
  * 
  * @className: BaseActivity
  * @description: extend this activity when define a new activity;
- * @author: hang.wang
+ * @author: wanghang
  * @date: 2015-4-20 上午11:14:44
  */
 public abstract class BaseActivity extends Activity implements OnClickListener {

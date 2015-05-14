@@ -8,7 +8,7 @@ import android.view.View.OnClickListener;
  * 
  * @className: BaseFragment
  * @description: extend this fragment when define a new fragment;
- * @author: hang.wang
+ * @author: wanghang
  * @date: 2015-4-20 上午11:29:29
  */
 public abstract class BaseFragment extends Fragment implements OnClickListener {
