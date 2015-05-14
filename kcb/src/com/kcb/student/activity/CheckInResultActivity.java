@@ -21,12 +21,10 @@ import com.kcbTeam.R;
 /**
  * 
  * @className: CheckResultActivity
- * @description:
+ * @description: look checkin result
  * @author: Ding
  * @date: 2015年5月5日 下午3:45:54
  */
-// TODO delete top-right tip;
-// TODO change colors and size;
 public class CheckInResultActivity extends BaseActivity implements OnChartValueSelectedListener {
 
     private ButtonFlat backbutton;
@@ -37,7 +35,7 @@ public class CheckInResultActivity extends BaseActivity implements OnChartValueS
     @Override
     protected void onCreate(android.os.Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.stu_activity_checkinresult);
+        setContentView(R.layout.stu_activity_look_checkin);
 
         initView();
     }

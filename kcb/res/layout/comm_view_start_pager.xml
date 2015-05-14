@@ -15,14 +15,14 @@
 
     <com.kcb.library.view.PaperButton
         android:id="@+id/pagerbutton_stu"
-        style="@style/common_button"
+        style="@style/common_paper_button"
         android:layout_above="@+id/pagerbutton_tch"
         android:visibility="gone"
         widget:paper_text="@string/i_am_stu" />
 
     <com.kcb.library.view.PaperButton
         android:id="@+id/pagerbutton_tch"
-        style="@style/common_button"
+        style="@style/common_paper_button"
         android:layout_alignParentBottom="true"
         android:visibility="gone"
         widget:paper_text="@string/i_am_tch" />
