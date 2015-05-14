@@ -41,9 +41,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/title_buttonbar"
+        android:layout_marginBottom="24dp"
         android:layout_marginLeft="24dp"
-        android:layout_marginRight="24dp"
-        android:layout_marginBottom="24dp" >
+        android:layout_marginRight="24dp" >
 
         <TextView
             android:id="@+id/textview_question_num"
@@ -103,8 +103,8 @@
 
             <com.kcb.library.view.checkbox.CheckBox
                 android:id="@+id/checkBox_A"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerInParent="true"
                 android:background="#1E88E5" />
@@ -137,8 +137,8 @@
 
             <com.kcb.library.view.checkbox.CheckBox
                 android:id="@+id/checkBox_B"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerInParent="true"
                 android:background="#1E88E5" />
@@ -171,8 +171,8 @@
 
             <com.kcb.library.view.checkbox.CheckBox
                 android:id="@+id/checkBox_C"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerInParent="true"
                 android:background="#1E88E5" />
@@ -205,8 +205,8 @@
 
             <com.kcb.library.view.checkbox.CheckBox
                 android:id="@+id/checkBox_D"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerInParent="true"
                 android:background="#1E88E5" />

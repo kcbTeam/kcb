@@ -88,6 +88,10 @@
     <string name="dialog_title_optionC">输入C选项</string>
     <string name="dialog_title_optionD">输入D选项</string>
     <string name="delete_success">删除成功</string>
+    <string name="dialog_title_delete">删除</string>
+    <string name="delete_msg">确认删除该题吗？</string>
+    <string name="dialog_title_add">添加</string>
+    <string name="add_msg">是否要再加一道题？</string>
     <!-- EditTestActivity End -->
 
 
