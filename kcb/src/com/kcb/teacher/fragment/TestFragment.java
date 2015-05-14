@@ -86,6 +86,9 @@ public class TestFragment extends BaseFragment {
                                 @Override
                                 public void onClick(View view, int position) {
                                     if (position == 0) {
+                                   
+                                    	//Intent intent = new Intent(getActivity(), EditTestFirstActivity.class);
+                                       // startActivity(intent);
                                         EditTestActivity.startAddTest(getActivity());
                                     } else {
                                         // TODO set selected testId
