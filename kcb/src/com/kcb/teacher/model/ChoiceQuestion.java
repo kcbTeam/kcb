@@ -13,6 +13,7 @@ public class ChoiceQuestion implements Serializable {
 
     private static final long serialVersionUID = 2L;
 
+    private int mQuestionNum;
     private String mQuestion;
     private String mOptionA;
     private String mOptionB;
@@ -22,6 +23,7 @@ public class ChoiceQuestion implements Serializable {
     private boolean[] mCorrectId;
 
     public ChoiceQuestion() {
+        mQuestionNum = 0;
         mQuestion = "";
         mOptionA = "";
         mOptionB = "";
@@ -38,6 +40,14 @@ public class ChoiceQuestion implements Serializable {
         mOptionC = optionC;
         mOptionD = optionD;
         mCorrectId = correctOption;
+    }
+
+    public int getQuestionNum() {
+        return this.mQuestionNum;
+    }
+
+    public void setQuestionNum(int mQuestionNum) {
+        this.mQuestionNum = mQuestionNum;
     }
 
     public String getQuestion() {
@@ -109,8 +119,8 @@ public class ChoiceQuestion implements Serializable {
 
     public String toString() {
 
-        return "." + mQuestion + '\n' + "A." + mOptionA + '\n' + "B." + mOptionB + '\n' + "C." + mOptionC
-                + '\n' + "D." + mOptionD + '\n' + "答案：" + getCorrectOption();
+        return "." + mQuestion + '\n' + "A." + mOptionA + '\n' + "B." + mOptionB + '\n' + "C."
+                + mOptionC + '\n' + "D." + mOptionD + '\n' + "答案：" + getCorrectOption();
     }
 
     public boolean isLegal() {

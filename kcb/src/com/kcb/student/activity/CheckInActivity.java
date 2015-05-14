@@ -1,6 +1,7 @@
 package com.kcb.student.activity;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -10,6 +11,7 @@ import com.kcb.common.base.BaseActivity;
 import com.kcb.common.listener.DelayClickListener;
 import com.kcb.common.util.ToastUtil;
 import com.kcb.library.view.PaperButton;
+import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
 import com.kcb.student.adapter.CheckInRecycleAdapter;
 import com.kcb.student.adapter.CheckInRecycleAdapter.RecyclerItemClickListener;
 import com.kcbTeam.R;
@@ -21,7 +23,6 @@ import com.kcbTeam.R;
  * @author: Tao Li
  * @date: 2015-4-24 下午9:16:22
  */
-// TODO add activity_header_shadow
 // TODO add SmoothProgressBar below finishButton, see in LoginActivity
 public class CheckInActivity extends BaseActivity {
 
@@ -31,7 +32,7 @@ public class CheckInActivity extends BaseActivity {
     private TextView num4TextView;
     private RecyclerView recyclerView;
     private PaperButton finishButton;
-
+    private SmoothProgressBar loginProgressBar;
     private CheckInRecycleAdapter mAdapter;
     private int currentInputIndex = 0;
 
@@ -52,7 +53,7 @@ public class CheckInActivity extends BaseActivity {
         num4TextView = (TextView) findViewById(R.id.textview_shownum4);
         finishButton = (PaperButton) findViewById(R.id.button_finish);
         finishButton.setOnClickListener(mClickListener);
-
+        loginProgressBar = (SmoothProgressBar) findViewById(R.id.progressbar_finish);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
         mAdapter = new CheckInRecycleAdapter();
@@ -69,11 +70,23 @@ public class CheckInActivity extends BaseActivity {
         @Override
         public void doClick(View v) {
             // TODO request server
-            String passwordString =
-                    new String(num1TextView.getText().toString()
-                            + num2TextView.getText().toString() + num3TextView.getText().toString()
-                            + num4TextView.getText().toString());
-            ToastUtil.toast(passwordString);
+
+            loginProgressBar.setVisibility(View.VISIBLE);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    // TODO save student's name after login success;
+                    String passwordString =
+                            new String(num1TextView.getText().toString()
+                                    + num2TextView.getText().toString()
+                                    + num3TextView.getText().toString()
+                                    + num4TextView.getText().toString());
+                    ToastUtil.toast(passwordString);
+                    HomeActivity.start(CheckInActivity.this);
+                    finish();
+                }
+            }, 1000);
+
         }
     };
 

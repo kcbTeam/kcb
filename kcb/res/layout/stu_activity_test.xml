@@ -32,7 +32,7 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/my_recyclerview1"
         android:layout_width="match_parent"
-        android:layout_height="20dp"
+        android:layout_height="8dp"
         android:layout_below="@id/relativeLayout_header"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
@@ -80,7 +80,7 @@
                 android:layout_marginRight="40dp" />
 
             <com.kcb.library.view.checkbox.CheckBox
-                android:id="@+id/checkbox_one"
+                android:id="@+id/checkbox_a"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:layout_alignParentRight="true"

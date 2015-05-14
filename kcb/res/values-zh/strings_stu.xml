@@ -10,7 +10,7 @@
 
     <!-- CheckinActivity Start -->
     <string name="checkin">课堂签到</string>
-    <string name="tip_inputnum">请输入正确的四位数字</string>
+    <string name="tip_inputnum">请输入老师报出的签到数字</string>
     <string name="button_finish">完成</string>
     <string name="button_login">登录</string>
     <string name="hint_password">密码</string>
@@ -29,11 +29,8 @@
 
 
     <!-- TestActivity Start -->
-    <string name="first_question">已经是第一题</string>
-    <string name="last_question">已经是最后一题</string>
     <string name="pre_question">上一题</string>
     <string name="next_question">下一题</string>
-    <string name="time_counter">倒计时：</string>
     <string name="if_submit_answer">是否提交答案？</string>
     <string name="to_submit_answer">请提交答案</string>
     <string name="end">结束!</string>

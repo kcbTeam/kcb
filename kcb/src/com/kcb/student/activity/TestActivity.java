@@ -3,8 +3,6 @@ package com.kcb.student.activity;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -40,9 +38,11 @@ public class TestActivity extends BaseFragmentActivity {
     private RecyclerView recyclerView;
     private TestRecycleAdapter mAdapter;
     private ChoiceQuestion mChoiceQuestion;
+    private ChoiceQuestion mChoiceQuestion1;
+    private ChoiceQuestion mChoiceQuestion2;
     private List<ChoiceQuestion> mListQuestion;
     private int currentPageIndex;
-    private int questionNum = 5;
+    private int questionNum = 3;
 
 
     @Override
@@ -61,14 +61,17 @@ public class TestActivity extends BaseFragmentActivity {
         answerBTextView = (TextView) findViewById(R.id.textview_choice_b);
         answerCTextView = (TextView) findViewById(R.id.textview_choice_c);
         answerDTextView = (TextView) findViewById(R.id.textview_choice_d);
+        checkboxA = (CheckBox) findViewById(R.id.checkbox_a);
+        checkboxB = (CheckBox) findViewById(R.id.checkbox_b);
+        checkboxC = (CheckBox) findViewById(R.id.checkbox_c);
+        checkboxD = (CheckBox) findViewById(R.id.checkbox_d);
         preButton = (PaperButton) findViewById(R.id.button_previous);
+        nextButton = (PaperButton) findViewById(R.id.button_next);
         preButton.setColor(Color.parseColor("#808080"));
         preButton.setOnClickListener(this);
-        nextButton = (PaperButton) findViewById(R.id.button_next);
         nextButton.setOnClickListener(this);
         recyclerView = (RecyclerView) findViewById(R.id.my_recyclerview1);
         recyclerView.setLayoutManager(new GridLayoutManager(this, questionNum));
-        setTimeCounterDown();
         mAdapter = new TestRecycleAdapter(questionNum);
         recyclerView.setAdapter(mAdapter);
     }
@@ -80,24 +83,39 @@ public class TestActivity extends BaseFragmentActivity {
         timeCountDown.start();
     }
 
-
     public void getTestContentFromNet() {
-        mChoiceQuestion.setQuestion("");
-        mChoiceQuestion.setOptionA("");
-        mChoiceQuestion.setOptionB("");
-        mChoiceQuestion.setOptionC("");
-        mChoiceQuestion.setOptionD("");
+        mChoiceQuestion.setQuestionNum(1);
+        mChoiceQuestion.setQuestion("这是题目显示区域1");
+        mChoiceQuestion.setOptionA("答案1");
+        mChoiceQuestion.setOptionB("答案2");
+        mChoiceQuestion.setOptionC("答案3");
+        mChoiceQuestion.setOptionD("答案4");
         mListQuestion = new ArrayList<ChoiceQuestion>();
         mListQuestion.add(mChoiceQuestion);
+        mChoiceQuestion1.setQuestionNum(2);
+        mChoiceQuestion1.setQuestion("这是题目显示区域2");
+        mChoiceQuestion1.setOptionA("答案1");
+        mChoiceQuestion1.setOptionB("答案2");
+        mChoiceQuestion1.setOptionC("答案3");
+        mChoiceQuestion1.setOptionD("答案4");
+        mListQuestion.add(mChoiceQuestion1);
+        mChoiceQuestion2.setQuestionNum(3);
+        mChoiceQuestion2.setQuestion("这是题目显示区域3");
+        mChoiceQuestion2.setOptionA("答案1");
+        mChoiceQuestion2.setOptionB("答案2");
+        mChoiceQuestion2.setOptionC("答案3");
+        mChoiceQuestion2.setOptionD("答案4");
+        mListQuestion.add(mChoiceQuestion2);
     }
 
     @Override
     protected void initData() {
-        questionTextView.setText("这是题目显示区域");
-        answerATextView.setText("答案1");
-        answerBTextView.setText("答案2");
-        answerCTextView.setText("答案3");
-        answerDTextView.setText("答案4");
+        mChoiceQuestion = new ChoiceQuestion();
+        mChoiceQuestion1 = new ChoiceQuestion();
+        mChoiceQuestion2 = new ChoiceQuestion();
+        getTestContentFromNet();
+        showCurrentQuestion(0);
+        setTimeCounterDown();
     }
 
     @Override
@@ -127,6 +145,9 @@ public class TestActivity extends BaseFragmentActivity {
                 nextButton.setText("已完成");
             else
                 nextButton.setText("下一题");
+            getCheckBoxsAnswer(currentPageIndex + 1);
+            showCurrentQuestion(currentPageIndex);
+            setCheckBoxsAnswer(currentPageIndex);
         }
     }
 
@@ -142,6 +163,9 @@ public class TestActivity extends BaseFragmentActivity {
                 preButton.setColor(Color.parseColor("#ffffff"));
             }
             preButton.setText("上一题");
+            getCheckBoxsAnswer(currentPageIndex - 1);
+            showCurrentQuestion(currentPageIndex);
+            setCheckBoxsAnswer(currentPageIndex);
         } else {
             DialogUtil.showNormalDialog(this, R.string.tip, R.string.if_submit_answer,
                     R.string.sure, new OnClickListener() {
@@ -154,6 +178,34 @@ public class TestActivity extends BaseFragmentActivity {
         }
 
     }
+
+    public void showCurrentQuestion(int position) {
+        choiceTextView.setText("选择题" + mListQuestion.get(position).getQuestionNum());
+        questionTextView.setText(mListQuestion.get(position).getQuestion());
+        answerATextView.setText(mListQuestion.get(position).getOptionA());
+        answerBTextView.setText(mListQuestion.get(position).getOptionB());
+        answerCTextView.setText(mListQuestion.get(position).getOptionC());
+        answerDTextView.setText(mListQuestion.get(position).getOptionD());
+    }
+
+    public void getCheckBoxsAnswer(int position) {
+        boolean[] mCorrectId = new boolean[] {false, false, false, false};
+        mCorrectId[0] = checkboxA.isCheck();
+        mCorrectId[1] = checkboxB.isCheck();
+        mCorrectId[2] = checkboxC.isCheck();
+        mCorrectId[3] = checkboxD.isCheck();
+        mListQuestion.get(position).setCorrectId(mCorrectId);
+    }
+
+    public void setCheckBoxsAnswer(int position) {
+        boolean[] mCorrectId;
+        mCorrectId = mListQuestion.get(position).getCorrectId();
+        checkboxA.setChecked(mCorrectId[0]);
+        checkboxB.setChecked(mCorrectId[1]);
+        checkboxC.setChecked(mCorrectId[2]);
+        checkboxD.setChecked(mCorrectId[3]);
+    }
+
 
     protected class fiveCountDownTimer extends CountDownTimer {
 
@@ -169,17 +221,13 @@ public class TestActivity extends BaseFragmentActivity {
 
         @Override
         public void onFinish() {
-            timeTextView.setText(R.string.end);
-
             DialogUtil.showNormalDialog(TestActivity.this, R.string.tip, R.string.if_submit_answer,
                     R.string.sure, new OnClickListener() {
-
                         @Override
                         public void onClick(View v) {
                             finish();
                         }
-                    }, R.string.cancel, null);
-
+                    }, -1, null);
         }
     }
 }
