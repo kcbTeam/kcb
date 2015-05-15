@@ -23,6 +23,7 @@ import com.kcb.library.view.PaperButton;
 import com.kcb.library.view.checkbox.CheckBox;
 import com.kcb.teacher.model.ChoiceQuestion;
 import com.kcb.teacher.model.CourseTest;
+import com.kcb.teacher.model.TextContent;
 import com.kcb.teacher.util.EditTestDialog;
 import com.kcb.teacher.util.EditTestDialog.DialogBackListener;
 import com.kcbTeam.R;
@@ -342,11 +343,11 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
     }
 
     private ChoiceQuestion getCurrentObj() {
-        String question = questionEditText.getText().toString();
-        String optionA = optionAEditText.getText().toString();
-        String optionB = optionBEditText.getText().toString();
-        String optionC = optionCEditText.getText().toString();
-        String optionD = optionDEditText.getText().toString();
+        TextContent question = new TextContent(questionEditText.getText().toString());
+        TextContent optionA = new TextContent(optionAEditText.getText().toString());
+        TextContent optionB = new TextContent(optionBEditText.getText().toString());
+        TextContent optionC = new TextContent(optionCEditText.getText().toString());
+        TextContent optionD = new TextContent(optionDEditText.getText().toString());
         boolean[] correctOption =
                 {checkBoxA.isCheck(), checkBoxB.isCheck(), checkBoxC.isCheck(), checkBoxD.isCheck()};
         return new ChoiceQuestion(question, optionA, optionB, optionC, optionD, correctOption);
@@ -360,11 +361,11 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
         String optionD = "";
         boolean[] correctId = {false, false, false, false};
         if (null != currentObj) {
-            question = currentObj.getQuestion();
-            optionA = currentObj.getOptionA();
-            optionB = currentObj.getOptionB();
-            optionC = currentObj.getOptionC();
-            optionD = currentObj.getOptionD();
+            question = currentObj.getQuestion().getContentString();
+            optionA = currentObj.getOptionA().getContentString();
+            optionB = currentObj.getOptionB().getContentString();
+            optionC = currentObj.getOptionC().getContentString();
+            optionD = currentObj.getOptionD().getContentString();
             correctId = currentObj.getCorrectId();
         }
         numHintTextView.setText(String.format(getResources()

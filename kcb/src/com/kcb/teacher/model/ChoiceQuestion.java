@@ -14,26 +14,26 @@ public class ChoiceQuestion implements Serializable {
     private static final long serialVersionUID = 2L;
 
     private int mQuestionNum;
-    private String mQuestion;
-    private String mOptionA;
-    private String mOptionB;
-    private String mOptionC;
-    private String mOptionD;
+    private TextContent mQuestion;
+    private TextContent mOptionA;
+    private TextContent mOptionB;
+    private TextContent mOptionC;
+    private TextContent mOptionD;
 
     private boolean[] mCorrectId;
 
     public ChoiceQuestion() {
         mQuestionNum = 0;
-        mQuestion = "";
-        mOptionA = "";
-        mOptionB = "";
-        mOptionC = "";
-        mOptionD = "";
+        mQuestion = new TextContent("");
+        mOptionA = new TextContent("");
+        mOptionB = new TextContent("");
+        mOptionC = new TextContent("");
+        mOptionD = new TextContent("");
         mCorrectId = new boolean[] {false, false, false, false};
     }
 
-    public ChoiceQuestion(String question, String optionA, String optionB, String optionC,
-            String optionD, boolean[] correctOption) {
+    public ChoiceQuestion(TextContent question, TextContent optionA, TextContent optionB, TextContent optionC,
+                          TextContent optionD, boolean[] correctOption) {
         mQuestion = question;
         mOptionA = optionA;
         mOptionB = optionB;
@@ -50,43 +50,43 @@ public class ChoiceQuestion implements Serializable {
         this.mQuestionNum = mQuestionNum;
     }
 
-    public String getQuestion() {
+    public TextContent getQuestion() {
         return mQuestion;
     }
 
-    public void setQuestion(String mQuestion) {
+    public void setQuestion(TextContent mQuestion) {
         this.mQuestion = mQuestion;
     }
 
-    public String getOptionA() {
+    public TextContent getOptionA() {
         return mOptionA;
     }
 
-    public void setOptionA(String mOptionA) {
+    public void setOptionA(TextContent mOptionA) {
         this.mOptionA = mOptionA;
     }
 
-    public String getOptionB() {
+    public TextContent getOptionB() {
         return mOptionB;
     }
 
-    public void setOptionB(String mOptionB) {
+    public void setOptionB(TextContent mOptionB) {
         this.mOptionB = mOptionB;
     }
 
-    public String getOptionC() {
+    public TextContent getOptionC() {
         return mOptionC;
     }
 
-    public void setOptionC(String mOptionC) {
+    public void setOptionC(TextContent mOptionC) {
         this.mOptionC = mOptionC;
     }
 
-    public String getOptionD() {
+    public TextContent getOptionD() {
         return mOptionD;
     }
 
-    public void setOptionD(String mOptionD) {
+    public void setOptionD(TextContent mOptionD) {
         this.mOptionD = mOptionD;
     }
 

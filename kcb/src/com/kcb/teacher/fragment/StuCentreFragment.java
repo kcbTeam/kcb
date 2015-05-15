@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.List;
 
 import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -15,11 +14,9 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.kcb.common.base.BaseFragment;
 import com.kcb.library.view.FloatingEditText;
-import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.teacher.adapter.ListAdapterStudent;
 import com.kcb.teacher.model.StudentInfo;
 import com.kcb.teacher.util.CompareByCheckInRate;
@@ -45,13 +42,8 @@ public class StuCentreFragment extends BaseFragment implements OnItemClickListen
     private final int INDEX_CORRECT_RATE = 2;
 
     private FloatingEditText searchEditText;
-    private ButtonFlat sortButton;
-    private TextView stuId;
-    private TextView stuCheckInRate;
-    private TextView stuCorrectRate;
     private View mCurrentView = null;
 
-    private int mSortSwitch = INDEX_ID;
     private ListView mStudentList;
     private ListAdapterStudent mAdapter;
     private List<StudentInfo> mList;
@@ -80,14 +72,6 @@ public class StuCentreFragment extends BaseFragment implements OnItemClickListen
         searchEditText = (FloatingEditText) view.findViewById(R.id.edittext_search);
         searchEditText.addTextChangedListener(this);
 
-        sortButton = (ButtonFlat) view.findViewById(R.id.button_sort);
-        sortButton.setOnClickListener(this);
-
-        stuId = (TextView) view.findViewById(R.id.textview_stuid);
-        stuCheckInRate = (TextView) view.findViewById(R.id.textview_stucheckinrate);
-        stuCorrectRate = (TextView) view.findViewById(R.id.textview_correctrate);
-
-        onClick(sortButton);
         return view;
     }
 
@@ -140,6 +124,7 @@ public class StuCentreFragment extends BaseFragment implements OnItemClickListen
 
     @Override
     public void afterTextChanged(Editable s) {
+        mCurrentView.setBackgroundColor(getResources().getColor(R.color.white));
         mTempList.clear();
         mTempList.addAll(mList);
         String searchContent = searchEditText.getText().toString();
@@ -156,59 +141,17 @@ public class StuCentreFragment extends BaseFragment implements OnItemClickListen
             mTempList.remove(i);
             i--;
         }
-        mSortSwitch = 0;
-        onClick(sortButton);
         mAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.button_sort:
-                mSortSwitch = mSortSwitch % 3;
-                switch (mSortSwitch) {
-                    case INDEX_ID:
-                        Collections.sort(mTempList, idComparator);
-                        setTextViewColor(INDEX_ID);
-                        mAdapter.notifyDataSetChanged();
-                        break;
-                    case INDEX_CHECKIN_RATE:
-                        Collections.sort(mTempList, checkInRateComparator);
-                        setTextViewColor(INDEX_CHECKIN_RATE);
-                        mAdapter.notifyDataSetChanged();
-                        break;
-                    case INDEX_CORRECT_RATE:
-                        Collections.sort(mTempList, correctRateComparator);
-                        setTextViewColor(INDEX_CORRECT_RATE);
-                        mAdapter.notifyDataSetChanged();
-                        break;
-                    default:
-                        break;
-                }
-                mSortSwitch++;
+            case 0:
                 break;
             default:
                 break;
         }
     }
 
-    private void setTextViewColor(int index) {
-        Resources res = getResources();
-        stuId.setTextColor(res.getColor(R.color.black));
-        stuCheckInRate.setTextColor(res.getColor(R.color.black));
-        stuCorrectRate.setTextColor(res.getColor(R.color.black));
-        switch (index) {
-            case INDEX_ID:
-                stuId.setTextColor(res.getColor(R.color.blue));
-                break;
-            case INDEX_CHECKIN_RATE:
-                stuCheckInRate.setTextColor(res.getColor(R.color.blue));
-                break;
-            case INDEX_CORRECT_RATE:
-                stuCorrectRate.setTextColor(res.getColor(R.color.blue));
-                break;
-            default:
-                break;
-        }
-    }
 }

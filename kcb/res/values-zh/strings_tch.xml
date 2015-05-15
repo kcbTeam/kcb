@@ -32,6 +32,7 @@
     <string name="hint_studentcenter_search">搜索学生姓名</string>
     <string name="stu_centre_name">姓名</string>
     <string name="stu_centre_stuId">学号</string>
+    <string name="stu_centre_info">学生信息</string>
     <string name="stu_centre_checkinrate">签到率</string>
     <string name="stu_centre_correctrate">正确率</string>
     <!-- home page activty end -->

@@ -12,6 +12,7 @@ import com.kcb.common.base.BaseActivity;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.teacher.model.ChoiceQuestion;
 import com.kcb.teacher.model.CourseTest;
+import com.kcb.teacher.model.TextContent;
 import com.kcbTeam.R;
 
 public class CheckTest extends BaseActivity {
@@ -88,13 +89,13 @@ public class CheckTest extends BaseActivity {
     private void setContent(ChoiceQuestion temp) {
 
         questionNum.setText("第一题");
-        questionTextView.setText(temp.getQuestion());
+        questionTextView.setText(temp.getQuestion().getContentString());
         correctRate.setText("正确率：76%");
 
-        optionAcontent.setText(temp.getOptionA());
-        optionBcontent.setText(temp.getOptionB());
-        optionCcontent.setText(temp.getOptionC());
-        optionDcontent.setText(temp.getOptionD());
+        optionAcontent.setText(temp.getOptionA().getContentString());
+        optionBcontent.setText(temp.getOptionB().getContentString());
+        optionCcontent.setText(temp.getOptionC().getContentString());
+        optionDcontent.setText(temp.getOptionD().getContentString());
 
         optionArate.setText("76%");
         optionBrate.setText("10%");
@@ -132,9 +133,10 @@ public class CheckTest extends BaseActivity {
     @Override
     protected void initData() {
         mQuestionList = new ArrayList<ChoiceQuestion>();
-        mQuestionList.add(new ChoiceQuestion("一年可能有多少天？", "365" + '\n' + "365" + '\n' + "365",
-                "365" + '\n' + "365" + '\n' + "365", "367", "368", new boolean[] {true, true,
-                        false, false}));
+        mQuestionList.add(new ChoiceQuestion(new TextContent("一年可能有多少天？"), new TextContent("365" + '\n' + "365"
+                + '\n' + "365"), new TextContent("365" + '\n' + "365" + '\n' + "365"),
+                new TextContent("367"), new TextContent("368"), new boolean[] {true, true, false,
+                        false}));
         mTest = new CourseTest("高考数学", mQuestionList);
     }
 
