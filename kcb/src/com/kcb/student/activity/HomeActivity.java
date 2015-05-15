@@ -15,6 +15,7 @@ import android.text.TextUtils;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.PopupWindow;
@@ -22,8 +23,10 @@ import android.widget.TextView;
 
 import com.kcb.common.application.KAccount;
 import com.kcb.common.base.BaseFragmentActivity;
+import com.kcb.common.util.DialogUtil;
 import com.kcb.common.util.ToastUtil;
 import com.kcb.library.view.buttonflat.ButtonFlat;
+import com.kcb.student.activity.LoginActivity;
 import com.kcbTeam.R;
 
 /**
@@ -95,7 +98,7 @@ public class HomeActivity extends BaseFragmentActivity {
 		        return;
 		    }else{
 		        initPopupWindow();
-		        mPopupWindow.showAsDropDown(v,0,5);
+		        mPopupWindow.showAsDropDown(v,0,0);
 		    }		    
 			break;
 		case R.id.button_checkin:
@@ -108,9 +111,17 @@ public class HomeActivity extends BaseFragmentActivity {
 		    ModifyPassword();
 		    break;
 		case R.id.exit_button:
-		    KAccount.deleteAccount();
-            LoginActivity.start(HomeActivity.this);
-		    finish();
+		    onClick(settingButton);
+		    DialogUtil.showNormalDialog(this, R.string.quitload, R.string.destroy_tip,
+                R.string.sure, new View.OnClickListener() {
+		        
+                    @Override
+                    public void onClick(View v) {
+                        KAccount.deleteAccount();
+                        LoginActivity.start(HomeActivity.this);
+                        finish();
+                    }
+                }, R.string.cancel, null);
 		    break;
 		default:
 			break;
@@ -158,7 +169,10 @@ public class HomeActivity extends BaseFragmentActivity {
 
 	public void initPopupWindow(){
 	    View customView=getLayoutInflater().inflate(R.layout.stu_menu_setting, null, false);
-	    mPopupWindow=new PopupWindow(customView,350,300);
+	    mPopupWindow=new PopupWindow(customView,350,ViewGroup.LayoutParams.WRAP_CONTENT);
+	    mPopupWindow.setTouchable(true);
+	    mPopupWindow.setFocusable(true);
+	    mPopupWindow.setOutsideTouchable(true);
 	    customView.setOnTouchListener(new OnTouchListener() {
             
             @Override

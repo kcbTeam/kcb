@@ -27,7 +27,7 @@ public class ModifyPasswordActivity extends BaseActivity{
     
     @Override
     protected void initView() {
-        backButton=(ButtonFlat) findViewById(R.id.button_goback);
+        backButton=(ButtonFlat) findViewById(R.id.button_back);
         finishButton=(ButtonFlat) findViewById(R.id.button_finish);
         passwordEditText=(EditText) findViewById(R.id.edittext_newpassword);
         password2EditText=(EditText) findViewById(R.id.edittext_renewpassword);
