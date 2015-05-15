@@ -27,6 +27,7 @@
     <string name="check1">查看测试结果</string>
     <string name="button_modify">修改密码</string>
     <string name="button_exit">退出当前账号</string>
+    <string name="quitload">退出登录</string>
     <!-- HomeActivity End -->
 
 
@@ -41,17 +42,14 @@
 
 
     <!-- CheckInResultActivity Start -->
-    <string name="signresult">查看我的签到</string>
+    <string name="signresult">查看签到结果</string>
     <string name="statistics">Y老师一共用课程宝签到10次，其中你签到成功8次。到课率为80%。</string>
     <!-- CheckInResultActivity End -->
 
 
     <!-- TestResultActivity Start -->
-    <string name="comeback">返回</string>
     <string name="testresult">查看测试结果</string>
     <string name="search">搜索关键字</string>
-    <string name="headertext">最新测试结果</string>
-    <string name="checktest">去查看</string>
     <!-- TestResultActivity End -->
     
     <!-- ModifyPasswordActivity Start -->
