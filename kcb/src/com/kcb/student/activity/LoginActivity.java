@@ -1,5 +1,6 @@
 package com.kcb.student.activity;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Context;
@@ -13,7 +14,7 @@ import com.android.volley.Request.Method;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.kcb.common.activity.StartActivity;
 import com.kcb.common.application.KAccount;
 import com.kcb.common.base.BaseActivity;
@@ -21,6 +22,7 @@ import com.kcb.common.listener.DelayClickListener;
 import com.kcb.common.server.RequestUtil;
 import com.kcb.common.server.UrlUtil;
 import com.kcb.common.util.AnimationUtil;
+import com.kcb.common.util.ToastUtil;
 import com.kcb.library.view.FloatingEditText;
 import com.kcb.library.view.PaperButton;
 import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
@@ -94,19 +96,41 @@ public class LoginActivity extends BaseActivity {
                 }, 1000);
 
                 // TODO request server
-                JsonObjectRequest request =
-                        new JsonObjectRequest(Method.POST, UrlUtil.getStuLoginUrl(id, password),
-                                "", new Listener<JSONObject>() {
+                // username = admin 和 password =123
 
-                                    @Override
-                                    public void onResponse(JSONObject response) {}
+                JSONObject jsonObject = new JSONObject();
+                try {
+                    jsonObject.put("username", "admin");
+                    jsonObject.put("password", "123");
+                } catch (JSONException e) {}
+                StringRequest request =
+                        new StringRequest(Method.POST, UrlUtil.getStuLoginUrl(id, password),
+                                new Listener<String>() {
+                                    public void onResponse(String response) {
+                                        ToastUtil.toast(response);
+                                    };
                                 }, new ErrorListener() {
-
-                                    @Override
                                     public void onErrorResponse(VolleyError error) {
-                                        // loginProgressBar.hide(LoginActivity.this);
-                                    }
+                                        // error.networkResponse.statusCode =400;
+                                        ToastUtil.toast(error.toString());
+                                    };
                                 });
+
+                // StringRequest request =
+                // new StringRequest(Method.POST, UrlUtil.getStuLoginUrl(id, password),
+                // jsonObject.toString(), new Listener<JSONObject>() {
+                //
+                // @Override
+                // public void onResponse(JSONObject response) {
+                //
+                // }
+                // }, new ErrorListener() {
+                //
+                // @Override
+                // public void onErrorResponse(VolleyError error) {
+                // // loginProgressBar.hide(LoginActivity.this);
+                // }
+                // });
                 RequestUtil.getInstance().addToRequestQueue(request, TAG);
             }
         }

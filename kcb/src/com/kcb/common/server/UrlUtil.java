@@ -9,16 +9,16 @@ package com.kcb.common.server;
  */
 public class UrlUtil {
 
-    private static final String IP = "http://192.168.1.1";
+    private static final String IP = "http://armani.aliapp.com";
 
     /**
      * stu module
      */
-    private static final String url_stu_login = "/v1/stu/login";
+    private static final String url_stu_login = "/servlet/LoginAction";
 
     // login
     public static String getStuLoginUrl(String id, String password) {
-        return IP + url_stu_login;
+        return IP + url_stu_login + "?username=" + id + "&password=" + password;
     }
 
     /**
