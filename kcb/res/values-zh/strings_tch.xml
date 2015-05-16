@@ -55,7 +55,7 @@
     <!-- checkin details activity start -->
     <string name="checkin_missed_hint">以下为没有到课学生名单</string>
     <string name="stu_info">学生信息</string>
-    <string name="checkin_detail">签到详情</string>
+    <string name="checkin_misstimes">未到课次数</string>
     <string name="checkinRate_hint">本次到课率为%1$d%%</string>
     <!-- checkin details activity start -->
 

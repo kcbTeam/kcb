@@ -39,10 +39,11 @@
             buttonflat:rippleSpeed="6" >
 
             <ImageView
+                android:id="@+id/imageview_id"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_centerInParent="true"
-                android:src="@drawable/ic_action_sort" />
+                android:background="@drawable/ic_action_sort" />
         </com.kcb.library.view.buttonflat.ButtonFlat>
 
         <TextView
@@ -63,10 +64,11 @@
             buttonflat:rippleSpeed="6" >
 
             <ImageView
+                android:id="@+id/imageview_checkinrate"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_centerInParent="true"
-                android:src="@drawable/ic_action_sort" />
+                android:background="@drawable/ic_action_sort" />
         </com.kcb.library.view.buttonflat.ButtonFlat>
 
         <TextView
@@ -87,10 +89,11 @@
             buttonflat:rippleSpeed="6" >
 
             <ImageView
+                android:id="@+id/imageview_correctrate"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_centerInParent="true"
-                android:src="@drawable/ic_action_sort" />
+                android:background="@drawable/ic_action_sort" />
         </com.kcb.library.view.buttonflat.ButtonFlat>
     </RelativeLayout>
 

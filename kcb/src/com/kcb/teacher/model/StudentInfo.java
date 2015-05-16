@@ -16,10 +16,10 @@ public class StudentInfo implements Serializable {
     private String mStudentID;
 
     private int mCheckInTimes;
-    private int mMissTimes;
+    private int mTotalCheckInTimes;
 
     private int mCorrectTimes;
-    private int mTotalTimes;
+    private int mTotalChoiceQuestion;
 
     private HashMap<String, Float> mCorrectRateMap;
 
@@ -27,24 +27,36 @@ public class StudentInfo implements Serializable {
         mStudentName = name;
         mStudentID = studentID;
         mCheckInTimes = 0;
-        mMissTimes = 0;
+        mTotalCheckInTimes = 0;
     }
-
-    public StudentInfo(String name, String studentID, int checkinTimes, int missTimes) {
+    
+    /**
+     * 
+     * Constructor: StudentInfo
+     * checkinTimes is success checkinTimes of the student
+     */
+    public StudentInfo(String name, String studentID, int checkinTimes, int totalCheckInTimes) {
         mStudentName = name;
         mStudentID = studentID;
         mCheckInTimes = checkinTimes;
-        mMissTimes = missTimes;
+        mTotalCheckInTimes = totalCheckInTimes;
     }
-
-    public StudentInfo(String name, String studentID, int checkinTimes, int missTimes,
-            int correctTimes, int totalTimes) {
+    
+    /**
+     * 
+     * Constructor: StudentInfo
+     * checkinTimes is success checkinTimes of the student
+     * correctTimes is correctTimes of the student
+     * 
+     */
+    public StudentInfo(String name, String studentID, int checkinTimes, int totalCheckInTimes,
+            int correctTimes, int totalChoiceQuestion) {
         mStudentName = name;
         mStudentID = studentID;
         mCheckInTimes = checkinTimes;
-        mMissTimes = missTimes;
+        mTotalCheckInTimes = totalCheckInTimes;
         mCorrectTimes = correctTimes;
-        mTotalTimes = totalTimes;
+        mTotalChoiceQuestion = totalChoiceQuestion;
     }
 
     public void setStudentID(String mStudentID) {
@@ -71,12 +83,12 @@ public class StudentInfo implements Serializable {
         this.mCheckInTimes = mCheckInTimes;
     }
 
-    public int getMissTimes() {
-        return this.mMissTimes;
+    public int getTotalCheckInTimes() {
+        return this.mTotalCheckInTimes;
     }
 
-    public void setMissTimes(int mMissTimes) {
-        this.mMissTimes = mMissTimes;
+    public void setTotalCheckInTimes(int mTotalCheckInTimes) {
+        this.mTotalCheckInTimes = mTotalCheckInTimes;
     }
 
     public HashMap<String, Float> getCorrectRateMap() {
@@ -95,12 +107,12 @@ public class StudentInfo implements Serializable {
         this.mCorrectTimes = mCorrectTimes;
     }
 
-    public int getTotleTimes() {
-        return this.mTotalTimes;
+    public int getTotalChoiceQuestion() {
+        return this.mTotalChoiceQuestion;
     }
 
-    public void setTotleTimes(int mTotleTimes) {
-        this.mTotalTimes = mTotleTimes;
+    public void setTotalChoiceQuestion(int mTotalChoiceQuestion) {
+        this.mTotalChoiceQuestion = mTotalChoiceQuestion;
     }
 
     public void addTestRecord(String testName, float correctRate) {
@@ -114,17 +126,17 @@ public class StudentInfo implements Serializable {
     public void addCorrectRecord(int correctTimes, int totalTimes) {
         if (correctTimes <= totalTimes) {
             mCorrectTimes += correctTimes;
-            mTotalTimes += totalTimes;
+            mTotalChoiceQuestion += totalTimes;
         }
 
     }
 
     public float getCheckInRate() {
-        return (float) mCheckInTimes / (mCheckInTimes + mMissTimes);
+        return (float) mCheckInTimes / mTotalCheckInTimes;
     }
 
     public float getCorrectRate() {
-        return (float) mCorrectTimes / mTotalTimes;
+        return (float) mCorrectTimes / mTotalChoiceQuestion;
     }
 
 }

@@ -226,6 +226,19 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
         return false;
     }
 
+    @Override
+    public void onBackPressed() {
+        OnClickListener sureListener = new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        };
+        DialogUtil.showNormalDialog(this, R.string.leave, R.string.sureLeave, R.string.sure,
+                sureListener, R.string.cancel, null);
+    }
+
     private void makeEditDialog(String text, String title) {
         EditTestDialog dialog = new EditTestDialog(this, text);
         dialog.show();

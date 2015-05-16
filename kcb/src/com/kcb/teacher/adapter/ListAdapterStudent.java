@@ -4,11 +4,16 @@ import java.util.List;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.kcb.library.view.buttonflat.ButtonFlat;
+import com.kcb.teacher.activity.StuDetailsActivity;
+import com.kcb.teacher.fragment.StuCentreFragment;
 import com.kcb.teacher.model.StudentInfo;
 import com.kcbTeam.R;
 
@@ -21,6 +26,7 @@ import com.kcbTeam.R;
  */
 @SuppressLint("ViewHolder")
 public class ListAdapterStudent extends BaseAdapter {
+
 
     private List<StudentInfo> mList;
     private Context mContext;
@@ -48,7 +54,7 @@ public class ListAdapterStudent extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
         ViewHolder holder = null;
         if (convertView == null) {
@@ -58,6 +64,7 @@ public class ListAdapterStudent extends BaseAdapter {
             holder.studentId = (TextView) convertView.findViewById(R.id.textview_studentid);
             holder.checkInRate = (TextView) convertView.findViewById(R.id.textview_checkinRate);
             holder.correctRate = (TextView) convertView.findViewById(R.id.textview_correctRate);
+            holder.detailButton = (ButtonFlat) convertView.findViewById(R.id.button_details);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -68,6 +75,15 @@ public class ListAdapterStudent extends BaseAdapter {
                 .getCheckInRate())));
         holder.correctRate.setText(String.format(FORMAT_RATE, (int) (100 * mList.get(position)
                 .getCorrectRate())));
+        holder.detailButton.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, StuDetailsActivity.class);
+                intent.putExtra(StuCentreFragment.CURRENT_STU_KEY, mList.get(position));
+                mContext.startActivity(intent);
+            }
+        });
         return convertView;
     }
 
@@ -76,7 +92,7 @@ public class ListAdapterStudent extends BaseAdapter {
         TextView studentId;
         TextView checkInRate;
         TextView correctRate;
+        ButtonFlat detailButton;
     }
-
 
 }
