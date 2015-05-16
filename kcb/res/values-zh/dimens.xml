@@ -6,8 +6,11 @@
     <dimen name="text_size_small">14dp</dimen>
     <dimen name="text_size_dedium">18dp</dimen>
     <dimen name="text_size_large">22dp</dimen>
+    <dimen name="dp_1">1dp</dimen>
     <dimen name="dp_16">16dp</dimen>
     <dimen name="dp_32">32dp</dimen>
+    <dimen name="dp_42">42dp</dimen>
+    <dimen name="dp_90">90dp</dimen>
     <!-- Common end -->
 
 
