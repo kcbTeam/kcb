@@ -34,7 +34,9 @@
             android:layout_marginBottom="24dp"
             android:layout_marginLeft="24dp"
             android:layout_marginRight="24dp"
-            android:textColor="#000" />
+            android:textColor="#000" 
+            android:dividerHeight="1px"
+            android:divider="@color/gray"/>
 
         <com.kcb.library.view.buttonflat.ButtonFlat
             android:id="@+id/button_accept"

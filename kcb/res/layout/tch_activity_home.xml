@@ -15,7 +15,7 @@
         android:id="@+id/button_setting"
         style="@style/common_top_button"
         android:layout_alignParentRight="true"
-        android:text="@string/destroy"
+        android:text="@string/setting"
         buttonflat:rippleSpeed="6" />
 
     <FrameLayout

@@ -1,6 +1,7 @@
 package com.kcb.common.base;
 
 import android.support.v4.app.Fragment;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 
@@ -19,4 +20,6 @@ public abstract class BaseFragment extends Fragment implements OnClickListener {
 
     @Override
     public void onClick(View v) {}
+
+	
 }
