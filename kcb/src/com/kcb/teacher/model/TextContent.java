@@ -1,5 +1,7 @@
 package com.kcb.teacher.model;
 
+import java.io.Serializable;
+
 import android.graphics.Bitmap;
 
 /**
@@ -9,7 +11,12 @@ import android.graphics.Bitmap;
  * @author: ZQJ
  * @date: 2015年5月15日 下午8:07:01
  */
-public class TextContent {
+public class TextContent implements Serializable {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 4919254309171318451L;
+
     @SuppressWarnings("unused")
     private static final String TAG = "TextContent";
 

@@ -403,7 +403,7 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
 
     private void completeEdit() {
         CourseTest test = new CourseTest("TestName1", mQuestionList);
-        Intent intent = new Intent(this, SubmitTest.class);
+        Intent intent = new Intent(this, SubmitTestActivity.class);
         intent.putExtra(COURSE_TEST_KEY, test);
         startActivity(intent);
         finish();

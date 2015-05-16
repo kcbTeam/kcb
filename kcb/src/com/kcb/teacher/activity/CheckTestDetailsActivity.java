@@ -1,28 +1,27 @@
 package com.kcb.teacher.activity;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import android.annotation.SuppressLint;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
 import com.kcb.common.base.BaseActivity;
+import com.kcb.library.view.PaperButton;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.teacher.model.ChoiceQuestion;
 import com.kcb.teacher.model.CourseTest;
-import com.kcb.teacher.model.TextContent;
 import com.kcbTeam.R;
 
-public class CheckTest extends BaseActivity {
+public class CheckTestDetailsActivity extends BaseActivity {
     @SuppressWarnings("unused")
     private static final String TAG = "CheckTest";
 
     private ButtonFlat backButton;
 
     private TextView testName;
-    private TextView questionNum;
     private TextView questionTextView;
     private TextView correctRate;
 
@@ -42,13 +41,16 @@ public class CheckTest extends BaseActivity {
     private TextView optionDcontent;
     private TextView optionDrate;
 
+    private PaperButton lastButton;
+    private PaperButton nextButton;
+
     private CourseTest mTest;
     private List<ChoiceQuestion> mQuestionList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.tch_activity_checktest);
+        setContentView(R.layout.tch_activity_checktestdetails);
         initData();
         initView();
     }
@@ -62,7 +64,6 @@ public class CheckTest extends BaseActivity {
         testName = (TextView) findViewById(R.id.textview_testname);
         testName.setText(mTest.getTestName());
 
-        questionNum = (TextView) findViewById(R.id.textview_question_num);
         questionTextView = (TextView) findViewById(R.id.textview_question);
         correctRate = (TextView) findViewById(R.id.textview_correct_rate);
 
@@ -82,19 +83,43 @@ public class CheckTest extends BaseActivity {
         optionDcontent = (TextView) findViewById(R.id.textview_D_content);
         optionDrate = (TextView) findViewById(R.id.textview_D_rate);
 
+        lastButton = (PaperButton) findViewById(R.id.pagerbutton_last);
+        nextButton = (PaperButton) findViewById(R.id.pagerbutton_next);
+
         setContent(mQuestionList.get(0));
 
     }
 
+    @Override
+    protected void initData() {
+
+        mTest = (CourseTest) getIntent().getSerializableExtra(CheckTestActivity.CLICKED_TEST_KEY);
+        mQuestionList = mTest.getQuestionList();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.button_back:
+                finish();
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    @SuppressLint("NewApi")
     private void setContent(ChoiceQuestion temp) {
 
-        questionNum.setText("第一题");
-        questionTextView.setText(temp.getQuestion().getContentString());
+        questionTextView.setText("1、" + temp.getQuestion().getContentString());
         correctRate.setText("正确率：76%");
 
-        optionAcontent.setText(temp.getOptionA().getContentString());
+        // optionAcontent.setText(temp.getOptionA().getContentString());
+        optionAcontent.setBackground(getResources().getDrawable(R.drawable.option_a));
         optionBcontent.setText(temp.getOptionB().getContentString());
-        optionCcontent.setText(temp.getOptionC().getContentString());
+//        optionCcontent.setText(temp.getOptionC().getContentString());
+        optionCcontent.setBackground(getResources().getDrawable(R.drawable.option_a));
         optionDcontent.setText(temp.getOptionD().getContentString());
 
         optionArate.setText("76%");
@@ -130,25 +155,4 @@ public class CheckTest extends BaseActivity {
 
     }
 
-    @Override
-    protected void initData() {
-        mQuestionList = new ArrayList<ChoiceQuestion>();
-        mQuestionList.add(new ChoiceQuestion(new TextContent("一年可能有多少天？"), new TextContent("365" + '\n' + "365"
-                + '\n' + "365"), new TextContent("365" + '\n' + "365" + '\n' + "365"),
-                new TextContent("367"), new TextContent("368"), new boolean[] {true, true, false,
-                        false}));
-        mTest = new CourseTest("高考数学", mQuestionList);
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.button_back:
-                finish();
-                break;
-
-            default:
-                break;
-        }
-    }
 }

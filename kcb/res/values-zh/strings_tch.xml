@@ -74,10 +74,10 @@
     <string name="problem_hint">请输入题目</string>
     <string name="options_hint">请输入选项</string>
     <string name="format_question_num">选择题%1$d</string>
-    <string name="option_A">A</string>
-    <string name="option_B">B</string>
-    <string name="option_C">C</string>
-    <string name="option_D">D</string>
+    <string name="option_A">A.</string>
+    <string name="option_B">B.</string>
+    <string name="option_C">C.</string>
+    <string name="option_D">D.</string>
     <string name="select_hint">在正确的选项后面打钩</string>
     <string name="leave">离开</string>
     <string name="sureLeave">确认放弃此次编辑吗？</string>
@@ -102,7 +102,14 @@
     <string name="editCouseTest">编辑课堂小测试</string>
     <string name="sure_submit">确认提交</string>
     <!-- Submit Activity End -->
-
+	
+	<!-- Check Test Activity Start -->
+	<string name="checktest">查看测试</string>
+	<string name="hint_checktest_search">搜索测试名称</string>
+	<string name="testinfo">测试信息</string>
+	<string name="totalQuestionNum">总题数</string>
+	<!-- Check Test Activity End -->
+	
     <string name="signclass">课堂签到</string>
     <string name="giveupsign">放弃签到</string>
     <string name="giveup_sign_tip">放弃签到后，将返回上一页面。</string>

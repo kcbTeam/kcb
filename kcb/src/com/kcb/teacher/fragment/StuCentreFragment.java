@@ -181,6 +181,9 @@ public class StuCentreFragment extends BaseFragment implements OnItemClickListen
 
     @Override
     public void onClick(View v) {
+        if (null != mCurrentView) {
+            mCurrentView.setBackgroundColor(getResources().getColor(R.color.white));
+        }
         switch (v.getId()) {
             case R.id.button_sort_info:
                 Collections.sort(mTempList, idComparator);
