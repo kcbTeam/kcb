@@ -18,7 +18,7 @@ public class UrlUtil {
      * **********1, account**********
      */
     // 1.1 login
-    private static final String url_stu_login = IP + "/v1/stu/account/login";
+    private static final String url_stu_login = IP + "/v1/stu/login";
 
     public static String getStuLoginUrl(String id, String password) {
         return url_stu_login + "?id=" + id + "&password=" + password;

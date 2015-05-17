@@ -81,25 +81,26 @@ public class LoginActivity extends BaseActivity {
                 }
                 loginProgressBar.setVisibility(View.VISIBLE);
 
-//                 JSONObject jsonObject = new JSONObject();
-//                 try {
-//                 jsonObject.put("username", "admin");
-//                 jsonObject.put("password", "123");
-//                 } catch (JSONException e) {}
-//                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Method.POST,
-//                    "http://armani.aliapp.com/v1/stu/login", jsonRequest, listener, errorListener);
-//                
+                // JSONObject jsonObject = new JSONObject();
+                // try {
+                // jsonObject.put("username", "admin");
+                // jsonObject.put("password", "123");
+                // } catch (JSONException e) {}
+                // JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Method.POST,
+                // "http://armani.aliapp.com/v1/stu/login", jsonRequest, listener, errorListener);
+                //
                 StringRequest request =
                         new StringRequest(Method.POST, UrlUtil.getStuLoginUrl(id, password),
                                 new Listener<String>() {
-                                    public void onResponse(String response) {
+                                    public void onResponse(final String response) {
                                         new Handler().postDelayed(new Runnable() {
 
                                             @Override
                                             public void run() {
                                                 // TODO save student's name after login success;
                                                 KAccount account =
-                                                        new KAccount(KAccount.TYPE_STU, id, "name");
+                                                        new KAccount(KAccount.TYPE_STU, id,
+                                                                response);
                                                 KAccount.saveAccount(account);
                                                 HomeActivity.start(LoginActivity.this);
                                                 finish();
