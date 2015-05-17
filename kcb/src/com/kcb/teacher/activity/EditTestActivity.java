@@ -6,8 +6,10 @@ import java.util.List;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -71,6 +73,7 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
 
     private int mPositionIndex = IndexOfQuestion;
     public final static String COURSE_TEST_KEY = "current_course_key";
+    private String path;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -250,10 +253,30 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
     private final int REQUEST_TAKEPHOTO = 100;
 
     private void takePhoto() {
+//        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//        intent.putExtra(MediaStore.EXTRA_OUTPUT, getCacheDir());
+//        intent.putExtra(MediaStore.EXTRA_OUTPUT,
+//                Uri.fromFile(new File(getCacheDir().getPath() + File.separator + "temp.jpg")));
+//        File file = new File(mSaveImgPath);
+//        if (!file.exists()) {
+//            file.mkdirs();
+//        }
+//        file = new File(mSaveImgPath + "temp.jpg");
+//        Uri uri = Uri.fromFile(file);
+//        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//        intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+//        startActivityForResult(intent, REQUEST_TAKEPHOTO);
+        path = Environment.getExternalStorageDirectory() + "/MediaOpe/";
+        File file = new File(path);
+        if (!file.exists()) {
+            file.mkdirs();
+        }
+        file = new File(path + "temp.jpg");
+        Uri uri = Uri.fromFile(file);
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, getCacheDir());
-        // intent.putExtra(MediaStore.EXTRA_OUTPUT,
-        // Uri.fromFile(new File(getCacheDir().getPath() + File.separator + "temp.jpg")));
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+        startActivityForResult(intent, REQUEST_TAKEPHOTO);
+        
         if (intent.resolveActivity(getPackageManager()) == null) {
             ToastUtil.toast("没有可以拍照的应用程序");
             return;
@@ -271,14 +294,28 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
         // after camera, we need to cut the picture
         if (requestCode == REQUEST_TAKEPHOTO) {
             // TODO get bitmap form data
-            File picture = new File(getCacheDir().getPath() + File.separator + "temp.jpg");
-            cutPicture(Uri.fromFile(picture));
+//            File picture = new File(getCacheDir().getPath() + File.separator + "temp.jpg");
+            File picture = new File(path + "temp.jpg");
+            try {
+                Uri u =
+                        Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(),
+                            picture.getAbsolutePath(), null, null));
+                Intent intent = new Intent(this, CutPictureActivity.class);
+                intent.putExtra("PICTURE", u);
+                startActivity(intent);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+//            cutPicture(Uri.fromFile(picture));
         }
     }
 
     // TODO github开源代码
     public void cutPicture(Uri uri) {
         ToastUtil.toast("需要裁剪图片");
+        Intent intent = new Intent(this, CutPictureActivity.class);
+        intent.putExtra("PICTURE", uri);
+        startActivity(intent);
     }
 
     private void clickAdd() {

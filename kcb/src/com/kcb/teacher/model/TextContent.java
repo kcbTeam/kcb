@@ -58,5 +58,19 @@ public class TextContent implements Serializable {
         }
     }
 
+    public boolean equals(TextContent o) {
+        if (this == o) {
+            return true;
+        }
+        if (this.isString == o.isString) {
+            if (this.isString) {
+                return this.mContentString.equals(o.mContentString);
+            } else {
+                return this.mContentBitmap.equals(o.mContentBitmap);
+            }
+        }
+        return false;
+    }
+
 
 }

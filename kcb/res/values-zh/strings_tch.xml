@@ -94,7 +94,14 @@
     <string name="dialog_title_add">添加</string>
     <string name="add_msg">是否要再加一道题？</string>
     <!-- EditTestActivity End -->
-
+	
+	<!-- Cut Picture Activity Strat -->
+	<string name="cut_title">裁剪图片</string>
+	<string name="rotate">旋转</string>
+	<string name="crop">裁剪</string>
+	
+	<!-- Cut Picture Activity End -->
+	
 
     <!-- Submit Activity Start -->
     <string name="Go_modify">去修改</string>

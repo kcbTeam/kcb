@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="24dp"
+    android:layout_marginRight="24dp" >
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:paddingBottom="25dp"
+        android:text="@string/cut_title"
+        android:textSize="40sp" />
+
+    <com.edmodo.cropper.CropImageView
+        xmlns:custom="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/CropImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/CropImageView"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp" >
+
+        <com.kcb.library.view.buttonflat.ButtonFlat
+            android:id="@+id/Button_rotate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="20dp"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
+            android:text="@string/rotate"
+            android:textColor="#33B5E5" />
+
+        <com.kcb.library.view.buttonflat.ButtonFlat
+            android:id="@+id/Button_crop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="20dp"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
+            android:text="@string/crop"
+            android:textColor="#33B5E5"
+            android:textSize="30sp" />
+
+        <ImageView
+            android:id="@+id/croppedImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|top" />
+    </LinearLayout>
+
+</RelativeLayout>
