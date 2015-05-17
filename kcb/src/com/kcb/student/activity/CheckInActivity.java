@@ -1,16 +1,26 @@
 package com.kcb.student.activity;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
+import com.android.volley.Request.Method;
+import com.android.volley.Response.ErrorListener;
+import com.android.volley.Response.Listener;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.kcb.common.application.KAccount;
 import com.kcb.common.base.BaseActivity;
 import com.kcb.common.listener.DelayClickListener;
+import com.kcb.common.server.RequestUtil;
+import com.kcb.common.server.ResponseUtil;
+import com.kcb.common.server.UrlUtil;
+import com.kcb.common.util.AnimationUtil;
 import com.kcb.common.util.ToastUtil;
 import com.kcb.library.view.PaperButton;
+import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
 import com.kcb.student.adapter.CheckInRecycleAdapter;
 import com.kcb.student.adapter.CheckInRecycleAdapter.RecyclerItemClickListener;
@@ -23,9 +33,12 @@ import com.kcbTeam.R;
  * @author: Tao Li
  * @date: 2015-4-24 下午9:16:22
  */
-// TODO add SmoothProgressBar below finishButton, see in LoginActivity
 public class CheckInActivity extends BaseActivity {
 
+    private final String TAG = CheckInActivity.class.getName();
+
+    private ButtonFlat backButton;
+    private View numView;
     private TextView num1TextView;
     private TextView num2TextView;
     private TextView num3TextView;
@@ -47,6 +60,9 @@ public class CheckInActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        backButton = (ButtonFlat) findViewById(R.id.button_back);
+        backButton.setOnClickListener(this);
+        numView = findViewById(R.id.linearlayout_shownum);
         num1TextView = (TextView) findViewById(R.id.textview_shownum1);
         num2TextView = (TextView) findViewById(R.id.textview_shownum2);
         num3TextView = (TextView) findViewById(R.id.textview_shownum3);
@@ -64,29 +80,64 @@ public class CheckInActivity extends BaseActivity {
     @Override
     protected void initData() {}
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.button_back:
+                finish();
+                break;
+            default:
+                break;
+        }
+    }
+
+    private boolean isNumCompleted() {
+        return getNum().length() == 4;
+    }
+
+    private String getNum() {
+        String num1 = num1TextView.getText().toString();
+        String num2 = num2TextView.getText().toString();
+        String num3 = num3TextView.getText().toString();
+        String num4 = num4TextView.getText().toString();
+        return num1 + num2 + num3 + num4;
+    }
+
     private DelayClickListener mClickListener = new DelayClickListener(
             DelayClickListener.DELAY_PAPER_BUTTON) {
 
         @Override
         public void doClick(View v) {
-            // TODO request server
-
+            if (loginProgressBar.getVisibility() == View.VISIBLE) {
+                return;
+            }
+            if (!isNumCompleted()) {
+                AnimationUtil.shake(numView);
+                return;
+            }
             loginProgressBar.setVisibility(View.VISIBLE);
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    // TODO save student's name after login success;
-                    String passwordString =
-                            new String(num1TextView.getText().toString()
-                                    + num2TextView.getText().toString()
-                                    + num3TextView.getText().toString()
-                                    + num4TextView.getText().toString());
-                    ToastUtil.toast(passwordString);
-                    HomeActivity.start(CheckInActivity.this);
-                    finish();
-                }
-            }, 1000);
+            StringRequest request =
+                    new StringRequest(Method.POST, UrlUtil.getStuCheckinStartUrl(
+                            KAccount.getAccountId(), getNum()), new Listener<String>() {
 
+                        @Override
+                        public void onResponse(String response) {
+                            ToastUtil.toast(R.string.checkin_success);
+                            finish();
+                        }
+                    }, new ErrorListener() {
+
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            loginProgressBar.hide(CheckInActivity.this);
+                            if (error.networkResponse.statusCode == 400) {
+                                ToastUtil.toast(R.string.num_error);
+                            } else {
+                                ResponseUtil.toastError(error);
+                            }
+                        }
+                    });
+            RequestUtil.getInstance().addToRequestQueue(request, TAG);
         }
     };
 
@@ -147,5 +198,10 @@ public class CheckInActivity extends BaseActivity {
                 }
             }
         }
+    };
+
+    protected void onDestroy() {
+        super.onDestroy();
+        RequestUtil.getInstance().cancelPendingRequests(TAG);
     };
 }

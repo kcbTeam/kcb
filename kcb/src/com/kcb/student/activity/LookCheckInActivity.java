@@ -26,7 +26,7 @@ import com.kcbTeam.R;
  * @author: Ding
  * @date: 2015年5月5日 下午3:45:54
  */
-public class CheckInResultActivity extends BaseActivity implements OnChartValueSelectedListener {
+public class LookCheckInActivity extends BaseActivity implements OnChartValueSelectedListener {
 
     private ButtonFlat backbutton;
     private PieChart mChart;

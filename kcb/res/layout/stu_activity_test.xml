@@ -3,37 +3,30 @@
     xmlns:widget="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/activity_background"
     tools:context="${relativePackage}.${activityClass}"
     tools:ignore="contentDescription" >
 
-    <RelativeLayout
-        android:id="@+id/relativeLayout_header"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/activity_header_shadow">
     <TextView
         android:id="@+id/textview_testtitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:text="@string/testbtn"
-        android:textSize="25dp" />
+        android:background="@drawable/activity_header_shadow"
+        android:gravity="center_vertical"
+        android:text="@string/testbtn" />
 
     <TextView
         android:id="@+id/textview_timecounter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="1dp"
-        android:layout_below="@id/textview_testtitle"
-        android:gravity="bottom"
-        android:textSize="10dp" />
-</RelativeLayout>
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/textview_testtitle" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/my_recyclerview1"
         android:layout_width="match_parent"
         android:layout_height="8dp"
-        android:layout_below="@id/relativeLayout_header"
+        android:layout_below="@id/textview_timecounter"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:layout_marginTop="5dp" />

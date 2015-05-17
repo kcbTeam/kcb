@@ -1,5 +1,6 @@
 package com.kcb.student.adapter;
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -30,6 +31,7 @@ public class TestRecycleAdapter extends RecyclerView.Adapter<TestRecycleAdapter.
         notifyDataSetChanged();
     }
 
+    @SuppressLint("InflateParams")
     @Override
     public TestViewHolder onCreateViewHolder(ViewGroup viewGroup, int position) {
         View view =
@@ -61,7 +63,7 @@ public class TestRecycleAdapter extends RecyclerView.Adapter<TestRecycleAdapter.
         }
 
         public void setViewNormalColor() {
-            view.setBackgroundColor(Color.parseColor("#ffffff"));
+            view.setBackgroundColor(Color.parseColor("#eeeeee"));
         }
     }
 }

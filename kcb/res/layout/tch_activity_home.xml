@@ -9,7 +9,9 @@
         android:id="@+id/textview_username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/activity_header_shadow" />
+        android:background="@drawable/activity_header_shadow"
+        android:gravity="center_vertical"
+        android:paddingLeft="16dp" />
 
     <com.kcb.library.view.buttonflat.ButtonFlat
         android:id="@+id/button_setting"

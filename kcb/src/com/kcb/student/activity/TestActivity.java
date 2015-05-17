@@ -48,6 +48,7 @@ public class TestActivity extends BaseFragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.stu_activity_test);
+
         initView();
         initData();
     }
@@ -66,7 +67,6 @@ public class TestActivity extends BaseFragmentActivity {
         checkboxD = (CheckBox) findViewById(R.id.checkbox_d);
         preButton = (PaperButton) findViewById(R.id.button_previous);
         nextButton = (PaperButton) findViewById(R.id.button_next);
-        preButton.setColor(Color.parseColor("#808080"));
         preButton.setOnClickListener(this);
         nextButton.setOnClickListener(this);
         recyclerView = (RecyclerView) findViewById(R.id.my_recyclerview1);
@@ -119,7 +119,6 @@ public class TestActivity extends BaseFragmentActivity {
 
     @Override
     public void onClick(View v) {
-
         switch (v.getId()) {
             case R.id.button_previous:
                 clickPreButton();
@@ -130,20 +129,17 @@ public class TestActivity extends BaseFragmentActivity {
             default:
                 break;
         }
-
     }
 
     public void clickPreButton() {
         if (currentPageIndex > 0) {
             currentPageIndex--;
             mAdapter.setCurrentIndex(currentPageIndex);
-            if (currentPageIndex == 0) {
-                preButton.setColor(Color.parseColor("#808080"));
-            }
-            if (currentPageIndex == questionNum - 1)
+            if (currentPageIndex == questionNum - 1) {
                 nextButton.setText("已完成");
-            else
+            } else {
                 nextButton.setText("下一题");
+            }
             getCheckBoxsAnswer(currentPageIndex + 1);
             showCurrentQuestion(currentPageIndex);
             setCheckBoxsAnswer(currentPageIndex);
@@ -151,7 +147,6 @@ public class TestActivity extends BaseFragmentActivity {
     }
 
     public void clickNextButton() {
-
         if (currentPageIndex < questionNum - 1) {
             currentPageIndex++;
             mAdapter.setCurrentIndex(currentPageIndex);
@@ -175,7 +170,6 @@ public class TestActivity extends BaseFragmentActivity {
                         }
                     }, R.string.cancel, null);
         }
-
     }
 
     public void showCurrentQuestion(int position) {

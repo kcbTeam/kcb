@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
-
 import com.android.volley.Request.Method;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
@@ -67,7 +66,7 @@ public class LoginActivity extends BaseActivity {
 
         @Override
         public void doClick(View v) {
-            final String id = idEditText.getText().toString().trim();
+            final String id = idEditText.getText().toString().trim().replace(" ", "");
             final String password = passwordEditText.getText().toString();
             if (TextUtils.isEmpty(id)) {
                 idEditText.requestFocus();
@@ -80,15 +79,6 @@ public class LoginActivity extends BaseActivity {
                     return;
                 }
                 loginProgressBar.setVisibility(View.VISIBLE);
-
-                // JSONObject jsonObject = new JSONObject();
-                // try {
-                // jsonObject.put("username", "admin");
-                // jsonObject.put("password", "123");
-                // } catch (JSONException e) {}
-                // JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Method.POST,
-                // "http://armani.aliapp.com/v1/stu/login", jsonRequest, listener, errorListener);
-                //
                 StringRequest request =
                         new StringRequest(Method.POST, UrlUtil.getStuLoginUrl(id, password),
                                 new Listener<String>() {
@@ -97,7 +87,6 @@ public class LoginActivity extends BaseActivity {
 
                                             @Override
                                             public void run() {
-                                                // TODO save student's name after login success;
                                                 KAccount account =
                                                         new KAccount(KAccount.TYPE_STU, id,
                                                                 response);
@@ -105,13 +94,13 @@ public class LoginActivity extends BaseActivity {
                                                 HomeActivity.start(LoginActivity.this);
                                                 finish();
                                             }
-                                        }, 1000);
+                                        }, 500);
                                     };
                                 }, new ErrorListener() {
                                     public void onErrorResponse(VolleyError error) {
                                         loginProgressBar.hide(LoginActivity.this);
                                         if (error.networkResponse.statusCode == 400) {
-                                            ToastUtil.toast("账号或密码不对");
+                                            ToastUtil.toast(R.string.id_password_error);
                                         } else {
                                             ResponseUtil.toastError(error);
                                         }
