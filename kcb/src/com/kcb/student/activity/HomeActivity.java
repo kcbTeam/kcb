@@ -26,7 +26,6 @@ import com.kcb.common.base.BaseFragmentActivity;
 import com.kcb.common.util.DialogUtil;
 import com.kcb.common.util.ToastUtil;
 import com.kcb.library.view.buttonflat.ButtonFlat;
-import com.kcb.teacher.activity.LoginActivity;
 import com.kcbTeam.R;
 
 /**
