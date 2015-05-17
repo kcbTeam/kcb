@@ -67,7 +67,6 @@ public class TestActivity extends BaseFragmentActivity {
         checkboxD = (CheckBox) findViewById(R.id.checkbox_d);
         preButton = (PaperButton) findViewById(R.id.button_previous);
         nextButton = (PaperButton) findViewById(R.id.button_next);
-        preButton.setColor(Color.parseColor("#808080"));
         preButton.setOnClickListener(this);
         nextButton.setOnClickListener(this);
         recyclerView = (RecyclerView) findViewById(R.id.my_recyclerview1);
