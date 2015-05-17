@@ -16,4 +16,9 @@
     <string name="save">保存</string>
     <string name="complete">完成</string>
 
+    <!-- Server Error start -->
+    <string name="network_error">网络出错了，请检查网络连接</string>
+    <string name="server_error">服务器出错了，请稍后再试</string>
+    <!-- Server Error end -->
+
 </resources>

@@ -1,14 +1,15 @@
 /*
- * Copyright 2013, Edmodo, Inc. 
- *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this work except in compliance with the License.
- * You may obtain a copy of the License in the LICENSE file, or at:
- *
+ * Copyright 2013, Edmodo, Inc.
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this work except
+ * in compliance with the License. You may obtain a copy of the License in the LICENSE file, or at:
+ * 
  * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" 
- * BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language 
- * governing permissions and limitations under the License. 
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed under the License
+ * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing permissions and limitations under
+ * the License.
  */
 
 package com.edmodo.cropper.cropwindow;
@@ -32,8 +33,7 @@ import com.edmodo.cropper.util.HandleUtil;
 import com.edmodo.cropper.util.PaintUtil;
 
 /**
- * A custom View representing the crop window and the shaded background outside
- * the crop window.
+ * A custom View representing the crop window and the shaded background outside the crop window.
  */
 public class CropOverlayView extends View {
 
@@ -41,14 +41,15 @@ public class CropOverlayView extends View {
 
     private static final int SNAP_RADIUS_DP = 6;
     private static final float DEFAULT_SHOW_GUIDELINES_LIMIT = 100;
-    
+
     // Gets default values from PaintUtil, sets a bunch of values such that the
     // corners will draw correctly
     private static final float DEFAULT_CORNER_THICKNESS_DP = PaintUtil.getCornerThickness();
     private static final float DEFAULT_LINE_THICKNESS_DP = PaintUtil.getLineThickness();
-    private static final float DEFAULT_CORNER_OFFSET_DP = (DEFAULT_CORNER_THICKNESS_DP / 2) - (DEFAULT_LINE_THICKNESS_DP / 2);
+    private static final float DEFAULT_CORNER_OFFSET_DP = (DEFAULT_CORNER_THICKNESS_DP / 2)
+            - (DEFAULT_LINE_THICKNESS_DP / 2);
     private static final float DEFAULT_CORNER_EXTENSION_DP = DEFAULT_CORNER_THICKNESS_DP / 2
-                                                             + DEFAULT_CORNER_OFFSET_DP;
+            + DEFAULT_CORNER_OFFSET_DP;
     private static final float DEFAULT_CORNER_LENGTH_DP = 20;
 
     // mGuidelines enumerations
@@ -150,19 +151,15 @@ public class CropOverlayView extends View {
                 drawRuleOfThirdsGuidelines(canvas);
             } else if (mGuidelines == GUIDELINES_ON_TOUCH) {
                 // Draw only when resizing
-                if (mPressedHandle != null)
-                    drawRuleOfThirdsGuidelines(canvas);
+                if (mPressedHandle != null) drawRuleOfThirdsGuidelines(canvas);
             } else if (mGuidelines == GUIDELINES_OFF) {
                 // Do nothing
             }
         }
 
         // Draws the main crop window border.
-        canvas.drawRect(Edge.LEFT.getCoordinate(),
-                        Edge.TOP.getCoordinate(),
-                        Edge.RIGHT.getCoordinate(),
-                        Edge.BOTTOM.getCoordinate(),
-                        mBorderPaint);
+        canvas.drawRect(Edge.LEFT.getCoordinate(), Edge.TOP.getCoordinate(),
+                Edge.RIGHT.getCoordinate(), Edge.BOTTOM.getCoordinate(), mBorderPaint);
 
         drawCorners(canvas);
     }
@@ -200,8 +197,8 @@ public class CropOverlayView extends View {
     // Public Methods //////////////////////////////////////////////////////////
 
     /**
-     * Informs the CropOverlayView of the image's position relative to the
-     * ImageView. This is necessary to call in order to draw the crop window.
+     * Informs the CropOverlayView of the image's position relative to the ImageView. This is
+     * necessary to call in order to draw the crop window.
      * 
      * @param bitmapRect the image's bounding box
      */
@@ -224,16 +221,16 @@ public class CropOverlayView extends View {
     }
 
     /**
-     * Sets the guidelines for the CropOverlayView to be either on, off, or to
-     * show when resizing the application.
+     * Sets the guidelines for the CropOverlayView to be either on, off, or to show when resizing
+     * the application.
      * 
-     * @param guidelines Integer that signals whether the guidelines should be
-     *            on, off, or only showing when resizing.
+     * @param guidelines Integer that signals whether the guidelines should be on, off, or only
+     *        showing when resizing.
      */
-    public void setGuidelines(int guidelines)
-    {
+    public void setGuidelines(int guidelines) {
         if (guidelines < 0 || guidelines > 2)
-            throw new IllegalArgumentException("Guideline value must be set between 0 and 2. See documentation.");
+            throw new IllegalArgumentException(
+                    "Guideline value must be set between 0 and 2. See documentation.");
         else {
             mGuidelines = guidelines;
 
@@ -245,14 +242,12 @@ public class CropOverlayView extends View {
     }
 
     /**
-     * Sets whether the aspect ratio is fixed or not; true fixes the aspect
-     * ratio, while false allows it to be changed.
+     * Sets whether the aspect ratio is fixed or not; true fixes the aspect ratio, while false
+     * allows it to be changed.
      * 
-     * @param fixAspectRatio Boolean that signals whether the aspect ratio
-     *            should be maintained.
+     * @param fixAspectRatio Boolean that signals whether the aspect ratio should be maintained.
      */
-    public void setFixedAspectRatio(boolean fixAspectRatio)
-    {
+    public void setFixedAspectRatio(boolean fixAspectRatio) {
         mFixAspectRatio = fixAspectRatio;
 
         if (initializedCropWindow) {
@@ -264,13 +259,12 @@ public class CropOverlayView extends View {
     /**
      * Sets the X value of the aspect ratio; is defaulted to 1.
      * 
-     * @param aspectRatioX int that specifies the new X value of the aspect
-     *            ratio
+     * @param aspectRatioX int that specifies the new X value of the aspect ratio
      */
-    public void setAspectRatioX(int aspectRatioX)
-    {
+    public void setAspectRatioX(int aspectRatioX) {
         if (aspectRatioX <= 0)
-            throw new IllegalArgumentException("Cannot set aspect ratio value to a number less than or equal to 0.");
+            throw new IllegalArgumentException(
+                    "Cannot set aspect ratio value to a number less than or equal to 0.");
         else {
             mAspectRatioX = aspectRatioX;
             mTargetAspectRatio = ((float) mAspectRatioX) / mAspectRatioY;
@@ -285,13 +279,12 @@ public class CropOverlayView extends View {
     /**
      * Sets the Y value of the aspect ratio; is defaulted to 1.
      * 
-     * @param aspectRatioY int that specifies the new Y value of the aspect
-     *            ratio
+     * @param aspectRatioY int that specifies the new Y value of the aspect ratio
      */
-    public void setAspectRatioY(int aspectRatioY)
-    {
+    public void setAspectRatioY(int aspectRatioY) {
         if (aspectRatioY <= 0)
-            throw new IllegalArgumentException("Cannot set aspect ratio value to a number less than or equal to 0.");
+            throw new IllegalArgumentException(
+                    "Cannot set aspect ratio value to a number less than or equal to 0.");
         else {
             mAspectRatioY = aspectRatioY;
             mTargetAspectRatio = ((float) mAspectRatioX) / mAspectRatioY;
@@ -304,38 +297,36 @@ public class CropOverlayView extends View {
     }
 
     /**
-     * Sets all initial values, but does not call initCropWindow to reset the
-     * views. Used once at the very start to initialize the attributes.
+     * Sets all initial values, but does not call initCropWindow to reset the views. Used once at
+     * the very start to initialize the attributes.
      * 
-     * @param guidelines Integer that signals whether the guidelines should be
-     *            on, off, or only showing when resizing.
-     * @param fixAspectRatio Boolean that signals whether the aspect ratio
-     *            should be maintained.
-     * @param aspectRatioX float that specifies the new X value of the aspect
-     *            ratio
-     * @param aspectRatioY float that specifies the new Y value of the aspect
-     *            ratio
+     * @param guidelines Integer that signals whether the guidelines should be on, off, or only
+     *        showing when resizing.
+     * @param fixAspectRatio Boolean that signals whether the aspect ratio should be maintained.
+     * @param aspectRatioX float that specifies the new X value of the aspect ratio
+     * @param aspectRatioY float that specifies the new Y value of the aspect ratio
      */
-    public void setInitialAttributeValues(int guidelines,
-                                          boolean fixAspectRatio,
-                                          int aspectRatioX,
-                                          int aspectRatioY) {
+    public void setInitialAttributeValues(int guidelines, boolean fixAspectRatio, int aspectRatioX,
+            int aspectRatioY) {
         if (guidelines < 0 || guidelines > 2)
-            throw new IllegalArgumentException("Guideline value must be set between 0 and 2. See documentation.");
+            throw new IllegalArgumentException(
+                    "Guideline value must be set between 0 and 2. See documentation.");
         else
             mGuidelines = guidelines;
 
         mFixAspectRatio = fixAspectRatio;
 
         if (aspectRatioX <= 0)
-            throw new IllegalArgumentException("Cannot set aspect ratio value to a number less than or equal to 0.");
+            throw new IllegalArgumentException(
+                    "Cannot set aspect ratio value to a number less than or equal to 0.");
         else {
             mAspectRatioX = aspectRatioX;
             mTargetAspectRatio = ((float) mAspectRatioX) / mAspectRatioY;
         }
 
         if (aspectRatioY <= 0)
-            throw new IllegalArgumentException("Cannot set aspect ratio value to a number less than or equal to 0.");
+            throw new IllegalArgumentException(
+                    "Cannot set aspect ratio value to a number less than or equal to 0.");
         else {
             mAspectRatioY = aspectRatioY;
             mTargetAspectRatio = ((float) mAspectRatioX) / mAspectRatioY;
@@ -351,9 +342,9 @@ public class CropOverlayView extends View {
 
         mHandleRadius = HandleUtil.getTargetRadius(context);
 
-        mSnapRadius = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-                                                SNAP_RADIUS_DP,
-                                                displayMetrics);
+        mSnapRadius =
+                TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, SNAP_RADIUS_DP,
+                        displayMetrics);
 
         mBorderPaint = PaintUtil.newBorderPaint(context);
         mGuidelinePaint = PaintUtil.newGuidelinePaint();
@@ -361,23 +352,23 @@ public class CropOverlayView extends View {
         mCornerPaint = PaintUtil.newCornerPaint(context);
 
         // Sets the values for the corner sizes
-        mCornerOffset = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-                                                  DEFAULT_CORNER_OFFSET_DP,
-                                                  displayMetrics);
-        mCornerExtension = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-                                                     DEFAULT_CORNER_EXTENSION_DP,
-                                                     displayMetrics);
-        mCornerLength = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-                                                  DEFAULT_CORNER_LENGTH_DP,
-                                                  displayMetrics);
+        mCornerOffset =
+                TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, DEFAULT_CORNER_OFFSET_DP,
+                        displayMetrics);
+        mCornerExtension =
+                TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, DEFAULT_CORNER_EXTENSION_DP,
+                        displayMetrics);
+        mCornerLength =
+                TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, DEFAULT_CORNER_LENGTH_DP,
+                        displayMetrics);
 
         // Sets guidelines to default until specified otherwise
         mGuidelines = CropImageView.DEFAULT_GUIDELINES;
     }
 
     /**
-     * Set the initial crop window size and position. This is dependent on the
-     * size and position of the image being cropped.
+     * Set the initial crop window size and position. This is dependent on the size and position of
+     * the image being cropped.
      * 
      * @param bitmapRect the bounding box around the image being cropped
      */
@@ -385,8 +376,7 @@ public class CropOverlayView extends View {
 
         // Tells the attribute functions the crop window has already been
         // initialized
-        if (initializedCropWindow == false)
-            initializedCropWindow = true;
+        if (initializedCropWindow == false) initializedCropWindow = true;
 
         if (mFixAspectRatio) {
 
@@ -401,15 +391,17 @@ public class CropOverlayView extends View {
                 final float centerX = getWidth() / 2f;
 
                 // Limits the aspect ratio to no less than 40 wide or 40 tall
-                final float cropWidth = Math.max(Edge.MIN_CROP_LENGTH_PX,
-                                                 AspectRatioUtil.calculateWidth(Edge.TOP.getCoordinate(),
-                                                                                Edge.BOTTOM.getCoordinate(),
-                                                                                mTargetAspectRatio));
+                final float cropWidth =
+                        Math.max(Edge.MIN_CROP_LENGTH_PX, AspectRatioUtil.calculateWidth(
+                                Edge.TOP.getCoordinate(), Edge.BOTTOM.getCoordinate(),
+                                mTargetAspectRatio));
 
                 // Create new TargetAspectRatio if the original one does not fit
                 // the screen
                 if (cropWidth == Edge.MIN_CROP_LENGTH_PX)
-                    mTargetAspectRatio = (Edge.MIN_CROP_LENGTH_PX) / (Edge.BOTTOM.getCoordinate() - Edge.TOP.getCoordinate());
+                    mTargetAspectRatio =
+                            (Edge.MIN_CROP_LENGTH_PX)
+                                    / (Edge.BOTTOM.getCoordinate() - Edge.TOP.getCoordinate());
 
                 final float halfCropWidth = cropWidth / 2f;
                 Edge.LEFT.setCoordinate(centerX - halfCropWidth);
@@ -423,15 +415,17 @@ public class CropOverlayView extends View {
                 final float centerY = getHeight() / 2f;
 
                 // Limits the aspect ratio to no less than 40 wide or 40 tall
-                final float cropHeight = Math.max(Edge.MIN_CROP_LENGTH_PX,
-                                                  AspectRatioUtil.calculateHeight(Edge.LEFT.getCoordinate(),
-                                                                                  Edge.RIGHT.getCoordinate(),
-                                                                                  mTargetAspectRatio));
+                final float cropHeight =
+                        Math.max(Edge.MIN_CROP_LENGTH_PX, AspectRatioUtil.calculateHeight(
+                                Edge.LEFT.getCoordinate(), Edge.RIGHT.getCoordinate(),
+                                mTargetAspectRatio));
 
                 // Create new TargetAspectRatio if the original one does not fit
                 // the screen
                 if (cropHeight == Edge.MIN_CROP_LENGTH_PX)
-                    mTargetAspectRatio = (Edge.RIGHT.getCoordinate() - Edge.LEFT.getCoordinate()) / Edge.MIN_CROP_LENGTH_PX;
+                    mTargetAspectRatio =
+                            (Edge.RIGHT.getCoordinate() - Edge.LEFT.getCoordinate())
+                                    / Edge.MIN_CROP_LENGTH_PX;
 
                 final float halfCropHeight = cropHeight / 2f;
                 Edge.TOP.setCoordinate(centerY - halfCropHeight);
@@ -452,15 +446,14 @@ public class CropOverlayView extends View {
     }
 
     /**
-     * Indicates whether the crop window is small enough that the guidelines
-     * should be shown. Public because this function is also used to determine
-     * if the center handle should be focused.
+     * Indicates whether the crop window is small enough that the guidelines should be shown. Public
+     * because this function is also used to determine if the center handle should be focused.
      * 
      * @return boolean Whether the guidelines should be shown or not
      */
     public static boolean showGuidelines() {
         if ((Math.abs(Edge.LEFT.getCoordinate() - Edge.RIGHT.getCoordinate()) < DEFAULT_SHOW_GUIDELINES_LIMIT)
-            || (Math.abs(Edge.TOP.getCoordinate() - Edge.BOTTOM.getCoordinate()) < DEFAULT_SHOW_GUIDELINES_LIMIT))
+                || (Math.abs(Edge.TOP.getCoordinate() - Edge.BOTTOM.getCoordinate()) < DEFAULT_SHOW_GUIDELINES_LIMIT))
             return false;
         else
             return true;
@@ -513,7 +506,8 @@ public class CropOverlayView extends View {
 
         // Draw "top", "bottom", "left", then "right" quadrants.
         canvas.drawRect(bitmapRect.left, bitmapRect.top, bitmapRect.right, top, mBackgroundPaint);
-        canvas.drawRect(bitmapRect.left, bottom, bitmapRect.right, bitmapRect.bottom, mBackgroundPaint);
+        canvas.drawRect(bitmapRect.left, bottom, bitmapRect.right, bitmapRect.bottom,
+                mBackgroundPaint);
         canvas.drawRect(bitmapRect.left, top, left, bottom, mBackgroundPaint);
         canvas.drawRect(right, top, bitmapRect.right, bottom, mBackgroundPaint);
     }
@@ -528,44 +522,28 @@ public class CropOverlayView extends View {
         // Draws the corner lines
 
         // Top left
-        canvas.drawLine(left - mCornerOffset,
-                        top - mCornerExtension,
-                        left - mCornerOffset,
-                        top + mCornerLength,
-                        mCornerPaint);
-        canvas.drawLine(left, top - mCornerOffset, left + mCornerLength, top - mCornerOffset, mCornerPaint);
+        canvas.drawLine(left - mCornerOffset, top - mCornerExtension, left - mCornerOffset, top
+                + mCornerLength, mCornerPaint);
+        canvas.drawLine(left, top - mCornerOffset, left + mCornerLength, top - mCornerOffset,
+                mCornerPaint);
 
         // Top right
-        canvas.drawLine(right + mCornerOffset,
-                        top - mCornerExtension,
-                        right + mCornerOffset,
-                        top + mCornerLength,
-                        mCornerPaint);
-        canvas.drawLine(right, top - mCornerOffset, right - mCornerLength, top - mCornerOffset, mCornerPaint);
+        canvas.drawLine(right + mCornerOffset, top - mCornerExtension, right + mCornerOffset, top
+                + mCornerLength, mCornerPaint);
+        canvas.drawLine(right, top - mCornerOffset, right - mCornerLength, top - mCornerOffset,
+                mCornerPaint);
 
         // Bottom left
-        canvas.drawLine(left - mCornerOffset,
-                        bottom + mCornerExtension,
-                        left - mCornerOffset,
-                        bottom - mCornerLength,
-                        mCornerPaint);
-        canvas.drawLine(left,
-                        bottom + mCornerOffset,
-                        left + mCornerLength,
-                        bottom + mCornerOffset,
-                        mCornerPaint);
+        canvas.drawLine(left - mCornerOffset, bottom + mCornerExtension, left - mCornerOffset,
+                bottom - mCornerLength, mCornerPaint);
+        canvas.drawLine(left, bottom + mCornerOffset, left + mCornerLength, bottom + mCornerOffset,
+                mCornerPaint);
 
         // Bottom left
-        canvas.drawLine(right + mCornerOffset,
-                        bottom + mCornerExtension,
-                        right + mCornerOffset,
-                        bottom - mCornerLength,
-                        mCornerPaint);
-        canvas.drawLine(right,
-                        bottom + mCornerOffset,
-                        right - mCornerLength,
-                        bottom + mCornerOffset,
-                        mCornerPaint);
+        canvas.drawLine(right + mCornerOffset, bottom + mCornerExtension, right + mCornerOffset,
+                bottom - mCornerLength, mCornerPaint);
+        canvas.drawLine(right, bottom + mCornerOffset, right - mCornerLength, bottom
+                + mCornerOffset, mCornerPaint);
 
     }
 
@@ -584,8 +562,7 @@ public class CropOverlayView extends View {
 
         mPressedHandle = HandleUtil.getPressedHandle(x, y, left, top, right, bottom, mHandleRadius);
 
-        if (mPressedHandle == null)
-            return;
+        if (mPressedHandle == null) return;
 
         // Calculate the offset of the touch point from the precise location
         // of the handle. Save these values in a member variable since we want
@@ -596,13 +573,11 @@ public class CropOverlayView extends View {
     }
 
     /**
-     * Handles a {@link MotionEvent#ACTION_UP} or
-     * {@link MotionEvent#ACTION_CANCEL} event.
+     * Handles a {@link MotionEvent#ACTION_UP} or {@link MotionEvent#ACTION_CANCEL} event.
      */
     private void onActionUp() {
 
-        if (mPressedHandle == null)
-            return;
+        if (mPressedHandle == null) return;
 
         mPressedHandle = null;
 
@@ -617,8 +592,7 @@ public class CropOverlayView extends View {
      */
     private void onActionMove(float x, float y) {
 
-        if (mPressedHandle == null)
-            return;
+        if (mPressedHandle == null) return;
 
         // Adjust the coordinates for the finger position's offset (i.e. the
         // distance from the initial touch to the precise handle location).

@@ -1,14 +1,15 @@
 /*
- * Copyright 2013, Edmodo, Inc. 
- *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this work except in compliance with the License.
- * You may obtain a copy of the License in the LICENSE file, or at:
- *
+ * Copyright 2013, Edmodo, Inc.
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this work except
+ * in compliance with the License. You may obtain a copy of the License in the LICENSE file, or at:
+ * 
  * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" 
- * BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language 
- * governing permissions and limitations under the License. 
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed under the License
+ * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing permissions and limitations under
+ * the License.
  */
 
 package com.edmodo.cropper.util;
@@ -35,23 +36,23 @@ public class HandleUtil {
     // Public Methods //////////////////////////////////////////////////////////
 
     /**
-     * Gets the default target radius (in pixels). This is the radius of the
-     * circular area that can be touched in order to activate the handle.
+     * Gets the default target radius (in pixels). This is the radius of the circular area that can
+     * be touched in order to activate the handle.
      * 
      * @param context the Context
      * @return the target radius (in pixels)
      */
     public static float getTargetRadius(Context context) {
 
-        final float targetRadius = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-                                                             TARGET_RADIUS_DP,
-                                                             context.getResources().getDisplayMetrics());
+        final float targetRadius =
+                TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, TARGET_RADIUS_DP, context
+                        .getResources().getDisplayMetrics());
         return targetRadius;
     }
 
     /**
-     * Determines which, if any, of the handles are pressed given the touch
-     * coordinates, the bounding box, and the touch radius.
+     * Determines which, if any, of the handles are pressed given the touch coordinates, the
+     * bounding box, and the touch radius.
      * 
      * @param x the x-coordinate of the touch point
      * @param y the y-coordinate of the touch point
@@ -62,13 +63,8 @@ public class HandleUtil {
      * @param targetRadius the target radius in pixels
      * @return the Handle that was pressed; null if no Handle was pressed
      */
-    public static Handle getPressedHandle(float x,
-                                          float y,
-                                          float left,
-                                          float top,
-                                          float right,
-                                          float bottom,
-                                          float targetRadius) {
+    public static Handle getPressedHandle(float x, float y, float left, float top, float right,
+            float bottom, float targetRadius) {
 
         Handle pressedHandle = null;
 
@@ -92,7 +88,8 @@ public class HandleUtil {
             pressedHandle = Handle.LEFT;
         } else if (HandleUtil.isInVerticalTargetZone(x, y, right, top, bottom, targetRadius)) {
             pressedHandle = Handle.RIGHT;
-        } else if (HandleUtil.isInCenterTargetZone(x, y, left, top, right, bottom) && !focusCenter()) {
+        } else if (HandleUtil.isInCenterTargetZone(x, y, left, top, right, bottom)
+                && !focusCenter()) {
             pressedHandle = Handle.CENTER;
 
         }
@@ -101,19 +98,13 @@ public class HandleUtil {
     }
 
     /**
-     * Calculates the offset of the touch point from the precise location of the
-     * specified handle.
+     * Calculates the offset of the touch point from the precise location of the specified handle.
      * 
-     * @return the offset as a Pair where the x-offset is the first value and
-     *         the y-offset is the second value; null if the handle is null
+     * @return the offset as a Pair where the x-offset is the first value and the y-offset is the
+     *         second value; null if the handle is null
      */
-    public static Pair<Float, Float> getOffset(Handle handle,
-                                               float x,
-                                               float y,
-                                               float left,
-                                               float top,
-                                               float right,
-                                               float bottom) {
+    public static Pair<Float, Float> getOffset(Handle handle, float x, float y, float left,
+            float top, float right, float bottom) {
 
         if (handle == null) {
             return null;
@@ -172,22 +163,17 @@ public class HandleUtil {
     // Private Methods /////////////////////////////////////////////////////////
 
     /**
-     * Determines if the specified coordinate is in the target touch zone for a
-     * corner handle.
+     * Determines if the specified coordinate is in the target touch zone for a corner handle.
      * 
      * @param x the x-coordinate of the touch point
      * @param y the y-coordinate of the touch point
      * @param handleX the x-coordinate of the corner handle
      * @param handleY the y-coordinate of the corner handle
      * @param targetRadius the target radius in pixels
-     * @return true if the touch point is in the target touch zone; false
-     *         otherwise
+     * @return true if the touch point is in the target touch zone; false otherwise
      */
-    private static boolean isInCornerTargetZone(float x,
-                                                float y,
-                                                float handleX,
-                                                float handleY,
-                                                float targetRadius) {
+    private static boolean isInCornerTargetZone(float x, float y, float handleX, float handleY,
+            float targetRadius) {
 
         if (Math.abs(x - handleX) <= targetRadius && Math.abs(y - handleY) <= targetRadius) {
             return true;
@@ -196,8 +182,8 @@ public class HandleUtil {
     }
 
     /**
-     * Determines if the specified coordinate is in the target touch zone for a
-     * horizontal bar handle.
+     * Determines if the specified coordinate is in the target touch zone for a horizontal bar
+     * handle.
      * 
      * @param x the x-coordinate of the touch point
      * @param y the y-coordinate of the touch point
@@ -205,15 +191,10 @@ public class HandleUtil {
      * @param handleXEnd the right x-coordinate of the horizontal bar handle
      * @param handleY the y-coordinate of the horizontal bar handle
      * @param targetRadius the target radius in pixels
-     * @return true if the touch point is in the target touch zone; false
-     *         otherwise
+     * @return true if the touch point is in the target touch zone; false otherwise
      */
-    private static boolean isInHorizontalTargetZone(float x,
-                                                    float y,
-                                                    float handleXStart,
-                                                    float handleXEnd,
-                                                    float handleY,
-                                                    float targetRadius) {
+    private static boolean isInHorizontalTargetZone(float x, float y, float handleXStart,
+            float handleXEnd, float handleY, float targetRadius) {
 
         if (x > handleXStart && x < handleXEnd && Math.abs(y - handleY) <= targetRadius) {
             return true;
@@ -222,8 +203,7 @@ public class HandleUtil {
     }
 
     /**
-     * Determines if the specified coordinate is in the target touch zone for a
-     * vertical bar handle.
+     * Determines if the specified coordinate is in the target touch zone for a vertical bar handle.
      * 
      * @param x the x-coordinate of the touch point
      * @param y the y-coordinate of the touch point
@@ -231,15 +211,10 @@ public class HandleUtil {
      * @param handleYStart the top y-coordinate of the vertical bar handle
      * @param handleYEnd the bottom y-coordinate of the vertical bar handle
      * @param targetRadius the target radius in pixels
-     * @return true if the touch point is in the target touch zone; false
-     *         otherwise
+     * @return true if the touch point is in the target touch zone; false otherwise
      */
-    private static boolean isInVerticalTargetZone(float x,
-                                                  float y,
-                                                  float handleX,
-                                                  float handleYStart,
-                                                  float handleYEnd,
-                                                  float targetRadius) {
+    private static boolean isInVerticalTargetZone(float x, float y, float handleX,
+            float handleYStart, float handleYEnd, float targetRadius) {
 
         if (Math.abs(x - handleX) <= targetRadius && y > handleYStart && y < handleYEnd) {
             return true;
@@ -248,8 +223,7 @@ public class HandleUtil {
     }
 
     /**
-     * Determines if the specified coordinate falls anywhere inside the given
-     * bounds.
+     * Determines if the specified coordinate falls anywhere inside the given bounds.
      * 
      * @param x the x-coordinate of the touch point
      * @param y the y-coordinate of the touch point
@@ -257,15 +231,10 @@ public class HandleUtil {
      * @param top the y-coordinate of the top bound
      * @param right the x-coordinate of the right bound
      * @param bottom the y-coordinate of the bottom bound
-     * @return true if the touch point is inside the bounding rectangle; false
-     *         otherwise
+     * @return true if the touch point is inside the bounding rectangle; false otherwise
      */
-    private static boolean isInCenterTargetZone(float x,
-                                                float y,
-                                                float left,
-                                                float top,
-                                                float right,
-                                                float bottom) {
+    private static boolean isInCenterTargetZone(float x, float y, float left, float top,
+            float right, float bottom) {
 
         if (x > left && x < right && y > top && y < bottom) {
             return true;
@@ -274,14 +243,13 @@ public class HandleUtil {
     }
 
     /**
-     * Determines if the cropper should focus on the center handle or the side
-     * handles. If it is a small image, focus on the center handle so the user
-     * can move it. If it is a large image, focus on the side handles so user
-     * can grab them. Corresponds to the appearance of the
+     * Determines if the cropper should focus on the center handle or the side handles. If it is a
+     * small image, focus on the center handle so the user can move it. If it is a large image,
+     * focus on the side handles so user can grab them. Corresponds to the appearance of the
      * RuleOfThirdsGuidelines.
      * 
-     * @return true if it is small enough such that it should focus on the
-     *         center; less than show_guidelines limit
+     * @return true if it is small enough such that it should focus on the center; less than
+     *         show_guidelines limit
      */
     private static boolean focusCenter() {
         return (!CropOverlayView.showGuidelines());

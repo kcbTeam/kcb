@@ -1,8 +1,5 @@
 package com.kcb.student.activity;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,6 +17,7 @@ import com.kcb.common.application.KAccount;
 import com.kcb.common.base.BaseActivity;
 import com.kcb.common.listener.DelayClickListener;
 import com.kcb.common.server.RequestUtil;
+import com.kcb.common.server.ResponseUtil;
 import com.kcb.common.server.UrlUtil;
 import com.kcb.common.util.AnimationUtil;
 import com.kcb.common.util.ToastUtil;
@@ -78,59 +76,46 @@ public class LoginActivity extends BaseActivity {
                 passwordEditText.requestFocus();
                 AnimationUtil.shake(passwordEditText);
             } else {
-                // test
                 if (loginProgressBar.getVisibility() == View.VISIBLE) {
                     return;
                 }
                 loginProgressBar.setVisibility(View.VISIBLE);
-                new Handler().postDelayed(new Runnable() {
 
-                    @Override
-                    public void run() {
-                        // TODO save student's name after login success;
-                        KAccount account = new KAccount(KAccount.TYPE_STU, id, "name");
-                        KAccount.saveAccount(account);
-                        HomeActivity.start(LoginActivity.this);
-                        finish();
-                    }
-                }, 1000);
-
-                // TODO request server
-                // username = admin 和 password =123
-
-                JSONObject jsonObject = new JSONObject();
-                try {
-                    jsonObject.put("username", "admin");
-                    jsonObject.put("password", "123");
-                } catch (JSONException e) {}
+//                 JSONObject jsonObject = new JSONObject();
+//                 try {
+//                 jsonObject.put("username", "admin");
+//                 jsonObject.put("password", "123");
+//                 } catch (JSONException e) {}
+//                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Method.POST,
+//                    "http://armani.aliapp.com/v1/stu/login", jsonRequest, listener, errorListener);
+//                
                 StringRequest request =
                         new StringRequest(Method.POST, UrlUtil.getStuLoginUrl(id, password),
                                 new Listener<String>() {
                                     public void onResponse(String response) {
-                                        ToastUtil.toast(response);
+                                        new Handler().postDelayed(new Runnable() {
+
+                                            @Override
+                                            public void run() {
+                                                // TODO save student's name after login success;
+                                                KAccount account =
+                                                        new KAccount(KAccount.TYPE_STU, id, "name");
+                                                KAccount.saveAccount(account);
+                                                HomeActivity.start(LoginActivity.this);
+                                                finish();
+                                            }
+                                        }, 1000);
                                     };
                                 }, new ErrorListener() {
                                     public void onErrorResponse(VolleyError error) {
-                                        // error.networkResponse.statusCode =400;
-                                        ToastUtil.toast(error.toString());
+                                        loginProgressBar.hide(LoginActivity.this);
+                                        if (error.networkResponse.statusCode == 400) {
+                                            ToastUtil.toast("账号或密码不对");
+                                        } else {
+                                            ResponseUtil.toastError(error);
+                                        }
                                     };
                                 });
-
-                // StringRequest request =
-                // new StringRequest(Method.POST, UrlUtil.getStuLoginUrl(id, password),
-                // jsonObject.toString(), new Listener<JSONObject>() {
-                //
-                // @Override
-                // public void onResponse(JSONObject response) {
-                //
-                // }
-                // }, new ErrorListener() {
-                //
-                // @Override
-                // public void onErrorResponse(VolleyError error) {
-                // // loginProgressBar.hide(LoginActivity.this);
-                // }
-                // });
                 RequestUtil.getInstance().addToRequestQueue(request, TAG);
             }
         }
