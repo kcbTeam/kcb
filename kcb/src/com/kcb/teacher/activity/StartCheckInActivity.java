@@ -285,12 +285,12 @@ public class StartCheckInActivity extends BaseActivity {
             }
         }
     };
-    
-    @Override 
-    public boolean onKeyDown(int keyCode, KeyEvent event) {  
-        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {  
-            
-        	DialogUtil.showNormalDialog(this, R.string.giveupsign, R.string.giveup_sign_tip,
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+
+            DialogUtil.showNormalDialog(this, R.string.giveupsign, R.string.giveup_sign_tip,
                     R.string.sure, new OnClickListener() {
 
                         @Override
@@ -298,9 +298,9 @@ public class StartCheckInActivity extends BaseActivity {
                             finish();
                         }
                     }, R.string.cancel, null);
-            return true;  
-        }  
-        return super.onKeyDown(keyCode, event);  
-    } 
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 
 }

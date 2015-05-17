@@ -1,14 +1,15 @@
 /*
- * Copyright 2013, Edmodo, Inc. 
- *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this work except in compliance with the License.
- * You may obtain a copy of the License in the LICENSE file, or at:
- *
+ * Copyright 2013, Edmodo, Inc.
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this work except
+ * in compliance with the License. You may obtain a copy of the License in the LICENSE file, or at:
+ * 
  * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" 
- * BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language 
- * governing permissions and limitations under the License. 
+ * 
+ * Unless required by applicable law or agreed to in writing, software distributed under the License
+ * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing permissions and limitations under
+ * the License.
  */
 
 package com.edmodo.cropper.util;
@@ -43,9 +44,9 @@ public class PaintUtil {
     public static Paint newBorderPaint(Context context) {
 
         // Set the line thickness for the crop window border.
-        final float lineThicknessPx = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-                                                                DEFAULT_LINE_THICKNESS_DP,
-                                                                context.getResources().getDisplayMetrics());
+        final float lineThicknessPx =
+                TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, DEFAULT_LINE_THICKNESS_DP,
+                        context.getResources().getDisplayMetrics());
 
         final Paint borderPaint = new Paint();
         borderPaint.setColor(Color.parseColor(SEMI_TRANSPARENT));
@@ -70,8 +71,7 @@ public class PaintUtil {
     }
 
     /**
-     * Creates the Paint object for drawing the translucent overlay outside the
-     * crop window.
+     * Creates the Paint object for drawing the translucent overlay outside the crop window.
      * 
      * @param context the Context
      * @return the new Paint object
@@ -93,9 +93,9 @@ public class PaintUtil {
     public static Paint newCornerPaint(Context context) {
 
         // Set the line thickness for the crop window border.
-        final float lineThicknessPx = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-                                                                DEFAULT_CORNER_THICKNESS_DP,
-                                                                context.getResources().getDisplayMetrics());
+        final float lineThicknessPx =
+                TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, DEFAULT_CORNER_THICKNESS_DP,
+                        context.getResources().getDisplayMetrics());
 
         final Paint cornerPaint = new Paint();
         cornerPaint.setColor(DEFAULT_CORNER_COLOR);
