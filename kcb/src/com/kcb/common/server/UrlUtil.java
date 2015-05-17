@@ -81,35 +81,28 @@ public class UrlUtil {
     /**
      * **********2, checkin**********
      */
-    // 2.1 get checkin num
-    private static final String url_tch_checkin_getnum = IP + "/v1/tch/checkin/getnum";
-
-    public static String getTchCheckinGetnumUrl(String id) {
-        return url_tch_checkin_getnum + "?id=" + id;
-    }
-
-    // 2.2 start checkin
+    // 2.1 start checkin
     private static final String url_tch_checkin_start = IP + "/v1/tch/checkin/start";
 
     public static String getTchCheckinStartUrl(String id, String num) {
         return url_tch_checkin_start + "?id=" + id + "&num=" + num;
     }
 
-    // 2.3 stop checkin
+    // 2.2 stop checkin
     private static final String url_tch_checkin_stop = IP + "/v1/tch/checkin/stop";
 
     public static String getTchCheckinStopUrl(String id, String num) {
         return url_tch_checkin_stop + "?id=" + id + "&num=" + num;
     }
 
-    // 2.4 get checkin result
+    // 2.3 get checkin result
     private static final String url_tch_checkin_getresult = IP + "/v1/tch/checkin/getresult";
 
     public static String getTchCheckinGetresultUrl(String id, String num) {
         return url_tch_checkin_getresult + "?id=" + id + "&num=" + num;
     }
 
-    // 2.5 giveup checkin
+    // 2.4 giveup checkin
     private static final String url_tch_checkin_giveup = IP + "/v1/tch/checkin/giveup";
 
     public static String getTchCheckinGiveupUrl(String id, String num) {

@@ -13,12 +13,12 @@
         android:background="@drawable/activity_header_shadow"
         android:orientation="horizontal" >
 
-        <include layout="@layout/comm_back_button"
-            android:focusable="false" />
+        <include layout="@layout/comm_back_button" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:text="@string/testresult" />
     </LinearLayout>
 
@@ -42,11 +42,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/search"
-        android:clickable="true"
-        android:focusable="false"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
         android:layout_marginTop="10dp"
+        android:clickable="true"
+        android:focusable="false"
         android:textSize="20sp" />
 
 </RelativeLayout>
