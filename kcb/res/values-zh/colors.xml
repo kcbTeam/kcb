@@ -7,6 +7,7 @@
     <color name="blue">#0000ff</color>
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
+    
 
     <!-- common start -->
     <color name="activity_background">#fff</color>
@@ -22,5 +23,7 @@
     <color name="half_gray">#5777</color>
     <!-- tch submit test activity end -->
     
-
+    <!-- tch edittestfirst activity start -->
+    <color name="thumbColor">#66aaaaaa</color>
+    <!-- tch edittestfirst activity end -->
 </resources>
