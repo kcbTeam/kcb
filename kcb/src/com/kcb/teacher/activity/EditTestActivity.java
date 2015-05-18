@@ -1,14 +1,20 @@
 package com.kcb.teacher.activity;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
+import android.provider.MediaStore.Images.Media;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
@@ -23,6 +29,7 @@ import com.kcb.library.view.PaperButton;
 import com.kcb.library.view.checkbox.CheckBox;
 import com.kcb.teacher.model.ChoiceQuestion;
 import com.kcb.teacher.model.CourseTest;
+import com.kcb.teacher.model.TextContent;
 import com.kcb.teacher.util.EditTestDialog;
 import com.kcb.teacher.util.EditTestDialog.DialogBackListener;
 import com.kcbTeam.R;
@@ -70,6 +77,7 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
 
     private int mPositionIndex = IndexOfQuestion;
     public final static String COURSE_TEST_KEY = "current_course_key";
+    private String path;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -222,7 +230,20 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
     @Override
     public boolean onLongClick(View v) {
         takePhoto();
-        return false;
+        return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        OnClickListener sureListener = new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        };
+        DialogUtil.showNormalDialog(this, R.string.leave, R.string.sureLeave, R.string.sure,
+                sureListener, R.string.cancel, null);
     }
 
     private void makeEditDialog(String text, String title) {
@@ -234,12 +255,18 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
     }
 
     private final int REQUEST_TAKEPHOTO = 100;
+    private final int REQUEXT_CUTPHOTO = 200;
 
     private void takePhoto() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, getCacheDir());
-        // intent.putExtra(MediaStore.EXTRA_OUTPUT,
-        // Uri.fromFile(new File(getCacheDir().getPath() + File.separator + "temp.jpg")));
+        path = Environment.getExternalStorageDirectory() + "/KCB/";
+        File file = new File(path);
+        if (!file.exists()) {
+            file.mkdirs();
+        }
+        file = new File(path + "temp.jpg");
+        Uri uri = Uri.fromFile(file);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
         if (intent.resolveActivity(getPackageManager()) == null) {
             ToastUtil.toast("没有可以拍照的应用程序");
             return;
@@ -247,6 +274,8 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
         startActivityForResult(intent, REQUEST_TAKEPHOTO);
     }
 
+    @SuppressWarnings("deprecation")
+    @SuppressLint("NewApi")
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -254,17 +283,36 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
             ToastUtil.toast("拍照取消了");
             return;
         }
-        // after camera, we need to cut the picture
         if (requestCode == REQUEST_TAKEPHOTO) {
-            // TODO get bitmap form data
-            File picture = new File(getCacheDir().getPath() + File.separator + "temp.jpg");
-            cutPicture(Uri.fromFile(picture));
+            File picture = new File(path + "temp.jpg");
+            try {
+                cutPicture(Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(),
+                        picture.getAbsolutePath(), null, null)));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        if (requestCode == REQUEXT_CUTPHOTO) {
+
+            if (resultCode == RESULT_OK) {
+                Uri uri = (Uri) data.getParcelableExtra("CUTTED_PICTURE");
+                try {
+                    questionEditText.setBackground(new BitmapDrawable(Media.getBitmap(
+                            getContentResolver(), uri)));
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
-    // TODO github开源代码
+
     public void cutPicture(Uri uri) {
-        ToastUtil.toast("需要裁剪图片");
+        Intent intent = new Intent(this, CutPictureActivity.class);
+        intent.putExtra("PICTURE", uri);
+        startActivityForResult(intent, REQUEXT_CUTPHOTO);
     }
 
     private void clickAdd() {
@@ -342,11 +390,11 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
     }
 
     private ChoiceQuestion getCurrentObj() {
-        String question = questionEditText.getText().toString();
-        String optionA = optionAEditText.getText().toString();
-        String optionB = optionBEditText.getText().toString();
-        String optionC = optionCEditText.getText().toString();
-        String optionD = optionDEditText.getText().toString();
+        TextContent question = new TextContent(questionEditText.getText().toString());
+        TextContent optionA = new TextContent(optionAEditText.getText().toString());
+        TextContent optionB = new TextContent(optionBEditText.getText().toString());
+        TextContent optionC = new TextContent(optionCEditText.getText().toString());
+        TextContent optionD = new TextContent(optionDEditText.getText().toString());
         boolean[] correctOption =
                 {checkBoxA.isCheck(), checkBoxB.isCheck(), checkBoxC.isCheck(), checkBoxD.isCheck()};
         return new ChoiceQuestion(question, optionA, optionB, optionC, optionD, correctOption);
@@ -360,11 +408,11 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
         String optionD = "";
         boolean[] correctId = {false, false, false, false};
         if (null != currentObj) {
-            question = currentObj.getQuestion();
-            optionA = currentObj.getOptionA();
-            optionB = currentObj.getOptionB();
-            optionC = currentObj.getOptionC();
-            optionD = currentObj.getOptionD();
+            question = currentObj.getQuestion().getContentString();
+            optionA = currentObj.getOptionA().getContentString();
+            optionB = currentObj.getOptionB().getContentString();
+            optionC = currentObj.getOptionC().getContentString();
+            optionD = currentObj.getOptionD().getContentString();
             correctId = currentObj.getCorrectId();
         }
         numHintTextView.setText(String.format(getResources()
@@ -389,7 +437,7 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
 
     private void completeEdit() {
         CourseTest test = new CourseTest("TestName1", mQuestionList);
-        Intent intent = new Intent(this, SubmitTest.class);
+        Intent intent = new Intent(this, SubmitTestActivity.class);
         intent.putExtra(COURSE_TEST_KEY, test);
         startActivity(intent);
         finish();

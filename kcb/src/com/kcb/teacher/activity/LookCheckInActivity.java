@@ -62,10 +62,10 @@ public class LookCheckInActivity extends BaseActivity implements OnItemClickList
         // contains a
         // StudentInfo list which record the missed CheckIn students
         List<StudentInfo> missedCheckInStus = new ArrayList<StudentInfo>();
-        missedCheckInStus.add(new StudentInfo("testName1", "00001", 12, 10));
+        missedCheckInStus.add(new StudentInfo("testName1", "00001", 12, 15));
         mList.add(new CheckInRecordInfo("2015-01-01", 0.7f, missedCheckInStus));
         List<StudentInfo> missedCheckInStus1 = new ArrayList<StudentInfo>();
-        missedCheckInStus1.add(new StudentInfo("testName2", "0002", 12, 9));
+        missedCheckInStus1.add(new StudentInfo("testName2", "0002", 12, 15));
         mList.add(new CheckInRecordInfo("2015-01-02", 0.5f, missedCheckInStus1));
     }
 

@@ -14,7 +14,7 @@ import com.kcb.teacher.model.ChoiceQuestion;
 import com.kcb.teacher.model.CourseTest;
 import com.kcbTeam.R;
 
-public class SubmitTest extends BaseActivity {
+public class SubmitTestActivity extends BaseActivity {
     @SuppressWarnings("unused")
     private static final String TAG = "SubmitTestPaper";
 

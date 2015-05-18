@@ -33,6 +33,7 @@
     <string name="hint_studentcenter_search">搜索学生姓名</string>
     <string name="stu_centre_name">姓名</string>
     <string name="stu_centre_stuId">学号</string>
+    <string name="stu_centre_info">学生信息</string>
     <string name="stu_centre_checkinrate">签到率</string>
     <string name="stu_centre_correctrate">正确率</string>
     <!-- home page activty end -->
@@ -55,7 +56,7 @@
     <!-- checkin details activity start -->
     <string name="checkin_missed_hint">以下为没有到课学生名单</string>
     <string name="stu_info">学生信息</string>
-    <string name="checkin_detail">签到详情</string>
+    <string name="checkin_misstimes">未到课次数</string>
     <string name="checkinRate_hint">本次到课率为%1$d%%</string>
     <!-- checkin details activity start -->
 
@@ -74,10 +75,10 @@
     <string name="problem_hint">请输入题目</string>
     <string name="options_hint">请输入选项</string>
     <string name="format_question_num">选择题%1$d</string>
-    <string name="option_A">A</string>
-    <string name="option_B">B</string>
-    <string name="option_C">C</string>
-    <string name="option_D">D</string>
+    <string name="option_A">A.</string>
+    <string name="option_B">B.</string>
+    <string name="option_C">C.</string>
+    <string name="option_D">D.</string>
     <string name="select_hint">在正确的选项后面打钩</string>
     <string name="leave">离开</string>
     <string name="sureLeave">确认放弃此次编辑吗？</string>
@@ -94,7 +95,14 @@
     <string name="dialog_title_add">添加</string>
     <string name="add_msg">是否要再加一道题？</string>
     <!-- EditTestActivity End -->
-
+	
+	<!-- Cut Picture Activity Strat -->
+	<string name="cut_title">裁剪图片</string>
+	<string name="rotate">旋转</string>
+	<string name="crop">裁剪</string>
+	<string name="preview">预览</string>
+	<!-- Cut Picture Activity End -->
+	
 
     <!-- Submit Activity Start -->
     <string name="Go_modify">去修改</string>
@@ -102,7 +110,14 @@
     <string name="editCouseTest">编辑课堂小测试</string>
     <string name="sure_submit">确认提交</string>
     <!-- Submit Activity End -->
-
+	
+	<!-- Check Test Activity Start -->
+	<string name="checktest">查看测试</string>
+	<string name="hint_checktest_search">搜索测试名称</string>
+	<string name="testinfo">测试信息</string>
+	<string name="totalQuestionNum">总题数</string>
+	<!-- Check Test Activity End -->
+	
     <string name="signclass">课堂签到</string>
     <string name="giveupsign">放弃签到</string>
     <string name="giveup_sign_tip">放弃签到后，本次签到将无效。</string>

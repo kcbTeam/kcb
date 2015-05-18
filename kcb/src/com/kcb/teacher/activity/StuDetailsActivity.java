@@ -92,9 +92,8 @@ public class StuDetailsActivity extends BaseActivity {
     private void initCurrentStu() {
         mCurrentStuInfo =
                 (StudentInfo) getIntent().getSerializableExtra(StuCentreFragment.CURRENT_STU_KEY);
-        mCheckInRate =
-                1.0f - (float) mCurrentStuInfo.getMissTimes() / mCurrentStuInfo.getCheckInTimes();
-        mCorrectRate = 0.8f;
+        mCheckInRate = mCurrentStuInfo.getCheckInRate();
+        mCorrectRate = mCurrentStuInfo.getCorrectRate();
     }
 
     private void initPieChart() {

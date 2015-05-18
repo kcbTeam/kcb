@@ -20,16 +20,18 @@ public class CourseTest implements Serializable {
     private List<ChoiceQuestion> mChoiceQuestionList;
     private String mTestName;
     private int mTestTime;
+    private String mTestDate;
 
     public CourseTest(String testName, List<ChoiceQuestion> questionList) {
         mChoiceQuestionList = questionList;
         mTestName = testName;
     }
 
-    public CourseTest(String testName, List<ChoiceQuestion> questionList, int time) {
+    public CourseTest(String testName, List<ChoiceQuestion> questionList, int time, String date) {
         mChoiceQuestionList = questionList;
         mTestName = testName;
         mTestTime = time;
+        mTestDate = date;
     }
 
     public void setQuestionList(List<ChoiceQuestion> mChoiceQuestionList) {
@@ -55,5 +57,14 @@ public class CourseTest implements Serializable {
     public void setTestTime(int mTestTime) {
         this.mTestTime = mTestTime;
     }
+
+    public String getTestDate() {
+        return this.mTestDate;
+    }
+
+    public void setTestDate(String mTestDate) {
+        this.mTestDate = mTestDate;
+    }
+
 
 }

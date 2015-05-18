@@ -10,6 +10,8 @@
 
     <!-- uses permission start -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <!-- uses permission end -->
 
     <application
@@ -103,11 +105,23 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.kcb.teacher.activity.SubmitTest"
+            android:name="com.kcb.teacher.activity.SubmitTestActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.kcb.teacher.activity.CheckTest"
+            android:name="com.kcb.teacher.activity.CheckTestActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.kcb.teacher.activity.CheckTestDetailsActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.kcb.teacher.activity.CutPictureActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.kcb.teacher.activity.CutActivity"
             android:screenOrientation="portrait" >
         </activity>
         <!-- teacher end -->

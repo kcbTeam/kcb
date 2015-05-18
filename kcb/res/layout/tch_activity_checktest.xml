@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:widget="http://schemas.android.com/apk/res-auto"
-    xmlns:buttonflat="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/activity_background"
-    tools:ignore="contentDescription" >
+    android:background="@color/activity_background" >
 
     <LinearLayout
         android:id="@+id/title"
@@ -15,241 +11,54 @@
         android:background="@drawable/activity_header_shadow"
         android:orientation="horizontal" >
 
-        <com.kcb.library.view.buttonflat.ButtonFlat
-            android:id="@+id/button_back"
-            android:layout_width="56dp"
-            android:layout_height="56dp"
-            buttonflat:rippleSpeed="6" >
-
-            <ImageView
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_centerInParent="true"
-                android:src="@drawable/ic_action_back" />
-        </com.kcb.library.view.buttonflat.ButtonFlat>
+        <include layout="@layout/comm_back_button" />
 
         <TextView
-            android:id="@+id/textview_testname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:textSize="22dp" />
+            android:text="@string/checktest" />
     </LinearLayout>
 
     <RelativeLayout
-        android:id="@+id/fragment_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/title"
-        android:layout_marginBottom="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginRight="24dp"
-        android:layout_marginTop="24dp" >
-
-        <TextView
-            android:id="@+id/textview_question_num"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/textview_question"
-            android:layout_width="match_parent"
-            android:layout_height="180dp"
-            android:layout_below="@id/textview_question_num"
-            android:layout_marginTop="2dp"
-            android:background="@color/half_gray" />
-
-        <TextView
-            android:id="@+id/textview_correct_rate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_below="@id/textview_question"
-            android:textColor="@color/red" />
-
-        <RelativeLayout
-            android:id="@+id/layout_A"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_below="@id/textview_correct_rate"
-            android:layout_marginTop="20dp" >
-
-            <TextView
-                android:id="@+id/textview_A_title"
-                android:layout_width="15dp"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:text="@string/option_A" />
-
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="30dp"
-                android:layout_toRightOf="@id/textview_A_title"
-                android:scrollbarSize="2dp"
-                android:scrollbarThumbVertical="@color/material_dialog_thumbColor" >
-
-                <TextView
-                    android:id="@+id/textview_A_content"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/half_gray"
-                    android:gravity="center_vertical" />
-            </ScrollView>
-
-            <TextView
-                android:id="@+id/textview_A_rate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerInParent="true"
-                android:textColor="@color/red" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/layout_B"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_below="@id/layout_A"
-            android:layout_marginTop="10dp" >
-
-            <TextView
-                android:id="@+id/textview_B_title"
-                android:layout_width="15dp"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:text="@string/option_B" />
-
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="30dp"
-                android:layout_toRightOf="@id/textview_B_title"
-                android:scrollbarSize="2dp"
-                android:scrollbarThumbVertical="@color/material_dialog_thumbColor" >
-
-                <TextView
-                    android:id="@+id/textview_B_content"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/half_gray"
-                    android:gravity="center_vertical" />
-            </ScrollView>
-
-            <TextView
-                android:id="@+id/textview_B_rate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerInParent="true"
-                android:textColor="@color/red" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/layout_C"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_below="@id/layout_B"
-            android:layout_marginTop="10dp" >
-
-            <TextView
-                android:id="@+id/textview_C_title"
-                android:layout_width="15dp"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:text="@string/option_C" />
-
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="30dp"
-                android:layout_toRightOf="@id/textview_C_title"
-                android:scrollbarSize="2dp"
-                android:scrollbarThumbVertical="@color/material_dialog_thumbColor" >
-
-                <TextView
-                    android:id="@+id/textview_C_content"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/half_gray"
-                    android:gravity="center_vertical" />
-            </ScrollView>
-
-            <TextView
-                android:id="@+id/textview_C_rate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerInParent="true"
-                android:textColor="@color/red" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/layout_D"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_below="@id/layout_C"
-            android:layout_centerVertical="true"
-            android:layout_marginTop="10dp" >
-
-            <TextView
-                android:id="@+id/textview_D_title"
-                android:layout_width="15dp"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:text="@string/option_D" />
-
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="30dp"
-                android:layout_toRightOf="@id/textview_D_title"
-                android:scrollbarSize="2dp"
-                android:scrollbarThumbVertical="@color/material_dialog_thumbColor" >
-
-                <TextView
-                    android:id="@+id/textview_D_content"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/half_gray"
-                    android:gravity="center_vertical" />
-            </ScrollView>
-
-            <TextView
-                android:id="@+id/textview_D_rate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerInParent="true"
-                android:textColor="@color/red" />
-        </RelativeLayout>
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_marginLeft="24dp"
         android:layout_marginRight="24dp" >
 
-        <com.kcb.library.view.PaperButton
-            android:id="@+id/pagerbutton_last"
-            style="@style/bottom_button"
-            widget:paper_text="@string/last_item" />
+        <com.kcb.library.view.FloatingEditText
+            android:id="@+id/edittext_search"
+            style="@style/login_edittext"
+            android:layout_marginTop="5dp"
+            android:hint="@string/hint_checktest_search" />
 
-        <com.kcb.library.view.PaperButton
-            android:id="@+id/pagerbutton_next"
-            style="@style/bottom_button"
-            android:layout_alignParentRight="true"
-            widget:paper_text="@string/next_item" />
+        <TextView
+            android:id="@+id/textview_testinfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/edittext_search"
+            android:layout_marginTop="5dp"
+            android:text="@string/testinfo" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/textview_testinfo"
+            android:layout_marginLeft="110dp"
+            android:layout_toRightOf="@id/textview_testinfo"
+            android:text="@string/totalQuestionNum" />
+
+        <ListView
+            android:id="@+id/listview_test"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textview_testinfo"
+            android:layout_marginTop="5dp"
+            android:cacheColorHint="#0fff"
+            android:listSelector="#00000000"
+            android:scrollbarSize="2dp"
+            android:scrollbarThumbVertical="@color/material_dialog_thumbColor" >
+        </ListView>
     </RelativeLayout>
 
 </RelativeLayout>
