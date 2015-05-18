@@ -12,46 +12,45 @@ import com.kcbTeam.R;
 
 public class EditTestFirstActivity extends BaseActivity {
 
-	private ButtonFlat backButton;
-	private PaperButton editfinishButton;
+    private ButtonFlat backButton;
+    private PaperButton editfinishButton;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.tch_activity_edittestfirst);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.tch_activity_edittestfirst);
 
-		initView();
-		initData();
-	}
+        initView();
+        initData();
+    }
 
-	@Override
-	protected void initView() {
-		// TODO Auto-generated method stub
-		backButton = (ButtonFlat) findViewById(R.id.button_back);
-		backButton.setOnClickListener(new OnClickListener() {
+    @Override
+    protected void initView() {
+        // TODO Auto-generated method stub
+        backButton = (ButtonFlat) findViewById(R.id.button_back);
+        backButton.setOnClickListener(new OnClickListener() {
 
-			@Override
-			public void onClick(View v) {
-				finish();
-			}
-		});
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
-		editfinishButton = (PaperButton) findViewById(R.id.button_editfinish);
-		editfinishButton.setOnClickListener(new OnClickListener() {
+        editfinishButton = (PaperButton) findViewById(R.id.button_editfinish);
+        editfinishButton.setOnClickListener(new OnClickListener() {
 
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(EditTestFirstActivity.this,
-						EditTestActivity.class);
-				startActivity(intent);
-			}
-		});
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(EditTestFirstActivity.this, EditTestActivity.class);
+                startActivity(intent);
+            }
+        });
 
-	}
+    }
 
-	@Override
-	protected void initData() {
-		// TODO Auto-generated method stub
+    @Override
+    protected void initData() {
+        // TODO Auto-generated method stub
 
-	}
+    }
 }

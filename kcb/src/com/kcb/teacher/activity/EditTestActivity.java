@@ -1,16 +1,20 @@
 package com.kcb.teacher.activity;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.provider.MediaStore.Images.Media;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
@@ -226,7 +230,7 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
     @Override
     public boolean onLongClick(View v) {
         takePhoto();
-        return false;
+        return true;
     }
 
     @Override
@@ -251,32 +255,18 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
     }
 
     private final int REQUEST_TAKEPHOTO = 100;
+    private final int REQUEXT_CUTPHOTO = 200;
 
     private void takePhoto() {
-//        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//        intent.putExtra(MediaStore.EXTRA_OUTPUT, getCacheDir());
-//        intent.putExtra(MediaStore.EXTRA_OUTPUT,
-//                Uri.fromFile(new File(getCacheDir().getPath() + File.separator + "temp.jpg")));
-//        File file = new File(mSaveImgPath);
-//        if (!file.exists()) {
-//            file.mkdirs();
-//        }
-//        file = new File(mSaveImgPath + "temp.jpg");
-//        Uri uri = Uri.fromFile(file);
-//        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//        intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
-//        startActivityForResult(intent, REQUEST_TAKEPHOTO);
-        path = Environment.getExternalStorageDirectory() + "/MediaOpe/";
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        path = Environment.getExternalStorageDirectory() + "/KCB/";
         File file = new File(path);
         if (!file.exists()) {
             file.mkdirs();
         }
         file = new File(path + "temp.jpg");
         Uri uri = Uri.fromFile(file);
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
-        startActivityForResult(intent, REQUEST_TAKEPHOTO);
-        
         if (intent.resolveActivity(getPackageManager()) == null) {
             ToastUtil.toast("没有可以拍照的应用程序");
             return;
@@ -284,6 +274,8 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
         startActivityForResult(intent, REQUEST_TAKEPHOTO);
     }
 
+    @SuppressWarnings("deprecation")
+    @SuppressLint("NewApi")
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -291,31 +283,36 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
             ToastUtil.toast("拍照取消了");
             return;
         }
-        // after camera, we need to cut the picture
         if (requestCode == REQUEST_TAKEPHOTO) {
-            // TODO get bitmap form data
-//            File picture = new File(getCacheDir().getPath() + File.separator + "temp.jpg");
             File picture = new File(path + "temp.jpg");
             try {
-                Uri u =
-                        Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(),
-                            picture.getAbsolutePath(), null, null));
-                Intent intent = new Intent(this, CutPictureActivity.class);
-                intent.putExtra("PICTURE", u);
-                startActivity(intent);
+                cutPicture(Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(),
+                        picture.getAbsolutePath(), null, null)));
             } catch (Exception e) {
                 e.printStackTrace();
             }
-//            cutPicture(Uri.fromFile(picture));
+        }
+        if (requestCode == REQUEXT_CUTPHOTO) {
+
+            if (resultCode == RESULT_OK) {
+                Uri uri = (Uri) data.getParcelableExtra("CUTTED_PICTURE");
+                try {
+                    questionEditText.setBackground(new BitmapDrawable(Media.getBitmap(
+                            getContentResolver(), uri)));
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
-    // TODO github开源代码
+
     public void cutPicture(Uri uri) {
-        ToastUtil.toast("需要裁剪图片");
         Intent intent = new Intent(this, CutPictureActivity.class);
         intent.putExtra("PICTURE", uri);
-        startActivity(intent);
+        startActivityForResult(intent, REQUEXT_CUTPHOTO);
     }
 
     private void clickAdd() {

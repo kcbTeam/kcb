@@ -29,11 +29,10 @@ public class StudentInfo implements Serializable {
         mCheckInTimes = 0;
         mTotalCheckInTimes = 0;
     }
-    
+
     /**
      * 
-     * Constructor: StudentInfo
-     * checkinTimes is success checkinTimes of the student
+     * Constructor: StudentInfo checkinTimes is success checkinTimes of the student
      */
     public StudentInfo(String name, String studentID, int checkinTimes, int totalCheckInTimes) {
         mStudentName = name;
@@ -41,12 +40,11 @@ public class StudentInfo implements Serializable {
         mCheckInTimes = checkinTimes;
         mTotalCheckInTimes = totalCheckInTimes;
     }
-    
+
     /**
      * 
-     * Constructor: StudentInfo
-     * checkinTimes is success checkinTimes of the student
-     * correctTimes is correctTimes of the student
+     * Constructor: StudentInfo checkinTimes is success checkinTimes of the student correctTimes is
+     * correctTimes of the student
      * 
      */
     public StudentInfo(String name, String studentID, int checkinTimes, int totalCheckInTimes,

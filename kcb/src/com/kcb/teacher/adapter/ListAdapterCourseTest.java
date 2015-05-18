@@ -62,14 +62,15 @@ public class ListAdapterCourseTest extends BaseAdapter {
         }
         holder.testName.setText(mList.get(conversePosition).getTestName());
         holder.testDate.setText(mList.get(conversePosition).getTestDate());
-        holder.questionTotalNum.setText(String
-                .valueOf(mList.get(conversePosition).getQuestionList().size()));
+        holder.questionTotalNum.setText(String.valueOf(mList.get(conversePosition)
+                .getQuestionList().size()));
         holder.detailsButton.setOnClickListener(new OnClickListener() {
-            
+
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext,CheckTestDetailsActivity.class);
-                intent.putExtra(CheckTestActivity.CLICKED_TEST_KEY, mList.get(getCount() - 1 - position));
+                Intent intent = new Intent(mContext, CheckTestDetailsActivity.class);
+                intent.putExtra(CheckTestActivity.CLICKED_TEST_KEY,
+                        mList.get(getCount() - 1 - position));
                 mContext.startActivity(intent);
             }
         });

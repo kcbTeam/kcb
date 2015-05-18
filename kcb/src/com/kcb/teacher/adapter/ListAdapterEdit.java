@@ -23,71 +23,67 @@ import com.kcbTeam.R;
 // you can ask TaoLi;
 public class ListAdapterEdit extends BaseAdapter {
 
-	private Context mContext;
-	private List<String> mTestNames;
-	private int selectedIndex = 0;
+    private Context mContext;
+    private List<String> mTestNames;
+    private int selectedIndex = 0;
 
-	public ListAdapterEdit(Context context, List<String> list) {
-		mContext = context;
-		mTestNames = list;
-	}
+    public ListAdapterEdit(Context context, List<String> list) {
+        mContext = context;
+        mTestNames = list;
+    }
 
-	@Override
-	public int getCount() {
-		return mTestNames.size();
-	}
+    @Override
+    public int getCount() {
+        return mTestNames.size();
+    }
 
-	@Override
-	public Object getItem(int position) {
-		return mTestNames.get(position);
-	}
+    @Override
+    public Object getItem(int position) {
+        return mTestNames.get(position);
+    }
 
-	@Override
-	public long getItemId(int position) {
-		return position;
-	}
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
 
-	private class ViewHolder {
-		TextView testname;
-		RadioButton testchosen;
-	}
+    private class ViewHolder {
+        TextView testname;
+        RadioButton testchosen;
+    }
 
-	@Override
-	public View getView(final int position, View convertView, ViewGroup parent) {
-		ViewHolder holder = null;
-		if (convertView == null) {
-			holder = new ViewHolder();
-			convertView = View.inflate(mContext, R.layout.tch_listitem_dialog,
-					null);
-			holder.testname = (TextView) convertView
-					.findViewById(R.id.textview_testname);
-			holder.testchosen = (RadioButton) convertView
-					.findViewById(R.id.checkBox_testchosen);
-			convertView.setTag(holder);
-		} else {
-			holder = (ViewHolder) convertView.getTag();
-		}
-		holder.testchosen
-				.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+    @Override
+    public View getView(final int position, View convertView, ViewGroup parent) {
+        ViewHolder holder = null;
+        if (convertView == null) {
+            holder = new ViewHolder();
+            convertView = View.inflate(mContext, R.layout.tch_listitem_dialog, null);
+            holder.testname = (TextView) convertView.findViewById(R.id.textview_testname);
+            holder.testchosen = (RadioButton) convertView.findViewById(R.id.checkBox_testchosen);
+            convertView.setTag(holder);
+        } else {
+            holder = (ViewHolder) convertView.getTag();
+        }
+        holder.testchosen.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
-					@Override
-					public void onCheckedChanged(boolean isChecked) {
-						if (isChecked) {
-							selectedIndex = position;
-						}
-						notifyDataSetChanged();
-					}
-				});
-		holder.testname.setText(mTestNames.get(position));
-		if (selectedIndex == position) {
-			holder.testchosen.setChecked(true);
-		} else {
-			holder.testchosen.setChecked(false);
-		}
-		return convertView;
-	}
+            @Override
+            public void onCheckedChanged(boolean isChecked) {
+                if (isChecked) {
+                    selectedIndex = position;
+                }
+                notifyDataSetChanged();
+            }
+        });
+        holder.testname.setText(mTestNames.get(position));
+        if (selectedIndex == position) {
+            holder.testchosen.setChecked(true);
+        } else {
+            holder.testchosen.setChecked(false);
+        }
+        return convertView;
+    }
 
-	public int getSelectedIndex() {
-		return selectedIndex;
-	}
+    public int getSelectedIndex() {
+        return selectedIndex;
+    }
 }

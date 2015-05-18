@@ -3,11 +3,15 @@ package com.kcb.teacher.activity;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.provider.MediaStore.Images.Media;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.ImageView;
 
@@ -19,23 +23,21 @@ import com.kcbTeam.R;
 public class CutPictureActivity extends BaseActivity {
     @SuppressWarnings("unused")
     private static final String TAG = "CutPictureActivity";
-    // Static final constants
     private static final int DEFAULT_ASPECT_RATIO_VALUES = 10;
     private static final int ROTATE_NINETY_DEGREES = 90;
     private static final String ASPECT_RATIO_X = "ASPECT_RATIO_X";
     private static final String ASPECT_RATIO_Y = "ASPECT_RATIO_Y";
 
-    // Instance variables
     private int mAspectRatioX = DEFAULT_ASPECT_RATIO_VALUES;
     private int mAspectRatioY = DEFAULT_ASPECT_RATIO_VALUES;
 
-    Bitmap originalImage;
+    Bitmap mBitMap;
     Bitmap croppedImage;
     private CropImageView cropImageView;
     private ButtonFlat rotateButton;
     private ButtonFlat cropButton;
+    private ButtonFlat completeButton;
 
-    // Saves the state upon rotating the screen/restarting the activity
     @Override
     protected void onSaveInstanceState(Bundle bundle) {
         super.onSaveInstanceState(bundle);
@@ -63,19 +65,15 @@ public class CutPictureActivity extends BaseActivity {
     @Override
     protected void initView() {
         cropImageView = (CropImageView) findViewById(R.id.CropImageView);
-        cropImageView.setImageBitmap(originalImage);
+        cropImageView.setImageBitmap(mBitMap);
         rotateButton = (ButtonFlat) findViewById(R.id.Button_rotate);
-        rotateButton.setOnClickListener(new View.OnClickListener() {
+        rotateButton.setOnClickListener(new OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 cropImageView.rotateImage(ROTATE_NINETY_DEGREES);
             }
         });
-
-
-        cropImageView.setAspectRatio(DEFAULT_ASPECT_RATIO_VALUES, DEFAULT_ASPECT_RATIO_VALUES);
-
 
         cropButton = (ButtonFlat) findViewById(R.id.Button_crop);
         cropButton.setOnClickListener(new View.OnClickListener() {
@@ -87,17 +85,46 @@ public class CutPictureActivity extends BaseActivity {
                 croppedImageView.setImageBitmap(croppedImage);
             }
         });
+
+        completeButton = (ButtonFlat) findViewById(R.id.button_complete);
+        completeButton.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.putExtra("CUTTED_PICTURE", Uri.parse(MediaStore.Images.Media.insertImage(
+                        getContentResolver(), croppedImage, null, null)));
+                setResult(RESULT_OK, intent);
+                finish();
+            }
+        });
     }
 
     @Override
     protected void initData() {
         Uri uri = (Uri) getIntent().getParcelableExtra("PICTURE");
         try {
-            originalImage = Media.getBitmap(getContentResolver(), uri);
+            mBitMap = Media.getBitmap(getContentResolver(), uri);
+            mBitMap = ResizeBitmap(mBitMap, 1000);
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            e.printStackTrace();;
         } catch (IOException e) {
-            e.printStackTrace();
+            e.printStackTrace();;
         }
+    }
+
+    private Bitmap ResizeBitmap(Bitmap bitmap, int newWidth) {
+        int width = bitmap.getWidth();
+        int height = bitmap.getHeight();
+        float temp = ((float) height) / ((float) width);
+        int newHeight = (int) ((newWidth) * temp);
+        float scaleWidth = ((float) newWidth) / width;
+        float scaleHeight = ((float) newHeight) / height;
+        Matrix matrix = new Matrix();
+        matrix.postScale(scaleWidth, scaleHeight);
+        // matrix.postRotate(45);
+        Bitmap resizedBitmap = Bitmap.createBitmap(bitmap, 0, 0, width, height, matrix, true);
+        bitmap.recycle();
+        return resizedBitmap;
     }
 }

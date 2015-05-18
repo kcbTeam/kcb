@@ -99,7 +99,7 @@
 	<string name="cut_title">裁剪图片</string>
 	<string name="rotate">旋转</string>
 	<string name="crop">裁剪</string>
-	
+	<string name="preview">预览</string>
 	<!-- Cut Picture Activity End -->
 	
 

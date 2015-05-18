@@ -32,8 +32,8 @@ public class ChoiceQuestion implements Serializable {
         mCorrectId = new boolean[] {false, false, false, false};
     }
 
-    public ChoiceQuestion(TextContent question, TextContent optionA, TextContent optionB, TextContent optionC,
-                          TextContent optionD, boolean[] correctOption) {
+    public ChoiceQuestion(TextContent question, TextContent optionA, TextContent optionB,
+            TextContent optionC, TextContent optionD, boolean[] correctOption) {
         mQuestion = question;
         mOptionA = optionA;
         mOptionB = optionB;

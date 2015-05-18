@@ -1,65 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginLeft="24dp"
-    android:layout_marginRight="24dp" >
+    android:layout_height="match_parent" >
 
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:paddingBottom="25dp"
-        android:text="@string/cut_title"
-        android:textSize="40sp" />
-
-    <com.edmodo.cropper.CropImageView
-        xmlns:custom="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/CropImageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center" />
-
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/CropImageView"
-        android:layout_marginTop="20dp"
-        android:orientation="vertical"
-        android:paddingLeft="40dp"
-        android:paddingRight="40dp" >
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp" >
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:paddingBottom="25dp"
+            android:text="@string/cut_title"
+            android:textSize="20sp" />
+
+        <com.edmodo.cropper.CropImageView
+            xmlns:custom="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/CropImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/title"
+            android:layout_centerHorizontal="true" />
 
         <com.kcb.library.view.buttonflat.ButtonFlat
             android:id="@+id/Button_rotate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="20dp"
-            android:paddingLeft="25dp"
-            android:paddingRight="25dp"
-            android:text="@string/rotate"
-            android:textColor="#33B5E5" />
+            android:layout_below="@id/CropImageView"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/rotate" />
 
         <com.kcb.library.view.buttonflat.ButtonFlat
             android:id="@+id/Button_crop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="20dp"
-            android:paddingLeft="25dp"
-            android:paddingRight="25dp"
-            android:text="@string/crop"
-            android:textColor="#33B5E5"
-            android:textSize="30sp" />
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/CropImageView"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/crop" />
+
+        <TextView
+            android:id="@+id/textview_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/Button_rotate"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:text="@string/preview" />
 
         <ImageView
             android:id="@+id/croppedImageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center|top" />
-    </LinearLayout>
+            android:layout_below="@id/textview_hint"
+            android:layout_centerHorizontal="true" />
 
-</RelativeLayout>
+        <com.kcb.library.view.buttonflat.ButtonFlat
+            android:id="@+id/button_complete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/croppedImageView"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:text="@string/complete" />
+    </RelativeLayout>
+
+</ScrollView>

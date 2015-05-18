@@ -118,7 +118,7 @@ public class CheckTestDetailsActivity extends BaseActivity {
         // optionAcontent.setText(temp.getOptionA().getContentString());
         optionAcontent.setBackground(getResources().getDrawable(R.drawable.option_a));
         optionBcontent.setText(temp.getOptionB().getContentString());
-//        optionCcontent.setText(temp.getOptionC().getContentString());
+        // optionCcontent.setText(temp.getOptionC().getContentString());
         optionCcontent.setBackground(getResources().getDrawable(R.drawable.option_a));
         optionDcontent.setText(temp.getOptionD().getContentString());
 
