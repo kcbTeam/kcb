@@ -100,7 +100,8 @@ public class LoginActivity extends BaseActivity {
                                 }, new ErrorListener() {
                                     public void onErrorResponse(VolleyError error) {
                                         loginProgressBar.hide(LoginActivity.this);
-                                        if (error.networkResponse.statusCode == 400) {
+                                        if (null != error.networkResponse
+                                                && error.networkResponse.statusCode == 400) {
                                             ToastUtil.toast(R.string.id_password_error);
                                         } else {
                                             ResponseUtil.toastError(error);
