@@ -1,6 +1,5 @@
 package com.kcb.student.util;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -12,26 +11,28 @@ import android.view.View;
 public class RedHookDraw extends View {
     private Paint paint;
     private Path path;
+    int step = 0;
 
-    @SuppressLint("NewApi")
     public RedHookDraw(Context context, AttributeSet attrs) {
         super(context, attrs);
-
         paint = new Paint();
         paint.setStyle(Paint.Style.STROKE);
-        paint.setStrokeWidth(2);
+        paint.setStrokeWidth(5);
         path = new Path();
-        path.moveTo(100, 100);
-        path.lineTo(106, 106);
-        path.lineTo(112, 112);
-        path.lineTo(118, 106);
-        path.lineTo(124, 100);
-        path.lineTo(130, 94);
+
     }
 
     protected void onDraw(Canvas canvas) {
         canvas.drawColor(Color.TRANSPARENT);
         paint.setColor(Color.RED);
+        path.moveTo(this.getLeft(), this.getTop() + this.getHeight() / 2);
+        path.lineTo(this.getLeft() + this.getWidth() / 6, this.getTop() + this.getHeight() / 4 * 3);
+        path.lineTo(this.getLeft() + this.getWidth() / 6 * 2, this.getTop() + this.getHeight());
+        path.lineTo(this.getLeft() + this.getWidth() / 6 * 3, this.getTop() + this.getHeight() / 4
+                * 3);
+        path.lineTo(this.getLeft() + this.getWidth() / 6 * 4, this.getTop() + this.getHeight() / 2);
+        path.lineTo(this.getLeft() + this.getWidth() / 6 * 5, this.getTop() + this.getHeight() / 4);
+        path.lineTo(this.getLeft() + this.getWidth(), this.getTop());
         canvas.drawPath(path, paint);
         invalidate();
     }

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.kcb.library.view.buttonflat.ButtonFlat xmlns:buttonflat="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="54dp"
+    android:layout_weight="1"
+    android:text="bjgf"
+    buttonflat:rippleSpeed="18" />

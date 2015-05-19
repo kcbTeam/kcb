@@ -4,11 +4,14 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.TextView;
 
 import com.kcb.common.base.BaseActivity;
 import com.kcb.common.listener.DelayClickListener;
+import com.kcb.common.util.DialogUtil;
 import com.kcb.common.util.ToastUtil;
 import com.kcb.library.view.PaperButton;
 import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
@@ -69,8 +72,6 @@ public class CheckInActivity extends BaseActivity {
 
         @Override
         public void doClick(View v) {
-            // TODO request server
-
             loginProgressBar.setVisibility(View.VISIBLE);
             new Handler().postDelayed(new Runnable() {
                 @Override
@@ -81,9 +82,12 @@ public class CheckInActivity extends BaseActivity {
                                     + num2TextView.getText().toString()
                                     + num3TextView.getText().toString()
                                     + num4TextView.getText().toString());
-                    ToastUtil.toast(passwordString);
-                    HomeActivity.start(CheckInActivity.this);
-                    finish();
+                    if (TextUtils.isEmpty(passwordString))
+                        ToastUtil.toast("请输入四位数字");
+                    else {
+                        HomeActivity.start(CheckInActivity.this);
+                        finish();
+                    }
                 }
             }, 1000);
 
@@ -148,4 +152,16 @@ public class CheckInActivity extends BaseActivity {
             }
         }
     };
+
+    @Override
+    public void onBackPressed() {
+        DialogUtil.showNormalDialog(this, R.string.tip, R.string.if_giveup_checkin, R.string.sure,
+                new OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        finish();
+                    }
+                }, R.string.cancel, null);
+    }
 }

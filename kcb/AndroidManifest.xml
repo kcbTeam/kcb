@@ -61,6 +61,10 @@
             android:name="com.kcb.student.activity.TestResultActivity"
             android:screenOrientation="portrait" >
         </activity>
+         <activity
+            android:name="com.kcb.student.activity.LookTestResultActivity"
+            android:screenOrientation="portrait" >
+        </activity>
         <!-- student end -->
 
 

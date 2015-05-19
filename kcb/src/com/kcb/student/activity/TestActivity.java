@@ -3,7 +3,8 @@ package com.kcb.student.activity;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.graphics.Color;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.widget.GridLayoutManager;
@@ -19,7 +20,13 @@ import com.kcb.library.view.checkbox.CheckBox;
 import com.kcb.student.adapter.TestRecycleAdapter;
 import com.kcb.teacher.model.ChoiceQuestion;
 import com.kcbTeam.R;
-
+/**
+ * 
+ * @className: TestActivity
+ * @description: 
+ * @author: Tao Li
+ * @date: 2015-5-17 上午10:53:44
+ */
 public class TestActivity extends BaseFragmentActivity {
 
     private TextView timeTextView;
@@ -35,12 +42,14 @@ public class TestActivity extends BaseFragmentActivity {
     private CheckBox checkboxB;
     private CheckBox checkboxC;
     private CheckBox checkboxD;
+    private fiveCountDownTimer timeCountDown;
     private RecyclerView recyclerView;
     private TestRecycleAdapter mAdapter;
     private ChoiceQuestion mChoiceQuestion;
     private ChoiceQuestion mChoiceQuestion1;
     private ChoiceQuestion mChoiceQuestion2;
     private List<ChoiceQuestion> mListQuestion;
+
     private int currentPageIndex;
     private int questionNum = 3;
 
@@ -66,19 +75,19 @@ public class TestActivity extends BaseFragmentActivity {
         checkboxD = (CheckBox) findViewById(R.id.checkbox_d);
         preButton = (PaperButton) findViewById(R.id.button_previous);
         nextButton = (PaperButton) findViewById(R.id.button_next);
-        preButton.setColor(Color.parseColor("#808080"));
         preButton.setOnClickListener(this);
         nextButton.setOnClickListener(this);
         recyclerView = (RecyclerView) findViewById(R.id.my_recyclerview1);
         recyclerView.setLayoutManager(new GridLayoutManager(this, questionNum));
         mAdapter = new TestRecycleAdapter(questionNum);
         recyclerView.setAdapter(mAdapter);
+
     }
 
     // Set the countdown Timer,5 minutes
     public void setTimeCounterDown() {
         timeTextView = (TextView) findViewById(R.id.textview_timecounter);
-        fiveCountDownTimer timeCountDown = new fiveCountDownTimer(300000, 1000);
+        timeCountDown = new fiveCountDownTimer(300000, 1000);
         timeCountDown.start();
     }
 
@@ -117,6 +126,7 @@ public class TestActivity extends BaseFragmentActivity {
         setTimeCounterDown();
     }
 
+
     @Override
     public void onClick(View v) {
 
@@ -137,9 +147,6 @@ public class TestActivity extends BaseFragmentActivity {
         if (currentPageIndex > 0) {
             currentPageIndex--;
             mAdapter.setCurrentIndex(currentPageIndex);
-            if (currentPageIndex == 0) {
-                preButton.setColor(Color.parseColor("#808080"));
-            }
             if (currentPageIndex == questionNum - 1)
                 nextButton.setText("已完成");
             else
@@ -159,7 +166,6 @@ public class TestActivity extends BaseFragmentActivity {
                 nextButton.setText("已完成");
             else {
                 nextButton.setText("下一题");
-                preButton.setColor(Color.parseColor("#ffffff"));
             }
             preButton.setText("上一题");
             getCheckBoxsAnswer(currentPageIndex - 1);
@@ -208,14 +214,21 @@ public class TestActivity extends BaseFragmentActivity {
 
     protected class fiveCountDownTimer extends CountDownTimer {
 
+        private long millisUntilFinished;
+
         public fiveCountDownTimer(long millisInFuture, long countDownInterval) {
             super(millisInFuture, countDownInterval);
+        }
+
+        public long getMillisUntilFinished() {
+            return this.millisUntilFinished;
         }
 
         @Override
         public void onTick(long millisUntilFinished) {
             timeTextView.setText(millisUntilFinished / 60000 + ":" + millisUntilFinished % 60000
                     / 1000);
+            this.millisUntilFinished = millisUntilFinished;
         }
 
         @Override
@@ -228,5 +241,37 @@ public class TestActivity extends BaseFragmentActivity {
                         }
                     }, -1, null);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        DialogUtil.showNormalDialog(this, R.string.tip, R.string.if_giveup_answer, R.string.sure,
+                new OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        finish();
+                    }
+                }, R.string.cancel, null);
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        SharedPreferences sharedPref = getSharedPreferences("CounterTimes", MODE_PRIVATE);
+        long useFirst = sharedPref.getLong("CounterTimes", 0);
+        timeCountDown = new fiveCountDownTimer(useFirst, 1000);
+        timeCountDown.start();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        SharedPreferences sharedPref = getSharedPreferences("CounterTimes", MODE_PRIVATE);
+        long useFirst = sharedPref.getLong("CounterTimes", 0);
+        Editor mEditor = sharedPref.edit();
+        mEditor.putLong("CounterTimes", timeCountDown.getMillisUntilFinished());
+        mEditor.commit();
+        timeCountDown.cancel();
     }
 }

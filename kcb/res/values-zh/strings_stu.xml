@@ -11,6 +11,7 @@
     <!-- CheckinActivity Start -->
     <string name="checkin">课堂签到</string>
     <string name="tip_inputnum">请输入老师报出的签到数字</string>
+    <string name="if_giveup_checkin">是否放弃签到？</string>
     <string name="button_finish">完成</string>
     <string name="button_login">登录</string>
     <string name="hint_password">密码</string>
@@ -34,6 +35,7 @@
     <string name="pre_question">上一题</string>
     <string name="next_question">下一题</string>
     <string name="if_submit_answer">是否提交答案？</string>
+    <string name="if_giveup_answer">是否放弃答题？</string>
     <string name="to_submit_answer">请提交答案</string>
     <string name="end">结束!</string>
     <string name="tip">提醒</string>
@@ -53,7 +55,8 @@
     <string name="headertext">最新测试结果</string>
     <string name="checktest">去查看</string>
     <!-- TestResultActivity End -->
-    
+
+
     <!-- ModifyPasswordActivity Start -->
     <string name="goback">返回</string>
     <string name="setpassword">设置密码</string>

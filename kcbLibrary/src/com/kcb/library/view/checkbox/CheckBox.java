@@ -223,7 +223,6 @@ public class CheckBox extends CustomView {
 			Rect src = new Rect(40 * step, 0, (40 * step) + 40, 40);
 			Rect dst = new Rect(0, 0, this.getWidth() - 2, this.getHeight());
 			canvas.drawBitmap(sprite, src, dst, null);
-
 		}
 
 	}

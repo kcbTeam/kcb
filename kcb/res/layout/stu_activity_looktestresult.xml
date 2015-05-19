@@ -3,174 +3,165 @@
     xmlns:widget="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
     tools:context="${relativePackage}.${activityClass}"
     tools:ignore="contentDescription" >
 
-    <RelativeLayout
-        android:id="@+id/relativeLayout_header"
+    <LinearLayout
+        android:id="@+id/testresult_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/activity_header_shadow" >
+        android:background="@drawable/activity_header_shadow"
+        android:orientation="horizontal" >
+
+        <include layout="@layout/comm_back_button" />
 
         <TextView
-            android:id="@+id/textview_testtitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:text="@string/testbtn"
-            android:textSize="25dp" />
-
-        <TextView
-            android:id="@+id/textview_timecounter"
+            android:id="@+id/testresult_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/textview_testtitle"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="1dp"
-            android:gravity="bottom"
-            android:textSize="12dp" />
-    </RelativeLayout>
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/my_recyclerview1"
-        android:layout_width="match_parent"
-        android:layout_height="8dp"
-        android:layout_below="@id/relativeLayout_header"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp" />
+            android:text="@string/edittest" />
+    </LinearLayout>
 
     <TextView
-        android:id="@+id/textview_choice"
-        android:layout_width="match_parent"
+        android:id="@+id/textview_testresultchioce"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/my_recyclerview1"
+        android:layout_below="@id/testresult_layout"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="5dp"
         android:text="选择题"
         android:textSize="25dp" />
 
+    <RelativeLayout
+        android:layout_width="35dp"
+        android:layout_height="24dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@id/textview_testresultchioce"
+        android:layout_marginRight="16dp" >
+
+        <com.kcb.student.util.RedHookDraw
+            android:id="@+id/relativelayout_redhook"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible" />
+    </RelativeLayout>
+
     <TextView
-        android:id="@+id/textview_choice_question"
+        android:id="@+id/textview_choice_question1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/textview_choice"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textview_testresultchioce"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="5dp"
         android:textSize="30dp" />
 
     <RelativeLayout
-        android:id="@+id/relativelayout_one"
+        android:id="@+id/relativelayout_one1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textview_choice_question"
+        android:layout_below="@id/textview_choice_question1"
         android:layout_margin="16dp" >
 
         <TextView
-            android:id="@+id/textview_choice_a"
+            android:id="@+id/textview_choice_a1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="40dp" />
 
         <com.kcb.library.view.checkbox.CheckBox
-            android:id="@+id/checkbox_a"
+            android:id="@+id/checkbox_a1"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_alignParentRight="true"
-            android:layout_alignTop="@id/textview_choice_a"
+            android:layout_alignTop="@id/textview_choice_a1"
             android:background="#1E88E5"
             android:gravity="center" />
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/relativelayout_two"
+        android:id="@+id/relativelayout_two1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/relativelayout_one"
+        android:layout_below="@id/relativelayout_one1"
         android:layout_margin="16dp" >
 
         <TextView
-            android:id="@+id/textview_choice_b"
+            android:id="@+id/textview_choice_b1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="40dp" />
 
         <com.kcb.library.view.checkbox.CheckBox
-            android:id="@+id/checkbox_b"
+            android:id="@+id/checkbox_b1"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_alignParentRight="true"
-            android:layout_alignTop="@id/textview_choice_b"
+            android:layout_alignTop="@id/textview_choice_b1"
             android:background="#1E88E5"
             android:gravity="center" />
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/relativelayout_three"
+        android:id="@+id/relativelayout_three1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/relativelayout_two"
+        android:layout_below="@id/relativelayout_two1"
         android:layout_margin="16dp" >
 
         <TextView
-            android:id="@+id/textview_choice_c"
+            android:id="@+id/textview_choice_c1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="40dp" />
 
         <com.kcb.library.view.checkbox.CheckBox
-            android:id="@+id/checkbox_c"
+            android:id="@+id/checkbox_c1"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_alignParentRight="true"
-            android:layout_alignTop="@id/textview_choice_c"
+            android:layout_alignTop="@id/textview_choice_c1"
             android:background="#1E88E5"
             android:gravity="center" />
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/relativelayout_four"
+        android:id="@+id/relativelayout_four1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/relativelayout_three"
+        android:layout_below="@id/relativelayout_three1"
         android:layout_margin="16dp" >
 
         <TextView
-            android:id="@+id/textview_choice_d"
+            android:id="@+id/textview_choice_d1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="40dp" />
 
         <com.kcb.library.view.checkbox.CheckBox
-            android:id="@+id/checkbox_d"
+            android:id="@+id/checkbox_d1"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_alignParentRight="true"
-            android:layout_alignTop="@id/textview_choice_d"
+            android:layout_alignTop="@id/textview_choice_d1"
             android:background="#1E88E5"
             android:gravity="center" />
     </RelativeLayout>
 
-    <com.kcb.library.view.PaperButton
-        android:id="@+id/button_previous"
-        android:layout_width="118dp"
-        android:layout_height="56dp"
+    <LinearLayout
+        android:id="@+id/buttonflats1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginBottom="5dp"
-        android:layout_marginLeft="16dp"
-        widget:paper_text="@string/pre_question" />
+        android:measureWithLargestChild="true"
+        android:orientation="horizontal" >
+    </LinearLayout>
 
-    <com.kcb.library.view.PaperButton
-        android:id="@+id/button_next"
-        android:layout_width="118dp"
-        android:layout_height="56dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="5dp"
-        android:layout_marginRight="15dp"
-        widget:paper_text="@string/next_question" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_above="@id/buttonflats1"
+        android:background="@color/divider" />
 
 </RelativeLayout>
