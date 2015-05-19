@@ -7,40 +7,34 @@
     android:background="@color/activity_background"
     tools:ignore="contentDescription" >
 
-    <!-- TODO delete relativelayout -->
-
-    <RelativeLayout
-        android:id="@+id/title_buttonbar"
+    <TextView
+        android:id="@+id/textview_title"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:background="@drawable/activity_header_shadow" >
+        android:layout_height="wrap_content"
+        android:background="@drawable/activity_header_shadow"
+        android:gravity="center_vertical"
+        android:text="@string/edittest" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="@string/edittest" />
+    <ImageButton
+        android:id="@+id/delete_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/ic_action_delete" />
 
-        <ImageButton
-            android:id="@+id/delete_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:background="@drawable/ic_action_delete" />
-
-        <ImageButton
-            android:id="@+id/add_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toLeftOf="@id/delete_button"
-            android:background="@drawable/ic_action_user_add"
-            android:visibility="invisible" />
-    </RelativeLayout>
+    <ImageButton
+        android:id="@+id/add_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/delete_button"
+        android:background="@drawable/ic_action_user_add"
+        android:visibility="invisible" />
 
     <RelativeLayout
         android:id="@+id/fragment_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/title_buttonbar"
+        android:layout_below="@id/textview_title"
         android:layout_marginBottom="24dp"
         android:layout_marginLeft="24dp"
         android:layout_marginRight="24dp" >
@@ -221,25 +215,27 @@
             android:text="@string/select_hint" />
     </RelativeLayout>
 
-    <!-- TODO -->
-
-    <RelativeLayout
+    <LinearLayout
+        android:id="@+id/layout_buttons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginLeft="24dp"
-        android:layout_marginRight="24dp" >
+        android:orientation="horizontal"
+        android:padding="8dp" >
 
         <com.kcb.library.view.PaperButton
             android:id="@+id/pagerbutton_last"
-            style="@style/bottom_button"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_weight="1"
             widget:paper_text="@string/last_item" />
 
         <com.kcb.library.view.PaperButton
             android:id="@+id/pagerbutton_next"
-            style="@style/bottom_button"
-            android:layout_alignParentRight="true"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_weight="1"
             widget:paper_text="@string/next_item" />
-    </RelativeLayout>
+    </LinearLayout>
 
 </RelativeLayout>

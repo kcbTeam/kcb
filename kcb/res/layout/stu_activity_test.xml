@@ -34,6 +34,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@+id/layout_buttons"
         android:layout_below="@id/my_recyclerview1" >
 
         <TextView
@@ -152,26 +153,27 @@
         </RelativeLayout>
     </RelativeLayout>
 
-    <com.kcb.library.view.PaperButton
-        android:id="@+id/button_previous"
-        android:layout_width="100dp"
-        android:layout_height="56dp"
+    <LinearLayout
+        android:id="@+id/layout_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginBottom="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="5dp"
-        widget:paper_text="@string/pre_question" />
+        android:orientation="horizontal"
+        android:padding="8dp" >
 
-    <com.kcb.library.view.PaperButton
-        android:id="@+id/button_next"
-        android:layout_width="100dp"
-        android:layout_height="56dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="5dp"
-        widget:paper_text="@string/next_question" />
+        <com.kcb.library.view.PaperButton
+            android:id="@+id/button_previous"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_weight="1"
+            widget:paper_text="@string/pre_question" />
+
+        <com.kcb.library.view.PaperButton
+            android:id="@+id/button_next"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_weight="1"
+            widget:paper_text="@string/next_question" />
+    </LinearLayout>
 
 </RelativeLayout>
