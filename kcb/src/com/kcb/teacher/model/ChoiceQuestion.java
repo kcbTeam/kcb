@@ -9,7 +9,7 @@ import java.io.Serializable;
  * @author: ZQJ
  * @date: 2015年5月8日 上午10:08:21
  */
-public class ChoiceQuestion implements Serializable {
+public class ChoiceQuestion implements Serializable, Cloneable {
 
     private static final long serialVersionUID = 2L;
 
@@ -40,6 +40,50 @@ public class ChoiceQuestion implements Serializable {
         mOptionC = optionC;
         mOptionD = optionD;
         mCorrectId = correctOption;
+    }
+
+    /**
+     * 
+     * Constructor: ChoiceQuestion
+     * copy data from a ChoiceQuestion object, be careful that must copy the real data of those reference objects
+     */
+    public ChoiceQuestion(ChoiceQuestion choiceQuestion) {
+//        mCorrectId = choiceQuestion.mCorrectId;
+//        mOptionA = choiceQuestion.getOptionA();
+//        mOptionB = choiceQuestion.getOptionB();
+//        mOptionC = choiceQuestion.getOptionC();
+//        mOptionD = choiceQuestion.getOptionD();
+        mCorrectId =
+                new boolean[] {choiceQuestion.mCorrectId[0], choiceQuestion.mCorrectId[1],
+                        choiceQuestion.mCorrectId[2], choiceQuestion.mCorrectId[3]};
+        if (choiceQuestion.getOptionA().isString()) {
+            mOptionA = new TextContent(choiceQuestion.getOptionA().getContentString());
+        } else {
+            mOptionA = new TextContent(choiceQuestion.getOptionA().getContentBitmap());
+        }
+
+        if (choiceQuestion.getOptionB().isString()) {
+            mOptionB = new TextContent(choiceQuestion.getOptionB().getContentString());
+        } else {
+            mOptionB = new TextContent(choiceQuestion.getOptionB().getContentBitmap());
+        }
+        
+        if (choiceQuestion.getOptionC().isString()) {
+            mOptionC = new TextContent(choiceQuestion.getOptionC().getContentString());
+        } else {
+            mOptionC = new TextContent(choiceQuestion.getOptionC().getContentBitmap());
+        }
+        
+        if (choiceQuestion.getOptionD().isString()) {
+            mOptionD = new TextContent(choiceQuestion.getOptionD().getContentString());
+        } else {
+            mOptionD = new TextContent(choiceQuestion.getOptionD().getContentBitmap());
+        }
+        if (choiceQuestion.getQuestion().isString()) {
+            mQuestion = new TextContent(choiceQuestion.getQuestion().getContentString());
+        } else {
+            mQuestion = new TextContent(choiceQuestion.getQuestion().getContentBitmap());
+        }
     }
 
     public int getQuestionNum() {
@@ -150,6 +194,16 @@ public class ChoiceQuestion implements Serializable {
         }
 
         return tempString.substring(0, tempString.length() - 1);
+    }
+
+    public void copyFrom(ChoiceQuestion choiceQuestion) {
+        this.mCorrectId = choiceQuestion.getCorrectId().clone();
+        this.mOptionA.copy(choiceQuestion.getOptionA());
+        this.mOptionB.copy(choiceQuestion.getOptionB());
+        this.mOptionC.copy(choiceQuestion.getOptionC());
+        this.mOptionD.copy(choiceQuestion.getOptionD());
+        this.mQuestion.copy(choiceQuestion.getQuestion());
+
     }
 
 }
