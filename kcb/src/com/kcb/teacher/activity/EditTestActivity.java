@@ -209,7 +209,6 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
                 } else {
                     clickDelete();
                 }
-
                 break;
             case R.id.pagerbutton_last:
                 clickLast();
@@ -227,6 +226,12 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
                             }
                         }, R.string.cancel, null);
                 break;
+            default:
+                break;
+        }
+        if (v.getBackground() != questionOriginalDrawable
+                && v.getBackground() != optionOriginalDrawable) return;
+        switch (v.getId()) {
             case R.id.edittext_question:
                 mPositionIndex = IndexOfQuestion;
                 makeEditDialog(questionEditText.getText().toString(),
