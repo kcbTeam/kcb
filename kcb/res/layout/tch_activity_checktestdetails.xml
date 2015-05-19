@@ -228,23 +228,27 @@
         </RelativeLayout>
     </RelativeLayout>
 
-    <RelativeLayout
+    <LinearLayout
+        android:id="@+id/layout_buttons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginLeft="24dp"
-        android:layout_marginRight="24dp" >
+        android:orientation="horizontal"
+        android:padding="8dp" >
 
         <com.kcb.library.view.PaperButton
             android:id="@+id/pagerbutton_last"
-            style="@style/bottom_button"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_weight="1"
             widget:paper_text="@string/last_item" />
 
         <com.kcb.library.view.PaperButton
             android:id="@+id/pagerbutton_next"
-            style="@style/bottom_button"
-            android:layout_alignParentRight="true"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_weight="1"
             widget:paper_text="@string/next_item" />
-    </RelativeLayout>
+    </LinearLayout>
 
 </RelativeLayout>

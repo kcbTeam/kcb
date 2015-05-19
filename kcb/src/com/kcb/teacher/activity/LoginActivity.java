@@ -89,7 +89,7 @@ public class LoginActivity extends BaseActivity {
                                             @Override
                                             public void run() {
                                                 KAccount account =
-                                                        new KAccount(KAccount.TYPE_STU, id,
+                                                        new KAccount(KAccount.TYPE_TCH, id,
                                                                 response);
                                                 KAccount.saveAccount(account);
                                                 HomeActivity.start(LoginActivity.this);
