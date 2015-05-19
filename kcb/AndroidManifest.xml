@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="8"
+        android:minSdkVersion="14"
         android:targetSdkVersion="21" />
 
     <!-- uses permission start -->
@@ -124,6 +124,7 @@
             android:name="com.kcb.teacher.activity.CutActivity"
             android:screenOrientation="portrait" >
         </activity>
+        
         <!-- teacher end -->
     </application>
 

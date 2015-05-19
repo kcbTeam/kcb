@@ -95,6 +95,7 @@
     <string name="dialog_title_add">添加</string>
     <string name="add_msg">是否要再加一道题？</string>
     <!-- EditTestActivity End -->
+
 	
 	<!-- Cut Picture Activity Strat -->
 	<string name="cut_title">裁剪图片</string>
@@ -103,6 +104,12 @@
 	<string name="preview">预览</string>
 	<!-- Cut Picture Activity End -->
 	
+
+
+    <!-- EditTestFirstActivity Start -->
+    <string name="testname">本次测试名</string>
+    <!-- EditTestFirstActivity Start -->
+
 
     <!-- Submit Activity Start -->
     <string name="Go_modify">去修改</string>
@@ -131,4 +138,6 @@
     <string name="classrate_look">>></string>
     <string name="finish">完成</string>
 
+    
+    
 </resources>
