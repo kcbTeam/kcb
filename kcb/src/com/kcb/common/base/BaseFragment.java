@@ -19,4 +19,6 @@ public abstract class BaseFragment extends Fragment implements OnClickListener {
 
     @Override
     public void onClick(View v) {}
+
+
 }

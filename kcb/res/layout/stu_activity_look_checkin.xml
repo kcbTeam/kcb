@@ -4,43 +4,39 @@
     android:layout_height="match_parent"
     android:background="@color/activity_background" >
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/activity_header_shadow" >
+        android:background="@drawable/activity_header_shadow"
+        android:orientation="horizontal" >
 
-        <com.kcb.library.view.buttonflat.ButtonFlat
-            android:id="@+id/button_back"
-            style="@style/common_top_button" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="@string/back" />
-        </com.kcb.library.view.buttonflat.ButtonFlat>
+        <include layout="@layout/comm_back_button" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@id/button_back"
+            android:layout_gravity="center_vertical"
             android:text="@string/signresult" />
-    </RelativeLayout>
+    </LinearLayout>
 
     <TextView
         android:id="@+id/view1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/layout"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
         android:singleLine="false"
         android:text="@string/statistics" />
 
     <com.github.mikephil.charting.charts.PieChart
         android:id="@+id/chart"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/view1" />
+        android:layout_width="wrap_content"
+        android:layout_height="300dp"
+        android:layout_below="@id/view1"
+        android:layout_marginTop="50dp" />
 
 </RelativeLayout>

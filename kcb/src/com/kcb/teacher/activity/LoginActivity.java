@@ -1,7 +1,5 @@
 package com.kcb.teacher.activity;
 
-import org.json.JSONObject;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,14 +11,16 @@ import com.android.volley.Request.Method;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.kcb.common.activity.StartActivity;
 import com.kcb.common.application.KAccount;
 import com.kcb.common.base.BaseActivity;
 import com.kcb.common.listener.DelayClickListener;
 import com.kcb.common.server.RequestUtil;
+import com.kcb.common.server.ResponseUtil;
 import com.kcb.common.server.UrlUtil;
 import com.kcb.common.util.AnimationUtil;
+import com.kcb.common.util.ToastUtil;
 import com.kcb.library.view.FloatingEditText;
 import com.kcb.library.view.PaperButton;
 import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
@@ -67,7 +67,7 @@ public class LoginActivity extends BaseActivity {
 
         @Override
         public void doClick(View v) {
-            final String id = idEditText.getText().toString().trim();
+            final String id = idEditText.getText().toString().trim().replace(" ", "");
             final String password = passwordEditText.getText().toString();
             if (TextUtils.isEmpty(id)) {
                 idEditText.requestFocus();
@@ -80,32 +80,33 @@ public class LoginActivity extends BaseActivity {
                     return;
                 }
                 loginProgressBar.setVisibility(View.VISIBLE);
-                new Handler().postDelayed(new Runnable() {
+                StringRequest request =
+                        new StringRequest(Method.POST, UrlUtil.getTchLoginUrl(id, password),
+                                new Listener<String>() {
+                                    public void onResponse(final String response) {
+                                        new Handler().postDelayed(new Runnable() {
 
-                    @Override
-                    public void run() {
-                        // TODO save teacher's name after login success
-                        KAccount account = new KAccount(KAccount.TYPE_TCH, id, "name");
-                        KAccount.saveAccount(account);
-                        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                        startActivity(intent);
-                        finish();
-                    }
-                }, 1000);
-
-                // TODO request server
-                JsonObjectRequest request =
-                        new JsonObjectRequest(Method.POST, UrlUtil.getStuLoginUrl(id, password),
-                                "", new Listener<JSONObject>() {
-
-                                    @Override
-                                    public void onResponse(JSONObject response) {}
+                                            @Override
+                                            public void run() {
+                                                KAccount account =
+                                                        new KAccount(KAccount.TYPE_STU, id,
+                                                                response);
+                                                KAccount.saveAccount(account);
+                                                HomeActivity.start(LoginActivity.this);
+                                                finish();
+                                            }
+                                        }, 500);
+                                    };
                                 }, new ErrorListener() {
-
-                                    @Override
                                     public void onErrorResponse(VolleyError error) {
-                                        // loginProgressBar.hide(LoginActivity.this);
-                                    }
+                                        loginProgressBar.hide(LoginActivity.this);
+                                        if (null != error.networkResponse
+                                                && error.networkResponse.statusCode == 400) {
+                                            ToastUtil.toast(R.string.id_password_error);
+                                        } else {
+                                            ResponseUtil.toastError(error);
+                                        }
+                                    };
                                 });
                 RequestUtil.getInstance().addToRequestQueue(request, TAG);
             }

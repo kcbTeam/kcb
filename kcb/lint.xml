@@ -8,6 +8,7 @@
     <issue id="InflateParams">
         <ignore path="src/com/kcb/student/activity/HomeActivity.java" />
         <ignore path="src/com/kcb/student/activity/TestResultActivity.java" />
+        <ignore path="src/com/kcb/student/adapter/TestResultAdapter.java" />
     </issue>
     <issue id="ObsoleteLayoutParam">
         <ignore path="res/layout/stu_activity_modifypassword.xml" />
@@ -23,6 +24,7 @@
         <ignore path="res/layout/stu_activity_submit.xml" />
         <ignore path="res/layout/stu_activity_testresult.xml" />
         <ignore path="res/layout/stu_fragment_looktest.xml" />
+        <ignore path="res/layout/stu_menu_setting.xml" />
     </issue>
     <issue id="SpUsage">
         <ignore path="res/layout/stu_activity_submit.xml" />

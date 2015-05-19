@@ -14,6 +14,7 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.Highlight;
+import com.github.mikephil.charting.utils.PercentFormatter;
 import com.kcb.common.base.BaseActivity;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcbTeam.R;
@@ -25,7 +26,7 @@ import com.kcbTeam.R;
  * @author: Ding
  * @date: 2015年5月5日 下午3:45:54
  */
-public class CheckInResultActivity extends BaseActivity implements OnChartValueSelectedListener {
+public class LookCheckInActivity extends BaseActivity implements OnChartValueSelectedListener {
 
     private ButtonFlat backbutton;
     private PieChart mChart;
@@ -111,6 +112,9 @@ public class CheckInResultActivity extends BaseActivity implements OnChartValueS
         DisplayMetrics metrics = getResources().getDisplayMetrics();
         float px = 5 * (metrics.densityDpi / 160f);
         pieDataSet.setSelectionShift(px);
+        pieDataSet.setValueTextSize(14f);
+        pieDataSet.setValueTextColor(Color.BLUE);
+        pieDataSet.setValueFormatter(new PercentFormatter());
         PieData pieData = new PieData(xValues, pieDataSet);
         return pieData;
     }

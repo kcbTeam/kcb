@@ -11,7 +11,7 @@ import com.kcb.common.base.BaseFragment;
 import com.kcb.common.listener.DelayClickListener;
 import com.kcb.library.view.PaperButton;
 import com.kcb.student.activity.CheckInActivity;
-import com.kcb.student.activity.CheckInResultActivity;
+import com.kcb.student.activity.LookCheckInActivity;
 import com.kcbTeam.R;
 
 /**
@@ -58,7 +58,7 @@ public class CheckInFragment extends BaseFragment {
             if (v == startCheckInButton) {
                 intent = new Intent(getActivity(), CheckInActivity.class);
             } else if (v == lookCheckInButton) {
-                intent = new Intent(getActivity(), CheckInResultActivity.class);
+                intent = new Intent(getActivity(), LookCheckInActivity.class);
             }
             startActivity(intent);
         }

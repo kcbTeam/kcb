@@ -23,6 +23,22 @@ theme attribute (in the form
 containing a value of this type.
          */
         public static int animate=0x7f01001f;
+        /** <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static int aspectRatioX=0x7f010034;
+        /** <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static int aspectRatioY=0x7f010035;
         /**  in switche's view indicate state of view 
          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
 <p>This may also be a reference to a resource (in the form
@@ -51,6 +67,14 @@ theme attribute (in the form
 containing a value of this type.
          */
         public static int clickAfterRipple=0x7f010021;
+        /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static int fixAspectRatio=0x7f010033;
         /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
 <p>This may also be a reference to a resource (in the form
@@ -106,6 +130,18 @@ theme attribute (in the form
 containing a value of this type.
          */
         public static int floating_edit_text_underline_highlighted_height=0x7f010005;
+        /** <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>on</code></td><td>2</td><td></td></tr>
+<tr><td><code>onTouch</code></td><td>1</td><td></td></tr>
+<tr><td><code>off</code></td><td>0</td><td></td></tr>
+</table>
+         */
+        public static int guidelines=0x7f010032;
         /**  in float button indicate icon resource 
          <p>Must be an integer value, such as "<code>100</code>".
 <p>This may also be a reference to a resource (in the form
@@ -126,6 +162,10 @@ theme attribute (in the form
 containing a value of this type.
          */
         public static int iconSize=0x7f01001e;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static int imageResource=0x7f010036;
         /**  in progress view indicate max value of progress 
          <p>Must be an integer value, such as "<code>100</code>".
 <p>This may also be a reference to a resource (in the form
@@ -454,26 +494,27 @@ containing a value of this type.
         public static int spb_default_reversed=0x7f0a0000;
     }
     public static final class color {
+        public static int black_translucent=0x7f050008;
         /**  FloatingEditText Default 
          */
-        public static int floating_edit_text_color=0x7f05000b;
-        public static int floating_edit_text_error_color=0x7f05000d;
-        public static int floating_edit_text_highlighted_color=0x7f05000c;
+        public static int floating_edit_text_color=0x7f05000c;
+        public static int floating_edit_text_error_color=0x7f05000e;
+        public static int floating_edit_text_highlighted_color=0x7f05000d;
         public static int gplus_color_1=0x7f050001;
         public static int gplus_color_2=0x7f050002;
         public static int gplus_color_3=0x7f050003;
         public static int gplus_color_4=0x7f050004;
         public static int material_dialog_thumbColor=0x7f050000;
-        public static int paper_button_color=0x7f050009;
-        public static int paper_button_shadow_color=0x7f05000a;
-        public static int paper_text_color=0x7f050008;
+        public static int paper_button_color=0x7f05000a;
+        public static int paper_button_shadow_color=0x7f05000b;
+        public static int paper_text_color=0x7f050009;
         public static int radio_checked_color=0x7f050007;
         /**  RadioButton Default 
          */
         public static int radio_color=0x7f050006;
         /**  SmoothProgressBar 
          */
-        public static int spb_default_color=0x7f05000e;
+        public static int spb_default_color=0x7f05000f;
         public static int thumbColor=0x7f050005;
     }
     public static final class dimen {
@@ -499,21 +540,28 @@ containing a value of this type.
         public static int background_checkbox=0x7f020000;
         public static int background_checkbox_check=0x7f020001;
         public static int background_checkbox_uncheck=0x7f020002;
-        public static int background_transparent=0x7f020003;
-        public static int dialog_background=0x7f020004;
-        public static int float_button1_shadowp=0x7f020005;
-        public static int float_button_shadow1=0x7f020006;
-        public static int ic_launcher=0x7f020007;
-        public static int ic_reloj_max=0x7f020008;
-        public static int sprite_check=0x7f020009;
+        public static int background_switch_ball_uncheck=0x7f020003;
+        public static int background_transparent=0x7f020004;
+        public static int dialog_background=0x7f020005;
+        public static int float_button1_shadowp=0x7f020006;
+        public static int float_button_shadow1=0x7f020007;
+        public static int ic_launcher=0x7f020008;
+        public static int ic_reloj_max=0x7f020009;
+        public static int sprite_check=0x7f02000a;
     }
     public static final class id {
-        public static int background=0x7f040005;
-        public static int background_content=0x7f040006;
-        public static int content=0x7f040008;
-        public static int foreground=0x7f040007;
-        public static int parallax_scroll_widget=0x7f040004;
-        public static int shape_bacground=0x7f040009;
+        public static int CropOverlayView=0x7f040008;
+        public static int ImageView_image=0x7f040007;
+        public static int background=0x7f04000b;
+        public static int background_content=0x7f04000c;
+        public static int content=0x7f04000e;
+        public static int foreground=0x7f04000d;
+        public static int number_indicator_spinner_content=0x7f040009;
+        public static int off=0x7f040006;
+        public static int on=0x7f040004;
+        public static int onTouch=0x7f040005;
+        public static int parallax_scroll_widget=0x7f04000a;
+        public static int shape_bacground=0x7f04000f;
         public static int spb_interpolator_accelerate=0x7f040000;
         public static int spb_interpolator_acceleratedecelerate=0x7f040002;
         public static int spb_interpolator_decelerate=0x7f040003;
@@ -524,7 +572,9 @@ containing a value of this type.
         public static int spb_default_sections_count=0x7f080000;
     }
     public static final class layout {
-        public static int view_parallaxscroll=0x7f030000;
+        public static int crop_image_view=0x7f030000;
+        public static int tch_number_indicator_spinner=0x7f030001;
+        public static int view_parallaxscroll=0x7f030002;
     }
     public static final class string {
         public static int app_name=0x7f090001;
@@ -533,6 +583,18 @@ containing a value of this type.
         public static int sure=0x7f090002;
     }
     public static final class style {
+        /** 
+        Base application theme for API 11+. This theme completely replaces
+        AppBaseTheme from res/values/styles.xml on API 11+ devices.
+    
+ API 11 theme customizations can go here. 
+
+        Base application theme for API 14+. This theme completely replaces
+        AppBaseTheme from BOTH res/values/styles.xml and
+        res/values-v11/styles.xml on API 14+ devices.
+    
+ API 14 theme customizations can go here. 
+         */
         public static int AppBaseTheme=0x7f0b0000;
         /**  Application theme. 
          */
@@ -542,6 +604,98 @@ containing a value of this type.
         public static int SmoothProgressBar=0x7f0b0002;
     }
     public static final class styleable {
+        /** Attributes that can be used with a CropImageView.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #CropImageView_aspectRatioX com.kcbTeam.kcblibrary:aspectRatioX}</code></td><td></td></tr>
+           <tr><td><code>{@link #CropImageView_aspectRatioY com.kcbTeam.kcblibrary:aspectRatioY}</code></td><td></td></tr>
+           <tr><td><code>{@link #CropImageView_fixAspectRatio com.kcbTeam.kcblibrary:fixAspectRatio}</code></td><td></td></tr>
+           <tr><td><code>{@link #CropImageView_guidelines com.kcbTeam.kcblibrary:guidelines}</code></td><td></td></tr>
+           <tr><td><code>{@link #CropImageView_imageResource com.kcbTeam.kcblibrary:imageResource}</code></td><td></td></tr>
+           </table>
+           @see #CropImageView_aspectRatioX
+           @see #CropImageView_aspectRatioY
+           @see #CropImageView_fixAspectRatio
+           @see #CropImageView_guidelines
+           @see #CropImageView_imageResource
+         */
+        public static final int[] CropImageView = {
+            0x7f010032, 0x7f010033, 0x7f010034, 0x7f010035,
+            0x7f010036
+        };
+        /**
+          <p>This symbol is the offset where the {@link com.kcbTeam.kcblibrary.R.attr#aspectRatioX}
+          attribute's value can be found in the {@link #CropImageView} array.
+
+
+          <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.kcbTeam.kcblibrary:aspectRatioX
+        */
+        public static final int CropImageView_aspectRatioX = 2;
+        /**
+          <p>This symbol is the offset where the {@link com.kcbTeam.kcblibrary.R.attr#aspectRatioY}
+          attribute's value can be found in the {@link #CropImageView} array.
+
+
+          <p>Must be an integer value, such as "<code>100</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.kcbTeam.kcblibrary:aspectRatioY
+        */
+        public static final int CropImageView_aspectRatioY = 3;
+        /**
+          <p>This symbol is the offset where the {@link com.kcbTeam.kcblibrary.R.attr#fixAspectRatio}
+          attribute's value can be found in the {@link #CropImageView} array.
+
+
+          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.kcbTeam.kcblibrary:fixAspectRatio
+        */
+        public static final int CropImageView_fixAspectRatio = 1;
+        /**
+          <p>This symbol is the offset where the {@link com.kcbTeam.kcblibrary.R.attr#guidelines}
+          attribute's value can be found in the {@link #CropImageView} array.
+
+
+          <p>Must be one of the following constant values.</p>
+<table>
+<colgroup align="left" />
+<colgroup align="left" />
+<colgroup align="left" />
+<tr><th>Constant</th><th>Value</th><th>Description</th></tr>
+<tr><td><code>on</code></td><td>2</td><td></td></tr>
+<tr><td><code>onTouch</code></td><td>1</td><td></td></tr>
+<tr><td><code>off</code></td><td>0</td><td></td></tr>
+</table>
+          @attr name com.kcbTeam.kcblibrary:guidelines
+        */
+        public static final int CropImageView_guidelines = 0;
+        /**
+          <p>This symbol is the offset where the {@link com.kcbTeam.kcblibrary.R.attr#imageResource}
+          attribute's value can be found in the {@link #CropImageView} array.
+
+
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          @attr name com.kcbTeam.kcblibrary:imageResource
+        */
+        public static final int CropImageView_imageResource = 4;
         /**  ButtonFlat Attribute 
            <p>Includes the following attributes:</p>
            <table>

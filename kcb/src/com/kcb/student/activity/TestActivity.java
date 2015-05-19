@@ -19,6 +19,7 @@ import com.kcb.library.view.PaperButton;
 import com.kcb.library.view.checkbox.CheckBox;
 import com.kcb.student.adapter.TestRecycleAdapter;
 import com.kcb.teacher.model.ChoiceQuestion;
+import com.kcb.teacher.model.TextContent;
 import com.kcbTeam.R;
 /**
  * 
@@ -57,6 +58,7 @@ public class TestActivity extends BaseFragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.stu_activity_test);
+
         initView();
         initData();
     }
@@ -93,26 +95,26 @@ public class TestActivity extends BaseFragmentActivity {
 
     public void getTestContentFromNet() {
         mChoiceQuestion.setQuestionNum(1);
-        mChoiceQuestion.setQuestion("这是题目显示区域1");
-        mChoiceQuestion.setOptionA("答案1");
-        mChoiceQuestion.setOptionB("答案2");
-        mChoiceQuestion.setOptionC("答案3");
-        mChoiceQuestion.setOptionD("答案4");
+        mChoiceQuestion.setQuestion(new TextContent("这是题目显示区域1"));
+        mChoiceQuestion.setOptionA(new TextContent("答案1"));
+        mChoiceQuestion.setOptionB(new TextContent("答案2"));
+        mChoiceQuestion.setOptionC(new TextContent("答案3"));
+        mChoiceQuestion.setOptionD(new TextContent("答案4"));
         mListQuestion = new ArrayList<ChoiceQuestion>();
         mListQuestion.add(mChoiceQuestion);
         mChoiceQuestion1.setQuestionNum(2);
-        mChoiceQuestion1.setQuestion("这是题目显示区域2");
-        mChoiceQuestion1.setOptionA("答案1");
-        mChoiceQuestion1.setOptionB("答案2");
-        mChoiceQuestion1.setOptionC("答案3");
-        mChoiceQuestion1.setOptionD("答案4");
+        mChoiceQuestion1.setQuestion(new TextContent("这是题目显示区域2"));
+        mChoiceQuestion1.setOptionA(new TextContent("答案1"));
+        mChoiceQuestion1.setOptionB(new TextContent("答案2"));
+        mChoiceQuestion1.setOptionC(new TextContent("答案3"));
+        mChoiceQuestion1.setOptionD(new TextContent("答案4"));
         mListQuestion.add(mChoiceQuestion1);
         mChoiceQuestion2.setQuestionNum(3);
-        mChoiceQuestion2.setQuestion("这是题目显示区域3");
-        mChoiceQuestion2.setOptionA("答案1");
-        mChoiceQuestion2.setOptionB("答案2");
-        mChoiceQuestion2.setOptionC("答案3");
-        mChoiceQuestion2.setOptionD("答案4");
+        mChoiceQuestion2.setQuestion(new TextContent("这是题目显示区域3"));
+        mChoiceQuestion2.setOptionA(new TextContent("答案1"));
+        mChoiceQuestion2.setOptionB(new TextContent("答案2"));
+        mChoiceQuestion2.setOptionC(new TextContent("答案3"));
+        mChoiceQuestion2.setOptionD(new TextContent("答案4"));
         mListQuestion.add(mChoiceQuestion2);
     }
 
@@ -129,7 +131,6 @@ public class TestActivity extends BaseFragmentActivity {
 
     @Override
     public void onClick(View v) {
-
         switch (v.getId()) {
             case R.id.button_previous:
                 clickPreButton();
@@ -140,17 +141,17 @@ public class TestActivity extends BaseFragmentActivity {
             default:
                 break;
         }
-
     }
 
     public void clickPreButton() {
         if (currentPageIndex > 0) {
             currentPageIndex--;
             mAdapter.setCurrentIndex(currentPageIndex);
-            if (currentPageIndex == questionNum - 1)
+            if (currentPageIndex == questionNum - 1) {
                 nextButton.setText("已完成");
-            else
+            } else {
                 nextButton.setText("下一题");
+            }
             getCheckBoxsAnswer(currentPageIndex + 1);
             showCurrentQuestion(currentPageIndex);
             setCheckBoxsAnswer(currentPageIndex);
@@ -158,7 +159,6 @@ public class TestActivity extends BaseFragmentActivity {
     }
 
     public void clickNextButton() {
-
         if (currentPageIndex < questionNum - 1) {
             currentPageIndex++;
             mAdapter.setCurrentIndex(currentPageIndex);
@@ -181,16 +181,15 @@ public class TestActivity extends BaseFragmentActivity {
                         }
                     }, R.string.cancel, null);
         }
-
     }
 
     public void showCurrentQuestion(int position) {
         choiceTextView.setText("选择题" + mListQuestion.get(position).getQuestionNum());
-        questionTextView.setText(mListQuestion.get(position).getQuestion());
-        answerATextView.setText(mListQuestion.get(position).getOptionA());
-        answerBTextView.setText(mListQuestion.get(position).getOptionB());
-        answerCTextView.setText(mListQuestion.get(position).getOptionC());
-        answerDTextView.setText(mListQuestion.get(position).getOptionD());
+        questionTextView.setText(mListQuestion.get(position).getQuestion().getContentString());
+        answerATextView.setText(mListQuestion.get(position).getOptionA().getContentString());
+        answerBTextView.setText(mListQuestion.get(position).getOptionB().getContentString());
+        answerCTextView.setText(mListQuestion.get(position).getOptionC().getContentString());
+        answerDTextView.setText(mListQuestion.get(position).getOptionD().getContentString());
     }
 
     public void getCheckBoxsAnswer(int position) {

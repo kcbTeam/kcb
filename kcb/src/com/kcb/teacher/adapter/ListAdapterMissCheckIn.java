@@ -57,7 +57,8 @@ public class ListAdapterMissCheckIn extends BaseAdapter {
 
         TextView checkinDetail = (TextView) view.findViewById(R.id.textview_checkin_detail);
         checkinDetail.setText(String.format(FORMAT_CHECKIN_DETAIL, mList.get(position)
-                .getMissTimes(), mList.get(position).getCheckInTimes()));
+                .getTotalCheckInTimes() - mList.get(position).getCheckInTimes(), mList
+                .get(position).getTotalCheckInTimes()));
         return view;
     }
 }

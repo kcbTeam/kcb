@@ -35,7 +35,7 @@ public class LookTestResultActivity extends BaseActivity {
     private CheckBox checkboxC;
     private CheckBox checkboxD;
     private int numQuestion = 3;
-    RedHookDraw layout;
+    private RedHookDraw layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,8 +68,6 @@ public class LookTestResultActivity extends BaseActivity {
         linearLayout.addView(buFlat2);
         linearLayout.addView(buFlat3);
         linearLayout.addView(buFlat4);
-//        layout = (RedHookDraw) findViewById(R.id.relativelayout_redhook);
-//        layout.setVisibility(View.VISIBLE);
     }
 
     @Override

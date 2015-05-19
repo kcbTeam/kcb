@@ -7,6 +7,7 @@
     <color name="blue">#0000ff</color>
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
+    
 
     <!-- common start -->
     <color name="activity_background">#fff</color>
@@ -19,7 +20,8 @@
     
     <!-- tch submit test activity start -->
     <color name="questionItem">#4777</color>
+    <color name="half_gray">#5777</color>
     <!-- tch submit test activity end -->
     
-
+    
 </resources>

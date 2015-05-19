@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/activity_background" >
+
+    <LinearLayout
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/activity_header_shadow"
+        android:orientation="horizontal" >
+
+        <include layout="@layout/comm_back_button" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/checktest" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/title"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp" >
+
+        <com.kcb.library.view.FloatingEditText
+            android:id="@+id/edittext_search"
+            style="@style/login_edittext"
+            android:layout_marginTop="5dp"
+            android:hint="@string/hint_checktest_search" />
+
+        <TextView
+            android:id="@+id/textview_testinfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/edittext_search"
+            android:layout_marginTop="5dp"
+            android:text="@string/testinfo" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/textview_testinfo"
+            android:layout_marginLeft="110dp"
+            android:layout_toRightOf="@id/textview_testinfo"
+            android:text="@string/totalQuestionNum" />
+
+        <ListView
+            android:id="@+id/listview_test"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textview_testinfo"
+            android:layout_marginTop="5dp"
+            android:cacheColorHint="#0fff"
+            android:listSelector="#00000000"
+            android:scrollbarSize="2dp"
+            android:scrollbarThumbVertical="@color/material_dialog_thumbColor" >
+        </ListView>
+    </RelativeLayout>
+
+</RelativeLayout>

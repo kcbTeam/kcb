@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ProgressBar;
@@ -284,5 +285,22 @@ public class StartCheckInActivity extends BaseActivity {
             }
         }
     };
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+
+            DialogUtil.showNormalDialog(this, R.string.giveupsign, R.string.giveup_sign_tip,
+                    R.string.sure, new OnClickListener() {
+
+                        @Override
+                        public void onClick(View v) {
+                            finish();
+                        }
+                    }, R.string.cancel, null);
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 
 }

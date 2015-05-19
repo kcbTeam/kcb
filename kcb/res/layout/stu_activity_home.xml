@@ -9,8 +9,9 @@
         android:id="@+id/textview_username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/app_name"
-        android:background="@drawable/activity_header_shadow" />
+        android:background="@drawable/activity_header_shadow"
+        android:gravity="center_vertical"
+        android:paddingLeft="16dp" />
 
     <com.kcb.library.view.buttonflat.ButtonFlat
         android:id="@+id/button_setting"
@@ -24,14 +25,14 @@
         android:name="com.kcb.student.fragment.CheckInFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/button_setting" />
+        android:layout_below="@id/textview_username" />
 
     <fragment
         android:id="@+id/fragment_test"
         android:name="com.kcb.student.fragment.TestFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/button_setting" />
+        android:layout_below="@id/textview_username" />
 
     <LinearLayout
         android:id="@+id/buttonflats"

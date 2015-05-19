@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:buttonflat="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginLeft="24dp"
@@ -8,27 +9,46 @@
     <TextView
         android:id="@+id/textview_studentname"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:textSize="17dp" />
 
     <TextView
         android:id="@+id/textview_studentid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="50dp" />
+        android:layout_below="@id/textview_studentname" />
 
     <TextView
         android:id="@+id/textview_checkinRate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="180dp" />
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="115dp" />
 
     <TextView
         android:id="@+id/textview_correctRate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="270dp" />
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="220dp" />
+
+    <com.kcb.library.view.buttonflat.ButtonFlat
+        android:id="@+id/button_details"
+        android:layout_width="24dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/textview_correctrate"
+        buttonflat:rippleSpeed="6" >
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_centerInParent="true"
+            android:src="@drawable/ic_action_next" />
+    </com.kcb.library.view.buttonflat.ButtonFlat>
 
 </RelativeLayout>

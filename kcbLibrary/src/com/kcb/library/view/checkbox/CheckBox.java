@@ -1,5 +1,4 @@
 package com.kcb.library.view.checkbox;
-import com.kcbTeam.kcblibrary.R;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -14,6 +13,8 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.RelativeLayout;
+
+import com.kcbTeam.kcblibrary.R;
 
 public class CheckBox extends CustomView {
 
@@ -236,3 +237,7 @@ public class CheckBox extends CustomView {
 	}
 
 }
+
+
+
+
