@@ -33,6 +33,12 @@ public class TextContent implements Serializable {
         mContentBitmap = bitmapContent;
         isString = false;
     }
+    
+    public TextContent(TextContent textContent){
+        isString = textContent.isString;
+        mContentString = textContent.mContentString;
+        mContentBitmap = textContent.mContentBitmap;
+    }
 
     public boolean isString() {
         return isString;
@@ -70,6 +76,12 @@ public class TextContent implements Serializable {
             }
         }
         return false;
+    }
+    
+    public void copy(TextContent textContent){
+        mContentBitmap = textContent.mContentBitmap;
+        mContentString = textContent.mContentString;
+        isString = textContent.isString;
     }
 
 

@@ -9,7 +9,9 @@ import java.util.List;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -50,6 +52,7 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
 
     private int mCurrentPosition;
     private ChoiceQuestion mNextObj;
+    private ChoiceQuestion mCurrentContent;
     private List<ChoiceQuestion> mQuestionList;
 
     private int MaxFragmentNum = 3;
@@ -74,6 +77,10 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
     private final int IndexOfB = 3;
     private final int IndexOfC = 4;
     private final int IndexOfD = 5;
+    private int mLongClickFlag;
+
+    Drawable questionOriginalDrawable;
+    Drawable optionOriginalDrawable;
 
     private int mPositionIndex = IndexOfQuestion;
     public final static String COURSE_TEST_KEY = "current_course_key";
@@ -114,23 +121,31 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
 
         optionAEditText = (EditText) findViewById(R.id.edittext_A);
         optionAEditText.setOnClickListener(this);
+        optionAEditText.setOnLongClickListener(this);
+
         optionBEditText = (EditText) findViewById(R.id.edittext_B);
         optionBEditText.setOnClickListener(this);
+        optionBEditText.setOnLongClickListener(this);
+
         optionCEditText = (EditText) findViewById(R.id.edittext_C);
         optionCEditText.setOnClickListener(this);
+        optionCEditText.setOnLongClickListener(this);
+
         optionDEditText = (EditText) findViewById(R.id.edittext_D);
         optionDEditText.setOnClickListener(this);
+        optionDEditText.setOnLongClickListener(this);
 
         checkBoxA = (CheckBox) findViewById(R.id.checkBox_A);
         checkBoxB = (CheckBox) findViewById(R.id.checkBox_B);
         checkBoxC = (CheckBox) findViewById(R.id.checkBox_C);
         checkBoxD = (CheckBox) findViewById(R.id.checkBox_D);
-
-        refreshInfo(null);
     }
 
     @Override
     protected void initData() {
+        questionOriginalDrawable = questionEditText.getBackground();
+        optionOriginalDrawable = optionAEditText.getBackground();
+        mCurrentContent = new ChoiceQuestion();
         mQuestionList = new ArrayList<ChoiceQuestion>();
         for (int i = 0; i < MaxFragmentNum; i++) {
             mQuestionList.add(getCurrentObj());
@@ -143,26 +158,41 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
                 switch (mPositionIndex) {
                     case IndexOfQuestion:
                         questionEditText.setText(text);
+                        mCurrentContent.setQuestion(new TextContent(text));
                         break;
                     case IndexOfA:
                         optionAEditText.setText(text);
+                        mCurrentContent.setOptionA(new TextContent(text));
                         break;
                     case IndexOfB:
                         optionBEditText.setText(text);
+                        mCurrentContent.setOptionB(new TextContent(text));
                         break;
                     case IndexOfC:
                         optionCEditText.setText(text);
+                        mCurrentContent.setOptionC(new TextContent(text));
                         break;
                     case IndexOfD:
                         optionDEditText.setText(text);
+                        mCurrentContent.setOptionD(new TextContent(text));
                         break;
                     default:
                         break;
                 }
             }
         };
+        refreshInfo(mQuestionList.get(mCurrentPosition));
     }
 
+    /**
+     * 
+     * @title: onClick
+     * @description: buttons and edittexts click listener
+     * @author: ZQJ
+     * @date: 2015年5月19日 下午9:19:20
+     * @param v
+     * 
+     */
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -179,7 +209,6 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
                 } else {
                     clickDelete();
                 }
-
                 break;
             case R.id.pagerbutton_last:
                 clickLast();
@@ -197,6 +226,12 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
                             }
                         }, R.string.cancel, null);
                 break;
+            default:
+                break;
+        }
+        if (v.getBackground() != questionOriginalDrawable
+                && v.getBackground() != optionOriginalDrawable) return;
+        switch (v.getId()) {
             case R.id.edittext_question:
                 mPositionIndex = IndexOfQuestion;
                 makeEditDialog(questionEditText.getText().toString(),
@@ -227,23 +262,79 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
         }
     }
 
-    @Override
-    public boolean onLongClick(View v) {
-        takePhoto();
-        return true;
+    // four click functions: add ,delete ,next ,last.
+    private void clickAdd() {
+        MaxFragmentNum++;
+        mQuestionList.add(new ChoiceQuestion());
+        if (!mQuestionList.get(mCurrentPosition).equal(getCurrentObj())) {
+            mQuestionList.set(mCurrentPosition, getCurrentObj());
+            ToastUtil.toast(String.format(getResources().getString(R.string.format_edit_save),
+                    1 + mCurrentPosition));
+        }
+        mCurrentPosition++;
+        refreshInfo(mQuestionList.get(mCurrentPosition));
     }
 
-    @Override
-    public void onBackPressed() {
-        OnClickListener sureListener = new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                finish();
+    private void clickNext() {
+        if (mCurrentPosition + 1 >= MaxFragmentNum) {
+            if (!getCurrentObj().equal(mQuestionList.get(mCurrentPosition))) {
+                mQuestionList.set(mCurrentPosition, getCurrentObj());
             }
-        };
-        DialogUtil.showNormalDialog(this, R.string.leave, R.string.sureLeave, R.string.sure,
-                sureListener, R.string.cancel, null);
+            for (int i = 0; i < mQuestionList.size(); i++) {
+                if (!mQuestionList.get(i).isLegal()) {
+                    ToastUtil.toast(String.format(
+                            getResources().getString(R.string.format_edit_empty_hint), 1 + i));
+                    return;
+                }
+            }
+            completeEdit();
+        } else {
+            if (!getCurrentObj().equal(mQuestionList.get(mCurrentPosition))) {
+                mQuestionList.set(mCurrentPosition, getCurrentObj());
+                ToastUtil.toast(String.format(getResources().getString(R.string.format_edit_save),
+                        1 + mCurrentPosition));
+            }
+            mCurrentPosition++;
+            mNextObj = mQuestionList.get(mCurrentPosition);
+            refreshInfo(mNextObj);
+        }
+    }
+
+    private void clickLast() {
+        if (mCurrentPosition != 0) {
+            if (!getCurrentObj().equal(mQuestionList.get(mCurrentPosition))) {
+                mQuestionList.set(mCurrentPosition, getCurrentObj());
+                ToastUtil.toast(String.format(getResources().getString(R.string.format_edit_save),
+                        1 + mCurrentPosition));
+            }
+            mCurrentPosition--;
+            mNextObj = mQuestionList.get(mCurrentPosition);
+            refreshInfo(mNextObj);
+        }
+    }
+
+    private void clickDelete() {
+        if (MaxFragmentNum > 1) {
+            MaxFragmentNum--;
+            mQuestionList.remove(mCurrentPosition);
+            if (mCurrentPosition == 0) {
+                refreshInfo(mQuestionList.get(mCurrentPosition));
+            } else {
+                mCurrentPosition--;
+                refreshInfo(mQuestionList.get(mCurrentPosition));
+            }
+            ToastUtil.toast(R.string.delete_success);
+        } else {
+            OnClickListener sureListener = new OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    finish();
+                }
+            };
+            DialogUtil.showNormalDialog(this, R.string.leave, R.string.sureLeave, R.string.sure,
+                    sureListener, R.string.cancel, null);
+        }
     }
 
     private void makeEditDialog(String text, String title) {
@@ -254,6 +345,44 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
         dialog.setCancelButton(getResources().getString(R.string.cancel), null);
     }
 
+
+
+    /**
+     * 
+     * @title: onLongClick
+     * @description: edittexts long click listener
+     * @author: ZQJ
+     * @date: 2015年5月19日 下午9:19:49
+     * @param v
+     * @return
+     * 
+     */
+    @Override
+    public boolean onLongClick(View v) {
+        switch (v.getId()) {
+            case R.id.edittext_question:
+                mLongClickFlag = IndexOfQuestion;
+                break;
+            case R.id.edittext_A:
+                mLongClickFlag = IndexOfA;
+                break;
+            case R.id.edittext_B:
+                mLongClickFlag = IndexOfB;
+                break;
+            case R.id.edittext_C:
+                mLongClickFlag = IndexOfC;
+                break;
+            case R.id.edittext_D:
+                mLongClickFlag = IndexOfD;
+                break;
+            default:
+                break;
+        }
+        takePhoto();
+        return true;
+    }
+
+    // take photo and cut photo
     private final int REQUEST_TAKEPHOTO = 100;
     private final int REQUEXT_CUTPHOTO = 200;
 
@@ -297,8 +426,31 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
             if (resultCode == RESULT_OK) {
                 Uri uri = (Uri) data.getParcelableExtra("CUTTED_PICTURE");
                 try {
-                    questionEditText.setBackground(new BitmapDrawable(Media.getBitmap(
-                            getContentResolver(), uri)));
+                    Bitmap tempMap = Media.getBitmap(getContentResolver(), uri);
+                    switch (mLongClickFlag) {
+                        case IndexOfQuestion:
+                            questionEditText.setBackground(new BitmapDrawable(tempMap));
+                            mCurrentContent.setQuestion(new TextContent(tempMap));
+                            break;
+                        case IndexOfA:
+                            optionAEditText.setBackground(new BitmapDrawable(tempMap));
+                            mCurrentContent.setOptionA(new TextContent(tempMap));
+                            break;
+                        case IndexOfB:
+                            optionBEditText.setBackground(new BitmapDrawable(tempMap));
+                            mCurrentContent.setOptionB(new TextContent(tempMap));
+                            break;
+                        case IndexOfC:
+                            optionCEditText.setBackground(new BitmapDrawable(tempMap));
+                            mCurrentContent.setOptionC(new TextContent(tempMap));
+                            break;
+                        case IndexOfD:
+                            optionDEditText.setBackground(new BitmapDrawable(tempMap));
+                            mCurrentContent.setOptionD(new TextContent(tempMap));
+                            break;
+                        default:
+                            break;
+                    }
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 } catch (IOException e) {
@@ -308,120 +460,49 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
         }
     }
 
-
     public void cutPicture(Uri uri) {
         Intent intent = new Intent(this, CutPictureActivity.class);
         intent.putExtra("PICTURE", uri);
         startActivityForResult(intent, REQUEXT_CUTPHOTO);
     }
 
-    private void clickAdd() {
-        MaxFragmentNum++;
-        mQuestionList.add(new ChoiceQuestion());
-        if (!mQuestionList.get(mCurrentPosition).equal(getCurrentObj())) {
-            mQuestionList.set(mCurrentPosition, getCurrentObj());
-            ToastUtil.toast(String.format(getResources().getString(R.string.format_edit_save),
-                    1 + mCurrentPosition));
-        }
-        mCurrentPosition++;
-        refreshInfo(mQuestionList.get(mCurrentPosition));
-    }
-
-    private void clickNext() {
-        if (mCurrentPosition + 1 >= MaxFragmentNum) {
-            if (!getCurrentObj().equal(mQuestionList.get(mCurrentPosition))) {
-                mQuestionList.set(mCurrentPosition, getCurrentObj());
-            }
-            for (int i = 0; i < mQuestionList.size(); i++) {
-                if (!mQuestionList.get(i).isLegal()) {
-                    ToastUtil.toast(String.format(
-                            getResources().getString(R.string.format_edit_empty_hint), 1 + i));
-                    return;
-                }
-            }
-            completeEdit();
-        } else {
-            if (!getCurrentObj().equal(mQuestionList.get(mCurrentPosition))) {
-                mQuestionList.set(mCurrentPosition, getCurrentObj());
-                ToastUtil.toast(String.format(getResources().getString(R.string.format_edit_save),
-                        1 + mCurrentPosition));
-            }
-            mCurrentPosition++;
-            mNextObj = mQuestionList.get(mCurrentPosition);
-            refreshInfo(mNextObj);
-        }
-    }
-
-    private void clickLast() {
-        if (mCurrentPosition != 0) {
-            if (!mQuestionList.get(mCurrentPosition).equal(getCurrentObj())) {
-                mQuestionList.set(mCurrentPosition, getCurrentObj());
-                ToastUtil.toast(String.format(getResources().getString(R.string.format_edit_save),
-                        1 + mCurrentPosition));
-            }
-            mCurrentPosition--;
-            mNextObj = mQuestionList.get(mCurrentPosition);
-            refreshInfo(mNextObj);
-        }
-    }
-
-    private void clickDelete() {
-        if (MaxFragmentNum > 1) {
-            MaxFragmentNum--;
-            mQuestionList.remove(mCurrentPosition);
-            if (mCurrentPosition == 0) {
-                refreshInfo(mQuestionList.get(mCurrentPosition));
-            } else {
-                mCurrentPosition--;
-                refreshInfo(mQuestionList.get(mCurrentPosition));
-            }
-            ToastUtil.toast(R.string.delete_success);
-        } else {
-            OnClickListener sureListener = new OnClickListener() {
-
-                @Override
-                public void onClick(View v) {
-                    finish();
-                }
-            };
-            DialogUtil.showNormalDialog(this, R.string.leave, R.string.sureLeave, R.string.sure,
-                    sureListener, R.string.cancel, null);
-        }
-    }
-
+    /**
+     * 
+     * @title: getCurrentObj
+     * @description: return the current ChoiceQuestion object, invoked when add,delete,next,last is
+     *               clicked
+     * @author: ZQJ
+     * @date: 2015年5月19日 下午9:27:53
+     * @return
+     */
     private ChoiceQuestion getCurrentObj() {
-        TextContent question = new TextContent(questionEditText.getText().toString());
-        TextContent optionA = new TextContent(optionAEditText.getText().toString());
-        TextContent optionB = new TextContent(optionBEditText.getText().toString());
-        TextContent optionC = new TextContent(optionCEditText.getText().toString());
-        TextContent optionD = new TextContent(optionDEditText.getText().toString());
+        TextContent question = mCurrentContent.getQuestion();
+        TextContent optionA = mCurrentContent.getOptionA();
+        TextContent optionB = mCurrentContent.getOptionB();
+        TextContent optionC = mCurrentContent.getOptionC();
+        TextContent optionD = mCurrentContent.getOptionD();
         boolean[] correctOption =
                 {checkBoxA.isCheck(), checkBoxB.isCheck(), checkBoxC.isCheck(), checkBoxD.isCheck()};
         return new ChoiceQuestion(question, optionA, optionB, optionC, optionD, correctOption);
     }
 
-    private void refreshInfo(ChoiceQuestion currentObj) {
-        String question = "";
-        String optionA = "";
-        String optionB = "";
-        String optionC = "";
-        String optionD = "";
-        boolean[] correctId = {false, false, false, false};
-        if (null != currentObj) {
-            question = currentObj.getQuestion().getContentString();
-            optionA = currentObj.getOptionA().getContentString();
-            optionB = currentObj.getOptionB().getContentString();
-            optionC = currentObj.getOptionC().getContentString();
-            optionD = currentObj.getOptionD().getContentString();
-            correctId = currentObj.getCorrectId();
-        }
+    /**
+     * 
+     * @title: refreshInfo
+     * @description: refresh contents
+     * @author: ZQJ
+     * @date: 2015年5月19日 下午9:30:36
+     * @param showObj
+     */
+    private void refreshInfo(ChoiceQuestion showObj) {
+        showContent(questionEditText, showObj.getQuestion());
+        showContent(optionAEditText, showObj.getOptionA());
+        showContent(optionBEditText, showObj.getOptionB());
+        showContent(optionCEditText, showObj.getOptionC());
+        showContent(optionDEditText, showObj.getOptionD());
+        boolean[] correctId = showObj.getCorrectId();
         numHintTextView.setText(String.format(getResources()
                 .getString(R.string.format_question_num), mCurrentPosition + 1));
-        questionEditText.setText(question);
-        optionAEditText.setText(optionA);
-        optionBEditText.setText(optionB);
-        optionCEditText.setText(optionC);
-        optionDEditText.setText(optionD);
         checkBoxA.setChecked(correctId[0]);
         checkBoxB.setChecked(correctId[1]);
         checkBoxC.setChecked(correctId[2]);
@@ -433,8 +514,51 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
             nextButton.setText(getResources().getString(R.string.next_item));
             addButton.setVisibility(View.INVISIBLE);
         }
+        mCurrentContent = new ChoiceQuestion(showObj);
     }
 
+    @SuppressLint("NewApi")
+    @SuppressWarnings("deprecation")
+    private void showContent(EditText view, TextContent content) {
+        if (content.isString()) {
+            view.setText(content.getContentString());
+            if (view == questionEditText) {
+                view.setBackground(questionOriginalDrawable);
+            } else {
+                view.setBackground(optionOriginalDrawable);
+            }
+        } else {
+            view.setBackground(new BitmapDrawable(content.getContentBitmap()));
+        }
+    }
+
+    /**
+     * 
+     * @title: onBackPressed
+     * @description: backpressed response
+     * @author: ZQJ
+     * @date: 2015年5月19日 下午9:21:02
+     */
+    @Override
+    public void onBackPressed() {
+        OnClickListener sureListener = new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        };
+        DialogUtil.showNormalDialog(this, R.string.leave, R.string.sureLeave, R.string.sure,
+                sureListener, R.string.cancel, null);
+    }
+
+    /**
+     * 
+     * @title: completeEdit
+     * @description: goto next activity
+     * @author: ZQJ
+     * @date: 2015年5月19日 下午9:31:16
+     */
     private void completeEdit() {
         CourseTest test = new CourseTest("TestName1", mQuestionList);
         Intent intent = new Intent(this, SubmitTestActivity.class);
@@ -458,4 +582,5 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
         intent.putExtra(TEST_ID, testId);
         context.startActivity(intent);
     }
+
 }
