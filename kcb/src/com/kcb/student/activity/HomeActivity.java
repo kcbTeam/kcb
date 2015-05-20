@@ -95,7 +95,7 @@ public class HomeActivity extends BaseFragmentActivity {
 		    }else{
 		        initPopupWindow();
 		        mPopupWindow.showAsDropDown(v,0,0);
-		    }		    
+		    }
 			break;
 		case R.id.button_checkin:
 			switchFragment(INDEX_CHECKIN);
