@@ -45,8 +45,8 @@ public class TestResultActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        listView = (ListView) findViewById(R.id.listview); 
-        listAdapter=new TestResultAdapter(this, listItem);
+        listView = (ListView) findViewById(R.id.listview);
+        listAdapter = new TestResultAdapter(this, listItem);
         listView.setAdapter(listAdapter);
         for (int i = 0; i < testTitle.length; i++) {
             listItem.add(testTitle[i]);
@@ -62,7 +62,7 @@ public class TestResultActivity extends BaseActivity {
                 CurrentView = arg1;
             }
         });
-        
+
         mEditText = (EditText) findViewById(R.id.search);
         mEditText.addTextChangedListener(new TextWatcher() {
 

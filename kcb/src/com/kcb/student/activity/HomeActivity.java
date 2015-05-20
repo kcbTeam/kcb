@@ -32,149 +32,146 @@ import com.kcbTeam.R;
  */
 public class HomeActivity extends BaseFragmentActivity {
 
-	private final int INDEX_CHECKIN = 0;
-	private final int INDEX_TEST = 1;
+    private final int INDEX_CHECKIN = 0;
+    private final int INDEX_TEST = 1;
 
-	private TextView userNameTextView;
-	private ButtonFlat settingButton;
-	private ButtonFlat checkInButton;
-	private ButtonFlat testButton;
+    private TextView userNameTextView;
+    private ButtonFlat settingButton;
+    private ButtonFlat checkInButton;
+    private ButtonFlat testButton;
 
-	private Fragment[] mFragments;
-	private FragmentManager mFragmentManager;
-	
-	private PopupWindow mPopupWindow;
+    private Fragment[] mFragments;
+    private FragmentManager mFragmentManager;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.stu_activity_home);
+    private PopupWindow mPopupWindow;
 
-		initView();
-	}
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.stu_activity_home);
 
-	@Override
-	protected void initView() {
-		userNameTextView = (TextView) findViewById(R.id.textview_username);
-		userNameTextView.setText(KAccount.getAccountName());
+        initView();
+    }
 
-		settingButton = (ButtonFlat) findViewById(R.id.button_setting);
-		settingButton.setOnClickListener(this);
+    @Override
+    protected void initView() {
+        userNameTextView = (TextView) findViewById(R.id.textview_username);
+        userNameTextView.setText(KAccount.getAccountName());
 
-		checkInButton = (ButtonFlat) findViewById(R.id.button_checkin);
-		checkInButton.setOnClickListener(this);
-		testButton = (ButtonFlat) findViewById(R.id.button_test);
-		testButton.setOnClickListener(this);
+        settingButton = (ButtonFlat) findViewById(R.id.button_setting);
+        settingButton.setOnClickListener(this);
 
-		mFragmentManager = getSupportFragmentManager();
+        checkInButton = (ButtonFlat) findViewById(R.id.button_checkin);
+        checkInButton.setOnClickListener(this);
+        testButton = (ButtonFlat) findViewById(R.id.button_test);
+        testButton.setOnClickListener(this);
 
-		mFragments = new Fragment[2];
-		mFragments[INDEX_CHECKIN] = mFragmentManager
-				.findFragmentById(R.id.fragment_checkin);
-		mFragments[INDEX_TEST] = mFragmentManager
-				.findFragmentById(R.id.fragment_test);
+        mFragmentManager = getSupportFragmentManager();
 
-		showDefaultFragment();
-	}
+        mFragments = new Fragment[2];
+        mFragments[INDEX_CHECKIN] = mFragmentManager.findFragmentById(R.id.fragment_checkin);
+        mFragments[INDEX_TEST] = mFragmentManager.findFragmentById(R.id.fragment_test);
 
-	@Override
-	protected void initData() {
-	}
+        showDefaultFragment();
+    }
 
-	private void showDefaultFragment() {
-		onClick(checkInButton);
-	}
+    @Override
+    protected void initData() {}
 
-	@Override
-	public void onClick(View v) {
-		switch (v.getId()) {
-		case R.id.button_setting:
-		    if(mPopupWindow !=null&&mPopupWindow.isShowing()){
-		        mPopupWindow.dismiss();
-		        return;
-		    }else{
-		        initPopupWindow();
-		        mPopupWindow.showAsDropDown(v,0,0);
-		    }
-			break;
-		case R.id.button_checkin:
-			switchFragment(INDEX_CHECKIN);
-			break;
-		case R.id.button_test:
-			switchFragment(INDEX_TEST);
-			break;
-		case R.id.modify_button:
-		    onClick(settingButton);
-		    Intent intent=new Intent(HomeActivity.this, ModifyPasswordActivity.class);
-		    startActivity(intent);
-		    break;
-		case R.id.exit_button:
-		    onClick(settingButton);
-		    DialogUtil.showNormalDialog(this, R.string.quitload, R.string.destroy_tip,
-                R.string.sure, new View.OnClickListener() {
-		        
-                    @Override
-                    public void onClick(View v) {
-                        KAccount.deleteAccount();
-                        LoginActivity.start(HomeActivity.this);
-                        finish();
-                    }
-                }, R.string.cancel, null);
-		    break;
-		default:
-			break;
-		}
-	}
+    private void showDefaultFragment() {
+        onClick(checkInButton);
+    }
 
-	private void switchFragment(int index) {
-		FragmentTransaction fragmentTransaction = mFragmentManager
-				.beginTransaction();
-		fragmentTransaction.hide(mFragments[INDEX_CHECKIN]).hide(
-				mFragments[INDEX_TEST]);
-		fragmentTransaction.show(mFragments[index]).commit();
-		setButtonTextColor(index);
-	}
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.button_setting:
+                if (mPopupWindow != null && mPopupWindow.isShowing()) {
+                    mPopupWindow.dismiss();
+                    return;
+                } else {
+                    initPopupWindow();
+                    mPopupWindow.showAsDropDown(v, 0, 0);
+                }
+                break;
+            case R.id.button_checkin:
+                switchFragment(INDEX_CHECKIN);
+                break;
+            case R.id.button_test:
+                switchFragment(INDEX_TEST);
+                break;
+            case R.id.modify_button:
+                onClick(settingButton);
+                Intent intent = new Intent(HomeActivity.this, ModifyPasswordActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.exit_button:
+                onClick(settingButton);
+                DialogUtil.showNormalDialog(this, R.string.quitload, R.string.destroy_tip,
+                        R.string.sure, new View.OnClickListener() {
 
-	private void setButtonTextColor(int index) {
-		Resources resources = getResources();
-		checkInButton.setTextColor(resources.getColor(R.color.gray));
-		testButton.setTextColor(resources.getColor(R.color.gray));
-		if (index == INDEX_CHECKIN) {
-			checkInButton.setTextColor(resources.getColor(R.color.blue));
-		} else {
-			testButton.setTextColor(resources.getColor(R.color.blue));
-		}
-	}
+                            @Override
+                            public void onClick(View v) {
+                                KAccount.deleteAccount();
+                                LoginActivity.start(HomeActivity.this);
+                                finish();
+                            }
+                        }, R.string.cancel, null);
+                break;
+            default:
+                break;
+        }
+    }
 
-	private boolean hasClickBack = false;
+    private void switchFragment(int index) {
+        FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
+        fragmentTransaction.hide(mFragments[INDEX_CHECKIN]).hide(mFragments[INDEX_TEST]);
+        fragmentTransaction.show(mFragments[index]).commit();
+        setButtonTextColor(index);
+    }
 
-	@Override
-	public void onBackPressed() {
-		if (!hasClickBack) {
-			hasClickBack = true;
-			ToastUtil.toast(R.string.click_again_exit_app);
-			new Handler().postDelayed(new Runnable() {
+    private void setButtonTextColor(int index) {
+        Resources resources = getResources();
+        checkInButton.setTextColor(resources.getColor(R.color.gray));
+        testButton.setTextColor(resources.getColor(R.color.gray));
+        if (index == INDEX_CHECKIN) {
+            checkInButton.setTextColor(resources.getColor(R.color.blue));
+        } else {
+            testButton.setTextColor(resources.getColor(R.color.blue));
+        }
+    }
 
-				@Override
-				public void run() {
-					hasClickBack = false;
-				}
-			}, 2000);
-		} else {
-			System.exit(0);
-		}
-	}
+    private boolean hasClickBack = false;
 
-	@SuppressWarnings("deprecation")
-    public void initPopupWindow(){
-	    View customView=getLayoutInflater().inflate(R.layout.stu_menu_setting, null, false);
-	    mPopupWindow=new PopupWindow(customView,ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
-	    mPopupWindow.setTouchable(true);
-	    mPopupWindow.setFocusable(true);
-	    mPopupWindow.setBackgroundDrawable(new BitmapDrawable());
-	    mPopupWindow.setOutsideTouchable(true);
-	    customView.setOnTouchListener(new OnTouchListener() {
-            
+    @Override
+    public void onBackPressed() {
+        if (!hasClickBack) {
+            hasClickBack = true;
+            ToastUtil.toast(R.string.click_again_exit_app);
+            new Handler().postDelayed(new Runnable() {
+
+                @Override
+                public void run() {
+                    hasClickBack = false;
+                }
+            }, 2000);
+        } else {
+            System.exit(0);
+        }
+    }
+
+    @SuppressWarnings("deprecation")
+    public void initPopupWindow() {
+        View customView = getLayoutInflater().inflate(R.layout.stu_menu_setting, null, false);
+        mPopupWindow =
+                new PopupWindow(customView, ViewGroup.LayoutParams.WRAP_CONTENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT);
+        mPopupWindow.setTouchable(true);
+        mPopupWindow.setFocusable(true);
+        mPopupWindow.setBackgroundDrawable(new BitmapDrawable());
+        mPopupWindow.setOutsideTouchable(true);
+        customView.setOnTouchListener(new OnTouchListener() {
+
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (mPopupWindow != null && mPopupWindow.isShowing()) {
@@ -184,23 +181,23 @@ public class HomeActivity extends BaseFragmentActivity {
                 return false;
             }
         });
-	    
-	    Button modifyButton=(Button) customView.findViewById(R.id.modify_button);
-	    Button exitButton=(Button) customView.findViewById(R.id.exit_button);
-	    modifyButton.setOnClickListener(this);
-	    exitButton.setOnClickListener(this);
-	}
-	
-	/**
-	 * 
-	 * @title: start
-	 * @description: start HomeActivity from StartActivity or LoginActivity
-	 * @author: wanghang
-	 * @date: 2015-5-10 上午11:27:53
-	 * @param context
-	 */
-	public static void start(Context context) {
-		Intent intent = new Intent(context, HomeActivity.class);
-		context.startActivity(intent);
-	}
+
+        Button modifyButton = (Button) customView.findViewById(R.id.modify_button);
+        Button exitButton = (Button) customView.findViewById(R.id.exit_button);
+        modifyButton.setOnClickListener(this);
+        exitButton.setOnClickListener(this);
+    }
+
+    /**
+     * 
+     * @title: start
+     * @description: start HomeActivity from StartActivity or LoginActivity
+     * @author: wanghang
+     * @date: 2015-5-10 上午11:27:53
+     * @param context
+     */
+    public static void start(Context context) {
+        Intent intent = new Intent(context, HomeActivity.class);
+        context.startActivity(intent);
+    }
 }
