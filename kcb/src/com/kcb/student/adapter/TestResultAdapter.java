@@ -6,10 +6,12 @@ import java.util.List;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcbTeam.R;
 
 /**
@@ -50,16 +52,25 @@ public class TestResultAdapter extends BaseAdapter {
             holder = new ViewHolder();
             convertView = LayoutInflater.from(context).inflate(R.layout.stu_view_list, null);
             holder.testname = (TextView) convertView.findViewById(R.id.testname);
+            holder.nextButtonFlat = (ButtonFlat) convertView.findViewById(R.id.button_testdetail);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
         holder.testname.setText(Data.get(position).toString());
+        holder.nextButtonFlat.setOnClickListener(new OnClickListener(){
+            
+            @Override
+            public void onClick(View v){
+                
+            }
+        });
         return convertView;
     }
 
     public final class ViewHolder {
 
         public TextView testname;
+        public ButtonFlat nextButtonFlat;
     }
 }
