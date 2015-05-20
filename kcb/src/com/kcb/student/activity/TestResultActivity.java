@@ -43,8 +43,7 @@ public class TestResultActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        listView = (ListView) findViewById(R.id.listview);
-        mEditText = (EditText) findViewById(R.id.search);
+        listView = (ListView) findViewById(R.id.listview);     
         listView.setAdapter(new TestResultAdapter(this, listItem));
         for (int i = 0; i < testTitle.length; i++) {
             listItem.add(testTitle[i]);
@@ -54,7 +53,8 @@ public class TestResultActivity extends BaseActivity {
 
             }
         });
-
+        
+        mEditText = (EditText) findViewById(R.id.search);
         mEditText.addTextChangedListener(new TextWatcher() {
 
             @Override

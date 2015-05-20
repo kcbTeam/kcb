@@ -3,6 +3,7 @@ package com.kcb.student.activity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 
 import com.kcb.common.base.BaseActivity;
@@ -14,8 +15,10 @@ public class ModifyPasswordActivity extends BaseActivity {
 
     private ButtonFlat backButton;
     private ButtonFlat finishButton;
+    private EditText userpasswordEditText;
     private EditText passwordEditText;
     private EditText password2EditText;
+    private CheckBox check;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,18 +30,32 @@ public class ModifyPasswordActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        backButton = (ButtonFlat) findViewById(R.id.button_back);
-        finishButton = (ButtonFlat) findViewById(R.id.button_finish);
-        passwordEditText = (EditText) findViewById(R.id.edittext_newpassword);
-        password2EditText = (EditText) findViewById(R.id.edittext_renewpassword);
 
+        backButton=(ButtonFlat) findViewById(R.id.button_back);
+        finishButton=(ButtonFlat) findViewById(R.id.button_finish);
+        userpasswordEditText=(EditText) findViewById(R.id.edittext_userpassword);
+        passwordEditText=(EditText) findViewById(R.id.edittext_newpassword);
+        password2EditText=(EditText) findViewById(R.id.edittext_renewpassword);
+        check=(CheckBox) findViewById(R.id.check);
+        
         backButton.setOnClickListener(this);
         finishButton.setOnClickListener(this);
+        
+        CheckPassword();
     }
 
     @Override
     protected void initData() {}
-
+    
+    public void CheckPassword(){
+        String password=userpasswordEditText.getText().toString();
+        if(!TextUtils.isEmpty(password)){
+            check.setVisibility(View.VISIBLE);
+            passwordEditText.setEnabled(true);
+            password2EditText.setEnabled(true);
+        }
+    }
+    
     @Override
     public void onClick(View v) {
         String password = passwordEditText.getText().toString();
@@ -59,5 +76,4 @@ public class ModifyPasswordActivity extends BaseActivity {
             }
         }
     }
-
 }
