@@ -56,7 +56,7 @@
     <string name="goback">返回</string>
     <string name="setpassword">设置密码</string>
     <string name="finish">完成</string>
-    <string name="usersname">用户名：</string>
+    <string name="userpassword">原密码：</string>
     <string name="newpassword">新密码：</string>
     <string name="renewpassword">确认新密码：</string>
     <!-- ModifyPasswordActivity End -->
