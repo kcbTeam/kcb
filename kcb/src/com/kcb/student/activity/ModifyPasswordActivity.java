@@ -1,7 +1,9 @@
 package com.kcb.student.activity;
 
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -48,12 +50,28 @@ public class ModifyPasswordActivity extends BaseActivity {
     protected void initData() {}
     
     public void CheckPassword(){
-        String password=userpasswordEditText.getText().toString();
-        if(!TextUtils.isEmpty(password)){
-            check.setVisibility(View.VISIBLE);
-            passwordEditText.setEnabled(true);
-            password2EditText.setEnabled(true);
-        }
+        userpasswordEditText.addTextChangedListener(new TextWatcher() {
+            
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String password=userpasswordEditText.getText().toString();
+                if(!TextUtils.isEmpty(password)){
+                    check.setVisibility(View.VISIBLE);
+                    passwordEditText.setEnabled(true);
+                    password2EditText.setEnabled(true);
+                }else{
+                    check.setVisibility(View.INVISIBLE);
+                    passwordEditText.setEnabled(false);
+                    password2EditText.setEnabled(false);
+                }
+            }
+            
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            
+            @Override
+            public void afterTextChanged(Editable s) {}
+        });
     }
     
     @Override
