@@ -1,8 +1,10 @@
 package com.kcb.teacher.model;
 
+import java.io.ByteArrayOutputStream;
 import java.io.Serializable;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 
 /**
  * 
@@ -23,6 +25,12 @@ public class TextContent implements Serializable {
     private boolean isString = false;
     private String mContentString;
     private Bitmap mContentBitmap;
+    private byte[] mBytesOfBitmap;
+
+    public TextContent() {
+        mContentString = "";
+        isString = true;
+    }
 
     public TextContent(String stringContent) {
         mContentString = stringContent;
@@ -33,8 +41,8 @@ public class TextContent implements Serializable {
         mContentBitmap = bitmapContent;
         isString = false;
     }
-    
-    public TextContent(TextContent textContent){
+
+    public TextContent(TextContent textContent) {
         isString = textContent.isString;
         mContentString = textContent.mContentString;
         mContentBitmap = textContent.mContentBitmap;
@@ -77,12 +85,34 @@ public class TextContent implements Serializable {
         }
         return false;
     }
-    
-    public void copy(TextContent textContent){
+
+    public void copy(TextContent textContent) {
         mContentBitmap = textContent.mContentBitmap;
         mContentString = textContent.mContentString;
         isString = textContent.isString;
     }
 
+    public void changeBitmapToBytes() {
+        if (null != mContentBitmap) {
+            mBytesOfBitmap = getBytes(mContentBitmap);
+            mContentBitmap = null;
+        }
+    }
 
+    public void recoverBitmapFromBytes() {
+        if (null != mBytesOfBitmap) {
+            mContentBitmap = getBitmap(mBytesOfBitmap);
+            mBytesOfBitmap = null;
+        }
+    }
+
+    public static byte[] getBytes(Bitmap bitmap) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 0, baos);
+        return baos.toByteArray();
+    }
+
+    public static Bitmap getBitmap(byte[] data) {
+        return BitmapFactory.decodeByteArray(data, 0, data.length);
+    }
 }

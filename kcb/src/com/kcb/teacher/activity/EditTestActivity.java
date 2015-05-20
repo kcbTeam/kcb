@@ -361,25 +361,76 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
     public boolean onLongClick(View v) {
         switch (v.getId()) {
             case R.id.edittext_question:
+                longClick(questionEditText);
                 mLongClickFlag = IndexOfQuestion;
                 break;
             case R.id.edittext_A:
+                longClick(optionAEditText);
                 mLongClickFlag = IndexOfA;
                 break;
             case R.id.edittext_B:
+                longClick(optionBEditText);
                 mLongClickFlag = IndexOfB;
                 break;
             case R.id.edittext_C:
+                longClick(optionCEditText);
                 mLongClickFlag = IndexOfC;
                 break;
             case R.id.edittext_D:
+                longClick(optionDEditText);
                 mLongClickFlag = IndexOfD;
                 break;
             default:
                 break;
         }
-        takePhoto();
+
         return true;
+    }
+
+    private void longClick(final EditText editText) {
+        if (editText.getBackground() == questionOriginalDrawable
+                || editText.getBackground() == optionOriginalDrawable) {
+            takePhoto();
+            return;
+        } else {
+            DialogUtil.showDeletePictureDialog(this, "选择", new OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    takePhoto();
+                }
+            }, new OnClickListener() {
+
+                @SuppressLint("NewApi")
+                @Override
+                public void onClick(View v) {
+                    switch (editText.getId()) {
+                        case R.id.edittext_question:
+                            editText.setBackground(questionOriginalDrawable);
+                            mCurrentContent.setQuestion(new TextContent());
+                            break;
+                        case R.id.edittext_A:
+                            editText.setBackground(optionOriginalDrawable);
+                            mCurrentContent.setOptionA(new TextContent());
+                            break;
+                        case R.id.edittext_B:
+                            editText.setBackground(optionOriginalDrawable);
+                            mCurrentContent.setOptionB(new TextContent());
+                            break;
+                        case R.id.edittext_C:
+                            editText.setBackground(optionOriginalDrawable);
+                            mCurrentContent.setOptionC(new TextContent());
+                            break;
+                        case R.id.edittext_D:
+                            editText.setBackground(optionOriginalDrawable);
+                            mCurrentContent.setOptionD(new TextContent());
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            });
+        }
     }
 
     // take photo and cut photo

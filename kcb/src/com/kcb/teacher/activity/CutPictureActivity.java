@@ -105,7 +105,7 @@ public class CutPictureActivity extends BaseActivity {
         Uri uri = (Uri) getIntent().getParcelableExtra("PICTURE");
         try {
             mBitMap = Media.getBitmap(getContentResolver(), uri);
-            mBitMap = ResizeBitmap(mBitMap, 1000);
+            mBitMap = ResizeBitmap(mBitMap, 800);
         } catch (FileNotFoundException e) {
             e.printStackTrace();;
         } catch (IOException e) {

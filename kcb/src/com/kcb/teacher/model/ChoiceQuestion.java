@@ -9,7 +9,7 @@ import java.io.Serializable;
  * @author: ZQJ
  * @date: 2015年5月8日 上午10:08:21
  */
-public class ChoiceQuestion implements Serializable, Cloneable {
+public class ChoiceQuestion implements Serializable {
 
     private static final long serialVersionUID = 2L;
 
@@ -44,15 +44,15 @@ public class ChoiceQuestion implements Serializable, Cloneable {
 
     /**
      * 
-     * Constructor: ChoiceQuestion
-     * copy data from a ChoiceQuestion object, be careful that must copy the real data of those reference objects
+     * Constructor: ChoiceQuestion copy data from a ChoiceQuestion object, be careful that must copy
+     * the real data of those reference objects
      */
     public ChoiceQuestion(ChoiceQuestion choiceQuestion) {
-//        mCorrectId = choiceQuestion.mCorrectId;
-//        mOptionA = choiceQuestion.getOptionA();
-//        mOptionB = choiceQuestion.getOptionB();
-//        mOptionC = choiceQuestion.getOptionC();
-//        mOptionD = choiceQuestion.getOptionD();
+        // mCorrectId = choiceQuestion.mCorrectId;
+        // mOptionA = choiceQuestion.getOptionA();
+        // mOptionB = choiceQuestion.getOptionB();
+        // mOptionC = choiceQuestion.getOptionC();
+        // mOptionD = choiceQuestion.getOptionD();
         mCorrectId =
                 new boolean[] {choiceQuestion.mCorrectId[0], choiceQuestion.mCorrectId[1],
                         choiceQuestion.mCorrectId[2], choiceQuestion.mCorrectId[3]};
@@ -67,13 +67,13 @@ public class ChoiceQuestion implements Serializable, Cloneable {
         } else {
             mOptionB = new TextContent(choiceQuestion.getOptionB().getContentBitmap());
         }
-        
+
         if (choiceQuestion.getOptionC().isString()) {
             mOptionC = new TextContent(choiceQuestion.getOptionC().getContentString());
         } else {
             mOptionC = new TextContent(choiceQuestion.getOptionC().getContentBitmap());
         }
-        
+
         if (choiceQuestion.getOptionD().isString()) {
             mOptionD = new TextContent(choiceQuestion.getOptionD().getContentString());
         } else {

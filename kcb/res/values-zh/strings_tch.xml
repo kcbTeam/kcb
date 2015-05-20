@@ -94,6 +94,8 @@
     <string name="delete_msg">确认删除该题吗？</string>
     <string name="dialog_title_add">添加</string>
     <string name="add_msg">是否要再加一道题？</string>
+    <string name="rebackground">重拍背景</string>
+    <string name="deletebackground">删除背景</string>
     <!-- EditTestActivity End -->
 
 	
