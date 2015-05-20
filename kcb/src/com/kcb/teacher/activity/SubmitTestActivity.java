@@ -60,4 +60,5 @@ public class SubmitTestActivity extends BaseActivity {
                 (CourseTest) getIntent().getSerializableExtra(EditTestActivity.COURSE_TEST_KEY);
         mList = mCurrentTest.getQuestionList();
     }
+
 }

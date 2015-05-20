@@ -44,18 +44,18 @@ public class TestResultActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        listView = (ListView) findViewById(R.id.listview); 
-        listAdapter=new TestResultAdapter(this, listItem);
+        listView = (ListView) findViewById(R.id.listview);
+        listAdapter = new TestResultAdapter(this, listItem);
         listView.setAdapter(listAdapter);
         for (int i = 0; i < testTitle.length; i++) {
             listItem.add(testTitle[i]);
         }
         listView.setOnItemClickListener(new OnItemClickListener() {
             public void onItemClick(AdapterView<?> adapter, View arg1, int position, long arg3) {
-                
+
             }
         });
-        
+
         mEditText = (EditText) findViewById(R.id.search);
         mEditText.addTextChangedListener(new TextWatcher() {
 

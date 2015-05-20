@@ -280,12 +280,17 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
             if (!getCurrentObj().equal(mQuestionList.get(mCurrentPosition))) {
                 mQuestionList.set(mCurrentPosition, getCurrentObj());
             }
+            String hintString = "";
             for (int i = 0; i < mQuestionList.size(); i++) {
                 if (!mQuestionList.get(i).isLegal()) {
-                    ToastUtil.toast(String.format(
-                            getResources().getString(R.string.format_edit_empty_hint), 1 + i));
-                    return;
+                    hintString = hintString + String.valueOf(1 + i) + "、";
                 }
+            }
+            if (hintString != "") {
+                ToastUtil.toast(String.format(
+                        getResources().getString(R.string.format_edit_empty_hint),
+                        hintString.substring(0, hintString.length() - 1)));
+                return;
             }
             completeEdit();
         } else {
@@ -611,11 +616,45 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
      * @date: 2015年5月19日 下午9:31:16
      */
     private void completeEdit() {
+        changeDataSerializable(mQuestionList);
         CourseTest test = new CourseTest("TestName1", mQuestionList);
         Intent intent = new Intent(this, SubmitTestActivity.class);
         intent.putExtra(COURSE_TEST_KEY, test);
         startActivity(intent);
         finish();
+    }
+
+    /**
+     * 
+     * @title: changeDataSerializable
+     * @description: change TextContents's Bitmap to Byte[]
+     * @author: ZQJ
+     * @date: 2015年5月20日 下午7:10:01
+     * @param questionList
+     */
+    public static void changeDataSerializable(List<ChoiceQuestion> questionList) {
+        if (null == questionList) return;
+        for (int i = 0; i < questionList.size(); i++) {
+            if (!questionList.get(i).getQuestion().isString()) {
+                questionList.get(i).getQuestion().changeBitmapToBytes();
+            }
+
+            if (!questionList.get(i).getOptionA().isString()) {
+                questionList.get(i).getOptionA().changeBitmapToBytes();
+            }
+
+            if (!questionList.get(i).getOptionB().isString()) {
+                questionList.get(i).getOptionB().changeBitmapToBytes();
+            }
+
+            if (!questionList.get(i).getOptionC().isString()) {
+                questionList.get(i).getOptionC().changeBitmapToBytes();
+            }
+
+            if (!questionList.get(i).getOptionD().isString()) {
+                questionList.get(i).getOptionD().changeBitmapToBytes();
+            }
+        }
     }
 
     /**

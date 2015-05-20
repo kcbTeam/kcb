@@ -83,7 +83,7 @@
     <string name="leave">离开</string>
     <string name="sureLeave">确认放弃此次编辑吗？</string>
     <string name="format_edit_save">第%1$d题已保存</string>
-    <string name="format_edit_empty_hint">第%1$d题有空哦</string>
+    <string name="format_edit_empty_hint">第%1$s题有空哦</string>
     <string name="dialog_title_question">输入题目</string>
     <string name="dialog_title_optionA">输入A选项</string>
     <string name="dialog_title_optionB">输入B选项</string>
