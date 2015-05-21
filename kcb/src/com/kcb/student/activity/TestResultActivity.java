@@ -52,10 +52,10 @@ public class TestResultActivity extends BaseActivity {
             listItem.add(testTitle[i]);
         }
         listView.setOnItemClickListener(new OnItemClickListener() {
-            public void onItemClick(AdapterView<?> adapter, View arg1, int position, long arg3){
-                if(null == CurrentView){
-                    CurrentView=arg1;
-                }else{
+            public void onItemClick(AdapterView<?> adapter, View arg1, int position, long arg3) {
+                if (null == CurrentView) {
+                    CurrentView = arg1;
+                } else {
                     CurrentView.setBackgroundColor(getResources().getColor(R.color.white));
                 }
                 arg1.setBackgroundColor(getResources().getColor(R.color.green));

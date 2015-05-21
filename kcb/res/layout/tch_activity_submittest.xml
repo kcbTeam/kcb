@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:buttonflat="http://schemas.android.com/apk/res-auto"
+    xmlns:materialdesign="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/activity_background" >
@@ -35,22 +36,29 @@
         android:layout_marginTop="30dp"
         android:text="@string/settime_hint" />
 
-    <SeekBar
-        android:id="@+id/seekbar_testtime"
-        android:layout_width="match_parent"
+    <com.kcb.library.slider.Slider
+        android:id="@+id/slider_testtime"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/textview_settime_hint"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="24dp"
-        android:layout_marginRight="24dp"
-        android:layout_marginTop="10dp"
-        android:max="300" />
+        android:layout_marginTop="5dp"
+        android:background="#1E88E5"
+        materialdesign:max="10"
+        materialdesign:min="2"
+        materialdesign:showNumberIndicator="true" />
+
+    <TextView
+        android:id="@+id/testtimeHint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/slider_testtime"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:id="@+id/textview_testName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/seekbar_testtime"
+        android:layout_below="@id/testtimeHint"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp" />
 
