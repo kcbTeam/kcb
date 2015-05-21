@@ -118,6 +118,7 @@
     <string name="settime_hint">请您设置本次答题总时间:</string>
     <string name="editCouseTest">编辑课堂小测试</string>
     <string name="sure_submit">确认提交</string>
+    <string name="testtimeFormat">%1$d分钟</string>
     <!-- Submit Activity End -->
 	
 	<!-- Check Test Activity Start -->
