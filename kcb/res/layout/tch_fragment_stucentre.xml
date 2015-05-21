@@ -14,6 +14,23 @@
         android:layout_marginTop="5dp"
         android:hint="@string/hint_studentcenter_search" />
 
+    <com.kcb.library.view.buttonflat.ButtonFlat
+        android:id="@+id/button_clear"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:visibility="invisible"
+        buttonflat:rippleSpeed="6" >
+
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/ic_action_cancel" />
+    </com.kcb.library.view.buttonflat.ButtonFlat>
+
     <RelativeLayout
         android:id="@+id/table_title"
         android:layout_width="match_parent"
@@ -31,16 +48,16 @@
 
         <com.kcb.library.view.buttonflat.ButtonFlat
             android:id="@+id/button_sort_info"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@id/textview_stuinfo"
             buttonflat:rippleSpeed="6" >
 
             <ImageView
                 android:id="@+id/imageview_id"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
                 android:layout_centerInParent="true"
                 android:background="@drawable/ic_action_sort" />
         </com.kcb.library.view.buttonflat.ButtonFlat>
@@ -56,16 +73,16 @@
 
         <com.kcb.library.view.buttonflat.ButtonFlat
             android:id="@+id/button_sort_checkinrate"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@id/textview_stucheckinrate"
             buttonflat:rippleSpeed="6" >
 
             <ImageView
                 android:id="@+id/imageview_checkinrate"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
                 android:layout_centerInParent="true"
                 android:background="@drawable/ic_action_sort" />
         </com.kcb.library.view.buttonflat.ButtonFlat>
@@ -81,16 +98,16 @@
 
         <com.kcb.library.view.buttonflat.ButtonFlat
             android:id="@+id/button_sort_correctrate"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@id/textview_correctrate"
             buttonflat:rippleSpeed="6" >
 
             <ImageView
                 android:id="@+id/imageview_correctrate"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
                 android:layout_centerInParent="true"
                 android:background="@drawable/ic_action_sort" />
         </com.kcb.library.view.buttonflat.ButtonFlat>

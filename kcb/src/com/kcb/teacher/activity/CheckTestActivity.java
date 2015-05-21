@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -42,7 +43,6 @@ public class CheckTestActivity extends BaseActivity implements TextWatcher, OnIt
     private ListAdapterCourseTest mAdapter;
 
     public final static String CLICKED_TEST_KEY = "clicked_test_key";
-    private View mCurrentView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,13 +100,10 @@ public class CheckTestActivity extends BaseActivity implements TextWatcher, OnIt
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        if (null == mCurrentView) {
-            mCurrentView = view;
-        } else {
-            mCurrentView.setBackgroundColor(getResources().getColor(R.color.white));
-        }
-        view.setBackgroundColor(getResources().getColor(R.color.list_blue_background));
-        mCurrentView = view;
+        Intent intent = new Intent(this, CheckTestDetailsActivity.class);
+        intent.putExtra(CheckTestActivity.CLICKED_TEST_KEY,
+                mTempTestList.get(mTempTestList.size() - 1 - position));
+        startActivity(intent);
     }
 
     @Override
@@ -117,9 +114,6 @@ public class CheckTestActivity extends BaseActivity implements TextWatcher, OnIt
 
     @Override
     public void afterTextChanged(Editable s) {
-        if (null != mCurrentView) {
-            mCurrentView.setBackgroundColor(getResources().getColor(R.color.white));
-        }
         mTempTestList.clear();
         mTempTestList.addAll(mTestList);
         String searchContent = searchEditText.getText().toString();

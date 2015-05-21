@@ -3,16 +3,11 @@ package com.kcb.teacher.adapter;
 import java.util.List;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.kcb.library.view.buttonflat.ButtonFlat;
-import com.kcb.teacher.activity.CheckTestActivity;
-import com.kcb.teacher.activity.CheckTestDetailsActivity;
 import com.kcb.teacher.model.CourseTest;
 import com.kcbTeam.R;
 
@@ -55,7 +50,6 @@ public class ListAdapterCourseTest extends BaseAdapter {
             holder.testDate = (TextView) convertView.findViewById(R.id.textview_testdate);
             holder.questionTotalNum =
                     (TextView) convertView.findViewById(R.id.textview_questiontotalnum);
-            holder.detailsButton = (ButtonFlat) convertView.findViewById(R.id.button_details);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -64,16 +58,6 @@ public class ListAdapterCourseTest extends BaseAdapter {
         holder.testDate.setText(mList.get(conversePosition).getTestDate());
         holder.questionTotalNum.setText(String.valueOf(mList.get(conversePosition)
                 .getQuestionList().size()));
-        holder.detailsButton.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(mContext, CheckTestDetailsActivity.class);
-                intent.putExtra(CheckTestActivity.CLICKED_TEST_KEY,
-                        mList.get(getCount() - 1 - position));
-                mContext.startActivity(intent);
-            }
-        });
         return convertView;
     }
 
@@ -81,6 +65,5 @@ public class ListAdapterCourseTest extends BaseAdapter {
         TextView testName;
         TextView testDate;
         TextView questionTotalNum;
-        ButtonFlat detailsButton;
     }
 }
