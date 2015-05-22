@@ -2,6 +2,7 @@ package com.kcb.student.activity;
 
 import java.util.ArrayList;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -51,7 +52,9 @@ public class TestResultActivity extends BaseActivity {
         }
         listView.setOnItemClickListener(new OnItemClickListener() {
             public void onItemClick(AdapterView<?> adapter, View arg1, int position, long arg3) {
-
+                Intent intent=new Intent(TestResultActivity.this,LookTestResultActivity.class);
+                intent.putExtra("testTitle1", testTitle[position]);
+                startActivity(intent);
             }
         });
 

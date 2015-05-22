@@ -17,6 +17,10 @@ public class RedHookDraw extends View {
         paint = new Paint();
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(5);
+       
+    }
+
+    protected void onDraw(Canvas canvas) {
         path = new Path();
         path.moveTo(this.getLeft(), this.getTop() + this.getHeight() / 2);
         path.lineTo(this.getLeft() + this.getWidth() / 6, this.getTop() + this.getHeight() / 4 * 3);
@@ -26,9 +30,6 @@ public class RedHookDraw extends View {
         path.lineTo(this.getLeft() + this.getWidth() / 6 * 4, this.getTop() + this.getHeight() / 2);
         path.lineTo(this.getLeft() + this.getWidth() / 6 * 5, this.getTop() + this.getHeight() / 4);
         path.lineTo(this.getLeft() + this.getWidth(), this.getTop());
-    }
-
-    protected void onDraw(Canvas canvas) {
         canvas.drawColor(Color.TRANSPARENT);
         paint.setColor(Color.RED);
         canvas.drawPath(path, paint);

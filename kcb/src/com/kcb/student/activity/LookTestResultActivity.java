@@ -6,6 +6,7 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
 import android.R.integer;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.AttributeSet;
 import android.util.Xml;
@@ -34,15 +35,19 @@ public class LookTestResultActivity extends BaseActivity {
     private CheckBox checkboxB;
     private CheckBox checkboxC;
     private CheckBox checkboxD;
-    private int numQuestion = 3;
+    ButtonFlat qTab1Button;
+    ButtonFlat qTab2Button;
+    ButtonFlat qTab3Button;
+    ButtonFlat qTab4Button;
+    private int numQuestion;
     private RedHookDraw layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.stu_activity_looktestresult);
-
         initView();
+        initData();
     }
 
     @Override
@@ -58,19 +63,63 @@ public class LookTestResultActivity extends BaseActivity {
         checkboxB = (CheckBox) findViewById(R.id.checkbox_b1);
         checkboxC = (CheckBox) findViewById(R.id.checkbox_c1);
         checkboxD = (CheckBox) findViewById(R.id.checkbox_d1);
-        XmlPullParser parser = getResources().getXml(R.layout.stu_item_flatbutton);
-        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.buttonflats1);
-        ButtonFlat buFlat1 = new ButtonFlat(this, Xml.asAttributeSet(parser));
-        ButtonFlat buFlat2 = new ButtonFlat(this, Xml.asAttributeSet(parser));
-        ButtonFlat buFlat3 = new ButtonFlat(this, Xml.asAttributeSet(parser));
-        ButtonFlat buFlat4 = new ButtonFlat(this, Xml.asAttributeSet(parser));
-        linearLayout.addView(buFlat1);
-        linearLayout.addView(buFlat2);
-        linearLayout.addView(buFlat3);
-        linearLayout.addView(buFlat4);
+        qTab1Button = (ButtonFlat) findViewById(R.id.button_tab_question1);
+        qTab2Button = (ButtonFlat) findViewById(R.id.button_tab_question2);
+        qTab3Button = (ButtonFlat) findViewById(R.id.button_tab_question3);
+        qTab4Button = (ButtonFlat) findViewById(R.id.button_tab_question4);
+        layout = (RedHookDraw) findViewById(R.id.relativelayout_redhook);
+        layout.setVisibility(View.INVISIBLE);
+    }
+
+    protected void setTabNums() {
+        switch (numQuestion) {
+            case 1:
+                qTab2Button.setVisibility(View.GONE);
+                qTab3Button.setVisibility(View.GONE);
+                qTab4Button.setVisibility(View.GONE);
+                break;
+            case 2:
+                qTab3Button.setVisibility(View.GONE);
+                qTab4Button.setVisibility(View.GONE);
+                break;
+            case 3:
+                qTab4Button.setVisibility(View.GONE);
+                break;
+            default:
+                break;
+        }
+    }
+
+    protected void setCurrent() {}
+
+    @Override
+    protected void initData() {
+        Intent intent = this.getIntent();
+        String string = intent.getStringExtra("testTitle1");
+        titleTextView.setText(string);
+        numQuestion = 3;
+        setTabNums();
     }
 
     @Override
-    protected void initData() {}
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.button_back:
+                finish();
+                break;
+            case R.id.button_tab_question1:
+                break;
+            case R.id.button_tab_question2:
 
+                break;
+            case R.id.button_tab_question3:
+
+                break;
+            case R.id.button_tab_question4:
+
+                break;
+            default:
+                break;
+        }
+    }
 }

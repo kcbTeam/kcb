@@ -6,10 +6,14 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
+
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request.Method;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
+import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.kcb.common.activity.StartActivity;
 import com.kcb.common.application.KAccount;
@@ -83,6 +87,7 @@ public class LoginActivity extends BaseActivity {
                         new StringRequest(Method.POST, UrlUtil.getStuLoginUrl(id, password),
                                 new Listener<String>() {
                                     public void onResponse(final String response) {
+                                        ToastUtil.toast(response);
                                         new Handler().postDelayed(new Runnable() {
 
                                             @Override
@@ -108,6 +113,7 @@ public class LoginActivity extends BaseActivity {
                                     };
                                 });
                 RequestUtil.getInstance().addToRequestQueue(request, TAG);
+               
             }
         }
     };

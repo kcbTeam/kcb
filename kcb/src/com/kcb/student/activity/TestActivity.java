@@ -3,6 +3,7 @@ package com.kcb.student.activity;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.DownloadManager.Request;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
@@ -13,6 +14,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 
+import com.android.volley.Request.Method;
+import com.android.volley.toolbox.StringRequest;
 import com.kcb.common.base.BaseFragmentActivity;
 import com.kcb.common.util.DialogUtil;
 import com.kcb.library.view.PaperButton;
@@ -21,6 +24,7 @@ import com.kcb.student.adapter.TestRecycleAdapter;
 import com.kcb.teacher.model.ChoiceQuestion;
 import com.kcb.teacher.model.TextContent;
 import com.kcbTeam.R;
+import com.kcbTeam.R.string;
 /**
  * 
  * @className: TestActivity
@@ -58,7 +62,6 @@ public class TestActivity extends BaseFragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.stu_activity_test);
-
         initView();
         initData();
     }
