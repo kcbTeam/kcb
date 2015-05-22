@@ -9,11 +9,11 @@ import android.widget.TextView;
 
 import com.kcb.common.base.BaseActivity;
 import com.kcb.common.listener.DelayClickListener;
+import com.kcb.library.slider.Slider;
+import com.kcb.library.slider.Slider.OnValueChangedListener;
 import com.kcb.library.view.PaperButton;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcbTeam.R;
-import com.kcb.library.slider.*;
-import com.kcb.library.slider.Slider.OnValueChangedListener;
 
 public class EditTestFirstActivity extends BaseActivity {
 

@@ -63,6 +63,7 @@ public class TextContent implements Serializable {
     }
 
     public Bitmap getContentBitmap() {
+        recoverBitmapFromBytes();
         return this.mContentBitmap;
     }
 
@@ -104,6 +105,13 @@ public class TextContent implements Serializable {
             mContentBitmap = getBitmap(mBytesOfBitmap);
             mBytesOfBitmap = null;
         }
+    }
+
+    public boolean isEmpty() {
+        if (null == mContentBitmap && mContentString.equals("") && null == mBytesOfBitmap) {
+            return true;
+        }
+        return false;
     }
 
     public static byte[] getBytes(Bitmap bitmap) {

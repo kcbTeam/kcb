@@ -160,10 +160,18 @@ public class ChoiceQuestion implements Serializable {
         return false;
     }
 
-    public String toString() {
+    public String contentString() {
 
-        return "." + mQuestion + '\n' + "A." + mOptionA + '\n' + "B." + mOptionB + '\n' + "C."
-                + mOptionC + '\n' + "D." + mOptionD + '\n' + "答案：" + getCorrectOption();
+        return mQuestion.getContentString() + '\n' + "A." + mOptionA.getContentString() + '\n'
+                + "B." + mOptionB.getContentString() + '\n' + "C." + mOptionC.getContentString()
+                + '\n' + "D." + mOptionD.getContentString() + '\n';
+
+    }
+
+    public boolean isAllString() {
+        if (mQuestion.isString() && mOptionA.isString() && mOptionB.isString()
+                && mOptionC.isString() && mOptionD.isString()) return true;
+        return false;
     }
 
     public boolean isLegal() {
@@ -171,15 +179,15 @@ public class ChoiceQuestion implements Serializable {
                 && mCorrectId[3] == false) {
             return false;
         }
-        if (!mQuestion.equals("") && !mOptionA.equals("") && !mOptionB.equals("")
-                && !mOptionC.equals("") && !mOptionD.equals("")) {
+        if (!mQuestion.isEmpty() && !mOptionA.isEmpty() && !mOptionB.isEmpty()
+                && !mOptionC.isEmpty() && !mOptionD.isEmpty()) {
             return true;
         }
         return false;
     }
 
-    private String getCorrectOption() {
-        String tempString = "";
+    public String getCorrectOptionString() {
+        String tempString = "答案：";
         if (mCorrectId[0]) {
             tempString += "A、";
         }

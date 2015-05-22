@@ -54,6 +54,7 @@ public class StuCentreFragment extends BaseFragment implements OnItemClickListen
 
 
     private FloatingEditText searchEditText;
+    private ButtonFlat clearButton;
     private View mCurrentView = null;
 
     private ListView mStudentList;
@@ -89,6 +90,9 @@ public class StuCentreFragment extends BaseFragment implements OnItemClickListen
 
         searchEditText = (FloatingEditText) view.findViewById(R.id.edittext_search);
         searchEditText.addTextChangedListener(this);
+
+        clearButton = (ButtonFlat) view.findViewById(R.id.button_clear);
+        clearButton.setOnClickListener(this);
 
         sortById = (ButtonFlat) view.findViewById(R.id.button_sort_info);
         sortById.setOnClickListener(this);
@@ -157,6 +161,11 @@ public class StuCentreFragment extends BaseFragment implements OnItemClickListen
         mTempList.clear();
         mTempList.addAll(mList);
         String searchContent = searchEditText.getText().toString();
+        if (!searchContent.equals("")) {
+            clearButton.setVisibility(View.VISIBLE);
+        } else {
+            clearButton.setVisibility(View.INVISIBLE);
+        }
         for (int i = 0; i < mTempList.size(); i++) {
             String name = mTempList.get(i).getStudentName();
             try {
@@ -196,6 +205,10 @@ public class StuCentreFragment extends BaseFragment implements OnItemClickListen
             case R.id.button_sort_correctrate:
                 Collections.sort(mTempList, correctRateComparator);
                 setImageBackGround(INDEX_CORRECT_RATE);
+                break;
+            case R.id.button_clear:
+                searchEditText.setText("");
+                clearButton.setVisibility(View.INVISIBLE);
                 break;
             default:
                 break;
