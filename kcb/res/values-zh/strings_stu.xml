@@ -77,6 +77,9 @@
     <string name="userpassword">原密码：</string>
     <string name="newpassword">新密码：</string>
     <string name="renewpassword">确认新密码：</string>
+    <string name="emptypassword">密码不能为空，请重新输入！</string>
+    <string name="errorpassword">密码不一致，请重新输入！</string>
+    <string name="successpassword">密码修改成功！</string>
     <!-- ModifyPasswordActivity End -->
 
 </resources>

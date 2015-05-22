@@ -83,14 +83,14 @@ public class ModifyPasswordActivity extends BaseActivity {
         }
         if (v == finishButton) {
             if (TextUtils.isEmpty(password) || TextUtils.isEmpty(password2)) {
-                ToastUtil.toast("密码不能为空，请重新输入！");
+                ToastUtil.toast(R.string.emptypassword);
             }
             if (!password.equals(password2)) {
                 passwordEditText.setText("");
                 password2EditText.setText("");
-                ToastUtil.toast("密码不一致，请重新输入！");
+                ToastUtil.toast(R.string.errorpassword);
             } else {
-                ToastUtil.toast("密码修改成功！");
+                ToastUtil.toast(R.string.successpassword);
             }
         }
     }

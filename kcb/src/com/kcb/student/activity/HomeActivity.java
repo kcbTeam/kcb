@@ -13,7 +13,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
@@ -182,8 +181,8 @@ public class HomeActivity extends BaseFragmentActivity {
             }
         });
 
-        Button modifyButton = (Button) customView.findViewById(R.id.modify_button);
-        Button exitButton = (Button) customView.findViewById(R.id.exit_button);
+        ButtonFlat modifyButton = (ButtonFlat) customView.findViewById(R.id.modify_button);
+        ButtonFlat exitButton = (ButtonFlat) customView.findViewById(R.id.exit_button);
         modifyButton.setOnClickListener(this);
         exitButton.setOnClickListener(this);
     }
