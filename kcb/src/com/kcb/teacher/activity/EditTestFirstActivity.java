@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.TextView;
 
 import com.kcb.common.base.BaseActivity;
@@ -15,13 +14,19 @@ import com.kcb.library.view.PaperButton;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcbTeam.R;
 
+/**
+ * 
+ * @className: EditTestFirstActivity
+ * @description:
+ * @author: ljx
+ * @date: 2015-5-15 下午11:32:33
+ */
 public class EditTestFirstActivity extends BaseActivity {
 
-    int backgroundColor = Color.parseColor("#1E88E5");
     private ButtonFlat backButton;
-    private PaperButton editfinishButton;
     private TextView numtip;
     private Slider slider;
+    private PaperButton finishButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,48 +39,22 @@ public class EditTestFirstActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        // TODO Auto-generated method stub
-
-        int color = getIntent().getIntExtra("BACKGROUND", Color.BLACK);
-
-        slider = (Slider) findViewById(R.id.sliderNumber);
-        slider.setBackgroundColor(color);
-
-        // findViewById(R.id.sliderNumber).setBackgroundColor(color);
+        backButton = (ButtonFlat) findViewById(R.id.button_back);
+        backButton.setOnClickListener(this);
 
         numtip = (TextView) findViewById(R.id.edittext_num);
 
+        slider = (Slider) findViewById(R.id.sliderNumber);
         slider.setOnValueChangedListener(new OnValueChangedListener() {
 
             @Override
             public void onValueChanged(int value) {
-                // TODO Auto-generated method stub
                 numtip.setText("共" + String.valueOf(value) + "题");
             }
-
         });
 
-        backButton = (ButtonFlat) findViewById(R.id.button_back);
-
-        backButton.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-
-        editfinishButton = (PaperButton) findViewById(R.id.button_editfinish);
-        editfinishButton.setOnClickListener(mClickListener);
-
-
-        /*
-         * editfinishButton.setOnClickListener(new OnClickListener() {
-         * 
-         * @Override public void onClick(View v) { Intent intent = new
-         * Intent(EditTestFirstActivity.this, EditTestActivity.class); startActivity(intent); } });
-         */
-
+        finishButton = (PaperButton) findViewById(R.id.button_editfinish);
+        finishButton.setOnClickListener(mClickListener);
     }
 
     private DelayClickListener mClickListener = new DelayClickListener(
@@ -89,8 +68,16 @@ public class EditTestFirstActivity extends BaseActivity {
     };
 
     @Override
-    protected void initData() {
-        // TODO Auto-generated method stub
+    protected void initData() {}
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.button_back:
+                finish();
+                break;
+            default:
+                break;
+        }
     }
 }

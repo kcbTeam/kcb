@@ -17,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.kcb.common.base.BaseFragment;
 import com.kcb.library.view.FloatingEditText;
@@ -38,20 +39,16 @@ import com.kcbTeam.R;
  */
 public class StuCentreFragment extends BaseFragment implements OnItemClickListener, TextWatcher {
 
-    @SuppressWarnings("unused")
-    private static final String TAG = "StuCentreFragment";
-
     private final int INDEX_ID = 0;
     private final int INDEX_CHECKIN_RATE = 1;
     private final int INDEX_CORRECT_RATE = 2;
 
-    private ButtonFlat sortById;
+    private TextView sortById;
     private ImageView idImage;
-    private ButtonFlat sortByCheckInRate;
+    private TextView sortByCheckInRate;
     private ImageView checkInRateImage;
-    private ButtonFlat sortByCorrectRate;
+    private TextView sortByCorrectRate;
     private ImageView correctRateImage;
-
 
     private FloatingEditText searchEditText;
     private ButtonFlat clearButton;
@@ -68,21 +65,21 @@ public class StuCentreFragment extends BaseFragment implements OnItemClickListen
     public static final String CURRENT_STU_KEY = "cunrrent_stu";
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        initView();
-        initData();
-    }
-
-    @SuppressLint("NewApi")
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.tch_fragment_stucentre, container, false);
-        return view;
+        return inflater.inflate(R.layout.tch_fragment_stucentre, container, false);
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        initData();
+        initView();
+    }
+
+    @Override
+    protected void initView() {
+        View view = getView();
         mStudentList = (ListView) view.findViewById(R.id.listview_student);
         mAdapter = new ListAdapterStudent(getActivity(), mTempList);
         mStudentList.setAdapter(mAdapter);
@@ -94,44 +91,31 @@ public class StuCentreFragment extends BaseFragment implements OnItemClickListen
         clearButton = (ButtonFlat) view.findViewById(R.id.button_clear);
         clearButton.setOnClickListener(this);
 
-        sortById = (ButtonFlat) view.findViewById(R.id.button_sort_info);
+        sortById = (TextView) view.findViewById(R.id.textview_stuinfo);
         sortById.setOnClickListener(this);
         idImage = (ImageView) view.findViewById(R.id.imageview_id);
+        idImage.setOnClickListener(this);
 
-        sortByCheckInRate = (ButtonFlat) view.findViewById(R.id.button_sort_checkinrate);
+        sortByCheckInRate = (TextView) view.findViewById(R.id.textview_stucheckinrate);
         sortByCheckInRate.setOnClickListener(this);
         checkInRateImage = (ImageView) view.findViewById(R.id.imageview_checkinrate);
+        checkInRateImage.setOnClickListener(this);
 
-        sortByCorrectRate = (ButtonFlat) view.findViewById(R.id.button_sort_correctrate);
+        sortByCorrectRate = (TextView) view.findViewById(R.id.textview_correctrate);
         sortByCorrectRate.setOnClickListener(this);
         correctRateImage = (ImageView) view.findViewById(R.id.imageview_correctrate);
+        correctRateImage.setOnClickListener(this);
 
         onClick(sortById);
     }
 
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        if (null == mCurrentView) {
-            mCurrentView = view;
-        } else {
-            mCurrentView.setBackgroundColor(getResources().getColor(R.color.white));
-        }
-        view.setBackgroundColor(getResources().getColor(R.color.list_blue_background));
-        mCurrentView = view;
-    }
-
-    @Override
-    protected void initView() {}
-
-    @Override
     protected void initData() {
-
         idComparator = new CompareById();
         correctRateComparator = new CompareByCorrectRate();
         checkInRateComparator = new CompareByCheckInRate();
 
         mList = new ArrayList<StudentInfo>();
-        mList.clear();
         mList.add(new StudentInfo("令狐", "1004210254", 5, 15, 10, 20));
         mList.add(new StudentInfo("杨过", "1004210256", 6, 15, 5, 23));
         mList.add(new StudentInfo("萧远山", "1004210257", 7, 15, 5, 14));
@@ -194,15 +178,18 @@ public class StuCentreFragment extends BaseFragment implements OnItemClickListen
             mCurrentView.setBackgroundColor(getResources().getColor(R.color.white));
         }
         switch (v.getId()) {
-            case R.id.button_sort_info:
+            case R.id.textview_stuinfo:
+            case R.id.imageview_id:
                 Collections.sort(mTempList, idComparator);
                 setImageBackGround(INDEX_ID);
                 break;
-            case R.id.button_sort_checkinrate:
+            case R.id.textview_stucheckinrate:
+            case R.id.imageview_checkinrate:
                 Collections.sort(mTempList, checkInRateComparator);
                 setImageBackGround(INDEX_CHECKIN_RATE);
                 break;
-            case R.id.button_sort_correctrate:
+            case R.id.textview_correctrate:
+            case R.id.imageview_correctrate:
                 Collections.sort(mTempList, correctRateComparator);
                 setImageBackGround(INDEX_CORRECT_RATE);
                 break;
@@ -249,4 +236,14 @@ public class StuCentreFragment extends BaseFragment implements OnItemClickListen
         }
     }
 
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        if (null == mCurrentView) {
+            mCurrentView = view;
+        } else {
+            mCurrentView.setBackgroundColor(getResources().getColor(R.color.white));
+        }
+        view.setBackgroundColor(getResources().getColor(R.color.list_blue_background));
+        mCurrentView = view;
+    }
 }

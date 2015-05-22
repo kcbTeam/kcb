@@ -16,18 +16,17 @@
 
     <com.kcb.library.view.buttonflat.ButtonFlat
         android:id="@+id/button_clear"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="5dp"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_alignBottom="@id/edittext_search"
+        android:layout_alignRight="@id/edittext_search"
+        android:layout_marginBottom="16dp"
         android:visibility="invisible"
-        buttonflat:rippleSpeed="6" >
+        buttonflat:rippleSpeed="4" >
 
         <ImageView
             android:layout_width="32dp"
             android:layout_height="32dp"
-            android:layout_centerInParent="true"
             android:background="@drawable/ic_action_cancel" />
     </com.kcb.library.view.buttonflat.ButtonFlat>
 
@@ -46,21 +45,13 @@
             android:layout_centerVertical="true"
             android:text="@string/stu_centre_info" />
 
-        <com.kcb.library.view.buttonflat.ButtonFlat
-            android:id="@+id/button_sort_info"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_centerVertical="true"
+        <ImageView
+            android:id="@+id/imageview_id"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_centerInParent="true"
             android:layout_toRightOf="@id/textview_stuinfo"
-            buttonflat:rippleSpeed="6" >
-
-            <ImageView
-                android:id="@+id/imageview_id"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_centerInParent="true"
-                android:background="@drawable/ic_action_sort" />
-        </com.kcb.library.view.buttonflat.ButtonFlat>
+            android:background="@drawable/ic_action_sort" />
 
         <TextView
             android:id="@+id/textview_stucheckinrate"
@@ -71,21 +62,13 @@
             android:layout_toRightOf="@id/textview_stuinfo"
             android:text="@string/stu_centre_checkinrate" />
 
-        <com.kcb.library.view.buttonflat.ButtonFlat
-            android:id="@+id/button_sort_checkinrate"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_centerVertical="true"
+        <ImageView
+            android:id="@+id/imageview_checkinrate"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_centerInParent="true"
             android:layout_toRightOf="@id/textview_stucheckinrate"
-            buttonflat:rippleSpeed="6" >
-
-            <ImageView
-                android:id="@+id/imageview_checkinrate"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_centerInParent="true"
-                android:background="@drawable/ic_action_sort" />
-        </com.kcb.library.view.buttonflat.ButtonFlat>
+            android:background="@drawable/ic_action_sort" />
 
         <TextView
             android:id="@+id/textview_correctrate"
@@ -96,21 +79,13 @@
             android:layout_toRightOf="@id/textview_stucheckinrate"
             android:text="@string/stu_centre_correctrate" />
 
-        <com.kcb.library.view.buttonflat.ButtonFlat
-            android:id="@+id/button_sort_correctrate"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_centerVertical="true"
+        <ImageView
+            android:id="@+id/imageview_correctrate"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_centerInParent="true"
             android:layout_toRightOf="@id/textview_correctrate"
-            buttonflat:rippleSpeed="6" >
-
-            <ImageView
-                android:id="@+id/imageview_correctrate"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_centerInParent="true"
-                android:background="@drawable/ic_action_sort" />
-        </com.kcb.library.view.buttonflat.ButtonFlat>
+            android:background="@drawable/ic_action_sort" />
     </RelativeLayout>
 
     <ListView
