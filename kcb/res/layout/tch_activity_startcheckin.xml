@@ -13,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/activity_header_shadow"
+        android:gravity="center_vertical"
         android:text="@string/signclass" />
 
     <com.kcb.library.view.buttonflat.ButtonFlat
@@ -44,17 +45,19 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/button_getnum"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/dp_8"
         android:text="@string/tipforteacher1" />
 
     <LinearLayout
         android:id="@+id/linearlayout_showsignnum"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/button_getnum"
+        android:layout_alignRight="@id/button_getnum"
         android:layout_below="@id/tipforteacher1"
-        android:layout_marginLeft="@dimen/dp_42"
-        android:layout_marginRight="@dimen/dp_42"
-        android:layout_marginTop="@dimen/dp_32"
+        android:layout_marginLeft="@dimen/dp_8"
+        android:layout_marginRight="@dimen/dp_8"
+        android:layout_marginTop="@dimen/dp_8"
         android:orientation="horizontal" >
 
         <TextView
