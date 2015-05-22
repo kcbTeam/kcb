@@ -21,7 +21,7 @@ public class CourseTest implements Serializable {
     private String mTestName;
     private int mTestTime;
     private String mTestDate;
-    
+
 
     public CourseTest(String testName, List<ChoiceQuestion> questionList) {
         mChoiceQuestionList = questionList;

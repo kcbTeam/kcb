@@ -110,7 +110,7 @@ public class LoginActivity extends BaseActivity {
                                     };
                                 });
                 RequestUtil.getInstance().addToRequestQueue(request, TAG);
-               
+
             }
         }
     };

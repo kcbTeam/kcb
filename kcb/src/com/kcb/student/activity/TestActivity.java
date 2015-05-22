@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
+
 import com.kcb.common.base.BaseFragmentActivity;
 import com.kcb.common.util.DialogUtil;
 import com.kcb.library.view.PaperButton;
@@ -20,11 +21,11 @@ import com.kcb.student.adapter.TestRecycleAdapter;
 import com.kcb.teacher.model.ChoiceQuestion;
 import com.kcb.teacher.model.TextContent;
 import com.kcbTeam.R;
-import com.kcbTeam.R.string;
+
 /**
  * 
  * @className: TestActivity
- * @description: 
+ * @description:
  * @author: Tao Li
  * @date: 2015-5-17 上午10:53:44
  */

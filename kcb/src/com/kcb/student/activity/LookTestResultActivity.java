@@ -1,21 +1,11 @@
 package com.kcb.student.activity;
 
-import java.io.IOException;
-
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
-
-import android.R.integer;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.AttributeSet;
-import android.util.Xml;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.kcb.common.base.BaseActivity;
-import com.kcb.common.util.LogUtil;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.library.view.checkbox.CheckBox;
 import com.kcb.student.util.RedHookDraw;
@@ -68,7 +58,7 @@ public class LookTestResultActivity extends BaseActivity {
         qTab2Button = (ButtonFlat) findViewById(R.id.button_tab_question2);
         qTab3Button = (ButtonFlat) findViewById(R.id.button_tab_question3);
         qTab4Button = (ButtonFlat) findViewById(R.id.button_tab_question4);
-        backButton=(ButtonFlat) findViewById(R.id.button_back);
+        backButton = (ButtonFlat) findViewById(R.id.button_back);
         backButton.setOnClickListener(this);
         layout = (RedHookDraw) findViewById(R.id.relativelayout_redhook);
         layout.setVisibility(View.INVISIBLE);
