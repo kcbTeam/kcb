@@ -3,7 +3,6 @@ package com.kcb.student.activity;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.app.DownloadManager.Request;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
@@ -13,9 +12,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
-
-import com.android.volley.Request.Method;
-import com.android.volley.toolbox.StringRequest;
 import com.kcb.common.base.BaseFragmentActivity;
 import com.kcb.common.util.DialogUtil;
 import com.kcb.library.view.PaperButton;

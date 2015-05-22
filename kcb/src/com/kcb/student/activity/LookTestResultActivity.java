@@ -35,10 +35,11 @@ public class LookTestResultActivity extends BaseActivity {
     private CheckBox checkboxB;
     private CheckBox checkboxC;
     private CheckBox checkboxD;
-    ButtonFlat qTab1Button;
-    ButtonFlat qTab2Button;
-    ButtonFlat qTab3Button;
-    ButtonFlat qTab4Button;
+    private ButtonFlat qTab1Button;
+    private ButtonFlat qTab2Button;
+    private ButtonFlat qTab3Button;
+    private ButtonFlat qTab4Button;
+    private ButtonFlat backButton;
     private int numQuestion;
     private RedHookDraw layout;
 
@@ -67,6 +68,8 @@ public class LookTestResultActivity extends BaseActivity {
         qTab2Button = (ButtonFlat) findViewById(R.id.button_tab_question2);
         qTab3Button = (ButtonFlat) findViewById(R.id.button_tab_question3);
         qTab4Button = (ButtonFlat) findViewById(R.id.button_tab_question4);
+        backButton=(ButtonFlat) findViewById(R.id.button_back);
+        backButton.setOnClickListener(this);
         layout = (RedHookDraw) findViewById(R.id.relativelayout_redhook);
         layout.setVisibility(View.INVISIBLE);
     }

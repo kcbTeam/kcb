@@ -8,18 +8,20 @@
     android:background="@color/questionItem" >
 
     <TextView
-        android:id="@+id/textview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-    <com.kcb.library.view.buttonflat.ButtonFlat
-        android:id="@+id/button_modify"
+        android:id="@+id/textview_question_num"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/textview_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/textview_question_num" />
+
+    <TextView
+        android:id="@+id/textview_answer"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:background="@color/gray"
-        android:text="@string/Go_modify" >
-    </com.kcb.library.view.buttonflat.ButtonFlat>
+        android:layout_below="@id/textview_content" />
 
 </RelativeLayout>

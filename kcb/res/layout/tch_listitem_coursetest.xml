@@ -24,19 +24,4 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="180dp" />
 
-    <com.kcb.library.view.buttonflat.ButtonFlat
-        android:id="@+id/button_details"
-        android:layout_width="24dp"
-        android:layout_height="match_parent"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        buttonflat:rippleSpeed="6" >
-
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_centerInParent="true"
-            android:src="@drawable/ic_action_next" />
-    </com.kcb.library.view.buttonflat.ButtonFlat>
-
 </RelativeLayout>

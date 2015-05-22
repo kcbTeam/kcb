@@ -1,8 +1,11 @@
 package com.kcb.student.activity;
 
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 
 import com.kcb.common.base.BaseActivity;
@@ -14,8 +17,10 @@ public class ModifyPasswordActivity extends BaseActivity {
 
     private ButtonFlat backButton;
     private ButtonFlat finishButton;
+    private EditText userpasswordEditText;
     private EditText passwordEditText;
     private EditText password2EditText;
+    private CheckBox check;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,17 +32,47 @@ public class ModifyPasswordActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+
         backButton = (ButtonFlat) findViewById(R.id.button_back);
         finishButton = (ButtonFlat) findViewById(R.id.button_finish);
+        userpasswordEditText = (EditText) findViewById(R.id.edittext_userpassword);
         passwordEditText = (EditText) findViewById(R.id.edittext_newpassword);
         password2EditText = (EditText) findViewById(R.id.edittext_renewpassword);
+        check = (CheckBox) findViewById(R.id.check);
 
         backButton.setOnClickListener(this);
         finishButton.setOnClickListener(this);
+
+        CheckPassword();
     }
 
     @Override
     protected void initData() {}
+
+    public void CheckPassword() {
+        userpasswordEditText.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String password = userpasswordEditText.getText().toString();
+                if (!TextUtils.isEmpty(password)) {
+                    check.setVisibility(View.VISIBLE);
+                    passwordEditText.setEnabled(true);
+                    password2EditText.setEnabled(true);
+                } else {
+                    check.setVisibility(View.INVISIBLE);
+                    passwordEditText.setEnabled(false);
+                    password2EditText.setEnabled(false);
+                }
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+        });
+    }
 
     @Override
     public void onClick(View v) {
@@ -59,5 +94,4 @@ public class ModifyPasswordActivity extends BaseActivity {
             }
         }
     }
-
 }

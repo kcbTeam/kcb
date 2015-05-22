@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -11,6 +12,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.kcb.library.view.buttonflat.ButtonFlat;
+import com.kcb.student.activity.LookTestResultActivity;
+import com.kcb.student.activity.TestResultActivity;
 import com.kcbTeam.R;
 
 /**
@@ -45,21 +49,25 @@ public class TestResultAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
         if (convertView == null) {
             holder = new ViewHolder();
             convertView = LayoutInflater.from(context).inflate(R.layout.stu_view_list, null);
             holder.testname = (TextView) convertView.findViewById(R.id.testname);
+            holder.nextButtonFlat = (ButtonFlat) convertView.findViewById(R.id.button_testdetail);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
         holder.testname.setText(Data.get(position).toString());
-        holder.testname.setOnClickListener(new OnClickListener() {
+        holder.nextButtonFlat.setOnClickListener(new OnClickListener() {
+
             @Override
             public void onClick(View v) {
-
+                Intent intent=new Intent(context,LookTestResultActivity.class);
+                intent.putExtra("testTitle1", Data.get(position));
+                context.startActivity(intent);
             }
         });
         return convertView;
@@ -68,5 +76,6 @@ public class TestResultAdapter extends BaseAdapter {
     public final class ViewHolder {
 
         public TextView testname;
+        public ButtonFlat nextButtonFlat;
     }
 }

@@ -61,6 +61,7 @@
         </activity>
         <activity
             android:name="com.kcb.student.activity.TestResultActivity"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
             android:screenOrientation="portrait" >
         </activity>
          <activity

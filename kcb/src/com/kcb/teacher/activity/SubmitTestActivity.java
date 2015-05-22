@@ -4,10 +4,11 @@ import java.util.List;
 
 import android.os.Bundle;
 import android.widget.ListView;
-import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.kcb.common.base.BaseActivity;
+import com.kcb.library.slider.Slider;
+import com.kcb.library.slider.Slider.OnValueChangedListener;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.teacher.adapter.ListAdapterQuestions;
 import com.kcb.teacher.model.ChoiceQuestion;
@@ -24,7 +25,8 @@ public class SubmitTestActivity extends BaseActivity {
     private CourseTest mCurrentTest;
 
     private TextView testName;
-    private SeekBar testTime;
+    private Slider testTime;
+    private TextView texttimeHint;
 
     private ButtonFlat submitButton;
 
@@ -49,8 +51,19 @@ public class SubmitTestActivity extends BaseActivity {
         submitButton = (ButtonFlat) findViewById(R.id.button_submit);
         submitButton.setOnClickListener(this);
 
-        testTime = (SeekBar) findViewById(R.id.seekbar_testtime);
-        testTime.setProgress(150);
+        testTime = (Slider) findViewById(R.id.slider_testtime);
+        texttimeHint = (TextView) findViewById(R.id.testtimeHint);
+        texttimeHint.setText(String.format(getResources().getString(R.string.testtimeFormat),
+                testTime.getValue()));
+        testTime.setOnValueChangedListener(new OnValueChangedListener() {
+
+            @Override
+            public void onValueChanged(int value) {
+                texttimeHint.setText(String.format(getResources()
+                        .getString(R.string.testtimeFormat), testTime.getValue()));
+            }
+        });
+
 
     }
 
@@ -60,4 +73,5 @@ public class SubmitTestActivity extends BaseActivity {
                 (CourseTest) getIntent().getSerializableExtra(EditTestActivity.COURSE_TEST_KEY);
         mList = mCurrentTest.getQuestionList();
     }
+
 }

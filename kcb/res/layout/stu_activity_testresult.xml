@@ -4,7 +4,8 @@
     xmlns:expandable="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/activity_background" >
+    android:background="@color/activity_background"
+    tools:ignore="contentDescription" >
 
     <LinearLayout
         android:id="@+id/titlelayout"
@@ -42,11 +43,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/search"
+        android:listSelector="#00000000"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
         android:layout_marginTop="10dp"
         android:clickable="true"
-        android:focusable="false"
         android:textSize="20sp" />
 
 </RelativeLayout>

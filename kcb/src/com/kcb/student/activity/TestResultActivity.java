@@ -31,6 +31,8 @@ public class TestResultActivity extends BaseActivity {
     private ButtonFlat backButton;
     private EditText mEditText;
     ArrayList<String> listItem = new ArrayList<String>();
+    private TestResultAdapter listAdapter;
+    private View CurrentView;
     private String[] testTitle = {"微积分", "导数", "导数复习"};
     private String test;
 
@@ -45,19 +47,24 @@ public class TestResultActivity extends BaseActivity {
     @Override
     protected void initView() {
         listView = (ListView) findViewById(R.id.listview);
-        mEditText = (EditText) findViewById(R.id.search);
-        listView.setAdapter(new TestResultAdapter(this, listItem));
+        listAdapter = new TestResultAdapter(this, listItem);
+        listView.setAdapter(listAdapter);
         for (int i = 0; i < testTitle.length; i++) {
             listItem.add(testTitle[i]);
         }
         listView.setOnItemClickListener(new OnItemClickListener() {
             public void onItemClick(AdapterView<?> adapter, View arg1, int position, long arg3) {
-                Intent intent=new Intent(TestResultActivity.this,LookTestResultActivity.class);
-                intent.putExtra("testTitle1", testTitle[position]);
-                startActivity(intent);
+                if (null == CurrentView) {
+                    CurrentView = arg1;
+                } else {
+                    CurrentView.setBackgroundColor(getResources().getColor(R.color.white));
+                }
+                arg1.setBackgroundColor(getResources().getColor(R.color.green));
+                CurrentView = arg1;
             }
         });
 
+        mEditText = (EditText) findViewById(R.id.search);
         mEditText.addTextChangedListener(new TextWatcher() {
 
             @Override
