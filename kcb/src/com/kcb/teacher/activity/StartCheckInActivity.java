@@ -12,6 +12,9 @@ import android.os.Message;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -40,6 +43,8 @@ public class StartCheckInActivity extends BaseActivity {
     private PaperButton stopButton;
     private ProgressBar progressBar;
     private TextView timetip;
+    
+    private boolean sOs; //flag of button state
 
     protected static final int STOP = 0x10000;
     protected static final int NEXT = 0x10001;
@@ -49,6 +54,11 @@ public class StartCheckInActivity extends BaseActivity {
     private TextView signnum2TextView;
     private TextView signnum3TextView;
     private TextView signnum4TextView;
+    
+    
+    private ImageView imagelayer;
+    private ImageView imagelayer2;
+
 
     // private TextView numTextview;
     private PaperButton rateButton;
@@ -101,8 +111,9 @@ public class StartCheckInActivity extends BaseActivity {
         startButton = (PaperButton) findViewById(R.id.button_start);
         startButton.setOnClickListener(mClickListener);
 
-        stopButton = (PaperButton) findViewById(R.id.button_stop);
-        stopButton.setOnClickListener(mClickListener);
+        
+        imagelayer=(ImageView)findViewById(R.id.imageView_asback);
+        imagelayer2=(ImageView)findViewById(R.id.imageView_atsback);
 
         progressBar = (ProgressBar) findViewById(R.id.ProgressBar);
         timetip = (TextView) findViewById(R.id.textview_timetip);
@@ -130,13 +141,15 @@ public class StartCheckInActivity extends BaseActivity {
                     }, R.string.cancel, null);
         }
     }
-
+    
+   
     private DelayClickListener mClickListener = new DelayClickListener(
             DelayClickListener.DELAY_PAPER_BUTTON) {
 
         @Override
         public void doClick(View v) {
             if (v == getNumButton) {
+            	
                 final int intnum = (int) (Math.random() * 9000 + 1000);
 
                 signnum1TextView.setText("");
@@ -202,53 +215,75 @@ public class StartCheckInActivity extends BaseActivity {
                 timer.schedule(task2, 600);
                 timer.schedule(task3, 900);
                 timer.schedule(task4, 1200);
+                
+                Animation animation = AnimationUtils.loadAnimation(StartCheckInActivity.this, R.anim.layer_alpha_out); 
+                imagelayer.startAnimation(animation);
+                imagelayer.setVisibility(View.GONE);
+                
+            
+               
             } else if (v == startButton) {
-                startButton.setVisibility(View.GONE);
-                stopButton.setVisibility(View.VISIBLE);
-                stopButton.setClickable(true);
+            	
+            	if(!sOs){
+            		startButton.setText("停止签到");
+            		sOs=true;
+            		iCount = 0;
+                    progressBar.setVisibility(View.VISIBLE);
+                    progressBar.setMax(120);
+                    progressBar.setProgress(0);
 
-                iCount = 0;
-                progressBar.setVisibility(View.VISIBLE);
-                progressBar.setMax(120);
-                progressBar.setProgress(0);
-
-                Thread mThread = new Thread(new Runnable() {
-                    public void run() {
-                        for (int i = 0; i < 120; i++) {
-                            try {
-                                iCount = (i + 1);
-                                Thread.sleep(1000);
-                                if (i == 119) {
-                                    Message msg = new Message();
-                                    msg.what = STOP;
-                                    mHandler.sendMessage(msg);
-                                    break;
-                                } else {
-                                    Message msg = new Message();
-                                    msg.what = NEXT;
-                                    mHandler.sendMessage(msg);
+                    Thread mThread = new Thread(new Runnable() {
+                        public void run() {
+                            for (int i = 0; i < 120; i++) {
+                                try {
+                                    iCount = (i + 1);
+                                    Thread.sleep(1000);
+                                    if (i == 119) {
+                                        Message msg = new Message();
+                                        msg.what = STOP;
+                                        mHandler.sendMessage(msg); 
+                                        
+                                        
+                                        Animation animation = AnimationUtils.loadAnimation(StartCheckInActivity.this, R.anim.layer_alpha_out); 
+                                        imagelayer2.startAnimation(animation);
+                                        imagelayer2.setVisibility(View.GONE);
+                                        
+                                        break;
+                                    } else {
+                                        Message msg = new Message();
+                                        msg.what = NEXT;
+                                        mHandler.sendMessage(msg);
+                                    }
+                                } catch (Exception e) {
+                                    e.printStackTrace();
                                 }
-                            } catch (Exception e) {
-                                e.printStackTrace();
                             }
                         }
-                    }
-                });
-                mThread.start();
-            } else if (v == stopButton) {
-                DialogUtil.showNormalDialog(StartCheckInActivity.this, R.string.stopsign,
-                        R.string.stop_sign_tip, R.string.sure, new OnClickListener() {
+                    });
+                    mThread.start();
+            		
+            	}else{
+            		DialogUtil.showNormalDialog(StartCheckInActivity.this, R.string.stopsign,
+                            R.string.stop_sign_tip, R.string.sure, new OnClickListener() {
 
-                            @Override
-                            public void onClick(View v) {
-                                finish();
-                                // progressBar.setVisibility(View.GONE);
-                                // timetip.setText(""); // important
-                                // timetip.setVisibility(View.GONE);
-                            }
-                        }, R.string.cancel, null);
+                                @Override
+                                public void onClick(View v) {
+                                    finish();
+                                    // progressBar.setVisibility(View.GONE);
+                                    // timetip.setText(""); // important
+                                    // timetip.setVisibility(View.GONE);
+                                }
+                            }, R.string.cancel, null);
+            	}
+            	
+                //startButton.setVisibility(View.GONE);
+                //stopButton.setVisibility(View.VISIBLE);
+ 
+               // stopButton.setClickable(true);
 
+               
             } else if (v == rateButton) {
+            	
                 Intent intent = new Intent(StartCheckInActivity.this, CheckInDetailsActivity.class);
                 List<StudentInfo> missedCheckInStus = new ArrayList<StudentInfo>();
                 missedCheckInStus.add(new StudentInfo("testNameq", "0003", 12, 5));
