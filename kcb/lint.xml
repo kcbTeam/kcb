@@ -31,6 +31,9 @@
         <ignore path="res/layout/stu_menu_setting.xml" />
         <ignore path="res/layout/stu_view_list.xml" />
     </issue>
+    <issue id="RtlSymmetry">
+        <ignore path="res/layout/stu_activity_home.xml" />
+    </issue>
     <issue id="SpUsage">
         <ignore path="res/layout/stu_activity_submit.xml" />
     </issue>
