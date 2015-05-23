@@ -40,7 +40,7 @@ public class StartCheckInActivity extends BaseActivity {
     private PaperButton getNumButton;
 
     private PaperButton startButton;
-    private PaperButton stopButton;
+
     private ProgressBar progressBar;
     private TextView timetip;
     
