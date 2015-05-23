@@ -1,6 +1,8 @@
 package com.kcb.common.util;
 
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
 import android.view.animation.CycleInterpolator;
 import android.view.animation.TranslateAnimation;
 
@@ -27,4 +29,54 @@ public class AnimationUtil {
         animation.setDuration(350);
         view.startAnimation(animation);
     }
+
+    /**
+     * 
+     * @title: topToCenter
+     * @description:
+     * @author: ZQJ
+     * @date: 2015年5月23日 下午8:01:02
+     * @param view
+     */
+    public static void topToCenter(View view) {
+        TranslateAnimation animation = new TranslateAnimation(0, 0, -400, 0);
+        animation.setDuration(350);
+        view.startAnimation(animation);
+    }
+
+    /**
+     * 
+     * @title: rightToCenter
+     * @description:
+     * @author: ZQJ
+     * @date: 2015年5月23日 下午8:14:51
+     * @param view
+     */
+    public static void rightToCenter(View view) {
+        TranslateAnimation animation = new TranslateAnimation(1000, 0, 0, 0);
+        animation.setDuration(1000);
+        view.startAnimation(animation);
+    }
+
+    public static void centerToLeft(final View view) {
+        TranslateAnimation animation = new TranslateAnimation(0, -1000, 0, 0);
+        animation.setDuration(1000);
+        // animation.setFillAfter(true); not work very well , use listener instead
+        animation.setAnimationListener(new AnimationListener() {
+
+            @Override
+            public void onAnimationStart(Animation animation) {}
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {}
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                view.setVisibility(View.INVISIBLE);
+            }
+        });
+        view.startAnimation(animation);
+    }
+
+
 }
