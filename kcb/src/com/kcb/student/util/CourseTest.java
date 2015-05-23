@@ -1,4 +1,4 @@
-package com.kcb.teacher.model;
+package com.kcb.student.util;
 
 import java.io.Serializable;
 import java.util.List;
