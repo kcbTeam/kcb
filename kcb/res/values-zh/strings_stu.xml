@@ -72,7 +72,7 @@
 
     <!-- ModifyPasswordActivity Start -->
     <string name="goback">返回</string>
-    <string name="setpassword">设置密码</string>
+    <string name="setpassword">修改密码</string>
     <string name="finish">完成</string>
     <string name="userpassword">原密码：</string>
     <string name="newpassword">新密码：</string>

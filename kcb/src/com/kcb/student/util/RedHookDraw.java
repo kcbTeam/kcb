@@ -17,7 +17,7 @@ public class RedHookDraw extends View {
         paint = new Paint();
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(5);
-       
+
     }
 
     protected void onDraw(Canvas canvas) {

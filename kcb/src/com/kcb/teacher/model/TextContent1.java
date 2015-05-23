@@ -47,7 +47,7 @@ public class TextContent1<T> implements Serializable {
             return true;
         }
         if (this.isString == o.isString) {
-                return this.mContent.equals(o.mContent);
+            return this.mContent.equals(o.mContent);
         }
         return false;
     }

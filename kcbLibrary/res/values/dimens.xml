@@ -1,11 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- RadioButton  -->
-     <dimen name="radio_width">48dp</dimen> 
-     <dimen name="radio_height">48dp</dimen> 
-     <dimen name="radio_border_radius">10dp</dimen> 
-     <dimen name="radio_thumb_radius">6dp</dimen> 
-     <dimen name="radio_ripple_radius">24dp</dimen> 
-     <dimen name="radio_stroke_width">2dp</dimen> 
+
+    <!-- RadioButton -->
+    <dimen name="radio_width">48dp</dimen>
+    <dimen name="radio_height">48dp</dimen>
+    <dimen name="radio_border_radius">10dp</dimen>
+    <dimen name="radio_thumb_radius">6dp</dimen>
+    <dimen name="radio_ripple_radius">24dp</dimen>
+    <dimen name="radio_stroke_width">2dp</dimen>
+
+    <!-- CardView -->
+    <!-- Default radius for CardView corners. -->
+    <dimen name="cardview_default_radius">2dp</dimen>
+    <!-- Elevation value to use for CardViews. Pre-L, it is equal to shadow size. -->
+    <dimen name="cardview_default_elevation">2dp</dimen>
+    <!--
+     Inset shadow for RoundRectDrawableWithShadow. It is used to avoid gaps between the card
+     and the shadow.
+    -->
+    <dimen name="cardview_compat_inset_shadow">1dp</dimen>
 
 </resources>
