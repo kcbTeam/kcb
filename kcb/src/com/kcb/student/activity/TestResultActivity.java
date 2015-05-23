@@ -9,10 +9,10 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.EditText;
 import android.widget.ListView;
 
 import com.kcb.common.base.BaseActivity;
+import com.kcb.library.view.FloatingEditText;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.student.adapter.TestResultAdapter;
 import com.kcbTeam.R;
@@ -28,7 +28,7 @@ public class TestResultActivity extends BaseActivity {
 
     private ListView listView;
     private ButtonFlat backButton;
-    private EditText mEditText;
+    private FloatingEditText mEditText;
     ArrayList<String> listItem = new ArrayList<String>();
     private TestResultAdapter listAdapter;
     private View CurrentView;
@@ -63,7 +63,7 @@ public class TestResultActivity extends BaseActivity {
             }
         });
 
-        mEditText = (EditText) findViewById(R.id.search);
+        mEditText = (FloatingEditText) findViewById(R.id.search);
         mEditText.addTextChangedListener(new TextWatcher() {
 
             @Override
