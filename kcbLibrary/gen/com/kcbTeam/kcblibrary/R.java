@@ -611,13 +611,6 @@ containing a value of this type.
     }
     public static final class color {
         public static int black_translucent=0x7f050008;
-<<<<<<< HEAD
-        /**  FloatingEditText Default 
-         */
-        public static int floating_edit_text_color=0x7f05000c;
-        public static int floating_edit_text_error_color=0x7f05000e;
-        public static int floating_edit_text_highlighted_color=0x7f05000d;
-=======
         /**  Background color for dark CardView. 
          */
         public static int cardview_dark_background=0x7f05000a;
@@ -636,33 +629,20 @@ containing a value of this type.
         public static int floating_edit_text_color=0x7f050010;
         public static int floating_edit_text_error_color=0x7f050012;
         public static int floating_edit_text_highlighted_color=0x7f050011;
->>>>>>> d1000a91fc69051583892de178cfd73aac47650c
         public static int gplus_color_1=0x7f050001;
         public static int gplus_color_2=0x7f050002;
         public static int gplus_color_3=0x7f050003;
         public static int gplus_color_4=0x7f050004;
         public static int material_dialog_thumbColor=0x7f050000;
-<<<<<<< HEAD
-        public static int paper_button_color=0x7f05000a;
-        public static int paper_button_shadow_color=0x7f05000b;
-        public static int paper_text_color=0x7f050009;
-=======
         public static int paper_button_color=0x7f05000e;
         public static int paper_button_shadow_color=0x7f05000f;
         public static int paper_text_color=0x7f05000d;
->>>>>>> d1000a91fc69051583892de178cfd73aac47650c
         public static int radio_checked_color=0x7f050007;
         /**  RadioButton Default 
          */
         public static int radio_color=0x7f050006;
         /**  SmoothProgressBar 
          */
-<<<<<<< HEAD
-        public static int spb_default_color=0x7f05000f;
-        public static int thumbColor=0x7f050005;
-    }
-    public static final class dimen {
-=======
         public static int spb_default_color=0x7f050013;
         public static int thumbColor=0x7f050005;
     }
@@ -680,7 +660,6 @@ containing a value of this type.
  Default radius for CardView corners. 
          */
         public static int cardview_default_radius=0x7f07000d;
->>>>>>> d1000a91fc69051583892de178cfd73aac47650c
         public static int floating_edit_text_underline_height=0x7f070003;
         public static int floating_edit_text_underline_highlighted_height=0x7f070004;
         public static int paper_button_corner_radius=0x7f070001;
@@ -693,11 +672,7 @@ containing a value of this type.
         public static int radio_ripple_radius=0x7f07000b;
         public static int radio_stroke_width=0x7f07000c;
         public static int radio_thumb_radius=0x7f07000a;
-<<<<<<< HEAD
-        /**  RadioButton  
-=======
         /**  RadioButton 
->>>>>>> d1000a91fc69051583892de178cfd73aac47650c
          */
         public static int radio_width=0x7f070007;
         public static int spb_default_stroke_separator_length=0x7f070005;
@@ -766,14 +741,11 @@ containing a value of this type.
         /**  Application theme. 
          */
         public static int AppTheme=0x7f0b0001;
-<<<<<<< HEAD
-=======
         /**  CardView 
          */
         public static int CardView=0x7f0b0003;
         public static int CardView_Dark=0x7f0b0005;
         public static int CardView_Light=0x7f0b0004;
->>>>>>> d1000a91fc69051583892de178cfd73aac47650c
         /**  SmoothProgressBar 
          */
         public static int SmoothProgressBar=0x7f0b0002;

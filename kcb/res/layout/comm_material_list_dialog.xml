@@ -28,22 +28,31 @@
         <ListView
             android:id="@+id/listmessage"
             android:listSelector="#fff"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/title"
-            android:layout_marginBottom="24dp"
+            
             android:layout_marginLeft="24dp"
             android:layout_marginRight="24dp"
             android:textColor="#000" 
             android:dividerHeight="1px"
             android:divider="@color/gray"/>
+        
+        <View 
+            android:id="@+id/view_dig"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
+            android:layout_height="1px" 
+            android:background="@color/gray" 
+            android:layout_below="@id/listmessage"/>
 
         <com.kcb.library.view.buttonflat.ButtonFlat
             android:id="@+id/button_accept"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_below="@id/listmessage"
+            android:layout_below="@id/view_dig"
             android:layout_marginRight="16dp"
             android:background="#1E88E5"
             android:text="@string/sure" />
