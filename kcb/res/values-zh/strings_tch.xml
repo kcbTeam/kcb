@@ -98,14 +98,13 @@
     <string name="deletebackground">删除背景</string>
     <!-- EditTestActivity End -->
 
-	
-	<!-- Cut Picture Activity Strat -->
-	<string name="cut_title">裁剪图片</string>
-	<string name="rotate">旋转</string>
-	<string name="crop">裁剪</string>
-	<string name="preview">预览</string>
-	<!-- Cut Picture Activity End -->
-	
+
+    <!-- Cut Picture Activity Strat -->
+    <string name="cut_title">裁剪图片</string>
+    <string name="rotate">旋转</string>
+    <string name="crop">裁剪</string>
+    <string name="preview">预览</string>
+    <!-- Cut Picture Activity End -->
 
 
     <!-- EditTestFirstActivity Start -->
@@ -120,14 +119,25 @@
     <string name="sure_submit">确认提交</string>
     <string name="testtimeFormat">%1$d分钟</string>
     <!-- Submit Activity End -->
-	
-	<!-- Check Test Activity Start -->
-	<string name="checktest">查看测试</string>
-	<string name="hint_checktest_search">搜索测试名称</string>
-	<string name="testinfo">测试信息</string>
-	<string name="totalQuestionNum">总题数</string>
-	<!-- Check Test Activity End -->
-	
+
+
+    <!-- Check Test Activity Start -->
+    <string name="checktest">查看测试</string>
+    <string name="hint_checktest_search">搜索测试名称</string>
+    <string name="testinfo">测试信息</string>
+    <string name="totalQuestionNum">总题数</string>
+    <!-- Check Test Activity End -->
+
+
+    <!-- Modify PassWord Start -->
+    <string name="old_password">原密码</string>
+    <string name="next_step">下一步</string>
+    <string name="new_password">新密码</string>
+    <string name="repeat_new_password">再次输入新密码</string>
+    <string name="password_error">密码错误！</string>
+    <string name="modified">修改成功^_^</string>
+    <!-- Modify PassWord End -->
+
     <string name="signclass">课堂签到</string>
     <string name="giveupsign">放弃签到</string>
     <string name="giveup_sign_tip">放弃签到后，本次签到将无效。</string>
@@ -141,6 +151,4 @@
     <string name="classrate_look">>></string>
     <string name="finish">完成</string>
 
-    
-    
 </resources>
