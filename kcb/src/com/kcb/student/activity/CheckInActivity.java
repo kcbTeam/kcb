@@ -62,8 +62,6 @@ public class CheckInActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        backButton = (ButtonFlat) findViewById(R.id.button_back);
-        backButton.setOnClickListener(this);
         numView = findViewById(R.id.linearlayout_shownum);
         num1TextView = (TextView) findViewById(R.id.textview_shownum1);
         num2TextView = (TextView) findViewById(R.id.textview_shownum2);
@@ -83,15 +81,7 @@ public class CheckInActivity extends BaseActivity {
     protected void initData() {}
 
     @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.button_back:
-                finish();
-                break;
-            default:
-                break;
-        }
-    }
+    public void onClick(View v) {}
 
     private boolean isNumCompleted() {
         return getNum().length() == 4;
@@ -205,14 +195,7 @@ public class CheckInActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        DialogUtil.showNormalDialog(this, R.string.tip, R.string.if_giveup_checkin, R.string.sure,
-                new OnClickListener() {
-
-                    @Override
-                    public void onClick(View v) {
-                        finish();
-                    }
-                }, R.string.cancel, null);
+        ToastUtil.toast("签到尚未完成！");
     }
 
     protected void onDestroy() {

@@ -94,6 +94,8 @@ public class TestActivity extends BaseFragmentActivity {
     }
 
     public void getTestContentFromNet() {
+
+        mChoiceQuestion = new ChoiceQuestion();
         mChoiceQuestion.setQuestionNum(1);
         mChoiceQuestion.setQuestion(new TextContent("这是题目显示区域1"));
         mChoiceQuestion.setOptionA(new TextContent("答案1"));
@@ -102,6 +104,7 @@ public class TestActivity extends BaseFragmentActivity {
         mChoiceQuestion.setOptionD(new TextContent("答案4"));
         mListQuestion = new ArrayList<ChoiceQuestion>();
         mListQuestion.add(mChoiceQuestion);
+        mChoiceQuestion1 = new ChoiceQuestion();
         mChoiceQuestion1.setQuestionNum(2);
         mChoiceQuestion1.setQuestion(new TextContent("这是题目显示区域2"));
         mChoiceQuestion1.setOptionA(new TextContent("答案1"));
@@ -109,6 +112,7 @@ public class TestActivity extends BaseFragmentActivity {
         mChoiceQuestion1.setOptionC(new TextContent("答案3"));
         mChoiceQuestion1.setOptionD(new TextContent("答案4"));
         mListQuestion.add(mChoiceQuestion1);
+        mChoiceQuestion2 = new ChoiceQuestion();
         mChoiceQuestion2.setQuestionNum(3);
         mChoiceQuestion2.setQuestion(new TextContent("这是题目显示区域3"));
         mChoiceQuestion2.setOptionA(new TextContent("答案1"));
@@ -120,9 +124,6 @@ public class TestActivity extends BaseFragmentActivity {
 
     @Override
     protected void initData() {
-        mChoiceQuestion = new ChoiceQuestion();
-        mChoiceQuestion1 = new ChoiceQuestion();
-        mChoiceQuestion2 = new ChoiceQuestion();
         getTestContentFromNet();
         showCurrentQuestion(0);
         setTimeCounterDown();
@@ -172,8 +173,16 @@ public class TestActivity extends BaseFragmentActivity {
             showCurrentQuestion(currentPageIndex);
             setCheckBoxsAnswer(currentPageIndex);
         } else {
-            DialogUtil.showNormalDialog(this, R.string.tip, R.string.if_submit_answer,
-                    R.string.sure, new OnClickListener() {
+            getCheckBoxsAnswer(currentPageIndex);
+            String string;
+            int i = collectAnsweredNum();
+            if (i < questionNum) {
+                string = new String("已完成了" + i + "题，还有" + (questionNum - i) + "题未完成，是否提交？");
+            } else {
+                string = new String("已全完成，是否提交？");
+            }
+            DialogUtil.showNormalDialog(this, R.string.tip, string, R.string.sure,
+                    new OnClickListener() {
 
                         @Override
                         public void onClick(View v) {
@@ -210,6 +219,19 @@ public class TestActivity extends BaseFragmentActivity {
         checkboxD.setChecked(mCorrectId[3]);
     }
 
+    public int collectAnsweredNum() {
+        int AnsweredNum = 0;
+        for (int i = 0; i < mListQuestion.size(); i++) {
+            boolean[] bleans = mListQuestion.get(i).getCorrectId();
+            for (int j = 0; j < bleans.length; j++) {
+                if (bleans[j]) {
+                    AnsweredNum++;
+                    break;
+                }
+            }
+        }
+        return AnsweredNum;
+    }
 
     protected class fiveCountDownTimer extends CountDownTimer {
 

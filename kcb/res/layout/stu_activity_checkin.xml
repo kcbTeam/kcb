@@ -12,10 +12,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/activity_header_shadow"
         android:orientation="horizontal" >
-
-        <include layout="@layout/comm_back_button" />
-
-        <TextView
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
