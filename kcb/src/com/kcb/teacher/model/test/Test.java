@@ -36,6 +36,10 @@ public class Test implements Serializable {
         mQuestions.remove(index);
     }
 
+    public int getQuestionNum() {
+        return mQuestions.size();
+    }
+
     public boolean isCompleted() {
         for (int i = 0; i < mQuestions.size(); i++) {
             if (!mQuestions.get(i).isCompleted()) {

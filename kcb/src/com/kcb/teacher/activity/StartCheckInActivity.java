@@ -82,15 +82,17 @@ public class StartCheckInActivity extends BaseActivity {
                 case STOP:
                     progressBar.setVisibility(View.GONE);
                     timetip.setVisibility(View.GONE);
-                    
+
                     rateButton.setVisibility(View.VISIBLE);
-                    finishButton.setVisibility(View.VISIBLE); 
-                    
-                    
-                    Animation animation = AnimationUtils.loadAnimation(StartCheckInActivity.this, R.anim.layer_alpha_out); 
+                    finishButton.setVisibility(View.VISIBLE);
+
+
+                    Animation animation =
+                            AnimationUtils.loadAnimation(StartCheckInActivity.this,
+                                    R.anim.layer_alpha_out);
                     imagelayer2.startAnimation(animation);
                     imagelayer2.setVisibility(View.GONE);
-                    
+
                     Thread.currentThread().interrupt();
                     break;
                 case NEXT:
@@ -252,7 +254,7 @@ public class StartCheckInActivity extends BaseActivity {
                                     if (i == 119) {
                                         Message msg = new Message();
                                         msg.what = STOP;
-                                        mHandler.sendMessage(msg); 
+                                        mHandler.sendMessage(msg);
                                         break;
                                     } else {
                                         Message msg = new Message();

@@ -170,12 +170,12 @@ public class Slider extends CustomView {
     }
 
     /**
-     * Make a dark color to press effect
-<<<<<<< HEAD
-     *
-=======
+     * Make a dark color to press effect <<<<<<< HEAD
      * 
->>>>>>> wanghang_tuningCode16
+     * =======
+     * 
+     * >>>>>>> wanghang_tuningCode16
+     * 
      * @return
      */
     protected int makePressColor() {

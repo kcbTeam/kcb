@@ -5,6 +5,7 @@ import java.io.Serializable;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.text.TextUtils;
 
 /**
  * 
@@ -78,7 +79,7 @@ public class QuestionItem implements Serializable {
     }
 
     public boolean isEmpty() {
-        if (null == mBitmap && mText.equals("") && null == mBytesOfBitmap) {
+        if (null == mBitmap && TextUtils.isEmpty(mText) && null == mBytesOfBitmap) {
             return true;
         }
         return false;

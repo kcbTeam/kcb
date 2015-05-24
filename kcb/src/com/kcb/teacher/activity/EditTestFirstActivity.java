@@ -1,6 +1,5 @@
 package com.kcb.teacher.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -71,6 +70,7 @@ public class EditTestFirstActivity extends BaseActivity {
             String name = nameEditText.getText().toString().trim();
             if (TextUtils.isEmpty(name)) {
                 ToastUtil.toast("名称不能为空");
+                return;
             }
             EditTestActivity.startAddNewTest(EditTestFirstActivity.this,
                     new Test(name, slider.getValue()));

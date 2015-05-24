@@ -181,6 +181,7 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
             String testId = intent.getStringExtra(DATA_TEST_ID);
         }
         mTempQuestion = getCurrentQuestion();
+        mQuestionNum = mTest.getQuestionNum();
     }
 
     private Question getCurrentQuestion() {

@@ -44,30 +44,31 @@ public class DialogUtil {
         dialog.setSureButton(sureResId, sureListener);
         dialog.setCancelButton(cancelResId, cancelListener);
     }
-  /**
-   * 
-   * @title: showNormalDialog
-   * @description: 
-   * @author: TaoLi
-   * @date: 2015-5-24 下午2:36:52
-   * @param context
-   * @param titleResId
-   * @param text
-   * @param sureResId
-   * @param sureListener
-   * @param cancelResId
-   * @param cancelListener
-   */
-    public static void showNormalDialog(Context context, int titleResId,  CharSequence text,
-                                        @NonNull int sureResId, OnClickListener sureListener, int cancelResId,
-                                        OnClickListener cancelListener) {
-                                    MaterialDialog dialog = new MaterialDialog(context);
-                                    dialog.show();
-                                    dialog.setTitle(titleResId);
-                                    dialog.setMessage(text);
-                                    dialog.setSureButton(sureResId, sureListener);
-                                    dialog.setCancelButton(cancelResId, cancelListener);
-                                }
+
+    /**
+     * 
+     * @title: showNormalDialog
+     * @description:
+     * @author: TaoLi
+     * @date: 2015-5-24 下午2:36:52
+     * @param context
+     * @param titleResId
+     * @param text
+     * @param sureResId
+     * @param sureListener
+     * @param cancelResId
+     * @param cancelListener
+     */
+    public static void showNormalDialog(Context context, int titleResId, CharSequence text,
+            @NonNull int sureResId, OnClickListener sureListener, int cancelResId,
+            OnClickListener cancelListener) {
+        MaterialDialog dialog = new MaterialDialog(context);
+        dialog.show();
+        dialog.setTitle(titleResId);
+        dialog.setMessage(text);
+        dialog.setSureButton(sureResId, sureListener);
+        dialog.setCancelButton(cancelResId, cancelListener);
+    }
 
     /**
      * 
