@@ -124,8 +124,8 @@
     <!-- Check Test Activity Start -->
     <string name="checktest">查看测试</string>
     <string name="hint_checktest_search">搜索测试名称</string>
-    <string name="testinfo">测试信息</string>
     <string name="totalQuestionNum">总题数</string>
+    <string name="testdata">测试日期</string>
     <!-- Check Test Activity End -->
 
     <!-- Modify PassWord Start -->
