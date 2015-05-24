@@ -93,7 +93,7 @@ public class TestFragment extends BaseFragment {
                                         startActivity(intent);
                                     } else {
                                         // TODO set selected testId
-                                        EditTestActivity.startEditTest(getActivity(), "1");
+                                        EditTestActivity.AddNewTest(getActivity(), "1");
                                     }
                                 }
                             }, "取消", null);

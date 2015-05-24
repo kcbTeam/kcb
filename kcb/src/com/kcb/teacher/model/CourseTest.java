@@ -3,6 +3,8 @@ package com.kcb.teacher.model;
 import java.io.Serializable;
 import java.util.List;
 
+import com.kcb.teacher.model.test.Question;
+
 import android.R.integer;
 
 /**
@@ -19,29 +21,29 @@ public class CourseTest implements Serializable {
     @SuppressWarnings("unused")
     private static final String TAG = "CourseTest";
 
-    private List<ChoiceQuestion> mChoiceQuestionList;
+    private List<Question> mChoiceQuestionList;
     private String mTestName;
     private int mTestTime;
     private String mTestDate;
 
 
-    public CourseTest(String testName, List<ChoiceQuestion> questionList) {
+    public CourseTest(String testName, List<Question> questionList) {
         mChoiceQuestionList = questionList;
         mTestName = testName;
     }
 
-    public CourseTest(String testName, List<ChoiceQuestion> questionList, int time, String date) {
+    public CourseTest(String testName, List<Question> questionList, int time, String date) {
         mChoiceQuestionList = questionList;
         mTestName = testName;
         mTestTime = time;
         mTestDate = date;
     }
 
-    public void setQuestionList(List<ChoiceQuestion> mChoiceQuestionList) {
+    public void setQuestionList(List<Question> mChoiceQuestionList) {
         this.mChoiceQuestionList = mChoiceQuestionList;
     }
 
-    public List<ChoiceQuestion> getQuestionList() {
+    public List<Question> getQuestionList() {
         return this.mChoiceQuestionList;
     }
 

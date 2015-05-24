@@ -11,8 +11,8 @@ import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.kcb.teacher.model.ChoiceQuestion;
-import com.kcb.teacher.model.TextContent;
+import com.kcb.teacher.model.test.Question;
+import com.kcb.teacher.model.test.QuestionItem;
 import com.kcbTeam.R;
 
 /**
@@ -28,10 +28,10 @@ public class ListAdapterQuestions extends BaseAdapter {
     private final String numFormatString = "题%1$d";
 
 
-    private List<ChoiceQuestion> mList;
+    private List<Question> mList;
     private Context mContext;
 
-    public ListAdapterQuestions(Context context, List<ChoiceQuestion> list) {
+    public ListAdapterQuestions(Context context, List<Question> list) {
         mList = list;
         mContext = context;
     }
@@ -55,7 +55,7 @@ public class ListAdapterQuestions extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = null;
-        ChoiceQuestion temp = mList.get(position);
+        Question temp = mList.get(position);
         if (mList.get(position).isAllString()) {
             view = View.inflate(mContext, R.layout.tch_listview_questions_item_string, null);
             TextView questionNum = (TextView) view.findViewById(R.id.textview_question_num);
@@ -74,19 +74,19 @@ public class ListAdapterQuestions extends BaseAdapter {
             questionNumHint.setText(String.format(numFormatString, 1 + position));
 
             EditText quesitionEditText = (EditText) view.findViewById(R.id.edittext_question);
-            showContent(quesitionEditText, temp.getQuestion());
+            showContent(quesitionEditText, temp.getTitle());
 
             EditText optionAEditText = (EditText) view.findViewById(R.id.edittext_A);
-            showContent(optionAEditText, temp.getOptionA());
+            showContent(optionAEditText, temp.getChoiceA());
 
             EditText optionBEditText = (EditText) view.findViewById(R.id.edittext_B);
-            showContent(optionBEditText, temp.getOptionB());
+            showContent(optionBEditText, temp.getChoiceB());
 
             EditText optionCEditText = (EditText) view.findViewById(R.id.edittext_C);
-            showContent(optionCEditText, temp.getOptionC());
+            showContent(optionCEditText, temp.getChoiceC());
 
             EditText optionDEditText = (EditText) view.findViewById(R.id.edittext_D);
-            showContent(optionDEditText, temp.getOptionD());
+            showContent(optionDEditText, temp.getChoiceD());
 
             TextView correctOptions = (TextView) view.findViewById(R.id.textview_answer);
             correctOptions.setText(mList.get(position).getCorrectOptionString());
@@ -97,11 +97,11 @@ public class ListAdapterQuestions extends BaseAdapter {
 
     @SuppressWarnings("deprecation")
     @SuppressLint("NewApi")
-    private void showContent(EditText view, TextContent content) {
-        if (content.isString()) {
-            view.setText(content.getContentString());
+    private void showContent(EditText view, QuestionItem content) {
+        if (content.isText()) {
+            view.setText(content.getText());
         } else {
-            view.setBackground(new BitmapDrawable(content.getContentBitmap()));
+            view.setBackground(new BitmapDrawable(content.getBitmap()));
         }
     }
 }
