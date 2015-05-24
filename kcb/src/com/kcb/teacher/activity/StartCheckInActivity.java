@@ -82,6 +82,15 @@ public class StartCheckInActivity extends BaseActivity {
                 case STOP:
                     progressBar.setVisibility(View.GONE);
                     timetip.setVisibility(View.GONE);
+                    
+                    rateButton.setVisibility(View.VISIBLE);
+                    finishButton.setVisibility(View.VISIBLE); 
+                    
+                    
+                    Animation animation = AnimationUtils.loadAnimation(StartCheckInActivity.this, R.anim.layer_alpha_out); 
+                    imagelayer2.startAnimation(animation);
+                    imagelayer2.setVisibility(View.GONE);
+                    
                     Thread.currentThread().interrupt();
                     break;
                 case NEXT:
@@ -110,6 +119,7 @@ public class StartCheckInActivity extends BaseActivity {
 
         startButton = (PaperButton) findViewById(R.id.button_start);
         startButton.setOnClickListener(mClickListener);
+        startButton.setVisibility(View.INVISIBLE);
 
         
         imagelayer=(ImageView)findViewById(R.id.imageView_asback);
@@ -120,9 +130,11 @@ public class StartCheckInActivity extends BaseActivity {
 
         rateButton = (PaperButton) findViewById(R.id.button_rate);
         rateButton.setOnClickListener(mClickListener);
+        rateButton.setVisibility(View.INVISIBLE);
 
         finishButton = (PaperButton) findViewById(R.id.button_finish);
         finishButton.setOnClickListener(mClickListener);
+        finishButton.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -219,9 +231,8 @@ public class StartCheckInActivity extends BaseActivity {
                 Animation animation = AnimationUtils.loadAnimation(StartCheckInActivity.this, R.anim.layer_alpha_out); 
                 imagelayer.startAnimation(animation);
                 imagelayer.setVisibility(View.GONE);
+                startButton.setVisibility(View.VISIBLE);
                 
-            
-               
             } else if (v == startButton) {
             	
             	if(!sOs){
@@ -244,9 +255,6 @@ public class StartCheckInActivity extends BaseActivity {
                                         mHandler.sendMessage(msg); 
                                         
                                         
-                                        Animation animation = AnimationUtils.loadAnimation(StartCheckInActivity.this, R.anim.layer_alpha_out); 
-                                        imagelayer2.startAnimation(animation);
-                                        imagelayer2.setVisibility(View.GONE);
                                         
                                         break;
                                     } else {
