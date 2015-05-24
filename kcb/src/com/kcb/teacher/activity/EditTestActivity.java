@@ -49,8 +49,7 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
 
     private TextView numHintTextView;
 
-    private EditText questionEditText;
-
+    private EditText titleEditText;
     private EditText optionAEditText;
     private EditText optionBEditText;
     private EditText optionCEditText;
@@ -94,7 +93,6 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
 
     @Override
     protected void initView() {
-        // TODO set test name;
         titleTextView = (TextView) findViewById(R.id.textview_title);
 
         addButton = (ImageButton) findViewById(R.id.button_add);
@@ -111,9 +109,9 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
         numHintTextView.setText(String.format(getResources()
                 .getString(R.string.format_question_num), mQuestionIndex + 1));
 
-        questionEditText = (EditText) findViewById(R.id.edittext_question);
-        questionEditText.setOnClickListener(this);
-        questionEditText.setOnLongClickListener(this);
+        titleEditText = (EditText) findViewById(R.id.edittext_question);
+        titleEditText.setOnClickListener(this);
+        titleEditText.setOnLongClickListener(this);
 
         optionAEditText = (EditText) findViewById(R.id.edittext_A);
         optionAEditText.setOnClickListener(this);
@@ -147,7 +145,7 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
             public void onClickSure(String text) {
                 switch (mEditIndex) {
                     case INDEX_QUESTION:
-                        questionEditText.setText(text);
+                        titleEditText.setText(text);
                         getCurrentQuestion().getTitle().setText(text);
                         break;
                     case INDEX_A:
@@ -173,10 +171,6 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
         };
     }
 
-    private Question getCurrentQuestion() {
-        return mTest.getQuestion(mQuestionIndex);
-    }
-
     private void getIntentData() {
         Intent intent = getIntent();
         String action = intent.getAction();
@@ -186,7 +180,11 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
             // TODO get data from db & show them
             String testId = intent.getStringExtra(DATA_TEST_ID);
         }
-        mTempQuestion = mTest.getQuestion(0);
+        mTempQuestion = getCurrentQuestion();
+    }
+
+    private Question getCurrentQuestion() {
+        return mTest.getQuestion(mQuestionIndex);
     }
 
     /**
@@ -202,21 +200,14 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.button_add:
-                DialogUtil.showNormalDialog(this, R.string.dialog_title_add, R.string.add_msg,
-                        R.string.sure, new OnClickListener() {
-
-                            @Override
-                            public void onClick(View v) {
-                                AddQuestion();
-                            }
-                        }, R.string.cancel, null);
+                addQuestion();
                 break;
             case R.id.button_delete:
                 deleteQuestion();
                 break;
             case R.id.edittext_question:
                 mEditIndex = INDEX_QUESTION;
-                makeEditDialog(questionEditText.getText().toString(),
+                makeEditDialog(titleEditText.getText().toString(),
                         getResources().getString(R.string.dialog_title_question));
                 break;
             case R.id.edittext_A:
@@ -240,10 +231,10 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
                         getResources().getString(R.string.dialog_title_optionD));
                 break;
             case R.id.pagerbutton_last:
-                LastQuestion();
+                lastQuestion();
                 break;
             case R.id.pagerbutton_next:
-                NextQuesion();
+                nextQuesion();
                 break;
             default:
                 break;
@@ -251,18 +242,26 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
     }
 
     // four click functions: add ,delete ,next ,last.
-    private void AddQuestion() {
-        if (!getCurrentQuestion().equal(mTempQuestion)) {
-            ToastUtil.toast(String.format(getResources().getString(R.string.format_edit_save),
-                    1 + mQuestionIndex));
-        }
+    private void addQuestion() {
+        DialogUtil.showNormalDialog(this, R.string.dialog_title_add, R.string.add_msg,
+                R.string.sure, new OnClickListener() {
 
-        mQuestionNum++;
-        mTest.addQuestion();
+                    @Override
+                    public void onClick(View v) {
+                        if (!getCurrentQuestion().equal(mTempQuestion)) {
+                            ToastUtil.toast(String.format(
+                                    getResources().getString(R.string.format_edit_save),
+                                    1 + mQuestionIndex));
+                        }
 
-        mQuestionIndex++;
-        mTempQuestion = getCurrentQuestion();
-        refreshInfo(mTempQuestion);
+                        mQuestionNum++;
+                        mTest.addQuestion();
+
+                        mQuestionIndex++;
+                        mTempQuestion = getCurrentQuestion();
+                        showQuestion(mTempQuestion);
+                    }
+                }, R.string.cancel, null);
     }
 
     private void deleteQuestion() {
@@ -276,10 +275,10 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
                                 mTest.removeQuestion(mQuestionIndex);
                                 mQuestionNum--;
                                 if (mQuestionIndex == 0) {
-                                    refreshInfo(getCurrentQuestion());
+                                    showQuestion(getCurrentQuestion());
                                 } else {
                                     mQuestionIndex--;
-                                    refreshInfo(getCurrentQuestion());
+                                    showQuestion(getCurrentQuestion());
                                 }
                                 ToastUtil.toast(R.string.delete_success);
                             }
@@ -298,7 +297,7 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
         }
     }
 
-    private void LastQuestion() {
+    private void lastQuestion() {
         if (mQuestionIndex > 0) {
             if (!getCurrentQuestion().equal(mTempQuestion)) {
                 ToastUtil.toast(String.format(getResources().getString(R.string.format_edit_save),
@@ -306,11 +305,11 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
             }
             mQuestionIndex--;
             mTempQuestion = getCurrentQuestion();
-            refreshInfo(mTempQuestion);
+            showQuestion(mTempQuestion);
         }
     }
 
-    private void NextQuesion() {
+    private void nextQuesion() {
         if (mQuestionIndex == mQuestionNum - 1) {
             String hintString = "";
             if (!mTest.isCompleted()) {
@@ -331,7 +330,7 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
             }
             mQuestionIndex++;
             mTempQuestion = getCurrentQuestion();
-            refreshInfo(mTempQuestion);
+            showQuestion(mTempQuestion);
         }
     }
 
@@ -383,7 +382,7 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
 
     private void takePhoto() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        path = Environment.getExternalStorageDirectory() + "/KCB/";
+        path = Environment.getExternalStorageDirectory() + "/kcb/";
         File file = new File(path);
         if (!file.exists()) {
             file.mkdirs();
@@ -424,27 +423,27 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
             if (resultCode == RESULT_OK) {
                 Uri uri = (Uri) data.getParcelableExtra("CUTTED_PICTURE");
                 try {
-                    Bitmap tempMap = Media.getBitmap(getContentResolver(), uri);
+                    Bitmap bitmap = Media.getBitmap(getContentResolver(), uri);
                     switch (mEditIndex) {
                         case INDEX_QUESTION:
-                            questionEditText.setBackground(new BitmapDrawable(tempMap));
-                            getCurrentQuestion().getTitle().setBitmap(tempMap);
+                            titleEditText.setBackground(new BitmapDrawable(bitmap));
+                            getCurrentQuestion().getTitle().setBitmap(bitmap);
                             break;
                         case INDEX_A:
-                            optionAEditText.setBackground(new BitmapDrawable(tempMap));
-                            getCurrentQuestion().getChoiceA().setBitmap(tempMap);
+                            optionAEditText.setBackground(new BitmapDrawable(bitmap));
+                            getCurrentQuestion().getChoiceA().setBitmap(bitmap);
                             break;
                         case INDEX_B:
-                            optionBEditText.setBackground(new BitmapDrawable(tempMap));
-                            getCurrentQuestion().getChoiceB().setBitmap(tempMap);
+                            optionBEditText.setBackground(new BitmapDrawable(bitmap));
+                            getCurrentQuestion().getChoiceB().setBitmap(bitmap);
                             break;
                         case INDEX_C:
-                            optionCEditText.setBackground(new BitmapDrawable(tempMap));
-                            getCurrentQuestion().getChoiceC().setBitmap(tempMap);
+                            optionCEditText.setBackground(new BitmapDrawable(bitmap));
+                            getCurrentQuestion().getChoiceC().setBitmap(bitmap);
                             break;
                         case INDEX_D:
-                            optionDEditText.setBackground(new BitmapDrawable(tempMap));
-                            getCurrentQuestion().getChoiceD().setBitmap(tempMap);
+                            optionDEditText.setBackground(new BitmapDrawable(bitmap));
+                            getCurrentQuestion().getChoiceD().setBitmap(bitmap);
                             break;
                         default:
                             break;
@@ -466,22 +465,25 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
      * @description: refresh contents
      * @author: ZQJ
      * @date: 2015年5月19日 下午9:30:36
-     * @param showObj
+     * @param question
      */
-    private void refreshInfo(Question showObj) {
-        showContent(questionEditText, showObj.getTitle());
-        showContent(optionAEditText, showObj.getChoiceA());
-        showContent(optionBEditText, showObj.getChoiceB());
-        showContent(optionCEditText, showObj.getChoiceC());
-        showContent(optionDEditText, showObj.getChoiceD());
-        boolean[] correctId = showObj.getCorrectId();
+    private void showQuestion(Question question) {
         numHintTextView.setText(String.format(getResources()
                 .getString(R.string.format_question_num), mQuestionIndex + 1));
+
+        showContent(titleEditText, question.getTitle());
+        showContent(optionAEditText, question.getChoiceA());
+        showContent(optionBEditText, question.getChoiceB());
+        showContent(optionCEditText, question.getChoiceC());
+        showContent(optionDEditText, question.getChoiceD());
+        boolean[] correctId = question.getCorrectId();
+
         checkBoxA.setChecked(correctId[0]);
         checkBoxB.setChecked(correctId[1]);
         checkBoxC.setChecked(correctId[2]);
         checkBoxD.setChecked(correctId[3]);
-        if (mQuestionIndex + 1 >= mQuestionNum) {
+
+        if (mQuestionIndex == mQuestionNum - 1) {
             nextButton.setText(getResources().getString(R.string.complete));
             addButton.setVisibility(View.VISIBLE);
         } else {
@@ -495,7 +497,6 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
     private void showContent(EditText view, QuestionItem content) {
         if (content.isText()) {
             view.setText(content.getText());
-            if (view == questionEditText) {} else {}
         } else {
             view.setBackground(new BitmapDrawable(content.getBitmap()));
         }

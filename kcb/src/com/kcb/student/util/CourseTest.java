@@ -3,8 +3,6 @@ package com.kcb.student.util;
 import java.io.Serializable;
 import java.util.List;
 
-import android.R.integer;
-
 /**
  * 
  * @className: CourseTest
@@ -23,7 +21,7 @@ public class CourseTest implements Serializable {
     private String mTestName;
     private int mTestTime;
     private String mTestDate;
-    
+
 
     public CourseTest(String testName, List<ChoiceQuestion> questionList) {
         mChoiceQuestionList = questionList;

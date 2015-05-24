@@ -5,8 +5,6 @@ import java.util.List;
 
 import com.kcb.teacher.model.test.Question;
 
-import android.R.integer;
-
 /**
  * 
  * @className: CourseTest

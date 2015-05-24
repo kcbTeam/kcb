@@ -2,7 +2,9 @@ package com.kcb.student.util;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+
 import org.apache.commons.codec.binary.Base64;
+
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
