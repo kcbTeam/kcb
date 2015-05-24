@@ -11,17 +11,15 @@
         android:textSize="17dp" />
 
     <TextView
-        android:id="@+id/textview_testdate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@id/textview_testname" />
-
-    <TextView
         android:id="@+id/textview_questiontotalnum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="180dp" />
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/textview_testdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true" />
 
 </RelativeLayout>

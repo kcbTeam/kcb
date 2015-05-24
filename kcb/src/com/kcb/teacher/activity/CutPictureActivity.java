@@ -11,9 +11,6 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.provider.MediaStore.Images.Media;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.Window;
-import android.widget.ImageView;
 
 import com.edmodo.cropper.CropImageView;
 import com.kcb.common.base.BaseActivity;
@@ -34,9 +31,10 @@ public class CutPictureActivity extends BaseActivity {
     Bitmap mBitMap;
     Bitmap croppedImage;
     private CropImageView cropImageView;
+
     private ButtonFlat rotateButton;
-    private ButtonFlat cropButton;
     private ButtonFlat completeButton;
+    private ButtonFlat cancelButton;
 
     @Override
     protected void onSaveInstanceState(Bundle bundle) {
@@ -53,10 +51,9 @@ public class CutPictureActivity extends BaseActivity {
         mAspectRatioY = bundle.getInt(ASPECT_RATIO_Y);
     }
 
-    public void onCreate(Bundle savedInstanceState) {
-
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.tch_activity_cutpicture);
         initData();
         initView();
@@ -67,37 +64,13 @@ public class CutPictureActivity extends BaseActivity {
         cropImageView = (CropImageView) findViewById(R.id.CropImageView);
         cropImageView.setImageBitmap(mBitMap);
         rotateButton = (ButtonFlat) findViewById(R.id.Button_rotate);
-        rotateButton.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                cropImageView.rotateImage(ROTATE_NINETY_DEGREES);
-            }
-        });
-
-        cropButton = (ButtonFlat) findViewById(R.id.Button_crop);
-        cropButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                croppedImage = cropImageView.getCroppedImage();
-                ImageView croppedImageView = (ImageView) findViewById(R.id.croppedImageView);
-                croppedImageView.setImageBitmap(croppedImage);
-            }
-        });
+        rotateButton.setOnClickListener(this);
 
         completeButton = (ButtonFlat) findViewById(R.id.button_complete);
-        completeButton.setOnClickListener(new OnClickListener() {
+        completeButton.setOnClickListener(this);
 
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.putExtra("CUTTED_PICTURE", Uri.parse(MediaStore.Images.Media.insertImage(
-                        getContentResolver(), croppedImage, null, null)));
-                setResult(RESULT_OK, intent);
-                finish();
-            }
-        });
+        cancelButton = (ButtonFlat) findViewById(R.id.button_back);
+        cancelButton.setOnClickListener(this);
     }
 
     @Override
@@ -105,11 +78,33 @@ public class CutPictureActivity extends BaseActivity {
         Uri uri = (Uri) getIntent().getParcelableExtra("PICTURE");
         try {
             mBitMap = Media.getBitmap(getContentResolver(), uri);
-            mBitMap = ResizeBitmap(mBitMap, 800);
+            mBitMap = ResizeBitmap(mBitMap, 1000);
         } catch (FileNotFoundException e) {
             e.printStackTrace();;
         } catch (IOException e) {
             e.printStackTrace();;
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.Button_rotate:
+                cropImageView.rotateImage(ROTATE_NINETY_DEGREES);
+                break;
+            case R.id.button_complete:
+                croppedImage = cropImageView.getCroppedImage();
+                Intent intent = new Intent();
+                intent.putExtra("CUTTED_PICTURE", Uri.parse(MediaStore.Images.Media.insertImage(
+                        getContentResolver(), croppedImage, null, null)));
+                setResult(RESULT_OK, intent);
+                finish();
+                break;
+            case R.id.button_back:
+                finish();
+                break;
+            default:
+                break;
         }
     }
 

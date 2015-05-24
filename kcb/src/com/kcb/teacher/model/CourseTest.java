@@ -3,8 +3,6 @@ package com.kcb.teacher.model;
 import java.io.Serializable;
 import java.util.List;
 
-import android.R.integer;
-
 /**
  * 
  * @className: CourseTest

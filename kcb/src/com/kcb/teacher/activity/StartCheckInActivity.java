@@ -43,8 +43,8 @@ public class StartCheckInActivity extends BaseActivity {
 
     private ProgressBar progressBar;
     private TextView timetip;
-    
-    private boolean sOs; //flag of button state
+
+    private boolean sOs; // flag of button state
 
     protected static final int STOP = 0x10000;
     protected static final int NEXT = 0x10001;
@@ -54,8 +54,8 @@ public class StartCheckInActivity extends BaseActivity {
     private TextView signnum2TextView;
     private TextView signnum3TextView;
     private TextView signnum4TextView;
-    
-    
+
+
     private ImageView imagelayer;
     private ImageView imagelayer2;
 
@@ -111,9 +111,9 @@ public class StartCheckInActivity extends BaseActivity {
         startButton = (PaperButton) findViewById(R.id.button_start);
         startButton.setOnClickListener(mClickListener);
 
-        
-        imagelayer=(ImageView)findViewById(R.id.imageView_asback);
-        imagelayer2=(ImageView)findViewById(R.id.imageView_atsback);
+
+        imagelayer = (ImageView) findViewById(R.id.imageView_asback);
+        imagelayer2 = (ImageView) findViewById(R.id.imageView_atsback);
 
         progressBar = (ProgressBar) findViewById(R.id.ProgressBar);
         timetip = (TextView) findViewById(R.id.textview_timetip);
@@ -141,15 +141,15 @@ public class StartCheckInActivity extends BaseActivity {
                     }, R.string.cancel, null);
         }
     }
-    
-   
+
+
     private DelayClickListener mClickListener = new DelayClickListener(
             DelayClickListener.DELAY_PAPER_BUTTON) {
 
         @Override
         public void doClick(View v) {
             if (v == getNumButton) {
-            	
+
                 final int intnum = (int) (Math.random() * 9000 + 1000);
 
                 signnum1TextView.setText("");
@@ -215,19 +215,21 @@ public class StartCheckInActivity extends BaseActivity {
                 timer.schedule(task2, 600);
                 timer.schedule(task3, 900);
                 timer.schedule(task4, 1200);
-                
-                Animation animation = AnimationUtils.loadAnimation(StartCheckInActivity.this, R.anim.layer_alpha_out); 
+
+                Animation animation =
+                        AnimationUtils.loadAnimation(StartCheckInActivity.this,
+                                R.anim.layer_alpha_out);
                 imagelayer.startAnimation(animation);
                 imagelayer.setVisibility(View.GONE);
-                
-            
-               
+
+
+
             } else if (v == startButton) {
-            	
-            	if(!sOs){
-            		startButton.setText("停止签到");
-            		sOs=true;
-            		iCount = 0;
+
+                if (!sOs) {
+                    startButton.setText("停止签到");
+                    sOs = true;
+                    iCount = 0;
                     progressBar.setVisibility(View.VISIBLE);
                     progressBar.setMax(120);
                     progressBar.setProgress(0);
@@ -241,13 +243,16 @@ public class StartCheckInActivity extends BaseActivity {
                                     if (i == 119) {
                                         Message msg = new Message();
                                         msg.what = STOP;
-                                        mHandler.sendMessage(msg); 
-                                        
-                                        
-                                        Animation animation = AnimationUtils.loadAnimation(StartCheckInActivity.this, R.anim.layer_alpha_out); 
+                                        mHandler.sendMessage(msg);
+
+
+                                        Animation animation =
+                                                AnimationUtils.loadAnimation(
+                                                        StartCheckInActivity.this,
+                                                        R.anim.layer_alpha_out);
                                         imagelayer2.startAnimation(animation);
                                         imagelayer2.setVisibility(View.GONE);
-                                        
+
                                         break;
                                     } else {
                                         Message msg = new Message();
@@ -261,9 +266,9 @@ public class StartCheckInActivity extends BaseActivity {
                         }
                     });
                     mThread.start();
-            		
-            	}else{
-            		DialogUtil.showNormalDialog(StartCheckInActivity.this, R.string.stopsign,
+
+                } else {
+                    DialogUtil.showNormalDialog(StartCheckInActivity.this, R.string.stopsign,
                             R.string.stop_sign_tip, R.string.sure, new OnClickListener() {
 
                                 @Override
@@ -274,16 +279,16 @@ public class StartCheckInActivity extends BaseActivity {
                                     // timetip.setVisibility(View.GONE);
                                 }
                             }, R.string.cancel, null);
-            	}
-            	
-                //startButton.setVisibility(View.GONE);
-                //stopButton.setVisibility(View.VISIBLE);
- 
-               // stopButton.setClickable(true);
+                }
 
-               
+                // startButton.setVisibility(View.GONE);
+                // stopButton.setVisibility(View.VISIBLE);
+
+                // stopButton.setClickable(true);
+
+
             } else if (v == rateButton) {
-            	
+
                 Intent intent = new Intent(StartCheckInActivity.this, CheckInDetailsActivity.class);
                 List<StudentInfo> missedCheckInStus = new ArrayList<StudentInfo>();
                 missedCheckInStus.add(new StudentInfo("testNameq", "0003", 12, 5));

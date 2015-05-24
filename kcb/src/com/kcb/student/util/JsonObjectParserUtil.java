@@ -7,9 +7,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.kcb.student.util.ChoiceQuestion;
-import com.kcb.student.util.CourseTest;
-
 /**
  * 
  * @className: JsonObjectParserUtil
