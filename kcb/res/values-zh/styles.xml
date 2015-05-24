@@ -73,6 +73,13 @@
         <item name="android:layout_marginRight">36dp</item>
         <item name="android:layout_marginLeft">36dp</item>
     </style>
+    
+    <style name="home_imageview">
+        <item name="android:layout_width">28dp</item>
+        <item name="android:layout_height">28dp</item>
+        <item name="android:src">@drawable/ic_setting</item>
+        <item name="android:layout_centerInParent">true</item>
+    </style>
     <!-- ********** Home end ********** -->
     <!-- **************************************** Common module End **************************************** -->
 
