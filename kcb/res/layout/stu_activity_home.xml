@@ -17,8 +17,10 @@
         android:id="@+id/button_setting"
         style="@style/common_top_button"
         android:layout_alignParentRight="true"
-        android:text="@string/setting"
-        buttonflat:rippleSpeed="6" />
+        buttonflat:rippleSpeed="6" >
+        <ImageView
+            style="@style/home_imageview" />
+    </com.kcb.library.view.buttonflat.ButtonFlat>
 
     <fragment
         android:id="@+id/fragment_checkin"

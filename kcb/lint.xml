@@ -2,6 +2,7 @@
 <lint>
     <issue id="ClickableViewAccessibility" severity="ignore" />
     <issue id="ContentDescription">
+        <ignore path="res/layout/stu_activity_home.xml" />
         <ignore path="res/layout/stu_view_list.xml" />
     </issue>
     <issue id="DefaultLocale" severity="ignore" />
