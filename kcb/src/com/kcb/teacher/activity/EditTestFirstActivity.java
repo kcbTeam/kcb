@@ -2,15 +2,19 @@ package com.kcb.teacher.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
 import com.kcb.common.base.BaseActivity;
 import com.kcb.common.listener.DelayClickListener;
+import com.kcb.common.util.ToastUtil;
 import com.kcb.library.slider.Slider;
 import com.kcb.library.slider.Slider.OnValueChangedListener;
+import com.kcb.library.view.FloatingEditText;
 import com.kcb.library.view.PaperButton;
 import com.kcb.library.view.buttonflat.ButtonFlat;
+import com.kcb.teacher.model.test.Test;
 import com.kcbTeam.R;
 
 /**
@@ -24,6 +28,7 @@ public class EditTestFirstActivity extends BaseActivity {
 
     private ButtonFlat backButton;
     private TextView numtip;
+    private FloatingEditText nameEditText;
     private Slider slider;
     private PaperButton finishButton;
 
@@ -43,6 +48,8 @@ public class EditTestFirstActivity extends BaseActivity {
 
         numtip = (TextView) findViewById(R.id.edittext_num);
 
+        nameEditText = (FloatingEditText) findViewById(R.id.edittext_testname);
+
         slider = (Slider) findViewById(R.id.sliderNumber);
         slider.setOnValueChangedListener(new OnValueChangedListener() {
 
@@ -61,8 +68,12 @@ public class EditTestFirstActivity extends BaseActivity {
 
         @Override
         public void doClick(View v) {
-            Intent intent = new Intent(EditTestFirstActivity.this, EditTestActivity.class);
-            startActivity(intent);
+            String name = nameEditText.getText().toString().trim();
+            if (TextUtils.isEmpty(name)) {
+                ToastUtil.toast("名称不能为空");
+            }
+            EditTestActivity.startAddNewTest(EditTestFirstActivity.this,
+                    new Test(name, slider.getValue()));
         }
     };
 

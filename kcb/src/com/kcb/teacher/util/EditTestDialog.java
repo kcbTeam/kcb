@@ -136,18 +136,18 @@ public class EditTestDialog extends android.app.Dialog {
     /**
      * step 3
      */
-    public void setSureButton(@NonNull int resid, final DialogBackListener listener) {
+    public void setSureButton(@NonNull int resid, final DialogSureListener listener) {
         setSureButton(mContext.getResources().getString(resid), listener);
     }
 
-    public void setSureButton(@NonNull CharSequence text, final DialogBackListener listener) {
+    public void setSureButton(@NonNull CharSequence text, final DialogSureListener listener) {
         sureButton.setText(text);
         sureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dismiss();
                 if (null != listener) {
-                    listener.refreshActivity(contentEditText.getText().toString());
+                    listener.onClickSure(contentEditText.getText().toString());
                 }
             }
         });
@@ -181,8 +181,7 @@ public class EditTestDialog extends android.app.Dialog {
         });
     }
 
-    public interface DialogBackListener {
-        public void refreshActivity(String text);
-
+    public interface DialogSureListener {
+        public void onClickSure(String text);
     }
 }

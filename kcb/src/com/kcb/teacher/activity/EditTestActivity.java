@@ -3,15 +3,12 @@ package com.kcb.teacher.activity;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -29,11 +26,11 @@ import com.kcb.common.util.DialogUtil;
 import com.kcb.common.util.ToastUtil;
 import com.kcb.library.view.PaperButton;
 import com.kcb.library.view.checkbox.CheckBox;
-import com.kcb.teacher.model.ChoiceQuestion;
-import com.kcb.teacher.model.CourseTest;
-import com.kcb.teacher.model.TextContent;
+import com.kcb.teacher.model.test.Question;
+import com.kcb.teacher.model.test.QuestionItem;
+import com.kcb.teacher.model.test.Test;
 import com.kcb.teacher.util.EditTestDialog;
-import com.kcb.teacher.util.EditTestDialog.DialogBackListener;
+import com.kcb.teacher.util.EditTestDialog.DialogSureListener;
 import com.kcbTeam.R;
 
 /**
@@ -45,44 +42,43 @@ import com.kcbTeam.R;
  */
 public class EditTestActivity extends BaseActivity implements OnLongClickListener {
 
-    private PaperButton lastButton;
-    private PaperButton nextButton;
+    private TextView titleTextView;
+
     private ImageButton addButton;
     private ImageButton deleteButton;
 
-    private int mCurrentPosition;
-    private ChoiceQuestion mNextObj;
-    private ChoiceQuestion mCurrentContent;
-    private List<ChoiceQuestion> mQuestionList;
-
-    private int MaxFragmentNum = 3;
-
     private TextView numHintTextView;
+
+    private EditText titleEditText;
+    private EditText optionAEditText;
+    private EditText optionBEditText;
+    private EditText optionCEditText;
+    private EditText optionDEditText;
 
     private CheckBox checkBoxA;
     private CheckBox checkBoxB;
     private CheckBox checkBoxC;
     private CheckBox checkBoxD;
 
-    private EditText questionEditText;
-    private EditText optionAEditText;
-    private EditText optionBEditText;
-    private EditText optionCEditText;
-    private EditText optionDEditText;
+    private PaperButton lastButton;
+    private PaperButton nextButton;
 
-    private DialogBackListener mSureClickListener;
+    private DialogSureListener mDialogSureListener;
 
-    private final int IndexOfQuestion = 1;
-    private final int IndexOfA = 2;
-    private final int IndexOfB = 3;
-    private final int IndexOfC = 4;
-    private final int IndexOfD = 5;
-    private int mLongClickFlag;
+    //
+    private int mQuestionNum;
+    private Test mTest;
 
-    Drawable questionOriginalDrawable;
-    Drawable optionOriginalDrawable;
+    private int mQuestionIndex;
+    private Question mTempQuestion;
 
-    private int mPositionIndex = IndexOfQuestion;
+    private final int INDEX_QUESTION = 1;
+    private final int INDEX_A = 2;
+    private final int INDEX_B = 3;
+    private final int INDEX_C = 4;
+    private final int INDEX_D = 5;
+    private int mEditIndex = INDEX_QUESTION; // click or long click
+
     public final static String COURSE_TEST_KEY = "current_course_key";
     private String path;
 
@@ -97,27 +93,25 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
 
     @Override
     protected void initView() {
+        titleTextView = (TextView) findViewById(R.id.textview_title);
+
+        addButton = (ImageButton) findViewById(R.id.button_add);
+        addButton.setOnClickListener(this);
+        deleteButton = (ImageButton) findViewById(R.id.button_delete);
+        deleteButton.setOnClickListener(this);
+
         lastButton = (PaperButton) findViewById(R.id.pagerbutton_last);
         lastButton.setOnClickListener(this);
-        lastButton.setTextColor(getResources().getColor(R.color.gray));
-
         nextButton = (PaperButton) findViewById(R.id.pagerbutton_next);
         nextButton.setOnClickListener(this);
-        nextButton.setTextColor(getResources().getColor(R.color.black));
-
-        addButton = (ImageButton) findViewById(R.id.add_button);
-        addButton.setOnClickListener(this);
-
-        deleteButton = (ImageButton) findViewById(R.id.delete_button);
-        deleteButton.setOnClickListener(this);
 
         numHintTextView = (TextView) findViewById(R.id.textview_question_num);
         numHintTextView.setText(String.format(getResources()
-                .getString(R.string.format_question_num), mCurrentPosition + 1));
+                .getString(R.string.format_question_num), mQuestionIndex + 1));
 
-        questionEditText = (EditText) findViewById(R.id.edittext_question);
-        questionEditText.setOnClickListener(this);
-        questionEditText.setOnLongClickListener(this);
+        titleEditText = (EditText) findViewById(R.id.edittext_question);
+        titleEditText.setOnClickListener(this);
+        titleEditText.setOnLongClickListener(this);
 
         optionAEditText = (EditText) findViewById(R.id.edittext_A);
         optionAEditText.setOnClickListener(this);
@@ -143,45 +137,54 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
 
     @Override
     protected void initData() {
-        questionOriginalDrawable = questionEditText.getBackground();
-        optionOriginalDrawable = optionAEditText.getBackground();
-        mCurrentContent = new ChoiceQuestion();
-        mQuestionList = new ArrayList<ChoiceQuestion>();
-        for (int i = 0; i < MaxFragmentNum; i++) {
-            mQuestionList.add(getCurrentObj());
-        }
-        mCurrentPosition = 0;
-        mSureClickListener = new DialogBackListener() {
+        getIntentData();
+
+        mDialogSureListener = new DialogSureListener() {
 
             @Override
-            public void refreshActivity(String text) {
-                switch (mPositionIndex) {
-                    case IndexOfQuestion:
-                        questionEditText.setText(text);
-                        mCurrentContent.setQuestion(new TextContent(text));
+            public void onClickSure(String text) {
+                switch (mEditIndex) {
+                    case INDEX_QUESTION:
+                        titleEditText.setText(text);
+                        getCurrentQuestion().getTitle().setText(text);
                         break;
-                    case IndexOfA:
+                    case INDEX_A:
                         optionAEditText.setText(text);
-                        mCurrentContent.setOptionA(new TextContent(text));
+                        getCurrentQuestion().getChoiceA().setText(text);
                         break;
-                    case IndexOfB:
+                    case INDEX_B:
                         optionBEditText.setText(text);
-                        mCurrentContent.setOptionB(new TextContent(text));
+                        getCurrentQuestion().getChoiceB().setText(text);
                         break;
-                    case IndexOfC:
+                    case INDEX_C:
                         optionCEditText.setText(text);
-                        mCurrentContent.setOptionC(new TextContent(text));
+                        getCurrentQuestion().getChoiceC().setText(text);
                         break;
-                    case IndexOfD:
+                    case INDEX_D:
                         optionDEditText.setText(text);
-                        mCurrentContent.setOptionD(new TextContent(text));
+                        getCurrentQuestion().getChoiceD().setText(text);
                         break;
                     default:
                         break;
                 }
             }
         };
-        refreshInfo(mQuestionList.get(mCurrentPosition));
+    }
+
+    private void getIntentData() {
+        Intent intent = getIntent();
+        String action = intent.getAction();
+        if (ACTION_ADD.equals(action)) {
+            mTest = (Test) intent.getSerializableExtra(DATA_TEST);
+        } else if (ACTION_EDIT.equals(action)) {
+            // TODO get data from db & show them
+            String testId = intent.getStringExtra(DATA_TEST_ID);
+        }
+        mTempQuestion = getCurrentQuestion();
+    }
+
+    private Question getCurrentQuestion() {
+        return mTest.getQuestion(mQuestionIndex);
     }
 
     /**
@@ -196,66 +199,42 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.delete_button:
-                if (MaxFragmentNum != 1) {
-                    DialogUtil.showNormalDialog(this, R.string.dialog_title_delete,
-                            R.string.delete_msg, R.string.sure, new OnClickListener() {
-
-                                @Override
-                                public void onClick(View v) {
-                                    clickDelete();
-                                }
-                            }, R.string.cancel, null);
-                } else {
-                    clickDelete();
-                }
+            case R.id.button_add:
+                addQuestion();
                 break;
-            case R.id.pagerbutton_last:
-                clickLast();
+            case R.id.button_delete:
+                deleteQuestion();
                 break;
-            case R.id.pagerbutton_next:
-                clickNext();
-                break;
-            case R.id.add_button:
-                DialogUtil.showNormalDialog(this, R.string.dialog_title_add, R.string.add_msg,
-                        R.string.sure, new OnClickListener() {
-
-                            @Override
-                            public void onClick(View v) {
-                                clickAdd();
-                            }
-                        }, R.string.cancel, null);
-                break;
-            default:
-                break;
-        }
-        if (v.getBackground() != questionOriginalDrawable
-                && v.getBackground() != optionOriginalDrawable) return;
-        switch (v.getId()) {
             case R.id.edittext_question:
-                mPositionIndex = IndexOfQuestion;
-                makeEditDialog(questionEditText.getText().toString(),
+                mEditIndex = INDEX_QUESTION;
+                makeEditDialog(titleEditText.getText().toString(),
                         getResources().getString(R.string.dialog_title_question));
                 break;
             case R.id.edittext_A:
-                mPositionIndex = IndexOfA;
+                mEditIndex = INDEX_A;
                 makeEditDialog(optionAEditText.getText().toString(),
                         getResources().getString(R.string.dialog_title_optionA));
                 break;
             case R.id.edittext_B:
-                mPositionIndex = IndexOfB;
+                mEditIndex = INDEX_B;
                 makeEditDialog(optionBEditText.getText().toString(),
                         getResources().getString(R.string.dialog_title_optionB));
                 break;
             case R.id.edittext_C:
-                mPositionIndex = IndexOfC;
+                mEditIndex = INDEX_C;
                 makeEditDialog(optionCEditText.getText().toString(),
                         getResources().getString(R.string.dialog_title_optionC));
                 break;
             case R.id.edittext_D:
-                mPositionIndex = IndexOfD;
+                mEditIndex = INDEX_D;
                 makeEditDialog(optionDEditText.getText().toString(),
                         getResources().getString(R.string.dialog_title_optionD));
+                break;
+            case R.id.pagerbutton_last:
+                lastQuestion();
+                break;
+            case R.id.pagerbutton_next:
+                nextQuesion();
                 break;
             default:
                 break;
@@ -263,72 +242,48 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
     }
 
     // four click functions: add ,delete ,next ,last.
-    private void clickAdd() {
-        MaxFragmentNum++;
-        mQuestionList.add(new ChoiceQuestion());
-        if (!mQuestionList.get(mCurrentPosition).equal(getCurrentObj())) {
-            mQuestionList.set(mCurrentPosition, getCurrentObj());
-            ToastUtil.toast(String.format(getResources().getString(R.string.format_edit_save),
-                    1 + mCurrentPosition));
-        }
-        mCurrentPosition++;
-        refreshInfo(mQuestionList.get(mCurrentPosition));
+    private void addQuestion() {
+        DialogUtil.showNormalDialog(this, R.string.dialog_title_add, R.string.add_msg,
+                R.string.sure, new OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        if (!getCurrentQuestion().equal(mTempQuestion)) {
+                            ToastUtil.toast(String.format(
+                                    getResources().getString(R.string.format_edit_save),
+                                    1 + mQuestionIndex));
+                        }
+
+                        mQuestionNum++;
+                        mTest.addQuestion();
+
+                        mQuestionIndex++;
+                        mTempQuestion = getCurrentQuestion();
+                        showQuestion(mTempQuestion);
+                    }
+                }, R.string.cancel, null);
     }
 
-    private void clickNext() {
-        if (mCurrentPosition + 1 >= MaxFragmentNum) {
-            if (!getCurrentObj().equal(mQuestionList.get(mCurrentPosition))) {
-                mQuestionList.set(mCurrentPosition, getCurrentObj());
-            }
-            String hintString = "";
-            for (int i = 0; i < mQuestionList.size(); i++) {
-                if (!mQuestionList.get(i).isLegal()) {
-                    hintString = hintString + String.valueOf(1 + i) + "、";
-                }
-            }
-            if (hintString != "") {
-                ToastUtil.toast(String.format(
-                        getResources().getString(R.string.format_edit_empty_hint),
-                        hintString.substring(0, hintString.length() - 1)));
-                return;
-            }
-            completeEdit();
-        } else {
-            if (!getCurrentObj().equal(mQuestionList.get(mCurrentPosition))) {
-                mQuestionList.set(mCurrentPosition, getCurrentObj());
-                ToastUtil.toast(String.format(getResources().getString(R.string.format_edit_save),
-                        1 + mCurrentPosition));
-            }
-            mCurrentPosition++;
-            mNextObj = mQuestionList.get(mCurrentPosition);
-            refreshInfo(mNextObj);
-        }
-    }
+    private void deleteQuestion() {
+        if (mQuestionNum > 1) {
+            DialogUtil.showNormalDialog(this, R.string.dialog_title_delete, R.string.delete_msg,
+                    R.string.sure, new OnClickListener() {
 
-    private void clickLast() {
-        if (mCurrentPosition != 0) {
-            if (!getCurrentObj().equal(mQuestionList.get(mCurrentPosition))) {
-                mQuestionList.set(mCurrentPosition, getCurrentObj());
-                ToastUtil.toast(String.format(getResources().getString(R.string.format_edit_save),
-                        1 + mCurrentPosition));
-            }
-            mCurrentPosition--;
-            mNextObj = mQuestionList.get(mCurrentPosition);
-            refreshInfo(mNextObj);
-        }
-    }
-
-    private void clickDelete() {
-        if (MaxFragmentNum > 1) {
-            MaxFragmentNum--;
-            mQuestionList.remove(mCurrentPosition);
-            if (mCurrentPosition == 0) {
-                refreshInfo(mQuestionList.get(mCurrentPosition));
-            } else {
-                mCurrentPosition--;
-                refreshInfo(mQuestionList.get(mCurrentPosition));
-            }
-            ToastUtil.toast(R.string.delete_success);
+                        @Override
+                        public void onClick(View v) {
+                            if (mQuestionNum > 1) {
+                                mTest.removeQuestion(mQuestionIndex);
+                                mQuestionNum--;
+                                if (mQuestionIndex == 0) {
+                                    showQuestion(getCurrentQuestion());
+                                } else {
+                                    mQuestionIndex--;
+                                    showQuestion(getCurrentQuestion());
+                                }
+                                ToastUtil.toast(R.string.delete_success);
+                            }
+                        }
+                    }, R.string.cancel, null);
         } else {
             OnClickListener sureListener = new OnClickListener() {
 
@@ -342,15 +297,50 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
         }
     }
 
+    private void lastQuestion() {
+        if (mQuestionIndex > 0) {
+            if (!getCurrentQuestion().equal(mTempQuestion)) {
+                ToastUtil.toast(String.format(getResources().getString(R.string.format_edit_save),
+                        1 + mQuestionIndex));
+            }
+            mQuestionIndex--;
+            mTempQuestion = getCurrentQuestion();
+            showQuestion(mTempQuestion);
+        }
+    }
+
+    private void nextQuesion() {
+        if (mQuestionIndex == mQuestionNum - 1) {
+            String hintString = "";
+            if (!mTest.isCompleted()) {
+                hintString = hintString + String.valueOf(1 + mTest.getUnCompleteIndex()) + "、";
+                ToastUtil.toast(String.format(
+                        getResources().getString(R.string.format_edit_empty_hint),
+                        hintString.substring(0, hintString.length() - 1)));
+                return;
+            }
+            Intent intent = new Intent(this, SubmitTestActivity.class);
+            intent.putExtra(DATA_TEST, mTest);
+            startActivity(intent);
+            finish();
+        } else {
+            if (!getCurrentQuestion().equal(mTempQuestion)) {
+                ToastUtil.toast(String.format(getResources().getString(R.string.format_edit_save),
+                        1 + mQuestionIndex));
+            }
+            mQuestionIndex++;
+            mTempQuestion = getCurrentQuestion();
+            showQuestion(mTempQuestion);
+        }
+    }
+
     private void makeEditDialog(String text, String title) {
         EditTestDialog dialog = new EditTestDialog(this, text);
         dialog.show();
         dialog.setTitle(title);
-        dialog.setSureButton(getResources().getString(R.string.save), mSureClickListener);
+        dialog.setSureButton(getResources().getString(R.string.save), mDialogSureListener);
         dialog.setCancelButton(getResources().getString(R.string.cancel), null);
     }
-
-
 
     /**
      * 
@@ -360,91 +350,39 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
      * @date: 2015年5月19日 下午9:19:49
      * @param v
      * @return
-     * 
      */
     @Override
     public boolean onLongClick(View v) {
         switch (v.getId()) {
             case R.id.edittext_question:
-                longClick(questionEditText);
-                mLongClickFlag = IndexOfQuestion;
+                mEditIndex = INDEX_QUESTION;
                 break;
             case R.id.edittext_A:
-                longClick(optionAEditText);
-                mLongClickFlag = IndexOfA;
+                mEditIndex = INDEX_A;
                 break;
             case R.id.edittext_B:
-                longClick(optionBEditText);
-                mLongClickFlag = IndexOfB;
+                mEditIndex = INDEX_B;
                 break;
             case R.id.edittext_C:
-                longClick(optionCEditText);
-                mLongClickFlag = IndexOfC;
+                mEditIndex = INDEX_C;
                 break;
             case R.id.edittext_D:
-                longClick(optionDEditText);
-                mLongClickFlag = IndexOfD;
+                mEditIndex = INDEX_D;
                 break;
             default:
                 break;
         }
-
+        takePhoto();
         return true;
-    }
-
-    private void longClick(final EditText editText) {
-        if (editText.getBackground() == questionOriginalDrawable
-                || editText.getBackground() == optionOriginalDrawable) {
-            takePhoto();
-            return;
-        } else {
-            DialogUtil.showDeletePictureDialog(this, "选择", new OnClickListener() {
-
-                @Override
-                public void onClick(View v) {
-                    takePhoto();
-                }
-            }, new OnClickListener() {
-
-                @SuppressLint("NewApi")
-                @Override
-                public void onClick(View v) {
-                    switch (editText.getId()) {
-                        case R.id.edittext_question:
-                            editText.setBackground(questionOriginalDrawable);
-                            mCurrentContent.setQuestion(new TextContent());
-                            break;
-                        case R.id.edittext_A:
-                            editText.setBackground(optionOriginalDrawable);
-                            mCurrentContent.setOptionA(new TextContent());
-                            break;
-                        case R.id.edittext_B:
-                            editText.setBackground(optionOriginalDrawable);
-                            mCurrentContent.setOptionB(new TextContent());
-                            break;
-                        case R.id.edittext_C:
-                            editText.setBackground(optionOriginalDrawable);
-                            mCurrentContent.setOptionC(new TextContent());
-                            break;
-                        case R.id.edittext_D:
-                            editText.setBackground(optionOriginalDrawable);
-                            mCurrentContent.setOptionD(new TextContent());
-                            break;
-                        default:
-                            break;
-                    }
-                }
-            });
-        }
     }
 
     // take photo and cut photo
     private final int REQUEST_TAKEPHOTO = 100;
-    private final int REQUEXT_CUTPHOTO = 200;
+    private final int REQUEST_CUTPHOTO = 200;
 
     private void takePhoto() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        path = Environment.getExternalStorageDirectory() + "/KCB/";
+        path = Environment.getExternalStorageDirectory() + "/kcb/";
         File file = new File(path);
         if (!file.exists()) {
             file.mkdirs();
@@ -464,45 +402,48 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_CANCELED) {
-            ToastUtil.toast("拍照取消了");
-            return;
-        }
         if (requestCode == REQUEST_TAKEPHOTO) {
-            File picture = new File(path + "temp.jpg");
-            try {
-                cutPicture(Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(),
-                        picture.getAbsolutePath(), null, null)));
-            } catch (Exception e) {
-                e.printStackTrace();
+            if (resultCode == RESULT_CANCELED) {
+                ToastUtil.toast("操作取消了");
+            } else {
+                File picture = new File(path + "temp.jpg");
+                try {
+                    Uri uri =
+                            Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(),
+                                    picture.getAbsolutePath(), null, null));
+                    Intent intent = new Intent(this, CutPictureActivity.class);
+                    intent.putExtra("PICTURE", uri);
+                    startActivityForResult(intent, REQUEST_CUTPHOTO);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
-        if (requestCode == REQUEXT_CUTPHOTO) {
-
+        if (requestCode == REQUEST_CUTPHOTO) {
             if (resultCode == RESULT_OK) {
                 Uri uri = (Uri) data.getParcelableExtra("CUTTED_PICTURE");
                 try {
-                    Bitmap tempMap = Media.getBitmap(getContentResolver(), uri);
-                    switch (mLongClickFlag) {
-                        case IndexOfQuestion:
-                            questionEditText.setBackground(new BitmapDrawable(tempMap));
-                            mCurrentContent.setQuestion(new TextContent(tempMap));
+                    Bitmap bitmap = Media.getBitmap(getContentResolver(), uri);
+                    switch (mEditIndex) {
+                        case INDEX_QUESTION:
+                            titleEditText.setBackground(new BitmapDrawable(bitmap));
+                            getCurrentQuestion().getTitle().setBitmap(bitmap);
                             break;
-                        case IndexOfA:
-                            optionAEditText.setBackground(new BitmapDrawable(tempMap));
-                            mCurrentContent.setOptionA(new TextContent(tempMap));
+                        case INDEX_A:
+                            optionAEditText.setBackground(new BitmapDrawable(bitmap));
+                            getCurrentQuestion().getChoiceA().setBitmap(bitmap);
                             break;
-                        case IndexOfB:
-                            optionBEditText.setBackground(new BitmapDrawable(tempMap));
-                            mCurrentContent.setOptionB(new TextContent(tempMap));
+                        case INDEX_B:
+                            optionBEditText.setBackground(new BitmapDrawable(bitmap));
+                            getCurrentQuestion().getChoiceB().setBitmap(bitmap);
                             break;
-                        case IndexOfC:
-                            optionCEditText.setBackground(new BitmapDrawable(tempMap));
-                            mCurrentContent.setOptionC(new TextContent(tempMap));
+                        case INDEX_C:
+                            optionCEditText.setBackground(new BitmapDrawable(bitmap));
+                            getCurrentQuestion().getChoiceC().setBitmap(bitmap);
                             break;
-                        case IndexOfD:
-                            optionDEditText.setBackground(new BitmapDrawable(tempMap));
-                            mCurrentContent.setOptionD(new TextContent(tempMap));
+                        case INDEX_D:
+                            optionDEditText.setBackground(new BitmapDrawable(bitmap));
+                            getCurrentQuestion().getChoiceD().setBitmap(bitmap);
                             break;
                         default:
                             break;
@@ -512,34 +453,10 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+            } else if (resultCode == RESULT_CANCELED) {
+                ToastUtil.toast("操作取消了");
             }
         }
-    }
-
-    public void cutPicture(Uri uri) {
-        Intent intent = new Intent(this, CutPictureActivity.class);
-        intent.putExtra("PICTURE", uri);
-        startActivityForResult(intent, REQUEXT_CUTPHOTO);
-    }
-
-    /**
-     * 
-     * @title: getCurrentObj
-     * @description: return the current ChoiceQuestion object, invoked when add,delete,next,last is
-     *               clicked
-     * @author: ZQJ
-     * @date: 2015年5月19日 下午9:27:53
-     * @return
-     */
-    private ChoiceQuestion getCurrentObj() {
-        TextContent question = mCurrentContent.getQuestion();
-        TextContent optionA = mCurrentContent.getOptionA();
-        TextContent optionB = mCurrentContent.getOptionB();
-        TextContent optionC = mCurrentContent.getOptionC();
-        TextContent optionD = mCurrentContent.getOptionD();
-        boolean[] correctOption =
-                {checkBoxA.isCheck(), checkBoxB.isCheck(), checkBoxC.isCheck(), checkBoxD.isCheck()};
-        return new ChoiceQuestion(question, optionA, optionB, optionC, optionD, correctOption);
     }
 
     /**
@@ -548,43 +465,40 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
      * @description: refresh contents
      * @author: ZQJ
      * @date: 2015年5月19日 下午9:30:36
-     * @param showObj
+     * @param question
      */
-    private void refreshInfo(ChoiceQuestion showObj) {
-        showContent(questionEditText, showObj.getQuestion());
-        showContent(optionAEditText, showObj.getOptionA());
-        showContent(optionBEditText, showObj.getOptionB());
-        showContent(optionCEditText, showObj.getOptionC());
-        showContent(optionDEditText, showObj.getOptionD());
-        boolean[] correctId = showObj.getCorrectId();
+    private void showQuestion(Question question) {
         numHintTextView.setText(String.format(getResources()
-                .getString(R.string.format_question_num), mCurrentPosition + 1));
+                .getString(R.string.format_question_num), mQuestionIndex + 1));
+
+        showContent(titleEditText, question.getTitle());
+        showContent(optionAEditText, question.getChoiceA());
+        showContent(optionBEditText, question.getChoiceB());
+        showContent(optionCEditText, question.getChoiceC());
+        showContent(optionDEditText, question.getChoiceD());
+        boolean[] correctId = question.getCorrectId();
+
         checkBoxA.setChecked(correctId[0]);
         checkBoxB.setChecked(correctId[1]);
         checkBoxC.setChecked(correctId[2]);
         checkBoxD.setChecked(correctId[3]);
-        if (mCurrentPosition + 1 >= MaxFragmentNum) {
+
+        if (mQuestionIndex == mQuestionNum - 1) {
             nextButton.setText(getResources().getString(R.string.complete));
             addButton.setVisibility(View.VISIBLE);
         } else {
             nextButton.setText(getResources().getString(R.string.next_item));
             addButton.setVisibility(View.INVISIBLE);
         }
-        mCurrentContent = new ChoiceQuestion(showObj);
     }
 
     @SuppressLint("NewApi")
     @SuppressWarnings("deprecation")
-    private void showContent(EditText view, TextContent content) {
-        if (content.isString()) {
-            view.setText(content.getContentString());
-            if (view == questionEditText) {
-                view.setBackground(questionOriginalDrawable);
-            } else {
-                view.setBackground(optionOriginalDrawable);
-            }
+    private void showContent(EditText view, QuestionItem content) {
+        if (content.isText()) {
+            view.setText(content.getText());
         } else {
-            view.setBackground(new BitmapDrawable(content.getContentBitmap()));
+            view.setBackground(new BitmapDrawable(content.getBitmap()));
         }
     }
 
@@ -609,63 +523,26 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
     }
 
     /**
-     * 
-     * @title: completeEdit
-     * @description: goto next activity
-     * @author: ZQJ
-     * @date: 2015年5月19日 下午9:31:16
-     */
-    private void completeEdit() {
-        changeDataSerializable(mQuestionList);
-        CourseTest test = new CourseTest("TestName1", mQuestionList);
-        Intent intent = new Intent(this, SubmitTestActivity.class);
-        intent.putExtra(COURSE_TEST_KEY, test);
-        startActivity(intent);
-        finish();
-    }
-
-    /**
-     * 
-     * @title: changeDataSerializable
-     * @description: change TextContents's Bitmap to Byte[]
-     * @author: ZQJ
-     * @date: 2015年5月20日 下午7:10:01
-     * @param questionList
-     */
-    public static void changeDataSerializable(List<ChoiceQuestion> questionList) {
-        if (null == questionList) return;
-        for (int i = 0; i < questionList.size(); i++) {
-            if (!questionList.get(i).getQuestion().isString()) {
-                questionList.get(i).getQuestion().changeBitmapToBytes();
-            }
-
-            if (!questionList.get(i).getOptionA().isString()) {
-                questionList.get(i).getOptionA().changeBitmapToBytes();
-            }
-
-            if (!questionList.get(i).getOptionB().isString()) {
-                questionList.get(i).getOptionB().changeBitmapToBytes();
-            }
-
-            if (!questionList.get(i).getOptionC().isString()) {
-                questionList.get(i).getOptionC().changeBitmapToBytes();
-            }
-
-            if (!questionList.get(i).getOptionD().isString()) {
-                questionList.get(i).getOptionD().changeBitmapToBytes();
-            }
-        }
-    }
-
-    /**
      * for add a new Test or Edit Test;
      */
-    private static final String TEST_ID = "testId";
+    private static final String ACTION_ADD = "addTest";
+    private static final String ACTION_EDIT = "editTest";
 
-    public static void startEditTest(Context context, String testId) {
+    private static final String DATA_TEST = "test";
+
+    public static void startAddNewTest(Context context, Test test) {
         Intent intent = new Intent(context, EditTestActivity.class);
-        intent.putExtra(TEST_ID, testId);
+        intent.setAction(ACTION_ADD);
+        intent.putExtra(DATA_TEST, test);
         context.startActivity(intent);
     }
 
+    private static final String DATA_TEST_ID = "testId";
+
+    public static void startEditTest(Context context, String testId) {
+        Intent intent = new Intent(context, EditTestActivity.class);
+        intent.setAction(ACTION_EDIT);
+        intent.putExtra(DATA_TEST_ID, testId);
+        context.startActivity(intent);
+    }
 }

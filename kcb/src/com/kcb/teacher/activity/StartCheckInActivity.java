@@ -121,7 +121,6 @@ public class StartCheckInActivity extends BaseActivity {
         startButton.setOnClickListener(mClickListener);
         startButton.setVisibility(View.INVISIBLE);
 
-
         imagelayer = (ImageView) findViewById(R.id.imageView_asback);
         imagelayer2 = (ImageView) findViewById(R.id.imageView_atsback);
 

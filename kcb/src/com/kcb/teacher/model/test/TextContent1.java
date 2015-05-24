@@ -1,4 +1,4 @@
-package com.kcb.teacher.model;
+package com.kcb.teacher.model.test;
 
 import java.io.Serializable;
 
@@ -41,7 +41,6 @@ public class TextContent1<T> implements Serializable {
         this.mContent = mContent;
     }
 
-
     public boolean equals(TextContent1<T> o) {
         if (this == o) {
             return true;
@@ -51,6 +50,4 @@ public class TextContent1<T> implements Serializable {
         }
         return false;
     }
-
-
 }

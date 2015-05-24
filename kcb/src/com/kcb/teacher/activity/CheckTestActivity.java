@@ -17,9 +17,8 @@ import com.kcb.common.base.BaseActivity;
 import com.kcb.library.view.FloatingEditText;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.teacher.adapter.ListAdapterCourseTest;
-import com.kcb.teacher.model.ChoiceQuestion;
 import com.kcb.teacher.model.CourseTest;
-import com.kcb.teacher.model.TextContent;
+import com.kcb.teacher.model.test.Question;
 import com.kcb.teacher.util.NameUtils;
 import com.kcbTeam.R;
 
@@ -67,24 +66,25 @@ public class CheckTestActivity extends BaseActivity implements TextWatcher, OnIt
          * test data
          */
 
-        List<ChoiceQuestion> questionList = new ArrayList<ChoiceQuestion>();
-        questionList.add(new ChoiceQuestion(new TextContent("一年有可能多少天呢"), new TextContent("365"),
-                new TextContent("366"), new TextContent("367"), new TextContent("368"),
-                new boolean[] {true, true, false, false}));
-        questionList.add(new ChoiceQuestion(new TextContent("天上有多少颗星星"), new TextContent("1"),
-                new TextContent("5"), new TextContent("10"), new TextContent("数不清"), new boolean[] {
-                        false, false, false, true}));
-
-        List<ChoiceQuestion> questionList1 = new ArrayList<ChoiceQuestion>();
-        questionList1.add(new ChoiceQuestion(new TextContent("1 + 1 = ?"), new TextContent("1"),
-                new TextContent("11"), new TextContent("2"), new TextContent("111"), new boolean[] {
-                        false, false, true, false}));
-        questionList1.add(new ChoiceQuestion(new TextContent("天上有多少颗星星"), new TextContent("1"),
-                new TextContent("5"), new TextContent("10"), new TextContent("数不清"), new boolean[] {
-                        false, false, false, true}));
-        questionList1.add(new ChoiceQuestion(new TextContent("一年有可能多少天呢"), new TextContent("365"),
-                new TextContent("366"), new TextContent("367"), new TextContent("368"),
-                new boolean[] {true, true, false, false}));
+        // TODO getText from local
+        List<Question> questionList = new ArrayList<Question>();
+        // questionList.add(new Question(new QuestionItem("一年有可能多少天呢"), new QuestionItem("365"),
+        // new QuestionItem("366"), new QuestionItem("367"), new QuestionItem("368"),
+        // new boolean[] {true, true, false, false}));
+        // questionList.add(new Question(new QuestionItem("天上有多少颗星星"), new QuestionItem("1"),
+        // new QuestionItem("5"), new QuestionItem("10"), new QuestionItem("数不清"), new boolean[] {
+        // false, false, false, true}));
+        //
+        List<Question> questionList1 = new ArrayList<Question>();
+        // questionList1.add(new Question(new QuestionItem("1 + 1 = ?"), new QuestionItem("1"),
+        // new QuestionItem("11"), new QuestionItem("2"), new QuestionItem("111"), new boolean[] {
+        // false, false, true, false}));
+        // questionList1.add(new Question(new QuestionItem("天上有多少颗星星"), new QuestionItem("1"),
+        // new QuestionItem("5"), new QuestionItem("10"), new QuestionItem("数不清"), new boolean[] {
+        // false, false, false, true}));
+        // questionList1.add(new Question(new QuestionItem("一年有可能多少天呢"), new QuestionItem("365"),
+        // new QuestionItem("366"), new QuestionItem("367"), new QuestionItem("368"),
+        // new boolean[] {true, true, false, false}));
         mTestList = new ArrayList<CourseTest>();
         mTestList.add(new CourseTest("高考数学", questionList, 300, "2015-6-5"));
         mTestList.add(new CourseTest("考研数学", questionList1, 600, "2016-1-5"));
