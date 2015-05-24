@@ -128,6 +128,15 @@
     <string name="totalQuestionNum">总题数</string>
     <!-- Check Test Activity End -->
 
+    <!-- Modify PassWord Start -->
+    <string name="old_password">原密码</string>
+    <string name="next_step">下一步</string>
+    <string name="new_password">新密码</string>
+    <string name="repeat_new_password">再次输入新密码</string>
+    <string name="password_error">密码错误！</string>
+    <string name="modified">修改成功^_^</string>
+    <!-- Modify PassWord End -->
+
     <string name="signclass">课堂签到</string>
     <string name="giveupsign">放弃签到</string>
     <string name="giveup_sign_tip">放弃签到后，本次签到将无效。</string>

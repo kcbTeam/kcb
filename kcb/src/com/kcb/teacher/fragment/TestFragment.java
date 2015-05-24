@@ -76,7 +76,7 @@ public class TestFragment extends BaseFragment {
                 case R.id.button_edit_test:
                     // TODO get title from sharedPreference;
                     mList = new ArrayList<String>();
-                    mList.add("新测试");
+                    mList.add("添加新测试");
                     mList.add("第一次测试");
                     mList.add("第二次测试");
                     mList.add("第三次测试");

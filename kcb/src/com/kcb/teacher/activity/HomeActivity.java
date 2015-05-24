@@ -140,9 +140,9 @@ public class HomeActivity extends BaseFragmentActivity {
 
     private void setButtonTextColor(int index) {
         Resources res = getResources();
-        checkInButton.setTextColor(res.getColor(R.color.black));
-        testButton.setTextColor(res.getColor(R.color.black));
-        stuCenterButton.setTextColor(res.getColor(R.color.black));
+        checkInButton.setTextColor(res.getColor(R.color.gray));
+        testButton.setTextColor(res.getColor(R.color.gray));
+        stuCenterButton.setTextColor(res.getColor(R.color.gray));
         switch (index) {
             case INDEX_CHECKIN:
                 checkInButton.setTextColor(res.getColor(R.color.blue));
