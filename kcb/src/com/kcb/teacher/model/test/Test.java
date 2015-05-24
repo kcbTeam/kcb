@@ -1,11 +1,14 @@
 package com.kcb.teacher.model.test;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Test {
+public class Test implements Serializable {
 
-    private String mId;
+    private static final long serialVersionUID = 1L;
+
     private String mName; // test name
     private int mNum; // question num
     private long mTime; // minute
@@ -13,5 +16,41 @@ public class Test {
 
     private Date mDate; // test date
 
-    private Test() {}
+    public Test(String name, int num) {
+        mName = name;
+        mQuestions = new ArrayList<Question>();
+        for (int i = 0; i < num; i++) {
+            mQuestions.add(new Question());
+        }
+    }
+
+    public Question getQuestion(int index) {
+        return mQuestions.get(index);
+    }
+
+    public void addQuestion() {
+        mQuestions.add(new Question());
+    }
+
+    public void removeQuestion(int index) {
+        mQuestions.remove(index);
+    }
+
+    public boolean isCompleted() {
+        for (int i = 0; i < mQuestions.size(); i++) {
+            if (!mQuestions.get(i).isCompleted()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public int getUnCompleteIndex() {
+        for (int i = 0; i < mQuestions.size(); i++) {
+            if (!mQuestions.get(i).isCompleted()) {
+                return i;
+            }
+        }
+        return -1;
+    }
 }

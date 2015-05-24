@@ -30,16 +30,6 @@ public class Question implements Serializable {
         mAnswers = new boolean[] {false, false, false, false};
     }
 
-    public Question(QuestionItem question, QuestionItem optionA, QuestionItem optionB,
-            QuestionItem optionC, QuestionItem optionD, boolean[] correctOption) {
-        mTitleItem = question;
-        mChoiceAItem = optionA;
-        mChoiceBItem = optionB;
-        mChoiceCItem = optionC;
-        mChoiceDItem = optionD;
-        mAnswers = correctOption;
-    }
-
     public QuestionItem getTitle() {
         return mTitleItem;
     }
@@ -98,14 +88,13 @@ public class Question implements Serializable {
         return false;
     }
 
-    public boolean isLegal() {
-        if (mAnswers[0] == false && mAnswers[1] == false && mAnswers[2] == false
-                && mAnswers[3] == false) {
-            return false;
-        }
+    public boolean isCompleted() {
         if (!mTitleItem.isEmpty() && !mChoiceAItem.isEmpty() && !mChoiceBItem.isEmpty()
                 && !mChoiceCItem.isEmpty() && !mChoiceDItem.isEmpty()) {
-            return true;
+            if (mAnswers[0] == true || mAnswers[1] == true || mAnswers[2] == true
+                    || mAnswers[3] == true) {
+                return true;
+            }
         }
         return false;
     }

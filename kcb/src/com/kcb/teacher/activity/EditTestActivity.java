@@ -3,15 +3,12 @@ package com.kcb.teacher.activity;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -29,9 +26,9 @@ import com.kcb.common.util.DialogUtil;
 import com.kcb.common.util.ToastUtil;
 import com.kcb.library.view.PaperButton;
 import com.kcb.library.view.checkbox.CheckBox;
-import com.kcb.teacher.model.CourseTest;
 import com.kcb.teacher.model.test.Question;
 import com.kcb.teacher.model.test.QuestionItem;
+import com.kcb.teacher.model.test.Test;
 import com.kcb.teacher.util.EditTestDialog;
 import com.kcb.teacher.util.EditTestDialog.DialogSureListener;
 import com.kcbTeam.R;
@@ -71,9 +68,10 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
 
     //
     private int mQuestionNum;
+    private Test mTest;
 
-    private List<Question> mQuestionList;
     private int mQuestionIndex;
+    private Question mTempQuestion;
 
     private final int INDEX_QUESTION = 1;
     private final int INDEX_A = 2;
@@ -176,21 +174,19 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
     }
 
     private Question getCurrentQuestion() {
-        return mQuestionList.get(mQuestionIndex);
+        return mTest.getQuestion(mQuestionIndex);
     }
 
     private void getIntentData() {
         Intent intent = getIntent();
         String action = intent.getAction();
         if (ACTION_ADD.equals(action)) {
-            mQuestionList = new ArrayList<Question>();
-            for (int i = 0; i < mQuestionNum; i++) {
-                mQuestionList.add(getCurrentObj());
-            }
+            mTest = (Test) intent.getSerializableExtra(DATA_TEST);
         } else if (ACTION_EDIT.equals(action)) {
             // TODO get data from db & show them
             String testId = intent.getStringExtra(DATA_TEST_ID);
         }
+        mTempQuestion = mTest.getQuestion(0);
     }
 
     /**
@@ -256,43 +252,39 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
 
     // four click functions: add ,delete ,next ,last.
     private void AddQuestion() {
-        mQuestionNum++;
-        mQuestionList.add(new Question());
-        if (!mQuestionList.get(mQuestionIndex).equal(getCurrentObj())) {
-            mQuestionList.set(mQuestionIndex, getCurrentObj());
+        if (!getCurrentQuestion().equal(mTempQuestion)) {
             ToastUtil.toast(String.format(getResources().getString(R.string.format_edit_save),
                     1 + mQuestionIndex));
         }
+
+        mQuestionNum++;
+        mTest.addQuestion();
+
         mQuestionIndex++;
-        refreshInfo(mQuestionList.get(mQuestionIndex));
+        mTempQuestion = getCurrentQuestion();
+        refreshInfo(mTempQuestion);
     }
 
     private void deleteQuestion() {
-        if (mQuestionNum != 1) {
+        if (mQuestionNum > 1) {
             DialogUtil.showNormalDialog(this, R.string.dialog_title_delete, R.string.delete_msg,
                     R.string.sure, new OnClickListener() {
 
                         @Override
                         public void onClick(View v) {
-                            clickDelete();
+                            if (mQuestionNum > 1) {
+                                mTest.removeQuestion(mQuestionIndex);
+                                mQuestionNum--;
+                                if (mQuestionIndex == 0) {
+                                    refreshInfo(getCurrentQuestion());
+                                } else {
+                                    mQuestionIndex--;
+                                    refreshInfo(getCurrentQuestion());
+                                }
+                                ToastUtil.toast(R.string.delete_success);
+                            }
                         }
                     }, R.string.cancel, null);
-        } else {
-            clickDelete();
-        }
-    }
-
-    private void clickDelete() {
-        if (mQuestionNum > 1) {
-            mQuestionNum--;
-            mQuestionList.remove(mQuestionIndex);
-            if (mQuestionIndex == 0) {
-                refreshInfo(mQuestionList.get(mQuestionIndex));
-            } else {
-                mQuestionIndex--;
-                refreshInfo(mQuestionList.get(mQuestionIndex));
-            }
-            ToastUtil.toast(R.string.delete_success);
         } else {
             OnClickListener sureListener = new OnClickListener() {
 
@@ -307,43 +299,39 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
     }
 
     private void LastQuestion() {
-        if (mQuestionIndex != 0) {
-            if (!getCurrentObj().equal(mQuestionList.get(mQuestionIndex))) {
-                mQuestionList.set(mQuestionIndex, getCurrentObj());
+        if (mQuestionIndex > 0) {
+            if (!getCurrentQuestion().equal(mTempQuestion)) {
                 ToastUtil.toast(String.format(getResources().getString(R.string.format_edit_save),
                         1 + mQuestionIndex));
             }
             mQuestionIndex--;
-            refreshInfo(mQuestionList.get(mQuestionIndex));
+            mTempQuestion = getCurrentQuestion();
+            refreshInfo(mTempQuestion);
         }
     }
 
     private void NextQuesion() {
-        if (mQuestionIndex + 1 >= mQuestionNum) {
-            if (!getCurrentObj().equal(mQuestionList.get(mQuestionIndex))) {
-                mQuestionList.set(mQuestionIndex, getCurrentObj());
-            }
+        if (mQuestionIndex == mQuestionNum - 1) {
             String hintString = "";
-            for (int i = 0; i < mQuestionList.size(); i++) {
-                if (!mQuestionList.get(i).isLegal()) {
-                    hintString = hintString + String.valueOf(1 + i) + "、";
-                }
-            }
-            if (hintString != "") {
+            if (!mTest.isCompleted()) {
+                hintString = hintString + String.valueOf(1 + mTest.getUnCompleteIndex()) + "、";
                 ToastUtil.toast(String.format(
                         getResources().getString(R.string.format_edit_empty_hint),
                         hintString.substring(0, hintString.length() - 1)));
                 return;
             }
-            completeEdit();
+            Intent intent = new Intent(this, SubmitTestActivity.class);
+            intent.putExtra(DATA_TEST, mTest);
+            startActivity(intent);
+            finish();
         } else {
-            if (!getCurrentObj().equal(mQuestionList.get(mQuestionIndex))) {
-                mQuestionList.set(mQuestionIndex, getCurrentObj());
+            if (!getCurrentQuestion().equal(mTempQuestion)) {
                 ToastUtil.toast(String.format(getResources().getString(R.string.format_edit_save),
                         1 + mQuestionIndex));
             }
             mQuestionIndex++;
-            refreshInfo(mQuestionList.get(mQuestionIndex));
+            mTempQuestion = getCurrentQuestion();
+            refreshInfo(mTempQuestion);
         }
     }
 
@@ -369,73 +357,29 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
         switch (v.getId()) {
             case R.id.edittext_question:
                 mEditIndex = INDEX_QUESTION;
-                longClick(questionEditText);
                 break;
             case R.id.edittext_A:
                 mEditIndex = INDEX_A;
-                longClick(optionAEditText);
                 break;
             case R.id.edittext_B:
                 mEditIndex = INDEX_B;
-                longClick(optionBEditText);
                 break;
             case R.id.edittext_C:
                 mEditIndex = INDEX_C;
-                longClick(optionCEditText);
                 break;
             case R.id.edittext_D:
                 mEditIndex = INDEX_D;
-                longClick(optionDEditText);
                 break;
             default:
                 break;
         }
+        takePhoto();
         return true;
-    }
-
-    private void longClick(final EditText editText) {
-        // TODO
-        if (true) {
-            takePhoto();
-            return;
-        } else {
-            DialogUtil.showDeletePictureDialog(this, "选择", new OnClickListener() {
-
-                @Override
-                public void onClick(View v) {
-                    takePhoto();
-                }
-            }, new OnClickListener() {
-                @SuppressLint("NewApi")
-                @Override
-                public void onClick(View v) {
-                    switch (editText.getId()) {
-                        case R.id.edittext_question:
-                            getCurrentQuestion().setContent(new QuestionItem());
-                            break;
-                        case R.id.edittext_A:
-                            getCurrentQuestion().setOptionA(new QuestionItem());
-                            break;
-                        case R.id.edittext_B:
-                            getCurrentQuestion().setOptionB(new QuestionItem());
-                            break;
-                        case R.id.edittext_C:
-                            getCurrentQuestion().setOptionC(new QuestionItem());
-                            break;
-                        case R.id.edittext_D:
-                            getCurrentQuestion().setOptionD(new QuestionItem());
-                            break;
-                        default:
-                            break;
-                    }
-                }
-            });
-        }
     }
 
     // take photo and cut photo
     private final int REQUEST_TAKEPHOTO = 100;
-    private final int REQUEXT_CUTPHOTO = 200;
+    private final int REQUEST_CUTPHOTO = 200;
 
     private void takePhoto() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -459,20 +403,24 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_CANCELED) {
-            ToastUtil.toast("拍照取消了");
-            return;
-        }
         if (requestCode == REQUEST_TAKEPHOTO) {
-            File picture = new File(path + "temp.jpg");
-            try {
-                cutPicture(Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(),
-                        picture.getAbsolutePath(), null, null)));
-            } catch (Exception e) {
-                e.printStackTrace();
+            if (resultCode == RESULT_CANCELED) {
+                ToastUtil.toast("操作取消了");
+            } else {
+                File picture = new File(path + "temp.jpg");
+                try {
+                    Uri uri =
+                            Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(),
+                                    picture.getAbsolutePath(), null, null));
+                    Intent intent = new Intent(this, CutPictureActivity.class);
+                    intent.putExtra("PICTURE", uri);
+                    startActivityForResult(intent, REQUEST_CUTPHOTO);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
-        if (requestCode == REQUEXT_CUTPHOTO) {
+        if (requestCode == REQUEST_CUTPHOTO) {
             if (resultCode == RESULT_OK) {
                 Uri uri = (Uri) data.getParcelableExtra("CUTTED_PICTURE");
                 try {
@@ -506,34 +454,10 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+            } else if (resultCode == RESULT_CANCELED) {
+                ToastUtil.toast("操作取消了");
             }
         }
-    }
-
-    public void cutPicture(Uri uri) {
-        Intent intent = new Intent(this, CutPictureActivity.class);
-        intent.putExtra("PICTURE", uri);
-        startActivityForResult(intent, REQUEXT_CUTPHOTO);
-    }
-
-    /**
-     * 
-     * @title: getCurrentObj
-     * @description: return the current ChoiceQuestion object, invoked when add,delete,next,last is
-     *               clicked
-     * @author: ZQJ
-     * @date: 2015年5月19日 下午9:27:53
-     * @return
-     */
-    private Question getCurrentObj() {
-        QuestionItem question = getCurrentQuestion().getTitle();
-        QuestionItem optionA = getCurrentQuestion().getChoiceA();
-        QuestionItem optionB = getCurrentQuestion().getChoiceB();
-        QuestionItem optionC = getCurrentQuestion().getChoiceC();
-        QuestionItem optionD = getCurrentQuestion().getChoiceD();
-        boolean[] correctOption =
-                {checkBoxA.isCheck(), checkBoxB.isCheck(), checkBoxC.isCheck(), checkBoxD.isCheck()};
-        return new Question(question, optionA, optionB, optionC, optionD, correctOption);
     }
 
     /**
@@ -598,69 +522,23 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
     }
 
     /**
-     * 
-     * @title: completeEdit
-     * @description: goto next activity
-     * @author: ZQJ
-     * @date: 2015年5月19日 下午9:31:16
-     */
-    private void completeEdit() {
-        changeDataSerializable(mQuestionList);
-        CourseTest test = new CourseTest("TestName1", mQuestionList);
-        Intent intent = new Intent(this, SubmitTestActivity.class);
-        intent.putExtra(COURSE_TEST_KEY, test);
-        startActivity(intent);
-        finish();
-    }
-
-    /**
-     * 
-     * @title: changeDataSerializable
-     * @description: change TextContents's Bitmap to Byte[]
-     * @author: ZQJ
-     * @date: 2015年5月20日 下午7:10:01
-     * @param questionList
-     */
-    public static void changeDataSerializable(List<Question> questionList) {
-        if (null == questionList) return;
-        for (int i = 0; i < questionList.size(); i++) {
-            if (!questionList.get(i).getTitle().isText()) {
-                questionList.get(i).getTitle().changeBitmapToBytes();
-            }
-
-            if (!questionList.get(i).getChoiceA().isText()) {
-                questionList.get(i).getChoiceA().changeBitmapToBytes();
-            }
-
-            if (!questionList.get(i).getChoiceB().isText()) {
-                questionList.get(i).getChoiceB().changeBitmapToBytes();
-            }
-
-            if (!questionList.get(i).getChoiceC().isText()) {
-                questionList.get(i).getChoiceC().changeBitmapToBytes();
-            }
-
-            if (!questionList.get(i).getChoiceD().isText()) {
-                questionList.get(i).getChoiceD().changeBitmapToBytes();
-            }
-        }
-    }
-
-    /**
      * for add a new Test or Edit Test;
      */
     private static final String ACTION_ADD = "addTest";
     private static final String ACTION_EDIT = "editTest";
 
-    public static void AddNewTest(Context context, String testId) {
+    private static final String DATA_TEST = "test";
+
+    public static void startAddNewTest(Context context, Test test) {
         Intent intent = new Intent(context, EditTestActivity.class);
         intent.setAction(ACTION_ADD);
+        intent.putExtra(DATA_TEST, test);
         context.startActivity(intent);
     }
 
     private static final String DATA_TEST_ID = "testId";
 
-    public static void EditTest(Context context, String testId) {
+    public static void startEditTest(Context context, String testId) {
         Intent intent = new Intent(context, EditTestActivity.class);
         intent.setAction(ACTION_EDIT);
         intent.putExtra(DATA_TEST_ID, testId);

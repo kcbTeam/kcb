@@ -1,6 +1,5 @@
 package com.kcb.student.activity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import android.content.SharedPreferences;
@@ -19,7 +18,6 @@ import com.kcb.library.view.PaperButton;
 import com.kcb.library.view.checkbox.CheckBox;
 import com.kcb.student.adapter.TestRecycleAdapter;
 import com.kcb.teacher.model.test.Question;
-import com.kcb.teacher.model.test.QuestionItem;
 import com.kcbTeam.R;
 
 /**
@@ -94,28 +92,28 @@ public class TestActivity extends BaseFragmentActivity {
     }
 
     public void getTestContentFromNet() {
-        mChoiceQuestion.setQuestionNum(1);
-        mChoiceQuestion.setContent(new QuestionItem("这是题目显示区域1"));
-        mChoiceQuestion.setOptionA(new QuestionItem("答案1"));
-        mChoiceQuestion.setOptionB(new QuestionItem("答案2"));
-        mChoiceQuestion.setOptionC(new QuestionItem("答案3"));
-        mChoiceQuestion.setOptionD(new QuestionItem("答案4"));
-        mListQuestion = new ArrayList<Question>();
-        mListQuestion.add(mChoiceQuestion);
-        mChoiceQuestion1.setQuestionNum(2);
-        mChoiceQuestion1.setContent(new QuestionItem("这是题目显示区域2"));
-        mChoiceQuestion1.setOptionA(new QuestionItem("答案1"));
-        mChoiceQuestion1.setOptionB(new QuestionItem("答案2"));
-        mChoiceQuestion1.setOptionC(new QuestionItem("答案3"));
-        mChoiceQuestion1.setOptionD(new QuestionItem("答案4"));
-        mListQuestion.add(mChoiceQuestion1);
-        mChoiceQuestion2.setQuestionNum(3);
-        mChoiceQuestion2.setContent(new QuestionItem("这是题目显示区域3"));
-        mChoiceQuestion2.setOptionA(new QuestionItem("答案1"));
-        mChoiceQuestion2.setOptionB(new QuestionItem("答案2"));
-        mChoiceQuestion2.setOptionC(new QuestionItem("答案3"));
-        mChoiceQuestion2.setOptionD(new QuestionItem("答案4"));
-        mListQuestion.add(mChoiceQuestion2);
+//        mChoiceQuestion.setQuestionNum(1);
+//        mChoiceQuestion.setContent(new QuestionItem("这是题目显示区域1"));
+//        mChoiceQuestion.setOptionA(new QuestionItem("答案1"));
+//        mChoiceQuestion.setOptionB(new QuestionItem("答案2"));
+//        mChoiceQuestion.setOptionC(new QuestionItem("答案3"));
+//        mChoiceQuestion.setOptionD(new QuestionItem("答案4"));
+//        mListQuestion = new ArrayList<Question>();
+//        mListQuestion.add(mChoiceQuestion);
+//        mChoiceQuestion1.setQuestionNum(2);
+//        mChoiceQuestion1.setContent(new QuestionItem("这是题目显示区域2"));
+//        mChoiceQuestion1.setOptionA(new QuestionItem("答案1"));
+//        mChoiceQuestion1.setOptionB(new QuestionItem("答案2"));
+//        mChoiceQuestion1.setOptionC(new QuestionItem("答案3"));
+//        mChoiceQuestion1.setOptionD(new QuestionItem("答案4"));
+//        mListQuestion.add(mChoiceQuestion1);
+//        mChoiceQuestion2.setQuestionNum(3);
+//        mChoiceQuestion2.setContent(new QuestionItem("这是题目显示区域3"));
+//        mChoiceQuestion2.setOptionA(new QuestionItem("答案1"));
+//        mChoiceQuestion2.setOptionB(new QuestionItem("答案2"));
+//        mChoiceQuestion2.setOptionC(new QuestionItem("答案3"));
+//        mChoiceQuestion2.setOptionD(new QuestionItem("答案4"));
+//        mListQuestion.add(mChoiceQuestion2);
     }
 
     @Override
@@ -184,7 +182,7 @@ public class TestActivity extends BaseFragmentActivity {
     }
 
     public void showCurrentQuestion(int position) {
-        choiceTextView.setText("选择题" + mListQuestion.get(position).getQuestionNum());
+//        choiceTextView.setText("选择题" + mListQuestion.get(position).getQuestionNum());
         questionTextView.setText(mListQuestion.get(position).getTitle().getText());
         answerATextView.setText(mListQuestion.get(position).getChoiceA().getText());
         answerBTextView.setText(mListQuestion.get(position).getChoiceB().getText());
