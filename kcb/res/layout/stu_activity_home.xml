@@ -15,8 +15,8 @@
 
     <com.kcb.library.view.buttonflat.ButtonFlat
         android:id="@+id/button_setting"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
+        android:layout_width="@dimen/top_icon_button_width"
+        android:layout_height="@dimen/top_icon_button_height"
         android:layout_alignParentRight="true"
         buttonflat:rippleSpeed="6" >
 

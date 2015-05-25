@@ -15,20 +15,34 @@
         android:gravity="center_vertical"
         android:text="@string/edittest" />
 
-    <ImageButton
+    <com.kcb.library.view.buttonflat.ButtonFlat
         android:id="@+id/button_delete"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/top_icon_button_width"
+        android:layout_height="@dimen/top_icon_button_height"
         android:layout_alignParentRight="true"
-        android:background="@drawable/ic_delete_black_24dp" />
+        widget:rippleSpeed="6" >
 
-    <ImageButton
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@drawable/ic_delete_black_24dp" />
+    </com.kcb.library.view.buttonflat.ButtonFlat>
+
+    <com.kcb.library.view.buttonflat.ButtonFlat
         android:id="@+id/button_add"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/top_icon_button_width"
+        android:layout_height="@dimen/top_icon_button_height"
         android:layout_toLeftOf="@id/button_delete"
-        android:background="@drawable/ic_note_add_black_24dp"
-        android:visibility="invisible" />
+        android:visibility="invisible"
+        widget:rippleSpeed="6" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@drawable/ic_note_add_black_24dp" />
+    </com.kcb.library.view.buttonflat.ButtonFlat>
 
     <TextView
         android:id="@+id/textview_input_problem_tip"

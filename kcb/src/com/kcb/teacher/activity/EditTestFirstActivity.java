@@ -8,7 +8,6 @@ import android.widget.TextView;
 import com.kcb.common.base.BaseActivity;
 import com.kcb.common.listener.DelayClickListener;
 import com.kcb.common.util.AnimationUtil;
-import com.kcb.common.util.ToastUtil;
 import com.kcb.library.slider.Slider;
 import com.kcb.library.slider.Slider.OnValueChangedListener;
 import com.kcb.library.view.FloatingEditText;
@@ -75,6 +74,7 @@ public class EditTestFirstActivity extends BaseActivity {
             } else {
                 EditTestActivity.startAddNewTest(EditTestFirstActivity.this,
                         new Test(name, slider.getValue()));
+                finish();
             }
         }
     };

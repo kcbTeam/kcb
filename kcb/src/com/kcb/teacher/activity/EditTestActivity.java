@@ -18,13 +18,13 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.kcb.common.base.BaseActivity;
 import com.kcb.common.util.DialogUtil;
 import com.kcb.common.util.ToastUtil;
 import com.kcb.library.view.PaperButton;
+import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.library.view.checkbox.CheckBox;
 import com.kcb.teacher.model.test.Question;
 import com.kcb.teacher.model.test.QuestionItem;
@@ -44,8 +44,8 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
 
     private TextView titleTextView;
 
-    private ImageButton addButton;
-    private ImageButton deleteButton;
+    private ButtonFlat addButton;
+    private ButtonFlat deleteButton;
 
     private TextView numHintTextView;
 
@@ -95,9 +95,9 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
     protected void initView() {
         titleTextView = (TextView) findViewById(R.id.textview_title);
 
-        addButton = (ImageButton) findViewById(R.id.button_add);
+        addButton = (ButtonFlat) findViewById(R.id.button_add);
         addButton.setOnClickListener(this);
-        deleteButton = (ImageButton) findViewById(R.id.button_delete);
+        deleteButton = (ButtonFlat) findViewById(R.id.button_delete);
         deleteButton.setOnClickListener(this);
 
         lastButton = (PaperButton) findViewById(R.id.pagerbutton_last);
