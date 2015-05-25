@@ -11,8 +11,8 @@ import com.kcb.library.slider.Slider;
 import com.kcb.library.slider.Slider.OnValueChangedListener;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.teacher.adapter.ListAdapterQuestions;
-import com.kcb.teacher.model.ChoiceQuestion;
 import com.kcb.teacher.model.CourseTest;
+import com.kcb.teacher.model.test.Question;
 import com.kcbTeam.R;
 
 public class SubmitTestActivity extends BaseActivity {
@@ -21,7 +21,7 @@ public class SubmitTestActivity extends BaseActivity {
 
     private ListView questionListView;
     private ListAdapterQuestions mAdapter;
-    private List<ChoiceQuestion> mList;
+    private List<Question> mList;
     private CourseTest mCurrentTest;
 
     private TextView testName;

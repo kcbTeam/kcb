@@ -11,8 +11,8 @@ import android.widget.TextView;
 import com.kcb.common.base.BaseActivity;
 import com.kcb.library.view.PaperButton;
 import com.kcb.library.view.buttonflat.ButtonFlat;
-import com.kcb.teacher.model.ChoiceQuestion;
 import com.kcb.teacher.model.CourseTest;
+import com.kcb.teacher.model.test.Question;
 import com.kcbTeam.R;
 
 public class CheckTestDetailsActivity extends BaseActivity {
@@ -45,7 +45,7 @@ public class CheckTestDetailsActivity extends BaseActivity {
     private PaperButton nextButton;
 
     private CourseTest mTest;
-    private List<ChoiceQuestion> mQuestionList;
+    private List<Question> mQuestionList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,17 +110,17 @@ public class CheckTestDetailsActivity extends BaseActivity {
     }
 
     @SuppressLint("NewApi")
-    private void setContent(ChoiceQuestion temp) {
+    private void setContent(Question temp) {
 
-        questionTextView.setText("1、" + temp.getQuestion().getContentString());
+        questionTextView.setText("1、" + temp.getTitle().getText());
         correctRate.setText("正确率：76%");
 
         // optionAcontent.setText(temp.getOptionA().getContentString());
         optionAcontent.setBackground(getResources().getDrawable(R.drawable.option_a));
-        optionBcontent.setText(temp.getOptionB().getContentString());
+        optionBcontent.setText(temp.getChoiceB().getText());
         // optionCcontent.setText(temp.getOptionC().getContentString());
         optionCcontent.setBackground(getResources().getDrawable(R.drawable.option_a));
-        optionDcontent.setText(temp.getOptionD().getContentString());
+        optionDcontent.setText(temp.getChoiceD().getText());
 
         optionArate.setText("76%");
         optionBrate.setText("10%");

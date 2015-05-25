@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- common start -->
+    <color name="activity_background">#fff</color>
     <color name="gray">#777777</color>
     <color name="red">#ff0000</color>
     <color name="green">#00ff00</color>
     <color name="blue">#0000ff</color>
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
-    
-
-    <!-- common start -->
-    <color name="activity_background">#fff</color>
+    <color name="popupwindow_background">#eeeeee</color>
     <!-- common end -->
-    
+
+
     <!-- tch home activity start -->
     <color name="divider">#5777</color>
     <color name="list_blue_background">#500f</color>
     <!-- tch home activity end -->
-    
+
+
     <!-- tch submit test activity start -->
     <color name="questionItem">#4777</color>
     <color name="half_gray">#5777</color>
     <!-- tch submit test activity end -->
-    
-    
+
 </resources>

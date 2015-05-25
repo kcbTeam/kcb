@@ -55,6 +55,7 @@ public class CutPictureActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tch_activity_cutpicture);
+
         initData();
         initView();
     }

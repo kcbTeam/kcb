@@ -162,7 +162,7 @@ public class HomeActivity extends BaseFragmentActivity {
     @SuppressLint("InflateParams")
     public void initPopupWindow() {
         View customView =
-                getLayoutInflater().inflate(R.layout.stu_popupwindow_setting, null, false);
+                getLayoutInflater().inflate(R.layout.tch_popupwindow_setting, null, false);
         mPopupWindow =
                 new PopupWindow(customView, ViewGroup.LayoutParams.WRAP_CONTENT,
                         ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -205,7 +205,6 @@ public class HomeActivity extends BaseFragmentActivity {
         modifyButton.setOnClickListener(clickListener);
         exitButton.setOnClickListener(clickListener);
     }
-
 
     private boolean hasClickBack = false;
 
