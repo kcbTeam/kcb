@@ -58,7 +58,12 @@ public class ModifyPasswordActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.button_next:
-                if (oldPassWord.equals(userpasswordEditText.getText().toString())) {
+                String tempString = userpasswordEditText.getText().toString();
+                if (tempString.equals("")) {
+                    ToastUtil.toast(R.string.password_empty);
+                    AnimationUtil.shake(userpasswordEditText);
+                    return;
+                } else if (oldPassWord.equals(tempString)) {
                     setNewPassWord();
                 } else {
                     ToastUtil.toast(R.string.password_error);
@@ -81,6 +86,7 @@ public class ModifyPasswordActivity extends BaseActivity {
         if (!newPassWord.getText().toString().equals(repeatNewPassWord.getText().toString())) {
             AnimationUtil.shake(newPassWord);
             AnimationUtil.shake(repeatNewPassWord);
+            ToastUtil.toast(R.string.twice_password_unequal);
             return false;
         }
         return true;

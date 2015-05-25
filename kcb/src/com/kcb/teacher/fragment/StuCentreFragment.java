@@ -8,6 +8,7 @@ import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombi
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -171,15 +172,15 @@ public class StuCentreFragment extends BaseFragment implements OnItemClickListen
         }
         switch (v.getId()) {
             case R.id.textview_stuinfo:
-                Collections.sort(mTempList, idComparator);
+                new SortTast(INDEX_ID).execute();
                 setImageBackGround(INDEX_ID);
                 break;
             case R.id.textview_stucheckinrate:
-                Collections.sort(mTempList, checkInRateComparator);
+                new SortTast(INDEX_CHECKIN_RATE).execute();
                 setImageBackGround(INDEX_CHECKIN_RATE);
                 break;
             case R.id.textview_correctrate:
-                Collections.sort(mTempList, correctRateComparator);
+                new SortTast(INDEX_CORRECT_RATE).execute();
                 setImageBackGround(INDEX_CORRECT_RATE);
                 break;
             case R.id.imageview_clear:
@@ -242,5 +243,33 @@ public class StuCentreFragment extends BaseFragment implements OnItemClickListen
         Intent intent = new Intent(getActivity(), StuDetailsActivity.class);
         intent.putExtra(StuCentreFragment.CURRENT_STU_KEY, mAdapter.getItem(position));
         startActivity(intent);
+    }
+
+    private class SortTast extends AsyncTask<Integer, Integer, Integer> {
+
+        private int index;
+
+        public SortTast(int index) {
+            this.index = index;
+        }
+
+        @Override
+        protected Integer doInBackground(Integer... params) {
+            switch (index) {
+                case INDEX_ID:
+                    Collections.sort(mTempList, idComparator);
+                    break;
+                case INDEX_CHECKIN_RATE:
+                    Collections.sort(mTempList, checkInRateComparator);
+                    break;
+                case INDEX_CORRECT_RATE:
+                    Collections.sort(mTempList, correctRateComparator);
+                    break;
+                default:
+                    break;
+            }
+            return null;
+        }
+
     }
 }
