@@ -15,18 +15,7 @@
         android:background="@drawable/activity_header_shadow"
         android:orientation="horizontal" >
 
-        <com.kcb.library.view.buttonflat.ButtonFlat
-            android:id="@+id/button_back"
-            android:layout_width="56dp"
-            android:layout_height="56dp"
-            buttonflat:rippleSpeed="6" >
-
-            <ImageView
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_centerInParent="true"
-                android:src="@drawable/ic_action_back" />
-        </com.kcb.library.view.buttonflat.ButtonFlat>
+        <include layout="@layout/comm_back_button" />
 
         <TextView
             android:id="@+id/textview_testname"
