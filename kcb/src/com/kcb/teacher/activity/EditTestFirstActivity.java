@@ -72,8 +72,11 @@ public class EditTestFirstActivity extends BaseActivity {
                 ToastUtil.toast("名称不能为空");
                 return;
             }
+            EditTestFirstActivity.this.finish();
+            
             EditTestActivity.startAddNewTest(EditTestFirstActivity.this,
                     new Test(name, slider.getValue()));
+            
         }
     };
 

@@ -36,288 +36,303 @@ import com.kcbTeam.R;
  */
 public class StartCheckInActivity extends BaseActivity {
 
-    private ButtonFlat giveupButton;
-    private PaperButton getNumButton;
+	private ButtonFlat giveupButton;
+	private PaperButton getNumButton;
 
-    private PaperButton startButton;
+	private PaperButton startButton;
 
-    private ProgressBar progressBar;
-    private TextView timetip;
+	private ProgressBar progressBar;
+	private TextView timetip;
 
-    private boolean sOs; // flag of button state
+	private boolean sOs; // flag of button state
 
-    protected static final int STOP = 0x10000;
-    protected static final int NEXT = 0x10001;
-    private int iCount = 0;
+	protected static final int STOP = 0x10000;
+	protected static final int NEXT = 0x10001;
+	private int iCount = 0;
 
-    private TextView signnum1TextView;
-    private TextView signnum2TextView;
-    private TextView signnum3TextView;
-    private TextView signnum4TextView;
+	private TextView signnum1TextView;
+	private TextView signnum2TextView;
+	private TextView signnum3TextView;
+	private TextView signnum4TextView;
 
+	private ImageView imagelayer;
+	private ImageView imagelayer2;
 
-    private ImageView imagelayer;
-    private ImageView imagelayer2;
+	// private TextView numTextview;
+	private PaperButton rateButton;
+	private PaperButton finishButton;
 
+	// add by zqj
+	public final static String CURRENT_CHECKIN_RECORD_KEY = "current record";
+	public final static String TAG = "CheckInActivity";
 
-    // private TextView numTextview;
-    private PaperButton rateButton;
-    private PaperButton finishButton;
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.tch_activity_startcheckin);
 
-    // add by zqj
-    public final static String CURRENT_CHECKIN_RECORD_KEY = "current record";
-    public final static String TAG = "CheckInActivity";
+		initView();
+	}
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.tch_activity_startcheckin);
+	private Handler mHandler = new Handler() {
+		public void handleMessage(Message msg) {
+			switch (msg.what) {
+			case STOP:
+				progressBar.setVisibility(View.GONE);
+				timetip.setVisibility(View.GONE);
 
-        initView();
-    }
+				rateButton.setVisibility(View.VISIBLE);
+				finishButton.setVisibility(View.VISIBLE);
 
-    private Handler mHandler = new Handler() {
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case STOP:
-                    progressBar.setVisibility(View.GONE);
-                    timetip.setVisibility(View.GONE);
+				Animation animation = AnimationUtils.loadAnimation(
+						StartCheckInActivity.this, R.anim.layer_alpha_out);
+				imagelayer2.startAnimation(animation);
+				imagelayer2.setVisibility(View.GONE);
 
-                    rateButton.setVisibility(View.VISIBLE);
-                    finishButton.setVisibility(View.VISIBLE);
+				Thread.currentThread().interrupt();
+				break;
+			case NEXT:
+				if (!Thread.currentThread().isInterrupted()) {
+					progressBar.setProgress(iCount);
+					timetip.setText(iCount + "/120");
+				}
+				break;
+			}
+		}
+	};
 
+	@Override
+	protected void initView() {
+		giveupButton = (ButtonFlat) findViewById(R.id.button_giveup);
+		giveupButton.setOnClickListener(this);
 
-                    Animation animation =
-                            AnimationUtils.loadAnimation(StartCheckInActivity.this,
-                                    R.anim.layer_alpha_out);
-                    imagelayer2.startAnimation(animation);
-                    imagelayer2.setVisibility(View.GONE);
+		getNumButton = (PaperButton) findViewById(R.id.button_getnum);
 
-                    Thread.currentThread().interrupt();
-                    break;
-                case NEXT:
-                    if (!Thread.currentThread().isInterrupted()) {
-                        progressBar.setProgress(iCount);
-                        timetip.setText(iCount + "/120");
-                    }
-                    break;
-            }
-        }
-    };
+		getNumButton.setOnClickListener(mClickListener);
 
-    @Override
-    protected void initView() {
-        giveupButton = (ButtonFlat) findViewById(R.id.button_giveup);
-        giveupButton.setOnClickListener(this);
+		signnum1TextView = (TextView) findViewById(R.id.textview_showsignnum1);
+		signnum2TextView = (TextView) findViewById(R.id.textview_showsignnum2);
+		signnum3TextView = (TextView) findViewById(R.id.textview_showsignnum3);
+		signnum4TextView = (TextView) findViewById(R.id.textview_showsignnum4);
 
-        getNumButton = (PaperButton) findViewById(R.id.button_getnum);
+		startButton = (PaperButton) findViewById(R.id.button_start);
+		startButton.setOnClickListener(mClickListener);
+		startButton.setVisibility(View.INVISIBLE);
 
-        getNumButton.setOnClickListener(mClickListener);
+		imagelayer = (ImageView) findViewById(R.id.imageView_asback);
+		imagelayer2 = (ImageView) findViewById(R.id.imageView_atsback);
 
-        signnum1TextView = (TextView) findViewById(R.id.textview_showsignnum1);
-        signnum2TextView = (TextView) findViewById(R.id.textview_showsignnum2);
-        signnum3TextView = (TextView) findViewById(R.id.textview_showsignnum3);
-        signnum4TextView = (TextView) findViewById(R.id.textview_showsignnum4);
+		progressBar = (ProgressBar) findViewById(R.id.ProgressBar);
+		timetip = (TextView) findViewById(R.id.textview_timetip);
 
-        startButton = (PaperButton) findViewById(R.id.button_start);
-        startButton.setOnClickListener(mClickListener);
-        startButton.setVisibility(View.INVISIBLE);
+		rateButton = (PaperButton) findViewById(R.id.button_rate);
+		rateButton.setOnClickListener(mClickListener);
+		rateButton.setVisibility(View.INVISIBLE);
 
-        imagelayer = (ImageView) findViewById(R.id.imageView_asback);
-        imagelayer2 = (ImageView) findViewById(R.id.imageView_atsback);
+		finishButton = (PaperButton) findViewById(R.id.button_finish);
+		finishButton.setOnClickListener(mClickListener);
+		finishButton.setVisibility(View.INVISIBLE);
+	}
 
-        progressBar = (ProgressBar) findViewById(R.id.ProgressBar);
-        timetip = (TextView) findViewById(R.id.textview_timetip);
+	@Override
+	protected void initData() {
+	}
 
-        rateButton = (PaperButton) findViewById(R.id.button_rate);
-        rateButton.setOnClickListener(mClickListener);
-        rateButton.setVisibility(View.INVISIBLE);
+	@Override
+	public void onClick(View v) {
+		if (v == giveupButton) {
+			DialogUtil.showNormalDialog(this, R.string.giveupsign,
+					R.string.giveup_sign_tip, R.string.sure,
+					new OnClickListener() {
 
-        finishButton = (PaperButton) findViewById(R.id.button_finish);
-        finishButton.setOnClickListener(mClickListener);
-        finishButton.setVisibility(View.INVISIBLE);
-    }
+						@Override
+						public void onClick(View v) {
+							finish();
+						}
+					}, R.string.cancel, null);
+		}
+	}
 
-    @Override
-    protected void initData() {}
+	private DelayClickListener mClickListener = new DelayClickListener(
+			DelayClickListener.DELAY_PAPER_BUTTON) {
 
-    @Override
-    public void onClick(View v) {
-        if (v == giveupButton) {
-            DialogUtil.showNormalDialog(this, R.string.giveupsign, R.string.giveup_sign_tip,
-                    R.string.sure, new OnClickListener() {
+		@Override
+		public void doClick(View v) {
+			if (v == getNumButton) {
 
-                        @Override
-                        public void onClick(View v) {
-                            finish();
-                        }
-                    }, R.string.cancel, null);
-        }
-    }
+				final int intnum = (int) (Math.random() * 9000 + 1000);
 
+				signnum1TextView.setText("");
+				signnum2TextView.setText("");
+				signnum3TextView.setText("");
+				signnum4TextView.setText("");
 
-    private DelayClickListener mClickListener = new DelayClickListener(
-            DelayClickListener.DELAY_PAPER_BUTTON) {
+				final Timer timer = new Timer();
 
-        @Override
-        public void doClick(View v) {
-            if (v == getNumButton) {
+				final Handler handler = new Handler() {
+					public void handleMessage(android.os.Message msg) {
+						if (msg.what == 0x1000) {
+							signnum1TextView.setText(String
+									.valueOf(intnum / 1000));
+						}
+						if (msg.what == 0x1111) {
+							signnum2TextView.setText(String
+									.valueOf(intnum % 1000 / 100));
+						}
+						if (msg.what == 0x1222) {
+							signnum3TextView.setText(String
+									.valueOf(intnum % 1000 % 100 / 10));
+						}
+						if (msg.what == 0x1333) {
+							signnum4TextView.setText(String
+									.valueOf(intnum % 1000 % 100 % 10));
+						}
+					}
+				};
 
-                final int intnum = (int) (Math.random() * 9000 + 1000);
+				TimerTask task1 = new TimerTask() {
+					@Override
+					public void run() {
+						Message message = new Message();
+						message.what = 0x1000;
+						handler.sendMessage(message);
+					}
+				};
 
-                signnum1TextView.setText("");
-                signnum2TextView.setText("");
-                signnum3TextView.setText("");
-                signnum4TextView.setText("");
+				TimerTask task2 = new TimerTask() {
+					@Override
+					public void run() {
+						Message message = new Message();
+						message.what = 0x1111;
+						handler.sendMessage(message);
+					}
+				};
 
-                final Timer timer = new Timer();
+				TimerTask task3 = new TimerTask() {
+					@Override
+					public void run() {
+						Message message = new Message();
+						message.what = 0x1222;
+						handler.sendMessage(message);
+					}
+				};
 
-                final Handler handler = new Handler() {
-                    public void handleMessage(android.os.Message msg) {
-                        if (msg.what == 0x1000) {
-                            signnum1TextView.setText(String.valueOf(intnum / 1000));
-                        }
-                        if (msg.what == 0x1111) {
-                            signnum2TextView.setText(String.valueOf(intnum % 1000 / 100));
-                        }
-                        if (msg.what == 0x1222) {
-                            signnum3TextView.setText(String.valueOf(intnum % 1000 % 100 / 10));
-                        }
-                        if (msg.what == 0x1333) {
-                            signnum4TextView.setText(String.valueOf(intnum % 1000 % 100 % 10));
-                        }
-                    }
-                };
+				TimerTask task4 = new TimerTask() {
+					@Override
+					public void run() {
+						Message message = new Message();
+						message.what = 0x1333;
+						handler.sendMessage(message);
+					}
+				};
+				timer.schedule(task1, 300);
+				timer.schedule(task2, 600);
+				timer.schedule(task3, 900);
+				timer.schedule(task4, 1200);
 
-                TimerTask task1 = new TimerTask() {
-                    @Override
-                    public void run() {
-                        Message message = new Message();
-                        message.what = 0x1000;
-                        handler.sendMessage(message);
-                    }
-                };
+				Animation animation = AnimationUtils.loadAnimation(
+						StartCheckInActivity.this, R.anim.layer_alpha_out);
+				imagelayer.startAnimation(animation);
+				imagelayer.setVisibility(View.GONE);
+				startButton.setVisibility(View.VISIBLE);
+			} else if (v == startButton) {
 
-                TimerTask task2 = new TimerTask() {
-                    @Override
-                    public void run() {
-                        Message message = new Message();
-                        message.what = 0x1111;
-                        handler.sendMessage(message);
-                    }
-                };
+				if (!sOs) {
+					startButton.setText("停止签到");
+					sOs = true;
+					iCount = 0;
+					progressBar.setVisibility(View.VISIBLE);
+					progressBar.setMax(120);
+					progressBar.setProgress(0);
 
-                TimerTask task3 = new TimerTask() {
-                    @Override
-                    public void run() {
-                        Message message = new Message();
-                        message.what = 0x1222;
-                        handler.sendMessage(message);
-                    }
-                };
+					Thread mThread = new Thread(new Runnable() {
+						public void run() {
+							for (int i = 0; i < 120; i++) {
+								try {
+									iCount = (i + 1);
+									Thread.sleep(1000);
+									if (i == 119) {
+										Message msg = new Message();
+										msg.what = STOP;
+										mHandler.sendMessage(msg);
+										break;
+									} else {
+										Message msg = new Message();
+										msg.what = NEXT;
+										mHandler.sendMessage(msg);
+									}
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+							}
+						}
+					});
+					mThread.start();
 
-                TimerTask task4 = new TimerTask() {
-                    @Override
-                    public void run() {
-                        Message message = new Message();
-                        message.what = 0x1333;
-                        handler.sendMessage(message);
-                    }
-                };
-                timer.schedule(task1, 300);
-                timer.schedule(task2, 600);
-                timer.schedule(task3, 900);
-                timer.schedule(task4, 1200);
+				} else {
 
-                Animation animation =
-                        AnimationUtils.loadAnimation(StartCheckInActivity.this,
-                                R.anim.layer_alpha_out);
-                imagelayer.startAnimation(animation);
-                imagelayer.setVisibility(View.GONE);
-                startButton.setVisibility(View.VISIBLE);
-            } else if (v == startButton) {
+					DialogUtil.showNormalDialog(StartCheckInActivity.this,
+							R.string.stopsign, R.string.stop_sign_tip,
+							R.string.sure, new OnClickListener() {
 
-                if (!sOs) {
-                    startButton.setText("停止签到");
-                    sOs = true;
-                    iCount = 0;
-                    progressBar.setVisibility(View.VISIBLE);
-                    progressBar.setMax(120);
-                    progressBar.setProgress(0);
+								@Override
+								public void onClick(View v) {
+									progressBar.setVisibility(View.GONE);
+									timetip.setVisibility(View.GONE);
+									
+									rateButton.setVisibility(View.VISIBLE);
+									finishButton.setVisibility(View.VISIBLE);
+									Animation animation = AnimationUtils
+											.loadAnimation(
+													StartCheckInActivity.this,
+													R.anim.layer_alpha_out);
+									imagelayer2.startAnimation(animation);
+									imagelayer2.setVisibility(View.GONE);
+									// finish();
+									// progressBar.setVisibility(View.GONE);
+									// timetip.setText(""); // important
+									// timetip.setVisibility(View.GONE);
+								}
+							}, R.string.cancel, null);
+				}
 
-                    Thread mThread = new Thread(new Runnable() {
-                        public void run() {
-                            for (int i = 0; i < 120; i++) {
-                                try {
-                                    iCount = (i + 1);
-                                    Thread.sleep(1000);
-                                    if (i == 119) {
-                                        Message msg = new Message();
-                                        msg.what = STOP;
-                                        mHandler.sendMessage(msg);
-                                        break;
-                                    } else {
-                                        Message msg = new Message();
-                                        msg.what = NEXT;
-                                        mHandler.sendMessage(msg);
-                                    }
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        }
-                    });
-                    mThread.start();
+				// startButton.setVisibility(View.GONE);
+				// stopButton.setVisibility(View.VISIBLE);
 
-                } else {
-                    DialogUtil.showNormalDialog(StartCheckInActivity.this, R.string.stopsign,
-                            R.string.stop_sign_tip, R.string.sure, new OnClickListener() {
+				// stopButton.setClickable(true);
 
-                                @Override
-                                public void onClick(View v) {
-                                    finish();
-                                    // progressBar.setVisibility(View.GONE);
-                                    // timetip.setText(""); // important
-                                    // timetip.setVisibility(View.GONE);
-                                }
-                            }, R.string.cancel, null);
-                }
+			} else if (v == rateButton) {
 
-                // startButton.setVisibility(View.GONE);
-                // stopButton.setVisibility(View.VISIBLE);
+				Intent intent = new Intent(StartCheckInActivity.this,
+						CheckInDetailsActivity.class);
+				List<StudentInfo> missedCheckInStus = new ArrayList<StudentInfo>();
+				missedCheckInStus.add(new StudentInfo("testNameq", "0003", 12,
+						5));
+				CheckInRecordInfo currentInfo = new CheckInRecordInfo(
+						"2015 - 1", 0.9f, missedCheckInStus);
+				intent.putExtra("ACTIVITY_TAG", TAG);
+				intent.putExtra(CURRENT_CHECKIN_RECORD_KEY, currentInfo);
+				startActivity(intent);
+			} else if (v == finishButton) {
+				finish();
+			}
+		}
+	};
 
-                // stopButton.setClickable(true);
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			DialogUtil.showNormalDialog(this, R.string.giveupsign,
+					R.string.giveup_sign_tip, R.string.sure,
+					new OnClickListener() {
 
-
-            } else if (v == rateButton) {
-
-                Intent intent = new Intent(StartCheckInActivity.this, CheckInDetailsActivity.class);
-                List<StudentInfo> missedCheckInStus = new ArrayList<StudentInfo>();
-                missedCheckInStus.add(new StudentInfo("testNameq", "0003", 12, 5));
-                CheckInRecordInfo currentInfo =
-                        new CheckInRecordInfo("2015 - 1", 0.9f, missedCheckInStus);
-                intent.putExtra("ACTIVITY_TAG", TAG);
-                intent.putExtra(CURRENT_CHECKIN_RECORD_KEY, currentInfo);
-                startActivity(intent);
-            } else if (v == finishButton) {
-                finish();
-            }
-        }
-    };
-
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-            DialogUtil.showNormalDialog(this, R.string.giveupsign, R.string.giveup_sign_tip,
-                    R.string.sure, new OnClickListener() {
-
-                        @Override
-                        public void onClick(View v) {
-                            finish();
-                        }
-                    }, R.string.cancel, null);
-            return true;
-        }
-        return super.onKeyDown(keyCode, event);
-    }
+						@Override
+						public void onClick(View v) {
+							finish();
+						}
+					}, R.string.cancel, null);
+			return true;
+		}
+		return super.onKeyDown(keyCode, event);
+	}
 }

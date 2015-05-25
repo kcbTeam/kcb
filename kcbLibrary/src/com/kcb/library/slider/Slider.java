@@ -218,6 +218,18 @@ public class Slider extends CustomView {
                     + ball.getHeight() / 2, ball.getWidth() / 2, transparentPaint);
 
             canvas.drawBitmap(bitmap, 0, 0, new Paint());
+        } else if(value == max){   
+        	paint.setColor(Color.parseColor("#B0B0B0"));
+            paint.setStrokeWidth(Utils.dpToPx(2, getResources()));
+            canvas.drawLine(getHeight() / 2, getHeight() / 2, getWidth() - getHeight() / 2,
+                    getHeight() / 2, paint);
+            paint.setColor(backgroundColor);
+            float division = (ball.xFin - ball.xIni) / (max - min);
+            int value = this.value - min;
+
+            canvas.drawLine(getHeight()/2 , getHeight() / 2, value* division + getHeight()/2,
+                    getHeight() / 2, paint);  
+           
         } else {
 
             paint.setColor(Color.parseColor("#B0B0B0"));
@@ -228,7 +240,7 @@ public class Slider extends CustomView {
             float division = (ball.xFin - ball.xIni) / (max - min);
             int value = this.value - min;
 
-            canvas.drawLine(getHeight() / 2, getHeight() / 2, value * division + getHeight() / 2,
+            canvas.drawLine(getHeight()/2 , getHeight() / 2, value* division + getHeight(),
                     getHeight() / 2, paint);
 
         }
