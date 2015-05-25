@@ -15,58 +15,32 @@
         android:gravity="center_vertical"
         android:text="@string/edittest" />
 
-    <com.kcb.library.view.buttonflat.ButtonFlat
-        android:id="@+id/button_delete"
-        android:layout_width="@dimen/top_icon_button_width"
-        android:layout_height="@dimen/top_icon_button_height"
+    <TextView
+        android:id="@+id/textview_question_num"
+        android:layout_width="wrap_content"
+        android:layout_height="56dp"
         android:layout_alignParentRight="true"
-        widget:rippleSpeed="6" >
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:src="@drawable/ic_delete_black_24dp" />
-    </com.kcb.library.view.buttonflat.ButtonFlat>
-
-    <com.kcb.library.view.buttonflat.ButtonFlat
-        android:id="@+id/button_add"
-        android:layout_width="@dimen/top_icon_button_width"
-        android:layout_height="@dimen/top_icon_button_height"
-        android:layout_toLeftOf="@id/button_delete"
-        android:visibility="invisible"
-        widget:rippleSpeed="6" >
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:src="@drawable/ic_note_add_black_24dp" />
-    </com.kcb.library.view.buttonflat.ButtonFlat>
+        android:gravity="center" />
 
     <TextView
         android:id="@+id/textview_input_problem_tip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/textview_title"
-        android:layout_marginTop="5dp"
+        android:layout_marginLeft="16dp"
         android:text="@string/problem_hint" />
-
-    <TextView
-        android:id="@+id/textview_question_num"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@id/textview_title" />
 
     <EditText
         android:id="@+id/edittext_question"
         android:layout_width="match_parent"
         android:layout_height="180dp"
         android:layout_below="@id/textview_input_problem_tip"
-        android:layout_marginTop="2dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="8dp"
         android:focusable="true"
-        android:gravity="top"
+        android:gravity="top|left"
         android:inputType="textMultiLine" />
 
     <TextView
@@ -74,29 +48,34 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/edittext_question"
+        android:layout_marginLeft="16dp"
         android:text="@string/options_hint" />
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/layout_A"
         android:layout_width="fill_parent"
         android:layout_height="40dp"
         android:layout_below="@id/input_options_hint"
-        android:layout_marginTop="10dp" >
+        android:layout_marginBottom="4dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="4dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
 
         <TextView
             android:id="@+id/textview_A"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:paddingTop="10dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="4dp"
             android:text="@string/option_A" />
 
         <EditText
             android:id="@+id/edittext_A"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="40dp"
-            android:layout_toRightOf="@id/textview_A"
+            android:layout_marginRight="4dp"
+            android:layout_weight="1"
             android:focusable="false"
             android:inputType="textMultiLine"
             android:maxLines="6" />
@@ -105,32 +84,34 @@
             android:id="@+id/checkBox_A"
             android:layout_width="32dp"
             android:layout_height="32dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerInParent="true"
-            android:background="#1E88E5" />
-    </RelativeLayout>
+            android:background="@color/blue" />
+    </LinearLayout>
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/layout_B"
         android:layout_width="fill_parent"
         android:layout_height="40dp"
         android:layout_below="@id/layout_A"
-        android:layout_marginTop="10dp" >
+        android:layout_marginBottom="4dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="4dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
 
         <TextView
             android:id="@+id/textview_B"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:paddingTop="5dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="4dp"
             android:text="@string/option_B" />
 
         <EditText
             android:id="@+id/edittext_B"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="40dp"
-            android:layout_toRightOf="@id/textview_B"
+            android:layout_marginRight="4dp"
+            android:layout_weight="1"
             android:focusable="false"
             android:inputType="textMultiLine"
             android:maxLines="6" />
@@ -139,32 +120,34 @@
             android:id="@+id/checkBox_B"
             android:layout_width="32dp"
             android:layout_height="32dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerInParent="true"
-            android:background="#1E88E5" />
-    </RelativeLayout>
+            android:background="@color/blue" />
+    </LinearLayout>
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/layout_C"
         android:layout_width="fill_parent"
         android:layout_height="40dp"
         android:layout_below="@id/layout_B"
-        android:layout_marginTop="5dp" >
+        android:layout_marginBottom="4dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="4dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
 
         <TextView
             android:id="@+id/textview_C"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:paddingTop="10dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="4dp"
             android:text="@string/option_C" />
 
         <EditText
             android:id="@+id/edittext_C"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="40dp"
-            android:layout_toRightOf="@id/textview_C"
+            android:layout_marginRight="4dp"
+            android:layout_weight="1"
             android:focusable="false"
             android:inputType="textMultiLine"
             android:maxLines="6" />
@@ -173,32 +156,34 @@
             android:id="@+id/checkBox_C"
             android:layout_width="32dp"
             android:layout_height="32dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerInParent="true"
-            android:background="#1E88E5" />
-    </RelativeLayout>
+            android:background="@color/blue" />
+    </LinearLayout>
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/layout_D"
         android:layout_width="fill_parent"
         android:layout_height="40dp"
         android:layout_below="@id/layout_C"
-        android:layout_marginTop="5dp" >
+        android:layout_marginBottom="4dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="4dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
 
         <TextView
             android:id="@+id/textview_D"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:paddingTop="10dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="4dp"
             android:text="@string/option_D" />
 
         <EditText
             android:id="@+id/edittext_D"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="40dp"
-            android:layout_toRightOf="@id/textview_D"
+            android:layout_marginRight="4dp"
+            android:layout_weight="1"
             android:focusable="false"
             android:inputType="textMultiLine"
             android:maxLines="6" />
@@ -207,40 +192,62 @@
             android:id="@+id/checkBox_D"
             android:layout_width="32dp"
             android:layout_height="32dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerInParent="true"
-            android:background="#1E88E5" />
-    </RelativeLayout>
+            android:background="@color/blue" />
+    </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_below="@id/layout_D"
-        android:layout_marginRight="15dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginRight="16dp"
         android:text="@string/select_hint" />
 
     <LinearLayout
         android:id="@+id/layout_buttons"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_alignParentBottom="true"
-        android:orientation="horizontal"
-        android:padding="8dp" >
+        android:orientation="horizontal" >
 
-        <com.kcb.library.view.PaperButton
-            android:id="@+id/pagerbutton_last"
+        <com.kcb.library.view.buttonflat.ButtonFlat
+            android:id="@+id/button_last"
             android:layout_width="0dp"
-            android:layout_height="56dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            widget:paper_text="@string/last_item" />
+            android:text="上一题"
+            widget:rippleSpeed="18" />
 
-        <com.kcb.library.view.PaperButton
-            android:id="@+id/pagerbutton_next"
+        <com.kcb.library.view.buttonflat.ButtonFlat
+            android:id="@+id/button_next"
             android:layout_width="0dp"
-            android:layout_height="56dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            widget:paper_text="@string/next_item" />
+            android:text="下一题"
+            widget:rippleSpeed="18" />
+
+        <com.kcb.library.view.buttonflat.ButtonFlat
+            android:id="@+id/button_add"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="增加一题"
+            widget:rippleSpeed="18" />
+
+        <com.kcb.library.view.buttonflat.ButtonFlat
+            android:id="@+id/button_delete"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="删除本题"
+            widget:rippleSpeed="18" />
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_above="@id/layout_buttons"
+        android:background="@color/divider" />
 
 </RelativeLayout>

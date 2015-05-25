@@ -24,6 +24,10 @@ public class Test implements Serializable {
         }
     }
 
+    public String getName() {
+        return mName;
+    }
+
     public Question getQuestion(int index) {
         return mQuestions.get(index);
     }

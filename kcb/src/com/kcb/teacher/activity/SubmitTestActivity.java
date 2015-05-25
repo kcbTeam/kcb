@@ -63,8 +63,6 @@ public class SubmitTestActivity extends BaseActivity {
                         .getString(R.string.testtimeFormat), testTime.getValue()));
             }
         });
-
-
     }
 
     @Override
