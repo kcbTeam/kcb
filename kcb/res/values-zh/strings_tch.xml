@@ -136,7 +136,9 @@
     <string name="new_password">新密码</string>
     <string name="repeat_new_password">再次输入新密码</string>
     <string name="password_error">密码错误！</string>
+    <string name="password_empty">密码为空！</string>
     <string name="modified">修改成功^_^</string>
+    <string name="twice_password_unequal">两次输入密码不一致！</string>
     <!-- Modify PassWord End -->
 
     <string name="signclass">课堂签到</string>
