@@ -71,22 +71,20 @@ public class TestFragment extends BaseFragment {
 
         @Override
         public void doClick(View v) {
-            // Intent intent;
             switch (v.getId()) {
                 case R.id.button_edit_test:
-                    // TODO get title from sharedPreference;
+                    // TODO get title from database;
                     mList = new ArrayList<String>();
                     mList.add("添加新测试");
                     mList.add("第一次测试");
                     mList.add("第二次测试");
                     mList.add("第三次测试");
-
                     DialogUtil.showListDialog(getActivity(), "编辑测试内容", mList, "确定",
                             new OnClickSureListener() {
 
                                 @Override
                                 public void onClick(View view, int position) {
-                                    if (position == 0) {
+                                    if (position == 0) { // add new test
                                         Intent intent =
                                                 new Intent(getActivity(),
                                                         EditTestFirstActivity.class);
@@ -113,12 +111,8 @@ public class TestFragment extends BaseFragment {
                                     ToastUtil.toast("" + position);
                                 }
                             }, "取消", null);
-                    // intent = new Intent(getActivity(), TestActivity.class);
-                    // startActivity(intent);
                     break;
                 case R.id.button_test_result:
-                    // Intent intent = new Intent(getActivity(), EditTestFirstActivity.class);
-                    // startActivity(intent);
                     Intent intent = new Intent(getActivity(), CheckTestActivity.class);
                     startActivity(intent);
                     break;

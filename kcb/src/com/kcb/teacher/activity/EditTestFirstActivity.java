@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.kcb.common.base.BaseActivity;
 import com.kcb.common.listener.DelayClickListener;
+import com.kcb.common.util.AnimationUtil;
 import com.kcb.common.util.ToastUtil;
 import com.kcb.library.slider.Slider;
 import com.kcb.library.slider.Slider.OnValueChangedListener;
@@ -45,8 +46,6 @@ public class EditTestFirstActivity extends BaseActivity {
         backButton = (ButtonFlat) findViewById(R.id.button_back);
         backButton.setOnClickListener(this);
 
-        numtip = (TextView) findViewById(R.id.edittext_num);
-
         nameEditText = (FloatingEditText) findViewById(R.id.edittext_testname);
 
         slider = (Slider) findViewById(R.id.sliderNumber);
@@ -57,6 +56,9 @@ public class EditTestFirstActivity extends BaseActivity {
                 numtip.setText("共" + String.valueOf(value) + "题");
             }
         });
+
+        numtip = (TextView) findViewById(R.id.edittext_num);
+        numtip.setText("共" + String.valueOf(slider.getValue()) + "题");
 
         finishButton = (PaperButton) findViewById(R.id.button_editfinish);
         finishButton.setOnClickListener(mClickListener);
@@ -69,11 +71,11 @@ public class EditTestFirstActivity extends BaseActivity {
         public void doClick(View v) {
             String name = nameEditText.getText().toString().trim();
             if (TextUtils.isEmpty(name)) {
-                ToastUtil.toast("名称不能为空");
-                return;
+                AnimationUtil.shake(nameEditText);
+            } else {
+                EditTestActivity.startAddNewTest(EditTestFirstActivity.this,
+                        new Test(name, slider.getValue()));
             }
-            EditTestActivity.startAddNewTest(EditTestFirstActivity.this,
-                    new Test(name, slider.getValue()));
         }
     };
 
