@@ -29,7 +29,6 @@ import com.kcbTeam.R;
  * @author: ljx
  * @date: 2015-5-7 下午10:27:09
  */
-
 public class MaterialListDialog extends android.app.Dialog {
 
     private View backgroundView;

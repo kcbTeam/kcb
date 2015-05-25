@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:buttonflat="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/activity_background" >
+    android:background="@color/activity_background"
+    tools:ignore="contentDescription" >
 
     <TextView
         android:id="@+id/textview_username"
@@ -15,10 +17,17 @@
 
     <com.kcb.library.view.buttonflat.ButtonFlat
         android:id="@+id/button_setting"
-        style="@style/common_top_button"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
         android:layout_alignParentRight="true"
-        android:text="@string/setting"
-        buttonflat:rippleSpeed="6" />
+        buttonflat:rippleSpeed="6" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@drawable/ic_more_vert_black_24dp" />
+    </com.kcb.library.view.buttonflat.ButtonFlat>
 
     <FrameLayout
         android:id="@+id/fragment_content"

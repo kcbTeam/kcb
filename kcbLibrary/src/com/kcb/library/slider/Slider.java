@@ -170,11 +170,7 @@ public class Slider extends CustomView {
     }
 
     /**
-     * Make a dark color to press effect <<<<<<< HEAD
-     * 
-     * =======
-     * 
-     * >>>>>>> wanghang_tuningCode16
+     * Make a dark color to press effect
      * 
      * @return
      */
@@ -207,7 +203,7 @@ public class Slider extends CustomView {
                                 Bitmap.Config.ARGB_8888);
             }
             Canvas temp = new Canvas(bitmap);
-            paint.setColor(Color.parseColor("#B0B0B0"));
+            paint.setColor(Color.parseColor("#1e88e5"));
             paint.setStrokeWidth(Utils.dpToPx(2, getResources()));
             temp.drawLine(getHeight() / 2, getHeight() / 2, getWidth() - getHeight() / 2,
                     getHeight() / 2, paint);
@@ -219,8 +215,7 @@ public class Slider extends CustomView {
 
             canvas.drawBitmap(bitmap, 0, 0, new Paint());
         } else {
-
-            paint.setColor(Color.parseColor("#B0B0B0"));
+            paint.setColor(Color.parseColor("#1e88e5"));
             paint.setStrokeWidth(Utils.dpToPx(2, getResources()));
             canvas.drawLine(getHeight() / 2, getHeight() / 2, getWidth() - getHeight() / 2,
                     getHeight() / 2, paint);
@@ -270,7 +265,7 @@ public class Slider extends CustomView {
 
         ball = new Ball(getContext());
         RelativeLayout.LayoutParams params =
-                new LayoutParams(Utils.dpToPx(20, getResources()), Utils.dpToPx(20, getResources()));
+                new LayoutParams(Utils.dpToPx(16, getResources()), Utils.dpToPx(16, getResources()));
         params.addRule(RelativeLayout.CENTER_VERTICAL, RelativeLayout.TRUE);
         ball.setLayoutParams(params);
         addView(ball);
@@ -322,7 +317,6 @@ public class Slider extends CustomView {
     // Slider Number Indicator
 
     class Indicator extends RelativeLayout {
-
         boolean animate = true;
         // Final size after animation
         float finalSize = 0;
@@ -417,12 +411,8 @@ public class Slider extends CustomView {
             content.addView(numberIndicator);
 
             indicator.setLayoutParams(new RelativeLayout.LayoutParams(
-                    RelativeLayout.LayoutParams.FILL_PARENT,
-                    RelativeLayout.LayoutParams.FILL_PARENT));
+                    RelativeLayout.LayoutParams.MATCH_PARENT,
+                    RelativeLayout.LayoutParams.MATCH_PARENT));
         }
-
-
-
     }
-
 }

@@ -47,9 +47,9 @@
 
 
     <!-- edittestfirst activity start -->
-    <string name="helloteacher">王老师，请您先：</string>
-    <string name="hellotip1">1 为本次小测试起一个名字:</string>
-    <string name="hellotip2">2 设置题目数量:</string>
+    <string name="hellotip1">1、为本次测试起一个名字：</string>
+    <string name="hellotip2">2、设置题目数量：</string>
+    <string name="hellotip3">3、点击完成开始添加题目：</string>
     <!-- edittestfirst activity end -->
 
 
@@ -69,6 +69,7 @@
 
 
     <!-- EditTestActivity Start -->
+    <string name="add_newtest">添加新测试</string>
     <string name="edittest">编辑测试内容</string>
     <string name="last_item">上一题</string>
     <string name="next_item">下一题</string>
@@ -108,7 +109,7 @@
 
 
     <!-- EditTestFirstActivity Start -->
-    <string name="testname">测试名称</string>
+    <string name="testname">测试的名称</string>
     <!-- EditTestFirstActivity Start -->
 
 
@@ -127,6 +128,7 @@
     <string name="totalQuestionNum">总题数</string>
     <string name="testdata">测试日期</string>
     <!-- Check Test Activity End -->
+
 
     <!-- Modify PassWord Start -->
     <string name="old_password">原密码</string>

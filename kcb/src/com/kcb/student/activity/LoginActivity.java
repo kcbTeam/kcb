@@ -84,7 +84,6 @@ public class LoginActivity extends BaseActivity {
                         new StringRequest(Method.POST, UrlUtil.getStuLoginUrl(id, password),
                                 new Listener<String>() {
                                     public void onResponse(final String response) {
-                                        ToastUtil.toast(response);
                                         new Handler().postDelayed(new Runnable() {
 
                                             @Override

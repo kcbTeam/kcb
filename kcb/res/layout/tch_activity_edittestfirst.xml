@@ -9,7 +9,7 @@
     tools:ignore="contentDescription" >
 
     <LinearLayout
-        android:id="@+id/title"
+        android:id="@+id/layout_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/activity_header_shadow"
@@ -21,28 +21,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:text="@string/edittest" />
+            android:text="@string/add_newtest" />
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/edittext_helloteacher"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/title"
-        android:layout_marginTop="40dp"
-        android:text="@string/helloteacher" />
 
     <TextView
         android:id="@+id/edittext_hellotip1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/edittext_helloteacher"
-        android:layout_marginTop="40dp"
+        android:layout_below="@id/layout_title"
+        android:layout_margin="16dp"
         android:text="@string/hellotip1" />
 
     <com.kcb.library.view.FloatingEditText
         android:id="@+id/edittext_testname"
-        style="@style/login_edittext_id"
+        style="@style/login_edittext"
         android:layout_below="@id/edittext_hellotip1"
         android:hint="@string/testname" />
 
@@ -51,7 +43,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/edittext_testname"
-        android:layout_marginTop="20dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="24dp"
         android:text="@string/hellotip2" />
 
     <TextView
@@ -65,10 +58,13 @@
         android:id="@+id/sliderNumber"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:background="#1E88E5"
+        android:layout_below="@id/edittext_hellotip2"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/blue"
         materialdesign:max="9"
-        materialdesign:min="0"
+        materialdesign:min="1"
         materialdesign:showNumberIndicator="true" />
 
     <com.kcb.library.view.PaperButton
@@ -76,7 +72,7 @@
         style="@style/common_paper_button"
         android:layout_below="@id/sliderNumber"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="24dp"
         widget:paper_text="@string/finish" />
 
 </RelativeLayout>
