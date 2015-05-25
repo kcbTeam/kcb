@@ -275,7 +275,18 @@ public class StartCheckInActivity extends BaseActivity {
 
                                 @Override
                                 public void onClick(View v) {
-                                    finish();
+                                	progressBar.setVisibility(View.GONE);
+                                    timetip.setVisibility(View.GONE);
+
+                                    rateButton.setVisibility(View.VISIBLE);
+                                    finishButton.setVisibility(View.VISIBLE);
+
+
+                                    Animation animation =
+                                            AnimationUtils.loadAnimation(StartCheckInActivity.this,
+                                                    R.anim.layer_alpha_out);
+                                    imagelayer2.startAnimation(animation);
+                                    imagelayer2.setVisibility(View.GONE);
                                     // progressBar.setVisibility(View.GONE);
                                     // timetip.setText(""); // important
                                     // timetip.setVisibility(View.GONE);

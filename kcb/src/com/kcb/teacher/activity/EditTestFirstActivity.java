@@ -73,6 +73,7 @@ public class EditTestFirstActivity extends BaseActivity {
             if (TextUtils.isEmpty(name)) {
                 AnimationUtil.shake(nameEditText);
             } else {
+            	EditTestFirstActivity.this.finish();
                 EditTestActivity.startAddNewTest(EditTestFirstActivity.this,
                         new Test(name, slider.getValue()));
             }
