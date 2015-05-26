@@ -27,8 +27,16 @@ public class UrlUtil {
     // 1.2 modify password
     private static final String url_stu_modifypassword = IP + "/v1/stu/account/modifypassword";
 
-    public static String getStuModifyPasswordUrl(String id, String oldPassword, String newPassword) {
-        return url_stu_modifypassword + "?id=" + id + "&old=" + oldPassword + "&new=" + newPassword;
+    public static String getStuModifyPasswordUrl(String id, String newPassword) {
+        return url_stu_modifypassword + "?id=" + id + "&new=" + newPassword;
+    }
+
+    // 1.3 check password
+    private static final String url_stu_checkoldpassword = IP + "/v1/stu/account/checkoldpassword";
+
+    public static String getStuCheckOldPasswordUrl(String id, String password) {
+        return url_stu_checkoldpassword + "?id=" + id + "&old=" + password;
+
     }
 
     /**
@@ -77,13 +85,13 @@ public class UrlUtil {
     public static String getTchModifyPasswordUrl(String id, String newPassword) {
         return url_tch_modifypassword + "?id=" + id + "&new=" + newPassword;
     }
-    
-    //1.3 check password
+
+    // 1.3 check password
     private static final String url_tch_checkoldpassword = IP + "/v1/tch/account/checkoldpassword";
-    
+
     public static String getTchCheckOldPasswordUrl(String id, String password) {
         return url_tch_checkoldpassword + "?id=" + id + "&old=" + password;
-        
+
     }
 
     /**

@@ -3,10 +3,13 @@ package com.kcb.teacher.activity;
 import java.util.List;
 
 import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.kcb.common.base.BaseActivity;
+import com.kcb.common.util.DialogUtil;
 import com.kcb.library.slider.Slider;
 import com.kcb.library.slider.Slider.OnValueChangedListener;
 import com.kcb.library.view.buttonflat.ButtonFlat;
@@ -45,8 +48,8 @@ public class SubmitTestActivity extends BaseActivity {
         questionListView.setAdapter(mAdapter);
         mAdapter = (ListAdapterQuestions) questionListView.getAdapter();
 
-        testName = (TextView) findViewById(R.id.textview_testName);
-        testName.setText(mCurrentTest.getName());
+        testName = (TextView) findViewById(R.id.textview_test_name);
+        testName.setText("测试：" + mCurrentTest.getName());
 
         submitButton = (ButtonFlat) findViewById(R.id.button_submit);
         submitButton.setOnClickListener(this);
@@ -67,9 +70,20 @@ public class SubmitTestActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        mCurrentTest =
-                (Test) getIntent().getSerializableExtra(EditTestActivity.COURSE_TEST_KEY);
+        mCurrentTest = (Test) getIntent().getSerializableExtra(EditTestActivity.COURSE_TEST_KEY);
         mList = mCurrentTest.getQuestions();
+    }
+
+    @Override
+    public void onBackPressed() {
+        OnClickListener sureListener = new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        };
+        DialogUtil.showNormalDialog(this, R.string.leave, R.string.sureLeave, R.string.sure,
+                sureListener, R.string.cancel, null);
     }
 
 }

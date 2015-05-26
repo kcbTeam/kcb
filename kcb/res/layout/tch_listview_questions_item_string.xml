@@ -3,9 +3,7 @@
     xmlns:buttonflat="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="10dp"
-    android:layout_marginRight="10dp"
-    android:background="@color/questionItem" >
+    android:background="@color/activity_background" >
 
     <TextView
         android:id="@+id/textview_question_num"
