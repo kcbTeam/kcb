@@ -378,7 +378,7 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
                     Bitmap bitmap = Media.getBitmap(getContentResolver(), uri);
                     switch (mClickTag) {
                         case CLICK_TAG_TITLE:
-                            titleEditText.setText(" ");
+                            titleEditText.setText("");
                             titleEditText.setFocusable(false);
                             titleEditText.setBackground(new BitmapDrawable(bitmap));
                             deleteTitleImageView.setVisibility(View.VISIBLE);
