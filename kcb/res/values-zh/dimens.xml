@@ -4,8 +4,8 @@
     <!-- Common start -->
     <dimen name="text_size_micro">12dp</dimen>
     <dimen name="text_size_small">14dp</dimen>
-    <dimen name="text_size_dedium">18dp</dimen>
-    <dimen name="text_size_large">22dp</dimen>
+    <dimen name="text_size_medium">16dp</dimen>
+    <dimen name="text_size_large">18dp</dimen>
     <dimen name="dp_1">1dp</dimen>
     <dimen name="dp_8">8dp</dimen>
     <dimen name="dp_16">16dp</dimen>

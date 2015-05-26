@@ -8,12 +8,16 @@
     <com.kcb.library.view.PaperButton
         android:id="@+id/button_start_checkin"
         style="@style/home_center_button"
-        widget:paper_text="@string/begin_signin" />
+        widget:paper_text="@string/begin_signin"
+        widget:paper_text_color="@color/black_700"
+        widget:paper_text_size="@dimen/text_size_medium" />
 
     <com.kcb.library.view.PaperButton
         android:id="@+id/button_look_checkin"
         style="@style/home_center_button"
         android:layout_below="@id/button_start_checkin"
-        widget:paper_text="@string/signin_result" />
+        widget:paper_text="@string/signin_result"
+        widget:paper_text_color="@color/black_700"
+        widget:paper_text_size="@dimen/text_size_medium" />
 
 </RelativeLayout>

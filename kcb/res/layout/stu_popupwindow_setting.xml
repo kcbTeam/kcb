@@ -3,20 +3,20 @@
     xmlns:widget="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@color/popupwindow_background"
+    android:background="@color/black_200"
     android:orientation="vertical" >
 
     <com.kcb.library.view.buttonflat.ButtonFlat
         android:id="@+id/button_modifypassword"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:text="@string/button_modify"
         widget:rippleSpeed="12" />
 
     <com.kcb.library.view.buttonflat.ButtonFlat
         android:id="@+id/button_exit"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:text="@string/button_exit"
         widget:rippleSpeed="12" />
 

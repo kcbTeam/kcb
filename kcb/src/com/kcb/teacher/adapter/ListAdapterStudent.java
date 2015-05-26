@@ -22,7 +22,6 @@ import com.kcbTeam.R;
 @SuppressLint("ViewHolder")
 public class ListAdapterStudent extends BaseAdapter {
 
-
     private List<StudentInfo> mList;
     private Context mContext;
 

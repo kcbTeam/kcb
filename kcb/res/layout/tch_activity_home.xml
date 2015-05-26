@@ -13,7 +13,9 @@
         android:layout_height="wrap_content"
         android:background="@drawable/activity_header_shadow"
         android:gravity="center_vertical"
-        android:paddingLeft="16dp" />
+        android:paddingLeft="16dp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_large" />
 
     <com.kcb.library.view.buttonflat.ButtonFlat
         android:id="@+id/button_setting"
@@ -29,13 +31,6 @@
             android:src="@drawable/ic_more_vert_black_24dp" />
     </com.kcb.library.view.buttonflat.ButtonFlat>
 
-    <FrameLayout
-        android:id="@+id/fragment_content"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/textview_username" >
-    </FrameLayout>
-
     <LinearLayout
         android:id="@+id/buttonbar"
         android:layout_width="match_parent"
@@ -48,24 +43,10 @@
             style="@style/home_tab"
             android:text="@string/course_signin" />
 
-        <View
-            android:layout_width="1px"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_vertical"
-            android:background="@color/gray"
-            android:visibility="invisible" />
-
         <com.kcb.library.view.buttonflat.ButtonFlat
             android:id="@+id/button_test"
             style="@style/home_tab"
             android:text="@string/course_test" />
-
-        <View
-            android:layout_width="1px"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_vertical"
-            android:background="@color/gray"
-            android:visibility="invisible" />
 
         <com.kcb.library.view.buttonflat.ButtonFlat
             android:id="@+id/button_stucenter"
@@ -74,9 +55,18 @@
     </LinearLayout>
 
     <View
+        android:id="@+id/view_line"
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:layout_above="@id/buttonbar"
         android:background="@color/divider" />
+
+    <FrameLayout
+        android:id="@+id/fragment_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/view_line"
+        android:layout_below="@id/textview_username" >
+    </FrameLayout>
 
 </RelativeLayout>

@@ -72,10 +72,13 @@ public class HomeActivity extends BaseFragmentActivity {
 
         checkInButton = (ButtonFlat) findViewById(R.id.button_checkin);
         checkInButton.setOnClickListener(this);
+        checkInButton.setTextSize(16);
         testButton = (ButtonFlat) findViewById(R.id.button_test);
         testButton.setOnClickListener(this);
+        testButton.setTextSize(16);
         stuCenterButton = (ButtonFlat) findViewById(R.id.button_stucenter);
         stuCenterButton.setOnClickListener(this);
+        stuCenterButton.setTextSize(16);
 
         setDefaultFragment();
     }
@@ -140,9 +143,9 @@ public class HomeActivity extends BaseFragmentActivity {
 
     private void setButtonTextColor(int index) {
         Resources res = getResources();
-        checkInButton.setTextColor(res.getColor(R.color.gray));
-        testButton.setTextColor(res.getColor(R.color.gray));
-        stuCenterButton.setTextColor(res.getColor(R.color.gray));
+        checkInButton.setTextColor(res.getColor(R.color.black_500));
+        testButton.setTextColor(res.getColor(R.color.black_500));
+        stuCenterButton.setTextColor(res.getColor(R.color.black_500));
         switch (index) {
             case INDEX_CHECKIN:
                 checkInButton.setTextColor(res.getColor(R.color.blue));
@@ -201,9 +204,13 @@ public class HomeActivity extends BaseFragmentActivity {
         };
 
         ButtonFlat modifyButton = (ButtonFlat) customView.findViewById(R.id.button_modifypassword);
-        ButtonFlat exitButton = (ButtonFlat) customView.findViewById(R.id.button_exit);
         modifyButton.setOnClickListener(clickListener);
+        modifyButton.setTextColor(getResources().getColor(R.color.black_700));
+        modifyButton.setTextSize(14);
+        ButtonFlat exitButton = (ButtonFlat) customView.findViewById(R.id.button_exit);
         exitButton.setOnClickListener(clickListener);
+        exitButton.setTextColor(getResources().getColor(R.color.black_700));
+        exitButton.setTextSize(14);
     }
 
     private boolean hasClickBack = false;

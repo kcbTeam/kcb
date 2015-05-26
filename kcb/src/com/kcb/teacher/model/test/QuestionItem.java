@@ -48,9 +48,13 @@ public class QuestionItem implements Serializable {
     }
 
     public void setBitmap(Bitmap bitmap) {
-        isText = false;
-        mBitmap = bitmap;
+        if (bitmap == null) {
+            isText = true;
+        } else {
+            isText = false;
+        }
         mText = "";
+        mBitmap = bitmap;
     }
 
     public Bitmap getBitmap() {
