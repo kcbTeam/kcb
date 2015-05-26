@@ -12,6 +12,8 @@
     <dimen name="dp_32">32dp</dimen>
     <dimen name="dp_42">42dp</dimen>
     <dimen name="dp_90">90dp</dimen>
+    <dimen name="top_icon_button_height">56dp</dimen>
+    <dimen name="top_icon_button_width">42dp</dimen>
     <!-- Common end -->
 
 
