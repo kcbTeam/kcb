@@ -34,7 +34,7 @@
     <string name="check1">查看测试结果</string>
     <string name="button_modify">修改密码</string>
     <string name="button_exit">退出账号</string>
-    <string name="quitload">退出登录</string>
+    <string name="quitload">退出账号</string>
     <!-- HomeActivity End -->
 
 

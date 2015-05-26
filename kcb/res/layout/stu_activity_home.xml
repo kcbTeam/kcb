@@ -11,7 +11,9 @@
         android:layout_height="wrap_content"
         android:background="@drawable/activity_header_shadow"
         android:gravity="center_vertical"
-        android:paddingLeft="16dp" />
+        android:paddingLeft="16dp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_large" />
 
     <com.kcb.library.view.buttonflat.ButtonFlat
         android:id="@+id/button_setting"

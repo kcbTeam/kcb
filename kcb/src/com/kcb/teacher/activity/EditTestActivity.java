@@ -463,7 +463,7 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
             nextButton.setTextColor(getResources().getColor(R.color.blue));
         } else {
             nextButton.setText(getResources().getString(R.string.next_item));
-            nextButton.setTextColor(getResources().getColor(R.color.gray));
+            nextButton.setTextColor(getResources().getColor(R.color.black_700));
         }
     }
 

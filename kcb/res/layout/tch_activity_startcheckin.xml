@@ -14,30 +14,42 @@
         android:layout_height="wrap_content"
         android:background="@drawable/activity_header_shadow"
         android:gravity="center_vertical"
-        android:text="@string/signclass" />
+        android:paddingLeft="16dp"
+        android:text="@string/signclass"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_large" />
 
     <com.kcb.library.view.buttonflat.ButtonFlat
         android:id="@+id/button_giveup"
-        style="@style/common_top_button"
+        android:layout_width="@dimen/top_icon_button_width"
+        android:layout_height="@dimen/top_icon_button_height"
         android:layout_alignParentRight="true"
-        android:layout_alignTop="@id/textview_label"
-        android:text="@string/giveupsign"
-        buttonflat:rippleSpeed="6" />
+        buttonflat:rippleSpeed="6" >
 
-    <TextView
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@drawable/ic_highlight_remove_black_24dp" />
+    </com.kcb.library.view.buttonflat.ButtonFlat>
+
+    <ImageView
         android:id="@+id/textview_step1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/button_giveup"
-        android:layout_marginTop="@dimen/dp_32"
-        android:text="@string/num_1" />
+        android:layout_marginTop="16dp"
+        android:background="@drawable/ic_looks_one_black_24dp"
+        android:paddingLeft="16dp" />
 
     <com.kcb.library.view.PaperButton
         android:id="@+id/button_getnum"
         style="@style/common_paper_button"
         android:layout_alignTop="@id/textview_step1"
         android:layout_centerHorizontal="true"
-        widget:paper_text="@string/getnumber" />
+        widget:paper_text="@string/getnumber"
+        widget:paper_text_color="@color/black_700"
+        widget:paper_text_size="@dimen/text_size_medium" />
 
     <TextView
         android:id="@+id/tipforteacher1"
@@ -100,9 +112,10 @@
                 android:layout_alignTop="@id/textview_step2"
                 android:layout_centerHorizontal="true"
                 android:visibility="visible"
-                widget:paper_text="@string/startsign" />
+                widget:paper_text="@string/startsign"
+                widget:paper_text_color="@color/black_700"
+                widget:paper_text_size="@dimen/text_size_medium" />
 
-           
             <ProgressBar
                 android:id="@+id/ProgressBar"
                 style="@android:style/Widget.ProgressBar.Horizontal"
@@ -156,7 +169,9 @@
                 <com.kcb.library.view.PaperButton
                     android:id="@+id/button_rate"
                     style="@style/common_paper_button"
-                    widget:paper_text="@string/classrate" />
+                    widget:paper_text="@string/classrate"
+                    widget:paper_text_color="@color/black_700"
+                    widget:paper_text_size="@dimen/text_size_medium" />
 
                 <TextView
                     android:layout_width="wrap_content"
