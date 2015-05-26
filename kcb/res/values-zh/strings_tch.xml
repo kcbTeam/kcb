@@ -142,8 +142,8 @@
     <!-- Modify PassWord End -->
 
     <string name="signclass">课堂签到</string>
-    <string name="giveupsign">放弃签到</string>
-    <string name="giveup_sign_tip">放弃签到后，本次签到将无效。</string>
+    <string name="giveupsign">取消签到</string>
+    <string name="giveup_sign_tip">取消签到后，本次签到无效。</string>
     <string name="getnumber">获取签到数字</string>
     <string name="tipforteacher1">请告诉在场学生本次签到数字为：</string>
     <string name="startsign">开始签到</string>

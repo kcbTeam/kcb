@@ -11,59 +11,50 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_margin="24dp"
-        android:background="#fff"
-        android:paddingBottom="16dp"
-        android:paddingTop="24dp" >
+        android:background="@color/white"
+        android:padding="24dp" >
 
         <TextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginLeft="24dp"
-            android:layout_marginRight="24dp"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="#000" />
+            android:layout_marginBottom="16dp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_large" />
 
         <ListView
             android:id="@+id/listmessage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/title"
-            android:layout_marginLeft="24dp"
-            android:layout_marginRight="24dp"
-            android:divider="@color/gray"
-            android:dividerHeight="1px"
-            android:listSelector="#fff"
-            android:textColor="#000" />
+            android:divider="@color/black_200"
+            android:dividerHeight="1dp"
+            android:listSelector="@color/white" />
 
-        <View
+        <include
             android:id="@+id/view_dig"
-            android:layout_width="wrap_content"
-            android:layout_height="1px"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
             android:layout_below="@id/listmessage"
-            android:layout_marginLeft="24dp"
-            android:layout_marginRight="24dp"
-            android:background="@color/gray" />
+            layout="@layout/comm_divider" />
 
         <com.kcb.library.view.buttonflat.ButtonFlat
             android:id="@+id/button_accept"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="36dp"
             android:layout_alignParentRight="true"
             android:layout_below="@id/view_dig"
-            android:layout_marginRight="16dp"
             android:layout_marginTop="16dp"
-            android:background="#1E88E5"
+            android:background="@color/blue"
             android:text="@string/sure" />
 
         <com.kcb.library.view.buttonflat.ButtonFlat
             android:id="@+id/button_cancel"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="36dp"
             android:layout_alignBottom="@id/button_accept"
             android:layout_toLeftOf="@id/button_accept"
-            android:background="#000000"
+            android:background="@color/black_500"
             android:text="@string/cancel"
             android:visibility="gone" />
     </RelativeLayout>

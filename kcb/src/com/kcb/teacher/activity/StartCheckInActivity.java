@@ -86,7 +86,6 @@ public class StartCheckInActivity extends BaseActivity {
                     rateButton.setVisibility(View.VISIBLE);
                     finishButton.setVisibility(View.VISIBLE);
 
-
                     Animation animation =
                             AnimationUtils.loadAnimation(StartCheckInActivity.this,
                                     R.anim.layer_alpha_out);
@@ -154,7 +153,6 @@ public class StartCheckInActivity extends BaseActivity {
                     }, R.string.cancel, null);
         }
     }
-
 
     private DelayClickListener mClickListener = new DelayClickListener(
             DelayClickListener.DELAY_PAPER_BUTTON) {
