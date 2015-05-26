@@ -20,7 +20,7 @@ public class QuestionItem implements Serializable {
 
     private boolean isText = true;
     private String mText = "";
-    private Bitmap mBitmap;
+    private Bitmap mBitmap = null;
     private byte[] mBytesOfBitmap;
 
     public QuestionItem() {}
@@ -48,11 +48,7 @@ public class QuestionItem implements Serializable {
     }
 
     public void setBitmap(Bitmap bitmap) {
-        if (bitmap == null) {
-            isText = true;
-        } else {
-            isText = false;
-        }
+        isText = false;
         mText = "";
         mBitmap = bitmap;
     }

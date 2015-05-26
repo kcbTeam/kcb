@@ -1,7 +1,6 @@
 package com.kcb.teacher.model.test;
 
 import java.io.Serializable;
-import java.lang.reflect.Array;
 
 /**
  * 
@@ -125,5 +124,13 @@ public class Question implements Serializable {
             tempString += "D、";
         }
         return tempString.substring(0, tempString.length() - 1);
+    }
+
+    public void changeQuestionToSerializable() {
+        mTitleItem.changeBitmapToBytes();
+        mChoiceAItem.changeBitmapToBytes();
+        mChoiceBItem.changeBitmapToBytes();
+        mChoiceCItem.changeBitmapToBytes();
+        mChoiceDItem.changeBitmapToBytes();
     }
 }

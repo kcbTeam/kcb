@@ -196,6 +196,7 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
 
     private void nextQuesion() {
         if (mCurrentQuestionIndex == mTest.getQuestionNum() - 1) {
+            saveQuestion();
             String hintString = "";
             if (!mTest.isCompleted()) {
                 hintString = hintString + String.valueOf(1 + mTest.getUnCompleteIndex()) + "、";
@@ -205,7 +206,8 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
                 return;
             }
             Intent intent = new Intent(this, SubmitTestActivity.class);
-            intent.putExtra(DATA_TEST, mTest);
+            mTest.changeTestToSerializable();
+            intent.putExtra(COURSE_TEST_KEY, mTest);
             startActivity(intent);
             finish();
         } else {
@@ -386,13 +388,13 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
                             break;
                         case CLICK_TAG_A:
                             choiceAEditText.setText("");
-                            choiceBEditText.setFocusable(false);
+                            choiceAEditText.setFocusable(false);
                             choiceAEditText.setBackground(new BitmapDrawable(bitmap));
                             getCurrentQuestion().getChoiceA().setBitmap(bitmap);
                             break;
                         case CLICK_TAG_B:
-                            choiceCEditText.setText("");
-                            choiceDEditText.setFocusable(false);
+                            choiceBEditText.setText("");
+                            choiceBEditText.setFocusable(false);
                             choiceBEditText.setBackground(new BitmapDrawable(bitmap));
                             getCurrentQuestion().getChoiceB().setBitmap(bitmap);
                             break;
@@ -403,7 +405,7 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
                             getCurrentQuestion().getChoiceC().setBitmap(bitmap);
                             break;
                         case CLICK_TAG_D:
-                            choiceCEditText.setText("");
+                            choiceDEditText.setText("");
                             choiceDEditText.setFocusable(false);
                             choiceDEditText.setBackground(new BitmapDrawable(bitmap));
                             getCurrentQuestion().getChoiceD().setBitmap(bitmap);

@@ -11,8 +11,8 @@ import android.widget.TextView;
 import com.kcb.common.base.BaseActivity;
 import com.kcb.library.view.PaperButton;
 import com.kcb.library.view.buttonflat.ButtonFlat;
-import com.kcb.teacher.model.CourseTest;
 import com.kcb.teacher.model.test.Question;
+import com.kcb.teacher.model.test.Test;
 import com.kcbTeam.R;
 
 public class CheckTestDetailsActivity extends BaseActivity {
@@ -44,7 +44,7 @@ public class CheckTestDetailsActivity extends BaseActivity {
     private PaperButton lastButton;
     private PaperButton nextButton;
 
-    private CourseTest mTest;
+    private Test mTest;
     private List<Question> mQuestionList;
 
     @Override
@@ -62,7 +62,7 @@ public class CheckTestDetailsActivity extends BaseActivity {
         backButton.setOnClickListener(this);
 
         testName = (TextView) findViewById(R.id.textview_testname);
-        testName.setText(mTest.getTestName());
+        testName.setText(mTest.getName());
 
         questionTextView = (TextView) findViewById(R.id.textview_question);
         correctRate = (TextView) findViewById(R.id.textview_correct_rate);
@@ -93,8 +93,8 @@ public class CheckTestDetailsActivity extends BaseActivity {
     @Override
     protected void initData() {
 
-        mTest = (CourseTest) getIntent().getSerializableExtra(CheckTestActivity.CLICKED_TEST_KEY);
-        mQuestionList = mTest.getQuestionList();
+        mTest = (Test) getIntent().getSerializableExtra(CheckTestActivity.CLICKED_TEST_KEY);
+        mQuestionList = mTest.getQuestions();
     }
 
     @Override
