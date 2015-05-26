@@ -18,17 +18,19 @@ public class QuestionItem implements Serializable {
 
     private static final long serialVersionUID = 4919254309171318451L;
 
-    private boolean isText;
-    private String mText;
+    private boolean isText = true;
+    private String mText = "";
     private Bitmap mBitmap;
     private byte[] mBytesOfBitmap;
 
     public QuestionItem() {}
 
-    public QuestionItem(QuestionItem item) {
-        isText = item.isText;
-        mText = item.mText;
-        mBitmap = item.mBitmap;
+    public static void copy(QuestionItem oldItem, QuestionItem newItem) {
+        if (oldItem.isText) {
+            newItem.setText(oldItem.getText());
+        } else {
+            newItem.setBitmap(oldItem.getBitmap());
+        }
     }
 
     public boolean isText() {
@@ -42,11 +44,13 @@ public class QuestionItem implements Serializable {
     public void setText(String text) {
         isText = true;
         mText = text;
+        mBitmap = null;
     }
 
     public void setBitmap(Bitmap bitmap) {
         isText = false;
         mBitmap = bitmap;
+        mText = "";
     }
 
     public Bitmap getBitmap() {
@@ -58,14 +62,11 @@ public class QuestionItem implements Serializable {
     }
 
     public boolean equals(QuestionItem item) {
-        if (this == item) {
-            return true;
-        }
-        if (this.isText == item.isText) {
-            if (this.isText) {
-                return this.mText.equals(item.mText);
+        if (isText == item.isText) {
+            if (isText) {
+                return mText.equals(item.mText);
             } else {
-                return this.mBitmap.equals(item.mBitmap);
+                return mBitmap.equals(item.mBitmap);
             }
         }
         return false;

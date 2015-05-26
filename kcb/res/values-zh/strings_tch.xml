@@ -75,7 +75,7 @@
     <string name="next_item">下一题</string>
     <string name="problem_hint">请输入题目</string>
     <string name="options_hint">请输入选项</string>
-    <string name="format_question_num">选择题%1$d</string>
+    <string name="format_question_num">第%1$d题/共%2$d题</string>
     <string name="option_A">A.</string>
     <string name="option_B">B.</string>
     <string name="option_C">C.</string>
@@ -84,7 +84,7 @@
     <string name="leave">离开</string>
     <string name="sureLeave">确认放弃此次编辑吗？</string>
     <string name="format_edit_save">第%1$d题已保存</string>
-    <string name="format_edit_empty_hint">第%1$s题有空哦</string>
+    <string name="format_edit_empty_hint">第%1$s题未完成</string>
     <string name="dialog_title_question">输入题目</string>
     <string name="dialog_title_optionA">输入A选项</string>
     <string name="dialog_title_optionB">输入B选项</string>
@@ -93,8 +93,8 @@
     <string name="delete_success">删除成功</string>
     <string name="dialog_title_delete">删除</string>
     <string name="delete_msg">确认删除该题吗？</string>
-    <string name="dialog_title_add">添加</string>
-    <string name="add_msg">是否要再加一道题？</string>
+    <string name="dialog_title_add">添加一题</string>
+    <string name="add_msg">确定添加第 %1$d 题？</string>
     <string name="rebackground">重拍背景</string>
     <string name="deletebackground">删除背景</string>
     <!-- EditTestActivity End -->

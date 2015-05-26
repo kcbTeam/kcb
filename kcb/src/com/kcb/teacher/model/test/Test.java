@@ -10,7 +10,6 @@ public class Test implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private String mName; // test name
-    private int mNum; // question num
     private long mTime; // minute
     private List<Question> mQuestions;
 
