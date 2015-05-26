@@ -17,8 +17,8 @@ import com.kcb.common.base.BaseActivity;
 import com.kcb.library.view.FloatingEditText;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.teacher.adapter.ListAdapterCourseTest;
-import com.kcb.teacher.model.CourseTest;
 import com.kcb.teacher.model.test.Question;
+import com.kcb.teacher.model.test.Test;
 import com.kcb.teacher.util.NameUtils;
 import com.kcbTeam.R;
 
@@ -37,8 +37,8 @@ public class CheckTestActivity extends BaseActivity implements TextWatcher, OnIt
     private FloatingEditText searchEditText;
     private ListView testListView;
 
-    private List<CourseTest> mTestList;
-    private List<CourseTest> mTempTestList;
+    private List<Test> mTestList;
+    private List<Test> mTempTestList;
     private ListAdapterCourseTest mAdapter;
 
     public final static String CLICKED_TEST_KEY = "clicked_test_key";
@@ -85,11 +85,11 @@ public class CheckTestActivity extends BaseActivity implements TextWatcher, OnIt
         // questionList1.add(new Question(new QuestionItem("一年有可能多少天呢"), new QuestionItem("365"),
         // new QuestionItem("366"), new QuestionItem("367"), new QuestionItem("368"),
         // new boolean[] {true, true, false, false}));
-        mTestList = new ArrayList<CourseTest>();
-        mTestList.add(new CourseTest("高考数学", questionList, 300, "2015-6-5"));
-        mTestList.add(new CourseTest("考研数学", questionList1, 600, "2016-1-5"));
+        mTestList = new ArrayList<Test>();
+        mTestList.add(new Test("高考数学",4));
+        mTestList.add(new Test("考研数学", 3));
 
-        mTempTestList = new ArrayList<CourseTest>();
+        mTempTestList = new ArrayList<Test>();
         mTempTestList.addAll(mTestList);
 
         mAdapter = new ListAdapterCourseTest(this, mTempTestList);
@@ -118,7 +118,7 @@ public class CheckTestActivity extends BaseActivity implements TextWatcher, OnIt
         mTempTestList.addAll(mTestList);
         String searchContent = searchEditText.getText().toString();
         for (int i = 0; i < mTempTestList.size(); i++) {
-            String name = mTempTestList.get(i).getTestName();
+            String name = mTempTestList.get(i).getName();
             try {
                 if (NameUtils.isMatch(name, searchContent)) {
                     continue;

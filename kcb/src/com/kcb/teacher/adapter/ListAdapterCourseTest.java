@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.kcb.teacher.model.CourseTest;
+import com.kcb.teacher.model.test.Test;
 import com.kcbTeam.R;
 
 public class ListAdapterCourseTest extends BaseAdapter {
@@ -16,10 +16,10 @@ public class ListAdapterCourseTest extends BaseAdapter {
     private static final String TAG = "ListAdapterCourseTest";
 
     private Context mContext;
-    private List<CourseTest> mList;
+    private List<Test> mList;
 
 
-    public ListAdapterCourseTest(Context context, List<CourseTest> list) {
+    public ListAdapterCourseTest(Context context, List<Test> list) {
         mContext = context;
         mList = list;
     }
@@ -54,10 +54,10 @@ public class ListAdapterCourseTest extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        holder.testName.setText(mList.get(conversePosition).getTestName());
-        holder.testDate.setText(mList.get(conversePosition).getTestDate());
+        holder.testName.setText(mList.get(conversePosition).getName());
+        holder.testDate.setText(mList.get(conversePosition).getDate().toString());
         holder.questionTotalNum.setText(String.valueOf(mList.get(conversePosition)
-                .getQuestionList().size()));
+                .getQuestionNum()));
         return convertView;
     }
 

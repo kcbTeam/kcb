@@ -196,6 +196,7 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
 
     private void nextQuesion() {
         if (mCurrentQuestionIndex == mTest.getQuestionNum() - 1) {
+            saveQuestion();
             String hintString = "";
             if (!mTest.isCompleted()) {
                 hintString = hintString + String.valueOf(1 + mTest.getUnCompleteIndex()) + "、";
@@ -205,7 +206,8 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
                 return;
             }
             Intent intent = new Intent(this, SubmitTestActivity.class);
-            intent.putExtra(DATA_TEST, mTest);
+            mTest.changeTestToSerializable();
+            intent.putExtra(COURSE_TEST_KEY, mTest);
             startActivity(intent);
             finish();
         } else {

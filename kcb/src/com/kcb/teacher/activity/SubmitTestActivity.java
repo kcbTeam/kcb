@@ -11,8 +11,8 @@ import com.kcb.library.slider.Slider;
 import com.kcb.library.slider.Slider.OnValueChangedListener;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.teacher.adapter.ListAdapterQuestions;
-import com.kcb.teacher.model.CourseTest;
 import com.kcb.teacher.model.test.Question;
+import com.kcb.teacher.model.test.Test;
 import com.kcbTeam.R;
 
 public class SubmitTestActivity extends BaseActivity {
@@ -22,7 +22,7 @@ public class SubmitTestActivity extends BaseActivity {
     private ListView questionListView;
     private ListAdapterQuestions mAdapter;
     private List<Question> mList;
-    private CourseTest mCurrentTest;
+    private Test mCurrentTest;
 
     private TextView testName;
     private Slider testTime;
@@ -46,7 +46,7 @@ public class SubmitTestActivity extends BaseActivity {
         mAdapter = (ListAdapterQuestions) questionListView.getAdapter();
 
         testName = (TextView) findViewById(R.id.textview_testName);
-        testName.setText(mCurrentTest.getTestName());
+        testName.setText(mCurrentTest.getName());
 
         submitButton = (ButtonFlat) findViewById(R.id.button_submit);
         submitButton.setOnClickListener(this);
@@ -68,8 +68,8 @@ public class SubmitTestActivity extends BaseActivity {
     @Override
     protected void initData() {
         mCurrentTest =
-                (CourseTest) getIntent().getSerializableExtra(EditTestActivity.COURSE_TEST_KEY);
-        mList = mCurrentTest.getQuestionList();
+                (Test) getIntent().getSerializableExtra(EditTestActivity.COURSE_TEST_KEY);
+        mList = mCurrentTest.getQuestions();
     }
 
 }
