@@ -8,18 +8,24 @@
     <TextView
         android:id="@+id/textview_question_num"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:layout_marginTop="4dp" />
 
     <TextView
         android:id="@+id/textview_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/textview_question_num" />
+        android:layout_below="@id/textview_question_num"
+        android:layout_marginBottom="4dp"
+        android:layout_marginTop="4dp" />
 
     <TextView
         android:id="@+id/textview_answer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textview_content" />
+        android:layout_below="@id/textview_content"
+        android:layout_marginBottom="4dp"
+        android:layout_marginTop="4dp" />
 
 </RelativeLayout>

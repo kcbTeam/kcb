@@ -62,11 +62,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/testtimeHint"
-        android:layout_marginLeft="24dp"
-        android:layout_marginRight="24dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="8dp"
         android:layout_marginTop="10dp"
-        android:divider="@android:color/transparent"
-        android:dividerHeight="20dp"
+        android:divider="@color/gray"
+        android:dividerHeight="1dp"
         android:scrollbars="none" >
     </ListView>
 
