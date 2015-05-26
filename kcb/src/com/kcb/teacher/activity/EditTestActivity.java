@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.provider.MediaStore.Images.Media;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
@@ -73,7 +74,7 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
     private final int CLICK_TAG_B = 3;
     private final int CLICK_TAG_C = 4;
     private final int CLICK_TAG_D = 5;
-    private int mClickTag = CLICK_TAG_TITLE; // click or long click
+    private int mClickTag = CLICK_TAG_TITLE; // long click
 
     // save temp camera photo
     private String path;
@@ -92,39 +93,30 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
     @Override
     protected void initView() {
         testNameTextView = (TextView) findViewById(R.id.textview_title);
-
         questionNumTextView = (TextView) findViewById(R.id.textview_question_num);
-        questionNumTextView.setText(String.format(
-                getResources().getString(R.string.format_question_num), mCurrentQuestionIndex + 1));
 
         lastButton = (ButtonFlat) findViewById(R.id.button_last);
         lastButton.setOnClickListener(this);
         nextButton = (ButtonFlat) findViewById(R.id.button_next);
         nextButton.setOnClickListener(this);
-
         addButton = (ButtonFlat) findViewById(R.id.button_add);
         addButton.setOnClickListener(this);
         deleteButton = (ButtonFlat) findViewById(R.id.button_delete);
         deleteButton.setOnClickListener(this);
 
         titleEditText = (EditText) findViewById(R.id.edittext_question);
-        titleEditText.setOnClickListener(this);
         titleEditText.setOnLongClickListener(this);
 
         choiceAEditText = (EditText) findViewById(R.id.edittext_A);
-        choiceAEditText.setOnClickListener(this);
         choiceAEditText.setOnLongClickListener(this);
 
         choiceBEditText = (EditText) findViewById(R.id.edittext_B);
-        choiceBEditText.setOnClickListener(this);
         choiceBEditText.setOnLongClickListener(this);
 
         choiceCEditText = (EditText) findViewById(R.id.edittext_C);
-        choiceCEditText.setOnClickListener(this);
         choiceCEditText.setOnLongClickListener(this);
 
         choiceDEditText = (EditText) findViewById(R.id.edittext_D);
-        choiceDEditText.setOnClickListener(this);
         choiceDEditText.setOnLongClickListener(this);
 
         checkBoxA = (CheckBox) findViewById(R.id.checkBox_A);
@@ -144,9 +136,7 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
             String testId = intent.getStringExtra(DATA_TEST_ID);
         }
 
-        testNameTextView.setText("测试名称：" + mTest.getName());
-        mTempQuestion = getCurrentQuestion();
-
+        testNameTextView.setText("测试：" + mTest.getName());
         showQuestion();
     }
 
@@ -162,92 +152,31 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.button_last:
+                lastQuestion();
+                break;
+            case R.id.button_next:
+                nextQuesion();
+                break;
             case R.id.button_add:
                 addQuestion();
                 break;
             case R.id.button_delete:
                 deleteQuestion();
                 break;
-            case R.id.edittext_question:
-                mClickTag = CLICK_TAG_TITLE;
-                makeEditDialog(titleEditText.getText().toString(),
-                        getResources().getString(R.string.dialog_title_question));
-                break;
-            case R.id.edittext_A:
-                mClickTag = CLICK_TAG_A;
-                makeEditDialog(choiceAEditText.getText().toString(),
-                        getResources().getString(R.string.dialog_title_optionA));
-                break;
-            case R.id.edittext_B:
-                mClickTag = CLICK_TAG_B;
-                makeEditDialog(choiceBEditText.getText().toString(),
-                        getResources().getString(R.string.dialog_title_optionB));
-                break;
-            case R.id.edittext_C:
-                mClickTag = CLICK_TAG_C;
-                makeEditDialog(choiceCEditText.getText().toString(),
-                        getResources().getString(R.string.dialog_title_optionC));
-                break;
-            case R.id.edittext_D:
-                mClickTag = CLICK_TAG_D;
-                makeEditDialog(choiceDEditText.getText().toString(),
-                        getResources().getString(R.string.dialog_title_optionD));
-                break;
-            case R.id.pagerbutton_last:
-                lastQuestion();
-                break;
-            case R.id.pagerbutton_next:
-                nextQuesion();
-                break;
             default:
                 break;
         }
     }
 
-    // four click functions: add ,delete ,next ,last.
-    private void addQuestion() {
-        // TODO show add question num
-        DialogUtil.showNormalDialog(this, R.string.dialog_title_add, R.string.add_msg,
-                R.string.sure, new OnClickListener() {
-
-                    @Override
-                    public void onClick(View v) {
-                        mTest.addQuestion();
-                        // TODO change questionNumTextView
-                    }
-                }, R.string.cancel, null);
-    }
-
-    private void deleteQuestion() {
-        if (mTest.getQuestionNum() > 1) {
-            DialogUtil.showNormalDialog(this, R.string.dialog_title_delete, R.string.delete_msg,
-                    R.string.sure, new OnClickListener() {
-
-                        @Override
-                        public void onClick(View v) {
-                            if (mTest.getQuestionNum() > 1) {
-                                mTest.removeQuestion(mCurrentQuestionIndex);
-                                mCurrentQuestionIndex =
-                                        mCurrentQuestionIndex == mTest.getQuestionNum() - 1
-                                                ? mCurrentQuestionIndex
-                                                : mTest.getQuestionNum() - 1;
-                                showQuestion();
-                                // TODO change questionNumTextView
-                                ToastUtil.toast(R.string.delete_success);
-                            }
-                        }
-                    }, R.string.cancel, null);
-        }
-    }
-
     private void lastQuestion() {
         if (mCurrentQuestionIndex > 0) {
+            saveQuestion();
             if (!getCurrentQuestion().equal(mTempQuestion)) {
                 ToastUtil.toast(String.format(getResources().getString(R.string.format_edit_save),
                         1 + mCurrentQuestionIndex));
             }
             mCurrentQuestionIndex--;
-            mTempQuestion = getCurrentQuestion();
             showQuestion();
         }
     }
@@ -267,13 +196,52 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
             startActivity(intent);
             finish();
         } else {
+            saveQuestion();
             if (!getCurrentQuestion().equal(mTempQuestion)) {
                 ToastUtil.toast(String.format(getResources().getString(R.string.format_edit_save),
                         1 + mCurrentQuestionIndex));
             }
             mCurrentQuestionIndex++;
-            mTempQuestion = getCurrentQuestion();
             showQuestion();
+        }
+    }
+
+    // four click functions: add ,delete ,next ,last.
+    private void addQuestion() {
+        // TODO show add question num
+        final int questionNum = mTest.getQuestionNum() + 1;
+        DialogUtil.showNormalDialog(this, R.string.dialog_title_add,
+                String.format(getString(R.string.add_msg), questionNum), R.string.sure,
+                new OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        ToastUtil.toast("第" + questionNum + "题已添加");
+                        mTest.addQuestion();
+                        showQuestionNum();
+                        showNextButton();
+                    }
+                }, R.string.cancel, null);
+    }
+
+    private void deleteQuestion() {
+        if (mTest.getQuestionNum() > 1) {
+            DialogUtil.showNormalDialog(this, R.string.dialog_title_delete, R.string.delete_msg,
+                    R.string.sure, new OnClickListener() {
+
+                        @Override
+                        public void onClick(View v) {
+                            if (mTest.getQuestionNum() > 1) {
+                                int originQuestionNum = mTest.getQuestionNum();
+                                mTest.removeQuestion(mCurrentQuestionIndex);
+                                mCurrentQuestionIndex =
+                                        mCurrentQuestionIndex == originQuestionNum - 1 ? mTest
+                                                .getQuestionNum() - 1 : mCurrentQuestionIndex;
+                                showQuestion();
+                                ToastUtil.toast(R.string.delete_success);
+                            }
+                        }
+                    }, R.string.cancel, null);
         }
     }
 
@@ -441,37 +409,80 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
      * @param question
      */
     private void showQuestion() {
+        mTempQuestion = getCurrentQuestion();
+
+        showQuestionNum();
+        showNextButton();
+
         Question question = getCurrentQuestion();
 
-        questionNumTextView.setText(String.format(
-                getResources().getString(R.string.format_question_num), mCurrentQuestionIndex + 1));
+        showQuestionItem(titleEditText, question.getTitle());
+        showQuestionItem(choiceAEditText, question.getChoiceA());
+        showQuestionItem(choiceBEditText, question.getChoiceB());
+        showQuestionItem(choiceCEditText, question.getChoiceC());
+        showQuestionItem(choiceDEditText, question.getChoiceD());
 
-        showContent(titleEditText, question.getTitle());
-        showContent(choiceAEditText, question.getChoiceA());
-        showContent(choiceBEditText, question.getChoiceB());
-        showContent(choiceCEditText, question.getChoiceC());
-        showContent(choiceDEditText, question.getChoiceD());
         boolean[] correctId = question.getCorrectId();
-
         checkBoxA.setChecked(correctId[0]);
         checkBoxB.setChecked(correctId[1]);
         checkBoxC.setChecked(correctId[2]);
         checkBoxD.setChecked(correctId[3]);
+    }
 
+    private void showQuestionNum() {
+        questionNumTextView.setText(String.format(
+                getResources().getString(R.string.format_question_num), mCurrentQuestionIndex + 1,
+                mTest.getQuestionNum()));
+    }
+
+    private void showNextButton() {
         if (mCurrentQuestionIndex == mTest.getQuestionNum() - 1) {
             nextButton.setText(getResources().getString(R.string.complete));
+            nextButton.setTextColor(getResources().getColor(R.color.blue));
         } else {
             nextButton.setText(getResources().getString(R.string.next_item));
+            nextButton.setTextColor(getResources().getColor(R.color.gray));
         }
+    }
+
+    private void saveQuestion() {
+        String questionTitle = titleEditText.getText().toString().trim();
+        if (!TextUtils.isEmpty(questionTitle)) {
+            getCurrentQuestion().getTitle().setText(questionTitle);
+        }
+        String choiceA = choiceAEditText.getText().toString().trim();
+        if (!TextUtils.isEmpty(choiceA)) {
+            getCurrentQuestion().getChoiceA().setText(choiceA);
+        }
+        String choiceB = choiceBEditText.getText().toString().trim();
+        if (!TextUtils.isEmpty(choiceB)) {
+            getCurrentQuestion().getChoiceB().setText(choiceB);
+        }
+        String choiceC = choiceCEditText.getText().toString().trim();
+        if (!TextUtils.isEmpty(choiceC)) {
+            getCurrentQuestion().getChoiceC().setText(choiceC);
+        }
+        String choiceD = choiceDEditText.getText().toString().trim();
+        if (!TextUtils.isEmpty(choiceD)) {
+            getCurrentQuestion().getChoiceD().setText(choiceD);
+        }
+        getCurrentQuestion().setCorrectId(
+                new boolean[] {checkBoxA.isCheck(), checkBoxB.isCheck(), checkBoxC.isCheck(),
+                        checkBoxD.isCheck()});
     }
 
     @SuppressLint("NewApi")
     @SuppressWarnings("deprecation")
-    private void showContent(EditText view, QuestionItem content) {
-        if (content.isText()) {
-            view.setText(content.getText());
+    private void showQuestionItem(EditText view, QuestionItem item) {
+        if (item.isText()) {
+            view.setText(item.getText());
         } else {
-            view.setBackground(new BitmapDrawable(content.getBitmap()));
+            Bitmap bitmap = item.getBitmap();
+            if (null != bitmap) {
+                view.setBackground(new BitmapDrawable(bitmap));
+            } else {
+                view.setBackgroundResource(R.drawable.stu_checkin_textview);
+            }
         }
     }
 

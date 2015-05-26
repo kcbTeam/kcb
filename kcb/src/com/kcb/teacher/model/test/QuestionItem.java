@@ -18,18 +18,12 @@ public class QuestionItem implements Serializable {
 
     private static final long serialVersionUID = 4919254309171318451L;
 
-    private boolean isText;
+    private boolean isText = true;
     private String mText;
     private Bitmap mBitmap;
     private byte[] mBytesOfBitmap;
 
     public QuestionItem() {}
-
-    public QuestionItem(QuestionItem item) {
-        isText = item.isText;
-        mText = item.mText;
-        mBitmap = item.mBitmap;
-    }
 
     public boolean isText() {
         return isText;
