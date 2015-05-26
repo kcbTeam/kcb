@@ -367,22 +367,32 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
                     Bitmap bitmap = Media.getBitmap(getContentResolver(), uri);
                     switch (mClickTag) {
                         case CLICK_TAG_TITLE:
+                            titleEditText.setText("");
+                            titleEditText.setFocusable(false);
                             titleEditText.setBackground(new BitmapDrawable(bitmap));
                             getCurrentQuestion().getTitle().setBitmap(bitmap);
                             break;
                         case CLICK_TAG_A:
+                            choiceAEditText.setText("");
+                            choiceBEditText.setFocusable(false);
                             choiceAEditText.setBackground(new BitmapDrawable(bitmap));
                             getCurrentQuestion().getChoiceA().setBitmap(bitmap);
                             break;
                         case CLICK_TAG_B:
+                            choiceCEditText.setText("");
+                            choiceDEditText.setFocusable(false);
                             choiceBEditText.setBackground(new BitmapDrawable(bitmap));
                             getCurrentQuestion().getChoiceB().setBitmap(bitmap);
                             break;
                         case CLICK_TAG_C:
+                            choiceCEditText.setText("");
+                            choiceCEditText.setFocusable(false);
                             choiceCEditText.setBackground(new BitmapDrawable(bitmap));
                             getCurrentQuestion().getChoiceC().setBitmap(bitmap);
                             break;
                         case CLICK_TAG_D:
+                            choiceCEditText.setText("");
+                            choiceDEditText.setFocusable(false);
                             choiceDEditText.setBackground(new BitmapDrawable(bitmap));
                             getCurrentQuestion().getChoiceD().setBitmap(bitmap);
                             break;
@@ -409,7 +419,7 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
      * @param question
      */
     private void showQuestion() {
-        mTempQuestion = getCurrentQuestion();
+        mTempQuestion = Question.clone(getCurrentQuestion());
 
         showQuestionNum();
         showNextButton();
@@ -474,15 +484,18 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
     @SuppressLint("NewApi")
     @SuppressWarnings("deprecation")
     private void showQuestionItem(EditText view, QuestionItem item) {
+        view.setText("");
+        view.setBackground(getResources().getDrawable(R.drawable.stu_checkin_textview));
         if (item.isText()) {
             view.setText(item.getText());
+            view.setFocusable(true);
+            view.setFocusableInTouchMode(true);
         } else {
             Bitmap bitmap = item.getBitmap();
             if (null != bitmap) {
                 view.setBackground(new BitmapDrawable(bitmap));
-            } else {
-                view.setBackgroundResource(R.drawable.stu_checkin_textview);
             }
+            view.setFocusable(false);
         }
     }
 

@@ -1,6 +1,7 @@
 package com.kcb.teacher.model.test;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
 
 /**
  * 
@@ -28,6 +29,19 @@ public class Question implements Serializable {
         mChoiceCItem = new QuestionItem();
         mChoiceDItem = new QuestionItem();
         mAnswers = new boolean[] {false, false, false, false};
+    }
+
+    public static Question clone(Question object) {
+        Question question = new Question();
+        QuestionItem.copy(object.mTitleItem, question.mTitleItem);
+        QuestionItem.copy(object.mChoiceAItem, question.mChoiceAItem);
+        QuestionItem.copy(object.mChoiceBItem, question.mChoiceBItem);
+        QuestionItem.copy(object.mChoiceCItem, question.mChoiceCItem);
+        QuestionItem.copy(object.mChoiceDItem, question.mChoiceDItem);
+        for (int i = 0; i < 4; i++) {
+            question.mAnswers[i] = object.mAnswers[i];
+        }
+        return question;
     }
 
     public QuestionItem getTitle() {
@@ -59,9 +73,6 @@ public class Question implements Serializable {
     }
 
     public boolean equal(Question questionObj) {
-        if (this == questionObj) {
-            return true;
-        }
         if (mAnswers[0] == questionObj.getCorrectId()[0]
                 && mAnswers[1] == questionObj.getCorrectId()[1]
                 && mAnswers[2] == questionObj.getCorrectId()[2]
