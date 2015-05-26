@@ -22,47 +22,52 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:text="@string/cut_title"
-            android:textSize="22dp" />
+            android:textSize="@dimen/text_size_medium" />
     </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/title"
-        android:layout_marginTop="20dp" >
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp" >
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="24dp"
-            android:layout_marginRight="24dp" >
-
-            <com.edmodo.cropper.CropImageView
-                xmlns:custom="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/CropImageView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true" />
-
-            <com.kcb.library.view.buttonflat.ButtonFlat
-                android:id="@+id/Button_rotate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/CropImageView"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:text="@string/rotate" />
-
-            <com.kcb.library.view.buttonflat.ButtonFlat
-                android:id="@+id/button_complete"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_below="@id/CropImageView"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="10dp"
-                android:text="@string/complete" />
-        </RelativeLayout>
+        <com.edmodo.cropper.CropImageView
+            xmlns:custom="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/CropImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
     </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/layout_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal" >
+
+        <com.kcb.library.view.buttonflat.ButtonFlat
+            android:id="@+id/Button_rotate"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/rotate"
+            buttonflat:clickAfterRipple="false"
+            buttonflat:rippleSpeed="36" />
+
+        <com.kcb.library.view.buttonflat.ButtonFlat
+            android:id="@+id/button_complete"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/complete"
+            buttonflat:rippleSpeed="36" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_above="@id/layout_buttons"
+        android:background="@color/divider" />
 
 </RelativeLayout>

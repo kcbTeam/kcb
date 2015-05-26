@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.kcb.common.base.BaseActivity;
@@ -46,6 +47,7 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
     private TextView questionNumTextView;
 
     private EditText titleEditText;
+    private ImageView deleteTitleImageView;
     private EditText choiceAEditText;
     private EditText choiceBEditText;
     private EditText choiceCEditText;
@@ -104,8 +106,11 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
         deleteButton = (ButtonFlat) findViewById(R.id.button_delete);
         deleteButton.setOnClickListener(this);
 
-        titleEditText = (EditText) findViewById(R.id.edittext_question);
+        titleEditText = (EditText) findViewById(R.id.edittext_question_title);
         titleEditText.setOnLongClickListener(this);
+
+        deleteTitleImageView = (ImageView) findViewById(R.id.imageview_delete_title);
+        deleteTitleImageView.setOnClickListener(this);
 
         choiceAEditText = (EditText) findViewById(R.id.edittext_A);
         choiceAEditText.setOnLongClickListener(this);
@@ -152,6 +157,14 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.imageview_delete_title:
+                titleEditText.setText("");
+                titleEditText.setFocusable(true);
+                titleEditText.setFocusableInTouchMode(true);
+                titleEditText.setBackgroundResource(R.drawable.stu_checkin_textview);
+                deleteTitleImageView.setVisibility(View.INVISIBLE);
+                getCurrentQuestion().getTitle().setBitmap(null);
+                break;
             case R.id.button_last:
                 lastQuestion();
                 break;
@@ -295,7 +308,7 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
     @Override
     public boolean onLongClick(View v) {
         switch (v.getId()) {
-            case R.id.edittext_question:
+            case R.id.edittext_question_title:
                 mClickTag = CLICK_TAG_TITLE;
                 break;
             case R.id.edittext_A:
@@ -344,9 +357,7 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_TAKEPHOTO) {
-            if (resultCode == RESULT_CANCELED) {
-                ToastUtil.toast("操作取消了");
-            } else {
+            if (resultCode != RESULT_CANCELED) {
                 File picture = new File(path + "temp.jpg");
                 try {
                     Uri uri =
@@ -367,9 +378,10 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
                     Bitmap bitmap = Media.getBitmap(getContentResolver(), uri);
                     switch (mClickTag) {
                         case CLICK_TAG_TITLE:
-                            titleEditText.setText("");
+                            titleEditText.setText(" ");
                             titleEditText.setFocusable(false);
                             titleEditText.setBackground(new BitmapDrawable(bitmap));
+                            deleteTitleImageView.setVisibility(View.VISIBLE);
                             getCurrentQuestion().getTitle().setBitmap(bitmap);
                             break;
                         case CLICK_TAG_A:
@@ -404,8 +416,6 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-            } else if (resultCode == RESULT_CANCELED) {
-                ToastUtil.toast("操作取消了");
             }
         }
     }
@@ -481,11 +491,10 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
                         checkBoxD.isCheck()});
     }
 
-    @SuppressLint("NewApi")
     @SuppressWarnings("deprecation")
     private void showQuestionItem(EditText view, QuestionItem item) {
         view.setText("");
-        view.setBackground(getResources().getDrawable(R.drawable.stu_checkin_textview));
+        view.setBackgroundResource(R.drawable.stu_checkin_textview);
         if (item.isText()) {
             view.setText(item.getText());
             view.setFocusable(true);
@@ -493,7 +502,7 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
         } else {
             Bitmap bitmap = item.getBitmap();
             if (null != bitmap) {
-                view.setBackground(new BitmapDrawable(bitmap));
+                view.setBackgroundDrawable(new BitmapDrawable(bitmap));
             }
             view.setFocusable(false);
         }

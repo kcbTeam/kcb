@@ -4,13 +4,19 @@
     <!-- common start -->
     <color name="activity_background">#fff</color>
     <color name="gray">#777777</color>
-    <color name="red">#ff0000</color>
     <color name="green">#00ff00</color>
-    <color name="blue">#1e88e5</color>
-    <color name="white">#ffffff</color>
-    <color name="black">#000000</color>
-    <color name="popupwindow_background">#eeeeee</color>
+    <color name="red">#ff0000</color>
     <!-- common end -->
+
+
+    <!--  -->
+    <color name="white">#ffffff</color>
+    <color name="blue">#3d5afe</color>
+    <color name="black">#000000</color>
+    <color name="black_700">#616161</color>
+    <color name="black_500">#9e9e9e</color>
+    <color name="black_200">#eeeeee</color>
+    <!--  -->
 
 
     <!-- tch home activity start -->

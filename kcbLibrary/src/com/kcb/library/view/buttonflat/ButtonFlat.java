@@ -1,11 +1,13 @@
 package com.kcb.library.view.buttonflat;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -44,12 +46,13 @@ public class ButtonFlat extends Button {
             textButton = new TextView(getContext());
             textButton.setText(text.toUpperCase());
             textButton.setTextColor(backgroundColor);
-            textButton.setTypeface(null, Typeface.BOLD);
+//            textButton.setTypeface(null, Typeface.BOLD);
             RelativeLayout.LayoutParams params =
                     new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT,
                             LayoutParams.WRAP_CONTENT);
             params.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
             textButton.setLayoutParams(params);
+
             addView(textButton);
         }
         int bacgroundColor = attrs.getAttributeResourceValue(ANDROIDXML, "background", -1);
@@ -123,4 +126,7 @@ public class ButtonFlat extends Button {
         textButton.setTextColor(color);
     }
 
+    public void setTextSize(int dpSize) {
+        textButton.setTextSize(TypedValue.COMPLEX_UNIT_DIP, dpSize);
+    }
 }
