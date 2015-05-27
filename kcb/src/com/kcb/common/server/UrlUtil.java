@@ -1,5 +1,7 @@
 package com.kcb.common.server;
 
+import android.R.integer;
+
 /**
  * 
  * @className: UrlUtil
@@ -100,7 +102,7 @@ public class UrlUtil {
     // 2.1 start checkin
     private static final String url_tch_checkin_start = IP + "/v1/tch/checkin/start";
 
-    public static String getTchCheckinStartUrl(String id, String num) {
+    public static String getTchCheckinStartUrl(String id, int num) {
         return url_tch_checkin_start + "?id=" + id + "&num=" + num;
     }
 

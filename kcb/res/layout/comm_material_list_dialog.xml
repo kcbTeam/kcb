@@ -31,12 +31,12 @@
             android:dividerHeight="1dp"
             android:listSelector="@color/white" />
 
-        <include
+        <View
             android:id="@+id/view_dig"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_below="@id/listmessage"
-            layout="@layout/comm_divider" />
+            android:background="@color/black_divider" />
 
         <com.kcb.library.view.buttonflat.ButtonFlat
             android:id="@+id/button_accept"

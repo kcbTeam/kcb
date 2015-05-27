@@ -82,6 +82,18 @@
     <!-- **************************************** Teacher module End **************************************** -->
 
 
+    <!-- StartCheckIn start -->
+    <style name="tch_checkin_num">
+        <item name="android:textSize">@dimen/text_size_large</item>
+        <item name="android:textColor">@color/black_700</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">36dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/stu_checkin_textview</item>
+    </style>
+
+    <!-- StartCheckIn end -->
     <!-- **************************************** Teacher module End **************************************** -->
 
     <style name="edittest_edittext_problem">
