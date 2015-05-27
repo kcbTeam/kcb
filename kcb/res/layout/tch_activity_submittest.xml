@@ -65,7 +65,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="10dp"
-        android:divider="@color/gray"
+        android:divider="@color/divider"
         android:dividerHeight="1dp"
         android:scrollbars="none" >
     </ListView>

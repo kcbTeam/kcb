@@ -1,5 +1,7 @@
 package com.kcb.library.view.buttonflat;
 
+import com.kcbTeam.kcblibrary.R;
+
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
@@ -10,8 +12,6 @@ import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import com.kcbTeam.kcblibrary.R;
 
 public class ButtonFlat extends Button {
 
