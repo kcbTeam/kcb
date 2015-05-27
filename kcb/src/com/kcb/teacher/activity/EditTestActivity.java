@@ -30,8 +30,6 @@ import com.kcb.library.view.checkbox.CheckBox;
 import com.kcb.teacher.model.test.Question;
 import com.kcb.teacher.model.test.QuestionItem;
 import com.kcb.teacher.model.test.Test;
-import com.kcb.teacher.util.EditTestDialog;
-import com.kcb.teacher.util.EditTestDialog.DialogSureListener;
 import com.kcbTeam.R;
 
 /**
@@ -255,7 +253,10 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
                     }, R.string.cancel, null);
         }
     }
-
+    
+    //TODO:if needn't dialog to input then delete the function makeEditdialog().
+    
+    /*
     private void makeEditDialog(String text, String title) {
         EditTestDialog dialog = new EditTestDialog(this, text);
         dialog.show();
@@ -293,6 +294,7 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
         dialog.setSureButton(getResources().getString(R.string.save), sureListener);
         dialog.setCancelButton(getResources().getString(R.string.cancel), null);
     }
+    */
 
     /**
      * 
