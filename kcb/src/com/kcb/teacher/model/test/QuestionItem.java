@@ -22,10 +22,11 @@ public class QuestionItem implements Serializable {
     private String mText = "";
     private Bitmap mBitmap = null;
     private byte[] mBytesOfBitmap;
+    private boolean isRight;
 
     public QuestionItem() {}
-    
-    public QuestionItem(String text){
+
+    public QuestionItem(String text) {
         mText = text;
     }
 
