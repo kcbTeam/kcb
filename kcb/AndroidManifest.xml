@@ -134,6 +134,10 @@
             android:name="com.kcb.teacher.activity.ModifyPasswordActivity"
             android:screenOrientation="portrait" >
         </activity>
+        <activity
+            android:name="com.kcb.teacher.activity.ModifyQuestionActivty"
+            android:screenOrientation="portrait" >
+        </activity>
         <!-- teacher end -->
     </application>
 

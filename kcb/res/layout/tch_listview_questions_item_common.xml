@@ -10,7 +10,9 @@
     <TextView
         android:id="@+id/textview_question_num"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp" />
 
     <EditText
         android:id="@+id/edittext_question"
@@ -135,6 +137,7 @@
         android:id="@+id/textview_answer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/layout_D" />
+        android:layout_below="@id/layout_D"
+        android:layout_marginBottom="15dp" />
 
 </RelativeLayout>

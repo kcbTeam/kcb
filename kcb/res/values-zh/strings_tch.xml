@@ -121,7 +121,10 @@
     <string name="testtimeFormat">%1$d分钟</string>
     <!-- Submit Activity End -->
 
-
+	<!-- Modify Question Activity Start-->
+	<string name="modify_saved">修改已保存</string>
+	<!-- Modify Question Activity End -->
+	
     <!-- Check Test Activity Start -->
     <string name="checktest">查看测试</string>
     <string name="hint_checktest_search">搜索测试名称</string>

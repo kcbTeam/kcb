@@ -25,6 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
             android:text="@string/sure_submit" >
         </com.kcb.library.view.buttonflat.ButtonFlat>
     </RelativeLayout>
@@ -63,9 +64,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/testtimeHint"
         android:layout_marginLeft="16dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginRight="16dp"
         android:layout_marginTop="10dp"
-        android:divider="@color/gray"
+        android:divider="@color/half_gray"
         android:dividerHeight="1dp"
         android:scrollbars="none" >
     </ListView>
