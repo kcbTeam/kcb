@@ -134,6 +134,14 @@ public class ModifyQuestionActivty extends BaseActivity implements OnLongClickLi
     public void onClick(View v) {
         Intent intent = new Intent();
         switch (v.getId()) {
+            case R.id.imageview_delete_title:
+                deleteTitleImageView.setVisibility(View.INVISIBLE);
+                mQuestion.getTitle().setText("");
+                titleEditText.setClickable(true);
+                titleEditText.setFocusable(true);
+                titleEditText.setHint(R.string.edit_title_hint);
+                showQuestion();
+                break;
             case R.id.button_cancel:
                 setResult(MODIFY_CACELED, intent);
                 finish();
@@ -288,12 +296,19 @@ public class ModifyQuestionActivty extends BaseActivity implements OnLongClickLi
     private void showQuestionItem(EditText view, QuestionItem item) {
         view.setBackgroundResource(R.drawable.stu_checkin_textview);
         if (item.isText()) {
+            if (view == titleEditText) {
+                deleteTitleImageView.setVisibility(View.INVISIBLE);
+            }
             view.setText(item.getText());
             view.setFocusable(true);
             view.setFocusableInTouchMode(true);
         } else {
             Bitmap bitmap = item.getBitmap();
             if (null != bitmap) {
+                if (view == titleEditText) {
+                    deleteTitleImageView.setVisibility(View.VISIBLE);
+                    titleEditText.setHint("");
+                }
                 view.setBackgroundDrawable(new BitmapDrawable(bitmap));
             }
             view.setFocusable(false);

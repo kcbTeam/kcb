@@ -41,7 +41,7 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/stu_checkin_textview"
         android:gravity="top|left"
-        android:hint="直接输入文字，或者长按拍照"
+        android:hint="@string/edit_title_hint"
         android:inputType="none"
         android:lines="7"
         android:padding="4dp"
