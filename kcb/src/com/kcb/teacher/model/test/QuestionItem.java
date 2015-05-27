@@ -45,6 +45,7 @@ public class QuestionItem implements Serializable {
         isText = true;
         mText = text;
         mBitmap = null;
+        mBytesOfBitmap = null;
     }
 
     public void setBitmap(Bitmap bitmap) {
