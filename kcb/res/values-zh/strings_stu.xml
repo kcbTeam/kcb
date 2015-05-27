@@ -18,6 +18,7 @@
     <string name="if_giveup_checkin">是否放弃签到？</string>
     <string name="num_error">签到数字错误</string>
     <string name="checkin_success">签到成功！</string>
+    <string name="checkin_failed">签到数字错误！</string>
     <string name="button_finish">完成</string>
     <string name="button_login">登录</string>
     <string name="hint_password">密码</string>

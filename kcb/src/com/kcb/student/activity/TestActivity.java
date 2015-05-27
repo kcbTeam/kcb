@@ -1,5 +1,6 @@
 package com.kcb.student.activity;
 
+import net.sf.json.JSONObject;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.SharedPreferences;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 
 import com.kcb.common.base.BaseFragmentActivity;
 import com.kcb.common.util.DialogUtil;
+import com.kcb.common.util.LogUtil;
 import com.kcb.library.view.PaperButton;
 import com.kcb.library.view.checkbox.CheckBox;
 import com.kcb.student.adapter.TestRecycleAdapter;
@@ -80,20 +82,19 @@ public class TestActivity extends BaseFragmentActivity {
         nextButton.setOnClickListener(this);
     }
 
-    // Set the countdown Timer,5 minutes
     public void setTimeCounterDown(long totalTime) {
         timeTextView = (TextView) findViewById(R.id.textview_timecounter);
         timeCountDown = new fiveCountDownTimer(totalTime, 1000);
         timeCountDown.start();
     }
 
-   
-
     @Override
     protected void initData() {
         String string = getIntent().getStringExtra("questionInfo");
         JsonObjectParserUtil questionData = new JsonObjectParserUtil(string);
         mTest = questionData.ParserJsonObject();
+        JSONObject jsonObject =  JSONObject.fromObject(mTest);
+        LogUtil.i("efvgfr", jsonObject.toString());  
         questionNum = mTest.getQuestionNum();
         recyclerView.setLayoutManager(new GridLayoutManager(this, questionNum));
         mAdapter = new TestRecycleAdapter(questionNum);
@@ -101,9 +102,8 @@ public class TestActivity extends BaseFragmentActivity {
         if (questionNum == 1) nextButton.setText("已完成");
         titleTextView.setText(mTest.getName());
         showCurrentQuestion(0);
-        setTimeCounterDown(mTest.getmTime()*60000);
+        setTimeCounterDown(mTest.getmTime() * 60000);
     }
-
 
     @Override
     public void onClick(View v) {
@@ -232,6 +232,7 @@ public class TestActivity extends BaseFragmentActivity {
         checkboxD.setChecked(mCorrectId[3]);
     }
 
+    // 统计回答题目的数目
     public int collectAnsweredNum() {
         int AnsweredNum = 0;
         for (int i = 0; i < mTest.getQuestionNum(); i++) {
@@ -246,10 +247,10 @@ public class TestActivity extends BaseFragmentActivity {
         return AnsweredNum;
     }
 
+    // 倒计时
     protected class fiveCountDownTimer extends CountDownTimer {
 
         private long millisUntilFinished;
-
         public fiveCountDownTimer(long millisInFuture, long countDownInterval) {
             super(millisInFuture, countDownInterval);
         }
@@ -302,7 +303,6 @@ public class TestActivity extends BaseFragmentActivity {
     protected void onPause() {
         super.onPause();
         SharedPreferences sharedPref = getSharedPreferences("CounterTimes", MODE_PRIVATE);
-        long useFirst = sharedPref.getLong("CounterTimes", 0);
         Editor mEditor = sharedPref.edit();
         mEditor.putLong("CounterTimes", timeCountDown.getMillisUntilFinished());
         mEditor.commit();

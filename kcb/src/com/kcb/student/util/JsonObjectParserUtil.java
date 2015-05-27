@@ -77,6 +77,7 @@ public class JsonObjectParserUtil {
                                     .decode(jsonObject2.getString("mOptionD")));
                     question.getChoiceD().setBitmap(bitmap);
                 }
+                question.setCorrectId(IntToBooleans.IntCvToBooleans(jsonObject2.getInt("mAnswer")));
                 questionsList.add(question);
             }
             test =

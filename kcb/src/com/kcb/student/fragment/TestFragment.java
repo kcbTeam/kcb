@@ -1,7 +1,5 @@
 package com.kcb.student.fragment;
 
-import org.json.JSONObject;
-
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -11,15 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.android.volley.Request.Method;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.kcb.common.base.BaseFragment;
 import com.kcb.common.listener.DelayClickListener;
-import com.kcb.common.server.RequestUtil;
 import com.kcb.common.util.LogUtil;
-import com.kcb.common.util.ToastUtil;
 import com.kcb.library.view.PaperButton;
 import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
 import com.kcb.student.activity.TestActivity;
@@ -43,13 +35,13 @@ public class TestFragment extends BaseFragment {
                     "{\"mTestName\":\"微积分\",\"mTestDate\":\"2015.05.23\",\"mTestTime\":5,"
                             + "\"QuestionList\":[{\"mQuestion\":\"这是第一题选择题\",\"mQuestionType\":\"true\","
                             + "\"mOptionA\":\"答案1\",\"mOptionAType\":\"true\",\"mOptionB\":\"答案2\",\"mOptionBType\":\"true\","
-                            + "\"mOptionC\":\"答案3\",\"mOptionCType\":\"true\",\"mOptionD\":\"答案4\",\"mOptionDType\":\"true\""
+                            + "\"mOptionC\":\"答案3\",\"mOptionCType\":\"true\",\"mOptionD\":\"答案4\",\"mOptionDType\":\"true\",\"mAnswers\":4"
                             + "},{\"mQuestion\":\"这是第二道选择题的内容，请仔细作答\",\"mQuestionType\":\"true\",\"mOptionA\":\"答案1\","
                             + "\"mOptionAType\":\"true\",\"mOptionB\":\"答案2\",\"mOptionBType\":\"true\",\"mOptionC\":\"答案3\","
-                            + "\"mOptionCType\":\"true\",\"mOptionD\":\"答案4\",\"mOptionDType\":\"true\"},{\"mQuestion\":\"这是第三道选择题的内容，请仔细作答\","
+                            + "\"mOptionCType\":\"true\",\"mOptionD\":\"答案4\",\"mOptionDType\":\"true\",\"mAnswers\":4},{\"mQuestion\":\"这是第三道选择题的内容，请仔细作答\","
                             + "\"mQuestionType\":\"true\",\"mOptionA\":\"答案1\",\"mOptionAType\":\"true\",\"mOptionB\":\"答案2\","
                             + "\"mOptionBType\":\"true\",\"mOptionC\":\"答案3\",\"mOptionCType\":\"true\",\"mOptionD\":\"答案4\","
-                            + "\"mOptionDType\":\"true\"}]}");
+                            + "\"mOptionDType\":\"true\",\"mAnswers\":4}]}");
 
 
     @Override

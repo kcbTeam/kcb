@@ -20,7 +20,6 @@ import com.kcb.common.server.UrlUtil;
 import com.kcb.common.util.AnimationUtil;
 import com.kcb.common.util.ToastUtil;
 import com.kcb.library.view.PaperButton;
-import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
 import com.kcb.student.adapter.CheckInRecycleAdapter;
 import com.kcb.student.adapter.CheckInRecycleAdapter.RecyclerItemClickListener;
@@ -37,7 +36,6 @@ public class CheckInActivity extends BaseActivity {
 
     private final String TAG = CheckInActivity.class.getName();
 
-    private ButtonFlat backButton;
     private View numView;
     private TextView num1TextView;
     private TextView num2TextView;
@@ -112,8 +110,16 @@ public class CheckInActivity extends BaseActivity {
 
                         @Override
                         public void onResponse(String response) {
-                            ToastUtil.toast(R.string.checkin_success);
-                            finish();
+                            if (getNum().equals(response)) {
+                                ToastUtil.toast(R.string.checkin_success);
+                                finish();
+                            } else {
+                                ToastUtil.toast(R.string.checkin_failed);
+                                num1TextView.setText("");
+                                num2TextView.setText("");
+                                num3TextView.setText("");
+                                num4TextView.setText("");
+                            }
                         }
                     }, new ErrorListener() {
 

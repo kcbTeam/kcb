@@ -19,7 +19,6 @@ public class Question implements Serializable {
     private QuestionItem mChoiceBItem;
     private QuestionItem mChoiceCItem;
     private QuestionItem mChoiceDItem;
-
     private boolean[] mAnswers;
 
     public Question() {
