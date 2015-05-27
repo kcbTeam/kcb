@@ -179,14 +179,6 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
         }
     }
 
-    private void setTitleEditTextMode() {
-        titleEditText.setText("");
-        titleEditText.setHint(R.string.edit_title_hint);
-        titleEditText.setFocusable(true);
-        titleEditText.setFocusableInTouchMode(true);
-        titleEditText.setBackgroundResource(R.drawable.stu_checkin_textview);
-    }
-
     private void lastQuestion() {
         if (mCurrentQuestionIndex > 0) {
             saveQuestion();
@@ -228,7 +220,6 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
 
     // four click functions: add ,delete ,next ,last.
     private void addQuestion() {
-        // TODO show add question num
         final int questionNum = mTest.getQuestionNum() + 1;
         DialogUtil.showNormalDialog(this, R.string.dialog_title_add,
                 String.format(getString(R.string.add_msg), questionNum), R.string.sure,
@@ -525,6 +516,14 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
             }
             view.setFocusable(false);
         }
+    }
+
+    private void setTitleEditTextMode() {
+        titleEditText.setText("");
+        titleEditText.setHint(R.string.edit_title_hint);
+        titleEditText.setFocusable(true);
+        titleEditText.setFocusableInTouchMode(true);
+        titleEditText.setBackgroundResource(R.drawable.stu_checkin_textview);
     }
 
     private Question getCurrentQuestion() {
