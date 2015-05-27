@@ -61,10 +61,10 @@ public class HomeActivity extends BaseFragmentActivity {
 
         checkInButton = (ButtonFlat) findViewById(R.id.button_checkin);
         checkInButton.setOnClickListener(this);
-        checkInButton.setTextSize(16);
+//        checkInButton.setTextSize(16);
         testButton = (ButtonFlat) findViewById(R.id.button_test);
         testButton.setOnClickListener(this);
-        testButton.setTextSize(16);
+//        testButton.setTextSize(16);
 
         mFragmentManager = getSupportFragmentManager();
 
@@ -166,11 +166,11 @@ public class HomeActivity extends BaseFragmentActivity {
         ButtonFlat modifyButton = (ButtonFlat) customView.findViewById(R.id.button_modifypassword);
         modifyButton.setOnClickListener(clickListener);
         modifyButton.setTextColor(getResources().getColor(R.color.black_700));
-        modifyButton.setTextSize(14);
+//        modifyButton.setTextSize(14);
         ButtonFlat exitButton = (ButtonFlat) customView.findViewById(R.id.button_exit);
         exitButton.setOnClickListener(clickListener);
         exitButton.setTextColor(getResources().getColor(R.color.black_700));
-        exitButton.setTextSize(14);
+//        exitButton.setTextSize(14);
     }
 
     private boolean hasClickBack = false;

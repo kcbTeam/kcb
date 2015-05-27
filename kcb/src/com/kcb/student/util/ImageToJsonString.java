@@ -3,8 +3,7 @@ package com.kcb.student.util;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
-import org.apache.commons.codec.binary.Base64;
-
+import android.util.Base64;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
@@ -20,12 +19,12 @@ public class ImageToJsonString {
 
     // BASE64字符串转化为二进制数据
     public static byte[] decode(String string) {
-        return Base64.decodeBase64(string);
+        return Base64.decode(string, Base64.DEFAULT);
     }
 
     // 二进制数据编码为BASE64字符串
     public static String encode(byte[] bytes) {
-        return new String(Base64.encodeBase64(bytes));
+        return new String(Base64.encode(bytes,Base64.DEFAULT));
     }
 
     // 将两个byte数组连接起来后，返回连接后的Byte数组

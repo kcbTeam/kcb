@@ -1,9 +1,12 @@
 package com.kcb.student.activity;
 
-import java.util.List;
-
+import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.widget.GridLayoutManager;
@@ -17,7 +20,8 @@ import com.kcb.common.util.DialogUtil;
 import com.kcb.library.view.PaperButton;
 import com.kcb.library.view.checkbox.CheckBox;
 import com.kcb.student.adapter.TestRecycleAdapter;
-import com.kcb.teacher.model.test.Question;
+import com.kcb.student.util.JsonObjectParserUtil;
+import com.kcb.teacher.model.test.Test;
 import com.kcbTeam.R;
 
 /**
@@ -30,7 +34,7 @@ import com.kcbTeam.R;
 public class TestActivity extends BaseFragmentActivity {
 
     private TextView timeTextView;
-    private TextView choiceTextView;
+    private TextView titleTextView;
     private TextView questionTextView;
     private TextView answerATextView;
     private TextView answerBTextView;
@@ -42,16 +46,12 @@ public class TestActivity extends BaseFragmentActivity {
     private CheckBox checkboxB;
     private CheckBox checkboxC;
     private CheckBox checkboxD;
+    private Test mTest;
     private fiveCountDownTimer timeCountDown;
     private RecyclerView recyclerView;
     private TestRecycleAdapter mAdapter;
-    private Question mChoiceQuestion;
-    private Question mChoiceQuestion1;
-    private Question mChoiceQuestion2;
-    private List<Question> mListQuestion;
-
     private int currentPageIndex;
-    private int questionNum = 3;
+    private int questionNum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +63,7 @@ public class TestActivity extends BaseFragmentActivity {
 
     @Override
     protected void initView() {
-        choiceTextView = (TextView) findViewById(R.id.textview_choice);
+        titleTextView = (TextView) findViewById(R.id.textview_testtitle);
         questionTextView = (TextView) findViewById(R.id.textview_choice_question);
         answerATextView = (TextView) findViewById(R.id.textview_choice_a);
         answerBTextView = (TextView) findViewById(R.id.textview_choice_b);
@@ -75,55 +75,33 @@ public class TestActivity extends BaseFragmentActivity {
         checkboxD = (CheckBox) findViewById(R.id.checkbox_d);
         preButton = (PaperButton) findViewById(R.id.button_previous);
         nextButton = (PaperButton) findViewById(R.id.button_next);
+        recyclerView = (RecyclerView) findViewById(R.id.my_recyclerview1);
         preButton.setOnClickListener(this);
         nextButton.setOnClickListener(this);
-        recyclerView = (RecyclerView) findViewById(R.id.my_recyclerview1);
-        recyclerView.setLayoutManager(new GridLayoutManager(this, questionNum));
-        mAdapter = new TestRecycleAdapter(questionNum);
-        recyclerView.setAdapter(mAdapter);
-
     }
 
     // Set the countdown Timer,5 minutes
-    public void setTimeCounterDown() {
+    public void setTimeCounterDown(long totalTime) {
         timeTextView = (TextView) findViewById(R.id.textview_timecounter);
-        timeCountDown = new fiveCountDownTimer(300000, 1000);
+        timeCountDown = new fiveCountDownTimer(totalTime, 1000);
         timeCountDown.start();
     }
 
-    public void getTestContentFromNet() {
-        // mChoiceQuestion = new ChoiceQuestion();
-        // mChoiceQuestion.setQuestionNum(1);
-        // mChoiceQuestion.setQuestion(new TextContent("这是题目显示区域1"));
-        // mChoiceQuestion.setOptionA(new TextContent("答案1"));
-        // mChoiceQuestion.setOptionB(new TextContent("答案2"));
-        // mChoiceQuestion.setOptionC(new TextContent("答案3"));
-        // mChoiceQuestion.setOptionD(new TextContent("答案4"));
-        // mListQuestion = new ArrayList<ChoiceQuestion>();
-        // mListQuestion.add(mChoiceQuestion);
-        // mChoiceQuestion1 = new ChoiceQuestion();
-        // mChoiceQuestion1.setQuestionNum(2);
-        // mChoiceQuestion1.setQuestion(new TextContent("这是题目显示区域2"));
-        // mChoiceQuestion1.setOptionA(new TextContent("答案1"));
-        // mChoiceQuestion1.setOptionB(new TextContent("答案2"));
-        // mChoiceQuestion1.setOptionC(new TextContent("答案3"));
-        // mChoiceQuestion1.setOptionD(new TextContent("答案4"));
-        // mListQuestion.add(mChoiceQuestion1);
-        // mChoiceQuestion2 = new ChoiceQuestion();
-        // mChoiceQuestion2.setQuestionNum(3);
-        // mChoiceQuestion2.setQuestion(new TextContent("这是题目显示区域3"));
-        // mChoiceQuestion2.setOptionA(new TextContent("答案1"));
-        // mChoiceQuestion2.setOptionB(new TextContent("答案2"));
-        // mChoiceQuestion2.setOptionC(new TextContent("答案3"));
-        // mChoiceQuestion2.setOptionD(new TextContent("答案4"));
-        // mListQuestion.add(mChoiceQuestion2);
-    }
+   
 
     @Override
     protected void initData() {
-        getTestContentFromNet();
+        String string = getIntent().getStringExtra("questionInfo");
+        JsonObjectParserUtil questionData = new JsonObjectParserUtil(string);
+        mTest = questionData.ParserJsonObject();
+        questionNum = mTest.getQuestionNum();
+        recyclerView.setLayoutManager(new GridLayoutManager(this, questionNum));
+        mAdapter = new TestRecycleAdapter(questionNum);
+        recyclerView.setAdapter(mAdapter);
+        if (questionNum == 1) nextButton.setText("已完成");
+        titleTextView.setText(mTest.getName());
         showCurrentQuestion(0);
-        setTimeCounterDown();
+        setTimeCounterDown(mTest.getmTime()*60000);
     }
 
 
@@ -189,13 +167,51 @@ public class TestActivity extends BaseFragmentActivity {
         }
     }
 
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+    @SuppressLint("NewApi")
+    @SuppressWarnings("deprecation")
     public void showCurrentQuestion(int position) {
-        // choiceTextView.setText("选择题" + mListQuestion.get(position).getQuestionNum());
-        questionTextView.setText(mListQuestion.get(position).getTitle().getText());
-        answerATextView.setText(mListQuestion.get(position).getChoiceA().getText());
-        answerBTextView.setText(mListQuestion.get(position).getChoiceB().getText());
-        answerCTextView.setText(mListQuestion.get(position).getChoiceC().getText());
-        answerDTextView.setText(mListQuestion.get(position).getChoiceD().getText());
+
+        if (mTest.getQuestion(position).getTitle().isText()) {
+            questionTextView.setText(mTest.getQuestion(position).getTitle().getText());
+            questionTextView.setBackgroundColor(Color.WHITE);
+        } else {
+            questionTextView.setBackground(new BitmapDrawable(mTest.getQuestion(position)
+                    .getTitle().getBitmap()));
+            questionTextView.setText("");
+        }
+        if (mTest.getQuestion(position).getChoiceA().isText()) {
+            answerATextView.setText(mTest.getQuestion(position).getChoiceA().getText());
+            answerATextView.setBackgroundColor(Color.WHITE);
+        } else {
+            answerATextView.setBackground(new BitmapDrawable(mTest.getQuestion(position)
+                    .getChoiceA().getBitmap()));
+            answerATextView.setText("");
+        }
+        if (mTest.getQuestion(position).getChoiceB().isText()) {
+            answerBTextView.setText(mTest.getQuestion(position).getChoiceB().getText());
+            answerBTextView.setBackgroundColor(Color.WHITE);
+        } else {
+            answerBTextView.setBackground(new BitmapDrawable(mTest.getQuestion(position)
+                    .getChoiceB().getBitmap()));
+            answerBTextView.setText("");
+        }
+        if (mTest.getQuestion(position).getChoiceC().isText()) {
+            answerCTextView.setText(mTest.getQuestion(position).getChoiceC().getText());
+            answerCTextView.setBackgroundColor(Color.WHITE);
+        } else {
+            answerCTextView.setBackground(new BitmapDrawable(mTest.getQuestion(position)
+                    .getChoiceC().getBitmap()));
+            answerCTextView.setText("");
+        }
+        if (mTest.getQuestion(position).getTitle().isText()) {
+            answerDTextView.setText(mTest.getQuestion(position).getChoiceD().getText());
+            answerDTextView.setBackgroundColor(Color.WHITE);
+        } else {
+            answerDTextView.setBackground(new BitmapDrawable(mTest.getQuestion(position)
+                    .getChoiceD().getBitmap()));
+            answerDTextView.setText("");
+        }
     }
 
     public void getCheckBoxsAnswer(int position) {
@@ -204,12 +220,12 @@ public class TestActivity extends BaseFragmentActivity {
         mCorrectId[1] = checkboxB.isCheck();
         mCorrectId[2] = checkboxC.isCheck();
         mCorrectId[3] = checkboxD.isCheck();
-        mListQuestion.get(position).setCorrectId(mCorrectId);
+        mTest.getQuestion(position).setCorrectId(mCorrectId);
     }
 
     public void setCheckBoxsAnswer(int position) {
         boolean[] mCorrectId;
-        mCorrectId = mListQuestion.get(position).getCorrectId();
+        mCorrectId = mTest.getQuestion(position).getCorrectId();
         checkboxA.setChecked(mCorrectId[0]);
         checkboxB.setChecked(mCorrectId[1]);
         checkboxC.setChecked(mCorrectId[2]);
@@ -218,8 +234,8 @@ public class TestActivity extends BaseFragmentActivity {
 
     public int collectAnsweredNum() {
         int AnsweredNum = 0;
-        for (int i = 0; i < mListQuestion.size(); i++) {
-            boolean[] bleans = mListQuestion.get(i).getCorrectId();
+        for (int i = 0; i < mTest.getQuestionNum(); i++) {
+            boolean[] bleans = mTest.getQuestion(i).getCorrectId();
             for (int j = 0; j < bleans.length; j++) {
                 if (bleans[j]) {
                     AnsweredNum++;

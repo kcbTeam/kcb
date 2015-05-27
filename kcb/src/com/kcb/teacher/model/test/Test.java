@@ -5,12 +5,17 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import android.R.integer;
+
 public class Test implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     private String mName; // test name
-    private long mTime; // minute
+    private int mTime; // minute
+
+
+
     private List<Question> mQuestions;
 
     private Date mDate; // test date
@@ -21,6 +26,20 @@ public class Test implements Serializable {
         for (int i = 0; i < num; i++) {
             mQuestions.add(new Question());
         }
+    }
+
+    public Test(String name, List<Question> questions,int time) {
+        mName = name;
+        mQuestions = questions;
+        mTime=time;
+    }
+
+    public int getmTime() {
+        return this.mTime;
+    }
+
+    public void setmTime(int mTime) {
+        this.mTime = mTime;
     }
 
     public String getName() {
