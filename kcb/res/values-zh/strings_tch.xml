@@ -97,6 +97,7 @@
     <string name="add_msg">确定添加第 %1$d 题？</string>
     <string name="rebackground">重拍背景</string>
     <string name="deletebackground">删除背景</string>
+    <string name="edit_title_hint">直接输入文字，或者长按拍照</string>
     <!-- EditTestActivity End -->
 
 
@@ -121,7 +122,10 @@
     <string name="testtimeFormat">%1$d分钟</string>
     <!-- Submit Activity End -->
 
-
+	<!-- Modify Question Activity Start-->
+	<string name="modify_saved">修改已保存</string>
+	<!-- Modify Question Activity End -->
+	
     <!-- Check Test Activity Start -->
     <string name="checktest">查看测试</string>
     <string name="hint_checktest_search">搜索测试名称</string>
