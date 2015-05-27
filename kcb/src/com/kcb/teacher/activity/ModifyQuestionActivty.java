@@ -28,6 +28,13 @@ import com.kcb.teacher.model.test.Question;
 import com.kcb.teacher.model.test.QuestionItem;
 import com.kcbTeam.R;
 
+/**
+ * 
+ * @className: ModifyQuestionActivty
+ * @description: 
+ * @author: ZQJ
+ * @date: 2015年5月27日 下午8:24:10
+ */
 public class ModifyQuestionActivty extends BaseActivity implements OnLongClickListener {
     @SuppressWarnings("unused")
     private static final String TAG = "ModifyQuestionActivty";
@@ -293,6 +300,7 @@ public class ModifyQuestionActivty extends BaseActivity implements OnLongClickLi
         checkBoxD.setChecked(correctId[3]);
     }
 
+    @SuppressWarnings("deprecation")
     private void showQuestionItem(EditText view, QuestionItem item) {
         view.setBackgroundResource(R.drawable.stu_checkin_textview);
         if (item.isText()) {
