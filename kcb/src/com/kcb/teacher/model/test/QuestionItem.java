@@ -24,6 +24,10 @@ public class QuestionItem implements Serializable {
     private byte[] mBytesOfBitmap;
 
     public QuestionItem() {}
+    
+    public QuestionItem(String text){
+        mText = text;
+    }
 
     public static void copy(QuestionItem oldItem, QuestionItem newItem) {
         if (oldItem.isText) {

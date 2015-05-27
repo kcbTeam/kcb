@@ -1,13 +1,13 @@
 package com.kcb.teacher.adapter;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
-
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-
 import com.kcb.teacher.model.test.Test;
 import com.kcbTeam.R;
 
@@ -39,6 +39,7 @@ public class ListAdapterCourseTest extends BaseAdapter {
         return position;
     }
 
+    @SuppressLint("SimpleDateFormat")
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         int conversePosition = getCount() - 1 - position;
@@ -54,10 +55,11 @@ public class ListAdapterCourseTest extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         holder.testName.setText(mList.get(conversePosition).getName());
-        holder.testDate.setText(mList.get(conversePosition).getDate().toString());
-        holder.questionTotalNum.setText(String.valueOf(mList.get(conversePosition)
-                .getQuestionNum()));
+        holder.testDate.setText(formatter.format(mList.get(conversePosition).getDate()).toString());
+        holder.questionTotalNum.setText(String
+                .valueOf(mList.get(conversePosition).getQuestionNum()));
         return convertView;
     }
 
