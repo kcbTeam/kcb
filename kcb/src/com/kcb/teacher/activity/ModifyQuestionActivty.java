@@ -31,7 +31,7 @@ import com.kcbTeam.R;
 /**
  * 
  * @className: ModifyQuestionActivty
- * @description: 
+ * @description:
  * @author: ZQJ
  * @date: 2015年5月27日 下午8:24:10
  */
@@ -155,12 +155,14 @@ public class ModifyQuestionActivty extends BaseActivity implements OnLongClickLi
                 break;
             case R.id.button_save:
                 saveQuestion();
-                if (!mQuestion.equal(mTempQustion)) {
+                if (!mQuestion.isCompleted()) {
+                    ToastUtil.toast(R.string.empty_hint);
+                } else if (!mQuestion.equal(mTempQustion)) {
                     mQuestion.changeQuestionToSerializable();
                     intent.putExtra("MODIFIED", mQuestion);
                     setResult(MODIFY_SAVED, intent);
+                    finish();
                 }
-                finish();
                 break;
             default:
                 break;
@@ -326,7 +328,7 @@ public class ModifyQuestionActivty extends BaseActivity implements OnLongClickLi
 
     private void saveQuestion() {
         String questionTitle = titleEditText.getText().toString().trim();
-        if (!TextUtils.isEmpty(questionTitle)) {
+        if (mQuestion.getTitle().isText()) {
             mQuestion.getTitle().setText(questionTitle);
         }
         String choiceA = choiceAEditText.getText().toString().trim();

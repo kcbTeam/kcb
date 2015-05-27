@@ -98,6 +98,7 @@
     <string name="rebackground">重拍背景</string>
     <string name="deletebackground">删除背景</string>
     <string name="edit_title_hint">直接输入文字，或者长按拍照</string>
+    <string name="empty_hint">不能有空哦^^</string>
     <!-- EditTestActivity End -->
 
 
