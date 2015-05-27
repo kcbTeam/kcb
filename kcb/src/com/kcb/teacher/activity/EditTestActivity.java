@@ -30,8 +30,6 @@ import com.kcb.library.view.checkbox.CheckBox;
 import com.kcb.teacher.model.test.Question;
 import com.kcb.teacher.model.test.QuestionItem;
 import com.kcb.teacher.model.test.Test;
-import com.kcb.teacher.util.EditTestDialog;
-import com.kcb.teacher.util.EditTestDialog.DialogSureListener;
 import com.kcbTeam.R;
 
 /**
@@ -158,12 +156,9 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.imageview_delete_title:
-                titleEditText.setText("");
-                titleEditText.setFocusable(true);
-                titleEditText.setFocusableInTouchMode(true);
-                titleEditText.setBackgroundResource(R.drawable.stu_checkin_textview);
+                setTitleEditTextMode();
                 deleteTitleImageView.setVisibility(View.INVISIBLE);
-                getCurrentQuestion().getTitle().setBitmap(null);
+                getCurrentQuestion().getTitle().setText("");
                 break;
             case R.id.button_last:
                 lastQuestion();
@@ -223,7 +218,6 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
 
     // four click functions: add ,delete ,next ,last.
     private void addQuestion() {
-        // TODO show add question num
         final int questionNum = mTest.getQuestionNum() + 1;
         DialogUtil.showNormalDialog(this, R.string.dialog_title_add,
                 String.format(getString(R.string.add_msg), questionNum), R.string.sure,
@@ -259,7 +253,10 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
                     }, R.string.cancel, null);
         }
     }
-
+    
+    //TODO:if needn't dialog to input then delete the function makeEditdialog().
+    
+    /*
     private void makeEditDialog(String text, String title) {
         EditTestDialog dialog = new EditTestDialog(this, text);
         dialog.show();
@@ -297,6 +294,7 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
         dialog.setSureButton(getResources().getString(R.string.save), sureListener);
         dialog.setCancelButton(getResources().getString(R.string.cancel), null);
     }
+    */
 
     /**
      * 
@@ -380,7 +378,8 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
                     Bitmap bitmap = Media.getBitmap(getContentResolver(), uri);
                     switch (mClickTag) {
                         case CLICK_TAG_TITLE:
-                            titleEditText.setText(" ");
+                            titleEditText.setText("");
+                            titleEditText.setHint("");
                             titleEditText.setFocusable(false);
                             titleEditText.setBackground(new BitmapDrawable(bitmap));
                             deleteTitleImageView.setVisibility(View.VISIBLE);
@@ -469,7 +468,7 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
 
     private void saveQuestion() {
         String questionTitle = titleEditText.getText().toString().trim();
-        if (!TextUtils.isEmpty(questionTitle)) {
+        if (getCurrentQuestion().getTitle().isText()) {
             getCurrentQuestion().getTitle().setText(questionTitle);
         }
         String choiceA = choiceAEditText.getText().toString().trim();
@@ -495,19 +494,38 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
 
     @SuppressWarnings("deprecation")
     private void showQuestionItem(EditText view, QuestionItem item) {
-        view.setText("");
+        // view.setText("");
         view.setBackgroundResource(R.drawable.stu_checkin_textview);
         if (item.isText()) {
+            if (view == titleEditText) {
+                deleteTitleImageView.setVisibility(View.INVISIBLE);
+                if (item.getText().isEmpty()) {
+                    setTitleEditTextMode();
+                }
+            }
             view.setText(item.getText());
             view.setFocusable(true);
             view.setFocusableInTouchMode(true);
         } else {
             Bitmap bitmap = item.getBitmap();
             if (null != bitmap) {
+                if (view == titleEditText) {
+                    deleteTitleImageView.setVisibility(View.VISIBLE);
+                    titleEditText.setHint("");
+                }
+                view.setText("");
                 view.setBackgroundDrawable(new BitmapDrawable(bitmap));
             }
             view.setFocusable(false);
         }
+    }
+
+    private void setTitleEditTextMode() {
+        titleEditText.setText("");
+        titleEditText.setHint(R.string.edit_title_hint);
+        titleEditText.setFocusable(true);
+        titleEditText.setFocusableInTouchMode(true);
+        titleEditText.setBackgroundResource(R.drawable.stu_checkin_textview);
     }
 
     private Question getCurrentQuestion() {

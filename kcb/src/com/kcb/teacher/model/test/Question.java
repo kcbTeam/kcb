@@ -87,9 +87,9 @@ public class Question implements Serializable {
     }
 
     public String contentString() {
-        return mTitleItem.getText() + '\n' + "A." + mChoiceAItem.getText() + '\n' + "B."
+        return mTitleItem.getText() + '\n' + '\n' + "A." + mChoiceAItem.getText() + '\n' + "B."
                 + mChoiceBItem.getText() + '\n' + "C." + mChoiceCItem.getText() + '\n' + "D."
-                + mChoiceDItem.getText() + '\n';
+                + mChoiceDItem.getText();
     }
 
     public boolean isAllString() {

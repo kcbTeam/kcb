@@ -113,13 +113,11 @@ public class CheckTestDetailsActivity extends BaseActivity {
     private void setContent(Question temp) {
 
         questionTextView.setText("1、" + temp.getTitle().getText());
-        correctRate.setText("正确率：76%");
+        correctRate.setText("正确率：5%");
 
-        // optionAcontent.setText(temp.getOptionA().getContentString());
-        optionAcontent.setBackground(getResources().getDrawable(R.drawable.option_a));
+        optionAcontent.setText(temp.getChoiceA().getText());
         optionBcontent.setText(temp.getChoiceB().getText());
-        // optionCcontent.setText(temp.getOptionC().getContentString());
-        optionCcontent.setBackground(getResources().getDrawable(R.drawable.option_a));
+        optionCcontent.setText(temp.getChoiceC().getText());
         optionDcontent.setText(temp.getChoiceD().getText());
 
         optionArate.setText("76%");

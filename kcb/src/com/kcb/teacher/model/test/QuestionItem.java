@@ -24,6 +24,10 @@ public class QuestionItem implements Serializable {
     private byte[] mBytesOfBitmap;
 
     public QuestionItem() {}
+    
+    public QuestionItem(String text){
+        mText = text;
+    }
 
     public static void copy(QuestionItem oldItem, QuestionItem newItem) {
         if (oldItem.isText) {
@@ -45,6 +49,7 @@ public class QuestionItem implements Serializable {
         isText = true;
         mText = text;
         mBitmap = null;
+        mBytesOfBitmap = null;
     }
 
     public void setBitmap(Bitmap bitmap) {
@@ -55,8 +60,7 @@ public class QuestionItem implements Serializable {
 
     public Bitmap getBitmap() {
         if (null != mBytesOfBitmap) {
-            mBitmap = BitmapFactory.decodeByteArray(mBytesOfBitmap, 0, mBytesOfBitmap.length);
-            mBytesOfBitmap = null;
+            return BitmapFactory.decodeByteArray(mBytesOfBitmap, 0, mBytesOfBitmap.length);
         }
         return mBitmap;
     }
@@ -66,7 +70,11 @@ public class QuestionItem implements Serializable {
             if (isText) {
                 return mText.equals(item.mText);
             } else {
-                return mBitmap.equals(item.mBitmap);
+                if (null == mBitmap) {
+                    return mBytesOfBitmap.equals(item.mBytesOfBitmap);
+                } else {
+                    return mBitmap.equals(item.mBitmap);
+                }
             }
         }
         return false;

@@ -1,6 +1,7 @@
 package com.kcb.teacher.activity;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
@@ -17,7 +18,6 @@ import com.kcb.common.base.BaseActivity;
 import com.kcb.library.view.FloatingEditText;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.teacher.adapter.ListAdapterCourseTest;
-import com.kcb.teacher.model.test.Question;
 import com.kcb.teacher.model.test.Test;
 import com.kcb.teacher.util.NameUtils;
 import com.kcbTeam.R;
@@ -67,27 +67,28 @@ public class CheckTestActivity extends BaseActivity implements TextWatcher, OnIt
          */
 
         // TODO getText from local
-        List<Question> questionList = new ArrayList<Question>();
-        // questionList.add(new Question(new QuestionItem("一年有可能多少天呢"), new QuestionItem("365"),
-        // new QuestionItem("366"), new QuestionItem("367"), new QuestionItem("368"),
-        // new boolean[] {true, true, false, false}));
-        // questionList.add(new Question(new QuestionItem("天上有多少颗星星"), new QuestionItem("1"),
-        // new QuestionItem("5"), new QuestionItem("10"), new QuestionItem("数不清"), new boolean[] {
-        // false, false, false, true}));
-        //
-        List<Question> questionList1 = new ArrayList<Question>();
-        // questionList1.add(new Question(new QuestionItem("1 + 1 = ?"), new QuestionItem("1"),
-        // new QuestionItem("11"), new QuestionItem("2"), new QuestionItem("111"), new boolean[] {
-        // false, false, true, false}));
-        // questionList1.add(new Question(new QuestionItem("天上有多少颗星星"), new QuestionItem("1"),
-        // new QuestionItem("5"), new QuestionItem("10"), new QuestionItem("数不清"), new boolean[] {
-        // false, false, false, true}));
-        // questionList1.add(new Question(new QuestionItem("一年有可能多少天呢"), new QuestionItem("365"),
-        // new QuestionItem("366"), new QuestionItem("367"), new QuestionItem("368"),
-        // new boolean[] {true, true, false, false}));
+        
         mTestList = new ArrayList<Test>();
-        mTestList.add(new Test("高考数学",4));
-        mTestList.add(new Test("考研数学", 3));
+        Test tempTest = new Test("高考数学",2);
+        tempTest.setDate(new Date());
+        tempTest.addQuestion();
+        tempTest.getQuestion(0).getTitle().setText("1+1=?");
+        tempTest.getQuestion(0).getChoiceA().setText("1");
+        tempTest.getQuestion(0).getChoiceB().setText("2");
+        tempTest.getQuestion(0).getChoiceC().setText("3");
+        tempTest.getQuestion(0).getChoiceD().setText("4");
+        mTestList.add(tempTest);
+        
+        tempTest = new Test("影视艺术赏析",1);
+        tempTest.setDate(new Date());
+        tempTest.addQuestion();
+        tempTest.getQuestion(0).getTitle().setText("乱世佳人是根据哪部小说改编而来的？");
+        tempTest.getQuestion(0).getChoiceA().setText("战争与和平");
+        tempTest.getQuestion(0).getChoiceB().setText("安娜卡列尼娜");
+        tempTest.getQuestion(0).getChoiceC().setText("飘");
+        tempTest.getQuestion(0).getChoiceD().setText("复活");
+        mTestList.add(tempTest);
+        
 
         mTempTestList = new ArrayList<Test>();
         mTempTestList.addAll(mTestList);
