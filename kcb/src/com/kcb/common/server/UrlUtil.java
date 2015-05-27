@@ -1,6 +1,5 @@
 package com.kcb.common.server;
 
-import android.R.integer;
 
 /**
  * 
@@ -109,18 +108,11 @@ public class UrlUtil {
     // 2.2 stop checkin
     private static final String url_tch_checkin_stop = IP + "/v1/tch/checkin/stop";
 
-    public static String getTchCheckinStopUrl(String id, String num) {
+    public static String getTchCheckinStopUrl(String id, int num) {
         return url_tch_checkin_stop + "?id=" + id + "&num=" + num;
     }
 
-    // 2.3 get checkin result
-    private static final String url_tch_checkin_getresult = IP + "/v1/tch/checkin/getresult";
-
-    public static String getTchCheckinGetresultUrl(String id, String num) {
-        return url_tch_checkin_getresult + "?id=" + id + "&num=" + num;
-    }
-
-    // 2.4 giveup checkin
+    // 2.3 giveup checkin
     private static final String url_tch_checkin_giveup = IP + "/v1/tch/checkin/giveup";
 
     public static String getTchCheckinGiveupUrl(String id, String num) {

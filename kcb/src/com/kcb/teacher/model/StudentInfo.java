@@ -3,6 +3,8 @@ package com.kcb.teacher.model;
 import java.io.Serializable;
 import java.util.HashMap;
 
+import org.json.JSONObject;
+
 /**
  * 
  * @className: StudentInfo
@@ -11,9 +13,11 @@ import java.util.HashMap;
  * @date: 2015年4月24日 下午7:08:09
  */
 public class StudentInfo implements Serializable {
+
     private static final long serialVersionUID = 1L;
-    private String mStudentName;
-    private String mStudentID;
+
+    private String mId;
+    private String mName;
 
     private int mCheckInTimes;
     private int mTotalCheckInTimes;
@@ -23,11 +27,23 @@ public class StudentInfo implements Serializable {
 
     private HashMap<String, Float> mCorrectRateMap;
 
+    private double mUnCheckedRate;
+
+    public StudentInfo() {}
+
     public StudentInfo(String name, String studentID) {
-        mStudentName = name;
-        mStudentID = studentID;
+        mName = name;
+        mId = studentID;
         mCheckInTimes = 0;
         mTotalCheckInTimes = 0;
+    }
+
+    public static StudentInfo from(JSONObject jsonObject) {
+        StudentInfo studentInfo = new StudentInfo();
+        studentInfo.mId = jsonObject.optString("id");
+        studentInfo.mName = jsonObject.optString("name");
+        studentInfo.mUnCheckedRate = jsonObject.optDouble("rate");
+        return studentInfo;
     }
 
     /**
@@ -35,8 +51,8 @@ public class StudentInfo implements Serializable {
      * Constructor: StudentInfo checkinTimes is success checkinTimes of the student
      */
     public StudentInfo(String name, String studentID, int checkinTimes, int totalCheckInTimes) {
-        mStudentName = name;
-        mStudentID = studentID;
+        mName = name;
+        mId = studentID;
         mCheckInTimes = checkinTimes;
         mTotalCheckInTimes = totalCheckInTimes;
     }
@@ -49,8 +65,8 @@ public class StudentInfo implements Serializable {
      */
     public StudentInfo(String name, String studentID, int checkinTimes, int totalCheckInTimes,
             int correctTimes, int totalChoiceQuestion) {
-        mStudentName = name;
-        mStudentID = studentID;
+        mName = name;
+        mId = studentID;
         mCheckInTimes = checkinTimes;
         mTotalCheckInTimes = totalCheckInTimes;
         mCorrectTimes = correctTimes;
@@ -58,19 +74,19 @@ public class StudentInfo implements Serializable {
     }
 
     public void setStudentID(String mStudentID) {
-        this.mStudentID = mStudentID;
+        this.mId = mStudentID;
     }
 
     public void setStudentName(String mStudentName) {
-        this.mStudentName = mStudentName;
+        this.mName = mStudentName;
     }
 
     public String getStudentID() {
-        return this.mStudentID;
+        return this.mId;
     }
 
     public String getStudentName() {
-        return this.mStudentName;
+        return this.mName;
     }
 
     public int getCheckInTimes() {

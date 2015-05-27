@@ -13,8 +13,8 @@ import android.widget.ListView;
 import com.kcb.common.base.BaseActivity;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.teacher.adapter.ListAdapterSignRecod;
-import com.kcb.teacher.model.CheckInRecordInfo;
 import com.kcb.teacher.model.StudentInfo;
+import com.kcb.teacher.model.checkin.CheckInResult;
 import com.kcbTeam.R;
 
 /**
@@ -32,7 +32,7 @@ public class LookCheckInActivity extends BaseActivity implements OnItemClickList
     private ButtonFlat backButton;
     private ListView checkInRecordList;
 
-    private List<CheckInRecordInfo> mList;
+    private List<CheckInResult> mList;
     private ListAdapterSignRecod mAdapter;
 
     @Override
@@ -56,17 +56,17 @@ public class LookCheckInActivity extends BaseActivity implements OnItemClickList
 
     @Override
     protected void initData() {
-        mList = new ArrayList<CheckInRecordInfo>();
+        mList = new ArrayList<CheckInResult>();
         mList.clear();
         // test data.mList is a CheckInRecord list,and one CheckInRecord object
         // contains a
         // StudentInfo list which record the missed CheckIn students
         List<StudentInfo> missedCheckInStus = new ArrayList<StudentInfo>();
         missedCheckInStus.add(new StudentInfo("testName1", "00001", 12, 15));
-        mList.add(new CheckInRecordInfo("2015-01-01", 0.7f, missedCheckInStus));
+        // mList.add(new CheckInResult("2015-01-01", 0.7f, missedCheckInStus));
         List<StudentInfo> missedCheckInStus1 = new ArrayList<StudentInfo>();
         missedCheckInStus1.add(new StudentInfo("testName2", "0002", 12, 15));
-        mList.add(new CheckInRecordInfo("2015-01-02", 0.5f, missedCheckInStus1));
+        // mList.add(new CheckInResult("2015-01-02", 0.5f, missedCheckInStus1));
     }
 
     @Override
@@ -78,7 +78,7 @@ public class LookCheckInActivity extends BaseActivity implements OnItemClickList
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Intent intent = new Intent(this, CheckInDetailsActivity.class);
+        Intent intent = new Intent(this, CheckInDetailActivity.class);
         intent.putExtra(CURRENT_CHECKIN_RECORD_KEY, mList.get(position));
         intent.putExtra("ACTIVITY_TAG", TAG);
         startActivity(intent);

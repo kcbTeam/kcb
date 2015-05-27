@@ -1,9 +1,11 @@
 package com.kcb.common.util;
 
 import android.view.View;
+import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.CycleInterpolator;
+import android.view.animation.LinearInterpolator;
 import android.view.animation.TranslateAnimation;
 
 /**
@@ -78,5 +80,12 @@ public class AnimationUtil {
         view.startAnimation(animation);
     }
 
-
+    public static void fadeIn(View view) {
+        AlphaAnimation animation = new AlphaAnimation(0, 1);
+        animation.setFillAfter(true);
+        animation.setStartOffset(500);
+        animation.setDuration(500);
+        animation.setInterpolator(new LinearInterpolator());
+        view.startAnimation(animation);
+    }
 }

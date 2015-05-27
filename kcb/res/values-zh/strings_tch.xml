@@ -145,8 +145,8 @@
     <string name="giveupsign">取消签到</string>
     <string name="giveup_sign_tip">取消签到后，本次签到无效。</string>
     <string name="getnumber">获取签到数字</string>
-    <string name="tipforteacher1">获取签到数字，然后告诉在场的学生</string>
-    <string name="tipforteacher2">签到时间为两分钟</string>
+    <string name="tipforteacher1">将签到数字告诉在场的学生</string>
+    <string name="tipforteacher2">开始后，学生有两分钟完成签到</string>
     <string name="tipforteacher3">本次签到结束</string>
     <string name="startsign">开始签到</string>
     <string name="stopsign">停止签到</string>
