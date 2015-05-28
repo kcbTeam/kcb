@@ -22,7 +22,9 @@ public class QuestionItem implements Serializable {
     private String mText = "";
     private Bitmap mBitmap = null;
     private byte[] mBytesOfBitmap;
-    private boolean isRight;
+    private boolean isRight = false;
+    private float mRate; // if the item is a choice, mRate represent a choice rate;if the item is a
+                         // question title, mRate represent the correct rate
 
     public QuestionItem() {}
 
@@ -64,6 +66,22 @@ public class QuestionItem implements Serializable {
             return BitmapFactory.decodeByteArray(mBytesOfBitmap, 0, mBytesOfBitmap.length);
         }
         return mBitmap;
+    }
+
+    public float getRate() {
+        return mRate;
+    }
+
+    public void setRate(float rate) {
+        mRate = rate;
+    }
+
+    public boolean isRight() {
+        return isRight;
+    }
+
+    public void setRight() {
+        isRight = true;
     }
 
     public boolean equals(QuestionItem item) {

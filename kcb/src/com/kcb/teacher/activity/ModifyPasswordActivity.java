@@ -103,21 +103,20 @@ public class ModifyPasswordActivity extends BaseActivity {
                 if (comparaPassWord()) {
                     StringRequest request =
                             new StringRequest(Method.POST, UrlUtil.getTchModifyPasswordUrl(
-                                    KAccount.getAccountId(), newPassword),
-                                    new Listener<String>() {
+                                    KAccount.getAccountId(), newPassword), new Listener<String>() {
 
-                                        @Override
-                                        public void onResponse(String response) {
-                                            ToastUtil.toast(R.string.modified);
-                                            finish();
-                                        }
-                                    }, new ErrorListener() {
+                                @Override
+                                public void onResponse(String response) {
+                                    ToastUtil.toast(R.string.modified);
+                                    finish();
+                                }
+                            }, new ErrorListener() {
 
-                                        @Override
-                                        public void onErrorResponse(VolleyError error) {
+                                @Override
+                                public void onErrorResponse(VolleyError error) {
 
-                                        }
-                                    });
+                                }
+                            });
                     RequestUtil.getInstance().addToRequestQueue(request, TAG);
                 }
                 break;

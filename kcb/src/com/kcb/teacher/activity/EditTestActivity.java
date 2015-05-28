@@ -253,48 +253,24 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
                     }, R.string.cancel, null);
         }
     }
-    
-    //TODO:if needn't dialog to input then delete the function makeEditdialog().
-    
-    /*
-    private void makeEditDialog(String text, String title) {
-        EditTestDialog dialog = new EditTestDialog(this, text);
-        dialog.show();
-        dialog.setTitle(title);
-        DialogSureListener sureListener = new DialogSureListener() {
 
-            @Override
-            public void onClickSure(String text) {
-                switch (mClickTag) {
-                    case CLICK_TAG_TITLE:
-                        titleEditText.setText(text);
-                        getCurrentQuestion().getTitle().setText(text);
-                        break;
-                    case CLICK_TAG_A:
-                        choiceAEditText.setText(text);
-                        getCurrentQuestion().getChoiceA().setText(text);
-                        break;
-                    case CLICK_TAG_B:
-                        choiceBEditText.setText(text);
-                        getCurrentQuestion().getChoiceB().setText(text);
-                        break;
-                    case CLICK_TAG_C:
-                        choiceCEditText.setText(text);
-                        getCurrentQuestion().getChoiceC().setText(text);
-                        break;
-                    case CLICK_TAG_D:
-                        choiceDEditText.setText(text);
-                        getCurrentQuestion().getChoiceD().setText(text);
-                        break;
-                    default:
-                        break;
-                }
-            }
-        };
-        dialog.setSureButton(getResources().getString(R.string.save), sureListener);
-        dialog.setCancelButton(getResources().getString(R.string.cancel), null);
-    }
-    */
+    // TODO:if needn't dialog to input then delete the function makeEditdialog().
+
+    /*
+     * private void makeEditDialog(String text, String title) { EditTestDialog dialog = new
+     * EditTestDialog(this, text); dialog.show(); dialog.setTitle(title); DialogSureListener
+     * sureListener = new DialogSureListener() {
+     * 
+     * @Override public void onClickSure(String text) { switch (mClickTag) { case CLICK_TAG_TITLE:
+     * titleEditText.setText(text); getCurrentQuestion().getTitle().setText(text); break; case
+     * CLICK_TAG_A: choiceAEditText.setText(text); getCurrentQuestion().getChoiceA().setText(text);
+     * break; case CLICK_TAG_B: choiceBEditText.setText(text);
+     * getCurrentQuestion().getChoiceB().setText(text); break; case CLICK_TAG_C:
+     * choiceCEditText.setText(text); getCurrentQuestion().getChoiceC().setText(text); break; case
+     * CLICK_TAG_D: choiceDEditText.setText(text); getCurrentQuestion().getChoiceD().setText(text);
+     * break; default: break; } } }; dialog.setSureButton(getResources().getString(R.string.save),
+     * sureListener); dialog.setCancelButton(getResources().getString(R.string.cancel), null); }
+     */
 
     /**
      * 

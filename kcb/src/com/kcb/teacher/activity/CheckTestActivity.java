@@ -67,28 +67,30 @@ public class CheckTestActivity extends BaseActivity implements TextWatcher, OnIt
          */
 
         // TODO getText from local
-        
+
         mTestList = new ArrayList<Test>();
-        Test tempTest = new Test("高考数学",2);
+        Test tempTest = new Test("高考数学", 2);
         tempTest.setDate(new Date());
         tempTest.addQuestion();
         tempTest.getQuestion(0).getTitle().setText("1+1=?");
         tempTest.getQuestion(0).getChoiceA().setText("1");
         tempTest.getQuestion(0).getChoiceB().setText("2");
+        tempTest.getQuestion(0).getChoiceB().setRight();
         tempTest.getQuestion(0).getChoiceC().setText("3");
         tempTest.getQuestion(0).getChoiceD().setText("4");
         mTestList.add(tempTest);
-        
-        tempTest = new Test("影视艺术赏析",1);
+
+        tempTest = new Test("影视艺术赏析", 1);
         tempTest.setDate(new Date());
         tempTest.addQuestion();
         tempTest.getQuestion(0).getTitle().setText("乱世佳人是根据哪部小说改编而来的？");
         tempTest.getQuestion(0).getChoiceA().setText("战争与和平");
         tempTest.getQuestion(0).getChoiceB().setText("安娜卡列尼娜");
         tempTest.getQuestion(0).getChoiceC().setText("飘");
+        tempTest.getQuestion(0).getChoiceC().setRight();
         tempTest.getQuestion(0).getChoiceD().setText("复活");
         mTestList.add(tempTest);
-        
+
 
         mTempTestList = new ArrayList<Test>();
         mTempTestList.addAll(mTestList);

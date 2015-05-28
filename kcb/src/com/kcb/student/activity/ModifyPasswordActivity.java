@@ -116,8 +116,8 @@ public class ModifyPasswordActivity extends BaseActivity {
                                     }, 500);
                                 };
                             }, new ErrorListener() {
-                                public void onErrorResponse(VolleyError error) {                                   
-                                        ResponseUtil.toastError(error);                                 
+                                public void onErrorResponse(VolleyError error) {
+                                    ResponseUtil.toastError(error);
                                 };
                             });
                     RequestUtil.getInstance().addToRequestQueue(request, TAG);
