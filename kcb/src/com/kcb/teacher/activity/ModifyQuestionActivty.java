@@ -127,7 +127,7 @@ public class ModifyQuestionActivty extends BaseActivity implements OnLongClickLi
     @Override
     protected void initData() {
         mQuestion =
-                (Question) getIntent().getSerializableExtra(SubmitTestActivity.MODIFY_QUESTION_KEY);
+                (Question) getIntent().getSerializableExtra(SetTestTimeActivity.MODIFY_QUESTION_KEY);
         mTempQustion = Question.clone(mQuestion);
 
         testName = getIntent().getStringExtra("TEST_NAME");
@@ -227,7 +227,7 @@ public class ModifyQuestionActivty extends BaseActivity implements OnLongClickLi
                     Uri uri =
                             Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(),
                                     picture.getAbsolutePath(), null, null));
-                    Intent intent = new Intent(this, CutPictureActivity.class);
+                    Intent intent = new Intent(this, CropPictureActivity.class);
                     intent.putExtra("PICTURE", uri);
                     startActivityForResult(intent, REQUEST_CUTPHOTO);
                 } catch (Exception e) {

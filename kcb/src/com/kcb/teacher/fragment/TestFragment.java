@@ -18,7 +18,7 @@ import com.kcb.common.view.MaterialListDialog.OnClickSureListener;
 import com.kcb.library.view.PaperButton;
 import com.kcb.teacher.activity.CheckTestActivity;
 import com.kcb.teacher.activity.EditTestActivity;
-import com.kcb.teacher.activity.EditTestFirstActivity;
+import com.kcb.teacher.activity.SetTestNameActivity;
 import com.kcbTeam.R;
 
 /**
@@ -116,7 +116,7 @@ public class TestFragment extends BaseFragment {
             @Override
             public void onClick(View view, int position) {
                 if (position == 0) { // add new test
-                    Intent intent = new Intent(getActivity(), EditTestFirstActivity.class);
+                    Intent intent = new Intent(getActivity(), SetTestNameActivity.class);
                     startActivity(intent);
                 } else {
                     // TODO set selected testId

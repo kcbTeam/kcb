@@ -23,7 +23,7 @@ import com.kcbTeam.R;
  * @author: ljx
  * @date: 2015-5-15 下午11:32:33
  */
-public class EditTestFirstActivity extends BaseActivity {
+public class SetTestNameActivity extends BaseActivity {
 
     private ButtonFlat backButton;
     private TextView numtip;
@@ -72,8 +72,8 @@ public class EditTestFirstActivity extends BaseActivity {
             if (TextUtils.isEmpty(name)) {
                 AnimationUtil.shake(nameEditText);
             } else {
-                EditTestFirstActivity.this.finish();
-                EditTestActivity.startAddNewTest(EditTestFirstActivity.this,
+                SetTestNameActivity.this.finish();
+                EditTestActivity.startAddNewTest(SetTestNameActivity.this,
                         new Test(name, slider.getValue()));
                 finish();
             }
