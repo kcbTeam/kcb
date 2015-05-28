@@ -223,7 +223,7 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
                         hintString.substring(0, hintString.length() - 1)));
                 return;
             }
-            SubmitTestActivity.start(EditTestActivity.this, mTest);
+            SetTestTimeActivity.start(EditTestActivity.this, mTest);
             finish();
         } else {
             if (!getCurrentQuestion().equal(mTempQuestion)) {
@@ -340,7 +340,7 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
                     Uri uri =
                             Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(),
                                     picture.getAbsolutePath(), null, null));
-                    Intent intent = new Intent(this, CutPictureActivity.class);
+                    Intent intent = new Intent(this, CropPictureActivity.class);
                     intent.putExtra("PICTURE", uri);
                     startActivityForResult(intent, REQUEST_CUTPHOTO);
                 } catch (Exception e) {

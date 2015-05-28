@@ -107,11 +107,11 @@
             android:windowSoftInputMode="adjustPan" >
         </activity>
         <activity
-            android:name="com.kcb.teacher.activity.EditTestFirstActivity"
+            android:name="com.kcb.teacher.activity.SetTestNameActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.kcb.teacher.activity.SubmitTestActivity"
+            android:name="com.kcb.teacher.activity.SetTestTimeActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
@@ -124,7 +124,7 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.kcb.teacher.activity.CutPictureActivity"
+            android:name="com.kcb.teacher.activity.CropPictureActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity

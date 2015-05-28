@@ -24,7 +24,7 @@ import com.kcb.teacher.model.test.Question;
 import com.kcb.teacher.model.test.Test;
 import com.kcbTeam.R;
 
-public class SubmitTestActivity extends BaseActivity implements OnItemClickListener {
+public class SetTestTimeActivity extends BaseActivity implements OnItemClickListener {
     @SuppressWarnings("unused")
     private static final String TAG = "SubmitTestPaper";
 
@@ -135,7 +135,7 @@ public class SubmitTestActivity extends BaseActivity implements OnItemClickListe
     private static final String DATA_TEST = "current_course_key";
 
     public static void start(Context context, Test test) {
-        Intent intent = new Intent(context, SubmitTestActivity.class);
+        Intent intent = new Intent(context, SetTestTimeActivity.class);
         intent.putExtra(DATA_TEST, test);
         context.startActivity(intent);
     }
