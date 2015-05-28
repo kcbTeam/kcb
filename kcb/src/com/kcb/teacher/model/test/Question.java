@@ -97,16 +97,16 @@ public class Question implements Serializable {
 
     public String getAnswerString() {
         String anString = "答案：";
-        if (mChoiceAItem.getIsRight()) {
+        if (mChoiceAItem.isRight()) {
             anString += "A、";
         }
-        if (mChoiceBItem.getIsRight()) {
+        if (mChoiceBItem.isRight()) {
             anString += "B、";
         }
-        if (mChoiceCItem.getIsRight()) {
+        if (mChoiceCItem.isRight()) {
             anString += "C、";
         }
-        if (mChoiceDItem.getIsRight()) {
+        if (mChoiceDItem.isRight()) {
             anString += "D、";
         }
 

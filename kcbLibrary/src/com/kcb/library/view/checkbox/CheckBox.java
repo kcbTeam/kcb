@@ -18,7 +18,7 @@ import com.kcbTeam.kcblibrary.R;
 
 public class CheckBox extends CustomView {
 
-    int backgroundColor = Color.parseColor("#4CAF50");
+    int backgroundColor = Color.parseColor("#427fed");
 
     Check checkView;
 
