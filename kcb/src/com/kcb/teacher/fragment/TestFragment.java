@@ -39,7 +39,7 @@ public class TestFragment extends BaseFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.tch_fragment_course_test, container, false);
+        View view = inflater.inflate(R.layout.tch_fragment_test, container, false);
         return view;
     }
 

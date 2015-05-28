@@ -12,8 +12,8 @@
     <dimen name="paper_padding">8dp</dimen>
 
     <!-- FloatingEditText Default -->
-    <color name="floating_edit_text_color">#ffc8c8c8</color>
-    <color name="floating_edit_text_highlighted_color">#ff3f51b5</color>
+    <color name="floating_edit_text_color">#bdbdbd</color>
+    <color name="floating_edit_text_highlighted_color">#427fed</color>
     <color name="floating_edit_text_error_color">#DB4437</color>
 
     <dimen name="floating_edit_text_underline_height">1dp</dimen>

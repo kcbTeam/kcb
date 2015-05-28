@@ -147,7 +147,7 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
             String testId = intent.getStringExtra(DATA_TEST_ID);
         }
 
-        testNameTextView.setText("[" + mTest.getName() + "]");
+        testNameTextView.setText(mTest.getName());
         showQuestion();
     }
 
