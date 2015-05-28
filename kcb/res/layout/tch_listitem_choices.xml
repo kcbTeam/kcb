@@ -20,6 +20,7 @@
         android:layout_weight="1"
         android:background="@drawable/stu_checkin_textview"
         android:clickable="false"
+        android:focusable="false"
         android:inputType="none"
         android:padding="4dp" />
 

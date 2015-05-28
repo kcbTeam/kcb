@@ -42,8 +42,9 @@
         android:layout_marginRight="16dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/stu_checkin_textview"
+        android:clickable="false"
+        android:focusable="false"
         android:gravity="top|left"
-        android:inputType="none"
         android:lines="7"
         android:padding="4dp"
         android:textSize="@dimen/text_size_medium" />
