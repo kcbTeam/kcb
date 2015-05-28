@@ -47,9 +47,8 @@
 
 
     <!-- edittestfirst activity start -->
-    <string name="hellotip1">1、为本次测试起一个名字：</string>
-    <string name="hellotip2">2、设置题目数量：</string>
-    <string name="hellotip3">3、点击完成开始添加题目：</string>
+    <string name="hellotip1">为本次测试起一个名字</string>
+    <string name="hellotip2">设置题目数量：%1$d</string>
     <!-- edittestfirst activity end -->
 
 
@@ -111,7 +110,7 @@
 
 
     <!-- EditTestFirstActivity Start -->
-    <string name="testname">测试的名称</string>
+    <string name="testname">例如：科学的概念和应用</string>
     <!-- EditTestFirstActivity Start -->
 
 

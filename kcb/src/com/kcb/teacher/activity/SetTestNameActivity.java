@@ -26,15 +26,18 @@ import com.kcbTeam.R;
 public class SetTestNameActivity extends BaseActivity {
 
     private ButtonFlat backButton;
-    private TextView numtip;
-    private FloatingEditText nameEditText;
-    private Slider slider;
+
+    private FloatingEditText testNameEditText;
+
+    private TextView setNumTextView;
+    private Slider testNumSlider;
+
     private PaperButton finishButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.tch_activity_edittestfirst);
+        setContentView(R.layout.tch_activity_settestname);
 
         initView();
         initData();
@@ -45,40 +48,24 @@ public class SetTestNameActivity extends BaseActivity {
         backButton = (ButtonFlat) findViewById(R.id.button_back);
         backButton.setOnClickListener(this);
 
-        nameEditText = (FloatingEditText) findViewById(R.id.edittext_testname);
+        testNameEditText = (FloatingEditText) findViewById(R.id.edittext_testname);
 
-        slider = (Slider) findViewById(R.id.sliderNumber);
-        slider.setOnValueChangedListener(new OnValueChangedListener() {
+        setNumTextView = (TextView) findViewById(R.id.textview_setnum);
+        setNumTextView.setText(String.format(getString(R.string.hellotip2), 3));
+
+        testNumSlider = (Slider) findViewById(R.id.slider_testnum);
+        testNumSlider.setValue(3);
+        testNumSlider.setOnValueChangedListener(new OnValueChangedListener() {
 
             @Override
             public void onValueChanged(int value) {
-                numtip.setText("共" + String.valueOf(value) + "题");
+                setNumTextView.setText(String.format(getString(R.string.hellotip2), value));
             }
         });
 
-        numtip = (TextView) findViewById(R.id.edittext_num);
-        numtip.setText("共" + String.valueOf(slider.getValue()) + "题");
-
-        finishButton = (PaperButton) findViewById(R.id.button_editfinish);
+        finishButton = (PaperButton) findViewById(R.id.button_finish);
         finishButton.setOnClickListener(mClickListener);
     }
-
-    private DelayClickListener mClickListener = new DelayClickListener(
-            DelayClickListener.DELAY_PAPER_BUTTON) {
-
-        @Override
-        public void doClick(View v) {
-            String name = nameEditText.getText().toString().trim();
-            if (TextUtils.isEmpty(name)) {
-                AnimationUtil.shake(nameEditText);
-            } else {
-                SetTestNameActivity.this.finish();
-                EditTestActivity.startAddNewTest(SetTestNameActivity.this,
-                        new Test(name, slider.getValue()));
-                finish();
-            }
-        }
-    };
 
     @Override
     protected void initData() {}
@@ -93,4 +80,20 @@ public class SetTestNameActivity extends BaseActivity {
                 break;
         }
     }
+
+    private DelayClickListener mClickListener = new DelayClickListener(
+            DelayClickListener.DELAY_PAPER_BUTTON) {
+
+        @Override
+        public void doClick(View v) {
+            String name = testNameEditText.getText().toString().trim();
+            if (TextUtils.isEmpty(name)) {
+                AnimationUtil.shake(testNameEditText);
+            } else {
+                EditTestActivity.startAddNewTest(SetTestNameActivity.this, new Test(name,
+                        testNumSlider.getValue()));
+                finish();
+            }
+        }
+    };
 }

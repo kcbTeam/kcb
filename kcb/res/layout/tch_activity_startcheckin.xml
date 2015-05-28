@@ -51,8 +51,8 @@
         android:layout_alignBottom="@id/imageview_step1"
         android:layout_toRightOf="@id/imageview_step1"
         android:text="@string/tipforteacher1"
-        android:textColor="@color/black_500"
-        android:textSize="@dimen/text_size_small" />
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_medium" />
 
     <View
         android:id="@+id/view_divider1"
@@ -124,8 +124,8 @@
             android:layout_alignBottom="@id/imageview_step2"
             android:layout_toRightOf="@id/imageview_step2"
             android:text="@string/tipforteacher2"
-            android:textColor="@color/black_500"
-            android:textSize="@dimen/text_size_small" />
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_medium" />
 
         <View
             android:id="@+id/view_divider2"
@@ -208,8 +208,8 @@
             android:layout_alignBottom="@id/imageview_step3"
             android:layout_toRightOf="@id/imageview_step3"
             android:text="@string/tipforteacher3"
-            android:textColor="@color/black_500"
-            android:textSize="@dimen/text_size_small" />
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_medium" />
 
         <View
             android:id="@+id/view_divider3"
