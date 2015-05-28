@@ -27,7 +27,6 @@ public class SetTestTimeActivity extends BaseActivity implements OnItemClickList
 
     private TextView testNameTextView;
     private Slider testTimeSlider;
-    private TextView testTimeTextView;
 
     private ButtonFlat finishButton;
 
@@ -57,20 +56,12 @@ public class SetTestTimeActivity extends BaseActivity implements OnItemClickList
         finishButton = (ButtonFlat) findViewById(R.id.button_submit);
         finishButton.setOnClickListener(this);
 
-        testTimeTextView = (TextView) findViewById(R.id.testtimeHint);
-        testTimeTextView.setText(String
-                .format(getResources().getString(R.string.testtimeFormat), 5));
-
         testTimeSlider = (Slider) findViewById(R.id.slider_testtime);
         testTimeSlider.setValue(5);
         testTimeSlider.setOnValueChangedListener(new OnValueChangedListener() {
 
             @Override
-            public void onValueChanged(int value) {
-                testTimeTextView.setText(String.format(
-                        getResources().getString(R.string.testtimeFormat),
-                        testTimeSlider.getValue()));
-            }
+            public void onValueChanged(int value) {}
         });
 
         listView = (ListView) findViewById(R.id.listview_questions);
@@ -107,18 +98,15 @@ public class SetTestTimeActivity extends BaseActivity implements OnItemClickList
                 ToastUtil.toast(R.string.modify_saved);
             }
         }
-
     }
 
     @Override
     public void onClick(View v) {
-
         if (v == finishButton) {
             mTest.setDate(new Date());
             mTest.setTime(testTimeSlider.getValue());
             // TODO:change mcurrenttes to json object
         }
-
     }
 
     @Override
