@@ -83,7 +83,7 @@ public class QuestionItem implements Serializable {
         isRight = _isRight;
     }
 
-    public boolean getIsRight() {
+    public boolean isRight() {
         return isRight;
     }
 
@@ -120,11 +120,8 @@ public class QuestionItem implements Serializable {
         }
     }
 
-    public boolean isEmpty() {
-        if (null == mBitmap && TextUtils.isEmpty(mText) && null == mBytesOfBitmap) {
-            return true;
-        }
-        return false;
+    public boolean isCompleted() {
+        return !TextUtils.isEmpty(mText) || mBitmap != null;
     }
 
     public static byte[] getBytes(Bitmap bitmap) {

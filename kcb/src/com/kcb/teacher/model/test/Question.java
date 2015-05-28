@@ -121,8 +121,13 @@ public class Question implements Serializable {
     }
 
     public boolean isCompleted() {
-        return !mTitleItem.isEmpty() && !mChoiceAItem.isEmpty() && !mChoiceBItem.isEmpty()
-                && !mChoiceCItem.isEmpty() && !mChoiceDItem.isEmpty();
+        return mTitleItem.isCompleted()
+                && mChoiceAItem.isCompleted()
+                && mChoiceBItem.isCompleted()
+                && mChoiceCItem.isCompleted()
+                && mChoiceDItem.isCompleted()
+                && (mChoiceAItem.isRight() || mChoiceBItem.isRight() || mChoiceCItem.isRight() || mChoiceDItem
+                        .isRight());
     }
 
     public void changeQuestionToSerializable() {
