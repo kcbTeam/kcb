@@ -64,23 +64,27 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
     private ButtonFlat addButton;
     private ButtonFlat deleteButton;
 
-    //
+    // tag title/A/B/C/D;
+    private final int FLAG_TITLE = 1;
+    private final int FLAG_A = 2;
+    private final int FALG_B = 3;
+    private final int FLAG_C = 4;
+    private final int FLAG_D = 5;
+
+    // test and current question index;
     private Test mTest;
     private int mCurrentQuestionIndex;
 
     // when click last/next, show a mTempQuestion, used for compare it is changed or not;
     private Question mTempQuestion;
 
-    // user want to change what, question title or choice;
-    private final int FLAG_TITLE = 1;
-    private final int FLAG_A = 2;
-    private final int FALG_B = 3;
-    private final int FLAG_C = 4;
-    private final int FLAG_D = 5;
-    private int mClickTag = FLAG_TITLE; // long click
+    // long click to take photo;
+    private int mLongClickTag = FLAG_TITLE;
 
-    // save temp camera photo
+    // save temp camera photo;
     private String mBitmapPath;
+
+    private String mAction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,14 +143,8 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
     @Override
     protected void initData() {
         Intent intent = getIntent();
-        String action = intent.getAction();
-        if (ACTION_ADD.equals(action)) {
-            mTest = (Test) intent.getSerializableExtra(DATA_TEST);
-        } else if (ACTION_EDIT.equals(action)) {
-            // TODO get data from db & show them
-            String testId = intent.getStringExtra(DATA_TEST_ID);
-        }
-
+        mAction = intent.getAction();
+        mTest = (Test) intent.getSerializableExtra(DATA_TEST);
         testNameTextView.setText(mTest.getName());
         showQuestion();
     }
@@ -215,15 +213,17 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
     private void nextQuesion() {
         saveQuestion();
         if (mCurrentQuestionIndex == mTest.getQuestionNum() - 1) {
-            String hintString = "";
             if (!mTest.isCompleted()) {
-                hintString = hintString + String.valueOf(1 + mTest.getUnCompleteIndex()) + "、";
-                ToastUtil.toast(String.format(
-                        getResources().getString(R.string.format_edit_empty_hint),
-                        hintString.substring(0, hintString.length() - 1)));
+                int unCompletedIndex = mTest.getUnCompleteIndex() + 1;
+                ToastUtil.toast(String
+                        .format(getResources().getString(R.string.format_edit_empty_hint),
+                                unCompletedIndex));
                 return;
             }
-            SetTestTimeActivity.start(EditTestActivity.this, mTest);
+            // if add test, goto set time activity; if edit test, finish;
+            if (ACTION_ADD_TEST.equals(mAction)) {
+                SetTestTimeActivity.start(EditTestActivity.this, mTest);
+            }
             finish();
         } else {
             if (!getCurrentQuestion().equal(mTempQuestion)) {
@@ -286,19 +286,19 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
     public boolean onLongClick(View v) {
         switch (v.getId()) {
             case R.id.edittext_question_title:
-                mClickTag = FLAG_TITLE;
+                mLongClickTag = FLAG_TITLE;
                 break;
             case R.id.edittext_A:
-                mClickTag = FLAG_A;
+                mLongClickTag = FLAG_A;
                 break;
             case R.id.edittext_B:
-                mClickTag = FALG_B;
+                mLongClickTag = FALG_B;
                 break;
             case R.id.edittext_C:
-                mClickTag = FLAG_C;
+                mLongClickTag = FLAG_C;
                 break;
             case R.id.edittext_D:
-                mClickTag = FLAG_D;
+                mLongClickTag = FLAG_D;
                 break;
             default:
                 break;
@@ -353,7 +353,7 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
                 Uri uri = (Uri) data.getParcelableExtra("CUTTED_PICTURE");
                 try {
                     Bitmap bitmap = Media.getBitmap(getContentResolver(), uri);
-                    switch (mClickTag) {
+                    switch (mLongClickTag) {
                         case FLAG_TITLE:
                             setEditMode(FLAG_TITLE, EDIT_MODE_BITMAP);
                             titleEditText.setBackground(new BitmapDrawable(bitmap));
@@ -413,10 +413,10 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
         showQuestionItem(FLAG_C, question.getChoiceC());
         showQuestionItem(FLAG_D, question.getChoiceD());
 
-        checkBoxA.setChecked(question.getChoiceA().getIsRight());
-        checkBoxB.setChecked(question.getChoiceB().getIsRight());
-        checkBoxC.setChecked(question.getChoiceC().getIsRight());
-        checkBoxD.setChecked(question.getChoiceD().getIsRight());
+        checkBoxA.setChecked(question.getChoiceA().isRight());
+        checkBoxB.setChecked(question.getChoiceB().isRight());
+        checkBoxC.setChecked(question.getChoiceC().isRight());
+        checkBoxD.setChecked(question.getChoiceD().isRight());
     }
 
     private void showQuestionNum() {
@@ -582,24 +582,22 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
     /**
      * for add a new Test or Edit Test;
      */
-    private static final String ACTION_ADD = "addTest";
-    private static final String ACTION_EDIT = "editTest";
+    private static final String ACTION_ADD_TEST = "action_addTest";
+    private static final String ACTION_EDIT_TEST = "action_editTest";
 
-    private static final String DATA_TEST = "test";
+    private static final String DATA_TEST = "data_test";
 
     public static void startAddNewTest(Context context, Test test) {
         Intent intent = new Intent(context, EditTestActivity.class);
-        intent.setAction(ACTION_ADD);
+        intent.setAction(ACTION_ADD_TEST);
         intent.putExtra(DATA_TEST, test);
         context.startActivity(intent);
     }
 
-    private static final String DATA_TEST_ID = "testId";
-
-    public static void startEditTest(Context context, String testId) {
+    public static void startEditTest(Context context, Test test) {
         Intent intent = new Intent(context, EditTestActivity.class);
-        intent.setAction(ACTION_EDIT);
-        intent.putExtra(DATA_TEST_ID, testId);
+        intent.setAction(ACTION_EDIT_TEST);
+        intent.putExtra(DATA_TEST, test);
         context.startActivity(intent);
     }
 }

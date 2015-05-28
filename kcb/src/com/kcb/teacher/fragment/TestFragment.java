@@ -19,6 +19,7 @@ import com.kcb.library.view.PaperButton;
 import com.kcb.teacher.activity.CheckTestActivity;
 import com.kcb.teacher.activity.EditTestActivity;
 import com.kcb.teacher.activity.SetTestNameActivity;
+import com.kcb.teacher.model.test.Test;
 import com.kcbTeam.R;
 
 /**
@@ -120,7 +121,7 @@ public class TestFragment extends BaseFragment {
                     startActivity(intent);
                 } else {
                     // TODO set selected testId
-                    EditTestActivity.startEditTest(getActivity(), "");
+                    EditTestActivity.startEditTest(getActivity(), new Test("测试的题目", 4));
                 }
             }
         }, "取消", null);

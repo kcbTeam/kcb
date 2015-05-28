@@ -295,10 +295,10 @@ public class ModifyQuestionActivty extends BaseActivity implements OnLongClickLi
         showQuestionItem(choiceCEditText, question.getChoiceC());
         showQuestionItem(choiceDEditText, question.getChoiceD());
 
-        checkBoxA.setChecked(question.getChoiceA().getIsRight());
-        checkBoxB.setChecked(question.getChoiceB().getIsRight());
-        checkBoxC.setChecked(question.getChoiceC().getIsRight());
-        checkBoxD.setChecked(question.getChoiceD().getIsRight());
+        checkBoxA.setChecked(question.getChoiceA().isRight());
+        checkBoxB.setChecked(question.getChoiceB().isRight());
+        checkBoxC.setChecked(question.getChoiceC().isRight());
+        checkBoxD.setChecked(question.getChoiceD().isRight());
     }
 
     @SuppressWarnings("deprecation")
