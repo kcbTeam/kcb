@@ -95,6 +95,25 @@ public class Question implements Serializable {
                 + mChoiceDItem.getText();
     }
 
+    public String getAnswerString() {
+        String anString = "答案：";
+        if (mChoiceAItem.getIsRight()) {
+            anString += "A、";
+        }
+        if (mChoiceBItem.getIsRight()) {
+            anString += "B、";
+        }
+        if (mChoiceCItem.getIsRight()) {
+            anString += "C、";
+        }
+        if (mChoiceDItem.getIsRight()) {
+            anString += "D、";
+        }
+
+        return anString.substring(0, anString.length() - 1);
+
+    }
+
     public boolean isAllString() {
         if (mTitleItem.isText() && mChoiceAItem.isText() && mChoiceBItem.isText()
                 && mChoiceCItem.isText() && mChoiceDItem.isText()) return true;

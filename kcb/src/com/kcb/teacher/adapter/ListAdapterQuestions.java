@@ -64,8 +64,7 @@ public class ListAdapterQuestions extends BaseAdapter {
             content.setText(temp.contentString());
 
             TextView correctOptions = (TextView) view.findViewById(R.id.textview_answer);
-            // wanghang TODO
-            // correctOptions.setText(temp.getCorrectOptionString());
+            correctOptions.setText(temp.getAnswerString());
 
         } else {
             view = View.inflate(mContext, R.layout.tch_listview_questions_item_common, null);
@@ -89,8 +88,7 @@ public class ListAdapterQuestions extends BaseAdapter {
             showContent(optionDEditText, temp.getChoiceD());
 
             TextView correctOptions = (TextView) view.findViewById(R.id.textview_answer);
-            // wanghang TODO
-            // correctOptions.setText(mList.get(position).getCorrectOptionString());
+            correctOptions.setText(mList.get(position).getAnswerString());
         }
 
         return view;

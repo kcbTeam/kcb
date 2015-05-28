@@ -13,7 +13,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.provider.MediaStore.Images.Media;
-import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnLongClickListener;
 import android.widget.EditText;
@@ -46,10 +45,15 @@ public class ModifyQuestionActivty extends BaseActivity implements OnLongClickLi
 
     private EditText titleEditText;
     private ImageView deleteTitleImageView;
-    private EditText choiceAEditText;
-    private EditText choiceBEditText;
-    private EditText choiceCEditText;
-    private EditText choiceDEditText;
+    private EditText aEditText;
+    private ImageView deleteAImageView;
+    private EditText bEditText;
+    private ImageView deleteBImageView;
+    private EditText cEditText;
+    private ImageView deleteCImageView;
+    private EditText dEditText;
+    private ImageView deleteDImageView;
+
 
     private CheckBox checkBoxA;
     private CheckBox checkBoxB;
@@ -65,12 +69,12 @@ public class ModifyQuestionActivty extends BaseActivity implements OnLongClickLi
     private final String NumHint = "第%1$d题";
 
     // user want to change what, question title or choice;
-    private final int CLICK_TAG_TITLE = 1;
-    private final int CLICK_TAG_A = 2;
-    private final int CLICK_TAG_B = 3;
-    private final int CLICK_TAG_C = 4;
-    private final int CLICK_TAG_D = 5;
-    private int mClickTag = CLICK_TAG_TITLE; // long click
+    private final int FLAG_TITLE = 1;
+    private final int FLAG_A = 2;
+    private final int FLAG_B = 3;
+    private final int FLAG_C = 4;
+    private final int FLAG_D = 5;
+    private int mClickTag = FLAG_TITLE; // long click
 
     private String path;
 
@@ -103,17 +107,25 @@ public class ModifyQuestionActivty extends BaseActivity implements OnLongClickLi
         deleteTitleImageView = (ImageView) findViewById(R.id.imageview_delete_title);
         deleteTitleImageView.setOnClickListener(this);
 
-        choiceAEditText = (EditText) findViewById(R.id.edittext_A);
-        choiceAEditText.setOnLongClickListener(this);
+        aEditText = (EditText) findViewById(R.id.edittext_A);
+        aEditText.setOnLongClickListener(this);
+        deleteAImageView = (ImageView) findViewById(R.id.imageview_delete_a);
+        deleteAImageView.setOnClickListener(this);
 
-        choiceBEditText = (EditText) findViewById(R.id.edittext_B);
-        choiceBEditText.setOnLongClickListener(this);
+        bEditText = (EditText) findViewById(R.id.edittext_B);
+        bEditText.setOnLongClickListener(this);
+        deleteBImageView = (ImageView) findViewById(R.id.imageview_delete_b);
+        deleteBImageView.setOnClickListener(this);
 
-        choiceCEditText = (EditText) findViewById(R.id.edittext_C);
-        choiceCEditText.setOnLongClickListener(this);
+        cEditText = (EditText) findViewById(R.id.edittext_C);
+        cEditText.setOnLongClickListener(this);
+        deleteCImageView = (ImageView) findViewById(R.id.imageview_delete_c);
+        deleteCImageView.setOnClickListener(this);
 
-        choiceDEditText = (EditText) findViewById(R.id.edittext_D);
-        choiceDEditText.setOnLongClickListener(this);
+        dEditText = (EditText) findViewById(R.id.edittext_D);
+        dEditText.setOnLongClickListener(this);
+        deleteDImageView = (ImageView) findViewById(R.id.imageview_delete_d);
+        deleteDImageView.setOnClickListener(this);
 
         checkBoxA = (CheckBox) findViewById(R.id.checkBox_A);
         checkBoxB = (CheckBox) findViewById(R.id.checkBox_B);
@@ -150,6 +162,22 @@ public class ModifyQuestionActivty extends BaseActivity implements OnLongClickLi
                 titleEditText.setHint(R.string.edit_title_hint);
                 showQuestion();
                 break;
+            case R.id.imageview_delete_a:
+                setEditMode(FLAG_A, EDIT_MODE_TEXT);
+                mQuestion.getChoiceA().setText("");
+                break;
+            case R.id.imageview_delete_b:
+                setEditMode(FLAG_B, EDIT_MODE_TEXT);
+                mQuestion.getChoiceB().setText("");
+                break;
+            case R.id.imageview_delete_c:
+                setEditMode(FLAG_C, EDIT_MODE_TEXT);
+                mQuestion.getChoiceC().setText("");
+                break;
+            case R.id.imageview_delete_d:
+                setEditMode(FLAG_D, EDIT_MODE_TEXT);
+                mQuestion.getChoiceD().setText("");
+                break;
             case R.id.button_cancel:
                 setResult(MODIFY_CACELED, intent);
                 finish();
@@ -170,23 +198,95 @@ public class ModifyQuestionActivty extends BaseActivity implements OnLongClickLi
         }
     }
 
+    private final int EDIT_MODE_TEXT = 1;
+    private final int EDIT_MODE_BITMAP = 2;
+
+    private void setEditMode(int flag, int mode) {
+        EditText editText = getEdittextByTag(flag);
+        ImageView deleteIcon = getDeleteIconByTag(flag);
+        switch (mode) {
+            case EDIT_MODE_TEXT:
+                editText.setText("");
+                editText.setFocusable(true);
+                editText.setFocusableInTouchMode(true);
+                editText.setBackgroundResource(R.drawable.stu_checkin_textview);
+                deleteIcon.setVisibility(View.INVISIBLE);
+                break;
+            case EDIT_MODE_BITMAP:
+                editText.setText(" ");
+                editText.setFocusable(false);
+                deleteIcon.setVisibility(View.VISIBLE);
+                break;
+            default:
+                break;
+        }
+    }
+
+    private ImageView getDeleteIconByTag(int flag) {
+        ImageView deleteIcon = null;
+        switch (flag) {
+            case FLAG_TITLE:
+                deleteIcon = deleteTitleImageView;
+                break;
+            case FLAG_A:
+                deleteIcon = deleteAImageView;
+                break;
+            case FLAG_B:
+                deleteIcon = deleteBImageView;
+                break;
+            case FLAG_C:
+                deleteIcon = deleteCImageView;
+                break;
+            case FLAG_D:
+                deleteIcon = deleteDImageView;
+                break;
+            default:
+                break;
+        }
+        return deleteIcon;
+    }
+
+    private EditText getEdittextByTag(int flag) {
+        EditText editText = null;
+        switch (flag) {
+            case FLAG_TITLE:
+                editText = titleEditText;
+                break;
+            case FLAG_A:
+                editText = aEditText;
+                break;
+            case FLAG_B:
+                editText = bEditText;
+                break;
+            case FLAG_C:
+                editText = cEditText;
+                break;
+            case FLAG_D:
+                editText = dEditText;
+                break;
+            default:
+                break;
+        }
+        return editText;
+    }
+
     @Override
     public boolean onLongClick(View v) {
         switch (v.getId()) {
             case R.id.edittext_question_title:
-                mClickTag = CLICK_TAG_TITLE;
+                mClickTag = FLAG_TITLE;
                 break;
             case R.id.edittext_A:
-                mClickTag = CLICK_TAG_A;
+                mClickTag = FLAG_A;
                 break;
             case R.id.edittext_B:
-                mClickTag = CLICK_TAG_B;
+                mClickTag = FLAG_B;
                 break;
             case R.id.edittext_C:
-                mClickTag = CLICK_TAG_C;
+                mClickTag = FLAG_C;
                 break;
             case R.id.edittext_D:
-                mClickTag = CLICK_TAG_D;
+                mClickTag = FLAG_D;
                 break;
             default:
                 break;
@@ -242,36 +342,29 @@ public class ModifyQuestionActivty extends BaseActivity implements OnLongClickLi
                 try {
                     Bitmap bitmap = Media.getBitmap(getContentResolver(), uri);
                     switch (mClickTag) {
-                        case CLICK_TAG_TITLE:
-                            titleEditText.setText("");
-                            titleEditText.setFocusable(false);
-                            titleEditText.setHint("");
+                        case FLAG_TITLE:
+                            setEditMode(FLAG_TITLE, EDIT_MODE_BITMAP);
                             titleEditText.setBackground(new BitmapDrawable(bitmap));
-                            deleteTitleImageView.setVisibility(View.VISIBLE);
                             mQuestion.getTitle().setBitmap(bitmap);
                             break;
-                        case CLICK_TAG_A:
-                            choiceAEditText.setText("");
-                            choiceAEditText.setFocusable(false);
-                            choiceAEditText.setBackground(new BitmapDrawable(bitmap));
+                        case FLAG_A:
+                            setEditMode(FLAG_A, EDIT_MODE_BITMAP);
+                            aEditText.setBackground(new BitmapDrawable(bitmap));
                             mQuestion.getChoiceA().setBitmap(bitmap);
                             break;
-                        case CLICK_TAG_B:
-                            choiceBEditText.setText("");
-                            choiceBEditText.setFocusable(false);
-                            choiceBEditText.setBackground(new BitmapDrawable(bitmap));
+                        case FLAG_B:
+                            setEditMode(FLAG_B, EDIT_MODE_BITMAP);
+                            bEditText.setBackground(new BitmapDrawable(bitmap));
                             mQuestion.getChoiceB().setBitmap(bitmap);
                             break;
-                        case CLICK_TAG_C:
-                            choiceCEditText.setText("");
-                            choiceCEditText.setFocusable(false);
-                            choiceCEditText.setBackground(new BitmapDrawable(bitmap));
+                        case FLAG_C:
+                            setEditMode(FLAG_C, EDIT_MODE_BITMAP);
+                            cEditText.setBackground(new BitmapDrawable(bitmap));
                             mQuestion.getChoiceC().setBitmap(bitmap);
                             break;
-                        case CLICK_TAG_D:
-                            choiceDEditText.setText("");
-                            choiceDEditText.setFocusable(false);
-                            choiceDEditText.setBackground(new BitmapDrawable(bitmap));
+                        case FLAG_D:
+                            setEditMode(FLAG_D, EDIT_MODE_BITMAP);
+                            dEditText.setBackground(new BitmapDrawable(bitmap));
                             mQuestion.getChoiceD().setBitmap(bitmap);
                             break;
                         default:
@@ -289,11 +382,11 @@ public class ModifyQuestionActivty extends BaseActivity implements OnLongClickLi
     private void showQuestion() {
         Question question = mQuestion;
 
-        showQuestionItem(titleEditText, question.getTitle());
-        showQuestionItem(choiceAEditText, question.getChoiceA());
-        showQuestionItem(choiceBEditText, question.getChoiceB());
-        showQuestionItem(choiceCEditText, question.getChoiceC());
-        showQuestionItem(choiceDEditText, question.getChoiceD());
+        showQuestionItem(FLAG_TITLE, question.getTitle());
+        showQuestionItem(FLAG_A, question.getChoiceA());
+        showQuestionItem(FLAG_B, question.getChoiceB());
+        showQuestionItem(FLAG_C, question.getChoiceC());
+        showQuestionItem(FLAG_D, question.getChoiceD());
 
         checkBoxA.setChecked(question.getChoiceA().getIsRight());
         checkBoxB.setChecked(question.getChoiceB().getIsRight());
@@ -302,53 +395,50 @@ public class ModifyQuestionActivty extends BaseActivity implements OnLongClickLi
     }
 
     @SuppressWarnings("deprecation")
-    private void showQuestionItem(EditText view, QuestionItem item) {
-        view.setBackgroundResource(R.drawable.stu_checkin_textview);
+    private void showQuestionItem(int flag, QuestionItem item) {
+        EditText editText = getEdittextByTag(flag);
         if (item.isText()) {
-            if (view == titleEditText) {
-                deleteTitleImageView.setVisibility(View.INVISIBLE);
-            }
-            view.setText(item.getText());
-            view.setFocusable(true);
-            view.setFocusableInTouchMode(true);
+            setEditMode(flag, EDIT_MODE_TEXT);
+            editText.setText(item.getText());
         } else {
             Bitmap bitmap = item.getBitmap();
             if (null != bitmap) {
-                if (view == titleEditText) {
-                    deleteTitleImageView.setVisibility(View.VISIBLE);
-                    titleEditText.setHint("");
-                }
-                view.setBackgroundDrawable(new BitmapDrawable(bitmap));
+                setEditMode(flag, EDIT_MODE_BITMAP);
+                editText.setBackgroundDrawable(new BitmapDrawable(bitmap));
             }
-            view.setFocusable(false);
-            view.setHint("");
         }
     }
 
     private void saveQuestion() {
+        QuestionItem titleItem = mQuestion.getTitle();
+        QuestionItem aItem = mQuestion.getChoiceA();
+        QuestionItem bItem = mQuestion.getChoiceB();
+        QuestionItem cItem = mQuestion.getChoiceC();
+        QuestionItem dItem = mQuestion.getChoiceD();
+
         String questionTitle = titleEditText.getText().toString().trim();
-        if (mQuestion.getTitle().isText()) {
-            mQuestion.getTitle().setText(questionTitle);
+        if (titleItem.isText()) {
+            titleItem.setText(questionTitle);
         }
-        String choiceA = choiceAEditText.getText().toString().trim();
-        if (!TextUtils.isEmpty(choiceA)) {
-            mQuestion.getChoiceA().setText(choiceA);
+        String choiceA = aEditText.getText().toString().trim();
+        if (aItem.isText()) {
+            aItem.setText(choiceA);
         }
-        String choiceB = choiceBEditText.getText().toString().trim();
-        if (!TextUtils.isEmpty(choiceB)) {
-            mQuestion.getChoiceB().setText(choiceB);
+        String choiceB = bEditText.getText().toString().trim();
+        if (bItem.isText()) {
+            bItem.setText(choiceB);
         }
-        String choiceC = choiceCEditText.getText().toString().trim();
-        if (!TextUtils.isEmpty(choiceC)) {
-            mQuestion.getChoiceC().setText(choiceC);
+        String choiceC = cEditText.getText().toString().trim();
+        if (cItem.isText()) {
+            cItem.setText(choiceC);
         }
-        String choiceD = choiceDEditText.getText().toString().trim();
-        if (!TextUtils.isEmpty(choiceD)) {
-            mQuestion.getChoiceD().setText(choiceD);
+        String choiceD = dEditText.getText().toString().trim();
+        if (dItem.isText()) {
+            dItem.setText(choiceD);
         }
-        mQuestion.getChoiceA().setIsRight(checkBoxA.isCheck());
-        mQuestion.getChoiceB().setIsRight(checkBoxB.isCheck());
-        mQuestion.getChoiceC().setIsRight(checkBoxC.isCheck());
-        mQuestion.getChoiceD().setIsRight(checkBoxD.isCheck());
+        aItem.setIsRight(checkBoxA.isCheck());
+        bItem.setIsRight(checkBoxB.isCheck());
+        cItem.setIsRight(checkBoxC.isCheck());
+        dItem.setIsRight(checkBoxD.isCheck());
     }
 }

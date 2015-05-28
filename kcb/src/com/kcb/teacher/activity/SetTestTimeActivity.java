@@ -26,7 +26,7 @@ import com.kcbTeam.R;
 
 public class SetTestTimeActivity extends BaseActivity implements OnItemClickListener {
     @SuppressWarnings("unused")
-    private static final String TAG = "SubmitTestPaper";
+    private static final String TAG = "SetTestTimeActivity";
 
     private ListView questionListView;
     private ListAdapterQuestions mAdapter;
@@ -136,6 +136,7 @@ public class SetTestTimeActivity extends BaseActivity implements OnItemClickList
 
     public static void start(Context context, Test test) {
         Intent intent = new Intent(context, SetTestTimeActivity.class);
+        test.changeTestToSerializable();
         intent.putExtra(DATA_TEST, test);
         context.startActivity(intent);
     }

@@ -101,8 +101,11 @@ public class QuestionItem implements Serializable {
                 if (isText) {
                     return mText.equals(item.mText);
                 } else {
-                    if (null != item.mBitmap) {
-                        return mBitmap.equals(item.mBitmap);
+                    if (null != item.getBitmap()) {
+                        return getBitmap().equals(item.getBitmap()); // when use intent transport
+                                                                     // data , mBitmap must set as
+                                                                     // null,so use gtBitmap() is
+                                                                     // safer. mBitmap maybe =null
                     }
                 }
             }
