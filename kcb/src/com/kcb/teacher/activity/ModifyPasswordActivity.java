@@ -161,6 +161,7 @@ public class ModifyPasswordActivity extends BaseActivity {
                 return;
             }
             finishProgressBar.setVisibility(View.VISIBLE);
+            newPassword = password;
             StringRequest request =
                     new StringRequest(Method.POST, UrlUtil.getTchModifyPasswordUrl(
                             KAccount.getAccountId(), newPassword), new Listener<String>() {

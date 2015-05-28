@@ -59,7 +59,7 @@
         android:id="@+id/edittext_testname"
         style="@style/login_edittext"
         android:layout_below="@id/view_divider1"
-        android:hint="@string/testname" />
+        android:hint="@string/testname_hint" />
 
     <ImageView
         android:id="@+id/imageview_step2"

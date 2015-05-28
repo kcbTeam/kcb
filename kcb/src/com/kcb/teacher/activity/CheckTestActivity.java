@@ -75,7 +75,7 @@ public class CheckTestActivity extends BaseActivity implements TextWatcher, OnIt
         tempTest.getQuestion(0).getTitle().setText("1+1=?");
         tempTest.getQuestion(0).getChoiceA().setText("1");
         tempTest.getQuestion(0).getChoiceB().setText("2");
-        // tempTest.getQuestion(0).getChoiceB().setRight();
+        tempTest.getQuestion(0).getChoiceB().setIsRight(true);
         tempTest.getQuestion(0).getChoiceC().setText("3");
         tempTest.getQuestion(0).getChoiceD().setText("4");
         mTestList.add(tempTest);
@@ -87,7 +87,7 @@ public class CheckTestActivity extends BaseActivity implements TextWatcher, OnIt
         tempTest.getQuestion(0).getChoiceA().setText("战争与和平");
         tempTest.getQuestion(0).getChoiceB().setText("安娜卡列尼娜");
         tempTest.getQuestion(0).getChoiceC().setText("飘");
-        // tempTest.getQuestion(0).getChoiceC().setRight();
+        tempTest.getQuestion(0).getChoiceC().setIsRight(true);
         tempTest.getQuestion(0).getChoiceD().setText("复活");
         mTestList.add(tempTest);
 
