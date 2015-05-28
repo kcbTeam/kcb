@@ -286,7 +286,6 @@ public class ModifyQuestionActivty extends BaseActivity implements OnLongClickLi
     }
 
     private void showQuestion() {
-
         Question question = mQuestion;
 
         showQuestionItem(titleEditText, question.getTitle());
@@ -295,11 +294,10 @@ public class ModifyQuestionActivty extends BaseActivity implements OnLongClickLi
         showQuestionItem(choiceCEditText, question.getChoiceC());
         showQuestionItem(choiceDEditText, question.getChoiceD());
 
-        boolean[] correctId = question.getCorrectId();
-        checkBoxA.setChecked(correctId[0]);
-        checkBoxB.setChecked(correctId[1]);
-        checkBoxC.setChecked(correctId[2]);
-        checkBoxD.setChecked(correctId[3]);
+        checkBoxA.setChecked(question.getChoiceA().getIsRight());
+        checkBoxB.setChecked(question.getChoiceB().getIsRight());
+        checkBoxC.setChecked(question.getChoiceC().getIsRight());
+        checkBoxD.setChecked(question.getChoiceD().getIsRight());
     }
 
     @SuppressWarnings("deprecation")
@@ -347,7 +345,9 @@ public class ModifyQuestionActivty extends BaseActivity implements OnLongClickLi
         if (!TextUtils.isEmpty(choiceD)) {
             mQuestion.getChoiceD().setText(choiceD);
         }
-        mQuestion.setCorrectId(new boolean[] {checkBoxA.isCheck(), checkBoxB.isCheck(),
-                checkBoxC.isCheck(), checkBoxD.isCheck()});
+        mQuestion.getChoiceA().setIsRight(checkBoxA.isCheck());
+        mQuestion.getChoiceB().setIsRight(checkBoxB.isCheck());
+        mQuestion.getChoiceC().setIsRight(checkBoxC.isCheck());
+        mQuestion.getChoiceD().setIsRight(checkBoxD.isCheck());
     }
 }

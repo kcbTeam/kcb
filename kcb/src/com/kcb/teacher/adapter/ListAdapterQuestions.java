@@ -27,7 +27,6 @@ public class ListAdapterQuestions extends BaseAdapter {
     private static final String TAG = "ListAdapterQuestions";
     private final String numFormatString = "第%1$d题";
 
-
     private List<Question> mList;
     private Context mContext;
 
@@ -65,7 +64,8 @@ public class ListAdapterQuestions extends BaseAdapter {
             content.setText(temp.contentString());
 
             TextView correctOptions = (TextView) view.findViewById(R.id.textview_answer);
-            correctOptions.setText(temp.getCorrectOptionString());
+            // wanghang TODO
+            // correctOptions.setText(temp.getCorrectOptionString());
 
         } else {
             view = View.inflate(mContext, R.layout.tch_listview_questions_item_common, null);
@@ -89,7 +89,8 @@ public class ListAdapterQuestions extends BaseAdapter {
             showContent(optionDEditText, temp.getChoiceD());
 
             TextView correctOptions = (TextView) view.findViewById(R.id.textview_answer);
-            correctOptions.setText(mList.get(position).getCorrectOptionString());
+            // wanghang TODO
+            // correctOptions.setText(mList.get(position).getCorrectOptionString());
         }
 
         return view;

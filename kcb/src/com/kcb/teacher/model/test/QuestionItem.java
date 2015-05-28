@@ -18,9 +18,11 @@ public class QuestionItem implements Serializable {
 
     private static final long serialVersionUID = 4919254309171318451L;
 
+    private String mId; // from client
+
     private boolean isText = true;
     private String mText = "";
-    private Bitmap mBitmap = null;
+    private Bitmap mBitmap;
     private byte[] mBytesOfBitmap;
     private boolean isRight = false;
     private float mRate; // if the item is a choice, mRate represent a choice rate;if the item is a
@@ -38,6 +40,15 @@ public class QuestionItem implements Serializable {
         } else {
             newItem.setBitmap(oldItem.getBitmap());
         }
+        newItem.setIsRight(oldItem.isRight);
+    }
+
+    public void setId(String id) {
+        mId = id;
+    }
+
+    public String getId() {
+        return mId;
     }
 
     public boolean isText() {
@@ -68,6 +79,14 @@ public class QuestionItem implements Serializable {
         return mBitmap;
     }
 
+    public void setIsRight(boolean _isRight) {
+        isRight = _isRight;
+    }
+
+    public boolean getIsRight() {
+        return isRight;
+    }
+
     public float getRate() {
         return mRate;
     }
@@ -76,23 +95,15 @@ public class QuestionItem implements Serializable {
         mRate = rate;
     }
 
-    public boolean isRight() {
-        return isRight;
-    }
-
-    public void setRight() {
-        isRight = true;
-    }
-
     public boolean equals(QuestionItem item) {
-        if (isText == item.isText) {
-            if (isText) {
-                return mText.equals(item.mText);
-            } else {
-                if (null == mBitmap) {
-                    return mBytesOfBitmap.equals(item.mBytesOfBitmap);
+        if (isRight == item.isRight) {
+            if (isText == item.isText) {
+                if (isText) {
+                    return mText.equals(item.mText);
                 } else {
-                    return mBitmap.equals(item.mBitmap);
+                    if (null != item.mBitmap) {
+                        return mBitmap.equals(item.mBitmap);
+                    }
                 }
             }
         }

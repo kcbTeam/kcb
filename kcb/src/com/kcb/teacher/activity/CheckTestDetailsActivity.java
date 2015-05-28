@@ -149,5 +149,4 @@ public class CheckTestDetailsActivity extends BaseActivity {
             view.setFocusable(false);
         }
     }
-
 }

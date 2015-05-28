@@ -69,7 +69,7 @@ public class ListAdapterChoices extends BaseAdapter {
 
         QuestionItem tempItem = mQuestonItemList.get(position);
         holder.choiceTitle.setText(choiceTitleString[position]);
-        if (tempItem.isRight()) {
+        if (tempItem.getIsRight()) {
             holder.choiceTitle.setTextColor(Color.RED);
         } else {
             holder.choiceTitle.setTextColor(Color.BLACK);

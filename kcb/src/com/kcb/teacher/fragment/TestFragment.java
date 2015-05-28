@@ -72,45 +72,11 @@ public class TestFragment extends BaseFragment {
         @Override
         public void doClick(View v) {
             switch (v.getId()) {
-                case R.id.button_edit_test:
-                    // TODO get title from database;
-                    mList = new ArrayList<String>();
-                    mList.add("添加新测试");
-                    mList.add("第一次测试");
-                    mList.add("第二次测试");
-                    mList.add("第三次测试");
-                    DialogUtil.showListDialog(getActivity(), "编辑测试内容", mList, "确定",
-                            new OnClickSureListener() {
-
-                                @Override
-                                public void onClick(View view, int position) {
-                                    if (position == 0) { // add new test
-                                        Intent intent =
-                                                new Intent(getActivity(),
-                                                        EditTestFirstActivity.class);
-                                        startActivity(intent);
-                                    } else {
-                                        // TODO set selected testId
-                                        EditTestActivity.startEditTest(getActivity(), "");
-                                    }
-                                }
-                            }, "取消", null);
-                    break;
                 case R.id.button_begin_test:
-                    // TODO get title from sharedPreference;
-                    // if null ,toast;
-                    mList = new ArrayList<String>();
-                    mList.add("第一次测试");
-                    mList.add("第二次测试");
-                    mList.add("第三次测试");
-                    DialogUtil.showListDialog(getActivity(), "开始测试", mList, "确定",
-                            new OnClickSureListener() {
-
-                                @Override
-                                public void onClick(View view, int position) {
-                                    ToastUtil.toast("" + position);
-                                }
-                            }, "取消", null);
+                    startTest();
+                    break;
+                case R.id.button_edit_test:
+                    addOrEditTest();
                     break;
                 case R.id.button_test_result:
                     Intent intent = new Intent(getActivity(), CheckTestActivity.class);
@@ -121,4 +87,42 @@ public class TestFragment extends BaseFragment {
             }
         }
     };
+
+    private void startTest() {
+        // TODO get title from db;
+        // if null ,toast;
+        mList = new ArrayList<String>();
+        mList.add("第一次测试");
+        mList.add("第二次测试");
+        mList.add("第三次测试");
+        DialogUtil.showListDialog(getActivity(), "开始测试", mList, "确定", new OnClickSureListener() {
+
+            @Override
+            public void onClick(View view, int position) {
+                ToastUtil.toast("" + position);
+            }
+        }, "取消", null);
+    }
+
+    private void addOrEditTest() {
+        // TODO get title from database;
+        mList = new ArrayList<String>();
+        mList.add("添加新测试");
+        mList.add("第一次测试");
+        mList.add("第二次测试");
+        mList.add("第三次测试");
+        DialogUtil.showListDialog(getActivity(), "编辑测试内容", mList, "确定", new OnClickSureListener() {
+
+            @Override
+            public void onClick(View view, int position) {
+                if (position == 0) { // add new test
+                    Intent intent = new Intent(getActivity(), EditTestFirstActivity.class);
+                    startActivity(intent);
+                } else {
+                    // TODO set selected testId
+                    EditTestActivity.startEditTest(getActivity(), "");
+                }
+            }
+        }, "取消", null);
+    }
 }

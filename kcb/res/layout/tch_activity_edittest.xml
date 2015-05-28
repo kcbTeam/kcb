@@ -13,6 +13,8 @@
         android:layout_height="wrap_content"
         android:background="@drawable/activity_header_shadow"
         android:gravity="center_vertical"
+        android:paddingLeft="16dp"
+        android:textColor="@color/black"
         android:textSize="@dimen/text_size_large" />
 
     <TextView
@@ -20,31 +22,39 @@
         android:layout_width="wrap_content"
         android:layout_height="56dp"
         android:layout_alignParentRight="true"
-        android:gravity="center" />
+        android:gravity="center"
+        android:paddingRight="16dp"
+        android:textColor="@color/black_700"
+        android:textSize="@dimen/text_size_small" />
 
     <TextView
         android:id="@+id/textview_input_problem_tip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/textview_title"
+        android:layout_marginBottom="8dp"
         android:layout_marginLeft="16dp"
-        android:text="@string/problem_hint" />
+        android:text="@string/problem_hint"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_medium" />
 
     <EditText
         android:id="@+id/edittext_question_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/textview_input_problem_tip"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="24dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginTop="8dp"
         android:background="@drawable/stu_checkin_textview"
         android:gravity="top|left"
         android:hint="@string/edit_title_hint"
         android:inputType="none"
+        android:lineSpacingExtra="2dp"
         android:lines="7"
-        android:padding="4dp"
+        android:padding="8dp"
+        android:textColor="@color/black_700"
+        android:textColorHint="@color/black_400"
         android:textSize="@dimen/text_size_medium" />
 
     <ImageView
@@ -62,161 +72,256 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/edittext_question_title"
+        android:layout_marginBottom="8dp"
         android:layout_marginLeft="16dp"
-        android:text="@string/options_hint" />
+        android:text="@string/options_hint"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_medium" />
 
-    <LinearLayout
-        android:id="@+id/layout_A"
+    <ScrollView
+        android:id="@+id/scroll_choices"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/input_options_hint"
-        android:layout_marginBottom="4dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="4dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal" >
+        android:layout_above="@+id/view_divider"
+        android:layout_below="@id/input_options_hint" >
 
-        <TextView
-            android:id="@+id/textview_A"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="4dp"
-            android:text="@string/option_A" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
 
-        <EditText
-            android:id="@+id/edittext_A"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="4dp"
-            android:layout_weight="1"
-            android:background="@drawable/stu_checkin_textview"
-            android:inputType="none"
-            android:padding="4dp" />
+            <LinearLayout
+                android:id="@+id/layout_A"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="4dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
 
-        <com.kcb.library.view.checkbox.CheckBox
-            android:id="@+id/checkBox_A"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:background="@color/blue" />
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/textview_A"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:layout_marginRight="4dp"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/option_A"
+                    android:textColor="@color/black_700"
+                    android:textSize="@dimen/text_size_medium" />
 
-    <LinearLayout
-        android:id="@+id/layout_B"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/layout_A"
-        android:layout_marginBottom="4dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="4dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal" >
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="4dp"
+                    android:layout_weight="1" >
 
-        <TextView
-            android:id="@+id/textview_B"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="4dp"
-            android:text="@string/option_B" />
+                    <EditText
+                        android:id="@+id/edittext_A"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/stu_checkin_textview"
+                        android:hint="@string/edit_title_hint"
+                        android:padding="8dp"
+                        android:textColor="@color/black_700"
+                        android:textColorHint="@color/black_400"
+                        android:textSize="@dimen/text_size_medium" />
 
-        <EditText
-            android:id="@+id/edittext_B"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="4dp"
-            android:layout_weight="1"
-            android:background="@drawable/stu_checkin_textview"
-            android:inputType="none"
-            android:padding="4dp" />
+                    <ImageView
+                        android:id="@+id/imageview_delete_a"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:padding="4dp"
+                        android:src="@drawable/ic_cancel_black_24dp"
+                        android:visibility="invisible" />
+                </RelativeLayout>
 
-        <com.kcb.library.view.checkbox.CheckBox
-            android:id="@+id/checkBox_B"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:background="@color/blue" />
-    </LinearLayout>
+                <com.kcb.library.view.checkbox.CheckBox
+                    android:id="@+id/checkBox_A"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_gravity="top"
+                    android:background="@color/blue" />
+            </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/layout_C"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/layout_B"
-        android:layout_marginBottom="4dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="4dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal" >
+            <LinearLayout
+                android:id="@+id/layout_B"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/layout_A"
+                android:layout_marginBottom="4dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="4dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
 
-        <TextView
-            android:id="@+id/textview_C"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="4dp"
-            android:text="@string/option_C" />
+                <TextView
+                    android:id="@+id/textview_B"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:layout_marginRight="4dp"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/option_B"
+                    android:textColor="@color/black_700"
+                    android:textSize="@dimen/text_size_medium" />
 
-        <EditText
-            android:id="@+id/edittext_C"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="4dp"
-            android:layout_weight="1"
-            android:background="@drawable/stu_checkin_textview"
-            android:inputType="none"
-            android:padding="4dp" />
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="4dp"
+                    android:layout_weight="1" >
 
-        <com.kcb.library.view.checkbox.CheckBox
-            android:id="@+id/checkBox_C"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:background="@color/blue" />
-    </LinearLayout>
+                    <EditText
+                        android:id="@+id/edittext_B"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/stu_checkin_textview"
+                        android:inputType="none"
+                        android:padding="8dp"
+                        android:textColor="@color/black_700"
+                        android:textSize="@dimen/text_size_medium" />
 
-    <LinearLayout
-        android:id="@+id/layout_D"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/layout_C"
-        android:layout_marginBottom="4dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="4dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal" >
+                    <ImageView
+                        android:id="@+id/imageview_delete_b"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:padding="4dp"
+                        android:src="@drawable/ic_cancel_black_24dp"
+                        android:visibility="invisible" />
+                </RelativeLayout>
 
-        <TextView
-            android:id="@+id/textview_D"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="4dp"
-            android:text="@string/option_D" />
+                <com.kcb.library.view.checkbox.CheckBox
+                    android:id="@+id/checkBox_B"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_gravity="top"
+                    android:background="@color/blue" />
+            </LinearLayout>
 
-        <EditText
-            android:id="@+id/edittext_D"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="4dp"
-            android:layout_weight="1"
-            android:background="@drawable/stu_checkin_textview"
-            android:inputType="none"
-            android:padding="4dp" />
+            <LinearLayout
+                android:id="@+id/layout_C"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/layout_B"
+                android:layout_marginBottom="4dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="4dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
 
-        <com.kcb.library.view.checkbox.CheckBox
-            android:id="@+id/checkBox_D"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:background="@color/blue" />
-    </LinearLayout>
+                <TextView
+                    android:id="@+id/textview_C"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:layout_marginRight="4dp"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/option_C"
+                    android:textColor="@color/black_700"
+                    android:textSize="@dimen/text_size_medium" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@id/layout_D"
-        android:layout_marginBottom="16dp"
-        android:layout_marginRight="16dp"
-        android:text="@string/select_hint" />
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="4dp"
+                    android:layout_weight="1" >
+
+                    <EditText
+                        android:id="@+id/edittext_C"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/stu_checkin_textview"
+                        android:inputType="none"
+                        android:padding="8dp"
+                        android:textColor="@color/black_700"
+                        android:textSize="@dimen/text_size_medium" />
+
+                    <ImageView
+                        android:id="@+id/imageview_delete_c"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:padding="4dp"
+                        android:src="@drawable/ic_cancel_black_24dp"
+                        android:visibility="invisible" />
+                </RelativeLayout>
+
+                <com.kcb.library.view.checkbox.CheckBox
+                    android:id="@+id/checkBox_C"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_gravity="top"
+                    android:background="@color/blue" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_D"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/layout_C"
+                android:layout_marginBottom="4dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="4dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/textview_D"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:layout_marginRight="4dp"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/option_D"
+                    android:textColor="@color/black_700"
+                    android:textSize="@dimen/text_size_medium" />
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="4dp"
+                    android:layout_weight="1" >
+
+                    <EditText
+                        android:id="@+id/edittext_D"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/stu_checkin_textview"
+                        android:inputType="none"
+                        android:padding="8dp"
+                        android:textColor="@color/black_700"
+                        android:textSize="@dimen/text_size_medium" />
+
+                    <ImageView
+                        android:id="@+id/imageview_delete_d"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:padding="4dp"
+                        android:src="@drawable/ic_cancel_black_24dp"
+                        android:visibility="invisible" />
+                </RelativeLayout>
+
+                <com.kcb.library.view.checkbox.CheckBox
+                    android:id="@+id/checkBox_D"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_gravity="top"
+                    android:background="@color/blue" />
+            </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>
 
     <LinearLayout
         android:id="@+id/layout_buttons"
@@ -263,6 +368,7 @@
     </LinearLayout>
 
     <View
+        android:id="@+id/view_divider"
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:layout_above="@id/layout_buttons"

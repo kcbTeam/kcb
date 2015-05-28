@@ -53,16 +53,16 @@ public class CheckBox extends CustomView {
             if (background != -1) setBackgroundColor(background);
         }
 
-//        final boolean check = attrs.getAttributeBooleanValue(MATERIALDESIGNXML, "check", false);
-//        post(new Runnable() {
-//
-//            @Override
-//            public void run() {
-//                setChecked(check);
-//                setPressed(false);
-//                changeBackgroundColor(getResources().getColor(android.R.color.transparent));
-//            }
-//        });
+        // final boolean check = attrs.getAttributeBooleanValue(MATERIALDESIGNXML, "check", false);
+        // post(new Runnable() {
+        //
+        // @Override
+        // public void run() {
+        // setChecked(check);
+        // setPressed(false);
+        // changeBackgroundColor(getResources().getColor(android.R.color.transparent));
+        // }
+        // });
 
         checkView = new Check(getContext());
         RelativeLayout.LayoutParams params =

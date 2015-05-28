@@ -200,32 +200,35 @@ public class TestActivity extends BaseFragmentActivity {
 
     public void getCheckBoxsAnswer(int position) {
         boolean[] mCorrectId = new boolean[] {false, false, false, false};
-        mCorrectId[0] = checkboxA.isCheck();
-        mCorrectId[1] = checkboxB.isCheck();
-        mCorrectId[2] = checkboxC.isCheck();
-        mCorrectId[3] = checkboxD.isCheck();
-        mListQuestion.get(position).setCorrectId(mCorrectId);
+        // wanghang TODO
+        // mCorrectId[0] = checkboxA.isCheck();
+        // mCorrectId[1] = checkboxB.isCheck();
+        // mCorrectId[2] = checkboxC.isCheck();
+        // mCorrectId[3] = checkboxD.isCheck();
+        // mListQuestion.get(position).setCorrectId(mCorrectId);
     }
 
     public void setCheckBoxsAnswer(int position) {
         boolean[] mCorrectId;
-        mCorrectId = mListQuestion.get(position).getCorrectId();
-        checkboxA.setChecked(mCorrectId[0]);
-        checkboxB.setChecked(mCorrectId[1]);
-        checkboxC.setChecked(mCorrectId[2]);
-        checkboxD.setChecked(mCorrectId[3]);
+        // wanghang TODO
+        // mCorrectId = mListQuestion.get(position).getCorrectId();
+        // checkboxA.setChecked(mCorrectId[0]);
+        // checkboxB.setChecked(mCorrectId[1]);
+        // checkboxC.setChecked(mCorrectId[2]);
+        // checkboxD.setChecked(mCorrectId[3]);
     }
 
     public int collectAnsweredNum() {
         int AnsweredNum = 0;
         for (int i = 0; i < mListQuestion.size(); i++) {
-            boolean[] bleans = mListQuestion.get(i).getCorrectId();
-            for (int j = 0; j < bleans.length; j++) {
-                if (bleans[j]) {
-                    AnsweredNum++;
-                    break;
-                }
-            }
+            // wanghang TODO
+            // boolean[] bleans = mListQuestion.get(i).getCorrectId();
+            // for (int j = 0; j < bleans.length; j++) {
+            // if (bleans[j]) {
+            // AnsweredNum++;
+            // break;
+            // }
+            // }
         }
         return AnsweredNum;
     }
