@@ -125,32 +125,27 @@ public class CheckTestDetailsActivity extends BaseActivity {
         optionCrate.setText("5%");
         optionDrate.setText("9%");
 
-        setOptionTitle(temp.getCorrectId());
+        setOptionTitle(temp);
 
     }
 
-    private void setOptionTitle(boolean[] correctId) {
-        if (correctId.length != 4) {
-            return;
-        }
+    private void setOptionTitle(Question question) {
         Resources res = getResources();
-        if (correctId[0]) {
+        if (question.getChoiceA().getIsRight()) {
             optionAtitle.setTextColor(res.getColor(R.color.red));
             optionAtitle.setTextSize(22f);
         }
-        if (correctId[1]) {
+        if (question.getChoiceB().getIsRight()) {
             optionBtitle.setTextColor(res.getColor(R.color.red));
             optionBtitle.setTextSize(22f);
         }
-        if (correctId[2]) {
+        if (question.getChoiceC().getIsRight()) {
             optionCtitle.setTextColor(res.getColor(R.color.red));
             optionCtitle.setTextSize(22f);
         }
-        if (correctId[3]) {
+        if (question.getChoiceD().getIsRight()) {
             optionDtitle.setTextColor(res.getColor(R.color.red));
             optionDtitle.setTextSize(22f);
         }
-
     }
-
 }

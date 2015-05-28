@@ -13,21 +13,24 @@ public class Question implements Serializable {
 
     private static final long serialVersionUID = 2L;
 
+    private String mId; // from client
+
     private QuestionItem mTitleItem;
     private QuestionItem mChoiceAItem;
     private QuestionItem mChoiceBItem;
     private QuestionItem mChoiceCItem;
     private QuestionItem mChoiceDItem;
 
-    private boolean[] mAnswers;
-
     public Question() {
         mTitleItem = new QuestionItem();
         mChoiceAItem = new QuestionItem();
+        mChoiceAItem.setId("1");
         mChoiceBItem = new QuestionItem();
+        mChoiceBItem.setId("2");
         mChoiceCItem = new QuestionItem();
+        mChoiceCItem.setId("3");
         mChoiceDItem = new QuestionItem();
-        mAnswers = new boolean[] {false, false, false, false};
+        mChoiceDItem.setId("4");
     }
 
     public static Question clone(Question object) {
@@ -37,10 +40,15 @@ public class Question implements Serializable {
         QuestionItem.copy(object.mChoiceBItem, question.mChoiceBItem);
         QuestionItem.copy(object.mChoiceCItem, question.mChoiceCItem);
         QuestionItem.copy(object.mChoiceDItem, question.mChoiceDItem);
-        for (int i = 0; i < 4; i++) {
-            question.mAnswers[i] = object.mAnswers[i];
-        }
         return question;
+    }
+
+    public void setId(String id) {
+        mId = id;
+    }
+
+    public String getId() {
+        return mId;
     }
 
     public QuestionItem getTitle() {
@@ -63,27 +71,12 @@ public class Question implements Serializable {
         return mChoiceDItem;
     }
 
-    public boolean[] getCorrectId() {
-        return mAnswers;
-    }
-
-    public void setCorrectId(boolean[] mCorrectOption) {
-        mAnswers = mCorrectOption;
-    }
-
     public boolean equal(Question questionObj) {
-        if (mAnswers[0] == questionObj.getCorrectId()[0]
-                && mAnswers[1] == questionObj.getCorrectId()[1]
-                && mAnswers[2] == questionObj.getCorrectId()[2]
-                && mAnswers[3] == questionObj.getCorrectId()[3]
-                && mTitleItem.equals(questionObj.getTitle())
+        return mTitleItem.equals(questionObj.getTitle())
                 && mChoiceAItem.equals(questionObj.getChoiceA())
                 && mChoiceBItem.equals(questionObj.getChoiceB())
                 && mChoiceCItem.equals(questionObj.getChoiceC())
-                && mChoiceDItem.equals(questionObj.getChoiceD())) {
-            return true;
-        }
-        return false;
+                && mChoiceDItem.equals(questionObj.getChoiceD());
     }
 
     public String contentString() {
@@ -99,31 +92,8 @@ public class Question implements Serializable {
     }
 
     public boolean isCompleted() {
-        if (!mTitleItem.isEmpty() && !mChoiceAItem.isEmpty() && !mChoiceBItem.isEmpty()
-                && !mChoiceCItem.isEmpty() && !mChoiceDItem.isEmpty()) {
-            if (mAnswers[0] == true || mAnswers[1] == true || mAnswers[2] == true
-                    || mAnswers[3] == true) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public String getCorrectOptionString() {
-        String tempString = "答案：";
-        if (mAnswers[0]) {
-            tempString += "A、";
-        }
-        if (mAnswers[1]) {
-            tempString += "B、";
-        }
-        if (mAnswers[2]) {
-            tempString += "C、";
-        }
-        if (mAnswers[3]) {
-            tempString += "D、";
-        }
-        return tempString.substring(0, tempString.length() - 1);
+        return !mTitleItem.isEmpty() && !mChoiceAItem.isEmpty() && !mChoiceBItem.isEmpty()
+                && !mChoiceCItem.isEmpty() && !mChoiceDItem.isEmpty();
     }
 
     public void changeQuestionToSerializable() {

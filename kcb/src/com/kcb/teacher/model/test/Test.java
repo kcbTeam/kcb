@@ -9,6 +9,7 @@ public class Test implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    private String mId; // from server
     private String mName; // test name
     private int mTime; // minute
     private List<Question> mQuestions;
@@ -21,6 +22,14 @@ public class Test implements Serializable {
         for (int i = 0; i < num; i++) {
             mQuestions.add(new Question());
         }
+    }
+
+    public void setId(String id) {
+        mId = id;
+    }
+
+    public String getId() {
+        return mId;
     }
 
     public String getName() {

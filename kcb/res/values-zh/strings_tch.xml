@@ -17,7 +17,7 @@
     <string name="tipyes">是的，请这样做。</string>
     <string name="tipno">不，谢谢。</string>
     <string name="classtest">课堂小测试</string>
-    <string name="edit">编辑测试内容</string>
+    <string name="edit">添加 / 编辑测试内容</string>
     <string name="starttest">开始测试</string>
     <!-- test activty end -->
 
@@ -73,13 +73,13 @@
     <string name="edittest">编辑测试内容</string>
     <string name="last_item">上一题</string>
     <string name="next_item">下一题</string>
-    <string name="problem_hint">请输入题目</string>
-    <string name="options_hint">请输入选项</string>
+    <string name="problem_hint">输入题目</string>
+    <string name="options_hint">输入选项，并勾出正确项</string>
     <string name="format_question_num">第%1$d题/共%2$d题</string>
-    <string name="option_A">A.</string>
-    <string name="option_B">B.</string>
-    <string name="option_C">C.</string>
-    <string name="option_D">D.</string>
+    <string name="option_A">A</string>
+    <string name="option_B">B</string>
+    <string name="option_C">C</string>
+    <string name="option_D">D</string>
     <string name="select_hint">在正确的选项后面打钩</string>
     <string name="leave">离开</string>
     <string name="sureLeave">确认放弃此次编辑吗？</string>
@@ -97,8 +97,8 @@
     <string name="add_msg">确定添加第 %1$d 题？</string>
     <string name="rebackground">重拍背景</string>
     <string name="deletebackground">删除背景</string>
-    <string name="edit_title_hint">直接输入文字，或者长按拍照</string>
-    <string name="empty_hint">不能有空哦^^</string>
+    <string name="edit_title_hint">输入文字，或者长按拍照</string>
+    <string name="empty_hint">不能有空</string>
     <!-- EditTestActivity End -->
 
 
@@ -123,10 +123,12 @@
     <string name="testtimeFormat">%1$d分钟</string>
     <!-- Submit Activity End -->
 
-	<!-- Modify Question Activity Start-->
-	<string name="modify_saved">修改已保存</string>
-	<!-- Modify Question Activity End -->
-	
+
+    <!-- Modify Question Activity Start -->
+    <string name="modify_saved">修改已保存</string>
+    <!-- Modify Question Activity End -->
+
+
     <!-- Check Test Activity Start -->
     <string name="checktest">查看测试</string>
     <string name="hint_checktest_search">搜索测试名称</string>

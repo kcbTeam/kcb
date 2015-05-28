@@ -3,6 +3,7 @@ package com.kcb.teacher.activity;
 import java.util.Date;
 import java.util.List;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -80,7 +81,7 @@ public class SubmitTestActivity extends BaseActivity implements OnItemClickListe
 
     @Override
     protected void initData() {
-        mCurrentTest = (Test) getIntent().getSerializableExtra(EditTestActivity.COURSE_TEST_KEY);
+        mCurrentTest = (Test) getIntent().getSerializableExtra(DATA_TEST);
         mList = mCurrentTest.getQuestions();
     }
 
@@ -131,6 +132,11 @@ public class SubmitTestActivity extends BaseActivity implements OnItemClickListe
                 sureListener, R.string.cancel, null);
     }
 
+    private static final String DATA_TEST = "current_course_key";
 
-
+    public static void start(Context context, Test test) {
+        Intent intent = new Intent(context, SubmitTestActivity.class);
+        intent.putExtra(DATA_TEST, test);
+        context.startActivity(intent);
+    }
 }
