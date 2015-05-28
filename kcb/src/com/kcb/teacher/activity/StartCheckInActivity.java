@@ -147,6 +147,8 @@ public class StartCheckInActivity extends BaseActivity {
                 }
                 if (msg.what == MESSAGE_SHOW_NUM4) {
                     signnum4TextView.setText(String.valueOf(mNum % 10));
+                    startLayout.setVisibility(View.VISIBLE);
+                    AnimationUtil.fadeIn(startLayout);
                 }
             };
         };
@@ -161,12 +163,14 @@ public class StartCheckInActivity extends BaseActivity {
                     case MESSAGE_TIME_FINISH:
                         hasFinished = true;
                         startTipTextView.setText("两分钟已到");
+                        finishLayout.setVisibility(View.VISIBLE);
                         AnimationUtil.fadeIn(finishLayout);
                         break;
                     case MESSAGE_TIME_STOP:
                         hasFinished = true;
                         startStopProgressBar.setVisibility(View.INVISIBLE);
                         startTipTextView.setText("已经停止");
+                        finishLayout.setVisibility(View.VISIBLE);
                         AnimationUtil.fadeIn(finishLayout);
                         break;
                 }
@@ -242,8 +246,6 @@ public class StartCheckInActivity extends BaseActivity {
         Message message4 = mShowNumHandler.obtainMessage();
         message4.what = MESSAGE_SHOW_NUM4;
         mShowNumHandler.sendMessageDelayed(message4, 600);
-
-        AnimationUtil.fadeIn(startLayout);
     }
 
     private void start() {

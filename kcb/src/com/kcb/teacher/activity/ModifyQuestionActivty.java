@@ -127,7 +127,8 @@ public class ModifyQuestionActivty extends BaseActivity implements OnLongClickLi
     @Override
     protected void initData() {
         mQuestion =
-                (Question) getIntent().getSerializableExtra(SetTestTimeActivity.MODIFY_QUESTION_KEY);
+                (Question) getIntent()
+                        .getSerializableExtra(SetTestTimeActivity.MODIFY_QUESTION_KEY);
         mTempQustion = Question.clone(mQuestion);
 
         testName = getIntent().getStringExtra("TEST_NAME");
