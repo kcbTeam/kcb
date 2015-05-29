@@ -7,31 +7,44 @@
     android:background="@color/activity_background"
     tools:ignore="contentDescription" >
 
-    <TextView
-        android:id="@+id/textview_title"
+    <LinearLayout
+        android:id="@+id/layout_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/activity_header_shadow"
-        android:gravity="center_vertical"
-        android:paddingLeft="16dp"
-        android:textColor="@color/black"
-        android:textSize="@dimen/text_size_large" />
+        android:orientation="horizontal" >
 
-    <TextView
-        android:id="@+id/textview_question_num"
-        android:layout_width="wrap_content"
-        android:layout_height="56dp"
-        android:layout_alignParentRight="true"
-        android:gravity="center"
-        android:paddingRight="16dp"
-        android:textColor="@color/black_700"
-        android:textSize="@dimen/text_size_small" />
+        <include layout="@layout/comm_back_button" />
+
+        <TextView
+            android:id="@+id/textview_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:text="@string/cut_title"
+            android:textSize="@dimen/text_size_large" />
+
+        <com.kcb.library.view.buttonflat.ButtonFlat
+            android:id="@+id/button_delete"
+            android:layout_width="@dimen/top_icon_button_width"
+            android:layout_height="@dimen/top_icon_button_height"
+            widget:clickAfterRipple="false"
+            widget:rippleSpeed="6" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@drawable/ic_delete_black_24dp" />
+        </com.kcb.library.view.buttonflat.ButtonFlat>
+    </LinearLayout>
 
     <TextView
         android:id="@+id/textview_input_problem_tip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textview_title"
+        android:layout_below="@id/layout_title"
         android:layout_marginBottom="8dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
@@ -79,7 +92,7 @@
         android:id="@+id/scroll_choices"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/view_divider"
+        android:layout_above="@+id/button_finish"
         android:layout_below="@id/input_options_hint" >
 
         <RelativeLayout
@@ -231,55 +244,14 @@
         </RelativeLayout>
     </ScrollView>
 
-    <LinearLayout
-        android:id="@+id/layout_buttons"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
+    <com.kcb.library.view.PaperButton
+        android:id="@+id/button_finish"
+        style="@style/common_paper_button"
         android:layout_alignParentBottom="true"
-        android:orientation="horizontal" >
-
-        <com.kcb.library.view.buttonflat.ButtonFlat
-            android:id="@+id/button_last"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="上一题"
-            widget:clickAfterRipple="false"
-            widget:rippleSpeed="18" />
-
-        <com.kcb.library.view.buttonflat.ButtonFlat
-            android:id="@+id/button_next"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="下一题"
-            widget:clickAfterRipple="false"
-            widget:rippleSpeed="18" />
-
-        <com.kcb.library.view.buttonflat.ButtonFlat
-            android:id="@+id/button_add"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="增加一题"
-            widget:clickAfterRipple="false"
-            widget:rippleSpeed="18" />
-
-        <com.kcb.library.view.buttonflat.ButtonFlat
-            android:id="@+id/button_delete"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="删除本题"
-            widget:clickAfterRipple="false"
-            widget:rippleSpeed="18" />
-    </LinearLayout>
-
-    <View
-        android:id="@+id/view_divider"
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_above="@id/layout_buttons"
-        android:background="@color/divider" />
+        android:layout_marginBottom="4dp"
+        android:layout_marginTop="4dp"
+        widget:paper_text="完成"
+        widget:paper_text_color="@color/black_700"
+        widget:paper_text_size="@dimen/text_size_medium" />
 
 </RelativeLayout>

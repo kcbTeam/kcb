@@ -80,8 +80,6 @@
 
 
     <!-- **************************************** Teacher module End **************************************** -->
-
-
     <!-- StartCheckIn start -->
     <style name="tch_checkin_num">
         <item name="android:textSize">@dimen/text_size_large</item>
@@ -92,16 +90,86 @@
         <item name="android:gravity">center</item>
         <item name="android:background">@drawable/stu_checkin_textview</item>
     </style>
-
     <!-- StartCheckIn end -->
-    <!-- **************************************** Teacher module End **************************************** -->
 
-    <style name="edittest_edittext_problem">
-        <item name="android:inputType">text</item>
+
+    <!-- EditTest start -->
+    <style name="tch_test_choice_layout">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:maxLines">10</item>
-        <item name="android:lines">10</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:orientation">horizontal</item>
     </style>
+
+    <style name="tch_test_choice_tip">
+        <item name="android:layout_gravity">top</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingRight">4dp</item>
+        <item name="android:paddingTop">4dp</item>
+        <item name="android:textColor">@color/black_700</item>
+        <item name="android:textSize">@dimen/text_size_medium</item>
+    </style>
+
+    <style name="tch_test_input_choice">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:textColor">@color/black_700</item>
+        <item name="android:textSize">@dimen/text_size_medium</item>
+        <item name="android:background">@drawable/stu_checkin_textview</item>
+    </style>
+
+    <style name="tch_test_checkbox">
+        <item name="android:layout_width">32dp</item>
+        <item name="android:layout_height">32dp</item>
+        <item name="android:layout_gravity">top</item>
+        <item name="android:background">@color/blue</item>
+    </style>
+
+    <style name="tch_test_delete_bitmap">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">4dp</item>
+        <item name="android:src">@drawable/ic_cancel_grey600_24dp</item>
+        <item name="android:visibility">invisible</item>
+    </style>
+    <!-- EditTest end -->
+
+
+    <!-- SetTestTime start -->
+    <style name="tch_test_settime_checkicon">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">top</item>
+    </style>
+
+    <style name="tch_test_settime_choice_layout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="tch_test_settime_choice_tip">
+        <item name="android:layout_gravity">top</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingRight">4dp</item>
+        <item name="android:paddingTop">4dp</item>
+        <item name="android:textColor">@color/black_700</item>
+        <item name="android:textSize">@dimen/text_size_medium</item>
+    </style>
+
+    <style name="tch_test_settime_choice">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:padding">4dp</item>
+        <item name="android:textColor">@color/black_700</item>
+        <item name="android:textSize">@dimen/text_size_medium</item>
+    </style>
+    <!-- SetTestTime end -->
+    <!-- **************************************** Teacher module End **************************************** -->
 
 </resources>
