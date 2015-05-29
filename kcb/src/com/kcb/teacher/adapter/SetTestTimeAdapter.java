@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
@@ -23,12 +24,18 @@ import com.kcbTeam.R;
  */
 public class SetTestTimeAdapter extends BaseAdapter {
 
+    public interface EditQuestionListener {
+        void onEdit(int index, Question question);
+    }
+
     private Context mContext;
     private Test mTest;
+    private EditQuestionListener mListener;
 
-    public SetTestTimeAdapter(Context context, Test test) {
+    public SetTestTimeAdapter(Context context, Test test, EditQuestionListener listener) {
         mContext = context;
         mTest = test;
+        mListener = listener;
     }
 
     @Override
@@ -46,9 +53,13 @@ public class SetTestTimeAdapter extends BaseAdapter {
         return position;
     }
 
+    public void setQuestion(int index, Question question) {
+        mTest.updateQuestion(index, question);
+    }
+
     @SuppressLint("ViewHolder")
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
         if (convertView == null) {
             convertView = View.inflate(mContext, R.layout.tch_listitem_settesttime, null);
@@ -57,7 +68,13 @@ public class SetTestTimeAdapter extends BaseAdapter {
                     (TextView) convertView.findViewById(R.id.textview_questionindex);
             viewHolder.titleTextView = (TextView) convertView.findViewById(R.id.textview_title);
             viewHolder.editImageView = (ImageView) convertView.findViewById(R.id.imageview_edit);
-            viewHolder.editImageView.setOnClickListener();
+            viewHolder.editImageView.setOnClickListener(new OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    mListener.onEdit(position, getItem(position));
+                }
+            });
             viewHolder.aTextView = (TextView) convertView.findViewById(R.id.textview_A);
             viewHolder.aCheckBox = (ImageView) convertView.findViewById(R.id.checkBox_A);
             viewHolder.bTextView = (TextView) convertView.findViewById(R.id.textview_B);

@@ -68,6 +68,10 @@ public class Test implements Serializable {
         mQuestions.remove(index);
     }
 
+    public void updateQuestion(int index, Question question) {
+        mQuestions.set(index, question);
+    }
+
     public int getQuestionNum() {
         return mQuestions.size();
     }

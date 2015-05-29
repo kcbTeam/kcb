@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -14,12 +16,14 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.provider.MediaStore.Images.Media;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.kcb.common.base.BaseActivity;
+import com.kcb.common.util.DialogUtil;
 import com.kcb.common.util.ToastUtil;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.library.view.checkbox.CheckBox;
@@ -34,14 +38,9 @@ import com.kcbTeam.R;
  * @author: ZQJ
  * @date: 2015年5月27日 下午8:24:10
  */
-public class ModifyQuestionActivty extends BaseActivity implements OnLongClickListener {
-    @SuppressWarnings("unused")
-    private static final String TAG = "ModifyQuestionActivty";
+public class EditQuestionActivty extends BaseActivity implements OnLongClickListener {
 
-    private TextView questionNumHint;
-    private TextView titleTextView;
-    private ButtonFlat cancelButton;
-    private ButtonFlat saveButton;
+    private TextView testNameTextView;
 
     private EditText titleEditText;
     private ImageView deleteTitleImageView;
@@ -54,56 +53,48 @@ public class ModifyQuestionActivty extends BaseActivity implements OnLongClickLi
     private EditText dEditText;
     private ImageView deleteDImageView;
 
-
     private CheckBox checkBoxA;
     private CheckBox checkBoxB;
     private CheckBox checkBoxC;
     private CheckBox checkBoxD;
 
-    private Question mTempQustion;
-    private Question mQuestion;
+    private ButtonFlat deleteButton;
 
-    private String testName;
-    private int questionId;
-
-    private final String NumHint = "第%1$d题";
-
-    // user want to change what, question title or choice;
+    // tag title/A/B/C/D;
     private final int FLAG_TITLE = 1;
     private final int FLAG_A = 2;
-    private final int FLAG_B = 3;
+    private final int FALG_B = 3;
     private final int FLAG_C = 4;
     private final int FLAG_D = 5;
-    private int mClickTag = FLAG_TITLE; // long click
 
-    private String path;
+    // test and current question index;
+    private Question mQuestion;
+    private int mIndex;
+
+    // long click to take photo;
+    private int mLongClickTag = FLAG_TITLE;
+
+    // save temp camera photo;
+    private String mBitmapPath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.tch_activity_modify_question);
-        initData();
+        setContentView(R.layout.tch_activity_editquestion);
+
         initView();
+        initData();
     }
 
     @Override
     protected void initView() {
+        testNameTextView = (TextView) findViewById(R.id.textview_title);
 
-        questionNumHint = (TextView) findViewById(R.id.textview_question_num);
-        questionNumHint.setText(String.format(NumHint, 1 + questionId));
-
-        titleTextView = (TextView) findViewById(R.id.textview_title);
-        titleTextView.setText("测试：" + testName);
-
-        cancelButton = (ButtonFlat) findViewById(R.id.button_cancel);
-        cancelButton.setOnClickListener(this);
-
-        saveButton = (ButtonFlat) findViewById(R.id.button_save);
-        saveButton.setOnClickListener(this);
+        deleteButton = (ButtonFlat) findViewById(R.id.button_delete);
+        deleteButton.setOnClickListener(this);
 
         titleEditText = (EditText) findViewById(R.id.edittext_question_title);
         titleEditText.setOnLongClickListener(this);
-
         deleteTitleImageView = (ImageView) findViewById(R.id.imageview_delete_title);
         deleteTitleImageView.setOnClickListener(this);
 
@@ -131,70 +122,252 @@ public class ModifyQuestionActivty extends BaseActivity implements OnLongClickLi
         checkBoxB = (CheckBox) findViewById(R.id.checkBox_B);
         checkBoxC = (CheckBox) findViewById(R.id.checkBox_C);
         checkBoxD = (CheckBox) findViewById(R.id.checkBox_D);
-
-        showQuestion();
     }
-
 
     @Override
     protected void initData() {
-        mQuestion =
-                (Question) getIntent()
-                        .getSerializableExtra(SetTestTimeActivity.MODIFY_QUESTION_KEY);
-        mTempQustion = Question.clone(mQuestion);
-
-        testName = getIntent().getStringExtra("TEST_NAME");
-        questionId = getIntent().getIntExtra("QUETION_ID", 0);
+        Intent intent = getIntent();
+        mQuestion = (Question) intent.getSerializableExtra(DATA_QUESTION);
+        mIndex = intent.getIntExtra(DATA_INDEX, 0);
+        testNameTextView.setText("第" + (mIndex + 1) + "题");
+        showQuestion();
     }
 
-    public static final int MODIFY_CACELED = 100;
-    public static final int MODIFY_SAVED = 200;
-
+    /**
+     * 
+     * @title: onClick
+     * @description: buttons and edittexts click listener
+     * @author: ZQJ
+     * @date: 2015年5月19日 下午9:19:20
+     * @param v
+     * 
+     */
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent();
         switch (v.getId()) {
             case R.id.imageview_delete_title:
-                deleteTitleImageView.setVisibility(View.INVISIBLE);
-                mQuestion.getTitle().setText("");
-                titleEditText.setClickable(true);
-                titleEditText.setFocusable(true);
-                titleEditText.setHint(R.string.edit_title_hint);
-                showQuestion();
+                setEditMode(FLAG_TITLE, EDIT_MODE_TEXT);
+                getCurrentQuestion().getTitle().setText("");
                 break;
             case R.id.imageview_delete_a:
                 setEditMode(FLAG_A, EDIT_MODE_TEXT);
-                mQuestion.getChoiceA().setText("");
+                getCurrentQuestion().getChoiceA().setText("");
                 break;
             case R.id.imageview_delete_b:
-                setEditMode(FLAG_B, EDIT_MODE_TEXT);
-                mQuestion.getChoiceB().setText("");
+                setEditMode(FALG_B, EDIT_MODE_TEXT);
+                getCurrentQuestion().getChoiceB().setText("");
                 break;
             case R.id.imageview_delete_c:
                 setEditMode(FLAG_C, EDIT_MODE_TEXT);
-                mQuestion.getChoiceC().setText("");
+                getCurrentQuestion().getChoiceC().setText("");
                 break;
             case R.id.imageview_delete_d:
                 setEditMode(FLAG_D, EDIT_MODE_TEXT);
-                mQuestion.getChoiceD().setText("");
+                getCurrentQuestion().getChoiceD().setText("");
                 break;
-            case R.id.button_cancel:
-                setResult(MODIFY_CACELED, intent);
-                finish();
-                break;
-            case R.id.button_save:
-                saveQuestion();
-                if (!mQuestion.isCompleted()) {
-                    ToastUtil.toast(R.string.empty_hint);
-                } else if (!mQuestion.equal(mTempQustion)) {
-                    mQuestion.changeQuestionToSerializable();
-                    intent.putExtra("MODIFIED", mQuestion);
-                    setResult(MODIFY_SAVED, intent);
-                    finish();
-                }
+            case R.id.button_delete:
+                deleteQuestion();
                 break;
             default:
                 break;
+        }
+    }
+
+    private void deleteQuestion() {
+        DialogUtil.showNormalDialog(this, R.string.dialog_title_delete, R.string.delete_msg,
+                R.string.sure, new OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {}
+                }, R.string.cancel, null);
+    }
+
+    /**
+     * 
+     * @title: onLongClick
+     * @description: edittexts long click listener
+     * @author: ZQJ
+     * @date: 2015年5月19日 下午9:19:49
+     * @param v
+     * @return
+     */
+    @Override
+    public boolean onLongClick(View v) {
+        switch (v.getId()) {
+            case R.id.edittext_question_title:
+                mLongClickTag = FLAG_TITLE;
+                break;
+            case R.id.edittext_A:
+                mLongClickTag = FLAG_A;
+                break;
+            case R.id.edittext_B:
+                mLongClickTag = FALG_B;
+                break;
+            case R.id.edittext_C:
+                mLongClickTag = FLAG_C;
+                break;
+            case R.id.edittext_D:
+                mLongClickTag = FLAG_D;
+                break;
+            default:
+                break;
+        }
+        takePhoto();
+        return true;
+    }
+
+    // take photo and cut photo
+    private final int REQUEST_TAKEPHOTO = 100;
+    private final int REQUEST_CUTPHOTO = 200;
+
+    private void takePhoto() {
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        mBitmapPath = Environment.getExternalStorageDirectory() + "/kcb/";
+        File file = new File(mBitmapPath);
+        if (!file.exists()) {
+            file.mkdirs();
+        }
+        file = new File(mBitmapPath + "temp.jpg");
+        Uri uri = Uri.fromFile(file);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+        if (intent.resolveActivity(getPackageManager()) == null) {
+            ToastUtil.toast("没有可以拍照的应用程序");
+            return;
+        }
+        startActivityForResult(intent, REQUEST_TAKEPHOTO);
+    }
+
+    @SuppressWarnings("deprecation")
+    @SuppressLint("NewApi")
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_TAKEPHOTO) {
+            if (resultCode != RESULT_CANCELED) {
+                File picture = new File(mBitmapPath + "temp.jpg");
+                try {
+                    Uri uri =
+                            Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(),
+                                    picture.getAbsolutePath(), null, null));
+                    Intent intent = new Intent(this, CropPictureActivity.class);
+                    intent.putExtra("PICTURE", uri);
+                    startActivityForResult(intent, REQUEST_CUTPHOTO);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        if (requestCode == REQUEST_CUTPHOTO) {
+            if (resultCode == RESULT_OK) {
+                Uri uri = (Uri) data.getParcelableExtra("CUTTED_PICTURE");
+                try {
+                    Bitmap bitmap = Media.getBitmap(getContentResolver(), uri);
+                    switch (mLongClickTag) {
+                        case FLAG_TITLE:
+                            setEditMode(FLAG_TITLE, EDIT_MODE_BITMAP);
+                            titleEditText.setBackground(new BitmapDrawable(bitmap));
+                            getCurrentQuestion().getTitle().setBitmap(bitmap);
+                            break;
+                        case FLAG_A:
+                            setEditMode(FLAG_A, EDIT_MODE_BITMAP);
+                            aEditText.setBackground(new BitmapDrawable(bitmap));
+                            getCurrentQuestion().getChoiceA().setBitmap(bitmap);
+                            break;
+                        case FALG_B:
+                            setEditMode(FALG_B, EDIT_MODE_BITMAP);
+                            bEditText.setBackground(new BitmapDrawable(bitmap));
+                            getCurrentQuestion().getChoiceB().setBitmap(bitmap);
+                            break;
+                        case FLAG_C:
+                            setEditMode(FLAG_C, EDIT_MODE_BITMAP);
+                            cEditText.setBackground(new BitmapDrawable(bitmap));
+                            getCurrentQuestion().getChoiceC().setBitmap(bitmap);
+                            break;
+                        case FLAG_D:
+                            setEditMode(FLAG_D, EDIT_MODE_BITMAP);
+                            dEditText.setBackground(new BitmapDrawable(bitmap));
+                            getCurrentQuestion().getChoiceD().setBitmap(bitmap);
+                            break;
+                        default:
+                            break;
+                    }
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    /**
+     * 
+     * @title: refreshInfo
+     * @description: refresh contents
+     * @author: ZQJ
+     * @date: 2015年5月19日 下午9:30:36
+     * @param question
+     */
+    private void showQuestion() {
+        Question question = getCurrentQuestion();
+
+        showQuestionItem(FLAG_TITLE, question.getTitle());
+        showQuestionItem(FLAG_A, question.getChoiceA());
+        showQuestionItem(FALG_B, question.getChoiceB());
+        showQuestionItem(FLAG_C, question.getChoiceC());
+        showQuestionItem(FLAG_D, question.getChoiceD());
+
+        checkBoxA.setChecked(question.getChoiceA().isRight());
+        checkBoxB.setChecked(question.getChoiceB().isRight());
+        checkBoxC.setChecked(question.getChoiceC().isRight());
+        checkBoxD.setChecked(question.getChoiceD().isRight());
+    }
+
+    private void saveQuestion() {
+        QuestionItem titleItem = getCurrentQuestion().getTitle();
+        QuestionItem aItem = getCurrentQuestion().getChoiceA();
+        QuestionItem bItem = getCurrentQuestion().getChoiceB();
+        QuestionItem cItem = getCurrentQuestion().getChoiceC();
+        QuestionItem dItem = getCurrentQuestion().getChoiceD();
+
+        String questionTitle = titleEditText.getText().toString().trim();
+        if (titleItem.isText()) {
+            titleItem.setText(questionTitle);
+        }
+        String choiceA = aEditText.getText().toString().trim();
+        if (aItem.isText()) {
+            aItem.setText(choiceA);
+        }
+        String choiceB = bEditText.getText().toString().trim();
+        if (bItem.isText()) {
+            bItem.setText(choiceB);
+        }
+        String choiceC = cEditText.getText().toString().trim();
+        if (cItem.isText()) {
+            cItem.setText(choiceC);
+        }
+        String choiceD = dEditText.getText().toString().trim();
+        if (dItem.isText()) {
+            dItem.setText(choiceD);
+        }
+        aItem.setIsRight(checkBoxA.isCheck());
+        bItem.setIsRight(checkBoxB.isCheck());
+        cItem.setIsRight(checkBoxC.isCheck());
+        dItem.setIsRight(checkBoxD.isCheck());
+    }
+
+    @SuppressWarnings("deprecation")
+    private void showQuestionItem(int flag, QuestionItem item) {
+        EditText editText = getEdittextByTag(flag);
+        if (item.isText()) {
+            setEditMode(flag, EDIT_MODE_TEXT);
+            editText.setText(item.getText());
+        } else {
+            Bitmap bitmap = item.getBitmap();
+            if (null != bitmap) {
+                setEditMode(flag, EDIT_MODE_BITMAP);
+                editText.setBackgroundDrawable(new BitmapDrawable(bitmap));
+            }
         }
     }
 
@@ -222,30 +395,6 @@ public class ModifyQuestionActivty extends BaseActivity implements OnLongClickLi
         }
     }
 
-    private ImageView getDeleteIconByTag(int flag) {
-        ImageView deleteIcon = null;
-        switch (flag) {
-            case FLAG_TITLE:
-                deleteIcon = deleteTitleImageView;
-                break;
-            case FLAG_A:
-                deleteIcon = deleteAImageView;
-                break;
-            case FLAG_B:
-                deleteIcon = deleteBImageView;
-                break;
-            case FLAG_C:
-                deleteIcon = deleteCImageView;
-                break;
-            case FLAG_D:
-                deleteIcon = deleteDImageView;
-                break;
-            default:
-                break;
-        }
-        return deleteIcon;
-    }
-
     private EditText getEdittextByTag(int flag) {
         EditText editText = null;
         switch (flag) {
@@ -255,7 +404,7 @@ public class ModifyQuestionActivty extends BaseActivity implements OnLongClickLi
             case FLAG_A:
                 editText = aEditText;
                 break;
-            case FLAG_B:
+            case FALG_B:
                 editText = bEditText;
                 break;
             case FLAG_C:
@@ -270,175 +419,65 @@ public class ModifyQuestionActivty extends BaseActivity implements OnLongClickLi
         return editText;
     }
 
-    @Override
-    public boolean onLongClick(View v) {
-        switch (v.getId()) {
-            case R.id.edittext_question_title:
-                mClickTag = FLAG_TITLE;
+    private ImageView getDeleteIconByTag(int flag) {
+        ImageView deleteIcon = null;
+        switch (flag) {
+            case FLAG_TITLE:
+                deleteIcon = deleteTitleImageView;
                 break;
-            case R.id.edittext_A:
-                mClickTag = FLAG_A;
+            case FLAG_A:
+                deleteIcon = deleteAImageView;
                 break;
-            case R.id.edittext_B:
-                mClickTag = FLAG_B;
+            case FALG_B:
+                deleteIcon = deleteBImageView;
                 break;
-            case R.id.edittext_C:
-                mClickTag = FLAG_C;
+            case FLAG_C:
+                deleteIcon = deleteCImageView;
                 break;
-            case R.id.edittext_D:
-                mClickTag = FLAG_D;
+            case FLAG_D:
+                deleteIcon = deleteDImageView;
                 break;
             default:
                 break;
         }
-        takePhoto();
-        return true;
+        return deleteIcon;
     }
 
-    // take photo and cut photo
-    private final int REQUEST_TAKEPHOTO = 100;
-    private final int REQUEST_CUTPHOTO = 200;
-
-    private void takePhoto() {
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        path = Environment.getExternalStorageDirectory() + "/kcb/";
-        File file = new File(path);
-        if (!file.exists()) {
-            file.mkdirs();
-        }
-        file = new File(path + "temp.jpg");
-        Uri uri = Uri.fromFile(file);
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
-        if (intent.resolveActivity(getPackageManager()) == null) {
-            ToastUtil.toast("没有可以拍照的应用程序");
-            return;
-        }
-        startActivityForResult(intent, REQUEST_TAKEPHOTO);
+    private Question getCurrentQuestion() {
+        return mQuestion;
     }
 
-    @SuppressWarnings("deprecation")
-    @SuppressLint("NewApi")
+    /**
+     * 
+     * @title: onBackPressed
+     * @description: backpressed response
+     * @author: ZQJ
+     * @date: 2015年5月19日 下午9:21:02
+     */
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_TAKEPHOTO) {
-            if (resultCode != RESULT_CANCELED) {
-                File picture = new File(path + "temp.jpg");
-                try {
-                    Uri uri =
-                            Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(),
-                                    picture.getAbsolutePath(), null, null));
-                    Intent intent = new Intent(this, CropPictureActivity.class);
-                    intent.putExtra("PICTURE", uri);
-                    startActivityForResult(intent, REQUEST_CUTPHOTO);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+    public void onBackPressed() {
+        OnClickListener sureListener = new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                finish();
             }
-        }
-        if (requestCode == REQUEST_CUTPHOTO) {
-            if (resultCode == RESULT_OK) {
-                Uri uri = (Uri) data.getParcelableExtra("CUTTED_PICTURE");
-                try {
-                    Bitmap bitmap = Media.getBitmap(getContentResolver(), uri);
-                    switch (mClickTag) {
-                        case FLAG_TITLE:
-                            setEditMode(FLAG_TITLE, EDIT_MODE_BITMAP);
-                            titleEditText.setBackground(new BitmapDrawable(bitmap));
-                            mQuestion.getTitle().setBitmap(bitmap);
-                            break;
-                        case FLAG_A:
-                            setEditMode(FLAG_A, EDIT_MODE_BITMAP);
-                            aEditText.setBackground(new BitmapDrawable(bitmap));
-                            mQuestion.getChoiceA().setBitmap(bitmap);
-                            break;
-                        case FLAG_B:
-                            setEditMode(FLAG_B, EDIT_MODE_BITMAP);
-                            bEditText.setBackground(new BitmapDrawable(bitmap));
-                            mQuestion.getChoiceB().setBitmap(bitmap);
-                            break;
-                        case FLAG_C:
-                            setEditMode(FLAG_C, EDIT_MODE_BITMAP);
-                            cEditText.setBackground(new BitmapDrawable(bitmap));
-                            mQuestion.getChoiceC().setBitmap(bitmap);
-                            break;
-                        case FLAG_D:
-                            setEditMode(FLAG_D, EDIT_MODE_BITMAP);
-                            dEditText.setBackground(new BitmapDrawable(bitmap));
-                            mQuestion.getChoiceD().setBitmap(bitmap);
-                            break;
-                        default:
-                            break;
-                    }
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
+        };
+        DialogUtil.showNormalDialog(this, R.string.leave, R.string.sureLeave, R.string.sure,
+                sureListener, R.string.cancel, null);
     }
 
-    private void showQuestion() {
-        Question question = mQuestion;
+    private static final String ACTION_EDIT_QUESTION = "action_editQuestion";
+    private static final String DATA_INDEX = "data_index";
+    private static final String DATA_QUESTION = "data_question";
 
-        showQuestionItem(FLAG_TITLE, question.getTitle());
-        showQuestionItem(FLAG_A, question.getChoiceA());
-        showQuestionItem(FLAG_B, question.getChoiceB());
-        showQuestionItem(FLAG_C, question.getChoiceC());
-        showQuestionItem(FLAG_D, question.getChoiceD());
+    public static final int REQUEST_CODE_EDIT = 0;
 
-        checkBoxA.setChecked(question.getChoiceA().isRight());
-        checkBoxB.setChecked(question.getChoiceB().isRight());
-        checkBoxC.setChecked(question.getChoiceC().isRight());
-        checkBoxD.setChecked(question.getChoiceD().isRight());
-    }
-
-    @SuppressWarnings("deprecation")
-    private void showQuestionItem(int flag, QuestionItem item) {
-        EditText editText = getEdittextByTag(flag);
-        if (item.isText()) {
-            setEditMode(flag, EDIT_MODE_TEXT);
-            editText.setText(item.getText());
-        } else {
-            Bitmap bitmap = item.getBitmap();
-            if (null != bitmap) {
-                setEditMode(flag, EDIT_MODE_BITMAP);
-                editText.setBackgroundDrawable(new BitmapDrawable(bitmap));
-            }
-        }
-    }
-
-    private void saveQuestion() {
-        QuestionItem titleItem = mQuestion.getTitle();
-        QuestionItem aItem = mQuestion.getChoiceA();
-        QuestionItem bItem = mQuestion.getChoiceB();
-        QuestionItem cItem = mQuestion.getChoiceC();
-        QuestionItem dItem = mQuestion.getChoiceD();
-
-        String questionTitle = titleEditText.getText().toString().trim();
-        if (titleItem.isText()) {
-            titleItem.setText(questionTitle);
-        }
-        String choiceA = aEditText.getText().toString().trim();
-        if (aItem.isText()) {
-            aItem.setText(choiceA);
-        }
-        String choiceB = bEditText.getText().toString().trim();
-        if (bItem.isText()) {
-            bItem.setText(choiceB);
-        }
-        String choiceC = cEditText.getText().toString().trim();
-        if (cItem.isText()) {
-            cItem.setText(choiceC);
-        }
-        String choiceD = dEditText.getText().toString().trim();
-        if (dItem.isText()) {
-            dItem.setText(choiceD);
-        }
-        aItem.setIsRight(checkBoxA.isCheck());
-        bItem.setIsRight(checkBoxB.isCheck());
-        cItem.setIsRight(checkBoxC.isCheck());
-        dItem.setIsRight(checkBoxD.isCheck());
+    public static void startForResult(Context context, int index, Question question) {
+        Intent intent = new Intent(context, EditQuestionActivty.class);
+        intent.setAction(ACTION_EDIT_QUESTION);
+        intent.putExtra(DATA_INDEX, index);
+        intent.putExtra(DATA_QUESTION, question);
+        ((Activity) context).startActivityForResult(intent, REQUEST_CODE_EDIT);
     }
 }

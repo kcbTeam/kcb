@@ -7,8 +7,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -19,11 +17,12 @@ import com.kcb.library.slider.Slider;
 import com.kcb.library.slider.Slider.OnValueChangedListener;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.teacher.adapter.SetTestTimeAdapter;
+import com.kcb.teacher.adapter.SetTestTimeAdapter.EditQuestionListener;
 import com.kcb.teacher.model.test.Question;
 import com.kcb.teacher.model.test.Test;
 import com.kcbTeam.R;
 
-public class SetTestTimeActivity extends BaseActivity implements OnItemClickListener {
+public class SetTestTimeActivity extends BaseActivity {
 
     private TextView testNameTextView;
     private TextView testTimeTextView;
@@ -36,10 +35,10 @@ public class SetTestTimeActivity extends BaseActivity implements OnItemClickList
     private Test mTest;
     private SetTestTimeAdapter mAdapter;
 
-    private int mPositonIndex;
-
     public final static String MODIFY_QUESTION_KEY = "modify_question";
     private final int MODIFY_QUESTION = 100;
+
+    private EditQuestionListener mEditListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +69,6 @@ public class SetTestTimeActivity extends BaseActivity implements OnItemClickList
         });
 
         listView = (ListView) findViewById(R.id.listview_questions);
-        listView.setOnItemClickListener(this);
     }
 
     @Override
@@ -80,25 +78,22 @@ public class SetTestTimeActivity extends BaseActivity implements OnItemClickList
         testTimeTextView.setText(String.format(getString(R.string.settime_hint),
                 mTest.getQuestionNum(), 5));
 
-        mAdapter = new SetTestTimeAdapter(this, mTest);
-        listView.setAdapter(mAdapter);
-    }
+        mEditListener = new EditQuestionListener() {
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        mPositonIndex = position;
-        Intent intent = new Intent(this, ModifyQuestionActivty.class);
-        intent.putExtra(MODIFY_QUESTION_KEY, mTest.getQuestion(position));
-        intent.putExtra("TEST_NAME", mTest.getName());
-        intent.putExtra("QUETION_ID", position);
-        startActivityForResult(intent, MODIFY_QUESTION);
+            @Override
+            public void onEdit(int index, Question question) {
+                EditQuestionActivty.startForResult(SetTestTimeActivity.this, index, question);
+            }
+        };
+        mAdapter = new SetTestTimeAdapter(this, mTest, mEditListener);
+        listView.setAdapter(mAdapter);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == MODIFY_QUESTION) {
-            if (resultCode == ModifyQuestionActivty.MODIFY_SAVED) {
+        if (requestCode == EditQuestionActivty.REQUEST_CODE_EDIT) {
+            if (resultCode == RESULT_OK) {
                 Question question = (Question) data.getSerializableExtra("MODIFIED");
                 // TODO
                 // mList.set(mPositonIndex, question);
