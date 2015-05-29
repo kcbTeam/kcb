@@ -105,8 +105,8 @@ public class LookCheckInActivity extends BaseActivity implements OnChartValueSel
         pieDataSet.setSliceSpace(0f);
 
         ArrayList<Integer> colors = new ArrayList<Integer>();
-        colors.add(Color.RED);
-        colors.add(Color.GREEN);
+        colors.add(Color.rgb(192, 255, 140));
+        colors.add(Color.GRAY);
         pieDataSet.setColors(colors);
 
         DisplayMetrics metrics = getResources().getDisplayMetrics();

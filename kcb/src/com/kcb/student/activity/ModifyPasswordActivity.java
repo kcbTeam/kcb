@@ -21,6 +21,7 @@ import com.kcb.common.util.ToastUtil;
 import com.kcb.library.view.FloatingEditText;
 import com.kcb.library.view.PaperButton;
 import com.kcb.library.view.buttonflat.ButtonFlat;
+import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
 import com.kcbTeam.R;
 
 public class ModifyPasswordActivity extends BaseActivity {
@@ -35,11 +36,12 @@ public class ModifyPasswordActivity extends BaseActivity {
     private FloatingEditText repeatNewPassWord;
     private RelativeLayout mLayout;
     private String newpassword;
+    private SmoothProgressBar nextProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.tch_activity_modifypassword);
+        setContentView(R.layout.stu_activity_modifypassword);
 
         initView();
     }
@@ -52,6 +54,7 @@ public class ModifyPasswordActivity extends BaseActivity {
         userpasswordEditText = (FloatingEditText) findViewById(R.id.edittext_oldpassword);
         nextButton = (PaperButton) findViewById(R.id.button_next);
         nextButton.setOnClickListener(this);
+        nextProgressBar = (SmoothProgressBar) findViewById(R.id.progressbar_next);
 
         mLayout = (RelativeLayout) findViewById(R.id.layout_newpassword);
         newPassWord = (FloatingEditText) findViewById(R.id.edittext_newpassword);
@@ -75,6 +78,10 @@ public class ModifyPasswordActivity extends BaseActivity {
                     userpasswordEditText.requestFocus();
                     AnimationUtil.shake(userpasswordEditText);
                 } else {
+                    if(nextProgressBar.getVisibility() == View.VISIBLE){
+                        return;
+                    }
+                    nextProgressBar.setVisibility(View.VISIBLE);
                     StringRequest request =
                             new StringRequest(Method.POST, UrlUtil.getStuCheckOldPasswordUrl(
                                     KAccount.getAccountId(), oldpassword), new Listener<String>() {
@@ -89,6 +96,7 @@ public class ModifyPasswordActivity extends BaseActivity {
                                 };
                             }, new ErrorListener() {
                                 public void onErrorResponse(VolleyError error) {
+                                    nextProgressBar.hide(ModifyPasswordActivity.this);
                                     if (null != error.networkResponse
                                             && error.networkResponse.statusCode == 400) {
                                         ToastUtil.toast(R.string.password_error);
