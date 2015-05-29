@@ -70,6 +70,4 @@ public class CheckInFragment extends BaseFragment {
             startActivity(intent);
         }
     };
-
-
 }

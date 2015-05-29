@@ -9,7 +9,9 @@
         android:id="@+id/textview_testname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true" />
+        android:layout_centerVertical="true"
+        android:textColor="@color/black_700"
+        android:textSize="@dimen/text_size_medium" />
 
     <com.kcb.library.view.radioButton.RadioButton
         android:id="@+id/checkBox_testchosen"

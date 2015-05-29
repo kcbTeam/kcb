@@ -4,13 +4,15 @@
     xmlns:widget="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/questionItem"
+    android:background="@color/activity_background"
     tools:ignore="contentDescription" >
 
     <TextView
         android:id="@+id/textview_question_num"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp" />
 
     <EditText
         android:id="@+id/edittext_question"
@@ -18,6 +20,7 @@
         android:layout_height="180dp"
         android:layout_below="@id/textview_question_num"
         android:layout_marginTop="2dp"
+        android:background="@drawable/stu_checkin_textview"
         android:clickable="false"
         android:focusable="false"
         android:gravity="top" />
@@ -27,7 +30,8 @@
         android:layout_width="fill_parent"
         android:layout_height="40dp"
         android:layout_below="@id/edittext_question"
-        android:layout_marginTop="10dp" >
+        android:layout_marginBottom="4dp"
+        android:layout_marginTop="4dp" >
 
         <TextView
             android:id="@+id/textview_A"
@@ -40,9 +44,10 @@
             android:id="@+id/edittext_A"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
             android:layout_marginLeft="5dp"
-            android:layout_marginRight="40dp"
             android:layout_toRightOf="@id/textview_A"
+            android:background="@drawable/stu_checkin_textview"
             android:clickable="false"
             android:focusable="false" />
     </RelativeLayout>
@@ -52,7 +57,8 @@
         android:layout_width="fill_parent"
         android:layout_height="40dp"
         android:layout_below="@id/layout_A"
-        android:layout_marginTop="10dp" >
+        android:layout_marginBottom="4dp"
+        android:layout_marginTop="4dp" >
 
         <TextView
             android:id="@+id/textview_B"
@@ -65,9 +71,10 @@
             android:id="@+id/edittext_B"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
             android:layout_marginLeft="5dp"
-            android:layout_marginRight="40dp"
             android:layout_toRightOf="@id/textview_B"
+            android:background="@drawable/stu_checkin_textview"
             android:clickable="false"
             android:focusable="false" />
     </RelativeLayout>
@@ -77,7 +84,8 @@
         android:layout_width="fill_parent"
         android:layout_height="40dp"
         android:layout_below="@id/layout_B"
-        android:layout_marginTop="5dp" >
+        android:layout_marginBottom="4dp"
+        android:layout_marginTop="4dp" >
 
         <TextView
             android:id="@+id/textview_C"
@@ -90,9 +98,10 @@
             android:id="@+id/edittext_C"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
             android:layout_marginLeft="5dp"
-            android:layout_marginRight="40dp"
             android:layout_toRightOf="@id/textview_C"
+            android:background="@drawable/stu_checkin_textview"
             android:clickable="false"
             android:focusable="false" />
     </RelativeLayout>
@@ -102,7 +111,8 @@
         android:layout_width="fill_parent"
         android:layout_height="40dp"
         android:layout_below="@id/layout_C"
-        android:layout_marginTop="5dp" >
+        android:layout_marginBottom="4dp"
+        android:layout_marginTop="4dp" >
 
         <TextView
             android:id="@+id/textview_D"
@@ -115,9 +125,10 @@
             android:id="@+id/edittext_D"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
             android:layout_marginLeft="5dp"
-            android:layout_marginRight="40dp"
             android:layout_toRightOf="@id/textview_D"
+            android:background="@drawable/stu_checkin_textview"
             android:clickable="false"
             android:focusable="false" />
     </RelativeLayout>
@@ -126,6 +137,7 @@
         android:id="@+id/textview_answer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/layout_D" />
+        android:layout_below="@id/layout_D"
+        android:layout_marginBottom="15dp" />
 
 </RelativeLayout>

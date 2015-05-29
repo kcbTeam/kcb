@@ -13,15 +13,19 @@
         android:background="@drawable/activity_header_shadow" >
 
         <TextView
+            android:id="@+id/textview_test_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/editCouseTest" />
+            android:layout_centerVertical="true"
+            android:text="@string/editCouseTest"
+            android:textSize="@dimen/text_size_large" />
 
         <com.kcb.library.view.buttonflat.ButtonFlat
             android:id="@+id/button_submit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
             android:text="@string/sure_submit" >
         </com.kcb.library.view.buttonflat.ButtonFlat>
     </RelativeLayout>
@@ -54,24 +58,16 @@
         android:layout_below="@id/slider_testtime"
         android:layout_centerHorizontal="true" />
 
-    <TextView
-        android:id="@+id/textview_testName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/testtimeHint"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp" />
-
     <ListView
         android:id="@+id/listview_questions"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textview_testName"
-        android:layout_marginLeft="24dp"
-        android:layout_marginRight="24dp"
+        android:layout_below="@id/testtimeHint"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         android:layout_marginTop="10dp"
-        android:divider="@android:color/transparent"
-        android:dividerHeight="20dp"
+        android:divider="@color/half_gray"
+        android:dividerHeight="1dp"
         android:scrollbars="none" >
     </ListView>
 

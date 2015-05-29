@@ -16,18 +16,6 @@
         <item name="android:layout_marginLeft">36dp</item>
     </style>
 
-    <style name="common_back_button">
-        <item name="android:layout_width">48dp</item>
-        <item name="android:layout_height">56dp</item>
-    </style>
-
-    <style name="common_back_imageview">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:src">@drawable/ic_arrow_back_black_24dp</item>
-        <item name="android:layout_centerInParent">true</item>
-    </style>
-
     <style name="common_top_button">
         <item name="android:layout_width">72dp</item>
         <item name="android:layout_height">48dp</item>
@@ -94,6 +82,18 @@
     <!-- **************************************** Teacher module End **************************************** -->
 
 
+    <!-- StartCheckIn start -->
+    <style name="tch_checkin_num">
+        <item name="android:textSize">@dimen/text_size_large</item>
+        <item name="android:textColor">@color/black_700</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">36dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/stu_checkin_textview</item>
+    </style>
+
+    <!-- StartCheckIn end -->
     <!-- **************************************** Teacher module End **************************************** -->
 
     <style name="edittest_edittext_problem">

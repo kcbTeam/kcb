@@ -77,7 +77,9 @@ public class MaterialListDialog extends android.app.Dialog {
         titleTextView = (TextView) findViewById(R.id.title);
         messageListView = (ListView) findViewById(R.id.listmessage);
         sureButton = (ButtonFlat) findViewById(R.id.button_accept);
+        sureButton.setTextSize(16);
         cancelButton = (ButtonFlat) findViewById(R.id.button_cancel);
+        cancelButton.setTextSize(16);
     }
 
     @Override

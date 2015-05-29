@@ -1,10 +1,21 @@
 package com.kcb.student.activity;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.RelativeLayout;
 
+import com.android.volley.Request.Method;
+import com.android.volley.Response.ErrorListener;
+import com.android.volley.Response.Listener;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.kcb.common.application.KAccount;
 import com.kcb.common.base.BaseActivity;
+import com.kcb.common.server.RequestUtil;
+import com.kcb.common.server.ResponseUtil;
+import com.kcb.common.server.UrlUtil;
 import com.kcb.common.util.AnimationUtil;
 import com.kcb.common.util.ToastUtil;
 import com.kcb.library.view.FloatingEditText;
@@ -14,6 +25,8 @@ import com.kcbTeam.R;
 
 public class ModifyPasswordActivity extends BaseActivity {
 
+    private static final String TAG = ModifyPasswordActivity.class.getName();
+
     private ButtonFlat backButton;
     private FloatingEditText userpasswordEditText;
     private PaperButton nextButton;
@@ -21,8 +34,7 @@ public class ModifyPasswordActivity extends BaseActivity {
     private FloatingEditText newPassWord;
     private FloatingEditText repeatNewPassWord;
     private RelativeLayout mLayout;
-
-    private String oldPassWord = "123456";
+    private String newpassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,18 +70,57 @@ public class ModifyPasswordActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.button_next:
-                if (oldPassWord.equals(userpasswordEditText.getText().toString())) {
-                    setNewPassWord();
+                final String oldpassword = userpasswordEditText.getText().toString();
+                if (TextUtils.isEmpty(oldpassword)) {
+                    userpasswordEditText.requestFocus();
+                    AnimationUtil.shake(userpasswordEditText);
                 } else {
-                    ToastUtil.toast(R.string.password_error);
+                    StringRequest request =
+                            new StringRequest(Method.POST, UrlUtil.getStuCheckOldPasswordUrl(
+                                    KAccount.getAccountId(), oldpassword), new Listener<String>() {
+                                public void onResponse(final String response) {
+                                    new Handler().postDelayed(new Runnable() {
+
+                                        @Override
+                                        public void run() {
+                                            setNewPassWord();
+                                        }
+                                    }, 500);
+                                };
+                            }, new ErrorListener() {
+                                public void onErrorResponse(VolleyError error) {
+                                    if (null != error.networkResponse
+                                            && error.networkResponse.statusCode == 400) {
+                                        ToastUtil.toast(R.string.password_error);
+                                    } else {
+                                        ResponseUtil.toastError(error);
+                                    }
+                                };
+                            });
+                    RequestUtil.getInstance().addToRequestQueue(request, TAG);
                 }
                 break;
             case R.id.button_complete:
                 if (comparaPassWord()) {
-                    // TODO set new password
-                    oldPassWord = newPassWord.getText().toString();
-                    ToastUtil.toast(R.string.modified);
-                    finish();
+                    StringRequest request =
+                            new StringRequest(Method.POST, UrlUtil.getStuModifyPasswordUrl(
+                                    KAccount.getAccountId(), newpassword), new Listener<String>() {
+                                public void onResponse(final String response) {
+                                    new Handler().postDelayed(new Runnable() {
+
+                                        @Override
+                                        public void run() {
+                                            ToastUtil.toast(R.string.modified);
+                                            finish();
+                                        }
+                                    }, 500);
+                                };
+                            }, new ErrorListener() {
+                                public void onErrorResponse(VolleyError error) {                                   
+                                        ResponseUtil.toastError(error);                                 
+                                };
+                            });
+                    RequestUtil.getInstance().addToRequestQueue(request, TAG);
                 }
                 break;
             default:

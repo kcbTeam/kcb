@@ -13,11 +13,7 @@ public class Test implements Serializable {
 
     private String mName; // test name
     private int mTime; // minute
-
-
-
     private List<Question> mQuestions;
-
     private Date mDate; // test date
 
     public Test(String name, int num) {
@@ -44,6 +40,26 @@ public class Test implements Serializable {
 
     public String getName() {
         return mName;
+    }
+
+    public Date getDate() {
+        return mDate;
+    }
+
+    public void setDate(Date date) {
+        mDate = date;
+    }
+
+    public int getTime() {
+        return mTime;
+    }
+
+    public void setTime(int time) {
+        mTime = time;
+    }
+
+    public List<Question> getQuestions() {
+        return mQuestions;
     }
 
     public Question getQuestion(int index) {
@@ -78,5 +94,14 @@ public class Test implements Serializable {
             }
         }
         return -1;
+    }
+
+    public void changeTestToSerializable() {
+        if (null == mQuestions || mQuestions.size() == 0) {
+            return;
+        }
+        for (int i = 0; i < mQuestions.size(); i++) {
+            mQuestions.get(i).changeQuestionToSerializable();
+        }
     }
 }

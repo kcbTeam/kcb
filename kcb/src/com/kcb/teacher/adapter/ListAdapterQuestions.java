@@ -25,7 +25,7 @@ import com.kcbTeam.R;
 public class ListAdapterQuestions extends BaseAdapter {
     @SuppressWarnings("unused")
     private static final String TAG = "ListAdapterQuestions";
-    private final String numFormatString = "题%1$d";
+    private final String numFormatString = "第%1$d题";
 
 
     private List<Question> mList;

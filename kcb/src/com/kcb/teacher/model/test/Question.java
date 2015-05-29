@@ -1,7 +1,6 @@
 package com.kcb.teacher.model.test;
 
 import java.io.Serializable;
-import java.lang.reflect.Array;
 
 /**
  * 
@@ -87,9 +86,9 @@ public class Question implements Serializable {
     }
 
     public String contentString() {
-        return mTitleItem.getText() + '\n' + "A." + mChoiceAItem.getText() + '\n' + "B."
+        return mTitleItem.getText() + '\n' + '\n' + "A." + mChoiceAItem.getText() + '\n' + "B."
                 + mChoiceBItem.getText() + '\n' + "C." + mChoiceCItem.getText() + '\n' + "D."
-                + mChoiceDItem.getText() + '\n';
+                + mChoiceDItem.getText();
     }
 
     public boolean isAllString() {
@@ -124,5 +123,13 @@ public class Question implements Serializable {
             tempString += "D、";
         }
         return tempString.substring(0, tempString.length() - 1);
+    }
+
+    public void changeQuestionToSerializable() {
+        mTitleItem.changeBitmapToBytes();
+        mChoiceAItem.changeBitmapToBytes();
+        mChoiceBItem.changeBitmapToBytes();
+        mChoiceCItem.changeBitmapToBytes();
+        mChoiceDItem.changeBitmapToBytes();
     }
 }
