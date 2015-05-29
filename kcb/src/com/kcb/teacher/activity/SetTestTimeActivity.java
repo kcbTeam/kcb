@@ -72,7 +72,8 @@ public class SetTestTimeActivity extends BaseActivity {
         mTest = (Test) getIntent().getSerializableExtra(DATA_TEST);
 
         testNameTextView.setText(mTest.getName());
-        showTestTime();
+        testTimeTextView.setText(String.format(getString(R.string.settime_hint),
+                mTest.getQuestionNum(), 5));
 
         mEditListener = new EditQuestionListener() {
 
@@ -83,11 +84,6 @@ public class SetTestTimeActivity extends BaseActivity {
         };
         mAdapter = new SetTestTimeAdapter(this, mTest, mEditListener);
         listView.setAdapter(mAdapter);
-    }
-
-    private void showTestTime() {
-        testTimeTextView.setText(String.format(getString(R.string.settime_hint),
-                mTest.getQuestionNum(), 5));
     }
 
     @Override
@@ -105,7 +101,8 @@ public class SetTestTimeActivity extends BaseActivity {
                 int index = data.getIntExtra(EditQuestionActivty.DATA_INDEX, 0);
                 mAdapter.deleteItem(index);
                 mAdapter.notifyDataSetChanged();
-                showTestTime();
+                testTimeTextView.setText(String.format(getString(R.string.settime_hint),
+                        mAdapter.getCount(), slider.getValue()));
             }
         }
     }
