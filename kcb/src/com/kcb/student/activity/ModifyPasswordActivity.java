@@ -39,7 +39,7 @@ public class ModifyPasswordActivity extends BaseActivity {
     private PaperButton finishButton;
     private SmoothProgressBar finishProgressBar;
     private String newPassword;
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +53,7 @@ public class ModifyPasswordActivity extends BaseActivity {
     protected void initView() {
         backButton = (ButtonFlat) findViewById(R.id.button_back);
         backButton.setOnClickListener(mClickListener);
-        
+
         nextButton = (PaperButton) findViewById(R.id.button_next);
         nextButton.setOnClickListener(this);
         nextProgressBar = (SmoothProgressBar) findViewById(R.id.progressbar_next);

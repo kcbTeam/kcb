@@ -10,6 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.teacher.model.test.Question;
 import com.kcb.teacher.model.test.QuestionItem;
 import com.kcb.teacher.model.test.Test;
@@ -71,8 +72,8 @@ public class SetTestTimeAdapter extends BaseAdapter {
             viewHolder.questionIndexTextView =
                     (TextView) convertView.findViewById(R.id.textview_questionindex);
             viewHolder.titleTextView = (TextView) convertView.findViewById(R.id.textview_title);
-            viewHolder.editImageView = (ImageView) convertView.findViewById(R.id.imageview_edit);
-            viewHolder.editImageView.setOnClickListener(new OnClickListener() {
+            viewHolder.editButton = (ButtonFlat) convertView.findViewById(R.id.button_edit);
+            viewHolder.editButton.setOnClickListener(new OnClickListener() {
 
                 @Override
                 public void onClick(View v) {
@@ -101,7 +102,7 @@ public class SetTestTimeAdapter extends BaseAdapter {
 
         private TextView questionIndexTextView;
         private TextView titleTextView;
-        private ImageView editImageView;
+        private ButtonFlat editButton;
         private TextView aTextView;
         private TextView bTextView;
         private TextView cTextView;

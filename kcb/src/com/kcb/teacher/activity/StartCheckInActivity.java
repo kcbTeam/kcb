@@ -367,16 +367,16 @@ public class StartCheckInActivity extends BaseActivity {
     public void onBackPressed() {
         if (hasFinished) {
             super.onBackPressed();
-            return;
-        }
-        DialogUtil.showNormalDialog(this, R.string.giveupsign, R.string.giveup_sign_tip,
-                R.string.sure, new OnClickListener() {
+        } else {
+            DialogUtil.showNormalDialog(this, R.string.giveupsign, R.string.giveup_sign_tip,
+                    R.string.sure, new OnClickListener() {
 
-                    @Override
-                    public void onClick(View v) {
-                        finish();
-                    }
-                }, R.string.cancel, null);
+                        @Override
+                        public void onClick(View v) {
+                            finish();
+                        }
+                    }, R.string.cancel, null);
+        }
     };
 
     @Override

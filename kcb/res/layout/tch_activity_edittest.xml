@@ -14,18 +14,24 @@
         android:background="@drawable/activity_header_shadow"
         android:gravity="center_vertical"
         android:paddingLeft="16dp"
+        android:paddingRight="48dp"
+        android:singleLine="true"
         android:textColor="@color/black"
         android:textSize="@dimen/text_size_large" />
 
-    <TextView
-        android:id="@+id/textview_question_num"
-        android:layout_width="wrap_content"
-        android:layout_height="56dp"
+    <com.kcb.library.view.buttonflat.ButtonFlat
+        android:id="@+id/button_cancel"
+        android:layout_width="@dimen/top_icon_button_width"
+        android:layout_height="@dimen/top_icon_button_height"
         android:layout_alignParentRight="true"
-        android:gravity="center"
-        android:paddingRight="16dp"
-        android:textColor="@color/black_700"
-        android:textSize="@dimen/text_size_small" />
+        widget:rippleSpeed="6" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@drawable/ic_highlight_remove_black_24dp" />
+    </com.kcb.library.view.buttonflat.ButtonFlat>
 
     <TextView
         android:id="@+id/textview_input_problem_tip"
@@ -50,7 +56,6 @@
         android:background="@drawable/stu_checkin_textview"
         android:gravity="top|left"
         android:hint="@string/edit_title_hint"
-        android:inputType="none"
         android:lineSpacingExtra="2dp"
         android:lines="7"
         android:padding="8dp"
@@ -107,7 +112,9 @@
 
                     <EditText
                         android:id="@+id/edittext_A"
-                        style="@style/tch_test_input_choice" />
+                        style="@style/tch_test_input_choice"
+                        android:hint="@string/edit_title_hint"
+                        android:textColorHint="@color/black_400" />
 
                     <ImageView
                         android:id="@+id/imageview_delete_a"
@@ -261,7 +268,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="增加一题"
+            android:text="添加一题"
             widget:clickAfterRipple="false"
             widget:rippleSpeed="18" />
 

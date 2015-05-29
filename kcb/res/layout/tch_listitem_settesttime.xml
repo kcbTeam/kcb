@@ -13,19 +13,26 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="8dp"
         android:text="@string/problem_hint"
         android:textColor="@color/black"
         android:textSize="@dimen/text_size_medium" />
 
-    <ImageView
-        android:id="@+id/imageview_edit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <com.kcb.library.view.buttonflat.ButtonFlat
+        android:id="@+id/button_edit"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
         android:layout_alignParentRight="true"
         android:layout_alignTop="@id/textview_questionindex"
-        android:layout_marginRight="16dp"
-        android:src="@drawable/ic_mode_edit_grey600_24dp" />
+        android:layout_marginRight="8dp"
+        widget:rippleSpeed="6" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@drawable/ic_mode_edit_grey600_24dp" />
+    </com.kcb.library.view.buttonflat.ButtonFlat>
 
     <TextView
         android:id="@+id/textview_title"
@@ -152,7 +159,7 @@
         android:id="@+id/layout_D"
         style="@style/tch_test_settime_choice_layout"
         android:layout_below="@id/view_divider3"
-        android:layout_marginBottom="2dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="2dp" >
