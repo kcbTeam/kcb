@@ -20,7 +20,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:text="@string/testresult" />
+            android:text="@string/testresult"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_large" />
     </LinearLayout>
 
     <com.kcb.library.view.FloatingEditText

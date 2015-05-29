@@ -18,9 +18,12 @@
 
         <TextView
             android:id="@+id/testresult_title"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/edittest" />
+            android:text="@string/edittest"
+            android:layout_centerVertical="true"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_large" />
     </LinearLayout>
 
     <TextView

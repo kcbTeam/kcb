@@ -29,7 +29,6 @@ public class ModifyPasswordActivity extends BaseActivity {
     private final String TAG = ModifyPasswordActivity.class.getName();
 
     private ButtonFlat backButton;
-
     private FloatingEditText oldPasswordEditText;
     private PaperButton nextButton;
     private SmoothProgressBar nextProgressBar;
@@ -39,13 +38,12 @@ public class ModifyPasswordActivity extends BaseActivity {
     private FloatingEditText repeatPassWordEditText;
     private PaperButton finishButton;
     private SmoothProgressBar finishProgressBar;
-
     private String newPassword;
-
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.tch_activity_modifypassword);
+        setContentView(R.layout.stu_activity_modifypassword);
 
         initView();
         initData();
@@ -54,7 +52,11 @@ public class ModifyPasswordActivity extends BaseActivity {
     @Override
     protected void initView() {
         backButton = (ButtonFlat) findViewById(R.id.button_back);
-        backButton.setOnClickListener(this);
+        backButton.setOnClickListener(mClickListener);
+        
+        nextButton = (PaperButton) findViewById(R.id.button_next);
+        nextButton.setOnClickListener(this);
+        nextProgressBar = (SmoothProgressBar) findViewById(R.id.progressbar_next);
 
         oldPasswordEditText = (FloatingEditText) findViewById(R.id.edittext_oldpassword);
         nextButton = (PaperButton) findViewById(R.id.button_next);
@@ -72,17 +74,6 @@ public class ModifyPasswordActivity extends BaseActivity {
     @Override
     protected void initData() {}
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.button_back:
-                finish();
-                break;
-            default:
-                break;
-        }
-    }
-
     private DelayClickListener mClickListener = new DelayClickListener(
             DelayClickListener.DELAY_PAPER_BUTTON) {
 
@@ -96,6 +87,9 @@ public class ModifyPasswordActivity extends BaseActivity {
                     break;
                 case R.id.button_complete:
                     setNewPassword();
+                    break;
+                case R.id.button_back:
+                    finish();
                     break;
             }
         }

@@ -9,12 +9,17 @@
     <issue id="Deprecated">
         <ignore path="res/layout/stu_activity_modifypassword.xml" />
     </issue>
+    <issue id="HardcodedText">
+        <ignore path="res/layout/stu_activity_looktestresult.xml" />
+        <ignore path="res/layout/stu_activity_modifypassword.xml" />
+    </issue>
     <issue id="InflateParams">
         <ignore path="src/com/kcb/student/activity/HomeActivity.java" />
         <ignore path="src/com/kcb/student/activity/TestResultActivity.java" />
         <ignore path="src/com/kcb/student/adapter/TestResultAdapter.java" />
     </issue>
     <issue id="ObsoleteLayoutParam">
+        <ignore path="res/layout/stu_activity_looktestresult.xml" />
         <ignore path="res/layout/stu_activity_modifypassword.xml" />
         <ignore path="res/layout/stu_activity_setting.xml" />
         <ignore path="res/layout/stu_view_list.xml" />
@@ -24,11 +29,13 @@
         <ignore path="res/layout/stu_activity_checkinresult.xml" />
         <ignore path="res/layout/stu_activity_home.xml" />
         <ignore path="res/layout/stu_activity_home.xml" />
+        <ignore path="res/layout/stu_activity_looktestresult.xml" />
         <ignore path="res/layout/stu_activity_modifypassword.xml" />
         <ignore path="res/layout/stu_activity_setting.xml" />
         <ignore path="res/layout/stu_activity_submit.xml" />
         <ignore path="res/layout/stu_activity_testresult.xml" />
         <ignore path="res/layout/stu_fragment_looktest.xml" />
+        <ignore path="res/layout/stu_fragment_test.xml" />
         <ignore path="res/layout/stu_menu_setting.xml" />
         <ignore path="res/layout/stu_view_list.xml" />
     </issue>
@@ -36,6 +43,7 @@
         <ignore path="res/layout/stu_activity_home.xml" />
     </issue>
     <issue id="SpUsage">
+        <ignore path="res/layout/stu_activity_looktestresult.xml" />
         <ignore path="res/layout/stu_activity_submit.xml" />
     </issue>
     <issue id="SuspiciousImport">
