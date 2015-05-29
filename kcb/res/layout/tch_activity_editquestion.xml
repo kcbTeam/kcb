@@ -23,7 +23,7 @@
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:text="@string/cut_title"
-            android:textSize="@dimen/text_size_medium" />
+            android:textSize="@dimen/text_size_large" />
 
         <com.kcb.library.view.buttonflat.ButtonFlat
             android:id="@+id/button_delete"
@@ -248,7 +248,8 @@
         android:id="@+id/button_finish"
         style="@style/common_paper_button"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginTop="4dp"
         widget:paper_text="完成"
         widget:paper_text_color="@color/black_700"
         widget:paper_text_size="@dimen/text_size_medium" />

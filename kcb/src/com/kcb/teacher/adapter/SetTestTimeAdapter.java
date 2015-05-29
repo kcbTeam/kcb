@@ -53,8 +53,12 @@ public class SetTestTimeAdapter extends BaseAdapter {
         return position;
     }
 
-    public void setQuestion(int index, Question question) {
+    public void setItem(int index, Question question) {
         mTest.updateQuestion(index, question);
+    }
+
+    public void deleteItem(int index) {
+        mTest.deleteQuestion(index);
     }
 
     @SuppressLint("ViewHolder")

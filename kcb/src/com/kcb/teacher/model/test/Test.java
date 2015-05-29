@@ -64,7 +64,7 @@ public class Test implements Serializable {
         mQuestions.add(new Question());
     }
 
-    public void removeQuestion(int index) {
+    public void deleteQuestion(int index) {
         mQuestions.remove(index);
     }
 

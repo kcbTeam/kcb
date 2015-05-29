@@ -261,7 +261,7 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
                         public void onClick(View v) {
                             if (mTest.getQuestionNum() > 1) {
                                 int originQuestionNum = mTest.getQuestionNum();
-                                mTest.removeQuestion(mCurrentQuestionIndex);
+                                mTest.deleteQuestion(mCurrentQuestionIndex);
                                 mCurrentQuestionIndex =
                                         mCurrentQuestionIndex == originQuestionNum - 1 ? mTest
                                                 .getQuestionNum() - 1 : mCurrentQuestionIndex;

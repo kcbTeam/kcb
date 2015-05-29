@@ -92,13 +92,17 @@ public class SetTestTimeActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == EditQuestionActivty.REQUEST_CODE_EDIT) {
+        if (requestCode == EditQuestionActivty.REQUEST_EDIT) {
+            int index = data.getIntExtra(EditQuestionActivty.DATA_INDEX, 0);
             if (resultCode == RESULT_OK) {
-                Question question = (Question) data.getSerializableExtra("MODIFIED");
-                // TODO
-                // mList.set(mPositonIndex, question);
+                Question question =
+                        (Question) data.getSerializableExtra(EditQuestionActivty.DATA_QUESTION);
+                mAdapter.setItem(index, question);
                 mAdapter.notifyDataSetChanged();
-                ToastUtil.toast(R.string.modify_saved);
+                ToastUtil.toast("已保存");
+            } else if (resultCode == EditQuestionActivty.RESULT_DELETE) {
+                mAdapter.deleteItem(index);
+                mAdapter.notifyDataSetChanged();
             }
         }
     }

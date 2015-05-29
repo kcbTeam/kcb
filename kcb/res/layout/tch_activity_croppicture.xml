@@ -23,7 +23,7 @@
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:text="@string/cut_title"
-            android:textSize="@dimen/text_size_medium" />
+            android:textSize="@dimen/text_size_large" />
 
         <com.kcb.library.view.buttonflat.ButtonFlat
             android:id="@+id/button_rotate"

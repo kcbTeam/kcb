@@ -23,8 +23,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.kcb.common.base.BaseActivity;
+import com.kcb.common.listener.DelayClickListener;
 import com.kcb.common.util.DialogUtil;
 import com.kcb.common.util.ToastUtil;
+import com.kcb.library.view.PaperButton;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.library.view.checkbox.CheckBox;
 import com.kcb.teacher.model.test.Question;
@@ -41,6 +43,7 @@ import com.kcbTeam.R;
 public class EditQuestionActivty extends BaseActivity implements OnLongClickListener {
 
     private TextView testNameTextView;
+    private ButtonFlat deleteButton;
 
     private EditText titleEditText;
     private ImageView deleteTitleImageView;
@@ -58,7 +61,7 @@ public class EditQuestionActivty extends BaseActivity implements OnLongClickList
     private CheckBox checkBoxC;
     private CheckBox checkBoxD;
 
-    private ButtonFlat deleteButton;
+    private PaperButton finishButton;
 
     // tag title/A/B/C/D;
     private final int FLAG_TITLE = 1;
@@ -122,6 +125,9 @@ public class EditQuestionActivty extends BaseActivity implements OnLongClickList
         checkBoxB = (CheckBox) findViewById(R.id.checkBox_B);
         checkBoxC = (CheckBox) findViewById(R.id.checkBox_C);
         checkBoxD = (CheckBox) findViewById(R.id.checkBox_D);
+
+        finishButton = (PaperButton) findViewById(R.id.button_finish);
+        finishButton.setOnClickListener(mClickListener);
     }
 
     @Override
@@ -147,40 +153,59 @@ public class EditQuestionActivty extends BaseActivity implements OnLongClickList
         switch (v.getId()) {
             case R.id.imageview_delete_title:
                 setEditMode(FLAG_TITLE, EDIT_MODE_TEXT);
-                getCurrentQuestion().getTitle().setText("");
+                mQuestion.getTitle().setText("");
                 break;
             case R.id.imageview_delete_a:
                 setEditMode(FLAG_A, EDIT_MODE_TEXT);
-                getCurrentQuestion().getChoiceA().setText("");
+                mQuestion.getChoiceA().setText("");
                 break;
             case R.id.imageview_delete_b:
                 setEditMode(FALG_B, EDIT_MODE_TEXT);
-                getCurrentQuestion().getChoiceB().setText("");
+                mQuestion.getChoiceB().setText("");
                 break;
             case R.id.imageview_delete_c:
                 setEditMode(FLAG_C, EDIT_MODE_TEXT);
-                getCurrentQuestion().getChoiceC().setText("");
+                mQuestion.getChoiceC().setText("");
                 break;
             case R.id.imageview_delete_d:
                 setEditMode(FLAG_D, EDIT_MODE_TEXT);
-                getCurrentQuestion().getChoiceD().setText("");
+                mQuestion.getChoiceD().setText("");
                 break;
             case R.id.button_delete:
-                deleteQuestion();
+                DialogUtil.showNormalDialog(this, R.string.dialog_title_delete,
+                        R.string.delete_msg, R.string.sure, new OnClickListener() {
+
+                            @Override
+                            public void onClick(View v) {
+                                Intent intent = new Intent();
+                                intent.putExtra(DATA_INDEX, mIndex);
+                                setResult(RESULT_DELETE, intent);
+                            }
+                        }, R.string.cancel, null);
                 break;
             default:
                 break;
         }
     }
 
-    private void deleteQuestion() {
-        DialogUtil.showNormalDialog(this, R.string.dialog_title_delete, R.string.delete_msg,
-                R.string.sure, new OnClickListener() {
+    private DelayClickListener mClickListener = new DelayClickListener(
+            DelayClickListener.DELAY_PAPER_BUTTON) {
 
-                    @Override
-                    public void onClick(View v) {}
-                }, R.string.cancel, null);
-    }
+        @Override
+        public void doClick(View v) {
+            switch (v.getId()) {
+                case R.id.button_finish:
+                    saveQuestion();
+                    Intent intent = new Intent();
+                    intent.putExtra(DATA_INDEX, mIndex);
+                    intent.putExtra(DATA_QUESTION, mQuestion);
+                    setResult(RESULT_OK, intent);
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
 
     /**
      * 
@@ -266,27 +291,27 @@ public class EditQuestionActivty extends BaseActivity implements OnLongClickList
                         case FLAG_TITLE:
                             setEditMode(FLAG_TITLE, EDIT_MODE_BITMAP);
                             titleEditText.setBackground(new BitmapDrawable(bitmap));
-                            getCurrentQuestion().getTitle().setBitmap(bitmap);
+                            mQuestion.getTitle().setBitmap(bitmap);
                             break;
                         case FLAG_A:
                             setEditMode(FLAG_A, EDIT_MODE_BITMAP);
                             aEditText.setBackground(new BitmapDrawable(bitmap));
-                            getCurrentQuestion().getChoiceA().setBitmap(bitmap);
+                            mQuestion.getChoiceA().setBitmap(bitmap);
                             break;
                         case FALG_B:
                             setEditMode(FALG_B, EDIT_MODE_BITMAP);
                             bEditText.setBackground(new BitmapDrawable(bitmap));
-                            getCurrentQuestion().getChoiceB().setBitmap(bitmap);
+                            mQuestion.getChoiceB().setBitmap(bitmap);
                             break;
                         case FLAG_C:
                             setEditMode(FLAG_C, EDIT_MODE_BITMAP);
                             cEditText.setBackground(new BitmapDrawable(bitmap));
-                            getCurrentQuestion().getChoiceC().setBitmap(bitmap);
+                            mQuestion.getChoiceC().setBitmap(bitmap);
                             break;
                         case FLAG_D:
                             setEditMode(FLAG_D, EDIT_MODE_BITMAP);
                             dEditText.setBackground(new BitmapDrawable(bitmap));
-                            getCurrentQuestion().getChoiceD().setBitmap(bitmap);
+                            mQuestion.getChoiceD().setBitmap(bitmap);
                             break;
                         default:
                             break;
@@ -309,26 +334,24 @@ public class EditQuestionActivty extends BaseActivity implements OnLongClickList
      * @param question
      */
     private void showQuestion() {
-        Question question = getCurrentQuestion();
+        showQuestionItem(FLAG_TITLE, mQuestion.getTitle());
+        showQuestionItem(FLAG_A, mQuestion.getChoiceA());
+        showQuestionItem(FALG_B, mQuestion.getChoiceB());
+        showQuestionItem(FLAG_C, mQuestion.getChoiceC());
+        showQuestionItem(FLAG_D, mQuestion.getChoiceD());
 
-        showQuestionItem(FLAG_TITLE, question.getTitle());
-        showQuestionItem(FLAG_A, question.getChoiceA());
-        showQuestionItem(FALG_B, question.getChoiceB());
-        showQuestionItem(FLAG_C, question.getChoiceC());
-        showQuestionItem(FLAG_D, question.getChoiceD());
-
-        checkBoxA.setChecked(question.getChoiceA().isRight());
-        checkBoxB.setChecked(question.getChoiceB().isRight());
-        checkBoxC.setChecked(question.getChoiceC().isRight());
-        checkBoxD.setChecked(question.getChoiceD().isRight());
+        checkBoxA.setChecked(mQuestion.getChoiceA().isRight());
+        checkBoxB.setChecked(mQuestion.getChoiceB().isRight());
+        checkBoxC.setChecked(mQuestion.getChoiceC().isRight());
+        checkBoxD.setChecked(mQuestion.getChoiceD().isRight());
     }
 
     private void saveQuestion() {
-        QuestionItem titleItem = getCurrentQuestion().getTitle();
-        QuestionItem aItem = getCurrentQuestion().getChoiceA();
-        QuestionItem bItem = getCurrentQuestion().getChoiceB();
-        QuestionItem cItem = getCurrentQuestion().getChoiceC();
-        QuestionItem dItem = getCurrentQuestion().getChoiceD();
+        QuestionItem titleItem = mQuestion.getTitle();
+        QuestionItem aItem = mQuestion.getChoiceA();
+        QuestionItem bItem = mQuestion.getChoiceB();
+        QuestionItem cItem = mQuestion.getChoiceC();
+        QuestionItem dItem = mQuestion.getChoiceD();
 
         String questionTitle = titleEditText.getText().toString().trim();
         if (titleItem.isText()) {
@@ -443,10 +466,6 @@ public class EditQuestionActivty extends BaseActivity implements OnLongClickList
         return deleteIcon;
     }
 
-    private Question getCurrentQuestion() {
-        return mQuestion;
-    }
-
     /**
      * 
      * @title: onBackPressed
@@ -468,16 +487,17 @@ public class EditQuestionActivty extends BaseActivity implements OnLongClickList
     }
 
     private static final String ACTION_EDIT_QUESTION = "action_editQuestion";
-    private static final String DATA_INDEX = "data_index";
-    private static final String DATA_QUESTION = "data_question";
+    public static final String DATA_INDEX = "data_index";
+    public static final String DATA_QUESTION = "data_question";
 
-    public static final int REQUEST_CODE_EDIT = 0;
+    public static final int REQUEST_EDIT = 0;
+    public static final int RESULT_DELETE = 1;
 
     public static void startForResult(Context context, int index, Question question) {
         Intent intent = new Intent(context, EditQuestionActivty.class);
         intent.setAction(ACTION_EDIT_QUESTION);
         intent.putExtra(DATA_INDEX, index);
         intent.putExtra(DATA_QUESTION, question);
-        ((Activity) context).startActivityForResult(intent, REQUEST_CODE_EDIT);
+        ((Activity) context).startActivityForResult(intent, REQUEST_EDIT);
     }
 }
