@@ -11,6 +11,7 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,7 +52,6 @@ public class StuCentreFragment extends BaseFragment implements OnItemClickListen
 
     private FloatingEditText searchEditText;
     private ImageView clearImageView;
-    private View mCurrentView = null;
 
     private ListView mStudentList;
     private ListAdapterStudent mAdapter;
@@ -130,14 +130,13 @@ public class StuCentreFragment extends BaseFragment implements OnItemClickListen
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {}
 
+    private String searchContent;
+
     @Override
     public void afterTextChanged(Editable s) {
-        if (null != mCurrentView) {
-            mCurrentView.setBackgroundColor(getResources().getColor(R.color.white));
-        }
         mTempList.clear();
         mTempList.addAll(mList);
-        String searchContent = searchEditText.getText().toString();
+        searchContent = searchEditText.getText().toString().trim().replace(" ", "");
         if (!searchContent.equals("")) {
             clearImageView.setVisibility(View.VISIBLE);
         } else {
@@ -156,7 +155,7 @@ public class StuCentreFragment extends BaseFragment implements OnItemClickListen
             mTempList.remove(i);
             i--;
         }
-        if (!searchEditText.getText().toString().equals("")) {
+        if (!searchContent.equals("")) {
             hideSortButton(true);
             mAdapter.notifyDataSetChanged();
         } else {
@@ -167,21 +166,24 @@ public class StuCentreFragment extends BaseFragment implements OnItemClickListen
 
     @Override
     public void onClick(View v) {
-        if (null != mCurrentView) {
-            mCurrentView.setBackgroundColor(getResources().getColor(R.color.white));
-        }
         switch (v.getId()) {
             case R.id.textview_stuinfo:
-                new SortTast(INDEX_ID).execute();
-                setImageBackGround(INDEX_ID);
+                if (TextUtils.isEmpty(searchContent)) {
+                    new SortTast(INDEX_ID).execute();
+                    setImageBackGround(INDEX_ID);
+                }
                 break;
             case R.id.textview_stucheckinrate:
-                new SortTast(INDEX_CHECKIN_RATE).execute();
-                setImageBackGround(INDEX_CHECKIN_RATE);
+                if (TextUtils.isEmpty(searchContent)) {
+                    new SortTast(INDEX_CHECKIN_RATE).execute();
+                    setImageBackGround(INDEX_CHECKIN_RATE);
+                }
                 break;
             case R.id.textview_correctrate:
-                new SortTast(INDEX_CORRECT_RATE).execute();
-                setImageBackGround(INDEX_CORRECT_RATE);
+                if (TextUtils.isEmpty(searchContent)) {
+                    new SortTast(INDEX_CORRECT_RATE).execute();
+                    setImageBackGround(INDEX_CORRECT_RATE);
+                }
                 break;
             case R.id.imageview_clear:
                 searchEditText.setText("");
@@ -201,7 +203,6 @@ public class StuCentreFragment extends BaseFragment implements OnItemClickListen
         sortById.setCompoundDrawables(null, null, null, null);
         sortByCheckInRate.setCompoundDrawables(null, null, null, null);
         sortByCorrectRate.setCompoundDrawables(null, null, null, null);
-
         switch (index) {
             case INDEX_ID:
                 sortById.setCompoundDrawables(null, null, null, drawable);
@@ -232,21 +233,12 @@ public class StuCentreFragment extends BaseFragment implements OnItemClickListen
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        // if (null == mCurrentView) {
-        // mCurrentView = view;
-        // } else {
-        // mCurrentView.setBackgroundColor(getResources().getColor(R.color.white));
-        // }
-        // view.setBackgroundColor(getResources().getColor(R.color.list_blue_background));
-        // mCurrentView = view;
-
         Intent intent = new Intent(getActivity(), StuDetailsActivity.class);
         intent.putExtra(StuCentreFragment.CURRENT_STU_KEY, mAdapter.getItem(position));
         startActivity(intent);
     }
 
     private class SortTast extends AsyncTask<Integer, Integer, Integer> {
-
         private int index;
 
         public SortTast(int index) {
@@ -270,6 +262,5 @@ public class StuCentreFragment extends BaseFragment implements OnItemClickListen
             }
             return null;
         }
-
     }
 }

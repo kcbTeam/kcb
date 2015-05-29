@@ -26,6 +26,7 @@ import com.kcbTeam.R;
 public class SetTestTimeActivity extends BaseActivity implements OnItemClickListener {
 
     private TextView testNameTextView;
+    private TextView testTimeTextView;
     private Slider testTimeSlider;
 
     private ButtonFlat finishButton;
@@ -51,7 +52,8 @@ public class SetTestTimeActivity extends BaseActivity implements OnItemClickList
 
     @Override
     protected void initView() {
-        testNameTextView = (TextView) findViewById(R.id.textview_test_name);
+        testNameTextView = (TextView) findViewById(R.id.textview_testname);
+        testTimeTextView = (TextView) findViewById(R.id.textview_testtime);
 
         finishButton = (ButtonFlat) findViewById(R.id.button_submit);
         finishButton.setOnClickListener(this);
@@ -61,7 +63,10 @@ public class SetTestTimeActivity extends BaseActivity implements OnItemClickList
         testTimeSlider.setOnValueChangedListener(new OnValueChangedListener() {
 
             @Override
-            public void onValueChanged(int value) {}
+            public void onValueChanged(int value) {
+                testTimeTextView.setText(String.format(getString(R.string.settime_hint),
+                        mTest.getQuestionNum(), value));
+            }
         });
 
         listView = (ListView) findViewById(R.id.listview_questions);
@@ -72,6 +77,9 @@ public class SetTestTimeActivity extends BaseActivity implements OnItemClickList
     protected void initData() {
         mTest = (Test) getIntent().getSerializableExtra(DATA_TEST);
         testNameTextView.setText(mTest.getName());
+        testTimeTextView.setText(String.format(getString(R.string.settime_hint),
+                mTest.getQuestionNum(), 5));
+
         mAdapter = new SetTestTimeAdapter(this, mTest);
         listView.setAdapter(mAdapter);
     }

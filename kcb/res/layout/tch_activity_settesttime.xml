@@ -8,7 +8,7 @@
     tools:ignore="contentDescription" >
 
     <TextView
-        android:id="@+id/textview_test_name"
+        android:id="@+id/textview_testname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/activity_header_shadow"
@@ -31,13 +31,12 @@
     </com.kcb.library.view.buttonflat.ButtonFlat>
 
     <TextView
-        android:id="@+id/textview_settime_hint"
+        android:id="@+id/textview_testtime"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textview_test_name"
+        android:layout_below="@id/textview_testname"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
-        android:text="@string/settime_hint"
         android:textColor="@color/black"
         android:textSize="@dimen/text_size_medium" />
 
@@ -45,7 +44,7 @@
         android:id="@+id/slider_testtime"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textview_settime_hint"
+        android:layout_below="@id/textview_testtime"
         android:layout_marginTop="16dp"
         android:background="@color/blue"
         widget:max="10"

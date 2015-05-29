@@ -18,6 +18,15 @@
         android:textColor="@color/black"
         android:textSize="@dimen/text_size_medium" />
 
+    <ImageView
+        android:id="@+id/imageview_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@id/textview_questionindex"
+        android:layout_marginRight="16dp"
+        android:src="@drawable/ic_mode_edit_grey600_24dp" />
+
     <TextView
         android:id="@+id/textview_title"
         android:layout_width="match_parent"
@@ -42,43 +51,26 @@
 
     <LinearLayout
         android:id="@+id/layout_A"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/tch_test_settime_choice_layout"
         android:layout_below="@id/view_divider0"
         android:layout_marginBottom="2dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="2dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal" >
+        android:layout_marginTop="2dp" >
 
         <TextView
             android:id="@+id/textview_tipa"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top"
-            android:layout_marginRight="4dp"
-            android:layout_marginTop="4dp"
-            android:text="@string/option_A"
-            android:textColor="@color/black_700"
-            android:textSize="@dimen/text_size_medium" />
+            style="@style/tch_test_settime_choice_tip"
+            android:text="@string/option_A" />
 
         <TextView
             android:id="@+id/textview_A"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:padding="4dp"
-            android:textColor="@color/black_700"
-            android:textSize="@dimen/text_size_medium" />
+            style="@style/tch_test_settime_choice" />
 
-        <com.kcb.library.view.checkbox.CheckBox
+        <ImageView
             android:id="@+id/checkBox_A"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_gravity="top"
-            android:background="@color/blue"
-            android:clickable="false" />
+            style="@style/tch_test_settime_checkicon"
+            android:layout_margin="4dp" />
     </LinearLayout>
 
     <View
@@ -92,42 +84,26 @@
 
     <LinearLayout
         android:id="@+id/layout_B"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/tch_test_settime_choice_layout"
         android:layout_below="@id/view_divider1"
         android:layout_marginBottom="2dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="2dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal" >
+        android:layout_marginTop="2dp" >
 
         <TextView
             android:id="@+id/textview_tipb"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top"
-            android:layout_marginRight="4dp"
-            android:layout_marginTop="4dp"
-            android:text="@string/option_B"
-            android:textColor="@color/black_700"
-            android:textSize="@dimen/text_size_medium" />
+            style="@style/tch_test_settime_choice_tip"
+            android:text="@string/option_B" />
 
         <TextView
             android:id="@+id/textview_B"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:padding="4dp"
-            android:textColor="@color/black_700"
-            android:textSize="@dimen/text_size_medium" />
+            style="@style/tch_test_settime_choice" />
 
-        <com.kcb.library.view.checkbox.CheckBox
+        <ImageView
             android:id="@+id/checkBox_B"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_gravity="top"
-            android:background="@color/blue" />
+            style="@style/tch_test_settime_checkicon"
+            android:layout_margin="4dp" />
     </LinearLayout>
 
     <View
@@ -141,42 +117,26 @@
 
     <LinearLayout
         android:id="@+id/layout_C"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/tch_test_settime_choice_layout"
         android:layout_below="@id/view_divider2"
         android:layout_marginBottom="2dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="2dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal" >
+        android:layout_marginTop="2dp" >
 
         <TextView
             android:id="@+id/textview_tipc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top"
-            android:layout_marginRight="4dp"
-            android:layout_marginTop="4dp"
-            android:text="@string/option_C"
-            android:textColor="@color/black_700"
-            android:textSize="@dimen/text_size_medium" />
+            style="@style/tch_test_settime_choice_tip"
+            android:text="@string/option_C" />
 
         <TextView
             android:id="@+id/textview_C"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:padding="4dp"
-            android:textColor="@color/black_700"
-            android:textSize="@dimen/text_size_medium" />
+            style="@style/tch_test_settime_choice" />
 
-        <com.kcb.library.view.checkbox.CheckBox
+        <ImageView
             android:id="@+id/checkBox_C"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_gravity="top"
-            android:background="@color/blue" />
+            style="@style/tch_test_settime_checkicon"
+            android:layout_margin="4dp" />
     </LinearLayout>
 
     <View
@@ -190,42 +150,26 @@
 
     <LinearLayout
         android:id="@+id/layout_D"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/tch_test_settime_choice_layout"
         android:layout_below="@id/view_divider3"
         android:layout_marginBottom="2dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="2dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal" >
+        android:layout_marginTop="2dp" >
 
         <TextView
             android:id="@+id/textview_tipd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top"
-            android:layout_marginRight="4dp"
-            android:layout_marginTop="4dp"
-            android:text="@string/option_D"
-            android:textColor="@color/black_700"
-            android:textSize="@dimen/text_size_medium" />
+            style="@style/tch_test_settime_choice_tip"
+            android:text="@string/option_D" />
 
         <TextView
             android:id="@+id/textview_D"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:padding="4dp"
-            android:textColor="@color/black_700"
-            android:textSize="@dimen/text_size_medium" />
+            style="@style/tch_test_settime_choice" />
 
-        <com.kcb.library.view.checkbox.CheckBox
+        <ImageView
             android:id="@+id/checkBox_D"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_gravity="top"
-            android:background="@color/blue" />
+            style="@style/tch_test_settime_checkicon"
+            android:layout_margin="4dp" />
     </LinearLayout>
 
 </RelativeLayout>

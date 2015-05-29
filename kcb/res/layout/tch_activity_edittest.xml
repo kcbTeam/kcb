@@ -60,13 +60,9 @@
 
     <ImageView
         android:id="@+id/imageview_delete_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/tch_test_delete_bitmap"
         android:layout_alignRight="@id/edittext_question_title"
-        android:layout_alignTop="@id/edittext_question_title"
-        android:padding="4dp"
-        android:src="@drawable/ic_cancel_black_24dp"
-        android:visibility="invisible" />
+        android:layout_alignTop="@id/edittext_question_title" />
 
     <TextView
         android:id="@+id/input_options_hint"
@@ -92,25 +88,16 @@
 
             <LinearLayout
                 android:id="@+id/layout_A"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/tch_test_choice_layout"
                 android:layout_marginBottom="4dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="8dp"
-                android:layout_marginTop="4dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal" >
+                android:layout_marginTop="4dp" >
 
                 <TextView
                     android:id="@+id/textview_A"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="top"
-                    android:layout_marginRight="4dp"
-                    android:layout_marginTop="4dp"
-                    android:text="@string/option_A"
-                    android:textColor="@color/black_700"
-                    android:textSize="@dimen/text_size_medium" />
+                    style="@style/tch_test_choice_tip"
+                    android:text="@string/option_A" />
 
                 <RelativeLayout
                     android:layout_width="0dp"
@@ -120,56 +107,33 @@
 
                     <EditText
                         android:id="@+id/edittext_A"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/stu_checkin_textview"
-                        android:hint="@string/edit_title_hint"
-                        android:padding="8dp"
-                        android:textColor="@color/black_700"
-                        android:textColorHint="@color/black_400"
-                        android:textSize="@dimen/text_size_medium" />
+                        style="@style/tch_test_input_choice" />
 
                     <ImageView
                         android:id="@+id/imageview_delete_a"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        style="@style/tch_test_delete_bitmap"
                         android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:padding="4dp"
-                        android:src="@drawable/ic_cancel_black_24dp"
-                        android:visibility="invisible" />
+                        android:layout_alignTop="@id/edittext_A" />
                 </RelativeLayout>
 
                 <com.kcb.library.view.checkbox.CheckBox
                     android:id="@+id/checkBox_A"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_gravity="top"
-                    android:background="@color/blue" />
+                    style="@style/tch_test_checkbox" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/layout_B"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/tch_test_choice_layout"
                 android:layout_below="@id/layout_A"
                 android:layout_marginBottom="4dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="8dp"
-                android:layout_marginTop="4dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal" >
+                android:layout_marginTop="4dp" >
 
                 <TextView
                     android:id="@+id/textview_B"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="top"
-                    android:layout_marginRight="4dp"
-                    android:layout_marginTop="4dp"
-                    android:text="@string/option_B"
-                    android:textColor="@color/black_700"
-                    android:textSize="@dimen/text_size_medium" />
+                    style="@style/tch_test_choice_tip"
+                    android:text="@string/option_B" />
 
                 <RelativeLayout
                     android:layout_width="0dp"
@@ -179,55 +143,33 @@
 
                     <EditText
                         android:id="@+id/edittext_B"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/stu_checkin_textview"
-                        android:inputType="none"
-                        android:padding="8dp"
-                        android:textColor="@color/black_700"
-                        android:textSize="@dimen/text_size_medium" />
+                        style="@style/tch_test_input_choice" />
 
                     <ImageView
                         android:id="@+id/imageview_delete_b"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        style="@style/tch_test_delete_bitmap"
                         android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:padding="4dp"
-                        android:src="@drawable/ic_cancel_black_24dp"
-                        android:visibility="invisible" />
+                        android:layout_alignTop="@id/edittext_B" />
                 </RelativeLayout>
 
                 <com.kcb.library.view.checkbox.CheckBox
                     android:id="@+id/checkBox_B"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_gravity="top"
-                    android:background="@color/blue" />
+                    style="@style/tch_test_checkbox" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/layout_C"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/tch_test_choice_layout"
                 android:layout_below="@id/layout_B"
                 android:layout_marginBottom="4dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="8dp"
-                android:layout_marginTop="4dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal" >
+                android:layout_marginTop="4dp" >
 
                 <TextView
                     android:id="@+id/textview_C"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="top"
-                    android:layout_marginRight="4dp"
-                    android:layout_marginTop="4dp"
-                    android:text="@string/option_C"
-                    android:textColor="@color/black_700"
-                    android:textSize="@dimen/text_size_medium" />
+                    style="@style/tch_test_choice_tip"
+                    android:text="@string/option_C" />
 
                 <RelativeLayout
                     android:layout_width="0dp"
@@ -237,55 +179,33 @@
 
                     <EditText
                         android:id="@+id/edittext_C"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/stu_checkin_textview"
-                        android:inputType="none"
-                        android:padding="8dp"
-                        android:textColor="@color/black_700"
-                        android:textSize="@dimen/text_size_medium" />
+                        style="@style/tch_test_input_choice" />
 
                     <ImageView
                         android:id="@+id/imageview_delete_c"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        style="@style/tch_test_delete_bitmap"
                         android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:padding="4dp"
-                        android:src="@drawable/ic_cancel_black_24dp"
-                        android:visibility="invisible" />
+                        android:layout_alignTop="@id/edittext_C" />
                 </RelativeLayout>
 
                 <com.kcb.library.view.checkbox.CheckBox
                     android:id="@+id/checkBox_C"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_gravity="top"
-                    android:background="@color/blue" />
+                    style="@style/tch_test_checkbox" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/layout_D"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/tch_test_choice_layout"
                 android:layout_below="@id/layout_C"
                 android:layout_marginBottom="4dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="8dp"
-                android:layout_marginTop="4dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal" >
+                android:layout_marginTop="4dp" >
 
                 <TextView
                     android:id="@+id/textview_D"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="top"
-                    android:layout_marginRight="4dp"
-                    android:layout_marginTop="4dp"
-                    android:text="@string/option_D"
-                    android:textColor="@color/black_700"
-                    android:textSize="@dimen/text_size_medium" />
+                    style="@style/tch_test_choice_tip"
+                    android:text="@string/option_D" />
 
                 <RelativeLayout
                     android:layout_width="0dp"
@@ -295,31 +215,18 @@
 
                     <EditText
                         android:id="@+id/edittext_D"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/stu_checkin_textview"
-                        android:inputType="none"
-                        android:padding="8dp"
-                        android:textColor="@color/black_700"
-                        android:textSize="@dimen/text_size_medium" />
+                        style="@style/tch_test_input_choice" />
 
                     <ImageView
                         android:id="@+id/imageview_delete_d"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        style="@style/tch_test_delete_bitmap"
                         android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:padding="4dp"
-                        android:src="@drawable/ic_cancel_black_24dp"
-                        android:visibility="invisible" />
+                        android:layout_alignTop="@id/edittext_D" />
                 </RelativeLayout>
 
                 <com.kcb.library.view.checkbox.CheckBox
                     android:id="@+id/checkBox_D"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_gravity="top"
-                    android:background="@color/blue" />
+                    style="@style/tch_test_checkbox" />
             </LinearLayout>
         </RelativeLayout>
     </ScrollView>

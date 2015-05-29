@@ -14,12 +14,13 @@ import android.view.View;
 
 import com.edmodo.cropper.CropImageView;
 import com.kcb.common.base.BaseActivity;
+import com.kcb.common.listener.DelayClickListener;
+import com.kcb.library.view.PaperButton;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcbTeam.R;
 
 public class CropPictureActivity extends BaseActivity {
-    @SuppressWarnings("unused")
-    private static final String TAG = "CropPictureActivity";
+
     private static final int DEFAULT_ASPECT_RATIO_VALUES = 10;
     private static final int ROTATE_NINETY_DEGREES = 90;
     private static final String ASPECT_RATIO_X = "ASPECT_RATIO_X";
@@ -28,13 +29,13 @@ public class CropPictureActivity extends BaseActivity {
     private int mAspectRatioX = DEFAULT_ASPECT_RATIO_VALUES;
     private int mAspectRatioY = DEFAULT_ASPECT_RATIO_VALUES;
 
-    Bitmap mBitMap;
-    Bitmap croppedImage;
+    private Bitmap mBitMap;
+    private Bitmap croppedImage;
     private CropImageView cropImageView;
 
+    private ButtonFlat backButton;
     private ButtonFlat rotateButton;
-    private ButtonFlat completeButton;
-    private ButtonFlat cancelButton;
+    private PaperButton completeButton;
 
     @Override
     protected void onSaveInstanceState(Bundle bundle) {
@@ -54,7 +55,7 @@ public class CropPictureActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.tch_activity_cutpicture);
+        setContentView(R.layout.tch_activity_croppicture);
 
         initData();
         initView();
@@ -62,16 +63,17 @@ public class CropPictureActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        cropImageView = (CropImageView) findViewById(R.id.CropImageView);
-        cropImageView.setImageBitmap(mBitMap);
-        rotateButton = (ButtonFlat) findViewById(R.id.Button_rotate);
+        backButton = (ButtonFlat) findViewById(R.id.button_back);
+        backButton.setOnClickListener(this);
+
+        rotateButton = (ButtonFlat) findViewById(R.id.button_rotate);
         rotateButton.setOnClickListener(this);
 
-        completeButton = (ButtonFlat) findViewById(R.id.button_complete);
-        completeButton.setOnClickListener(this);
+        cropImageView = (CropImageView) findViewById(R.id.CropImageView);
+        cropImageView.setImageBitmap(mBitMap);
 
-        cancelButton = (ButtonFlat) findViewById(R.id.button_back);
-        cancelButton.setOnClickListener(this);
+        completeButton = (PaperButton) findViewById(R.id.button_complete);
+        completeButton.setOnClickListener(mClickListener);
     }
 
     @Override
@@ -90,24 +92,42 @@ public class CropPictureActivity extends BaseActivity {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.Button_rotate:
-                cropImageView.rotateImage(ROTATE_NINETY_DEGREES);
-                break;
-            case R.id.button_complete:
-                croppedImage = cropImageView.getCroppedImage();
-                Intent intent = new Intent();
-                intent.putExtra("CUTTED_PICTURE", Uri.parse(MediaStore.Images.Media.insertImage(
-                        getContentResolver(), croppedImage, null, null)));
-                setResult(RESULT_OK, intent);
-                finish();
-                break;
             case R.id.button_back:
                 finish();
+                break;
+            case R.id.button_rotate:
+                cropImageView.rotateImage(ROTATE_NINETY_DEGREES);
                 break;
             default:
                 break;
         }
     }
+
+    private DelayClickListener mClickListener = new DelayClickListener(
+            DelayClickListener.DELAY_PAPER_BUTTON) {
+
+        @Override
+        public void doClick(View v) {
+            switch (v.getId()) {
+                case R.id.button_back:
+                    finish();
+                    break;
+                case R.id.button_rotate:
+                    cropImageView.rotateImage(ROTATE_NINETY_DEGREES);
+                    break;
+                case R.id.button_complete:
+                    croppedImage = cropImageView.getCroppedImage();
+                    Intent intent = new Intent();
+                    intent.putExtra("CUTTED_PICTURE", Uri.parse(MediaStore.Images.Media
+                            .insertImage(getContentResolver(), croppedImage, null, null)));
+                    setResult(RESULT_OK, intent);
+                    finish();
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
 
     private Bitmap ResizeBitmap(Bitmap bitmap, int newWidth) {
         int width = bitmap.getWidth();
