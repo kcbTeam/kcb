@@ -25,20 +25,16 @@ import com.kcbTeam.R;
 public class SetTestTimeActivity extends BaseActivity {
 
     private TextView testNameTextView;
-    private TextView testTimeTextView;
-    private Slider testTimeSlider;
-
     private ButtonFlat finishButton;
+
+    private TextView testTimeTextView;
+    private Slider slider;
 
     private ListView listView;
 
     private Test mTest;
-    private SetTestTimeAdapter mAdapter;
-
-    public final static String MODIFY_QUESTION_KEY = "modify_question";
-    private final int MODIFY_QUESTION = 100;
-
     private EditQuestionListener mEditListener;
+    private SetTestTimeAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,14 +48,14 @@ public class SetTestTimeActivity extends BaseActivity {
     @Override
     protected void initView() {
         testNameTextView = (TextView) findViewById(R.id.textview_testname);
-        testTimeTextView = (TextView) findViewById(R.id.textview_testtime);
-
-        finishButton = (ButtonFlat) findViewById(R.id.button_submit);
+        finishButton = (ButtonFlat) findViewById(R.id.button_finish);
         finishButton.setOnClickListener(this);
 
-        testTimeSlider = (Slider) findViewById(R.id.slider_testtime);
-        testTimeSlider.setValue(5);
-        testTimeSlider.setOnValueChangedListener(new OnValueChangedListener() {
+        testTimeTextView = (TextView) findViewById(R.id.textview_testtime);
+
+        slider = (Slider) findViewById(R.id.slider_testtime);
+        slider.setValue(5);
+        slider.setOnValueChangedListener(new OnValueChangedListener() {
 
             @Override
             public void onValueChanged(int value) {
@@ -74,6 +70,7 @@ public class SetTestTimeActivity extends BaseActivity {
     @Override
     protected void initData() {
         mTest = (Test) getIntent().getSerializableExtra(DATA_TEST);
+
         testNameTextView.setText(mTest.getName());
         testTimeTextView.setText(String.format(getString(R.string.settime_hint),
                 mTest.getQuestionNum(), 5));
@@ -93,16 +90,19 @@ public class SetTestTimeActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == EditQuestionActivty.REQUEST_EDIT) {
-            int index = data.getIntExtra(EditQuestionActivty.DATA_INDEX, 0);
             if (resultCode == RESULT_OK) {
+                int index = data.getIntExtra(EditQuestionActivty.DATA_INDEX, 0);
                 Question question =
                         (Question) data.getSerializableExtra(EditQuestionActivty.DATA_QUESTION);
                 mAdapter.setItem(index, question);
                 mAdapter.notifyDataSetChanged();
                 ToastUtil.toast("已保存");
             } else if (resultCode == EditQuestionActivty.RESULT_DELETE) {
+                int index = data.getIntExtra(EditQuestionActivty.DATA_INDEX, 0);
                 mAdapter.deleteItem(index);
                 mAdapter.notifyDataSetChanged();
+                testTimeTextView.setText(String.format(getString(R.string.settime_hint),
+                        mAdapter.getCount(), slider.getValue()));
             }
         }
     }
@@ -111,8 +111,9 @@ public class SetTestTimeActivity extends BaseActivity {
     public void onClick(View v) {
         if (v == finishButton) {
             mTest.setDate(new Date());
-            mTest.setTime(testTimeSlider.getValue());
-            // TODO:change mcurrenttes to json object
+            mTest.setTime(slider.getValue());
+            // TODO save to db;
+            finish();
         }
     }
 
@@ -128,11 +129,10 @@ public class SetTestTimeActivity extends BaseActivity {
                 sureListener, R.string.cancel, null);
     }
 
-    private static final String DATA_TEST = "current_course_key";
+    private static final String DATA_TEST = "data_test";
 
     public static void start(Context context, Test test) {
         Intent intent = new Intent(context, SetTestTimeActivity.class);
-        test.changeTestToSerializable();
         intent.putExtra(DATA_TEST, test);
         context.startActivity(intent);
     }

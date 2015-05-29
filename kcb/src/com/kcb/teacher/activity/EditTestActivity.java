@@ -41,7 +41,9 @@ import com.kcbTeam.R;
 public class EditTestActivity extends BaseActivity implements OnLongClickListener {
 
     private TextView testNameTextView;
-    private TextView questionNumTextView;
+    private ButtonFlat cancelButton;
+
+    private TextView inputIndexTextView;
 
     private EditText titleEditText;
     private ImageView deleteTitleImageView;
@@ -98,7 +100,10 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
     @Override
     protected void initView() {
         testNameTextView = (TextView) findViewById(R.id.textview_title);
-        questionNumTextView = (TextView) findViewById(R.id.textview_question_num);
+        cancelButton = (ButtonFlat) findViewById(R.id.button_cancel);
+        cancelButton.setOnClickListener(this);
+
+        inputIndexTextView = (TextView) findViewById(R.id.textview_input_problem_tip);
 
         lastButton = (ButtonFlat) findViewById(R.id.button_last);
         lastButton.setOnClickListener(this);
@@ -145,7 +150,7 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
         Intent intent = getIntent();
         mAction = intent.getAction();
         mTest = (Test) intent.getSerializableExtra(DATA_TEST);
-        testNameTextView.setText(mTest.getName());
+        testNameTextView.setText(mTest.getName() + "（共" + mTest.getQuestionNum() + "题）");
         showQuestion();
     }
 
@@ -161,6 +166,9 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.button_cancel:
+                onBackPressed();
+                break;
             case R.id.imageview_delete_title:
                 setEditMode(FLAG_TITLE, EDIT_MODE_TEXT);
                 getCurrentQuestion().getTitle().setText("");
@@ -218,13 +226,13 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
                 ToastUtil.toast(String
                         .format(getResources().getString(R.string.format_edit_empty_hint),
                                 unCompletedIndex));
-                return;
+            } else {
+                // if add test, goto set time activity; if edit test, finish;
+                if (ACTION_ADD_TEST.equals(mAction)) {
+                    SetTestTimeActivity.start(EditTestActivity.this, mTest);
+                }
+                finish();
             }
-            // if add test, goto set time activity; if edit test, finish;
-            if (ACTION_ADD_TEST.equals(mAction)) {
-                SetTestTimeActivity.start(EditTestActivity.this, mTest);
-            }
-            finish();
         } else {
             if (!getCurrentQuestion().equal(mTempQuestion)) {
                 ToastUtil.toast(String.format(getResources().getString(R.string.format_edit_save),
@@ -237,6 +245,10 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
 
     // four click functions: add ,delete ,next ,last.
     private void addQuestion() {
+        if (mTest.getQuestionNum() == 9) {
+            ToastUtil.toast("最多只能有9题");
+            return;
+        }
         final int questionNum = mTest.getQuestionNum() + 1;
         DialogUtil.showNormalDialog(this, R.string.dialog_title_add,
                 String.format(getString(R.string.add_msg), questionNum), R.string.sure,
@@ -253,24 +265,25 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
     }
 
     private void deleteQuestion() {
-        if (mTest.getQuestionNum() > 1) {
-            DialogUtil.showNormalDialog(this, R.string.dialog_title_delete, R.string.delete_msg,
-                    R.string.sure, new OnClickListener() {
+        DialogUtil.showNormalDialog(this, R.string.dialog_title_delete,
+                String.format(getString(R.string.delete_question_tip), mCurrentQuestionIndex + 1),
+                R.string.sure, new OnClickListener() {
 
-                        @Override
-                        public void onClick(View v) {
-                            if (mTest.getQuestionNum() > 1) {
-                                int originQuestionNum = mTest.getQuestionNum();
-                                mTest.deleteQuestion(mCurrentQuestionIndex);
-                                mCurrentQuestionIndex =
-                                        mCurrentQuestionIndex == originQuestionNum - 1 ? mTest
-                                                .getQuestionNum() - 1 : mCurrentQuestionIndex;
-                                showQuestion();
-                                ToastUtil.toast(R.string.delete_success);
-                            }
+                    @Override
+                    public void onClick(View v) {
+                        if (mTest.getQuestionNum() > 1) {
+                            int originQuestionNum = mTest.getQuestionNum();
+                            mTest.deleteQuestion(mCurrentQuestionIndex);
+                            mCurrentQuestionIndex =
+                                    mCurrentQuestionIndex == originQuestionNum - 1 ? mTest
+                                            .getQuestionNum() - 1 : mCurrentQuestionIndex;
+                            showQuestion();
+                            ToastUtil.toast(R.string.delete_success);
+                        } else {
+                            finish();
                         }
-                    }, R.string.cancel, null);
-        }
+                    }
+                }, R.string.cancel, null);
     }
 
     /**
@@ -420,9 +433,10 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
     }
 
     private void showQuestionNum() {
-        questionNumTextView.setText(String.format(
-                getResources().getString(R.string.format_question_num), mCurrentQuestionIndex + 1,
+        testNameTextView.setText(String.format(getString(R.string.test_name_num), mTest.getName(),
                 mTest.getQuestionNum()));
+        inputIndexTextView.setText(String.format(getString(R.string.problem_hint),
+                mCurrentQuestionIndex + 1));
     }
 
     private void showNextButton() {

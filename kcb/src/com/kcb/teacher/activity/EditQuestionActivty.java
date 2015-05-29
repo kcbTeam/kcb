@@ -42,7 +42,8 @@ import com.kcbTeam.R;
  */
 public class EditQuestionActivty extends BaseActivity implements OnLongClickListener {
 
-    private TextView testNameTextView;
+    private TextView questionNumTextView;
+    private ButtonFlat backButton;
     private ButtonFlat deleteButton;
 
     private EditText titleEditText;
@@ -91,8 +92,9 @@ public class EditQuestionActivty extends BaseActivity implements OnLongClickList
 
     @Override
     protected void initView() {
-        testNameTextView = (TextView) findViewById(R.id.textview_title);
-
+        questionNumTextView = (TextView) findViewById(R.id.textview_title);
+        backButton = (ButtonFlat) findViewById(R.id.button_back);
+        backButton.setOnClickListener(this);
         deleteButton = (ButtonFlat) findViewById(R.id.button_delete);
         deleteButton.setOnClickListener(this);
 
@@ -135,7 +137,7 @@ public class EditQuestionActivty extends BaseActivity implements OnLongClickList
         Intent intent = getIntent();
         mQuestion = (Question) intent.getSerializableExtra(DATA_QUESTION);
         mIndex = intent.getIntExtra(DATA_INDEX, 0);
-        testNameTextView.setText("第" + (mIndex + 1) + "题");
+        questionNumTextView.setText("第" + (mIndex + 1) + "题");
         showQuestion();
     }
 
@@ -151,6 +153,22 @@ public class EditQuestionActivty extends BaseActivity implements OnLongClickList
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.button_back:
+                finish();
+                break;
+            case R.id.button_delete:
+                DialogUtil.showNormalDialog(this, R.string.dialog_title_delete,
+                        R.string.delete_msg, R.string.sure, new OnClickListener() {
+
+                            @Override
+                            public void onClick(View v) {
+                                Intent intent = new Intent();
+                                intent.putExtra(DATA_INDEX, mIndex);
+                                setResult(RESULT_DELETE, intent);
+                                finish();
+                            }
+                        }, R.string.cancel, null);
+                break;
             case R.id.imageview_delete_title:
                 setEditMode(FLAG_TITLE, EDIT_MODE_TEXT);
                 mQuestion.getTitle().setText("");
@@ -171,18 +189,6 @@ public class EditQuestionActivty extends BaseActivity implements OnLongClickList
                 setEditMode(FLAG_D, EDIT_MODE_TEXT);
                 mQuestion.getChoiceD().setText("");
                 break;
-            case R.id.button_delete:
-                DialogUtil.showNormalDialog(this, R.string.dialog_title_delete,
-                        R.string.delete_msg, R.string.sure, new OnClickListener() {
-
-                            @Override
-                            public void onClick(View v) {
-                                Intent intent = new Intent();
-                                intent.putExtra(DATA_INDEX, mIndex);
-                                setResult(RESULT_DELETE, intent);
-                            }
-                        }, R.string.cancel, null);
-                break;
             default:
                 break;
         }
@@ -200,6 +206,7 @@ public class EditQuestionActivty extends BaseActivity implements OnLongClickList
                     intent.putExtra(DATA_INDEX, mIndex);
                     intent.putExtra(DATA_QUESTION, mQuestion);
                     setResult(RESULT_OK, intent);
+                    finish();
                     break;
                 default:
                     break;
@@ -464,26 +471,6 @@ public class EditQuestionActivty extends BaseActivity implements OnLongClickList
                 break;
         }
         return deleteIcon;
-    }
-
-    /**
-     * 
-     * @title: onBackPressed
-     * @description: backpressed response
-     * @author: ZQJ
-     * @date: 2015年5月19日 下午9:21:02
-     */
-    @Override
-    public void onBackPressed() {
-        OnClickListener sureListener = new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        };
-        DialogUtil.showNormalDialog(this, R.string.leave, R.string.sureLeave, R.string.sure,
-                sureListener, R.string.cancel, null);
     }
 
     private static final String ACTION_EDIT_QUESTION = "action_editQuestion";

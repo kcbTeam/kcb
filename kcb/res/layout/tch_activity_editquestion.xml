@@ -48,7 +48,7 @@
         android:layout_marginBottom="8dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
-        android:text="@string/problem_hint"
+        android:text="输入题目"
         android:textColor="@color/black"
         android:textSize="@dimen/text_size_medium" />
 
@@ -63,7 +63,6 @@
         android:background="@drawable/stu_checkin_textview"
         android:gravity="top|left"
         android:hint="@string/edit_title_hint"
-        android:inputType="none"
         android:lineSpacingExtra="2dp"
         android:lines="7"
         android:padding="8dp"
@@ -120,7 +119,9 @@
 
                     <EditText
                         android:id="@+id/edittext_A"
-                        style="@style/tch_test_input_choice" />
+                        style="@style/tch_test_input_choice"
+                        android:hint="@string/edit_title_hint"
+                        android:textColorHint="@color/black_400" />
 
                     <ImageView
                         android:id="@+id/imageview_delete_a"

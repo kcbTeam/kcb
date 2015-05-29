@@ -130,9 +130,9 @@ public class CheckTestDetailsActivity extends BaseActivity {
     }
 
     private void showQuestionNum() {
-        questionNumTextView.setText(String.format(
-                getResources().getString(R.string.format_question_num), mCurrentPosition + 1,
-                mQuestionNum));
+        // questionNumTextView.setText(String.format(
+        // getResources().getString(R.string.format_question_num), mCurrentPosition + 1,
+        // mQuestionNum));
     }
 
     @SuppressWarnings("deprecation")
