@@ -1,20 +1,15 @@
 package com.kcb.student.adapter;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.kcb.library.view.buttonflat.ButtonFlat;
-import com.kcb.student.activity.LookTestResultActivity;
-import com.kcb.student.fragment.TestFragment;
 import com.kcbTeam.R;
 
 /**
@@ -25,12 +20,12 @@ import com.kcbTeam.R;
  */
 public class TestResultAdapter extends BaseAdapter {
 
-    ArrayList<String> Data = null;
+    public ArrayList<HashMap<String,Object>> Data = null;
     Context context;
-
-    public TestResultAdapter(Context context, List<String> list) {
+    
+    public TestResultAdapter(Context context, ArrayList<HashMap<String,Object>> list) {
         this.context = context;
-        this.Data = (ArrayList<String>) list;
+        this.Data = (ArrayList<HashMap<String,Object>>) list;
     }
 
     @Override
@@ -55,28 +50,22 @@ public class TestResultAdapter extends BaseAdapter {
             holder = new ViewHolder();
             convertView = LayoutInflater.from(context).inflate(R.layout.stu_view_list, null);
             holder.testname = (TextView) convertView.findViewById(R.id.testname);
-            holder.nextButtonFlat = (ButtonFlat) convertView.findViewById(R.id.button_testdetail);
+            holder.questionnum = (TextView) convertView.findViewById(R.id.questonnumber);
+            holder.testtime = (TextView) convertView.findViewById(R.id.testtime);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        holder.testname.setText(Data.get(position).toString());
-        holder.nextButtonFlat.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, LookTestResultActivity.class);
-                intent.putExtra("testTitle1", Data.get(position));
-                intent.putExtra("questionInfo", TestFragment.string);
-                context.startActivity(intent);
-            }
-        });
+        holder.testname.setText(Data.get(position).get("testname").toString());
+        holder.questionnum.setText(Data.get(position).get("questionnum").toString());
+        holder.testtime.setText(Data.get(position).get("testtime").toString());
         return convertView;
     }
 
     public final class ViewHolder {
 
         public TextView testname;
-        public ButtonFlat nextButtonFlat;
+        public TextView questionnum;
+        public TextView testtime;
     }
 }

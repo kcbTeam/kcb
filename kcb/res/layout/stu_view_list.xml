@@ -11,16 +11,18 @@
         android:layout_height="wrap_content"
         android:paddingTop="10dip"
         android:paddingBottom="10dip" />
-    <com.kcb.library.view.buttonflat.ButtonFlat
-        android:id="@+id/button_testdetail"
-        style="@style/common_top_button"
-        android:layout_alignParentRight="true"
-        buttonflat:rippleSpeed="6" >
-
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:src="@drawable/ic_action_next" />
-    </com.kcb.library.view.buttonflat.ButtonFlat>
+    <TextView
+        android:id="@+id/questonnumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="140dp"
+        android:paddingTop="10dip"
+        android:paddingBottom="10dip" />
+    <TextView
+        android:id="@+id/testtime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="250dp"
+        android:paddingTop="10dip"
+        android:paddingBottom="10dip" />
 </RelativeLayout>
