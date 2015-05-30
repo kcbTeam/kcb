@@ -21,7 +21,7 @@
         android:layout_alignBottom="@id/edittext_search"
         android:layout_alignRight="@id/edittext_search"
         android:layout_marginBottom="18dp"
-        android:background="@drawable/ic_cancel_black_24dp"
+        android:background="@drawable/ic_cancel_grey600_24dp"
         android:visibility="invisible" />
 
     <LinearLayout

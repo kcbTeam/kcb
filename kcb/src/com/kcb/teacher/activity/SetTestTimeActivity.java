@@ -7,8 +7,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -19,26 +17,24 @@ import com.kcb.library.slider.Slider;
 import com.kcb.library.slider.Slider.OnValueChangedListener;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.teacher.adapter.SetTestTimeAdapter;
+import com.kcb.teacher.adapter.SetTestTimeAdapter.EditQuestionListener;
 import com.kcb.teacher.model.test.Question;
 import com.kcb.teacher.model.test.Test;
 import com.kcbTeam.R;
 
-public class SetTestTimeActivity extends BaseActivity implements OnItemClickListener {
+public class SetTestTimeActivity extends BaseActivity {
 
     private TextView testNameTextView;
-    private Slider testTimeSlider;
-
     private ButtonFlat finishButton;
+
+    private TextView testTimeTextView;
+    private Slider slider;
 
     private ListView listView;
 
     private Test mTest;
+    private EditQuestionListener mEditListener;
     private SetTestTimeAdapter mAdapter;
-
-    private int mPositonIndex;
-
-    public final static String MODIFY_QUESTION_KEY = "modify_question";
-    private final int MODIFY_QUESTION = 100;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,51 +47,62 @@ public class SetTestTimeActivity extends BaseActivity implements OnItemClickList
 
     @Override
     protected void initView() {
-        testNameTextView = (TextView) findViewById(R.id.textview_test_name);
-
-        finishButton = (ButtonFlat) findViewById(R.id.button_submit);
+        testNameTextView = (TextView) findViewById(R.id.textview_testname);
+        finishButton = (ButtonFlat) findViewById(R.id.button_finish);
         finishButton.setOnClickListener(this);
 
-        testTimeSlider = (Slider) findViewById(R.id.slider_testtime);
-        testTimeSlider.setValue(5);
-        testTimeSlider.setOnValueChangedListener(new OnValueChangedListener() {
+        testTimeTextView = (TextView) findViewById(R.id.textview_testtime);
+
+        slider = (Slider) findViewById(R.id.slider_testtime);
+        slider.setValue(5);
+        slider.setOnValueChangedListener(new OnValueChangedListener() {
 
             @Override
-            public void onValueChanged(int value) {}
+            public void onValueChanged(int value) {
+                testTimeTextView.setText(String.format(getString(R.string.settime_hint),
+                        mTest.getQuestionNum(), value));
+            }
         });
 
         listView = (ListView) findViewById(R.id.listview_questions);
-        listView.setOnItemClickListener(this);
     }
 
     @Override
     protected void initData() {
         mTest = (Test) getIntent().getSerializableExtra(DATA_TEST);
-        testNameTextView.setText(mTest.getName());
-        mAdapter = new SetTestTimeAdapter(this, mTest);
-        listView.setAdapter(mAdapter);
-    }
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        mPositonIndex = position;
-        Intent intent = new Intent(this, ModifyQuestionActivty.class);
-        intent.putExtra(MODIFY_QUESTION_KEY, mTest.getQuestion(position));
-        intent.putExtra("TEST_NAME", mTest.getName());
-        intent.putExtra("QUETION_ID", position);
-        startActivityForResult(intent, MODIFY_QUESTION);
+        testNameTextView.setText(mTest.getName());
+        testTimeTextView.setText(String.format(getString(R.string.settime_hint),
+                mTest.getQuestionNum(), 5));
+
+        mEditListener = new EditQuestionListener() {
+
+            @Override
+            public void onEdit(int index, Question question) {
+                EditQuestionActivty.startForResult(SetTestTimeActivity.this, index, question);
+            }
+        };
+        mAdapter = new SetTestTimeAdapter(this, mTest, mEditListener);
+        listView.setAdapter(mAdapter);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == MODIFY_QUESTION) {
-            if (resultCode == ModifyQuestionActivty.MODIFY_SAVED) {
-                Question question = (Question) data.getSerializableExtra("MODIFIED");
-                // TODO
-                // mList.set(mPositonIndex, question);
+        if (requestCode == EditQuestionActivty.REQUEST_EDIT) {
+            if (resultCode == RESULT_OK) {
+                int index = data.getIntExtra(EditQuestionActivty.DATA_INDEX, 0);
+                Question question =
+                        (Question) data.getSerializableExtra(EditQuestionActivty.DATA_QUESTION);
+                mAdapter.setItem(index, question);
                 mAdapter.notifyDataSetChanged();
-                ToastUtil.toast(R.string.modify_saved);
+                ToastUtil.toast("已保存");
+            } else if (resultCode == EditQuestionActivty.RESULT_DELETE) {
+                int index = data.getIntExtra(EditQuestionActivty.DATA_INDEX, 0);
+                mAdapter.deleteItem(index);
+                mAdapter.notifyDataSetChanged();
+                testTimeTextView.setText(String.format(getString(R.string.settime_hint),
+                        mAdapter.getCount(), slider.getValue()));
             }
         }
     }
@@ -104,8 +111,9 @@ public class SetTestTimeActivity extends BaseActivity implements OnItemClickList
     public void onClick(View v) {
         if (v == finishButton) {
             mTest.setDate(new Date());
-            mTest.setTime(testTimeSlider.getValue());
-            // TODO:change mcurrenttes to json object
+            mTest.setTime(slider.getValue());
+            // TODO save to db;
+            finish();
         }
     }
 
@@ -121,11 +129,10 @@ public class SetTestTimeActivity extends BaseActivity implements OnItemClickList
                 sureListener, R.string.cancel, null);
     }
 
-    private static final String DATA_TEST = "current_course_key";
+    private static final String DATA_TEST = "data_test";
 
     public static void start(Context context, Test test) {
         Intent intent = new Intent(context, SetTestTimeActivity.class);
-        test.changeTestToSerializable();
         intent.putExtra(DATA_TEST, test);
         context.startActivity(intent);
     }

@@ -8,7 +8,7 @@
     tools:ignore="contentDescription" >
 
     <TextView
-        android:id="@+id/textview_test_name"
+        android:id="@+id/textview_testname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/activity_header_shadow"
@@ -17,7 +17,7 @@
         android:textSize="@dimen/text_size_large" />
 
     <com.kcb.library.view.buttonflat.ButtonFlat
-        android:id="@+id/button_submit"
+        android:id="@+id/button_finish"
         android:layout_width="@dimen/top_icon_button_width"
         android:layout_height="@dimen/top_icon_button_height"
         android:layout_alignParentRight="true"
@@ -27,17 +27,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:src="@drawable/ic_check_black_24dp" />
+            android:src="@drawable/ic_check_circle_black_24dp" />
     </com.kcb.library.view.buttonflat.ButtonFlat>
 
     <TextView
-        android:id="@+id/textview_settime_hint"
+        android:id="@+id/textview_testtime"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textview_test_name"
+        android:layout_below="@id/textview_testname"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
-        android:text="@string/settime_hint"
         android:textColor="@color/black"
         android:textSize="@dimen/text_size_medium" />
 
@@ -45,7 +44,7 @@
         android:id="@+id/slider_testtime"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textview_settime_hint"
+        android:layout_below="@id/textview_testtime"
         android:layout_marginTop="16dp"
         android:background="@color/blue"
         widget:max="10"
@@ -57,9 +56,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/slider_testtime"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:divider="@color/black_divider"
-        android:dividerHeight="8dp" >
+        android:dividerHeight="16dp" >
     </ListView>
 
 </RelativeLayout>

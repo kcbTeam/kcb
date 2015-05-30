@@ -9,7 +9,9 @@
     <com.kcb.library.view.PaperButton
         android:id="@+id/button_start_test"
         style="@style/home_center_button"
-        widget:paper_text="@string/start1" />
+        widget:paper_text="@string/start1"
+        widget:paper_text_color="@color/black_700"
+        widget:paper_text_size="@dimen/text_size_medium" />
 
     <com.kcb.library.view.smoothprogressbar.SmoothProgressBar
         android:id="@+id/progressbar_begintest"
@@ -23,6 +25,8 @@
         android:id="@+id/button_look_test"
         style="@style/home_center_button"
         android:layout_below="@id/button_start_test"
-        widget:paper_text="@string/check1" />
+        widget:paper_text="@string/check1"
+        widget:paper_text_color="@color/black_700"
+        widget:paper_text_size="@dimen/text_size_medium" />
 
 </RelativeLayout>

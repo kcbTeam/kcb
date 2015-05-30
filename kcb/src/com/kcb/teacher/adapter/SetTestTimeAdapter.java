@@ -4,11 +4,13 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.kcb.library.view.checkbox.CheckBox;
+import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.teacher.model.test.Question;
 import com.kcb.teacher.model.test.QuestionItem;
 import com.kcb.teacher.model.test.Test;
@@ -23,12 +25,18 @@ import com.kcbTeam.R;
  */
 public class SetTestTimeAdapter extends BaseAdapter {
 
+    public interface EditQuestionListener {
+        void onEdit(int index, Question question);
+    }
+
     private Context mContext;
     private Test mTest;
+    private EditQuestionListener mListener;
 
-    public SetTestTimeAdapter(Context context, Test test) {
+    public SetTestTimeAdapter(Context context, Test test, EditQuestionListener listener) {
         mContext = context;
         mTest = test;
+        mListener = listener;
     }
 
     @Override
@@ -46,9 +54,17 @@ public class SetTestTimeAdapter extends BaseAdapter {
         return position;
     }
 
+    public void setItem(int index, Question question) {
+        mTest.updateQuestion(index, question);
+    }
+
+    public void deleteItem(int index) {
+        mTest.deleteQuestion(index);
+    }
+
     @SuppressLint("ViewHolder")
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
         if (convertView == null) {
             convertView = View.inflate(mContext, R.layout.tch_listitem_settesttime, null);
@@ -56,14 +72,22 @@ public class SetTestTimeAdapter extends BaseAdapter {
             viewHolder.questionIndexTextView =
                     (TextView) convertView.findViewById(R.id.textview_questionindex);
             viewHolder.titleTextView = (TextView) convertView.findViewById(R.id.textview_title);
+            viewHolder.editButton = (ButtonFlat) convertView.findViewById(R.id.button_edit);
+            viewHolder.editButton.setOnClickListener(new OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    mListener.onEdit(position, getItem(position));
+                }
+            });
             viewHolder.aTextView = (TextView) convertView.findViewById(R.id.textview_A);
-            viewHolder.aCheckBox = (CheckBox) convertView.findViewById(R.id.checkBox_A);
+            viewHolder.aCheckBox = (ImageView) convertView.findViewById(R.id.checkBox_A);
             viewHolder.bTextView = (TextView) convertView.findViewById(R.id.textview_B);
-            viewHolder.bCheckBox = (CheckBox) convertView.findViewById(R.id.checkBox_B);
+            viewHolder.bCheckBox = (ImageView) convertView.findViewById(R.id.checkBox_B);
             viewHolder.cTextView = (TextView) convertView.findViewById(R.id.textview_C);
-            viewHolder.cCheckBox = (CheckBox) convertView.findViewById(R.id.checkBox_C);
+            viewHolder.cCheckBox = (ImageView) convertView.findViewById(R.id.checkBox_C);
             viewHolder.dTextView = (TextView) convertView.findViewById(R.id.textview_D);
-            viewHolder.dCheckBox = (CheckBox) convertView.findViewById(R.id.checkBox_D);
+            viewHolder.dCheckBox = (ImageView) convertView.findViewById(R.id.checkBox_D);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
@@ -78,47 +102,41 @@ public class SetTestTimeAdapter extends BaseAdapter {
 
         private TextView questionIndexTextView;
         private TextView titleTextView;
+        private ButtonFlat editButton;
         private TextView aTextView;
         private TextView bTextView;
         private TextView cTextView;
         private TextView dTextView;
-        private CheckBox aCheckBox;
-        private CheckBox bCheckBox;
-        private CheckBox cCheckBox;
-        private CheckBox dCheckBox;
+        private ImageView aCheckBox;
+        private ImageView bCheckBox;
+        private ImageView cCheckBox;
+        private ImageView dCheckBox;
 
         @SuppressLint("NewApi")
         public void setQuestion(int index, Question question) {
             questionIndexTextView.setText(String.format(questionIndexString, index + 1));
-
-            QuestionItem titleItem = question.getTitle();
-            showContent(titleTextView, titleItem);
-
-            QuestionItem aItem = question.getChoiceA();
-            showContent(aTextView, aItem);
-            aCheckBox.setChecked(aItem.isRight());
-
-            QuestionItem bItem = question.getChoiceB();
-            showContent(bTextView, bItem);
-            bCheckBox.setChecked(bItem.isRight());
-
-            QuestionItem cItem = question.getChoiceC();
-            showContent(cTextView, cItem);
-            cCheckBox.setChecked(cItem.isRight());
-
-            QuestionItem dItem = question.getChoiceD();
-            showContent(dTextView, dItem);
-            dCheckBox.setChecked(dItem.isRight());
+            showContent(titleTextView, null, question.getTitle());
+            showContent(aTextView, aCheckBox, question.getChoiceA());
+            showContent(bTextView, bCheckBox, question.getChoiceB());
+            showContent(cTextView, cCheckBox, question.getChoiceC());
+            showContent(dTextView, dCheckBox, question.getChoiceD());
         }
     }
 
     @SuppressWarnings("deprecation")
     @SuppressLint("NewApi")
-    private void showContent(TextView view, QuestionItem content) {
-        if (content.isText()) {
-            view.setText(content.getText());
+    private void showContent(TextView view, ImageView checkIcon, QuestionItem item) {
+        if (item.isText()) {
+            view.setText(item.getText());
         } else {
-            view.setBackground(new BitmapDrawable(content.getBitmap()));
+            view.setBackground(new BitmapDrawable(item.getBitmap()));
+        }
+        if (null != checkIcon) {
+            if (item.isRight()) {
+                checkIcon.setBackgroundResource(R.drawable.ic_check_box_grey600_18dp);
+            } else {
+                checkIcon.setBackgroundResource(R.drawable.ic_check_box_outline_blank_black_18dp);
+            }
         }
     }
 }
