@@ -23,22 +23,16 @@
 
     <TextView
         android:id="@+id/textview_input_problem_tip"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/common_tip"
         android:layout_below="@id/textview_title"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/problem_hint"
-        android:textColor="@color/black"
-        android:textSize="@dimen/text_size_medium" />
+        android:text="@string/problem_hint" />
 
     <EditText
         android:id="@+id/edittext_question_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/textview_input_problem_tip"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:background="@drawable/stu_checkin_textview"
@@ -59,14 +53,9 @@
 
     <TextView
         android:id="@+id/input_options_hint"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/common_tip"
         android:layout_below="@id/edittext_question_title"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="16dp"
-        android:text="@string/options_hint"
-        android:textColor="@color/black"
-        android:textSize="@dimen/text_size_medium" />
+        android:text="@string/options_hint" />
 
     <ScrollView
         android:id="@+id/scroll_choices"

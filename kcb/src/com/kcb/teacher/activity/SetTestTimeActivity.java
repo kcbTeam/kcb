@@ -24,7 +24,6 @@ import com.kcbTeam.R;
 
 public class SetTestTimeActivity extends BaseActivity {
 
-    private TextView testNameTextView;
     private ButtonFlat finishButton;
 
     private TextView testTimeTextView;
@@ -47,7 +46,6 @@ public class SetTestTimeActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        testNameTextView = (TextView) findViewById(R.id.textview_testname);
         finishButton = (ButtonFlat) findViewById(R.id.button_finish);
         finishButton.setOnClickListener(this);
 
@@ -69,7 +67,6 @@ public class SetTestTimeActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        testNameTextView.setText(sTest.getName());
         testTimeTextView.setText(String.format(getString(R.string.settime_hint),
                 sTest.getQuestionNum(), 5));
 
