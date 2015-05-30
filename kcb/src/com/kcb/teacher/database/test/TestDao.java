@@ -1,6 +1,7 @@
 package com.kcb.teacher.database.test;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -22,6 +23,8 @@ public class TestDao {
     private TestSQLiteOpenHelper mTestSQLiteOpenHelper;
     private SQLiteDatabase mSqLiteDatabase;
 
+    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
     public TestDao(Context context) {
         mTestSQLiteOpenHelper = new TestSQLiteOpenHelper(context);
         mSqLiteDatabase = mTestSQLiteOpenHelper.getWritableDatabase();
@@ -41,7 +44,9 @@ public class TestDao {
      */
     @SuppressLint("SimpleDateFormat")
     public void add(Test test) throws SQLException, JSONException, IOException {
-        SimpleDateFormat formatter = new SimpleDateFormat("yy-MM-dd");
+        if (null != test) {
+            deleteTestByName(test.getName());
+        }
         String date = formatter.format(test.getDate());
         mSqLiteDatabase.execSQL(
                 "INSERT INTO " + TestSQLiteOpenHelper.TABLE_NAME + " VALUES(null,?,?,?,?)",
@@ -60,8 +65,9 @@ public class TestDao {
      * @return
      * @throws JSONException
      * @throws IOException
+     * @throws ParseException
      */
-    public Test getTestByName(String testName) throws JSONException, IOException {
+    public Test getTestByName(String testName) throws JSONException, IOException, ParseException {
         Test test = null;
         Cursor cursor =
                 mSqLiteDatabase
@@ -76,7 +82,8 @@ public class TestDao {
                             .getColumnIndex(TestSQLiteOpenHelper.KEY_QUESTIONS)));
             @SuppressWarnings("deprecation")
             Date mDate =
-                    new Date(cursor.getString(cursor.getColumnIndex(TestSQLiteOpenHelper.KEY_DATE)));
+                    formatter.parse(cursor.getString(cursor
+                            .getColumnIndex(TestSQLiteOpenHelper.KEY_DATE)));
             test = new Test(testName, mQuestions, mTime);
             test.setDate(mDate);
         }
@@ -92,8 +99,9 @@ public class TestDao {
      * @return
      * @throws JSONException
      * @throws IOException
+     * @throws ParseException
      */
-    public List<Test> getAllRecord() throws JSONException, IOException {
+    public List<Test> getAllRecord() throws JSONException, IOException, ParseException {
         Cursor cursor =
                 mSqLiteDatabase.query(TestSQLiteOpenHelper.TABLE_NAME, null, null, null, null,
                         null, null);
@@ -110,7 +118,7 @@ public class TestDao {
                                 .getColumnIndex(TestSQLiteOpenHelper.KEY_QUESTIONS)));
                 @SuppressWarnings("deprecation")
                 Date mDate =
-                        new Date(cursor.getString(cursor
+                        formatter.parse(cursor.getString(cursor
                                 .getColumnIndex(TestSQLiteOpenHelper.KEY_DATE)));
                 Test test = new Test(mName, mQuestions, mTime);
                 test.setDate(mDate);
@@ -119,7 +127,7 @@ public class TestDao {
         }
         return list;
     }
-    
+
     /**
      * 
      * @title: deleteTestByName

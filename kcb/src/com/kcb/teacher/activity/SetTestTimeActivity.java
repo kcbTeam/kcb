@@ -1,15 +1,20 @@
 package com.kcb.teacher.activity;
 
+import java.io.IOException;
 import java.util.Date;
+
+import org.json.JSONException;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.SQLException;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.kcb.common.application.KApplication;
 import com.kcb.common.base.BaseActivity;
 import com.kcb.common.util.DialogUtil;
 import com.kcb.common.util.ToastUtil;
@@ -112,7 +117,17 @@ public class SetTestTimeActivity extends BaseActivity {
         if (v == finishButton) {
             mTest.setDate(new Date());
             mTest.setTime(slider.getValue());
-            // TODO save to db;
+            // TODO
+//            mTest.setId("2015-1-1");
+            try {
+                KApplication.mTestDao.add(mTest);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             finish();
         }
     }

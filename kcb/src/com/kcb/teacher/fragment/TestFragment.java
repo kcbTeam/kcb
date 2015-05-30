@@ -1,6 +1,7 @@
 package com.kcb.teacher.fragment;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,6 +46,8 @@ public class TestFragment extends BaseFragment {
     private List<Test> mTestList;
     private List<String> mTestNameList;
 
+    private GetTestListTask mGetTestListTask;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.tch_fragment_test, container, false);
@@ -73,7 +76,8 @@ public class TestFragment extends BaseFragment {
 
     @Override
     protected void initData() {
-        new GetTestListTask().execute();
+        mGetTestListTask = new GetTestListTask();
+        mGetTestListTask.execute();
     }
 
     private DelayClickListener mClickListener = new DelayClickListener(
@@ -99,8 +103,7 @@ public class TestFragment extends BaseFragment {
     };
 
     private void startTest() {
-        new GetTestListTask().execute();
-        mTestNameList.remove("编辑新的测试");
+        initData();
         if (mTestNameList.isEmpty()) {
             ToastUtil.toast("测试题库空空如也，请先编辑测试！");
             return;
@@ -116,7 +119,7 @@ public class TestFragment extends BaseFragment {
     }
 
     private void addOrEditTest() {
-        new GetTestListTask().execute();
+        initData();
         mTestNameList.add("编辑新的测试");
         DialogUtil.showListDialog(getActivity(), "编辑测试内容", mTestNameList, "确定",
                 new OnClickSureListener() {
@@ -128,10 +131,12 @@ public class TestFragment extends BaseFragment {
                             startActivity(intent);
                         } else {
                             // TODO set selected testId
-                            EditTestActivity.startEditTest(getActivity(), new Test("测试的题目", 4));
+                            EditTestActivity.startEditTest(getActivity(),
+                                    mTestList.get(mTestList.size() - position));
                         }
                     }
                 }, "取消", null);
+        mTestNameList.remove("编辑新的测试");
 
     }
 
@@ -149,8 +154,9 @@ public class TestFragment extends BaseFragment {
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
+            } catch (ParseException e) {
+                e.printStackTrace();
             }
-
             return null;
         }
     }
