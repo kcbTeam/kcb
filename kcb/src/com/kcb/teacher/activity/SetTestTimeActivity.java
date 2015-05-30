@@ -87,9 +87,7 @@ public class SetTestTimeActivity extends BaseActivity {
         if (requestCode == EditQuestionActivty.REQUEST_EDIT) {
             if (resultCode == RESULT_OK) {
                 int index = data.getIntExtra(EditQuestionActivty.DATA_INDEX, 0);
-                Question question =
-                        (Question) data.getSerializableExtra(EditQuestionActivty.DATA_QUESTION);
-                mAdapter.setItem(index, question);
+                mAdapter.setItem(index, EditQuestionActivty.sQuestion);
                 mAdapter.notifyDataSetChanged();
                 ToastUtil.toast("已保存");
             } else if (resultCode == EditQuestionActivty.RESULT_DELETE) {

@@ -34,7 +34,8 @@
     </style>
 
     <style name="common_title">
-        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_gravity">center_vertical</item>
         <item name="android:textColor">@color/black</item>
@@ -54,6 +55,11 @@
     </style>
 
     <style name="common_title_icon_layout_right">
+        <item name="android:layout_width">48dp</item>
+        <item name="android:layout_height">56dp</item>
+    </style>
+
+    <style name="common_title_left_icon_layout_right">
         <item name="android:layout_width">48dp</item>
         <item name="android:layout_height">56dp</item>
         <item name="android:layout_alignParentRight">true</item>

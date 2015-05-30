@@ -13,7 +13,7 @@
 
     <com.kcb.library.view.buttonflat.ButtonFlat
         android:id="@+id/button_cancel"
-        style="@style/common_title_icon_layout_right"
+        style="@style/common_title_left_icon_layout_right"
         widget:rippleSpeed="6" >
 
         <ImageView
