@@ -20,7 +20,6 @@ public class Question implements Serializable {
     private QuestionItem mChoiceBItem;
     private QuestionItem mChoiceCItem;
     private QuestionItem mChoiceDItem;
-    private float mCorrectRate; // for example 0.56 ,means 56%
 
     public Question() {
         mTitleItem = new QuestionItem();
@@ -70,14 +69,6 @@ public class Question implements Serializable {
 
     public QuestionItem getChoiceD() {
         return mChoiceDItem;
-    }
-
-    public float getCorrectRate() {
-        return mCorrectRate;
-    }
-
-    public void setCorrectRate(float rate) {
-        mCorrectRate = rate;
     }
 
     public boolean equal(Question questionObj) {

@@ -16,10 +16,12 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.kcb.common.application.KAccount;
+import com.kcb.common.application.KApplication;
 import com.kcb.common.base.BaseFragmentActivity;
 import com.kcb.common.util.DialogUtil;
 import com.kcb.common.util.ToastUtil;
 import com.kcb.library.view.buttonflat.ButtonFlat;
+import com.kcb.teacher.database.test.TestDao;
 import com.kcb.teacher.fragment.CheckInFragment;
 import com.kcb.teacher.fragment.StuCentreFragment;
 import com.kcb.teacher.fragment.TestFragment;
@@ -58,7 +60,7 @@ public class HomeActivity extends BaseFragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tch_activity_home);
-
+        initData();
         initView();
     }
 
@@ -72,19 +74,21 @@ public class HomeActivity extends BaseFragmentActivity {
 
         checkInButton = (ButtonFlat) findViewById(R.id.button_checkin);
         checkInButton.setOnClickListener(this);
-//        checkInButton.setTextSize(16);
+        // checkInButton.setTextSize(16);
         testButton = (ButtonFlat) findViewById(R.id.button_test);
         testButton.setOnClickListener(this);
-//        testButton.setTextSize(16);
+        // testButton.setTextSize(16);
         stuCenterButton = (ButtonFlat) findViewById(R.id.button_stucenter);
         stuCenterButton.setOnClickListener(this);
-//        stuCenterButton.setTextSize(16);
+        // stuCenterButton.setTextSize(16);
 
         setDefaultFragment();
     }
 
     @Override
-    protected void initData() {}
+    protected void initData() {
+        KApplication.mTestDao = new TestDao(this);
+    }
 
     private void setDefaultFragment() {
         mCurrentFragment = new CheckInFragment();
@@ -206,11 +210,11 @@ public class HomeActivity extends BaseFragmentActivity {
         ButtonFlat modifyButton = (ButtonFlat) customView.findViewById(R.id.button_modifypassword);
         modifyButton.setOnClickListener(clickListener);
         modifyButton.setTextColor(getResources().getColor(R.color.black_700));
-//        modifyButton.setTextSize(14);
+        // modifyButton.setTextSize(14);
         ButtonFlat exitButton = (ButtonFlat) customView.findViewById(R.id.button_exit);
         exitButton.setOnClickListener(clickListener);
         exitButton.setTextColor(getResources().getColor(R.color.black_700));
-//        exitButton.setTextSize(14);
+        // exitButton.setTextSize(14);
     }
 
     private boolean hasClickBack = false;

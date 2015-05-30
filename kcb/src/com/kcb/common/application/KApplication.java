@@ -1,5 +1,7 @@
 package com.kcb.common.application;
 
+import com.kcb.teacher.database.test.TestDao;
+
 import android.app.Application;
 
 /**
@@ -13,6 +15,7 @@ public class KApplication extends Application {
 
     // don't use this instance casually, we use for toast context, but can't use for dialog context
     private static KApplication instance;
+    public static TestDao mTestDao;
 
     @Override
     public void onCreate() {

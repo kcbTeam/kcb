@@ -1,8 +1,13 @@
 package com.kcb.teacher.fragment;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+
+import org.json.JSONException;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -10,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.kcb.common.application.KApplication;
 import com.kcb.common.base.BaseFragment;
 import com.kcb.common.listener.DelayClickListener;
 import com.kcb.common.util.DialogUtil;
@@ -36,7 +42,8 @@ public class TestFragment extends BaseFragment {
     private PaperButton testresultButton;
     private TextView tipTextView;
 
-    private ArrayList<String> mList;
+    private List<Test> mTestList;
+    private List<String> mTestNameList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -47,7 +54,7 @@ public class TestFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        initData();
         initView();
     }
 
@@ -65,7 +72,9 @@ public class TestFragment extends BaseFragment {
     }
 
     @Override
-    protected void initData() {}
+    protected void initData() {
+        new GetTestListTask().execute();
+    }
 
     private DelayClickListener mClickListener = new DelayClickListener(
             DelayClickListener.DELAY_PAPER_BUTTON) {
@@ -90,40 +99,61 @@ public class TestFragment extends BaseFragment {
     };
 
     private void startTest() {
-        // TODO get title from db;
-        // if null ,toast;
-        mList = new ArrayList<String>();
-        mList.add("第一次测试");
-        mList.add("第二次测试");
-        mList.add("第三次测试");
-        DialogUtil.showListDialog(getActivity(), "开始测试", mList, "确定", new OnClickSureListener() {
+        new GetTestListTask().execute();
+        mTestNameList.remove("编辑新的测试");
+        if (mTestNameList.isEmpty()) {
+            ToastUtil.toast("测试题库空空如也，请先编辑测试！");
+            return;
+        }
+        DialogUtil.showListDialog(getActivity(), "开始测试", mTestNameList, "确定",
+                new OnClickSureListener() {
 
-            @Override
-            public void onClick(View view, int position) {
-                ToastUtil.toast("" + position);
-            }
-        }, "取消", null);
+                    @Override
+                    public void onClick(View view, int position) {
+                        ToastUtil.toast("" + position);
+                    }
+                }, "取消", null);
     }
 
     private void addOrEditTest() {
-        // TODO get title from database;
-        mList = new ArrayList<String>();
-        mList.add("添加新测试");
-        mList.add("第一次测试");
-        mList.add("第二次测试");
-        mList.add("第三次测试");
-        DialogUtil.showListDialog(getActivity(), "编辑测试内容", mList, "确定", new OnClickSureListener() {
+        new GetTestListTask().execute();
+        mTestNameList.add("编辑新的测试");
+        DialogUtil.showListDialog(getActivity(), "编辑测试内容", mTestNameList, "确定",
+                new OnClickSureListener() {
 
-            @Override
-            public void onClick(View view, int position) {
-                if (position == 0) { // add new test
-                    Intent intent = new Intent(getActivity(), SetTestNameActivity.class);
-                    startActivity(intent);
-                } else {
-                    // TODO set selected testId
-                    EditTestActivity.startEditTest(getActivity(), new Test("测试的题目", 4));
-                }
-            }
-        }, "取消", null);
+                    @Override
+                    public void onClick(View view, int position) {
+                        if (position == 0) { // add new test
+                            Intent intent = new Intent(getActivity(), SetTestNameActivity.class);
+                            startActivity(intent);
+                        } else {
+                            // TODO set selected testId
+                            EditTestActivity.startEditTest(getActivity(), new Test("测试的题目", 4));
+                        }
+                    }
+                }, "取消", null);
+
     }
+
+    private class GetTestListTask extends AsyncTask<Integer, Integer, Integer> {
+
+        @Override
+        protected Integer doInBackground(Integer... params) {
+            try {
+                mTestList = KApplication.mTestDao.getAllRecord();
+                mTestNameList = new ArrayList<String>();
+                for (int i = 0; i < mTestList.size(); i++) {
+                    mTestNameList.add(mTestList.get(i).getName());
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+    }
+
+
 }

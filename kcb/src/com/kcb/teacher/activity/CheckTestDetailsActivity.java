@@ -82,11 +82,11 @@ public class CheckTestDetailsActivity extends BaseActivity {
         mQuestionList = mTest.getQuestions();
         mQuestionNum = mQuestionList.size();
         mCurrentPosition = 0;
-        mQuestionList.get(mCurrentPosition).setCorrectRate(0.8f);
-        mQuestionList.get(mCurrentPosition).getChoiceA().setRate(0.3f);
-        mQuestionList.get(mCurrentPosition).getChoiceB().setRate(0.4f);
-        mQuestionList.get(mCurrentPosition).getChoiceC().setRate(0.5f);
-        mQuestionList.get(mCurrentPosition).getChoiceD().setRate(0.2f);
+        mQuestionList.get(mCurrentPosition).getTitle().setRate(0.8);
+        mQuestionList.get(mCurrentPosition).getChoiceA().setRate(0.3);
+        mQuestionList.get(mCurrentPosition).getChoiceB().setRate(0.4);
+        mQuestionList.get(mCurrentPosition).getChoiceC().setRate(0.5);
+        mQuestionList.get(mCurrentPosition).getChoiceD().setRate(0.2);
     }
 
     @Override
@@ -124,7 +124,7 @@ public class CheckTestDetailsActivity extends BaseActivity {
         Question question = mQuestionList.get(mCurrentPosition);
         showQuestionNum();
         showQuestionItem(questionTitle, question.getTitle());
-        correctRate.setText(String.format(mRateFormat, (int) (100 * question.getCorrectRate())));
+        correctRate.setText(String.format(mRateFormat, (int) (100 * question.getTitle().getRate())));
         mAdapter = new ListAdapterChoices(this, question);
         choiceList.setAdapter(mAdapter);
     }

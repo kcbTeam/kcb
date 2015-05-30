@@ -101,7 +101,7 @@ public class TestActivity extends BaseFragmentActivity {
         if (questionNum == 1) nextButton.setText("已完成");
         titleTextView.setText(mTest.getName());
         showCurrentQuestion(0);
-        setTimeCounterDown(mTest.getmTime() * 60000);
+        setTimeCounterDown(mTest.getTime() * 60000);
     }
 
     @Override
