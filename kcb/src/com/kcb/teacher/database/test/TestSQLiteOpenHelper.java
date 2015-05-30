@@ -1,21 +1,22 @@
 package com.kcb.teacher.database.test;
 
+import com.kcb.teacher.database.CommonDB;
+
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-public class MySQLiteOpenHelper extends SQLiteOpenHelper {
-	private final static String DATABASE_NAME = "db_user.db";
-	private static final int DATABASE_VERSION = 1;
+public class TestSQLiteOpenHelper extends SQLiteOpenHelper {
 
-	public final static String TABLE_NAME = "profile";
-	public final static String FIELD_NICK = "nick";
-	public final static String FIELD_SIGN = "sign";
-	public final static String FIELD_GENDER = "gender";
-	public final static String FIELD_PASSWORD = "password";
+	public final static String TABLE_NAME = "test";
+	public final static String KEY_ID = "id";
+	public final static String KEY_NAME = "name";
+	public final static String KEY_TIME = "time";
+	public final static String KEY_DATE = "date";
+	public final static String KEY_QUESTIONS = "questions";
 
-	public MySQLiteOpenHelper(Context context) {
-		super(context, DATABASE_NAME, null, DATABASE_VERSION);
+	public TestSQLiteOpenHelper(Context context) {
+		super(context, CommonDB.DATABASE_NAME, null, CommonDB.DATABASE_VERSION);
 	}
 
 	// ="CREATE TABLE IF NOT EXISTS profile (_id INTEGER PRIMARY KEY AUTOINCREMENT, nick VARCHAR[30], sign VARCHAR[60] ,gender VARCHAR[10],password VARCHAR[30])"
@@ -25,9 +26,9 @@ public class MySQLiteOpenHelper extends SQLiteOpenHelper {
 		// +
 		// "(_id INTEGER PRIMARY KEY AUTOINCREMENT, nick VARCHAR[30], sign VARCHAR[60] ,gender VARCHAR[10],password VARCHAR[30])");
 		db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_NAME
-				+ "(_id INTEGER PRIMARY KEY AUTOINCREMENT, " + FIELD_NICK
-				+ " text," + FIELD_SIGN + " text," + FIELD_GENDER + " text,"
-				+ FIELD_PASSWORD + " text)");
+				+ "(_id INTEGER PRIMARY KEY AUTOINCREMENT, " + KEY_NAME
+				+ " text," + KEY_TIME + " text," + KEY_DATE + " text,"
+				+ KEY_QUESTIONS + " text)");
 	}
 
 	// TODO , when to invoked it;

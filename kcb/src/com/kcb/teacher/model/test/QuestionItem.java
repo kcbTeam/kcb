@@ -25,7 +25,7 @@ public class QuestionItem implements Serializable {
     private Bitmap mBitmap;
     private byte[] mBytesOfBitmap;
     private boolean isRight = false;
-    private float mRate; // if the item is a choice, mRate represent a choice rate;if the item is a
+    private double mRate; // if the item is a choice, mRate represent a choice rate;if the item is a
                          // question title, mRate represent the correct rate
 
     public QuestionItem() {}
@@ -79,6 +79,10 @@ public class QuestionItem implements Serializable {
         return mBitmap;
     }
 
+    public byte[] getBytesOfBitmap() {
+        return mBytesOfBitmap;
+    }
+
     public void setIsRight(boolean _isRight) {
         isRight = _isRight;
     }
@@ -87,11 +91,11 @@ public class QuestionItem implements Serializable {
         return isRight;
     }
 
-    public float getRate() {
+    public double getRate() {
         return mRate;
     }
 
-    public void setRate(float rate) {
+    public void setRate(double rate) {
         mRate = rate;
     }
 

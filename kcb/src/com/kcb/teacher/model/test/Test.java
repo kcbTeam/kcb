@@ -30,14 +30,6 @@ public class Test implements Serializable {
         mTime = time;
     }
 
-    public int getmTime() {
-        return this.mTime;
-    }
-
-    public void setmTime(int mTime) {
-        this.mTime = mTime;
-    }
-
     public void setId(String id) {
         mId = id;
     }
