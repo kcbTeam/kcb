@@ -6,35 +6,46 @@
     android:layout_height="match_parent"
     android:background="@color/activity_background" >
 
-    <LinearLayout
-        android:id="@+id/layout_header"
+    <TextView
+        android:id="@+id/textview_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/activity_header_shadow"
-        android:orientation="horizontal" >
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:text="@string/checkin" />
-    </LinearLayout>
+        android:gravity="center_vertical"
+        android:paddingLeft="16dp"
+        android:text="@string/checkin"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_large" />
+
+    <TextView
+        android:id="@+id/textview_time"
+        android:layout_width="wrap_content"
+        android:layout_height="56dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="16dp"
+        android:gravity="center_vertical"
+        android:text="ddddd"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_medium" />
 
     <TextView
         android:id="@+id/textview_inputnum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/layout_header"
+        android:layout_below="@id/textview_title"
         android:layout_centerHorizontal="true"
         android:layout_margin="16dp"
-        android:text="@string/tip_inputnum" />
+        android:text="@string/tip_inputnum"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_medium" />
 
     <LinearLayout
         android:id="@+id/linearlayout_shownum"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/textview_inputnum"
-        android:layout_marginLeft="@dimen/dp_32"
-        android:layout_marginRight="@dimen/dp_32"
+        android:layout_marginLeft="36dp"
+        android:layout_marginRight="36dp"
         android:orientation="horizontal" >
 
         <TextView
@@ -59,13 +70,15 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/checkin_recycler_height"
         android:layout_below="@id/linearlayout_shownum"
-        android:layout_margin="@dimen/dp_32" />
+        android:layout_margin="36dp" />
 
     <com.kcb.library.view.PaperButton
         android:id="@+id/button_finish"
         style="@style/common_paper_button"
         android:layout_below="@id/recyclerview"
-        widget:paper_text="@string/button_finish" />
+        widget:paper_text="@string/button_finish"
+        widget:paper_text_color="@color/black_700"
+        widget:paper_text_size="@dimen/text_size_medium" />
 
     <com.kcb.library.view.smoothprogressbar.SmoothProgressBar
         android:id="@+id/progressbar_finish"

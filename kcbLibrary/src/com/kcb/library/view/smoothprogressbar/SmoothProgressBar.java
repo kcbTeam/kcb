@@ -335,7 +335,7 @@ public class SmoothProgressBar extends ProgressBar {
 
                     @Override
                     public void run() {
-                        SmoothProgressBar.super.setVisibility(GONE);
+                        SmoothProgressBar.super.setVisibility(INVISIBLE);
                     }
                 }, 500);
             }

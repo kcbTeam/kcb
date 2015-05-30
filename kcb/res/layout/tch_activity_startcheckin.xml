@@ -9,7 +9,7 @@
     tools:ignore="contentDescription" >
 
     <TextView
-        android:id="@+id/textview_label"
+        android:id="@+id/textview_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/activity_header_shadow"
@@ -19,25 +19,11 @@
         android:textColor="@color/black"
         android:textSize="@dimen/text_size_large" />
 
-    <com.kcb.library.view.buttonflat.ButtonFlat
-        android:id="@+id/button_giveup"
-        android:layout_width="@dimen/top_icon_button_width"
-        android:layout_height="@dimen/top_icon_button_height"
-        android:layout_alignParentRight="true"
-        buttonflat:rippleSpeed="6" >
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:src="@drawable/ic_highlight_remove_black_24dp" />
-    </com.kcb.library.view.buttonflat.ButtonFlat>
-
     <ImageView
         android:id="@+id/imageview_step1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/button_giveup"
+        android:layout_below="@id/textview_title"
         android:layout_marginBottom="8dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="8dp"
@@ -136,7 +122,7 @@
             android:background="@color/black_divider" />
 
         <com.kcb.library.view.PaperButton
-            android:id="@+id/button_startstop"
+            android:id="@+id/button_start"
             style="@style/common_paper_button"
             android:layout_below="@id/view_divider2"
             android:layout_centerHorizontal="true"
@@ -145,112 +131,12 @@
             widget:paper_text_size="@dimen/text_size_medium" />
 
         <com.kcb.library.view.smoothprogressbar.SmoothProgressBar
-            android:id="@+id/progressbar_startstop"
+            android:id="@+id/progressbar_start"
             style="@style/SmoothProgressBar"
-            android:layout_alignBottom="@id/button_startstop"
-            android:layout_alignLeft="@id/button_startstop"
-            android:layout_alignRight="@id/button_startstop"
+            android:layout_alignBottom="@id/button_start"
+            android:layout_alignLeft="@id/button_start"
+            android:layout_alignRight="@id/button_start"
             android:visibility="gone" />
-
-        <LinearLayout
-            android:id="@+id/layout_time"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@id/button_startstop"
-            android:layout_alignRight="@id/button_startstop"
-            android:layout_below="@id/button_startstop"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:visibility="invisible" >
-
-            <ProgressBar
-                android:id="@+id/progressbar"
-                style="@android:style/Widget.ProgressBar.Horizontal"
-                android:layout_width="0dp"
-                android:layout_height="3dp"
-                android:layout_marginRight="8dp"
-                android:layout_weight="1"
-                android:max="120"
-                android:progressDrawable="@drawable/tch_progressbar"
-                android:visibility="visible" />
-
-            <TextView
-                android:id="@+id/textview_timetip"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="1/120" />
-        </LinearLayout>
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/layout_finish"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/layout_start"
-        android:layout_marginTop="32dp"
-        android:visibility="invisible" >
-
-        <ImageView
-            android:id="@+id/imageview_step3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="8dp"
-            android:background="@drawable/ic_looks_3_grey600_24dp" />
-
-        <TextView
-            android:id="@+id/tip3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/imageview_step3"
-            android:layout_toRightOf="@id/imageview_step3"
-            android:text="@string/tipforteacher3"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_medium" />
-
-        <View
-            android:id="@+id/view_divider3"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_below="@id/imageview_step3"
-            android:layout_marginBottom="16dp"
-            android:background="@color/black_divider" />
-
-        <RelativeLayout
-            android:id="@+id/layout_rate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/view_divider3"
-            android:layout_centerHorizontal="true" >
-
-            <com.kcb.library.view.PaperButton
-                android:id="@+id/button_rate"
-                style="@style/common_paper_button"
-                widget:paper_text="@string/classrate"
-                widget:paper_text_color="@color/black_700"
-                widget:paper_text_size="@dimen/text_size_medium" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignRight="@id/button_rate"
-                android:layout_centerVertical="true"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:src="@drawable/ic_chevron_right_grey600_24dp" />
-        </RelativeLayout>
-
-        <com.kcb.library.view.PaperButton
-            android:id="@+id/button_finish"
-            style="@style/common_paper_button"
-            android:layout_below="@id/layout_rate"
-            android:layout_centerHorizontal="true"
-            widget:paper_text="@string/finish"
-            widget:paper_text_color="@color/black_700"
-            widget:paper_text_size="@dimen/text_size_medium" />
     </RelativeLayout>
 
 </RelativeLayout>

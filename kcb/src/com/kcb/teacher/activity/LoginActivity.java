@@ -100,9 +100,13 @@ public class LoginActivity extends BaseActivity {
                                 }, new ErrorListener() {
                                     public void onErrorResponse(VolleyError error) {
                                         loginProgressBar.hide(LoginActivity.this);
-                                        if (null != error.networkResponse
-                                                && error.networkResponse.statusCode == 400) {
-                                            ToastUtil.toast(R.string.id_password_error);
+
+                                        if (null != error.networkResponse) {
+                                            if (error.networkResponse.statusCode == 400) {
+                                                ToastUtil.toast("账号不存在");
+                                            } else if (error.networkResponse.statusCode == 401) {
+                                                ToastUtil.toast("密码错误");
+                                            }
                                         } else {
                                             ResponseUtil.toastError(error);
                                         }

@@ -2,16 +2,28 @@ package com.kcb.student.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.android.volley.Request.Method;
+import com.android.volley.Response.ErrorListener;
+import com.android.volley.Response.Listener;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.kcb.common.application.KAccount;
 import com.kcb.common.base.BaseFragment;
 import com.kcb.common.listener.DelayClickListener;
+import com.kcb.common.server.RequestUtil;
+import com.kcb.common.server.ResponseUtil;
+import com.kcb.common.server.UrlUtil;
+import com.kcb.common.util.ToastUtil;
 import com.kcb.library.view.PaperButton;
-import com.kcb.student.activity.CheckInActivity;
+import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
 import com.kcb.student.activity.LookCheckInActivity;
+import com.kcb.student.activity.StartCheckInActivity;
 import com.kcbTeam.R;
 
 /**
@@ -22,7 +34,11 @@ import com.kcbTeam.R;
  */
 public class CheckInFragment extends BaseFragment {
 
+    private final String TAG = CheckInFragment.class.getName();
+
     private PaperButton startCheckInButton;
+    private SmoothProgressBar progressBar;
+
     private PaperButton lookCheckInButton;
 
     @Override
@@ -42,6 +58,8 @@ public class CheckInFragment extends BaseFragment {
         View view = getView();
         startCheckInButton = (PaperButton) view.findViewById(R.id.button_start_checkin);
         startCheckInButton.setOnClickListener(mClickListener);
+        progressBar = (SmoothProgressBar) view.findViewById(R.id.progressbar_start_checkin);
+
         lookCheckInButton = (PaperButton) view.findViewById(R.id.button_look_checkin);
         lookCheckInButton.setOnClickListener(mClickListener);
     }
@@ -54,13 +72,52 @@ public class CheckInFragment extends BaseFragment {
 
         @Override
         public void doClick(View v) {
-            Intent intent = null;
             if (v == startCheckInButton) {
-                intent = new Intent(getActivity(), CheckInActivity.class);
+                startCheckIn();
             } else if (v == lookCheckInButton) {
-                intent = new Intent(getActivity(), LookCheckInActivity.class);
+                Intent intent = new Intent(getActivity(), LookCheckInActivity.class);
+                startActivity(intent);
             }
-            startActivity(intent);
         }
     };
+
+    public void startCheckIn() {
+        if (progressBar.getVisibility() == View.VISIBLE) {
+            return;
+        }
+        progressBar.setVisibility(View.VISIBLE);
+        StringRequest request =
+                new StringRequest(Method.POST, UrlUtil.getStuCheckinStartUrl(KAccount
+                        .getAccountId()), new Listener<String>() {
+                    public void onResponse(final String response) {
+                        new Handler().postDelayed(new Runnable() {
+
+                            @Override
+                            public void run() {
+                                progressBar.setVisibility(View.INVISIBLE);
+                                StartCheckInActivity.start(getActivity(), response);
+                            }
+                        }, 500);
+                    };
+                }, new ErrorListener() {
+                    public void onErrorResponse(VolleyError error) {
+                        progressBar.hide(getActivity());
+                        if (null != error.networkResponse) {
+                            if (error.networkResponse.statusCode == 400) {
+                                ToastUtil.toast("没有签到");
+                            }
+                        } else {
+                            ResponseUtil.toastError(error);
+                        }
+                        StartCheckInActivity.start(getActivity(), "100");
+                    };
+                });
+        RequestUtil.getInstance().addToRequestQueue(request, TAG);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        RequestUtil.getInstance().cancelPendingRequests(TAG);
+    }
 }

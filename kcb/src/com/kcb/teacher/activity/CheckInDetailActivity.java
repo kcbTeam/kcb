@@ -88,12 +88,6 @@ public class CheckInDetailActivity extends BaseFragmentActivity implements OnCli
                             LookCheckInActivity.CURRENT_CHECKIN_RECORD_KEY);
             mMissedCheckInStusList = mCurrentCheckInRecordInfo.getUnCheckedStudentInfos();
             // mCheckInRate = mCurrentCheckInRecordInfo.getRate();
-        } else if (flagString.equals(StartCheckInActivity.TAG)) {
-            mCurrentCheckInRecordInfo =
-                    (CheckInResult) getIntent().getSerializableExtra(
-                            StartCheckInActivity.CURRENT_CHECKIN_RECORD_KEY);
-            mMissedCheckInStusList = mCurrentCheckInRecordInfo.getUnCheckedStudentInfos();
-            // mCheckInRate = mCurrentCheckInRecordInfo.getRate();
         }
     }
 

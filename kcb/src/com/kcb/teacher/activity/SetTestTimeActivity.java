@@ -32,7 +32,7 @@ public class SetTestTimeActivity extends BaseActivity {
 
     private ListView listView;
 
-    private Test mTest;
+    public static Test sTest;
     private EditQuestionListener mEditListener;
     private SetTestTimeAdapter mAdapter;
 
@@ -60,7 +60,7 @@ public class SetTestTimeActivity extends BaseActivity {
             @Override
             public void onValueChanged(int value) {
                 testTimeTextView.setText(String.format(getString(R.string.settime_hint),
-                        mTest.getQuestionNum(), value));
+                        sTest.getQuestionNum(), value));
             }
         });
 
@@ -69,11 +69,9 @@ public class SetTestTimeActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        mTest = (Test) getIntent().getSerializableExtra(DATA_TEST);
-
-        testNameTextView.setText(mTest.getName());
+        testNameTextView.setText(sTest.getName());
         testTimeTextView.setText(String.format(getString(R.string.settime_hint),
-                mTest.getQuestionNum(), 5));
+                sTest.getQuestionNum(), 5));
 
         mEditListener = new EditQuestionListener() {
 
@@ -82,7 +80,7 @@ public class SetTestTimeActivity extends BaseActivity {
                 EditQuestionActivty.startForResult(SetTestTimeActivity.this, index, question);
             }
         };
-        mAdapter = new SetTestTimeAdapter(this, mTest, mEditListener);
+        mAdapter = new SetTestTimeAdapter(this, sTest, mEditListener);
         listView.setAdapter(mAdapter);
     }
 
@@ -110,8 +108,8 @@ public class SetTestTimeActivity extends BaseActivity {
     @Override
     public void onClick(View v) {
         if (v == finishButton) {
-            mTest.setDate(new Date());
-            mTest.setTime(slider.getValue());
+            sTest.setDate(new Date());
+            sTest.setTime(slider.getValue());
             // TODO save to db;
             finish();
         }
@@ -129,11 +127,9 @@ public class SetTestTimeActivity extends BaseActivity {
                 sureListener, R.string.cancel, null);
     }
 
-    private static final String DATA_TEST = "data_test";
-
     public static void start(Context context, Test test) {
         Intent intent = new Intent(context, SetTestTimeActivity.class);
-        intent.putExtra(DATA_TEST, test);
         context.startActivity(intent);
+        sTest = test;
     }
 }

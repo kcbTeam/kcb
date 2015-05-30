@@ -35,6 +35,7 @@
         <item name="android:layout_marginRight">40dp</item>
         <item name="android:layout_marginLeft">40dp</item>
         <item name="android:maxLines">1</item>
+        <item name="android:singleLine">true</item>
         <item name="android:maxLength">15</item>
     </style>
 
@@ -74,6 +75,8 @@
         <item name="android:layout_weight">1</item>
         <item name="android:gravity">center</item>
         <item name="android:background">@drawable/stu_checkin_textview</item>
+        <item name="android:textSize">@dimen/text_size_large</item>
+        <item name="android:textColor">@color/black_700</item>
     </style>
     <!-- ********** CheckIn end ********** -->
     <!-- **************************************** Student module End **************************************** -->
