@@ -46,7 +46,11 @@ public class UrlUtil {
     // 2.1 start checkin
     private static final String url_stu_checkin_start = IP + "/v1/stu/checkin/start";
 
-    public static String getStuCheckinStartUrl(String id, String num) {
+    public static String getStuCheckinStartUrl(String id) {
+        return url_stu_checkin_start + "?id=" + id;
+    }
+
+    public static String getStuCheckinSubmitUrl(String id, String num) {
         return url_stu_checkin_start + "?id=" + id + "&num=" + num;
     }
 

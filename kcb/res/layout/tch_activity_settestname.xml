@@ -10,20 +10,13 @@
 
     <LinearLayout
         android:id="@+id/layout_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/activity_header_shadow"
-        android:orientation="horizontal" >
+        style="@style/common_title_layout" >
 
         <include layout="@layout/comm_back_button" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:text="@string/add_newtest"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_large" />
+            style="@style/common_title"
+            android:text="@string/add_newtest" />
     </LinearLayout>
 
     <ImageView

@@ -128,7 +128,9 @@ public class SetTestTimeAdapter extends BaseAdapter {
     private void showContent(TextView view, ImageView checkIcon, QuestionItem item) {
         if (item.isText()) {
             view.setText(item.getText());
+            view.setBackground(null);
         } else {
+            view.setText("");
             view.setBackground(new BitmapDrawable(item.getBitmap()));
         }
         if (null != checkIcon) {

@@ -54,7 +54,8 @@ public class CheckInDetailActivity extends BaseFragmentActivity implements OnCli
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.tch_activity_checkindetails);
+        setContentView(R.layout.tch_activity_checkindetail);
+
         initData();
         initView();
     }
@@ -86,12 +87,6 @@ public class CheckInDetailActivity extends BaseFragmentActivity implements OnCli
             mCurrentCheckInRecordInfo =
                     (CheckInResult) getIntent().getSerializableExtra(
                             LookCheckInActivity.CURRENT_CHECKIN_RECORD_KEY);
-            mMissedCheckInStusList = mCurrentCheckInRecordInfo.getUnCheckedStudentInfos();
-            // mCheckInRate = mCurrentCheckInRecordInfo.getRate();
-        } else if (flagString.equals(StartCheckInActivity.TAG)) {
-            mCurrentCheckInRecordInfo =
-                    (CheckInResult) getIntent().getSerializableExtra(
-                            StartCheckInActivity.CURRENT_CHECKIN_RECORD_KEY);
             mMissedCheckInStusList = mCurrentCheckInRecordInfo.getUnCheckedStudentInfos();
             // mCheckInRate = mCurrentCheckInRecordInfo.getRate();
         }

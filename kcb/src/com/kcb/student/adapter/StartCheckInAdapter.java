@@ -1,17 +1,19 @@
 package com.kcb.student.adapter;
 
 import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcbTeam.R;
 
-public class CheckInRecycleAdapter
-        extends RecyclerView.Adapter<CheckInRecycleAdapter.CheckinViewHolder> {
+public class StartCheckInAdapter
+        extends RecyclerView.Adapter<StartCheckInAdapter.CheckinViewHolder> {
 
     private String[] mItems;
     public RecyclerItemClickListener mItemClickListener;
@@ -20,9 +22,9 @@ public class CheckInRecycleAdapter
         public void onItemClick(View view, int postion);
     }
 
-    public CheckInRecycleAdapter() {
+    public StartCheckInAdapter() {
         super();
-        mItems = new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "清除", "0", "退格"};
+        mItems = new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "", "0", ""};
     }
 
     public void setRecyclerItemClickListener(RecyclerItemClickListener listener) {
@@ -46,16 +48,20 @@ public class CheckInRecycleAdapter
 
     @Override
     public void onBindViewHolder(CheckinViewHolder viewHolder, int position) {
-        viewHolder.setText(mItems[position]);
+        viewHolder.setText(position, mItems[position]);
     }
 
     public class CheckinViewHolder extends RecyclerView.ViewHolder {
         private ButtonFlat numButton;
+        private ImageView actionImageView;
 
         public CheckinViewHolder(View view) {
             super(view);
             numButton = (ButtonFlat) view.findViewById(R.id.button_num);
             numButton.setBackgroundResource(R.drawable.stu_checkin_textview);
+            numButton.setTextSize(18);
+            // black_700
+            numButton.setTextColor(Color.parseColor("#616161"));
             numButton.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -64,10 +70,20 @@ public class CheckInRecycleAdapter
                     }
                 }
             });
+            actionImageView = (ImageView) view.findViewById(R.id.imageview_action);
         }
 
-        public void setText(String num) {
+        public void setText(int index, String num) {
             numButton.setText(num);
+            if (index == 9) {
+                actionImageView.setBackgroundResource(R.drawable.ic_highlight_remove_grey600_24dp);
+                actionImageView.setVisibility(View.VISIBLE);
+            } else if (index == 11) {
+                actionImageView.setBackgroundResource(R.drawable.ic_label_outline_grey600_24dp);
+                actionImageView.setVisibility(View.VISIBLE);
+            } else {
+                actionImageView.setVisibility(View.GONE);
+            }
         }
     }
 }

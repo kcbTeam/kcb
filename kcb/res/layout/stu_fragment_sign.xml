@@ -13,10 +13,18 @@
         widget:paper_text_color="@color/black_700"
         widget:paper_text_size="@dimen/text_size_medium" />
 
+    <com.kcb.library.view.smoothprogressbar.SmoothProgressBar
+        android:id="@+id/progressbar_start_checkin"
+        style="@style/SmoothProgressBar"
+        android:layout_alignBottom="@id/button_start_checkin"
+        android:layout_alignLeft="@id/button_start_checkin"
+        android:layout_alignRight="@id/button_start_checkin"
+        android:visibility="invisible" />
+
     <com.kcb.library.view.PaperButton
         android:id="@+id/button_look_checkin"
         style="@style/home_center_button"
-        android:layout_below="@id/button_start_checkin"
+        android:layout_below="@id/progressbar_start_checkin"
         widget:paper_text="@string/check"
         widget:paper_text_color="@color/black_700"
         widget:paper_text_size="@dimen/text_size_medium" />

@@ -44,7 +44,7 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.kcb.student.activity.CheckInActivity"
+            android:name="com.kcb.student.activity.StartCheckInActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
