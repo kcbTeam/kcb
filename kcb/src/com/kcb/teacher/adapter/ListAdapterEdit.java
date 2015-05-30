@@ -54,6 +54,7 @@ public class ListAdapterEdit extends BaseAdapter {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
+        final int cov_position = getCount() - position - 1;
         ViewHolder holder = null;
         if (convertView == null) {
             holder = new ViewHolder();
@@ -74,7 +75,7 @@ public class ListAdapterEdit extends BaseAdapter {
                 notifyDataSetChanged();
             }
         });
-        holder.testname.setText(mTestNames.get(position));
+        holder.testname.setText(mTestNames.get(cov_position));
         if (selectedIndex == position) {
             holder.testchosen.setChecked(true);
         } else {

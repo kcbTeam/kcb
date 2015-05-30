@@ -40,7 +40,7 @@ public class TestJsonUtils {
             temp = list.get(i);
             JSONObject jsonObject = new JSONObject();
 
-            jsonObject.put("mId", temp.getId());
+            // jsonObject.put("mId", temp.getId());
             jsonObject.put("mTitleItem", changeQuestionItemToJsonObject(temp.getTitle()));
             jsonObject.put("mChoiceAItem", changeQuestionItemToJsonObject(temp.getChoiceA()));
             jsonObject.put("mChoiceBItem", changeQuestionItemToJsonObject(temp.getChoiceB()));
@@ -53,7 +53,17 @@ public class TestJsonUtils {
 
     }
 
-
+    /**
+     * 
+     * @title: jsonStringToQuesitonList
+     * @description: jsonString to List<Question>
+     * @author: ZQJ
+     * @date: 2015年5月30日 下午10:18:12
+     * @param jsonString
+     * @return
+     * @throws JSONException
+     * @throws IOException
+     */
     public static List<Question> jsonStringToQuesitonList(String jsonString) throws JSONException,
             IOException {
         JSONArray jsonArray = new JSONArray(jsonString);
@@ -70,8 +80,8 @@ public class TestJsonUtils {
             /*
              * mId
              */
-            String mId = questionJsonObject.getString("mId");
-            tempQuestion.setId(mId);
+            // String mId = (String) questionJsonObject.get("mId");
+            // tempQuestion.setId(mId);
 
             /*
              * mTitleItem
@@ -124,24 +134,21 @@ public class TestJsonUtils {
      */
     public static void jsonObjectToQuestionItem(QuestionItem questionItem, JSONObject jsonObject)
             throws JSONException, IOException {
-        String mId = jsonObject.getString("mId");
+        // String mId = (String) jsonObject.get("mId");
         boolean isText = (Boolean) jsonObject.get("isText");
-        String mText = jsonObject.getString("mText");
-        Bitmap mBitmap = null;
-        if (!jsonObject.getString("mBitmap").isEmpty()) {
-            mBitmap = ImageToJsonString.decodeImagefromJson(jsonObject.getString("mBitmap"));
-        }
         boolean isRight = (Boolean) jsonObject.get("isRight");
         double mRate = (Double) jsonObject.getDouble("mRate");
-
-        questionItem.setId(mId);
         questionItem.setRate(mRate);
         questionItem.setIsRight(isRight);
+
         if (isText) {
+            String mText = jsonObject.getString("mText");
             questionItem.setText(mText);
         } else {
+            Bitmap mBitmap = ImageToJsonString.decodeImagefromJson(jsonObject.getString("mBitmap"));
             questionItem.setBitmap(mBitmap);
         }
+        // questionItem.setId(mId);
     }
 
 
@@ -160,7 +167,7 @@ public class TestJsonUtils {
             throws JSONException, IOException {
         JSONObject jsonObject = new JSONObject();
 
-        jsonObject.put("mId", questionItem.getId());
+        // jsonObject.put("mId", questionItem.getId());
         jsonObject.put("mRate", questionItem.getRate());
         jsonObject.put("isRight", questionItem.isRight());
         jsonObject.put("isText", questionItem.isText());
@@ -172,7 +179,7 @@ public class TestJsonUtils {
                 jsonObject.put("mBitmap",
                         ImageToJsonString.encodeImageToJson(questionItem.getBitmap()));
             } else {
-                jsonObject.put("mBitmap", "");
+                jsonObject.put("mBitmap", " ");
             }
         }
         return jsonObject;

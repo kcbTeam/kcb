@@ -4,9 +4,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import org.json.JSONException;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.database.SQLException;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
@@ -21,6 +24,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.kcb.common.application.KApplication;
 import com.kcb.common.base.BaseActivity;
 import com.kcb.common.util.DialogUtil;
 import com.kcb.common.util.ToastUtil;
@@ -230,8 +234,23 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
                 // if add test, goto set time activity; if edit test, finish;
                 if (ACTION_ADD_TEST.equals(mAction)) {
                     SetTestTimeActivity.start(EditTestActivity.this, mTest);
+                } else {
+                    if (!getCurrentQuestion().equal(mTempQuestion)) {
+                        ToastUtil.toast(String.format(
+                                getResources().getString(R.string.format_edit_save),
+                                1 + mCurrentQuestionIndex));
+                    }
+                    try {
+                        KApplication.mTestDao.add(mTest);
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    finish();
                 }
-                finish();
             }
         } else {
             if (!getCurrentQuestion().equal(mTempQuestion)) {
