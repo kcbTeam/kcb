@@ -1,7 +1,9 @@
 package com.kcb.student.activity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -15,6 +17,7 @@ import com.kcb.common.base.BaseActivity;
 import com.kcb.library.view.FloatingEditText;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.student.adapter.TestResultAdapter;
+import com.kcb.student.fragment.TestFragment;
 import com.kcbTeam.R;
 
 /**
@@ -29,10 +32,11 @@ public class TestResultActivity extends BaseActivity {
     private ListView listView;
     private ButtonFlat backButton;
     private FloatingEditText mEditText;
-    ArrayList<String> listItem = new ArrayList<String>();
+    ArrayList<HashMap<String,Object>> listItem;
     private TestResultAdapter listAdapter;
-    private View CurrentView;
     private String[] testTitle = {"微积分", "导数", "导数复习"};
+    private int[] questionNum = {3, 4, 2};
+    private String[] testTime = {"2015-5-1", "2015-5-16", "2015-5-30"};
     private String test;
 
     @Override
@@ -46,23 +50,26 @@ public class TestResultActivity extends BaseActivity {
     @Override
     protected void initView() {
         listView = (ListView) findViewById(R.id.listview);
-        listAdapter = new TestResultAdapter(this, listItem);
-        listView.setAdapter(listAdapter);
+        listItem = new ArrayList<HashMap<String,Object>>();
         for (int i = 0; i < testTitle.length; i++) {
-            listItem.add(testTitle[i]);
+            HashMap<String,Object> map=new HashMap<String,Object>();
+            map.put("testname",testTitle[i]);
+            map.put("questionnum", questionNum[i]);
+            map.put("testtime",testTime[i]);
+            listItem.add(map);
         }
+        listAdapter = new TestResultAdapter(this,listItem);
         listView.setOnItemClickListener(new OnItemClickListener() {
             public void onItemClick(AdapterView<?> adapter, View arg1, int position, long arg3) {
-                if (null == CurrentView) {
-                    CurrentView = arg1;
-                } else {
-                    CurrentView.setBackgroundColor(getResources().getColor(R.color.white));
-                }
-                arg1.setBackgroundColor(getResources().getColor(R.color.green));
-                CurrentView = arg1;
+                Intent intent = new Intent(TestResultActivity.this, LookTestResultActivity.class);
+                intent.putExtra("testTitle1", testTitle[position]);
+                intent.putExtra("questionNum1", questionNum[position]);
+                intent.putExtra("questionInfo", TestFragment.string);
+                startActivity(intent);
             }
-        });
-
+        });       
+        listView.setAdapter(listAdapter);
+        
         mEditText = (FloatingEditText) findViewById(R.id.search);
         mEditText.addTextChangedListener(new TextWatcher() {
 
@@ -94,12 +101,17 @@ public class TestResultActivity extends BaseActivity {
     protected void initData() {}
 
     private void search(String string) {
+        listItem = new ArrayList<HashMap<String,Object>>();
         listItem.clear();
         for (int i = 0; i < testTitle.length; i++) {
             if (testTitle[i].contains(string)) {
-                listItem.add(testTitle[i]);
+                HashMap<String,Object> map=new HashMap<String,Object>();
+                map.put("testname",testTitle[i]);
+                map.put("questionnum",questionNum[i]);
+                map.put("testtime",testTime[i]);
+                listItem.add(map);
             }
         }
-        listView.setAdapter(new TestResultAdapter(this, listItem));
+        listView.setAdapter(new TestResultAdapter(this,listItem));
     }
 }

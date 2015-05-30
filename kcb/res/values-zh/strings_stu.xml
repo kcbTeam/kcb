@@ -59,6 +59,9 @@
     <!-- TestResultActivity Start -->
     <string name="testresult">查看测试结果</string>
     <string name="search">搜索关键字</string>
+    <string name="testname">测试名称</string>
+    <string name="questionnumber">题目数量</string>
+    <string name="testdate">测试日期</string>
     <!-- TestResultActivity End -->
 
 
