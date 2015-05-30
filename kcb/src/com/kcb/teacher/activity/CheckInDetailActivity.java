@@ -54,7 +54,8 @@ public class CheckInDetailActivity extends BaseFragmentActivity implements OnCli
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.tch_activity_checkindetails);
+        setContentView(R.layout.tch_activity_checkindetail);
+
         initData();
         initView();
     }

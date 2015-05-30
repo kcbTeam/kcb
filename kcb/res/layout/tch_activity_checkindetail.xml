@@ -8,18 +8,13 @@
     tools:ignore="contentDescription" >
 
     <LinearLayout
-        android:id="@+id/title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/activity_header_shadow"
-        android:orientation="horizontal" >
+        android:id="@+id/layout_title"
+        style="@style/common_title_layout" >
 
         <include layout="@layout/comm_back_button" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
+            style="@style/common_title"
             android:text="@string/signin_result" />
     </LinearLayout>
 
@@ -27,7 +22,7 @@
         android:id="@+id/textview_attendance_rate_hint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/title"
+        android:layout_below="@id/layout_title"
         android:layout_marginLeft="24dp" />
 
     <com.github.mikephil.charting.charts.PieChart

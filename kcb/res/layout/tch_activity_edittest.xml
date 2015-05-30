@@ -9,27 +9,15 @@
 
     <TextView
         android:id="@+id/textview_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/activity_header_shadow"
-        android:gravity="center_vertical"
-        android:paddingLeft="16dp"
-        android:paddingRight="48dp"
-        android:singleLine="true"
-        android:textColor="@color/black"
-        android:textSize="@dimen/text_size_large" />
+        style="@style/common_title_left" />
 
     <com.kcb.library.view.buttonflat.ButtonFlat
         android:id="@+id/button_cancel"
-        android:layout_width="@dimen/top_icon_button_width"
-        android:layout_height="@dimen/top_icon_button_height"
-        android:layout_alignParentRight="true"
+        style="@style/common_title_icon_layout_right"
         widget:rippleSpeed="6" >
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
+            style="@style/common_title_icon_right"
             android:src="@drawable/ic_highlight_remove_black_24dp" />
     </com.kcb.library.view.buttonflat.ButtonFlat>
 

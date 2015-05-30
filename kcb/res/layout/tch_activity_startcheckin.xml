@@ -8,22 +8,22 @@
     android:background="@color/activity_background"
     tools:ignore="contentDescription" >
 
-    <TextView
-        android:id="@+id/textview_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/activity_header_shadow"
-        android:gravity="center_vertical"
-        android:paddingLeft="16dp"
-        android:text="@string/signclass"
-        android:textColor="@color/black"
-        android:textSize="@dimen/text_size_large" />
+    <LinearLayout
+        android:id="@+id/layout_title"
+        style="@style/common_title_layout" >
+
+        <include layout="@layout/comm_back_button" />
+
+        <TextView
+            style="@style/common_title"
+            android:text="@string/signclass" />
+    </LinearLayout>
 
     <ImageView
         android:id="@+id/imageview_step1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textview_title"
+        android:layout_below="@id/layout_title"
         android:layout_marginBottom="8dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="8dp"
@@ -48,25 +48,13 @@
         android:layout_marginBottom="16dp"
         android:background="@color/black_divider" />
 
-    <com.kcb.library.view.PaperButton
-        android:id="@+id/button_getnum"
-        style="@style/common_paper_button"
-        android:layout_below="@id/view_divider1"
-        android:layout_centerHorizontal="true"
-        widget:paper_text="@string/getnumber"
-        widget:paper_text_color="@color/black_700"
-        widget:paper_text_size="@dimen/text_size_medium" />
-
     <LinearLayout
         android:id="@+id/linearlayout_showsignnum"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/button_getnum"
-        android:layout_alignRight="@id/button_getnum"
-        android:layout_below="@id/button_getnum"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_below="@id/view_divider1"
+        android:layout_marginLeft="48dp"
+        android:layout_marginRight="48dp"
         android:orientation="horizontal" >
 
         <TextView
@@ -91,8 +79,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/linearlayout_showsignnum"
-        android:layout_marginTop="32dp"
-        android:visibility="invisible" >
+        android:layout_marginTop="36dp" >
 
         <ImageView
             android:id="@+id/imageview_step2"

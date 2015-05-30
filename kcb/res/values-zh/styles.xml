@@ -25,6 +25,45 @@
     <style name="common_top_longtext_button" parent="@style/common_top_button">
         <item name="android:layout_width">90dp</item>
     </style>
+
+    <style name="common_title_layout">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/activity_header_shadow</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="common_title">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/text_size_large</item>
+    </style>
+
+    <style name="common_title_left">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/activity_header_shadow</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/text_size_large</item>
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">48dp</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="common_title_icon_layout_right">
+        <item name="android:layout_width">48dp</item>
+        <item name="android:layout_height">56dp</item>
+        <item name="android:layout_alignParentRight">true</item>
+    </style>
+
+    <style name="common_title_icon_right">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerInParent">true</item>
+    </style>
     <!-- ********** Common end ********** -->
 
 
