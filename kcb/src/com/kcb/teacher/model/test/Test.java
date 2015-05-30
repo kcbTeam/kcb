@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import android.R.integer;
-
 public class Test implements Serializable {
 
     private static final long serialVersionUID = 1L;
