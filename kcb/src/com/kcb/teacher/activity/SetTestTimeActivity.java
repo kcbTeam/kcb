@@ -1,8 +1,8 @@
 package com.kcb.teacher.activity;
 
 import java.util.Date;
-import java.util.List;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -18,78 +18,70 @@ import com.kcb.common.util.ToastUtil;
 import com.kcb.library.slider.Slider;
 import com.kcb.library.slider.Slider.OnValueChangedListener;
 import com.kcb.library.view.buttonflat.ButtonFlat;
-import com.kcb.teacher.adapter.ListAdapterQuestions;
+import com.kcb.teacher.adapter.SetTestTimeAdapter;
 import com.kcb.teacher.model.test.Question;
 import com.kcb.teacher.model.test.Test;
 import com.kcbTeam.R;
 
-public class SubmitTestActivity extends BaseActivity implements OnItemClickListener {
-    @SuppressWarnings("unused")
-    private static final String TAG = "SubmitTestPaper";
+public class SetTestTimeActivity extends BaseActivity implements OnItemClickListener {
 
-    private ListView questionListView;
-    private ListAdapterQuestions mAdapter;
-    private List<Question> mList;
-    private Test mCurrentTest;
+    private TextView testNameTextView;
+    private Slider testTimeSlider;
 
-    private TextView testName;
-    private Slider testTime;
-    private TextView texttimeHint;
+    private ButtonFlat finishButton;
 
-    private ButtonFlat submitButton;
+    private ListView listView;
+
+    private Test mTest;
+    private SetTestTimeAdapter mAdapter;
+
+    private int mPositonIndex;
 
     public final static String MODIFY_QUESTION_KEY = "modify_question";
     private final int MODIFY_QUESTION = 100;
 
-    private int mPositonIndex;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.tch_activity_submittest);
-        initData();
+        setContentView(R.layout.tch_activity_settesttime);
+
         initView();
+        initData();
     }
 
     @Override
     protected void initView() {
-        questionListView = (ListView) findViewById(R.id.listview_questions);
-        mAdapter = new ListAdapterQuestions(this, mList);
-        questionListView.setAdapter(mAdapter);
-        questionListView.setOnItemClickListener(this);
+        testNameTextView = (TextView) findViewById(R.id.textview_test_name);
 
-        testName = (TextView) findViewById(R.id.textview_test_name);
-        testName.setText("测试：" + mCurrentTest.getName());
+        finishButton = (ButtonFlat) findViewById(R.id.button_submit);
+        finishButton.setOnClickListener(this);
 
-        submitButton = (ButtonFlat) findViewById(R.id.button_submit);
-        submitButton.setOnClickListener(this);
-
-        testTime = (Slider) findViewById(R.id.slider_testtime);
-        texttimeHint = (TextView) findViewById(R.id.testtimeHint);
-        texttimeHint.setText(String.format(getResources().getString(R.string.testtimeFormat),
-                testTime.getValue()));
-        testTime.setOnValueChangedListener(new OnValueChangedListener() {
+        testTimeSlider = (Slider) findViewById(R.id.slider_testtime);
+        testTimeSlider.setValue(5);
+        testTimeSlider.setOnValueChangedListener(new OnValueChangedListener() {
 
             @Override
-            public void onValueChanged(int value) {
-                texttimeHint.setText(String.format(getResources()
-                        .getString(R.string.testtimeFormat), testTime.getValue()));
-            }
+            public void onValueChanged(int value) {}
         });
+
+        listView = (ListView) findViewById(R.id.listview_questions);
+        listView.setOnItemClickListener(this);
     }
 
     @Override
     protected void initData() {
-        mCurrentTest = (Test) getIntent().getSerializableExtra(EditTestActivity.COURSE_TEST_KEY);
-        mList = mCurrentTest.getQuestions();
+        mTest = (Test) getIntent().getSerializableExtra(DATA_TEST);
+        testNameTextView.setText(mTest.getName());
+        mAdapter = new SetTestTimeAdapter(this, mTest);
+        listView.setAdapter(mAdapter);
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         mPositonIndex = position;
         Intent intent = new Intent(this, ModifyQuestionActivty.class);
-        intent.putExtra(MODIFY_QUESTION_KEY, mCurrentTest.getQuestion(position));
-        intent.putExtra("TEST_NAME", mCurrentTest.getName());
+        intent.putExtra(MODIFY_QUESTION_KEY, mTest.getQuestion(position));
+        intent.putExtra("TEST_NAME", mTest.getName());
         intent.putExtra("QUETION_ID", position);
         startActivityForResult(intent, MODIFY_QUESTION);
     }
@@ -100,23 +92,21 @@ public class SubmitTestActivity extends BaseActivity implements OnItemClickListe
         if (requestCode == MODIFY_QUESTION) {
             if (resultCode == ModifyQuestionActivty.MODIFY_SAVED) {
                 Question question = (Question) data.getSerializableExtra("MODIFIED");
-                mList.set(mPositonIndex, question);
+                // TODO
+                // mList.set(mPositonIndex, question);
                 mAdapter.notifyDataSetChanged();
                 ToastUtil.toast(R.string.modify_saved);
             }
         }
-
     }
 
     @Override
     public void onClick(View v) {
-
-        if (v == submitButton) {
-            mCurrentTest.setDate(new Date());
-            mCurrentTest.setTime(testTime.getValue());
+        if (v == finishButton) {
+            mTest.setDate(new Date());
+            mTest.setTime(testTimeSlider.getValue());
             // TODO:change mcurrenttes to json object
         }
-
     }
 
     @Override
@@ -131,6 +121,12 @@ public class SubmitTestActivity extends BaseActivity implements OnItemClickListe
                 sureListener, R.string.cancel, null);
     }
 
+    private static final String DATA_TEST = "current_course_key";
 
-
+    public static void start(Context context, Test test) {
+        Intent intent = new Intent(context, SetTestTimeActivity.class);
+        test.changeTestToSerializable();
+        intent.putExtra(DATA_TEST, test);
+        context.startActivity(intent);
+    }
 }

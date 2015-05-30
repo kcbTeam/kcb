@@ -84,15 +84,33 @@
             android:layout_marginRight="4dp"
             android:text="@string/option_A" />
 
-        <EditText
-            android:id="@+id/edittext_A"
+        <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="4dp"
-            android:layout_weight="1"
-            android:background="@drawable/stu_checkin_textview"
-            android:inputType="none"
-            android:padding="4dp" />
+            android:layout_weight="1" >
+
+            <EditText
+                android:id="@+id/edittext_A"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/stu_checkin_textview"
+                android:hint="@string/edit_title_hint"
+                android:padding="8dp"
+                android:textColor="@color/black_700"
+                android:textColorHint="@color/black_400"
+                android:textSize="@dimen/text_size_medium" />
+
+            <ImageView
+                android:id="@+id/imageview_delete_a"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:padding="4dp"
+                android:src="@drawable/ic_cancel_black_24dp"
+                android:visibility="invisible" />
+        </RelativeLayout>
 
         <com.kcb.library.view.checkbox.CheckBox
             android:id="@+id/checkBox_A"
@@ -120,15 +138,32 @@
             android:layout_marginRight="4dp"
             android:text="@string/option_B" />
 
-        <EditText
-            android:id="@+id/edittext_B"
+        <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="4dp"
-            android:layout_weight="1"
-            android:background="@drawable/stu_checkin_textview"
-            android:inputType="none"
-            android:padding="4dp" />
+            android:layout_weight="1" >
+
+            <EditText
+                android:id="@+id/edittext_B"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/stu_checkin_textview"
+                android:inputType="none"
+                android:padding="8dp"
+                android:textColor="@color/black_700"
+                android:textSize="@dimen/text_size_medium" />
+
+            <ImageView
+                android:id="@+id/imageview_delete_b"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:padding="4dp"
+                android:src="@drawable/ic_cancel_black_24dp"
+                android:visibility="invisible" />
+        </RelativeLayout>
 
         <com.kcb.library.view.checkbox.CheckBox
             android:id="@+id/checkBox_B"
@@ -156,15 +191,32 @@
             android:layout_marginRight="4dp"
             android:text="@string/option_C" />
 
-        <EditText
-            android:id="@+id/edittext_C"
+        <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="4dp"
-            android:layout_weight="1"
-            android:background="@drawable/stu_checkin_textview"
-            android:inputType="none"
-            android:padding="4dp" />
+            android:layout_weight="1" >
+
+            <EditText
+                android:id="@+id/edittext_C"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/stu_checkin_textview"
+                android:inputType="none"
+                android:padding="8dp"
+                android:textColor="@color/black_700"
+                android:textSize="@dimen/text_size_medium" />
+
+            <ImageView
+                android:id="@+id/imageview_delete_c"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:padding="4dp"
+                android:src="@drawable/ic_cancel_black_24dp"
+                android:visibility="invisible" />
+        </RelativeLayout>
 
         <com.kcb.library.view.checkbox.CheckBox
             android:id="@+id/checkBox_C"
@@ -192,15 +244,32 @@
             android:layout_marginRight="4dp"
             android:text="@string/option_D" />
 
-        <EditText
-            android:id="@+id/edittext_D"
+        <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="4dp"
-            android:layout_weight="1"
-            android:background="@drawable/stu_checkin_textview"
-            android:inputType="none"
-            android:padding="4dp" />
+            android:layout_weight="1" >
+
+            <EditText
+                android:id="@+id/edittext_D"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/stu_checkin_textview"
+                android:inputType="none"
+                android:padding="8dp"
+                android:textColor="@color/black_700"
+                android:textSize="@dimen/text_size_medium" />
+
+            <ImageView
+                android:id="@+id/imageview_delete_d"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:padding="4dp"
+                android:src="@drawable/ic_cancel_black_24dp"
+                android:visibility="invisible" />
+        </RelativeLayout>
 
         <com.kcb.library.view.checkbox.CheckBox
             android:id="@+id/checkBox_D"

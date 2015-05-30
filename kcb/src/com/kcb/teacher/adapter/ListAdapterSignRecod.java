@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.kcb.teacher.model.CheckInRecordInfo;
+import com.kcb.teacher.model.checkin.CheckInResult;
 import com.kcbTeam.R;
 
 /**
@@ -23,10 +23,10 @@ import com.kcbTeam.R;
 public class ListAdapterSignRecod extends BaseAdapter {
 
     private Context mContext;
-    private List<CheckInRecordInfo> mList;
+    private List<CheckInResult> mList;
     private final String FORMAT_RATE = "%1$d%%";
 
-    public ListAdapterSignRecod(Context context, List<CheckInRecordInfo> list) {
+    public ListAdapterSignRecod(Context context, List<CheckInResult> list) {
         mContext = context;
         mList = list;
     }
@@ -51,9 +51,8 @@ public class ListAdapterSignRecod extends BaseAdapter {
         View view = View.inflate(mContext, R.layout.tch_listitem_checkinrecord, null);
         TextView signDate = (TextView) view.findViewById(R.id.textview_signdate);
         TextView signRate = (TextView) view.findViewById(R.id.textview_signrate);
-        signDate.setText(mList.get(position).getSignDate());
-        signRate.setText(String
-                .format(FORMAT_RATE, (int) (100 * mList.get(position).getSignRate())));
+        signDate.setText(mList.get(position).getDate().toString());
+        signRate.setText(String.format(FORMAT_RATE, (int) (100 * mList.get(position).getRate())));
         return view;
     }
 }

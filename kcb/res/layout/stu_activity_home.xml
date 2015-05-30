@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:buttonflat="http://schemas.android.com/apk/res-auto"
+    xmlns:widget="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/activity_background" >
@@ -20,7 +20,7 @@
         android:layout_width="@dimen/top_icon_button_width"
         android:layout_height="@dimen/top_icon_button_height"
         android:layout_alignParentRight="true"
-        buttonflat:rippleSpeed="6" >
+        widget:rippleSpeed="6" >
 
         <ImageView
             android:layout_width="wrap_content"
@@ -54,13 +54,15 @@
             android:id="@+id/button_checkin"
             style="@style/home_tab"
             android:text="@string/signbtn"
-            buttonflat:rippleSpeed="18" />
+            widget:clickAfterRipple="false"
+            widget:rippleSpeed="18" />
 
         <com.kcb.library.view.buttonflat.ButtonFlat
             android:id="@+id/button_test"
             style="@style/home_tab"
             android:text="@string/testbtn"
-            buttonflat:rippleSpeed="18" />
+            widget:clickAfterRipple="false"
+            widget:rippleSpeed="18" />
     </LinearLayout>
 
     <View

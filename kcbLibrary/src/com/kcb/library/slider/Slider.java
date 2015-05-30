@@ -24,7 +24,7 @@ import com.nineoldandroids.view.ViewHelper;
 
 public class Slider extends CustomView {
 
-    private int backgroundColor = Color.parseColor("#4CAF50");
+    private int backgroundColor = Color.parseColor("#427fed");
     private Ball ball;
     private Bitmap bitmap;
     private int max = 100;
@@ -203,7 +203,7 @@ public class Slider extends CustomView {
                                 Bitmap.Config.ARGB_8888);
             }
             Canvas temp = new Canvas(bitmap);
-            paint.setColor(Color.parseColor("#1e88e5"));
+            paint.setColor(Color.parseColor("#427fed"));
             paint.setStrokeWidth(Utils.dpToPx(2, getResources()));
             temp.drawLine(getHeight() / 2, getHeight() / 2, getWidth() - getHeight() / 2,
                     getHeight() / 2, paint);
@@ -215,7 +215,7 @@ public class Slider extends CustomView {
 
             canvas.drawBitmap(bitmap, 0, 0, new Paint());
         } else {
-            paint.setColor(Color.parseColor("#1e88e5"));
+            paint.setColor(Color.parseColor("#427fed"));
             paint.setStrokeWidth(Utils.dpToPx(2, getResources()));
             canvas.drawLine(getHeight() / 2, getHeight() / 2, getWidth() - getHeight() / 2,
                     getHeight() / 2, paint);

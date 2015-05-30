@@ -9,7 +9,6 @@ import android.view.View.OnClickListener;
 import com.kcb.common.view.MaterialDialog;
 import com.kcb.common.view.MaterialListDialog;
 import com.kcb.common.view.MaterialListDialog.OnClickSureListener;
-import com.kcb.teacher.util.DeletePictureDialog;
 
 /**
  * 
@@ -107,13 +106,13 @@ public class DialogUtil {
      * @param reBackgroundListener
      * @param deleteBackgroundListener
      */
-    public static void showDeletePictureDialog(Context context, String title,
-            OnClickListener reBackgroundListener, OnClickListener deleteBackgroundListener) {
-        DeletePictureDialog dialog = new DeletePictureDialog(context);
-        dialog.show();
-        dialog.setTitle(title);
-        dialog.setReBackgroundButton(reBackgroundListener);
-        dialog.setDeleteBackgroundButton(deleteBackgroundListener);
-        dialog.setCancelButton(null);
-    }
+    // public static void showDeletePictureDialog(Context context, String title,
+    // OnClickListener reBackgroundListener, OnClickListener deleteBackgroundListener) {
+    // DeletePictureDialog dialog = new DeletePictureDialog(context);
+    // dialog.show();
+    // dialog.setTitle(title);
+    // dialog.setReBackgroundButton(reBackgroundListener);
+    // dialog.setDeleteBackgroundButton(deleteBackgroundListener);
+    // dialog.setCancelButton(null);
+    // }
 }

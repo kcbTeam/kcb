@@ -11,6 +11,7 @@ public class Test implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    private String mId; // from server
     private String mName; // test name
     private int mTime; // minute
     private List<Question> mQuestions;
@@ -24,10 +25,11 @@ public class Test implements Serializable {
         }
     }
 
-    public Test(String name, List<Question> questions,int time) {
+
+    public Test(String name, List<Question> questions, int time) {
         mName = name;
         mQuestions = questions;
-        mTime=time;
+        mTime = time;
     }
 
     public int getmTime() {
@@ -36,6 +38,14 @@ public class Test implements Serializable {
 
     public void setmTime(int mTime) {
         this.mTime = mTime;
+    }
+
+    public void setId(String id) {
+        mId = id;
+    }
+
+    public String getId() {
+        return mId;
     }
 
     public String getName() {

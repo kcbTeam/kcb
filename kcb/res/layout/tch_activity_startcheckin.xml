@@ -51,8 +51,8 @@
         android:layout_alignBottom="@id/imageview_step1"
         android:layout_toRightOf="@id/imageview_step1"
         android:text="@string/tipforteacher1"
-        android:textColor="@color/black_500"
-        android:textSize="@dimen/text_size_small" />
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_medium" />
 
     <View
         android:id="@+id/view_divider1"
@@ -105,7 +105,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/linearlayout_showsignnum"
-        android:layout_marginTop="32dp" >
+        android:layout_marginTop="32dp"
+        android:visibility="invisible" >
 
         <ImageView
             android:id="@+id/imageview_step2"
@@ -123,8 +124,8 @@
             android:layout_alignBottom="@id/imageview_step2"
             android:layout_toRightOf="@id/imageview_step2"
             android:text="@string/tipforteacher2"
-            android:textColor="@color/black_500"
-            android:textSize="@dimen/text_size_small" />
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_medium" />
 
         <View
             android:id="@+id/view_divider2"
@@ -161,7 +162,8 @@
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:gravity="center_vertical"
-            android:orientation="horizontal" >
+            android:orientation="horizontal"
+            android:visibility="invisible" >
 
             <ProgressBar
                 android:id="@+id/progressbar"
@@ -187,7 +189,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/layout_start"
-        android:layout_marginTop="32dp" >
+        android:layout_marginTop="32dp"
+        android:visibility="invisible" >
 
         <ImageView
             android:id="@+id/imageview_step3"
@@ -205,8 +208,8 @@
             android:layout_alignBottom="@id/imageview_step3"
             android:layout_toRightOf="@id/imageview_step3"
             android:text="@string/tipforteacher3"
-            android:textColor="@color/black_500"
-            android:textSize="@dimen/text_size_small" />
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_medium" />
 
         <View
             android:id="@+id/view_divider3"

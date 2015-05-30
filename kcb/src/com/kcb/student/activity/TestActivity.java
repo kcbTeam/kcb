@@ -1,6 +1,5 @@
 package com.kcb.student.activity;
 
-import net.sf.json.JSONObject;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.SharedPreferences;
@@ -10,6 +9,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.renderscript.Sampler.Value;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -18,7 +18,6 @@ import android.widget.TextView;
 
 import com.kcb.common.base.BaseFragmentActivity;
 import com.kcb.common.util.DialogUtil;
-import com.kcb.common.util.LogUtil;
 import com.kcb.library.view.PaperButton;
 import com.kcb.library.view.checkbox.CheckBox;
 import com.kcb.student.adapter.TestRecycleAdapter;
@@ -93,8 +92,8 @@ public class TestActivity extends BaseFragmentActivity {
         String string = getIntent().getStringExtra("questionInfo");
         JsonObjectParserUtil questionData = new JsonObjectParserUtil(string);
         mTest = questionData.ParserJsonObject();
-        JSONObject jsonObject =  JSONObject.fromObject(mTest);
-        LogUtil.i("efvgfr", jsonObject.toString());  
+        // JSONObject jsonObject = JSONObject.fromObject(mTest);
+        // LogUtil.i("efvgfr", jsonObject.toString());
         questionNum = mTest.getQuestionNum();
         recyclerView.setLayoutManager(new GridLayoutManager(this, questionNum));
         mAdapter = new TestRecycleAdapter(questionNum);
@@ -173,7 +172,7 @@ public class TestActivity extends BaseFragmentActivity {
     public void showCurrentQuestion(int position) {
 
         if (mTest.getQuestion(position).getTitle().isText()) {
-            questionTextView.setText(mTest.getQuestion(position).getTitle().getText());
+            questionTextView.setText(Integer.toString(position+1)+"、"+mTest.getQuestion(position).getTitle().getText());
             questionTextView.setBackgroundColor(Color.WHITE);
         } else {
             questionTextView.setBackground(new BitmapDrawable(mTest.getQuestion(position)
@@ -181,7 +180,7 @@ public class TestActivity extends BaseFragmentActivity {
             questionTextView.setText("");
         }
         if (mTest.getQuestion(position).getChoiceA().isText()) {
-            answerATextView.setText(mTest.getQuestion(position).getChoiceA().getText());
+            answerATextView.setText("A、"+mTest.getQuestion(position).getChoiceA().getText());
             answerATextView.setBackgroundColor(Color.WHITE);
         } else {
             answerATextView.setBackground(new BitmapDrawable(mTest.getQuestion(position)
@@ -189,7 +188,7 @@ public class TestActivity extends BaseFragmentActivity {
             answerATextView.setText("");
         }
         if (mTest.getQuestion(position).getChoiceB().isText()) {
-            answerBTextView.setText(mTest.getQuestion(position).getChoiceB().getText());
+            answerBTextView.setText("B、"+mTest.getQuestion(position).getChoiceB().getText());
             answerBTextView.setBackgroundColor(Color.WHITE);
         } else {
             answerBTextView.setBackground(new BitmapDrawable(mTest.getQuestion(position)
@@ -197,7 +196,7 @@ public class TestActivity extends BaseFragmentActivity {
             answerBTextView.setText("");
         }
         if (mTest.getQuestion(position).getChoiceC().isText()) {
-            answerCTextView.setText(mTest.getQuestion(position).getChoiceC().getText());
+            answerCTextView.setText("C、"+mTest.getQuestion(position).getChoiceC().getText());
             answerCTextView.setBackgroundColor(Color.WHITE);
         } else {
             answerCTextView.setBackground(new BitmapDrawable(mTest.getQuestion(position)
@@ -205,7 +204,7 @@ public class TestActivity extends BaseFragmentActivity {
             answerCTextView.setText("");
         }
         if (mTest.getQuestion(position).getTitle().isText()) {
-            answerDTextView.setText(mTest.getQuestion(position).getChoiceD().getText());
+            answerDTextView.setText("D、"+mTest.getQuestion(position).getChoiceD().getText());
             answerDTextView.setBackgroundColor(Color.WHITE);
         } else {
             answerDTextView.setBackground(new BitmapDrawable(mTest.getQuestion(position)
@@ -216,34 +215,39 @@ public class TestActivity extends BaseFragmentActivity {
 
     public void getCheckBoxsAnswer(int position) {
         boolean[] mCorrectId = new boolean[] {false, false, false, false};
+
         mCorrectId[0] = checkboxA.isCheck();
         mCorrectId[1] = checkboxB.isCheck();
         mCorrectId[2] = checkboxC.isCheck();
         mCorrectId[3] = checkboxD.isCheck();
-        mTest.getQuestion(position).setCorrectId(mCorrectId);
+        // mTest.getQuestion(position).setCorrectId(mCorrectId);
+
     }
 
     public void setCheckBoxsAnswer(int position) {
         boolean[] mCorrectId;
-        mCorrectId = mTest.getQuestion(position).getCorrectId();
-        checkboxA.setChecked(mCorrectId[0]);
-        checkboxB.setChecked(mCorrectId[1]);
-        checkboxC.setChecked(mCorrectId[2]);
-        checkboxD.setChecked(mCorrectId[3]);
+
+        // mCorrectId = mTest.getQuestion(position).getCorrectId();
+        // checkboxA.setChecked(mCorrectId[0]);
+        // checkboxB.setChecked(mCorrectId[1]);
+        // checkboxC.setChecked(mCorrectId[2]);
+        // checkboxD.setChecked(mCorrectId[3]);
+
     }
 
     // 统计回答题目的数目
     public int collectAnsweredNum() {
         int AnsweredNum = 0;
-        for (int i = 0; i < mTest.getQuestionNum(); i++) {
-            boolean[] bleans = mTest.getQuestion(i).getCorrectId();
-            for (int j = 0; j < bleans.length; j++) {
-                if (bleans[j]) {
-                    AnsweredNum++;
-                    break;
-                }
-            }
-        }
+        // // for (int i = 0; i < mTest.getQuestionNum(); i++) {
+        // //// boolean[] bleans = mTest.getQuestion(i).getCorrectId();
+        // //// for (int j = 0; j < bleans.length; j++) {
+        // //// if (bleans[j]) {
+        // //// AnsweredNum++;
+        // //// break;
+        // //// }
+        // // }
+        //
+        // }
         return AnsweredNum;
     }
 
@@ -251,6 +255,7 @@ public class TestActivity extends BaseFragmentActivity {
     protected class fiveCountDownTimer extends CountDownTimer {
 
         private long millisUntilFinished;
+
         public fiveCountDownTimer(long millisInFuture, long countDownInterval) {
             super(millisInFuture, countDownInterval);
         }

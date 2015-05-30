@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.student.activity.LookTestResultActivity;
+import com.kcb.student.fragment.TestFragment;
 import com.kcbTeam.R;
 
 /**
@@ -66,6 +67,7 @@ public class TestResultAdapter extends BaseAdapter {
             public void onClick(View v) {
                 Intent intent = new Intent(context, LookTestResultActivity.class);
                 intent.putExtra("testTitle1", Data.get(position));
+                intent.putExtra("questionInfo", TestFragment.string);
                 context.startActivity(intent);
             }
         });

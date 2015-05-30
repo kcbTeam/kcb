@@ -17,7 +17,7 @@
     <string name="tipyes">是的，请这样做。</string>
     <string name="tipno">不，谢谢。</string>
     <string name="classtest">课堂小测试</string>
-    <string name="edit">编辑测试内容</string>
+    <string name="edit">添加 / 编辑测试内容</string>
     <string name="starttest">开始测试</string>
     <!-- test activty end -->
 
@@ -47,9 +47,8 @@
 
 
     <!-- edittestfirst activity start -->
-    <string name="hellotip1">1、为本次测试起一个名字：</string>
-    <string name="hellotip2">2、设置题目数量：</string>
-    <string name="hellotip3">3、点击完成开始添加题目：</string>
+    <string name="hellotip1">为本次测试起一个名字</string>
+    <string name="hellotip2">设置题目数量：%1$d</string>
     <!-- edittestfirst activity end -->
 
 
@@ -73,13 +72,13 @@
     <string name="edittest">编辑测试内容</string>
     <string name="last_item">上一题</string>
     <string name="next_item">下一题</string>
-    <string name="problem_hint">请输入题目</string>
-    <string name="options_hint">请输入选项</string>
+    <string name="problem_hint">输入题目</string>
+    <string name="options_hint">输入选项，并勾出正确项</string>
     <string name="format_question_num">第%1$d题/共%2$d题</string>
-    <string name="option_A">A.</string>
-    <string name="option_B">B.</string>
-    <string name="option_C">C.</string>
-    <string name="option_D">D.</string>
+    <string name="option_A">A</string>
+    <string name="option_B">B</string>
+    <string name="option_C">C</string>
+    <string name="option_D">D</string>
     <string name="select_hint">在正确的选项后面打钩</string>
     <string name="leave">离开</string>
     <string name="sureLeave">确认放弃此次编辑吗？</string>
@@ -97,8 +96,8 @@
     <string name="add_msg">确定添加第 %1$d 题？</string>
     <string name="rebackground">重拍背景</string>
     <string name="deletebackground">删除背景</string>
-    <string name="edit_title_hint">直接输入文字，或者长按拍照</string>
-    <string name="empty_hint">不能有空哦^^</string>
+    <string name="edit_title_hint">输入文字，或者长按拍照</string>
+    <string name="empty_hint">不能有空</string>
     <!-- EditTestActivity End -->
 
 
@@ -111,7 +110,7 @@
 
 
     <!-- EditTestFirstActivity Start -->
-    <string name="testname">测试的名称</string>
+    <string name="testname_hint">例如：科学的概念和应用</string>
     <!-- EditTestFirstActivity Start -->
 
 
@@ -119,19 +118,21 @@
     <string name="Go_modify">去修改</string>
     <string name="settime_hint">请您设置本次答题总时间:</string>
     <string name="editCouseTest">编辑课堂小测试</string>
-    <string name="sure_submit">确认提交</string>
-    <string name="testtimeFormat">%1$d分钟</string>
+    <string name="sure_submit">完成</string>
     <!-- Submit Activity End -->
 
-	<!-- Modify Question Activity Start-->
-	<string name="modify_saved">修改已保存</string>
-	<!-- Modify Question Activity End -->
-	
+
+    <!-- Modify Question Activity Start -->
+    <string name="modify_saved">修改已保存</string>
+    <!-- Modify Question Activity End -->
+
+
     <!-- Check Test Activity Start -->
     <string name="checktest">查看测试</string>
     <string name="hint_checktest_search">搜索测试名称</string>
     <string name="totalQuestionNum">总题数</string>
     <string name="testdata">测试日期</string>
+    <string name="testname">测试名称</string>
     <!-- Check Test Activity End -->
 
 
@@ -140,9 +141,9 @@
     <string name="next_step">下一步</string>
     <string name="new_password">新密码</string>
     <string name="repeat_new_password">再次输入新密码</string>
-    <string name="password_error">密码错误！</string>
-    <string name="password_empty">密码为空！</string>
-    <string name="modified">修改成功^_^</string>
+    <string name="password_error">密码错误</string>
+    <string name="password_empty">密码为空</string>
+    <string name="modified">修改成功</string>
     <string name="twice_password_unequal">两次输入密码不一致！</string>
     <!-- Modify PassWord End -->
 
@@ -150,8 +151,8 @@
     <string name="giveupsign">取消签到</string>
     <string name="giveup_sign_tip">取消签到后，本次签到无效。</string>
     <string name="getnumber">获取签到数字</string>
-    <string name="tipforteacher1">获取签到数字，然后告诉在场的学生</string>
-    <string name="tipforteacher2">签到时间为两分钟</string>
+    <string name="tipforteacher1">将签到数字告诉在场的学生</string>
+    <string name="tipforteacher2">开始后，学生有两分钟完成签到</string>
     <string name="tipforteacher3">本次签到结束</string>
     <string name="startsign">开始签到</string>
     <string name="stopsign">停止签到</string>

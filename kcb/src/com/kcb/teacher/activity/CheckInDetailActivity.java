@@ -3,6 +3,8 @@ package com.kcb.teacher.activity;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -21,8 +23,8 @@ import com.github.mikephil.charting.utils.PercentFormatter;
 import com.kcb.common.base.BaseFragmentActivity;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.teacher.adapter.ListAdapterMissCheckIn;
-import com.kcb.teacher.model.CheckInRecordInfo;
 import com.kcb.teacher.model.StudentInfo;
+import com.kcb.teacher.model.checkin.CheckInResult;
 import com.kcbTeam.R;
 
 /**
@@ -32,14 +34,14 @@ import com.kcbTeam.R;
  * @author: ZQJ
  * @date: 2015年4月27日 下午11:14:41
  */
-public class CheckInDetailsActivity extends BaseFragmentActivity implements OnClickListener {
+public class CheckInDetailActivity extends BaseFragmentActivity implements OnClickListener {
 
     private PieChart mChart;
     private TextView hintTextView;
     private ButtonFlat backButton;
     private ListView missCheckInListView;
 
-    private CheckInRecordInfo mCurrentCheckInRecordInfo;
+    private CheckInResult mCurrentCheckInRecordInfo;
     private float mCheckInRate;
 
     private String[] mInfoStrings = new String[] {"已签", "未签"};
@@ -82,18 +84,17 @@ public class CheckInDetailsActivity extends BaseFragmentActivity implements OnCl
         mMissedCheckInStusList = new ArrayList<StudentInfo>();
         if (flagString.equals(LookCheckInActivity.TAG)) {
             mCurrentCheckInRecordInfo =
-                    (CheckInRecordInfo) getIntent().getSerializableExtra(
+                    (CheckInResult) getIntent().getSerializableExtra(
                             LookCheckInActivity.CURRENT_CHECKIN_RECORD_KEY);
-            mMissedCheckInStusList = mCurrentCheckInRecordInfo.getMissedCheckInStus();
-            mCheckInRate = mCurrentCheckInRecordInfo.getSignRate();
+            mMissedCheckInStusList = mCurrentCheckInRecordInfo.getUnCheckedStudentInfos();
+            // mCheckInRate = mCurrentCheckInRecordInfo.getRate();
         } else if (flagString.equals(StartCheckInActivity.TAG)) {
             mCurrentCheckInRecordInfo =
-                    (CheckInRecordInfo) getIntent().getSerializableExtra(
+                    (CheckInResult) getIntent().getSerializableExtra(
                             StartCheckInActivity.CURRENT_CHECKIN_RECORD_KEY);
-            mMissedCheckInStusList = mCurrentCheckInRecordInfo.getMissedCheckInStus();
-            mCheckInRate = mCurrentCheckInRecordInfo.getSignRate();
+            mMissedCheckInStusList = mCurrentCheckInRecordInfo.getUnCheckedStudentInfos();
+            // mCheckInRate = mCurrentCheckInRecordInfo.getRate();
         }
-
     }
 
     private void initPieChart() {
@@ -149,5 +150,13 @@ public class CheckInDetailsActivity extends BaseFragmentActivity implements OnCl
         pieChart.setVisibility(View.INVISIBLE);
         Legend l = pieChart.getLegend();
         l.setEnabled(false);
+    }
+
+    private static final String DATA_CHECKINRESULT = "checkin_result";
+
+    public static void start(Context context, CheckInResult checkInResult) {
+        Intent intent = new Intent(context, CheckInDetailActivity.class);
+        intent.putExtra(DATA_CHECKINRESULT, checkInResult);
+        context.startActivity(intent);
     }
 }

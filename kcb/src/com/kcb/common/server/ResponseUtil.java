@@ -29,8 +29,7 @@ public class ResponseUtil {
     public static void toastError(VolleyError error) {
         if (isNetworkProblem(error)) {
             ToastUtil.toast(R.string.network_error);
-        }
-        if (isServerProblem(error)) {
+        } else {
             ToastUtil.toast(R.string.server_error);
         }
     }

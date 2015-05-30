@@ -30,7 +30,7 @@ public class TestFragment extends BaseFragment {
     private PaperButton startTestButton;
     private PaperButton lookTestButton;
     private SmoothProgressBar loginProgressBar;
-    String string =
+    public static String string =
             new String(
                     "{\"mTestName\":\"微积分\",\"mTestDate\":\"2015.05.23\",\"mTestTime\":5,"
                             + "\"QuestionList\":[{\"mQuestion\":\"这是第一题选择题\",\"mQuestionType\":\"true\","
@@ -63,9 +63,6 @@ public class TestFragment extends BaseFragment {
         lookTestButton = (PaperButton) view.findViewById(R.id.button_look_test);
         lookTestButton.setOnClickListener(mClickListener);
         loginProgressBar = (SmoothProgressBar) view.findViewById(R.id.progressbar_begintest);
-        Bitmap bitmap=BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
-        LogUtil.i("dcdd", ImageToJsonString.encode(ImageToJsonString.getBitmapByte(bitmap)));
-   ImageToJsonString.decode(ImageToJsonString.encode(ImageToJsonString.getBitmapByte(bitmap)));
     }
 
     @Override

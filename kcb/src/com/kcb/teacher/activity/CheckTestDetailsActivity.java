@@ -2,16 +2,19 @@ package com.kcb.teacher.activity;
 
 import java.util.List;
 
-import android.annotation.SuppressLint;
-import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.kcb.common.base.BaseActivity;
-import com.kcb.library.view.PaperButton;
 import com.kcb.library.view.buttonflat.ButtonFlat;
+import com.kcb.teacher.adapter.ListAdapterChoices;
 import com.kcb.teacher.model.test.Question;
+import com.kcb.teacher.model.test.QuestionItem;
 import com.kcb.teacher.model.test.Test;
 import com.kcbTeam.R;
 
@@ -20,32 +23,25 @@ public class CheckTestDetailsActivity extends BaseActivity {
     private static final String TAG = "CheckTest";
 
     private ButtonFlat backButton;
+    private ButtonFlat lastButton;
+    private ButtonFlat nextButton;
 
-    private TextView testName;
-    private TextView questionTextView;
+    private TextView testNameTextView;
+    private TextView questionNumTextView;
+
+    private EditText questionTitle;
     private TextView correctRate;
 
-    private TextView optionAtitle;
-    private TextView optionAcontent;
-    private TextView optionArate;
-
-    private TextView optionBtitle;
-    private TextView optionBcontent;
-    private TextView optionBrate;
-
-    private TextView optionCtitle;
-    private TextView optionCcontent;
-    private TextView optionCrate;
-
-    private TextView optionDtitle;
-    private TextView optionDcontent;
-    private TextView optionDrate;
-
-    private PaperButton lastButton;
-    private PaperButton nextButton;
+    private ListView choiceList;
+    private ListAdapterChoices mAdapter;
 
     private Test mTest;
     private List<Question> mQuestionList;
+
+    private int mQuestionNum;
+    private int mCurrentPosition;
+
+    private final String mRateFormat = "正确率：%1$d%%";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,44 +53,40 @@ public class CheckTestDetailsActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-
         backButton = (ButtonFlat) findViewById(R.id.button_back);
         backButton.setOnClickListener(this);
 
-        testName = (TextView) findViewById(R.id.textview_testname);
-        testName.setText(mTest.getName());
+        testNameTextView = (TextView) findViewById(R.id.textview_title);
+        testNameTextView.setText(mTest.getName());
 
-        questionTextView = (TextView) findViewById(R.id.textview_question);
-        correctRate = (TextView) findViewById(R.id.textview_correct_rate);
+        questionNumTextView = (TextView) findViewById(R.id.textview_question_num);
 
-        optionAtitle = (TextView) findViewById(R.id.textview_A_title);
-        optionAcontent = (TextView) findViewById(R.id.textview_A_content);
-        optionArate = (TextView) findViewById(R.id.textview_A_rate);
+        questionTitle = (EditText) findViewById(R.id.edittext_question_title);
+        correctRate = (TextView) findViewById(R.id.textview_correctrate);
 
-        optionBtitle = (TextView) findViewById(R.id.textview_B_title);
-        optionBcontent = (TextView) findViewById(R.id.textview_B_content);
-        optionBrate = (TextView) findViewById(R.id.textview_B_rate);
+        choiceList = (ListView) findViewById(R.id.listview_choices);
 
-        optionCtitle = (TextView) findViewById(R.id.textview_C_title);
-        optionCcontent = (TextView) findViewById(R.id.textview_C_content);
-        optionCrate = (TextView) findViewById(R.id.textview_C_rate);
+        lastButton = (ButtonFlat) findViewById(R.id.button_last);
+        lastButton.setOnClickListener(this);
+        nextButton = (ButtonFlat) findViewById(R.id.button_next);
+        nextButton.setOnClickListener(this);
 
-        optionDtitle = (TextView) findViewById(R.id.textview_D_title);
-        optionDcontent = (TextView) findViewById(R.id.textview_D_content);
-        optionDrate = (TextView) findViewById(R.id.textview_D_rate);
-
-        lastButton = (PaperButton) findViewById(R.id.pagerbutton_last);
-        nextButton = (PaperButton) findViewById(R.id.pagerbutton_next);
-
-        setContent(mQuestionList.get(0));
-
+        showContent();
     }
+
 
     @Override
     protected void initData() {
 
         mTest = (Test) getIntent().getSerializableExtra(CheckTestActivity.CLICKED_TEST_KEY);
         mQuestionList = mTest.getQuestions();
+        mQuestionNum = mQuestionList.size();
+        mCurrentPosition = 0;
+        mQuestionList.get(mCurrentPosition).setCorrectRate(0.8f);
+        mQuestionList.get(mCurrentPosition).getChoiceA().setRate(0.3f);
+        mQuestionList.get(mCurrentPosition).getChoiceB().setRate(0.4f);
+        mQuestionList.get(mCurrentPosition).getChoiceC().setRate(0.5f);
+        mQuestionList.get(mCurrentPosition).getChoiceD().setRate(0.2f);
     }
 
     @Override
@@ -103,54 +95,58 @@ public class CheckTestDetailsActivity extends BaseActivity {
             case R.id.button_back:
                 finish();
                 break;
-
+            case R.id.button_last:
+                lastQuestion();
+                break;
+            case R.id.button_next:
+                nextQuestin();
+                break;
             default:
                 break;
         }
+        showContent();
     }
 
-    @SuppressLint("NewApi")
-    private void setContent(Question temp) {
 
-        questionTextView.setText("1、" + temp.getTitle().getText());
-        correctRate.setText("正确率：5%");
-
-        optionAcontent.setText(temp.getChoiceA().getText());
-        optionBcontent.setText(temp.getChoiceB().getText());
-        optionCcontent.setText(temp.getChoiceC().getText());
-        optionDcontent.setText(temp.getChoiceD().getText());
-
-        optionArate.setText("76%");
-        optionBrate.setText("10%");
-        optionCrate.setText("5%");
-        optionDrate.setText("9%");
-
-        setOptionTitle(temp.getCorrectId());
-
+    private void lastQuestion() {
+        if (mCurrentPosition > 0) {
+            mCurrentPosition--;
+        }
     }
 
-    private void setOptionTitle(boolean[] correctId) {
-        if (correctId.length != 4) {
-            return;
+    private void nextQuestin() {
+        if (mCurrentPosition != mQuestionNum - 1) {
+            mCurrentPosition++;
         }
-        Resources res = getResources();
-        if (correctId[0]) {
-            optionAtitle.setTextColor(res.getColor(R.color.red));
-            optionAtitle.setTextSize(22f);
-        }
-        if (correctId[1]) {
-            optionBtitle.setTextColor(res.getColor(R.color.red));
-            optionBtitle.setTextSize(22f);
-        }
-        if (correctId[2]) {
-            optionCtitle.setTextColor(res.getColor(R.color.red));
-            optionCtitle.setTextSize(22f);
-        }
-        if (correctId[3]) {
-            optionDtitle.setTextColor(res.getColor(R.color.red));
-            optionDtitle.setTextSize(22f);
-        }
-
     }
 
+    private void showContent() {
+        Question question = mQuestionList.get(mCurrentPosition);
+        showQuestionNum();
+        showQuestionItem(questionTitle, question.getTitle());
+        correctRate.setText(String.format(mRateFormat, (int) (100 * question.getCorrectRate())));
+        mAdapter = new ListAdapterChoices(this, question);
+        choiceList.setAdapter(mAdapter);
+    }
+
+    private void showQuestionNum() {
+        questionNumTextView.setText(String.format(
+                getResources().getString(R.string.format_question_num), mCurrentPosition + 1,
+                mQuestionNum));
+    }
+
+    @SuppressWarnings("deprecation")
+    private void showQuestionItem(EditText view, QuestionItem item) {
+        view.setBackgroundResource(R.drawable.stu_checkin_textview);
+        if (item.isText()) {
+            view.setText(item.getText());
+        } else {
+            Bitmap bitmap = item.getBitmap();
+            if (null != bitmap) {
+                view.setText("");
+                view.setBackgroundDrawable(new BitmapDrawable(bitmap));
+            }
+            view.setFocusable(false);
+        }
+    }
 }
