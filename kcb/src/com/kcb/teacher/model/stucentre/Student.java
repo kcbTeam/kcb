@@ -1,4 +1,4 @@
-package com.kcb.teacher.model;
+package com.kcb.teacher.model.stucentre;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -12,7 +12,7 @@ import org.json.JSONObject;
  * @author: ZQJ
  * @date: 2015年4月24日 下午7:08:09
  */
-public class StudentInfo implements Serializable {
+public class Student implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -29,17 +29,17 @@ public class StudentInfo implements Serializable {
 
     private double mUnCheckedRate;
 
-    public StudentInfo() {}
+    public Student() {}
 
-    public StudentInfo(String name, String studentID) {
+    public Student(String name, String studentID) {
         mName = name;
         mId = studentID;
         mCheckInTimes = 0;
         mTotalCheckInTimes = 0;
     }
 
-    public static StudentInfo from(JSONObject jsonObject) {
-        StudentInfo studentInfo = new StudentInfo();
+    public static Student from(JSONObject jsonObject) {
+        Student studentInfo = new Student();
         studentInfo.mId = jsonObject.optString("id");
         studentInfo.mName = jsonObject.optString("name");
         studentInfo.mUnCheckedRate = jsonObject.optDouble("rate");
@@ -50,7 +50,7 @@ public class StudentInfo implements Serializable {
      * 
      * Constructor: StudentInfo checkinTimes is success checkinTimes of the student
      */
-    public StudentInfo(String name, String studentID, int checkinTimes, int totalCheckInTimes) {
+    public Student(String name, String studentID, int checkinTimes, int totalCheckInTimes) {
         mName = name;
         mId = studentID;
         mCheckInTimes = checkinTimes;
@@ -63,7 +63,7 @@ public class StudentInfo implements Serializable {
      * correctTimes of the student
      * 
      */
-    public StudentInfo(String name, String studentID, int checkinTimes, int totalCheckInTimes,
+    public Student(String name, String studentID, int checkinTimes, int totalCheckInTimes,
             int correctTimes, int totalChoiceQuestion) {
         mName = name;
         mId = studentID;
@@ -81,11 +81,11 @@ public class StudentInfo implements Serializable {
         this.mName = mStudentName;
     }
 
-    public String getStudentID() {
+    public String getId() {
         return this.mId;
     }
 
-    public String getStudentName() {
+    public String getName() {
         return this.mName;
     }
 

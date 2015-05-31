@@ -8,7 +8,7 @@
     tools:ignore="contentDescription" >
 
     <LinearLayout
-        android:id="@+id/title"
+        android:id="@+id/layout_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/activity_header_shadow"
@@ -17,43 +17,34 @@
         <include layout="@layout/comm_back_button" />
 
         <TextView
-            android:id="@+id/textview_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:textSize="22dp" />
+            android:id="@+id/textview_name_id"
+            style="@style/common_title" />
     </LinearLayout>
 
     <TextView
         android:id="@+id/textview_stu_checkinrate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/title"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp" />
+        style="@style/common_tip"
+        android:layout_below="@id/layout_title"
+        android:layout_marginTop="8dp" />
 
     <com.github.mikephil.charting.charts.PieChart
         android:id="@+id/piechart_checkinrate"
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_below="@id/textview_stu_checkinrate"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp" />
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:id="@+id/textview_stu_correctrate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/textview_stu_checkinrate"
+        style="@style/common_tip"
         android:layout_below="@id/piechart_checkinrate"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="8dp" />
 
     <com.github.mikephil.charting.charts.PieChart
         android:id="@+id/piechart_correctrate"
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_below="@id/textview_stu_correctrate"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp" />
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

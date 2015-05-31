@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.kcb.teacher.model.StudentInfo;
+import com.kcb.teacher.model.stucentre.Student;
 import com.kcbTeam.R;
 
 /**
@@ -22,12 +22,12 @@ import com.kcbTeam.R;
 @SuppressLint("ViewHolder")
 public class ListAdapterStudent extends BaseAdapter {
 
-    private List<StudentInfo> mList;
+    private List<Student> mList;
     private Context mContext;
 
     private final String FORMAT_RATE = "%1$d%%";
 
-    public ListAdapterStudent(Context context, List<StudentInfo> list) {
+    public ListAdapterStudent(Context context, List<Student> list) {
         mContext = context;
         mList = list;
     }
@@ -38,7 +38,7 @@ public class ListAdapterStudent extends BaseAdapter {
     }
 
     @Override
-    public StudentInfo getItem(int position) {
+    public Student getItem(int position) {
         return mList.get(position);
     }
 
@@ -62,8 +62,8 @@ public class ListAdapterStudent extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        holder.studentName.setText(mList.get(position).getStudentName());
-        holder.studentId.setText(mList.get(position).getStudentID());
+        holder.studentName.setText(mList.get(position).getName());
+        holder.studentId.setText(mList.get(position).getId());
         holder.checkInRate.setText(String.format(FORMAT_RATE, (int) (100 * mList.get(position)
                 .getCheckInRate())));
         holder.correctRate.setText(String.format(FORMAT_RATE, (int) (100 * mList.get(position)

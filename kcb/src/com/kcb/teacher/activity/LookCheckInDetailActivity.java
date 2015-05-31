@@ -1,7 +1,6 @@
 package com.kcb.teacher.activity;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import android.content.Context;
 import android.content.Intent;
@@ -22,8 +21,7 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.PercentFormatter;
 import com.kcb.common.base.BaseFragmentActivity;
 import com.kcb.library.view.buttonflat.ButtonFlat;
-import com.kcb.teacher.adapter.ListAdapterMissCheckIn;
-import com.kcb.teacher.model.StudentInfo;
+import com.kcb.teacher.adapter.LookCheckInDetailAdapter;
 import com.kcb.teacher.model.checkin.CheckInResult;
 import com.kcbTeam.R;
 
@@ -34,80 +32,82 @@ import com.kcbTeam.R;
  * @author: ZQJ
  * @date: 2015年4月27日 下午11:14:41
  */
-public class CheckInDetailActivity extends BaseFragmentActivity implements OnClickListener {
+public class LookCheckInDetailActivity extends BaseFragmentActivity implements OnClickListener {
 
-    private PieChart mChart;
-    private TextView hintTextView;
     private ButtonFlat backButton;
-    private ListView missCheckInListView;
+    private TextView dateTextView;
+    private TextView rateTextView;
 
-    private CheckInResult mCurrentCheckInRecordInfo;
+    private PieChart pieChart;
+
+    private ListView listView;
+
+    private CheckInResult mCheckInResult;
     private float mCheckInRate;
 
-    private String[] mInfoStrings = new String[] {"已签", "未签"};
-    private List<StudentInfo> mMissedCheckInStusList;
-    private ListAdapterMissCheckIn mAdapter;
-
-    private final int mDealy = 150;
-    private final int mAnimateDuration = 1800;
+    private LookCheckInDetailAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.tch_activity_checkindetail);
+        setContentView(R.layout.tch_activity_look_checkin_detail);
 
-        initData();
         initView();
+        initData();
     }
 
     @Override
     protected void initView() {
-        initPieChart();
-        hintTextView = (TextView) findViewById(R.id.textview_attendance_rate_hint);
-        hintTextView.setText(String.format(getResources().getString(R.string.checkinRate_hint),
-                (int) (100 * mCheckInRate)));
         backButton = (ButtonFlat) findViewById(R.id.button_back);
-        backButton.setOnClickListener(new OnClickListener() {
+        backButton.setOnClickListener(this);
 
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-        missCheckInListView = (ListView) findViewById(R.id.listview_not_ckeckin_stu);
-        mAdapter = new ListAdapterMissCheckIn(this, mMissedCheckInStusList);
-        missCheckInListView.setAdapter(mAdapter);
+        dateTextView = (TextView) findViewById(R.id.textview_date);
+        rateTextView = (TextView) findViewById(R.id.textview_rate);
+
+        pieChart = (PieChart) findViewById(R.id.piechart);
+        listView = (ListView) findViewById(R.id.listview);
     }
 
     @Override
     protected void initData() {
-        String flagString = getIntent().getStringExtra("ACTIVITY_TAG");
-        mMissedCheckInStusList = new ArrayList<StudentInfo>();
-        if (flagString.equals(LookCheckInActivity.TAG)) {
-            mCurrentCheckInRecordInfo =
-                    (CheckInResult) getIntent().getSerializableExtra(
-                            LookCheckInActivity.CURRENT_CHECKIN_RECORD_KEY);
-            mMissedCheckInStusList = mCurrentCheckInRecordInfo.getUnCheckedStudentInfos();
-            // mCheckInRate = mCurrentCheckInRecordInfo.getRate();
+        mCheckInResult = (CheckInResult) getIntent().getSerializableExtra(DATA_CHECKIN_RESULT);
+        mCheckInRate = (float) mCheckInResult.getRate();
+
+        dateTextView.setText(mCheckInResult.getDate().toString());
+        rateTextView.setText(String.format(getResources().getString(R.string.checkinRate_hint),
+                (int) (100 * mCheckInRate)));
+
+        mAdapter = new LookCheckInDetailAdapter(this, mCheckInResult.getUnCheckedStudents());
+        listView.setAdapter(mAdapter);
+
+        initPieChart();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.button_back:
+                finish();
+                break;
+            default:
+                break;
         }
     }
 
     private void initPieChart() {
-        mChart = (PieChart) findViewById(R.id.piechart);
-        setData(mChart, mInfoStrings);
-        setDefaultPieChartStyle(mChart);
+        setData(pieChart, new String[] {"成功签到", "未签到"});
+        setDefaultPieChartStyle(pieChart);
         new Handler().postDelayed(new Runnable() {
 
             @Override
             public void run() {
-                mChart.animateY(mAnimateDuration);
-                mChart.setVisibility(View.VISIBLE);
+                pieChart.animateY(1800);
+                pieChart.setVisibility(View.VISIBLE);
             }
-        }, mDealy);
+        }, 150);
     }
 
     private void setData(PieChart pieChart, String[] infoStrings) {
-
         ArrayList<Entry> yVals1 = new ArrayList<Entry>();
         yVals1.add(new Entry(mCheckInRate, 0));
         yVals1.add(new Entry(1.0f - mCheckInRate, 1));
@@ -147,11 +147,14 @@ public class CheckInDetailActivity extends BaseFragmentActivity implements OnCli
         l.setEnabled(false);
     }
 
-    private static final String DATA_CHECKINRESULT = "checkin_result";
+    /**
+     * start this activity
+     */
+    private static final String DATA_CHECKIN_RESULT = "data_checkin_result";
 
     public static void start(Context context, CheckInResult checkInResult) {
-        Intent intent = new Intent(context, CheckInDetailActivity.class);
-        intent.putExtra(DATA_CHECKINRESULT, checkInResult);
+        Intent intent = new Intent(context, LookCheckInDetailActivity.class);
+        intent.putExtra(DATA_CHECKIN_RESULT, checkInResult);
         context.startActivity(intent);
     }
 }

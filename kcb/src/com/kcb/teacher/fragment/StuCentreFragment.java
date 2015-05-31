@@ -6,7 +6,6 @@ import java.util.List;
 
 import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -24,9 +23,9 @@ import android.widget.TextView;
 
 import com.kcb.common.base.BaseFragment;
 import com.kcb.library.view.FloatingEditText;
-import com.kcb.teacher.activity.StuDetailsActivity;
+import com.kcb.teacher.activity.StuCentreActivity;
 import com.kcb.teacher.adapter.ListAdapterStudent;
-import com.kcb.teacher.model.StudentInfo;
+import com.kcb.teacher.model.stucentre.Student;
 import com.kcb.teacher.util.CompareByCheckInRate;
 import com.kcb.teacher.util.CompareByCorrectRate;
 import com.kcb.teacher.util.CompareById;
@@ -55,13 +54,11 @@ public class StuCentreFragment extends BaseFragment implements OnItemClickListen
 
     private ListView mStudentList;
     private ListAdapterStudent mAdapter;
-    private List<StudentInfo> mList;
-    private List<StudentInfo> mTempList;
+    private List<Student> mList;
+    private List<Student> mTempList;
     private CompareById idComparator;
     private CompareByCheckInRate checkInRateComparator;
     private CompareByCorrectRate correctRateComparator;
-
-    public static final String CURRENT_STU_KEY = "cunrrent_stu";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -108,19 +105,19 @@ public class StuCentreFragment extends BaseFragment implements OnItemClickListen
         correctRateComparator = new CompareByCorrectRate();
         checkInRateComparator = new CompareByCheckInRate();
 
-        mList = new ArrayList<StudentInfo>();
-        mList.add(new StudentInfo("令狐", "1004210254", 5, 15, 10, 20));
-        mList.add(new StudentInfo("杨过", "1004210256", 6, 15, 5, 23));
-        mList.add(new StudentInfo("萧远山", "1004210257", 7, 15, 5, 14));
-        mList.add(new StudentInfo("慕容博", "1004210258", 2, 15, 5, 13));
-        mList.add(new StudentInfo("扫地僧", "1004210259", 3, 15, 5, 14));
-        mList.add(new StudentInfo("向问天", "1004210245", 14, 15, 5, 15));
-        mList.add(new StudentInfo("任我行", "1004210221", 13, 15, 5, 14));
-        mList.add(new StudentInfo("萧峰", "1004210232", 12, 15, 5, 15));
-        mList.add(new StudentInfo("东方", "1004210214", 10, 15, 5, 16));
-        mList.add(new StudentInfo("查良镛", "1004210228", 3, 15, 5, 13));
+        mList = new ArrayList<Student>();
+        mList.add(new Student("令狐", "1004210254", 5, 15, 10, 20));
+        mList.add(new Student("杨过", "1004210256", 6, 15, 5, 23));
+        mList.add(new Student("萧远山", "1004210257", 7, 15, 5, 14));
+        mList.add(new Student("慕容博", "1004210258", 2, 15, 5, 13));
+        mList.add(new Student("扫地僧", "1004210259", 3, 15, 5, 14));
+        mList.add(new Student("向问天", "1004210245", 14, 15, 5, 15));
+        mList.add(new Student("任我行", "1004210221", 13, 15, 5, 14));
+        mList.add(new Student("萧峰", "1004210232", 12, 15, 5, 15));
+        mList.add(new Student("东方", "1004210214", 10, 15, 5, 16));
+        mList.add(new Student("查良镛", "1004210228", 3, 15, 5, 13));
         Collections.sort(mList, idComparator);
-        mTempList = new ArrayList<StudentInfo>();
+        mTempList = new ArrayList<Student>();
         mTempList.addAll(mList);
     }
 
@@ -143,7 +140,7 @@ public class StuCentreFragment extends BaseFragment implements OnItemClickListen
             clearImageView.setVisibility(View.INVISIBLE);
         }
         for (int i = 0; i < mTempList.size(); i++) {
-            String name = mTempList.get(i).getStudentName();
+            String name = mTempList.get(i).getName();
             try {
                 if (NameUtils.isMatch(name, searchContent)) {
                     continue;
@@ -233,9 +230,7 @@ public class StuCentreFragment extends BaseFragment implements OnItemClickListen
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Intent intent = new Intent(getActivity(), StuDetailsActivity.class);
-        intent.putExtra(StuCentreFragment.CURRENT_STU_KEY, mAdapter.getItem(position));
-        startActivity(intent);
+        StuCentreActivity.start(getActivity(), mAdapter.getItem(position));
     }
 
     private class SortTast extends AsyncTask<Integer, Integer, Integer> {

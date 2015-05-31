@@ -19,34 +19,43 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/table_title"
+        android:id="@+id/layout_listview_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/layout_title"
-        android:layout_marginBottom="@dimen/dp_16"
-        android:layout_marginLeft="@dimen/dp_16"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
         android:orientation="horizontal" >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:text="@string/checkin_date" />
+            android:layout_marginLeft="16dp"
+            android:text="@string/checkin_date"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_small" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="135dp"
-            android:text="@string/checkin_rate" />
+            android:layout_marginRight="16dp"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:text="@string/checkin_rate"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_small" />
     </LinearLayout>
 
     <ListView
-        android:id="@+id/listview_sign_record"
+        android:id="@+id/listview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/table_title"
-        android:layout_marginLeft="@dimen/dp_16"
-        android:layout_marginRight="@dimen/dp_16" >
+        android:layout_below="@id/layout_listview_title"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp" >
     </ListView>
 
 </RelativeLayout>
