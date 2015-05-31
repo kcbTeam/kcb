@@ -15,7 +15,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.kcb.common.application.KApplication;
 import com.kcb.common.base.BaseFragment;
 import com.kcb.common.listener.DelayClickListener;
 import com.kcb.common.util.DialogUtil;
@@ -25,6 +24,7 @@ import com.kcb.library.view.PaperButton;
 import com.kcb.teacher.activity.CheckTestActivity;
 import com.kcb.teacher.activity.EditTestActivity;
 import com.kcb.teacher.activity.SetTestNameActivity;
+import com.kcb.teacher.database.test.TestDao;
 import com.kcb.teacher.model.test.Test;
 import com.kcbTeam.R;
 
@@ -46,6 +46,8 @@ public class TestFragment extends BaseFragment {
 
     private GetTestListTask mGetTestListTask;
 
+    private TestDao mTestDao;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.tch_fragment_test, container, false);
@@ -55,7 +57,7 @@ public class TestFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        initData();
         initView();
     }
 
@@ -71,7 +73,9 @@ public class TestFragment extends BaseFragment {
     }
 
     @Override
-    protected void initData() {}
+    protected void initData() {
+        mTestDao = new TestDao(getActivity());
+    }
 
     @Override
     public void onStart() {
@@ -103,7 +107,6 @@ public class TestFragment extends BaseFragment {
     };
 
     private void startTest() {
-        initData();
         refreshNameList(TAG_ADD_OR_EDIT_TEST);
         if (mTestNameList.isEmpty()) {
             ToastUtil.toast("请先添加测试内容");
@@ -120,7 +123,6 @@ public class TestFragment extends BaseFragment {
     }
 
     private void addOrEditTest() {
-        initData();
         refreshNameList(TAG_START_TEST);
         DialogUtil.showListDialog(getActivity(), "编辑测试内容", mTestNameList, "确定",
                 new OnClickSureListener() {
@@ -145,7 +147,7 @@ public class TestFragment extends BaseFragment {
         @Override
         protected Integer doInBackground(Integer... params) {
             try {
-                mTestList = KApplication.mTestDao.getAllRecord();
+                mTestList = mTestDao.getAllRecord();
                 mTestNameList = new ArrayList<String>();
                 for (int i = 0; i < mTestList.size(); i++) {
                     mTestNameList.add(mTestList.get(i).getName());

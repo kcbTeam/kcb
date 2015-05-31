@@ -17,9 +17,9 @@ public class UncheckedStudent {
 
     public static UncheckedStudent from(JSONObject jsonObject) {
         UncheckedStudent uncheckedStudent = new UncheckedStudent();
-        uncheckedStudent.mId = jsonObject.optString("");
-        uncheckedStudent.mName = jsonObject.optString("");
-        uncheckedStudent.mUnCheckedRate = jsonObject.optDouble("");
+        uncheckedStudent.mId = jsonObject.optString("mId");
+        uncheckedStudent.mName = jsonObject.optString("mName");
+        uncheckedStudent.mUnCheckedRate = jsonObject.optDouble("mUnCheckedRate");
         return uncheckedStudent;
     }
 

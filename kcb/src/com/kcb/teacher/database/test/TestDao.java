@@ -15,19 +15,20 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.kcb.teacher.database.CommonSQLiteOpenHelper;
 import com.kcb.teacher.database.test.utils.TestJsonUtils;
 import com.kcb.teacher.model.test.Question;
 import com.kcb.teacher.model.test.Test;
 
 public class TestDao {
-    private TestSQLiteOpenHelper mTestSQLiteOpenHelper;
+    private CommonSQLiteOpenHelper mTestSQLiteOpenHelper;
     private SQLiteDatabase mSqLiteDatabase;
 
     @SuppressLint("SimpleDateFormat")
     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
     public TestDao(Context context) {
-        mTestSQLiteOpenHelper = new TestSQLiteOpenHelper(context);
+        mTestSQLiteOpenHelper = new CommonSQLiteOpenHelper(context);
         mSqLiteDatabase = mTestSQLiteOpenHelper.getWritableDatabase();
     }
 
@@ -50,7 +51,7 @@ public class TestDao {
         }
         String date = formatter.format(test.getDate());
         mSqLiteDatabase.execSQL(
-                "INSERT INTO " + TestSQLiteOpenHelper.TABLE_NAME + " VALUES(null,?,?,?,?)",
+                "INSERT INTO " + TestDB.TABLE_NAME + " VALUES(null,?,?,?,?)",
                 new String[] {test.getName(), String.valueOf(test.getTime()), date,
                         TestJsonUtils.changeQuestionsToString(test.getQuestions())});
     }
@@ -71,19 +72,14 @@ public class TestDao {
     public Test getTestByName(String testName) throws JSONException, IOException, ParseException {
         Test test = null;
         Cursor cursor =
-                mSqLiteDatabase
-                        .rawQuery("SELECT * FROM " + TestSQLiteOpenHelper.TABLE_NAME + " WHERE "
-                                + TestSQLiteOpenHelper.KEY_NAME + "=?", new String[] {testName});
+                mSqLiteDatabase.rawQuery("SELECT * FROM " + TestDB.TABLE_NAME + " WHERE "
+                        + TestDB.KEY_NAME + "=?", new String[] {testName});
         if (cursor.moveToFirst()) {
-            int mTime =
-                    Integer.valueOf(cursor.getString(cursor
-                            .getColumnIndex(TestSQLiteOpenHelper.KEY_TIME)));
+            int mTime = Integer.valueOf(cursor.getString(cursor.getColumnIndex(TestDB.KEY_TIME)));
             List<Question> mQuestions =
                     TestJsonUtils.jsonStringToQuesitonList(cursor.getString(cursor
-                            .getColumnIndex(TestSQLiteOpenHelper.KEY_QUESTIONS)));
-            Date mDate =
-                    formatter.parse(cursor.getString(cursor
-                            .getColumnIndex(TestSQLiteOpenHelper.KEY_DATE)));
+                            .getColumnIndex(TestDB.KEY_QUESTIONS)));
+            Date mDate = formatter.parse(cursor.getString(cursor.getColumnIndex(TestDB.KEY_DATE)));
             test = new Test(testName, mQuestions, mTime);
             test.setDate(mDate);
         }
@@ -103,22 +99,18 @@ public class TestDao {
      */
     public List<Test> getAllRecord() throws JSONException, IOException, ParseException {
         Cursor cursor =
-                mSqLiteDatabase.query(TestSQLiteOpenHelper.TABLE_NAME, null, null, null, null,
-                        null, null);
+                mSqLiteDatabase.query(TestDB.TABLE_NAME, null, null, null, null, null, null);
         List<Test> list = new ArrayList<Test>();
         if (cursor.moveToFirst()) {
             do {
-                String mName =
-                        cursor.getString(cursor.getColumnIndex(TestSQLiteOpenHelper.KEY_NAME));
+                String mName = cursor.getString(cursor.getColumnIndex(TestDB.KEY_NAME));
                 int mTime =
-                        Integer.valueOf(cursor.getString(cursor
-                                .getColumnIndex(TestSQLiteOpenHelper.KEY_TIME)));
+                        Integer.valueOf(cursor.getString(cursor.getColumnIndex(TestDB.KEY_TIME)));
                 List<Question> mQuestions =
                         TestJsonUtils.jsonStringToQuesitonList(cursor.getString(cursor
-                                .getColumnIndex(TestSQLiteOpenHelper.KEY_QUESTIONS)));
+                                .getColumnIndex(TestDB.KEY_QUESTIONS)));
                 Date mDate =
-                        formatter.parse(cursor.getString(cursor
-                                .getColumnIndex(TestSQLiteOpenHelper.KEY_DATE)));
+                        formatter.parse(cursor.getString(cursor.getColumnIndex(TestDB.KEY_DATE)));
                 Test test = new Test(mName, mQuestions, mTime);
                 test.setDate(mDate);
                 list.add(test);
@@ -136,19 +128,10 @@ public class TestDao {
      * @param testName
      */
     public void deleteTestByName(String testName) {
-        Cursor cursor =
-                mSqLiteDatabase
-                        .rawQuery("SELECT * FROM " + TestSQLiteOpenHelper.TABLE_NAME + " WHERE "
-                                + TestSQLiteOpenHelper.KEY_NAME + "=?", new String[] {testName});
-        if (cursor.moveToFirst()) {
-            mSqLiteDatabase.delete(TestSQLiteOpenHelper.TABLE_NAME, TestSQLiteOpenHelper.KEY_NAME
-                    + "=?", new String[] {testName});
-        }
+        mSqLiteDatabase.delete(TestDB.TABLE_NAME, TestDB.KEY_NAME + "=?", new String[] {testName});
     }
 
     public void deleteAllRecord() {
-        if (null != mSqLiteDatabase) {
-            mSqLiteDatabase.execSQL("DELETE FROM " + TestSQLiteOpenHelper.TABLE_NAME);
-        }
+        mSqLiteDatabase.execSQL("DELETE FROM " + TestDB.TABLE_NAME);
     }
 }

@@ -24,12 +24,12 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.kcb.common.application.KApplication;
 import com.kcb.common.base.BaseActivity;
 import com.kcb.common.util.DialogUtil;
 import com.kcb.common.util.ToastUtil;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.library.view.checkbox.CheckBox;
+import com.kcb.teacher.database.test.TestDao;
 import com.kcb.teacher.model.test.Question;
 import com.kcb.teacher.model.test.QuestionItem;
 import com.kcb.teacher.model.test.Test;
@@ -91,6 +91,8 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
     private String mBitmapPath;
 
     private String mAction;
+    
+    private TestDao mTestDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -242,7 +244,8 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
                                 1 + mCurrentQuestionIndex));
                     }
                     try {
-                        KApplication.mTestDao.add(mTest);
+                        mTestDao = new TestDao(this);
+                        mTestDao.add(mTest);
                     } catch (SQLException e) {
                         e.printStackTrace();
                     } catch (JSONException e) {
