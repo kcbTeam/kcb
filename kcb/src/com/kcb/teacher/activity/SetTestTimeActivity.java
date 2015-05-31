@@ -14,7 +14,6 @@ import android.view.View.OnClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.kcb.common.application.KApplication;
 import com.kcb.common.base.BaseActivity;
 import com.kcb.common.util.DialogUtil;
 import com.kcb.common.util.ToastUtil;
@@ -23,6 +22,7 @@ import com.kcb.library.slider.Slider.OnValueChangedListener;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.teacher.adapter.SetTestTimeAdapter;
 import com.kcb.teacher.adapter.SetTestTimeAdapter.EditQuestionListener;
+import com.kcb.teacher.database.test.TestDao;
 import com.kcb.teacher.model.test.Question;
 import com.kcb.teacher.model.test.Test;
 import com.kcbTeam.R;
@@ -39,6 +39,8 @@ public class SetTestTimeActivity extends BaseActivity {
     public static Test sTest;
     private EditQuestionListener mEditListener;
     private SetTestTimeAdapter mAdapter;
+
+    private TestDao mTestDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,9 +113,9 @@ public class SetTestTimeActivity extends BaseActivity {
             sTest.setDate(new Date());
             sTest.setTime(slider.getValue());
             // TODO
-            // mTest.setId("2015-1-1");
             try {
-                KApplication.mTestDao.add(sTest);
+                mTestDao = new TestDao(this);
+                mTestDao.add(sTest);
             } catch (SQLException e) {
                 e.printStackTrace();
             } catch (JSONException e) {

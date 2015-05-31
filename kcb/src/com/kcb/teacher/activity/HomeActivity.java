@@ -16,12 +16,10 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.kcb.common.application.KAccount;
-import com.kcb.common.application.KApplication;
 import com.kcb.common.base.BaseFragmentActivity;
 import com.kcb.common.util.DialogUtil;
 import com.kcb.common.util.ToastUtil;
 import com.kcb.library.view.buttonflat.ButtonFlat;
-import com.kcb.teacher.database.test.TestDao;
 import com.kcb.teacher.fragment.CheckInFragment;
 import com.kcb.teacher.fragment.StuCentreFragment;
 import com.kcb.teacher.fragment.TestFragment;
@@ -60,7 +58,6 @@ public class HomeActivity extends BaseFragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tch_activity_home);
-        initData();
         initView();
     }
 
@@ -86,10 +83,7 @@ public class HomeActivity extends BaseFragmentActivity {
     }
 
     @Override
-    protected void initData() {
-        KApplication.mTestDao = new TestDao(this);
-        // KApplication.mTestDao.deleteAllRecord();
-    }
+    protected void initData() {}
 
     private void setDefaultFragment() {
         mCurrentFragment = new CheckInFragment();
