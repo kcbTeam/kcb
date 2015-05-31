@@ -234,6 +234,7 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
                 // if add test, goto set time activity; if edit test, finish;
                 if (ACTION_ADD_TEST.equals(mAction)) {
                     SetTestTimeActivity.start(EditTestActivity.this, mTest);
+                    finish();
                 } else {
                     if (!getCurrentQuestion().equal(mTempQuestion)) {
                         ToastUtil.toast(String.format(

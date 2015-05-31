@@ -32,7 +32,7 @@ public class TestResultActivity extends BaseActivity {
     private ListView listView;
     private ButtonFlat backButton;
     private FloatingEditText mEditText;
-    ArrayList<HashMap<String,Object>> listItem;
+    ArrayList<HashMap<String, Object>> listItem;
     private TestResultAdapter listAdapter;
     private String[] testTitle = {"微积分", "导数", "导数复习"};
     private int[] questionNum = {3, 4, 2};
@@ -50,15 +50,15 @@ public class TestResultActivity extends BaseActivity {
     @Override
     protected void initView() {
         listView = (ListView) findViewById(R.id.listview);
-        listItem = new ArrayList<HashMap<String,Object>>();
+        listItem = new ArrayList<HashMap<String, Object>>();
         for (int i = 0; i < testTitle.length; i++) {
-            HashMap<String,Object> map=new HashMap<String,Object>();
-            map.put("testname",testTitle[i]);
+            HashMap<String, Object> map = new HashMap<String, Object>();
+            map.put("testname", testTitle[i]);
             map.put("questionnum", questionNum[i]);
-            map.put("testtime",testTime[i]);
+            map.put("testtime", testTime[i]);
             listItem.add(map);
         }
-        listAdapter = new TestResultAdapter(this,listItem);
+        listAdapter = new TestResultAdapter(this, listItem);
         listView.setOnItemClickListener(new OnItemClickListener() {
             public void onItemClick(AdapterView<?> adapter, View arg1, int position, long arg3) {
                 Intent intent = new Intent(TestResultActivity.this, LookTestResultActivity.class);
@@ -67,9 +67,9 @@ public class TestResultActivity extends BaseActivity {
                 intent.putExtra("questionInfo", TestFragment.string);
                 startActivity(intent);
             }
-        });       
+        });
         listView.setAdapter(listAdapter);
-        
+
         mEditText = (FloatingEditText) findViewById(R.id.search);
         mEditText.addTextChangedListener(new TextWatcher() {
 
@@ -101,17 +101,17 @@ public class TestResultActivity extends BaseActivity {
     protected void initData() {}
 
     private void search(String string) {
-        listItem = new ArrayList<HashMap<String,Object>>();
+        listItem = new ArrayList<HashMap<String, Object>>();
         listItem.clear();
         for (int i = 0; i < testTitle.length; i++) {
             if (testTitle[i].contains(string)) {
-                HashMap<String,Object> map=new HashMap<String,Object>();
-                map.put("testname",testTitle[i]);
-                map.put("questionnum",questionNum[i]);
-                map.put("testtime",testTime[i]);
+                HashMap<String, Object> map = new HashMap<String, Object>();
+                map.put("testname", testTitle[i]);
+                map.put("questionnum", questionNum[i]);
+                map.put("testtime", testTime[i]);
                 listItem.add(map);
             }
         }
-        listView.setAdapter(new TestResultAdapter(this,listItem));
+        listView.setAdapter(new TestResultAdapter(this, listItem));
     }
 }

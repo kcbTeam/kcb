@@ -124,7 +124,8 @@ public class CheckTestDetailsActivity extends BaseActivity {
         Question question = mQuestionList.get(mCurrentPosition);
         showQuestionNum();
         showQuestionItem(questionTitle, question.getTitle());
-        correctRate.setText(String.format(mRateFormat, (int) (100 * question.getTitle().getRate())));
+        correctRate
+                .setText(String.format(mRateFormat, (int) (100 * question.getTitle().getRate())));
         mAdapter = new ListAdapterChoices(this, question);
         choiceList.setAdapter(mAdapter);
     }

@@ -10,7 +10,6 @@ import org.json.JSONObject;
 
 import android.graphics.Bitmap;
 
-import com.kcb.teacher.database.test.utils.ImageToJsonString;
 import com.kcb.teacher.model.test.Question;
 import com.kcb.teacher.model.test.QuestionItem;
 

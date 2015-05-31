@@ -1,8 +1,8 @@
 package com.kcb.common.application;
 
-import com.kcb.teacher.database.test.TestDao;
-
 import android.app.Application;
+
+import com.kcb.teacher.database.test.TestDao;
 
 /**
  * 

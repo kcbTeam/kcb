@@ -110,7 +110,7 @@ public class LoginActivity extends BaseActivity {
                                         } else {
                                             ResponseUtil.toastError(error);
                                         }
-                                        
+
                                         HomeActivity.start(LoginActivity.this);
                                         finish();
                                     };
