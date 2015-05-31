@@ -61,10 +61,10 @@ public class HomeActivity extends BaseFragmentActivity {
 
         checkInButton = (ButtonFlat) findViewById(R.id.button_checkin);
         checkInButton.setOnClickListener(this);
-        // checkInButton.setTextSize(16);
+        checkInButton.setTextSize(16);
         testButton = (ButtonFlat) findViewById(R.id.button_test);
         testButton.setOnClickListener(this);
-        // testButton.setTextSize(16);
+        testButton.setTextSize(16);
 
         mFragmentManager = getSupportFragmentManager();
 

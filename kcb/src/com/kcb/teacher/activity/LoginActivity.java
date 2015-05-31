@@ -23,6 +23,7 @@ import com.kcb.common.util.AnimationUtil;
 import com.kcb.common.util.ToastUtil;
 import com.kcb.library.view.FloatingEditText;
 import com.kcb.library.view.PaperButton;
+import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
 import com.kcbTeam.R;
 
@@ -36,6 +37,8 @@ import com.kcbTeam.R;
 public class LoginActivity extends BaseActivity {
 
     private static final String TAG = LoginActivity.class.getName();
+
+    private ButtonFlat backButton;
 
     private FloatingEditText idEditText;
     private FloatingEditText passwordEditText;
@@ -52,6 +55,9 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        backButton = (ButtonFlat) findViewById(R.id.button_back);
+        backButton.setOnClickListener(this);
+
         idEditText = (FloatingEditText) findViewById(R.id.edittext_id);
         passwordEditText = (FloatingEditText) findViewById(R.id.edittext_password);
         loginButton = (PaperButton) findViewById(R.id.button_login);
@@ -61,6 +67,17 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     protected void initData() {}
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.button_back:
+                onBackPressed();
+                break;
+            default:
+                break;
+        }
+    }
 
     private DelayClickListener mClickListener = new DelayClickListener(
             DelayClickListener.DELAY_PAPER_BUTTON) {

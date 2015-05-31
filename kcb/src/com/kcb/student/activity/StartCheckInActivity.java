@@ -3,9 +3,11 @@ package com.kcb.student.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.TextView;
 
 import com.android.volley.Request.Method;
@@ -20,7 +22,9 @@ import com.kcb.common.server.RequestUtil;
 import com.kcb.common.server.ResponseUtil;
 import com.kcb.common.server.UrlUtil;
 import com.kcb.common.util.AnimationUtil;
+import com.kcb.common.util.DialogUtil;
 import com.kcb.common.util.ToastUtil;
+import com.kcb.common.view.MaterialDialog;
 import com.kcb.library.view.PaperButton;
 import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
 import com.kcb.student.adapter.StartCheckInAdapter;
@@ -38,6 +42,8 @@ public class StartCheckInActivity extends BaseActivity {
 
     private final String TAG = StartCheckInActivity.class.getName();
 
+    private TextView timeTextView;
+
     private View numView;
     private TextView num1TextView;
     private TextView num2TextView;
@@ -52,12 +58,14 @@ public class StartCheckInActivity extends BaseActivity {
     private StartCheckInAdapter mAdapter;
     private int currentInputIndex = 0;
 
-    private int mTime;
+    private int mRemainTime;
+    private Handler mHandler;
+    private final int MESSAGE_TIME_REDUCE = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.stu_activity_checkin);
+        setContentView(R.layout.stu_activity_start_checkin);
 
         initView();
         initData();
@@ -65,6 +73,8 @@ public class StartCheckInActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        timeTextView = (TextView) findViewById(R.id.textview_time);
+
         numView = findViewById(R.id.linearlayout_shownum);
         num1TextView = (TextView) findViewById(R.id.textview_shownum1);
         num2TextView = (TextView) findViewById(R.id.textview_shownum2);
@@ -85,8 +95,37 @@ public class StartCheckInActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        mTime = Integer.valueOf(getIntent().getStringExtra(DATA_TIME));
-        // TODO show time, if time is 0, dialog tip
+        mRemainTime = Integer.valueOf(getIntent().getStringExtra(DATA_TIME));
+
+        mHandler = new Handler(getMainLooper()) {
+            public void handleMessage(android.os.Message msg) {
+                showRemainTime();
+                if (mRemainTime == 0) {
+                    showTimeEndDialog();
+                } else {
+                    sendEmptyMessageDelayed(MESSAGE_TIME_REDUCE, 1000);
+                    mRemainTime--;
+                }
+            };
+        };
+        mHandler.sendEmptyMessage(MESSAGE_TIME_REDUCE);
+    }
+
+    private void showRemainTime() {
+        timeTextView.setText(String.format(getString(R.string.checkin_remain_time), mRemainTime));
+    }
+
+    private void showTimeEndDialog() {
+        MaterialDialog dialog =
+                DialogUtil.showNormalDialog(StartCheckInActivity.this, R.string.tip,
+                        R.string.checkin_time_end, R.string.sure, new OnClickListener() {
+
+                            @Override
+                            public void onClick(View v) {
+                                finish();
+                            }
+                        }, -1, null);
+        dialog.setCancelable(false);
     }
 
     @Override
@@ -209,7 +248,9 @@ public class StartCheckInActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        ToastUtil.toast("签到未完成");
+        if (mRemainTime > 0) {
+            ToastUtil.toast("签到未完成");
+        }
     }
 
     protected void onDestroy() {

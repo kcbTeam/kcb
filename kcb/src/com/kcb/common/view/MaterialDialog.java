@@ -37,6 +37,7 @@ public class MaterialDialog extends android.app.Dialog {
     private ButtonFlat cancelButton;
 
     private Context mContext;
+    private boolean mCancelable = true;
 
     public MaterialDialog(Context context) {
         super(context, android.R.style.Theme_Translucent);
@@ -56,10 +57,13 @@ public class MaterialDialog extends android.app.Dialog {
             @SuppressLint("ClickableViewAccessibility")
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                if (event.getX() < contentView.getLeft() || event.getX() > contentView.getRight()
-                        || event.getY() > contentView.getBottom()
-                        || event.getY() < contentView.getTop()) {
-                    dismiss();
+                if (mCancelable) {
+                    if (event.getX() < contentView.getLeft()
+                            || event.getX() > contentView.getRight()
+                            || event.getY() > contentView.getBottom()
+                            || event.getY() < contentView.getTop()) {
+                        dismiss();
+                    }
                 }
                 return false;
             }
@@ -184,5 +188,14 @@ public class MaterialDialog extends android.app.Dialog {
                 }
             }
         });
+    }
+
+    /**
+     * step 5
+     */
+    @Override
+    public void setCancelable(boolean flag) {
+        super.setCancelable(flag);
+        mCancelable = flag;
     }
 }
