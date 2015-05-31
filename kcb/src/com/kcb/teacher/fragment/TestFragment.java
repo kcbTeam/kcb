@@ -37,9 +37,9 @@ import com.kcbTeam.R;
  */
 public class TestFragment extends BaseFragment {
 
-    private PaperButton editButton;
-    private PaperButton testButton;
-    private PaperButton testresultButton;
+    private PaperButton startTestButton;
+    private PaperButton addOrEditTestButton;
+    private PaperButton lookTestResultButton;
 
     private List<Test> mTestList;
     private List<String> mTestNameList;
@@ -55,19 +55,19 @@ public class TestFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         initView();
     }
 
     @Override
     protected void initView() {
         View view = getView();
-        editButton = (PaperButton) view.findViewById(R.id.button_edit_test);
-        editButton.setOnClickListener(mClickListener);
-        testButton = (PaperButton) view.findViewById(R.id.button_begin_test);
-        testButton.setOnClickListener(mClickListener);
-        testresultButton = (PaperButton) view.findViewById(R.id.button_test_result);
-        testresultButton.setOnClickListener(mClickListener);
-
+        addOrEditTestButton = (PaperButton) view.findViewById(R.id.button_edit_test);
+        addOrEditTestButton.setOnClickListener(mClickListener);
+        startTestButton = (PaperButton) view.findViewById(R.id.button_begin_test);
+        startTestButton.setOnClickListener(mClickListener);
+        lookTestResultButton = (PaperButton) view.findViewById(R.id.button_test_result);
+        lookTestResultButton.setOnClickListener(mClickListener);
     }
 
     @Override
@@ -77,7 +77,7 @@ public class TestFragment extends BaseFragment {
     public void onStart() {
         super.onStart();
         mGetTestListTask = new GetTestListTask();
-        mGetTestListTask.execute();
+        mGetTestListTask.execute(0);
     }
 
     private DelayClickListener mClickListener = new DelayClickListener(
@@ -104,9 +104,9 @@ public class TestFragment extends BaseFragment {
 
     private void startTest() {
         initData();
-        refreshNameList(INDEX_OF_SATRT_TEST);
+        refreshNameList(TAG_ADD_OR_EDIT_TEST);
         if (mTestNameList.isEmpty()) {
-            ToastUtil.toast("测试题库空空如也，请先编辑测试！");
+            ToastUtil.toast("请先添加测试内容");
             return;
         }
         DialogUtil.showListDialog(getActivity(), "开始测试", mTestNameList, "确定",
@@ -121,7 +121,7 @@ public class TestFragment extends BaseFragment {
 
     private void addOrEditTest() {
         initData();
-        refreshNameList(INDEX_OF_EDIT_TEST);
+        refreshNameList(TAG_START_TEST);
         DialogUtil.showListDialog(getActivity(), "编辑测试内容", mTestNameList, "确定",
                 new OnClickSureListener() {
 
@@ -138,7 +138,6 @@ public class TestFragment extends BaseFragment {
                         }
                     }
                 }, "取消", null);
-
     }
 
     private class GetTestListTask extends AsyncTask<Integer, Integer, Integer> {
@@ -162,20 +161,18 @@ public class TestFragment extends BaseFragment {
         }
     }
 
-    private final int INDEX_OF_EDIT_TEST = 1;
-    private final int INDEX_OF_SATRT_TEST = 2;
+    private final int TAG_START_TEST = 1;
+    private final int TAG_ADD_OR_EDIT_TEST = 2;
 
     private void refreshNameList(int INDEX) {
         if (null == mTestNameList) {
             return;
         }
-        if (mTestNameList.contains("编辑新的测试")) {
-            mTestNameList.remove("编辑新的测试");
+        if (mTestNameList.contains("添加新测试")) {
+            mTestNameList.remove("添加新测试");
         }
-        if (INDEX == INDEX_OF_EDIT_TEST) {
-            mTestNameList.add("编辑新的测试");
+        if (INDEX == TAG_START_TEST) {
+            mTestNameList.add("添加新测试");
         }
     }
-
-
 }

@@ -4,7 +4,9 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
 
-import com.kcb.teacher.model.StudentInfo;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * 
@@ -19,35 +21,40 @@ public class CheckInResult implements Serializable {
 
     private Date mDate;
     private double mRate;
-    private List<StudentInfo> mUnCheckedStuInfos;
+    private List<UncheckedStudent> mUnCheckedStudents;
 
-    public CheckInResult(Date signDate, Double signRate, List<StudentInfo> missedCheckInStus) {
+    private CheckInResult() {}
+
+    public CheckInResult(Date signDate, Double signRate, List<UncheckedStudent> uncheckedStudents) {
         mDate = signDate;
         mRate = signRate;
-        mUnCheckedStuInfos = missedCheckInStus;
+        mUnCheckedStudents = uncheckedStudents;
     }
 
-    public void setDate(Date date) {
-        mDate = date;
+    public CheckInResult from(JSONObject jsonObject) {
+        // TODO jsonObject from server
+        CheckInResult checkInResult = new CheckInResult();
+        checkInResult.mDate = new Date(jsonObject.optLong(""));
+        checkInResult.mRate = jsonObject.optDouble("");
+        JSONArray jsonArray = jsonObject.optJSONArray("");
+        for (int i = 0; i < jsonArray.length(); i++) {
+            try {
+                UncheckedStudent student = UncheckedStudent.from(jsonArray.getJSONObject(i));
+                checkInResult.mUnCheckedStudents.add(student);
+            } catch (JSONException e) {}
+        }
+        return checkInResult;
     }
 
     public Date getDate() {
         return mDate;
     }
 
-    public void setRate(float rate) {
-        mRate = rate;
-    }
-
     public double getRate() {
         return mRate;
     }
 
-    public List<StudentInfo> getUnCheckedStudentInfos() {
-        return mUnCheckedStuInfos;
-    }
-
-    public void setUnCheckedStudentInfos(List<StudentInfo> unCheckedStuInfos) {
-        mUnCheckedStuInfos = unCheckedStuInfos;
+    public List<UncheckedStudent> getUnCheckedStudents() {
+        return mUnCheckedStudents;
     }
 }

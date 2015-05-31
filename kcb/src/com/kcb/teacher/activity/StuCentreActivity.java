@@ -2,11 +2,12 @@ package com.kcb.teacher.activity;
 
 import java.util.ArrayList;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.PieChart;
@@ -18,8 +19,7 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.PercentFormatter;
 import com.kcb.common.base.BaseActivity;
 import com.kcb.library.view.buttonflat.ButtonFlat;
-import com.kcb.teacher.fragment.StuCentreFragment;
-import com.kcb.teacher.model.StudentInfo;
+import com.kcb.teacher.model.stucentre.Student;
 import com.kcbTeam.R;
 
 /**
@@ -29,93 +29,89 @@ import com.kcbTeam.R;
  * @author: ZQJ
  * @date: 2015年4月29日 下午2:48:48
  */
-public class StuDetailsActivity extends BaseActivity {
+public class StuCentreActivity extends BaseActivity {
+
+    private ButtonFlat backButton;
+    private TextView nameIdTextView;
 
     private PieChart mCheckInPieChart;
     private PieChart mCorrectPieChart;
 
-    private TextView titleText;
-    private TextView checkInRateText;
-    private TextView correctRateText;
+    private TextView checkInRateTextView;
+    private TextView testRateTextView;
 
-    private ButtonFlat backButton;
-
-    private StudentInfo mCurrentStuInfo;
-
-    private String[] mCheckInStrings = new String[] {"到课", "缺课"};
-    private String[] mCorrectStrings = new String[] {"正确", "错误"};
+    private Student mStudentInfo;
 
     private float mCheckInRate;
     private float mCorrectRate;
 
-    private final int mDelay = 150;
-    private final int mAnimateDuration = 1800;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.tch_activity_studetails);
-        initData();
-        initView();
-    }
+        setContentView(R.layout.tch_activity_stucentre);
 
-    @Override
-    protected void initData() {
-        initCurrentStu();
+        initView();
+        initData();
     }
 
     @Override
     protected void initView() {
-        titleText = (TextView) findViewById(R.id.textview_title);
-        checkInRateText = (TextView) findViewById(R.id.textview_stu_checkinrate);
-        correctRateText = (TextView) findViewById(R.id.textview_stu_correctrate);
-        titleText.setText(String.format(getResources().getString(R.string.studetails_title_format),
-                mCurrentStuInfo.getStudentName()));
-        checkInRateText.setText(String.format(getResources()
-                .getString(R.string.checkin_rate_format), mCurrentStuInfo.getStudentName(),
+        backButton = (ButtonFlat) findViewById(R.id.button_back);
+        backButton.setOnClickListener(this);
+
+        nameIdTextView = (TextView) findViewById(R.id.textview_name_id);
+
+        checkInRateTextView = (TextView) findViewById(R.id.textview_stu_checkinrate);
+        testRateTextView = (TextView) findViewById(R.id.textview_stu_correctrate);
+
+        mCheckInPieChart = (PieChart) findViewById(R.id.piechart_checkinrate);
+        mCorrectPieChart = (PieChart) findViewById(R.id.piechart_correctrate);
+    }
+
+    @Override
+    protected void initData() {
+        mStudentInfo = (Student) getIntent().getSerializableExtra(DATA_STUDENT);
+        mCheckInRate = mStudentInfo.getCheckInRate();
+        mCorrectRate = mStudentInfo.getCorrectRate();
+
+        nameIdTextView.setText(mStudentInfo.getName() + "（" + mStudentInfo.getId() + "）");
+        checkInRateTextView.setText(String.format(
+                getResources().getString(R.string.checkin_rate_format), mStudentInfo.getName(),
                 (int) (100 * mCheckInRate)));
-        correctRateText.setText(String.format(getResources()
-                .getString(R.string.correct_rate_format), mCurrentStuInfo.getStudentName(),
+        testRateTextView.setText(String.format(
+                getResources().getString(R.string.correct_rate_format), mStudentInfo.getName(),
                 (int) (100 * mCorrectRate)));
 
-        backButton = (ButtonFlat) findViewById(R.id.button_back);
-        backButton.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
         initPieChart();
     }
 
-    private void initCurrentStu() {
-        mCurrentStuInfo =
-                (StudentInfo) getIntent().getSerializableExtra(StuCentreFragment.CURRENT_STU_KEY);
-        mCheckInRate = mCurrentStuInfo.getCheckInRate();
-        mCorrectRate = mCurrentStuInfo.getCorrectRate();
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.button_back:
+                finish();
+                break;
+            default:
+                break;
+        }
     }
 
     private void initPieChart() {
-        mCheckInPieChart = (PieChart) findViewById(R.id.piechart_checkinrate);
-        mCorrectPieChart = (PieChart) findViewById(R.id.piechart_correctrate);
-        setData(mCheckInPieChart, mCheckInStrings, mCheckInRate);
-        setData(mCorrectPieChart, mCorrectStrings, mCorrectRate);
+        setData(mCheckInPieChart, new String[] {"到课", "缺课"}, mCheckInRate);
+        setData(mCorrectPieChart, new String[] {"正确", "错误"}, mCorrectRate);
         defaultPieChartStyle(mCheckInPieChart);
         defaultPieChartStyle(mCorrectPieChart);
         new Handler().postDelayed(new Runnable() {
             public void run() {
-                mCheckInPieChart.animateY(mAnimateDuration);
-                mCorrectPieChart.animateY(mAnimateDuration);
+                mCheckInPieChart.animateY(1800);
+                mCorrectPieChart.animateY(1800);
                 mCheckInPieChart.setVisibility(View.VISIBLE);
                 mCorrectPieChart.setVisibility(View.VISIBLE);
             }
-        }, mDelay);
-
+        }, 150);
     }
 
     private void setData(PieChart pieChart, String[] infoStrings, float mult) {
-
         ArrayList<Entry> yVals1 = new ArrayList<Entry>();
         yVals1.add(new Entry(mult, 0));
         yVals1.add(new Entry(1.0f - mult, 1));
@@ -158,4 +154,14 @@ public class StuDetailsActivity extends BaseActivity {
         l.setEnabled(false);
     }
 
+    /**
+     * start
+     */
+    private static final String DATA_STUDENT = "data_student";
+
+    public static void start(Context context, Student student) {
+        Intent intent = new Intent(context, StuCentreActivity.class);
+        intent.putExtra(DATA_STUDENT, student);
+        context.startActivity(intent);
+    }
 }

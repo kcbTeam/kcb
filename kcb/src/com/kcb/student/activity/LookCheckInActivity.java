@@ -18,8 +18,6 @@ import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
-import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
-import com.github.mikephil.charting.utils.Highlight;
 import com.github.mikephil.charting.utils.PercentFormatter;
 import com.kcb.common.application.KAccount;
 import com.kcb.common.base.BaseActivity;
@@ -37,7 +35,7 @@ import com.kcbTeam.R;
  * @author: Ding
  * @date: 2015年5月5日 下午3:45:54
  */
-public class LookCheckInActivity extends BaseActivity implements OnChartValueSelectedListener {
+public class LookCheckInActivity extends BaseActivity {
 
     private final String TAG = LookCheckInActivity.class.getName();
 
@@ -114,7 +112,6 @@ public class LookCheckInActivity extends BaseActivity implements OnChartValueSel
 
         pieChart.setRotationAngle(0);
         pieChart.setRotationEnabled(false);
-        pieChart.setOnChartValueSelectedListener(this);
 
         pieChart.setCenterText("");
 
@@ -155,12 +152,6 @@ public class LookCheckInActivity extends BaseActivity implements OnChartValueSel
         PieData pieData = new PieData(xValues, pieDataSet);
         return pieData;
     }
-
-    @Override
-    public void onNothingSelected() {}
-
-    @Override
-    public void onValueSelected(Entry arg0, int arg1, Highlight arg2) {}
 
     private void refreshRate() {
         // TODO get checkin rate from server

@@ -62,9 +62,8 @@
 
 
     <!-- student details activty start -->
-    <string name="studetails_title_format">学生中心— —%1$s</string>
-    <string name="checkin_rate_format"> %1$s的到课率为%2$d%%</string>
-    <string name="correct_rate_format"> %1$s的选择题正确率为%2$d%%</string>
+    <string name="checkin_rate_format">%1$s的到课率为%2$d%%</string>
+    <string name="correct_rate_format">%1$s的选择题正确率为%2$d%%</string>
     <!-- student details activty end -->
 
 
