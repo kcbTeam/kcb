@@ -22,10 +22,16 @@
 
             <ImageView
                 style="@style/common_title_icon_right"
-                android:src="@drawable/ic_cancel_grey600_24dp" >
+                android:src="@drawable/ic_refresh_black_24dp" >
             </ImageView>
         </com.kcb.library.view.buttonflat.ButtonFlat>
     </LinearLayout>
+
+    <com.kcb.library.view.smoothprogressbar.SmoothProgressBar
+        android:id="@+id/progressbar_refresh"
+        style="@style/SmoothProgressBar"
+        android:layout_alignBottom="@id/layout_title"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/textview_rate"

@@ -50,8 +50,16 @@ public class UrlUtil {
         return url_stu_checkin_start + "?id=" + id;
     }
 
+    private static final String url_stu_checkin_submit = IP + "/v1/stu/checkin/submit";
+
     public static String getStuCheckinSubmitUrl(String id, String num) {
-        return url_stu_checkin_start + "?id=" + id + "&num=" + num;
+        return url_stu_checkin_submit + "?id=" + id + "&num=" + num;
+    }
+
+    private static final String url_stu_checkin_getresult = IP + "/v1/stu/checkin/start/getresult";
+
+    public static String getStuCheckinResultUrl(String id) {
+        return url_stu_checkin_getresult + "?id=" + id;
     }
 
     /**
