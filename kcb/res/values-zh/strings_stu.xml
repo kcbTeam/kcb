@@ -15,6 +15,7 @@
     <!-- CheckinActivity Start -->
     <string name="checkin">课堂签到</string>
     <string name="tip_inputnum">请输入老师报出的签到数字</string>
+    <string name="checkin_remain_time">倒计时：%1$d秒</string>
     <string name="if_giveup_checkin">是否放弃签到？</string>
     <string name="num_error">签到数字错误</string>
     <string name="checkin_success">签到成功</string>
@@ -23,6 +24,7 @@
     <string name="button_login">登录</string>
     <string name="hint_password">密码</string>
     <string name="hint_stuid">学号</string>
+    <string name="checkin_time_end">时间已到，你未完成本次签到。</string>
     <!-- CheckinActivity End -->
 
 
@@ -52,7 +54,7 @@
 
     <!-- CheckInResultActivity Start -->
     <string name="signresult">查看签到结果</string>
-    <string name="statistics">Y老师一共用课程宝签到10次，其中你签到成功8次。到课率为80%。</string>
+    <string name="stu_checkin_rate">老师签到了%1$d次，其中你签到成功%2$d次，到课率为%3$s。</string>
     <!-- CheckInResultActivity End -->
 
 

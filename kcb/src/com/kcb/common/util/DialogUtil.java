@@ -33,15 +33,16 @@ public class DialogUtil {
      * @param cancelResId , can be null (don't show cancel button);
      * @param cancelListener , can be null (only dismiss after click);
      */
-    public static void showNormalDialog(Context context, int titleResId, int messageResId,
-            @NonNull int sureResId, OnClickListener sureListener, int cancelResId,
-            OnClickListener cancelListener) {
+    public static MaterialDialog showNormalDialog(Context context, int titleResId,
+            int messageResId, @NonNull int sureResId, OnClickListener sureListener,
+            int cancelResId, OnClickListener cancelListener) {
         MaterialDialog dialog = new MaterialDialog(context);
         dialog.show();
         dialog.setTitle(titleResId);
         dialog.setMessage(messageResId);
         dialog.setSureButton(sureResId, sureListener);
         dialog.setCancelButton(cancelResId, cancelListener);
+        return dialog;
     }
 
     /**

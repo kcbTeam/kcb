@@ -2,10 +2,10 @@ package com.kcb.student.activity;
 
 import java.util.ArrayList;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.util.DisplayMetrics;
 import android.view.View;
+import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
@@ -29,8 +29,12 @@ import com.kcbTeam.R;
 public class LookCheckInActivity extends BaseActivity implements OnChartValueSelectedListener {
 
     private ButtonFlat backbutton;
+    private ButtonFlat refreshButton;
+
+    private TextView rateTextView;
+
     private PieChart mChart;
-    private String[] mParties = new String[] {"Sign", "Not Sign"};
+    private String[] mParties = new String[] {"签到", "未签到"};
     private float[] quarterly = new float[] {80, 20};
 
     @Override
@@ -45,11 +49,16 @@ public class LookCheckInActivity extends BaseActivity implements OnChartValueSel
     protected void initView() {
         backbutton = (ButtonFlat) findViewById(R.id.button_back);
         backbutton.setOnClickListener(this);
+        refreshButton = (ButtonFlat) findViewById(R.id.button_refresh);
+        refreshButton.setOnClickListener(this);
 
-        mChart = (PieChart) findViewById(R.id.chart);
+        rateTextView = (TextView) findViewById(R.id.textview_rate);
+        showCheckInRate();
+
+        mChart = (PieChart) findViewById(R.id.piechart_rate);
 
         PieData mPieData = setData(2, 100);
-        showChart(mChart, mPieData);
+        showCheckInChart(mChart, mPieData);
     }
 
     @Override
@@ -57,11 +66,27 @@ public class LookCheckInActivity extends BaseActivity implements OnChartValueSel
 
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent(this, HomeActivity.class);
-        startActivity(intent);
+        switch (v.getId()) {
+            case R.id.button_back:
+                finish();
+                break;
+            case R.id.button_refresh:
+                refreshRate();
+                break;
+            default:
+                break;
+        }
     }
 
-    private void showChart(PieChart pieChart, PieData pieData) {
+    private void refreshRate() {
+
+    }
+
+    private void showCheckInRate() {
+        rateTextView.setText(String.format(getString(R.string.stu_checkin_rate), 10, 8, "0.8"));
+    }
+
+    private void showCheckInChart(PieChart pieChart, PieData pieData) {
         pieChart.setUsePercentValues(true);
         pieChart.setDescription("");
 
@@ -79,7 +104,7 @@ public class LookCheckInActivity extends BaseActivity implements OnChartValueSel
         pieChart.setRotationEnabled(false);
         pieChart.setOnChartValueSelectedListener(this);
 
-        pieChart.setCenterText("MPAndroidChart\nby Philipp Jahoda");
+        pieChart.setCenterText("");
 
         pieChart.setData(pieData);
         pieChart.highlightValues(null);

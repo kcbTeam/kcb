@@ -1,44 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/activity_background" >
+    android:background="@color/activity_background"
+    tools:ignore="contentDescription" >
 
     <LinearLayout
-        android:id="@+id/layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/activity_header_shadow"
-        android:orientation="horizontal" >
+        android:id="@+id/layout_title"
+        style="@style/common_title_layout" >
 
         <include layout="@layout/comm_back_button" />
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:text="@string/signresult"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_large" />
+            style="@style/common_title"
+            android:text="@string/signresult" />
+
+        <com.kcb.library.view.buttonflat.ButtonFlat
+            android:id="@+id/button_refresh"
+            style="@style/common_title_icon_layout_right" >
+
+            <ImageView
+                style="@style/common_title_icon_right"
+                android:src="@drawable/ic_cancel_grey600_24dp" >
+            </ImageView>
+        </com.kcb.library.view.buttonflat.ButtonFlat>
     </LinearLayout>
 
     <TextView
-        android:id="@+id/view1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/layout"
+        android:id="@+id/textview_rate"
+        style="@style/common_tip"
+        android:layout_below="@id/layout_title"
         android:layout_marginBottom="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
         android:layout_marginTop="16dp"
-        android:singleLine="false"
-        android:text="@string/statistics" />
+        android:singleLine="false" />
 
     <com.github.mikephil.charting.charts.PieChart
-        android:id="@+id/chart"
+        android:id="@+id/piechart_rate"
         android:layout_width="wrap_content"
-        android:layout_height="300dp"
-        android:layout_below="@id/view1"
-        android:layout_marginTop="50dp" />
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textview_rate"
+        android:layout_marginBottom="64dp"
+        android:layout_marginLeft="48dp"
+        android:layout_marginRight="48dp"
+        android:layout_marginTop="24dp" />
 
 </RelativeLayout>
