@@ -111,7 +111,7 @@ public class SetTestTimeActivity extends BaseActivity {
             sTest.setDate(new Date());
             sTest.setTime(slider.getValue());
             // TODO
-//            mTest.setId("2015-1-1");
+            // mTest.setId("2015-1-1");
             try {
                 KApplication.mTestDao.add(sTest);
             } catch (SQLException e) {

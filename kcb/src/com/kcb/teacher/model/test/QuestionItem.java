@@ -26,7 +26,7 @@ public class QuestionItem implements Serializable {
     private byte[] mBytesOfBitmap;
     private boolean isRight = false;
     private double mRate; // if the item is a choice, mRate represent a choice rate;if the item is a
-                         // question title, mRate represent the correct rate
+                          // question title, mRate represent the correct rate
 
     public QuestionItem() {}
 
@@ -125,7 +125,7 @@ public class QuestionItem implements Serializable {
     }
 
     public boolean isCompleted() {
-        return !TextUtils.isEmpty(mText) || mBitmap != null;
+        return !TextUtils.isEmpty(mText) || mBitmap != null || mBytesOfBitmap != null;
     }
 
     public static byte[] getBytes(Bitmap bitmap) {

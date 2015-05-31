@@ -105,11 +105,10 @@ public class LookTestResultActivity extends BaseActivity {
         numQuestion = 3;
         setTabNums();
         String string1 = getIntent().getStringExtra("questionInfo");
-//        LogUtil.i("gdf", string1);
+        // LogUtil.i("gdf", string1);
         JsonObjectParserUtil questionData = new JsonObjectParserUtil(string1);
         mTest = questionData.ParserJsonObject();
-        if(mTest.getQuestion(0).getTitle().isText())
-            LogUtil.i("df", "gg");
+        if (mTest.getQuestion(0).getTitle().isText()) LogUtil.i("df", "gg");
         showCurrentQuestion(0);
     }
 
@@ -118,7 +117,8 @@ public class LookTestResultActivity extends BaseActivity {
     public void showCurrentQuestion(int position) {
 
         if (mTest.getQuestion(position).getTitle().isText()) {
-            questionTextView.setText(Integer.toString(position+1)+"、"+mTest.getQuestion(position).getTitle().getText());
+            questionTextView.setText(Integer.toString(position + 1) + "、"
+                    + mTest.getQuestion(position).getTitle().getText());
             questionTextView.setBackgroundColor(Color.WHITE);
         } else {
             questionTextView.setBackground(new BitmapDrawable(mTest.getQuestion(position)
@@ -126,7 +126,7 @@ public class LookTestResultActivity extends BaseActivity {
             questionTextView.setText("");
         }
         if (mTest.getQuestion(position).getChoiceA().isText()) {
-            answerATextView.setText("A、"+mTest.getQuestion(position).getChoiceA().getText());
+            answerATextView.setText("A、" + mTest.getQuestion(position).getChoiceA().getText());
             answerATextView.setBackgroundColor(Color.WHITE);
         } else {
             answerATextView.setBackground(new BitmapDrawable(mTest.getQuestion(position)
@@ -134,7 +134,7 @@ public class LookTestResultActivity extends BaseActivity {
             answerATextView.setText("");
         }
         if (mTest.getQuestion(position).getChoiceB().isText()) {
-            answerBTextView.setText("B、"+mTest.getQuestion(position).getChoiceB().getText());
+            answerBTextView.setText("B、" + mTest.getQuestion(position).getChoiceB().getText());
             answerBTextView.setBackgroundColor(Color.WHITE);
         } else {
             answerBTextView.setBackground(new BitmapDrawable(mTest.getQuestion(position)
@@ -142,7 +142,7 @@ public class LookTestResultActivity extends BaseActivity {
             answerBTextView.setText("");
         }
         if (mTest.getQuestion(position).getChoiceC().isText()) {
-            answerCTextView.setText("C、"+mTest.getQuestion(position).getChoiceC().getText());
+            answerCTextView.setText("C、" + mTest.getQuestion(position).getChoiceC().getText());
             answerCTextView.setBackgroundColor(Color.WHITE);
         } else {
             answerCTextView.setBackground(new BitmapDrawable(mTest.getQuestion(position)
@@ -150,7 +150,7 @@ public class LookTestResultActivity extends BaseActivity {
             answerCTextView.setText("");
         }
         if (mTest.getQuestion(position).getTitle().isText()) {
-            answerDTextView.setText("D、"+mTest.getQuestion(position).getChoiceD().getText());
+            answerDTextView.setText("D、" + mTest.getQuestion(position).getChoiceD().getText());
             answerDTextView.setBackgroundColor(Color.WHITE);
         } else {
             answerDTextView.setBackground(new BitmapDrawable(mTest.getQuestion(position)

@@ -1,8 +1,6 @@
 package com.kcb.student.fragment;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -11,12 +9,10 @@ import android.view.ViewGroup;
 
 import com.kcb.common.base.BaseFragment;
 import com.kcb.common.listener.DelayClickListener;
-import com.kcb.common.util.LogUtil;
 import com.kcb.library.view.PaperButton;
 import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
 import com.kcb.student.activity.TestActivity;
 import com.kcb.student.activity.TestResultActivity;
-import com.kcb.student.util.ImageToJsonString;
 import com.kcbTeam.R;
 
 /**

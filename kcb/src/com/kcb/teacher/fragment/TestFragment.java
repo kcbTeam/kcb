@@ -14,7 +14,6 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.kcb.common.application.KApplication;
 import com.kcb.common.base.BaseFragment;
@@ -41,7 +40,6 @@ public class TestFragment extends BaseFragment {
     private PaperButton editButton;
     private PaperButton testButton;
     private PaperButton testresultButton;
-    private TextView tipTextView;
 
     private List<Test> mTestList;
     private List<String> mTestNameList;
@@ -57,7 +55,6 @@ public class TestFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        initData();
         initView();
     }
 
@@ -71,11 +68,14 @@ public class TestFragment extends BaseFragment {
         testresultButton = (PaperButton) view.findViewById(R.id.button_test_result);
         testresultButton.setOnClickListener(mClickListener);
 
-        tipTextView = (TextView) view.findViewById(R.id.textview_tip);
     }
 
     @Override
-    protected void initData() {
+    protected void initData() {}
+
+    @Override
+    public void onStart() {
+        super.onStart();
         mGetTestListTask = new GetTestListTask();
         mGetTestListTask.execute();
     }
@@ -104,6 +104,7 @@ public class TestFragment extends BaseFragment {
 
     private void startTest() {
         initData();
+        refreshNameList(INDEX_OF_SATRT_TEST);
         if (mTestNameList.isEmpty()) {
             ToastUtil.toast("测试题库空空如也，请先编辑测试！");
             return;
@@ -120,7 +121,7 @@ public class TestFragment extends BaseFragment {
 
     private void addOrEditTest() {
         initData();
-        mTestNameList.add("编辑新的测试");
+        refreshNameList(INDEX_OF_EDIT_TEST);
         DialogUtil.showListDialog(getActivity(), "编辑测试内容", mTestNameList, "确定",
                 new OnClickSureListener() {
 
@@ -131,12 +132,12 @@ public class TestFragment extends BaseFragment {
                             startActivity(intent);
                         } else {
                             // TODO set selected testId
+                            mTestList.get(mTestList.size() - position).changeTestToSerializable();
                             EditTestActivity.startEditTest(getActivity(),
                                     mTestList.get(mTestList.size() - position));
                         }
                     }
                 }, "取消", null);
-        mTestNameList.remove("编辑新的测试");
 
     }
 
@@ -158,6 +159,21 @@ public class TestFragment extends BaseFragment {
                 e.printStackTrace();
             }
             return null;
+        }
+    }
+
+    private final int INDEX_OF_EDIT_TEST = 1;
+    private final int INDEX_OF_SATRT_TEST = 2;
+
+    private void refreshNameList(int INDEX) {
+        if (null == mTestNameList) {
+            return;
+        }
+        if (mTestNameList.contains("编辑新的测试")) {
+            mTestNameList.remove("编辑新的测试");
+        }
+        if (INDEX == INDEX_OF_EDIT_TEST) {
+            mTestNameList.add("编辑新的测试");
         }
     }
 

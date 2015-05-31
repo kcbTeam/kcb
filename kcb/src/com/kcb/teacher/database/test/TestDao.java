@@ -23,6 +23,7 @@ public class TestDao {
     private TestSQLiteOpenHelper mTestSQLiteOpenHelper;
     private SQLiteDatabase mSqLiteDatabase;
 
+    @SuppressLint("SimpleDateFormat")
     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
     public TestDao(Context context) {
@@ -80,7 +81,6 @@ public class TestDao {
             List<Question> mQuestions =
                     TestJsonUtils.jsonStringToQuesitonList(cursor.getString(cursor
                             .getColumnIndex(TestSQLiteOpenHelper.KEY_QUESTIONS)));
-            @SuppressWarnings("deprecation")
             Date mDate =
                     formatter.parse(cursor.getString(cursor
                             .getColumnIndex(TestSQLiteOpenHelper.KEY_DATE)));
@@ -116,7 +116,6 @@ public class TestDao {
                 List<Question> mQuestions =
                         TestJsonUtils.jsonStringToQuesitonList(cursor.getString(cursor
                                 .getColumnIndex(TestSQLiteOpenHelper.KEY_QUESTIONS)));
-                @SuppressWarnings("deprecation")
                 Date mDate =
                         formatter.parse(cursor.getString(cursor
                                 .getColumnIndex(TestSQLiteOpenHelper.KEY_DATE)));
@@ -142,8 +141,14 @@ public class TestDao {
                         .rawQuery("SELECT * FROM " + TestSQLiteOpenHelper.TABLE_NAME + " WHERE "
                                 + TestSQLiteOpenHelper.KEY_NAME + "=?", new String[] {testName});
         if (cursor.moveToFirst()) {
-            mSqLiteDatabase.delete(TestSQLiteOpenHelper.TABLE_NAME, " WHERE "
-                    + TestSQLiteOpenHelper.KEY_NAME + "=?", new String[] {testName});
+            mSqLiteDatabase.delete(TestSQLiteOpenHelper.TABLE_NAME, TestSQLiteOpenHelper.KEY_NAME
+                    + "=?", new String[] {testName});
+        }
+    }
+
+    public void deleteAllRecord() {
+        if (null != mSqLiteDatabase) {
+            mSqLiteDatabase.execSQL("DELETE FROM " + TestSQLiteOpenHelper.TABLE_NAME);
         }
     }
 }

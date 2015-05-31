@@ -9,7 +9,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.renderscript.Sampler.Value;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -172,7 +171,8 @@ public class TestActivity extends BaseFragmentActivity {
     public void showCurrentQuestion(int position) {
 
         if (mTest.getQuestion(position).getTitle().isText()) {
-            questionTextView.setText(Integer.toString(position+1)+"、"+mTest.getQuestion(position).getTitle().getText());
+            questionTextView.setText(Integer.toString(position + 1) + "、"
+                    + mTest.getQuestion(position).getTitle().getText());
             questionTextView.setBackgroundColor(Color.WHITE);
         } else {
             questionTextView.setBackground(new BitmapDrawable(mTest.getQuestion(position)
@@ -180,7 +180,7 @@ public class TestActivity extends BaseFragmentActivity {
             questionTextView.setText("");
         }
         if (mTest.getQuestion(position).getChoiceA().isText()) {
-            answerATextView.setText("A、"+mTest.getQuestion(position).getChoiceA().getText());
+            answerATextView.setText("A、" + mTest.getQuestion(position).getChoiceA().getText());
             answerATextView.setBackgroundColor(Color.WHITE);
         } else {
             answerATextView.setBackground(new BitmapDrawable(mTest.getQuestion(position)
@@ -188,7 +188,7 @@ public class TestActivity extends BaseFragmentActivity {
             answerATextView.setText("");
         }
         if (mTest.getQuestion(position).getChoiceB().isText()) {
-            answerBTextView.setText("B、"+mTest.getQuestion(position).getChoiceB().getText());
+            answerBTextView.setText("B、" + mTest.getQuestion(position).getChoiceB().getText());
             answerBTextView.setBackgroundColor(Color.WHITE);
         } else {
             answerBTextView.setBackground(new BitmapDrawable(mTest.getQuestion(position)
@@ -196,7 +196,7 @@ public class TestActivity extends BaseFragmentActivity {
             answerBTextView.setText("");
         }
         if (mTest.getQuestion(position).getChoiceC().isText()) {
-            answerCTextView.setText("C、"+mTest.getQuestion(position).getChoiceC().getText());
+            answerCTextView.setText("C、" + mTest.getQuestion(position).getChoiceC().getText());
             answerCTextView.setBackgroundColor(Color.WHITE);
         } else {
             answerCTextView.setBackground(new BitmapDrawable(mTest.getQuestion(position)
@@ -204,7 +204,7 @@ public class TestActivity extends BaseFragmentActivity {
             answerCTextView.setText("");
         }
         if (mTest.getQuestion(position).getTitle().isText()) {
-            answerDTextView.setText("D、"+mTest.getQuestion(position).getChoiceD().getText());
+            answerDTextView.setText("D、" + mTest.getQuestion(position).getChoiceD().getText());
             answerDTextView.setBackgroundColor(Color.WHITE);
         } else {
             answerDTextView.setBackground(new BitmapDrawable(mTest.getQuestion(position)

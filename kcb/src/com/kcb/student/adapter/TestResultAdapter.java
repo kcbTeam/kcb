@@ -20,12 +20,12 @@ import com.kcbTeam.R;
  */
 public class TestResultAdapter extends BaseAdapter {
 
-    public ArrayList<HashMap<String,Object>> Data = null;
+    public ArrayList<HashMap<String, Object>> Data = null;
     Context context;
-    
-    public TestResultAdapter(Context context, ArrayList<HashMap<String,Object>> list) {
+
+    public TestResultAdapter(Context context, ArrayList<HashMap<String, Object>> list) {
         this.context = context;
-        this.Data = (ArrayList<HashMap<String,Object>>) list;
+        this.Data = (ArrayList<HashMap<String, Object>>) list;
     }
 
     @Override

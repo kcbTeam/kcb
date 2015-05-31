@@ -88,6 +88,7 @@ public class HomeActivity extends BaseFragmentActivity {
     @Override
     protected void initData() {
         KApplication.mTestDao = new TestDao(this);
+        // KApplication.mTestDao.deleteAllRecord();
     }
 
     private void setDefaultFragment() {

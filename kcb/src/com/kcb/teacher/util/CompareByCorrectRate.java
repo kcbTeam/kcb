@@ -10,6 +10,7 @@ public class CompareByCorrectRate implements Comparator<StudentInfo> {
 
     @Override
     public int compare(StudentInfo lhs, StudentInfo rhs) {
-        return -String.valueOf(lhs.getCorrectRate()).compareTo(String.valueOf(rhs.getCorrectRate()));
+        return -String.valueOf(lhs.getCorrectRate())
+                .compareTo(String.valueOf(rhs.getCorrectRate()));
     }
 }

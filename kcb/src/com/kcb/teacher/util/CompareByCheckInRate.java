@@ -10,6 +10,7 @@ public class CompareByCheckInRate implements Comparator<StudentInfo> {
 
     @Override
     public int compare(StudentInfo lhs, StudentInfo rhs) {
-        return -String.valueOf(lhs.getCheckInRate()).compareTo(String.valueOf(rhs.getCheckInRate()));
+        return -String.valueOf(lhs.getCheckInRate())
+                .compareTo(String.valueOf(rhs.getCheckInRate()));
     }
 }
