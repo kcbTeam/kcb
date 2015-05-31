@@ -6,19 +6,23 @@
     android:background="@color/activity_background"
     tools:ignore="contentDescription" >
 
-    <TextView
-        android:id="@+id/textview_appname"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/activity_header_shadow"
-        android:gravity="center_vertical"
-        android:text="@string/app_name" />
+    <LinearLayout
+        android:id="@+id/layout_title"
+        style="@style/common_title_layout" >
+
+        <include layout="@layout/comm_back_button" />
+
+        <TextView
+            android:id="@+id/textview_appname"
+            style="@style/common_title"
+            android:text="学生登录" />
+    </LinearLayout>
 
     <ImageView
         android:id="@+id/imageview_app"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textview_appname"
+        android:layout_below="@id/layout_title"
         android:layout_marginTop="30dp"
         android:src="@drawable/ic_launcher" />
 
