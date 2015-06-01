@@ -134,8 +134,8 @@ public class CheckInDao {
     public void deleteAllCheckInResults() {
         mSqLiteDatabase.execSQL("DELETE FROM " + CheckInDB.TABLE_NAME);
     }
-    
-    public void close(){
+
+    public void close() {
         mSqLiteDatabase.close();
     }
 

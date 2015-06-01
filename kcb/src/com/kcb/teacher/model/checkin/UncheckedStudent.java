@@ -11,7 +11,7 @@ import org.json.JSONObject;
  * @author: wanghang
  * @date: 2015-5-31 下午3:42:39
  */
-public class UncheckedStudent implements Serializable{
+public class UncheckedStudent implements Serializable {
 
     /**
      * 

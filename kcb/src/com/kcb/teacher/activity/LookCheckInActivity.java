@@ -65,7 +65,7 @@ public class LookCheckInActivity extends BaseActivity implements OnItemClickList
     @Override
     protected void initData() {
         mCheckInDao = new CheckInDao(this);
-        //TODO  I don't know why Asynctask didn't work..
+        // TODO I don't know why Asynctask didn't work..
         try {
             mCheckInResults = mCheckInDao.getAllCheckInResults();
         } catch (ParseException e) {

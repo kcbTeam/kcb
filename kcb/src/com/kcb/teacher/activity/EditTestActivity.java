@@ -91,7 +91,7 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
     private String mBitmapPath;
 
     private String mAction;
-    
+
     private TestDao mTestDao;
 
     @Override

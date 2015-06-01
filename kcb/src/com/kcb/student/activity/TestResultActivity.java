@@ -40,7 +40,7 @@ public class TestResultActivity extends BaseActivity {
     private int[] questionNum = {3, 4, 2};
     private String[] testTime = {"2015-5-1", "2015-5-16", "2015-5-30"};
     private String test;
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,28 +60,29 @@ public class TestResultActivity extends BaseActivity {
             map.put("testtime", testTime[i]);
             listItem.add(map);
         }
-        
-        listAdapter = new TestResultAdapter(this,listItem);
+
+        listAdapter = new TestResultAdapter(this, listItem);
         listView.setAdapter(listAdapter);
         listView.post(new Runnable() {
-            
+
             @Override
             public void run() {
-                int index=listView.getLastVisiblePosition()-listView.getFirstVisiblePosition();
+                int index = listView.getLastVisiblePosition() - listView.getFirstVisiblePosition();
                 listView.getChildAt(index).setBackgroundColor(Color.GRAY);
             }
         });
 
         listView.setOnItemClickListener(new OnItemClickListener() {
-            
+
             @Override
             public void onItemClick(AdapterView<?> adapter, View arg1, int position, long arg3) {
-                String test=(String) listItem.get(position).get("testname");
-                if(test.equals(testTitle[testTitle.length-1])){
+                String test = (String) listItem.get(position).get("testname");
+                if (test.equals(testTitle[testTitle.length - 1])) {
                     arg1.setBackgroundColor(Color.GRAY);
                     ToastUtil.toast(R.string.cannotlook);
-                }else{
-                    Intent intent = new Intent(TestResultActivity.this, LookTestResultActivity.class);
+                } else {
+                    Intent intent =
+                            new Intent(TestResultActivity.this, LookTestResultActivity.class);
                     intent.putExtra("testTitle1", (String) listItem.get(position).get("testname"));
                     intent.putExtra("questionNum1", (String) listItem.get(position).get("question"));
                     intent.putExtra("questionInfo", TestFragment.string);
@@ -119,7 +120,7 @@ public class TestResultActivity extends BaseActivity {
 
     @Override
     protected void initData() {}
-    
+
     private void search(String string) {
         listItem = new ArrayList<HashMap<String, Object>>();
         listItem.clear();
@@ -132,6 +133,6 @@ public class TestResultActivity extends BaseActivity {
                 listItem.add(map);
             }
         }
-        listView.setAdapter(new TestResultAdapter(this,listItem)); 
+        listView.setAdapter(new TestResultAdapter(this, listItem));
     }
 }

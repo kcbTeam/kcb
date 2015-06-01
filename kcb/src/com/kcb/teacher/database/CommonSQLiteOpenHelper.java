@@ -19,7 +19,7 @@ public class CommonSQLiteOpenHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(TestDB.CREATE_TABLE_TEST);
         db.execSQL(CheckInDB.CREATE_TABLE_CHECKIN);
-        //TODO:create new table from here
+        // TODO:create new table from here
     }
 
     // TODO , when to invoked it;
