@@ -66,8 +66,7 @@ public class TestResultAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, LookTestResultActivity.class);
-                intent.putExtra("testTitle1", Data.get(position));
-                intent.putExtra("questionInfo", TestFragment.string);
+                intent.putExtra("testTitle1", Data.get(position));     
                 context.startActivity(intent);
             }
         });

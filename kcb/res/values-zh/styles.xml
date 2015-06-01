@@ -76,6 +76,39 @@
         <item name="android:background">@drawable/stu_checkin_textview</item>
     </style>
     <!-- ********** CheckIn end ********** -->
+
+
+    <!-- ********** Test start ********** -->
+    <style name="stu_test_questionItem">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginRight">34dp</item>
+        <item name="android:background">@drawable/stu_checkin_textview</item>
+        <item name="android:textColor">@color/black_700</item>
+        <item name="android:textSize">@dimen/text_size_medium</item>
+    </style>
+
+    <style name="stu_test_question_interval">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">16dp</item>
+        <item name="android:layout_marginRight">16dp</item>
+        <item name="android:layout_marginTop">5dp</item>
+    </style>
+
+    <!-- ********** Test end ********** -->
+
+
+    <!-- ********** LookTestResult start ********** -->
+    <style name="stu_test_questionImage">
+        <item name="android:layout_width">18dp</item>
+        <item name="android:layout_height">18dp</item>
+        <item name="android:gravity">top</item>
+    </style>
+
+    <!-- ********** LookTestResult end ********** -->
+
+
     <!-- **************************************** Student module End **************************************** -->
 
 

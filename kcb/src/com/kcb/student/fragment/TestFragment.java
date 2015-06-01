@@ -34,14 +34,14 @@ public class TestFragment extends BaseFragment {
             new String(
                     "{\"mTestName\":\"微积分\",\"mTestDate\":\"2015.05.23\",\"mTestTime\":5,"
                             + "\"QuestionList\":[{\"mQuestion\":\"这是第一题选择题\",\"mQuestionType\":\"true\","
-                            + "\"mOptionA\":\"答案1\",\"mOptionAType\":\"true\",\"mOptionB\":\"答案2\",\"mOptionBType\":\"true\","
-                            + "\"mOptionC\":\"答案3\",\"mOptionCType\":\"true\",\"mOptionD\":\"答案4\",\"mOptionDType\":\"true\",\"mAnswers\":4"
+                            + "\"mOptionA\":\"答案1\",\"mOptionAType\":\"true\",\"mOptionATf\":\"true\",\"mOptionATf1\":\"false\",\"mOptionB\":\"答案2\",\"mOptionBType\":\"true\",\"mOptionBTf\":\"true\",\"mOptionBTf1\":\"false\","
+                            + "\"mOptionC\":\"答案3\",\"mOptionCType\":\"true\",\"mOptionCTf\":\"true\",\"mOptionCTf1\":\"false\",\"mOptionD\":\"答案4\",\"mOptionDType\":\"true\",\"mOptionDTf\":\"true\",\"mOptionDTf1\":\"false\""
                             + "},{\"mQuestion\":\"这是第二道选择题的内容，请仔细作答\",\"mQuestionType\":\"true\",\"mOptionA\":\"答案1\","
-                            + "\"mOptionAType\":\"true\",\"mOptionB\":\"答案2\",\"mOptionBType\":\"true\",\"mOptionC\":\"答案3\","
-                            + "\"mOptionCType\":\"true\",\"mOptionD\":\"答案4\",\"mOptionDType\":\"true\",\"mAnswers\":4},{\"mQuestion\":\"这是第三道选择题的内容，请仔细作答\","
-                            + "\"mQuestionType\":\"true\",\"mOptionA\":\"答案1\",\"mOptionAType\":\"true\",\"mOptionB\":\"答案2\","
-                            + "\"mOptionBType\":\"true\",\"mOptionC\":\"答案3\",\"mOptionCType\":\"true\",\"mOptionD\":\"答案4\","
-                            + "\"mOptionDType\":\"true\",\"mAnswers\":4}]}");
+                            + "\"mOptionAType\":\"true\",\"mOptionATf\":\"true\",\"mOptionATf1\":\"false\",\"mOptionB\":\"答案2\",\"mOptionBType\":\"true\",\"mOptionBTf\":\"true\",\"mOptionBTf1\":\"false\",\"mOptionC\":\"答案3\",\"mOptionCTf\":\"true\","
+                            + "\"mOptionCType\":\"true\",\"mOptionCTf\":\"true\",\"mOptionCTf1\":\"false\",\"mOptionD\":\"答案4\",\"mOptionDType\":\"true\",\"mOptionDTf\":\"true\",\"mOptionDTf1\":\"false\"},{\"mQuestion\":\"这是第三道选择题的内容，请仔细作答\","
+                            + "\"mQuestionType\":\"true\",\"mOptionA\":\"答案1\",\"mOptionAType\":\"true\",\"mOptionATf\":\"true\",\"mOptionATf1\":\"false\",\"mOptionB\":\"答案2\","
+                            + "\"mOptionBType\":\"true\",\"mOptionBTf\":\"true\",\"mOptionBTf1\":\"false\",\"mOptionC\":\"答案3\",\"mOptionCType\":\"true\",\"mOptionCTf\":\"true\",\"mOptionCTf1\":\"false\",\"mOptionD\":\"答案4\","
+                            + "\"mOptionDType\":\"true\",\"mOptionDTf\":\"true\",\"mOptionDTf1\":\"false\"}]}");
 
 
     @Override

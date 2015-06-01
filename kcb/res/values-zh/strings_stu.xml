@@ -63,10 +63,8 @@
 
 
     <!-- LookTestResultActivity Start -->
-    <string name="question1btn">选择题1</string>
-    <string name="question2btn">选择题2</string>
-    <string name="question3btn">选择题3</string>
-    <string name="question4btn">选择题4</string>
+    <string name="question1btn">上一题</string>
+    <string name="question2btn">下一题</string>
     <!-- LookResultActivity End -->
 
 

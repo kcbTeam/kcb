@@ -33,123 +33,135 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/my_recyclerview1"
         android:layout_width="match_parent"
-        android:layout_height="5dp"
-        android:layout_below="@id/relativeLayout_header"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp" />
+        android:layout_height="3dp"
+        android:layout_below="@id/relativeLayout_header" />
 
     <TextView
-        android:id="@+id/textview_choice"
-        android:layout_width="match_parent"
+        android:id="@+id/textview_choice_index"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/my_recyclerview1"
         android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
         android:layout_marginTop="5dp"
-        android:text="选择题"
-        android:textSize="25dp" />
+        android:text="1"
+        android:textSize="@dimen/text_size_medium" />
 
     <TextView
         android:id="@+id/textview_choice_question"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textview_choice"
-        android:layout_marginLeft="16dp"
+        android:layout_below="@id/my_recyclerview1"
         android:layout_marginRight="16dp"
         android:layout_marginTop="5dp"
-        android:textSize="25dp" />
+        android:layout_toRightOf="@id/textview_choice_index"
+        android:background="@drawable/stu_checkin_textview"
+        android:textColor="@color/black_700"
+        android:textSize="@dimen/text_size_medium" />
 
-    <RelativeLayout
-        android:id="@+id/relativelayout_one"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+    <ScrollView
+        android:id="@+id/scroll_choices1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/layout_buttons"
         android:layout_below="@id/textview_choice_question"
-        android:layout_margin="16dp" >
+        android:layout_marginTop="5dp" >
 
-        <TextView
-            android:id="@+id/textview_choice_a"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="40dp" />
-
-        <com.kcb.library.view.checkbox.CheckBox
-            android:id="@+id/checkbox_a"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_alignParentRight="true"
-            android:layout_alignTop="@id/textview_choice_a"
-            android:background="#1E88E5"
-            android:gravity="center" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/relativelayout_two"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/relativelayout_one"
-        android:layout_margin="16dp" >
-
-        <TextView
-            android:id="@+id/textview_choice_b"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="40dp" />
-
-        <com.kcb.library.view.checkbox.CheckBox
-            android:id="@+id/checkbox_b"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_alignParentRight="true"
-            android:layout_alignTop="@id/textview_choice_b"
-            android:background="#1E88E5"
-            android:gravity="center" />
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/relativelayout_three"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/relativelayout_two"
-        android:layout_margin="16dp" >
-
-        <TextView
-            android:id="@+id/textview_choice_c"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="40dp" />
+            android:layout_height="wrap_content" >
 
-        <com.kcb.library.view.checkbox.CheckBox
-            android:id="@+id/checkbox_c"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_alignParentRight="true"
-            android:layout_alignTop="@id/textview_choice_c"
-            android:background="#1E88E5"
-            android:gravity="center" />
-    </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/relativelayout_one"
+                style="@style/stu_test_question_interval" >
 
-    <RelativeLayout
-        android:id="@+id/relativelayout_four"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/relativelayout_three"
-        android:layout_margin="16dp" >
+                <TextView
+                    android:id="@+id/textview_A"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:text="@string/option_A" />
 
-        <TextView
-            android:id="@+id/textview_choice_d"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="40dp" />
+                <TextView
+                    android:id="@+id/textview_choice_a"
+                    style="@style/stu_test_questionItem"
+                    android:layout_toRightOf="@id/textview_A" />
 
-        <com.kcb.library.view.checkbox.CheckBox
-            android:id="@+id/checkbox_d"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_alignParentRight="true"
-            android:layout_alignTop="@id/textview_choice_d"
-            android:background="#1E88E5"
-            android:gravity="center" />
-    </RelativeLayout>
+                <com.kcb.library.view.checkbox.CheckBox
+                    android:id="@+id/checkbox_a"
+                    style="@style/tch_test_checkbox"
+                    android:layout_alignParentRight="true" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/relativelayout_two"
+                style="@style/stu_test_question_interval"
+                android:layout_below="@id/relativelayout_one" >
+
+                <TextView
+                    android:id="@+id/textview_B"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:text="@string/option_B" />
+
+                <TextView
+                    android:id="@+id/textview_choice_b"
+                    style="@style/stu_test_questionItem"
+                    android:layout_toRightOf="@id/textview_B" />
+
+                <com.kcb.library.view.checkbox.CheckBox
+                    android:id="@+id/checkbox_b"
+                    style="@style/tch_test_checkbox"
+                    android:layout_alignParentRight="true" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/relativelayout_three"
+                style="@style/stu_test_question_interval"
+                android:layout_below="@id/relativelayout_two" >
+
+                <TextView
+                    android:id="@+id/textview_C"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:text="@string/option_C" />
+
+                <TextView
+                    android:id="@+id/textview_choice_c"
+                    style="@style/stu_test_questionItem"
+                    android:layout_toRightOf="@id/textview_C" />
+
+                <com.kcb.library.view.checkbox.CheckBox
+                    android:id="@+id/checkbox_c"
+                    style="@style/tch_test_checkbox"
+                    android:layout_alignParentRight="true" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/relativelayout_four"
+                style="@style/stu_test_question_interval"
+                android:layout_below="@id/relativelayout_three" >
+
+                <TextView
+                    android:id="@+id/textview_D"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:text="@string/option_D" />
+
+                <TextView
+                    android:id="@+id/textview_choice_d"
+                    style="@style/stu_test_questionItem"
+                    android:layout_toRightOf="@id/textview_D" />
+
+                <com.kcb.library.view.checkbox.CheckBox
+                    android:id="@+id/checkbox_d"
+                    style="@style/tch_test_checkbox"
+                    android:layout_alignParentRight="true" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </ScrollView>
 
     <LinearLayout
         android:id="@+id/layout_buttons"

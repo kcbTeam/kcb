@@ -4,23 +4,26 @@ import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.renderscript.Sampler.Value;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 
+import com.kcb.common.application.KApplication;
 import com.kcb.common.base.BaseFragmentActivity;
 import com.kcb.common.util.DialogUtil;
+import com.kcb.common.util.LogUtil;
 import com.kcb.library.view.PaperButton;
 import com.kcb.library.view.checkbox.CheckBox;
 import com.kcb.student.adapter.TestRecycleAdapter;
+import com.kcb.student.database.KCBProfileDao;
 import com.kcb.student.util.JsonObjectParserUtil;
 import com.kcb.teacher.model.test.Test;
 import com.kcbTeam.R;
@@ -53,6 +56,8 @@ public class TestActivity extends BaseFragmentActivity {
     private TestRecycleAdapter mAdapter;
     private int currentPageIndex;
     private int questionNum;
+    private Cursor mCursor;
+    public KCBProfileDao dbManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,9 +97,17 @@ public class TestActivity extends BaseFragmentActivity {
         String string = getIntent().getStringExtra("questionInfo");
         JsonObjectParserUtil questionData = new JsonObjectParserUtil(string);
         mTest = questionData.ParserJsonObject();
-        // JSONObject jsonObject = JSONObject.fromObject(mTest);
-        // LogUtil.i("efvgfr", jsonObject.toString());
         questionNum = mTest.getQuestionNum();
+        dbManager = ((KApplication) getApplication()).getDB();
+        dbManager.getDataDb();
+        mCursor = dbManager.select(new String[] {mTest.getName(), "5"});
+        if (mCursor.moveToFirst()) {
+            finish();
+        } else {
+            for (int i = 0; i < questionNum; i++) {
+                dbManager.insert(mTest, i);
+            }
+        }
         recyclerView.setLayoutManager(new GridLayoutManager(this, questionNum));
         mAdapter = new TestRecycleAdapter(questionNum);
         recyclerView.setAdapter(mAdapter);
@@ -160,6 +173,10 @@ public class TestActivity extends BaseFragmentActivity {
 
                         @Override
                         public void onClick(View v) {
+                            for (int i = 0; i < questionNum; i++) {
+                                dbManager.upDate(mTest, i);
+                            }
+                            dbManager.closeDataDB();
                             finish();
                         }
                     }, R.string.cancel, null);
@@ -172,7 +189,7 @@ public class TestActivity extends BaseFragmentActivity {
     public void showCurrentQuestion(int position) {
 
         if (mTest.getQuestion(position).getTitle().isText()) {
-            questionTextView.setText(Integer.toString(position+1)+"、"+mTest.getQuestion(position).getTitle().getText());
+            questionTextView.setText(mTest.getQuestion(position).getTitle().getText());
             questionTextView.setBackgroundColor(Color.WHITE);
         } else {
             questionTextView.setBackground(new BitmapDrawable(mTest.getQuestion(position)
@@ -180,7 +197,7 @@ public class TestActivity extends BaseFragmentActivity {
             questionTextView.setText("");
         }
         if (mTest.getQuestion(position).getChoiceA().isText()) {
-            answerATextView.setText("A、"+mTest.getQuestion(position).getChoiceA().getText());
+            answerATextView.setText(mTest.getQuestion(position).getChoiceA().getText());
             answerATextView.setBackgroundColor(Color.WHITE);
         } else {
             answerATextView.setBackground(new BitmapDrawable(mTest.getQuestion(position)
@@ -188,7 +205,7 @@ public class TestActivity extends BaseFragmentActivity {
             answerATextView.setText("");
         }
         if (mTest.getQuestion(position).getChoiceB().isText()) {
-            answerBTextView.setText("B、"+mTest.getQuestion(position).getChoiceB().getText());
+            answerBTextView.setText(mTest.getQuestion(position).getChoiceB().getText());
             answerBTextView.setBackgroundColor(Color.WHITE);
         } else {
             answerBTextView.setBackground(new BitmapDrawable(mTest.getQuestion(position)
@@ -196,7 +213,7 @@ public class TestActivity extends BaseFragmentActivity {
             answerBTextView.setText("");
         }
         if (mTest.getQuestion(position).getChoiceC().isText()) {
-            answerCTextView.setText("C、"+mTest.getQuestion(position).getChoiceC().getText());
+            answerCTextView.setText(mTest.getQuestion(position).getChoiceC().getText());
             answerCTextView.setBackgroundColor(Color.WHITE);
         } else {
             answerCTextView.setBackground(new BitmapDrawable(mTest.getQuestion(position)
@@ -204,7 +221,7 @@ public class TestActivity extends BaseFragmentActivity {
             answerCTextView.setText("");
         }
         if (mTest.getQuestion(position).getTitle().isText()) {
-            answerDTextView.setText("D、"+mTest.getQuestion(position).getChoiceD().getText());
+            answerDTextView.setText(mTest.getQuestion(position).getChoiceD().getText());
             answerDTextView.setBackgroundColor(Color.WHITE);
         } else {
             answerDTextView.setBackground(new BitmapDrawable(mTest.getQuestion(position)
@@ -214,40 +231,36 @@ public class TestActivity extends BaseFragmentActivity {
     }
 
     public void getCheckBoxsAnswer(int position) {
-        boolean[] mCorrectId = new boolean[] {false, false, false, false};
-
-        mCorrectId[0] = checkboxA.isCheck();
-        mCorrectId[1] = checkboxB.isCheck();
-        mCorrectId[2] = checkboxC.isCheck();
-        mCorrectId[3] = checkboxD.isCheck();
-        // mTest.getQuestion(position).setCorrectId(mCorrectId);
-
+        mTest.getQuestion(position).getChoiceA().setIsRight1(checkboxA.isCheck());
+        mTest.getQuestion(position).getChoiceB().setIsRight1(checkboxB.isCheck());
+        mTest.getQuestion(position).getChoiceC().setIsRight1(checkboxC.isCheck());
+        mTest.getQuestion(position).getChoiceD().setIsRight1(checkboxD.isCheck());
     }
 
     public void setCheckBoxsAnswer(int position) {
-        boolean[] mCorrectId;
-
-        // mCorrectId = mTest.getQuestion(position).getCorrectId();
-        // checkboxA.setChecked(mCorrectId[0]);
-        // checkboxB.setChecked(mCorrectId[1]);
-        // checkboxC.setChecked(mCorrectId[2]);
-        // checkboxD.setChecked(mCorrectId[3]);
-
+        checkboxA.setChecked(mTest.getQuestion(position).getChoiceA().isRight1());
+        checkboxB.setChecked(mTest.getQuestion(position).getChoiceB().isRight1());
+        checkboxC.setChecked(mTest.getQuestion(position).getChoiceC().isRight1());
+        checkboxD.setChecked(mTest.getQuestion(position).getChoiceD().isRight1());
     }
 
     // 统计回答题目的数目
     public int collectAnsweredNum() {
         int AnsweredNum = 0;
-        // // for (int i = 0; i < mTest.getQuestionNum(); i++) {
-        // //// boolean[] bleans = mTest.getQuestion(i).getCorrectId();
-        // //// for (int j = 0; j < bleans.length; j++) {
-        // //// if (bleans[j]) {
-        // //// AnsweredNum++;
-        // //// break;
-        // //// }
-        // // }
-        //
-        // }
+        for (int i = 0; i < mTest.getQuestionNum(); i++) {
+            boolean[] bleans =
+                    new boolean[] {mTest.getQuestion(i).getChoiceA().isRight1(),
+                            mTest.getQuestion(i).getChoiceB().isRight1(),
+                            mTest.getQuestion(i).getChoiceC().isRight1(),
+                            mTest.getQuestion(i).getChoiceD().isRight1()};
+            for (int j = 0; j < bleans.length; j++) {
+                if (bleans[j]) {
+                    AnsweredNum++;
+                    break;
+                }
+            }
+
+        }
         return AnsweredNum;
     }
 

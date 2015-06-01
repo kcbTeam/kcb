@@ -25,6 +25,7 @@ public class QuestionItem implements Serializable {
     private Bitmap mBitmap;
     private byte[] mBytesOfBitmap;
     private boolean isRight = false;
+    private boolean isRight1 = false;
     private float mRate; // if the item is a choice, mRate represent a choice rate;if the item is a
                          // question title, mRate represent the correct rate
 
@@ -41,6 +42,7 @@ public class QuestionItem implements Serializable {
             newItem.setBitmap(oldItem.getBitmap());
         }
         newItem.setIsRight(oldItem.isRight);
+        newItem.setIsRight1(oldItem.isRight1);
     }
 
     public void setId(String id) {
@@ -57,6 +59,14 @@ public class QuestionItem implements Serializable {
 
     public String getText() {
         return mText;
+    }
+
+    public boolean isTrue() {
+        if (isRight1 == isRight)
+            return true;
+        else {
+            return false;
+        }
     }
 
     public void setText(String text) {
@@ -85,6 +95,14 @@ public class QuestionItem implements Serializable {
 
     public boolean isRight() {
         return isRight;
+    }
+
+    public void setIsRight1(boolean _isRight1) {
+        isRight1 = _isRight1;
+    }
+
+    public boolean isRight1() {
+        return isRight1;
     }
 
     public float getRate() {
