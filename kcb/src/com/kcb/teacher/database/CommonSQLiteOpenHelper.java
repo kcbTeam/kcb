@@ -8,7 +8,8 @@ import com.kcb.teacher.database.checkin.CheckInDB;
 import com.kcb.teacher.database.test.TestDB;
 
 public class CommonSQLiteOpenHelper extends SQLiteOpenHelper {
-    public static final String DATABASE_NAME = "db_kcb_teacher.db";
+
+    public static final String DATABASE_NAME = "kcb_teacher.db";
     public static final int DATABASE_VERSION = 1;
 
     public CommonSQLiteOpenHelper(Context context) {

@@ -137,8 +137,8 @@ public class UrlUtil {
     // 3.1 start test
     private static final String url_tch_test_start = IP + "/v1/tch/test/start";
 
-    public static String getTchTestStartUrl(String id) {
-        return url_tch_test_start + "?id=" + id;
+    public static String getTchTestStartUrl() {
+        return url_tch_test_start;
     }
 
     // 3.2 look test result

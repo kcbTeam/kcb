@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -13,10 +14,19 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 
+import com.android.volley.Request.Method;
+import com.android.volley.Response.ErrorListener;
+import com.android.volley.Response.Listener;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.kcb.common.application.KAccount;
 import com.kcb.common.base.BaseFragment;
 import com.kcb.common.listener.DelayClickListener;
+import com.kcb.common.server.RequestUtil;
+import com.kcb.common.server.UrlUtil;
 import com.kcb.common.util.DialogUtil;
 import com.kcb.common.util.ToastUtil;
 import com.kcb.common.view.MaterialListDialog.OnClickSureListener;
@@ -36,6 +46,8 @@ import com.kcbTeam.R;
  * @date: 2015年4月24日 下午3:24:15
  */
 public class TestFragment extends BaseFragment {
+
+    private final String TAG = TestFragment.class.getName();
 
     private PaperButton startTestButton;
     private PaperButton addOrEditTestButton;
@@ -57,6 +69,7 @@ public class TestFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         initData();
         initView();
     }
@@ -88,6 +101,7 @@ public class TestFragment extends BaseFragment {
     public void onDestroy() {
         super.onDestroy();
         mTestDao.close();
+        RequestUtil.getInstance().cancelPendingRequests(TAG);
     }
 
     private DelayClickListener mClickListener = new DelayClickListener(
@@ -116,16 +130,49 @@ public class TestFragment extends BaseFragment {
         refreshNameList(TAG_ADD_OR_EDIT_TEST);
         if (mTestNameList.isEmpty()) {
             ToastUtil.toast("请先添加测试内容");
-            return;
-        }
-        DialogUtil.showListDialog(getActivity(), "开始测试", mTestNameList, "确定",
-                new OnClickSureListener() {
+        } else {
+            DialogUtil.showListDialog(getActivity(), "选择测试", mTestNameList, "确定",
+                    new OnClickSureListener() {
 
-                    @Override
-                    public void onClick(View view, int position) {
-                        ToastUtil.toast("" + position);
-                    }
-                }, "取消", null);
+                        @Override
+                        public void onClick(View view, int position) {
+                            sendTestToServer(mTestList.get(position));
+                        }
+                    }, "取消", null);
+        }
+    }
+
+    private void sendTestToServer(final Test test) {
+        OnClickListener sureListener = new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                JSONObject requestObject = new JSONObject();
+                try {
+                    requestObject.put("id", KAccount.getAccountId());
+                    requestObject.put("test", test.toJsonObject());
+                } catch (JSONException e) {}
+                JsonObjectRequest request =
+                        new JsonObjectRequest(Method.POST, UrlUtil.getTchTestStartUrl(),
+                                requestObject, new Listener<JSONObject>() {
+
+                                    @Override
+                                    public void onResponse(JSONObject response) {
+                                        ToastUtil.toast("成功");
+                                    }
+                                }, new ErrorListener() {
+
+                                    @Override
+                                    public void onErrorResponse(VolleyError error) {
+                                        ToastUtil.toast("失败");
+                                    }
+                                });
+                RequestUtil.getInstance().addToRequestQueue(request, TAG);
+            }
+        };
+        DialogUtil.showNormalDialog(getActivity(), R.string.starttest, "本次测试的名称为" + test.getName()
+                + "，包括" + test.getQuestionNum() + "道题，" + "时间为" + test.getTime() + "分钟",
+                R.string.sure, sureListener, R.string.cancel, null);
     }
 
     private void addOrEditTest() {
