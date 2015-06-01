@@ -123,6 +123,7 @@ public class SetTestTimeActivity extends BaseActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            mTestDao.close();
             finish();
         }
     }

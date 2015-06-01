@@ -83,6 +83,7 @@ public class TestDao {
             test = new Test(testName, mQuestions, mTime);
             test.setDate(mDate);
         }
+        cursor.close();
         return test;
     }
 
@@ -116,6 +117,7 @@ public class TestDao {
                 list.add(test);
             } while (cursor.moveToNext());
         }
+        cursor.close();
         return list;
     }
 
@@ -133,5 +135,9 @@ public class TestDao {
 
     public void deleteAllRecord() {
         mSqLiteDatabase.execSQL("DELETE FROM " + TestDB.TABLE_NAME);
+    }
+
+    public void close() {
+        mSqLiteDatabase.close();
     }
 }

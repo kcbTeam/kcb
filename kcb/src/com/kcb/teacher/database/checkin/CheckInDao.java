@@ -25,7 +25,7 @@ public class CheckInDao {
     private SQLiteDatabase mSqLiteDatabase;
 
     @SuppressLint("SimpleDateFormat")
-    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+    public static SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
     public CheckInDao(Context context) {
         mCommonSQLiteOpenHelper = new CommonSQLiteOpenHelper(context);
@@ -81,6 +81,7 @@ public class CheckInDao {
                 checkInResultsList.add(new CheckInResult(mDate, mRate, uncheckedStudentList));
             } while (cursor.moveToNext());
         }
+        cursor.close();
         return checkInResultsList;
     }
 
@@ -112,6 +113,7 @@ public class CheckInDao {
                 checkInResultsList.add(new CheckInResult(mDate, mRate, uncheckedStudentList));
             } while (cursor.moveToNext());
         }
+        cursor.close();
         return checkInResultsList;
     }
 
@@ -132,7 +134,10 @@ public class CheckInDao {
     public void deleteAllCheckInResults() {
         mSqLiteDatabase.execSQL("DELETE FROM " + CheckInDB.TABLE_NAME);
     }
-
+    
+    public void close(){
+        mSqLiteDatabase.close();
+    }
 
     /**
      * 
@@ -204,8 +209,16 @@ public class CheckInDao {
         List<UncheckedStudent> list = new ArrayList<UncheckedStudent>();
         for (int i = 0; i < length; i++) {
             JSONObject jsonObject = (JSONObject) jsonArray.get(i);
-            list.add(UncheckedStudent.from(jsonObject));
+            list.add(jsonObjectToUncheckedStudent(jsonObject));
         }
         return list;
+    }
+
+    private static UncheckedStudent jsonObjectToUncheckedStudent(JSONObject jsonObject)
+            throws JSONException {
+        String id = jsonObject.getString("mId");
+        String name = jsonObject.getString("mName");
+        double rate = jsonObject.getDouble("mUnCheckedRate");
+        return new UncheckedStudent(id, name, rate);
     }
 }

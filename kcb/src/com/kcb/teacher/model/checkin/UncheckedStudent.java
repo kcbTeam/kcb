@@ -1,5 +1,7 @@
 package com.kcb.teacher.model.checkin;
 
+import java.io.Serializable;
+
 import org.json.JSONObject;
 
 /**
@@ -9,8 +11,12 @@ import org.json.JSONObject;
  * @author: wanghang
  * @date: 2015-5-31 下午3:42:39
  */
-public class UncheckedStudent {
+public class UncheckedStudent implements Serializable{
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 6L;
     private String mId;
     private String mName;
     private double mUnCheckedRate;
@@ -23,6 +29,8 @@ public class UncheckedStudent {
         return uncheckedStudent;
     }
 
+    public UncheckedStudent() {}
+
     public String getId() {
         return mId;
     }
@@ -33,5 +41,12 @@ public class UncheckedStudent {
 
     public double getUnCheckedRate() {
         return mUnCheckedRate;
+    }
+
+    // TODO : for test
+    public UncheckedStudent(String id, String name, double rate) {
+        mId = id;
+        mName = name;
+        mUnCheckedRate = rate;
     }
 }

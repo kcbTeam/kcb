@@ -84,6 +84,12 @@ public class TestFragment extends BaseFragment {
         mGetTestListTask.execute(0);
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mTestDao.close();
+    }
+
     private DelayClickListener mClickListener = new DelayClickListener(
             DelayClickListener.DELAY_PAPER_BUTTON) {
 

@@ -253,6 +253,7 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+                    mTestDao.close();
                     finish();
                 }
             }

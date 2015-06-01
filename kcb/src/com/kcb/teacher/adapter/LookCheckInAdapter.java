@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.kcb.teacher.database.checkin.CheckInDao;
 import com.kcb.teacher.model.checkin.CheckInResult;
 import com.kcbTeam.R;
 
@@ -24,6 +25,7 @@ public class LookCheckInAdapter extends BaseAdapter {
 
     private Context mContext;
     private List<CheckInResult> mList;
+    private final String FORMAT_RATE = "%1$d%%";
 
     public LookCheckInAdapter(Context context, List<CheckInResult> list) {
         mContext = context;
@@ -66,8 +68,8 @@ public class LookCheckInAdapter extends BaseAdapter {
         public TextView rateTextView;
 
         public void setCheckInResult(CheckInResult result) {
-            dateTextView.setText(result.getDate().toString());
-            rateTextView.setText(String.valueOf(result.getRate()));
+            dateTextView.setText(CheckInDao.formatter.format(result.getDate()));
+            rateTextView.setText(String.format(FORMAT_RATE, (int) (100 * result.getRate())));
         }
     }
 }
