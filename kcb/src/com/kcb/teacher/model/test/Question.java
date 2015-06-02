@@ -1,6 +1,8 @@
 package com.kcb.teacher.model.test;
 
+import java.io.IOException;
 import java.io.Serializable;
+import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -147,4 +149,41 @@ public class Question implements Serializable {
         } catch (JSONException e) {}
         return jsonObject;
     }
+    
+    /**
+     * 
+     * @title: List<Question> To String
+     * @description:
+     * @author: ZQJ
+     * @date: 2015年5月30日 下午7:55:04
+     * @param list
+     * @return
+     * @throws JSONException
+     * @throws IOException
+     */
+    public static String questionListToString(List<Question> list) throws JSONException,
+            IOException {
+        int length = list.size();
+        if (length < 1) {
+            return null;
+        }
+        JSONArray questionsArray = new JSONArray();
+        Question temp = new Question();
+        for (int i = 0; i < length; i++) {
+            temp = list.get(i);
+            JSONObject jsonObject = new JSONObject();
+
+            // jsonObject.put("mId", temp.getId());
+            jsonObject.put("mTitleItem", temp.getTitle().toJsonObject());
+            jsonObject.put("mChoiceAItem", temp.getChoiceA().toJsonObject());
+            jsonObject.put("mChoiceBItem", temp.getChoiceB().toJsonObject());
+            jsonObject.put("mChoiceCItem", temp.getChoiceC().toJsonObject());
+            jsonObject.put("mChoiceDItem", temp.getChoiceD().toJsonObject());
+
+            questionsArray.put(jsonObject);
+        }
+        return questionsArray.toString();
+
+    }
+    
 }

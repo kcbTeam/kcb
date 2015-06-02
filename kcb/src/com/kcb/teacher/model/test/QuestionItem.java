@@ -1,6 +1,7 @@
 package com.kcb.teacher.model.test;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.Serializable;
 
 import org.json.JSONException;
@@ -9,6 +10,7 @@ import org.json.JSONObject;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.text.TextUtils;
+import android.util.Base64;
 
 /**
  * 
@@ -136,8 +138,8 @@ public class QuestionItem implements Serializable {
         bitmap.compress(Bitmap.CompressFormat.PNG, 0, baos);
         return baos.toByteArray();
     }
-    
-    public JSONObject toJsonObject(){
+
+    public JSONObject toJsonObject() {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("id", mId);
@@ -145,8 +147,31 @@ public class QuestionItem implements Serializable {
             jsonObject.put("text", mText);
             jsonObject.put("bitmap", mBytesOfBitmap);
             jsonObject.put("isRight", isRight);
-        } catch (JSONException e) {
-        }
+        } catch (JSONException e) {}
         return jsonObject;
+    }
+
+
+
+    public static String encodeBitmapToString(Bitmap bitmap) throws IOException {
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
+        try {
+            out.flush();
+            out.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return new String(Base64.encode(out.toByteArray(), Base64.DEFAULT));
+    }
+
+    public static Bitmap decodeStringToBitmap(String string) throws IOException {
+        byte[] bytes = Base64.decode(string, Base64.DEFAULT);
+        if (bytes != null) {
+            Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+            return bitmap;
+        } else {
+            return null;
+        }
     }
 }
