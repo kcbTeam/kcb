@@ -28,6 +28,10 @@ public class Student implements Serializable {
     private HashMap<String, Float> mCorrectRateMap;
 
     private double mUnCheckedRate;
+    
+    //add by ljx
+    private double mCheckInRate;
+    private double mCorrectRate;
 
     public Student() {}
 
@@ -37,12 +41,17 @@ public class Student implements Serializable {
         mCheckInTimes = 0;
         mTotalCheckInTimes = 0;
     }
-
+    
+  
     public static Student from(JSONObject jsonObject) {
         Student studentInfo = new Student();
         studentInfo.mId = jsonObject.optString("id");
         studentInfo.mName = jsonObject.optString("name");
         studentInfo.mUnCheckedRate = jsonObject.optDouble("rate");
+      //add by ljx
+        studentInfo.mCheckInRate = jsonObject.optDouble("checkinrate");
+        studentInfo.mCorrectRate = jsonObject.optDouble("correctrate");
+        //------------------
         return studentInfo;
     }
 
