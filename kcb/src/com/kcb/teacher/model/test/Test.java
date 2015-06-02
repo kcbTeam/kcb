@@ -13,11 +13,11 @@ public class Test implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private String mId; // from server
+    private String mId; // from server when start test
     private String mName; // test name
     private int mTime; // minute
     private List<Question> mQuestions;
-    private Date mDate; // test date
+    private Date mDate; // test date, from server when start test
 
     public Test(String name, int num) {
         mName = name;
@@ -117,7 +117,7 @@ public class Test implements Serializable {
         try {
             jsonObject.put("name", mName);
             jsonObject.put("time", mTime);
-            
+
             JSONArray questionArray = new JSONArray();
             for (int i = 0; i < mQuestions.size(); i++) {
                 questionArray.put(mQuestions.get(i).toJsonObject());

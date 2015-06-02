@@ -17,6 +17,7 @@
         widget:rippleSpeed="6" >
 
         <ImageView
+            android:id="@+id/imageview_cancel"
             style="@style/common_title_icon_right"
             android:src="@drawable/ic_highlight_remove_black_24dp" />
     </com.kcb.library.view.buttonflat.ButtonFlat>
