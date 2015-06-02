@@ -186,7 +186,6 @@ public class TestFragment extends BaseFragment {
                             Intent intent = new Intent(getActivity(), SetTestNameActivity.class);
                             startActivity(intent);
                         } else {
-                            // TODO set selected testId
                             mTestList.get(mTestList.size() - position).changeTestToSerializable();
                             EditTestActivity.startEditTest(getActivity(),
                                     mTestList.get(mTestList.size() - position));

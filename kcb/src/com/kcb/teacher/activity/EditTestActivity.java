@@ -46,6 +46,7 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
 
     private TextView testNameTextView;
     private ButtonFlat cancelButton;
+    private ImageView cancelImageView;
 
     private TextView inputIndexTextView;
 
@@ -108,6 +109,7 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
         testNameTextView = (TextView) findViewById(R.id.textview_title);
         cancelButton = (ButtonFlat) findViewById(R.id.button_cancel);
         cancelButton.setOnClickListener(this);
+        cancelImageView = (ImageView) findViewById(R.id.imageview_cancel);
 
         inputIndexTextView = (TextView) findViewById(R.id.textview_input_problem_tip);
 
@@ -155,6 +157,9 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
     protected void initData() {
         Intent intent = getIntent();
         mAction = intent.getAction();
+        if (mAction.equals(ACTION_EDIT_TEST)) {
+            cancelImageView.setImageResource(R.drawable.ic_delete_black_24dp);
+        }
         mTest = (Test) intent.getSerializableExtra(DATA_TEST);
         testNameTextView.setText(mTest.getName() + "（共" + mTest.getQuestionNum() + "题）");
         showQuestion();
@@ -173,7 +178,11 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.button_cancel:
-                onBackPressed();
+                if (mAction.equals(ACTION_ADD_TEST)) {
+                    cancelAddTest();
+                } else {
+                    deleteTest();
+                }
                 break;
             case R.id.imageview_delete_title:
                 setEditMode(FLAG_TITLE, EDIT_MODE_TEXT);
@@ -238,22 +247,7 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
                     SetTestTimeActivity.start(EditTestActivity.this, mTest);
                     finish();
                 } else {
-                    if (!getCurrentQuestion().equal(mTempQuestion)) {
-                        ToastUtil.toast(String.format(
-                                getResources().getString(R.string.format_edit_save),
-                                1 + mCurrentQuestionIndex));
-                    }
-                    try {
-                        mTestDao = new TestDao(this);
-                        mTestDao.add(mTest);
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    mTestDao.close();
+                    saveEditTest();
                     finish();
                 }
             }
@@ -606,6 +600,14 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
      */
     @Override
     public void onBackPressed() {
+        if (mAction.equals(ACTION_ADD_TEST)) {
+            cancelAddTest();
+        } else {
+            saveEditTest();
+        }
+    }
+
+    private void cancelAddTest() {
         OnClickListener sureListener = new OnClickListener() {
 
             @Override
@@ -615,6 +617,43 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
         };
         DialogUtil.showNormalDialog(this, R.string.leave, R.string.sureLeave, R.string.sure,
                 sureListener, R.string.cancel, null);
+    }
+
+    private void saveEditTest() {
+        ToastUtil.toast("已保存");
+        try {
+            mTestDao = new TestDao(this);
+            mTestDao.add(mTest);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        mTestDao.close();
+        finish();
+    }
+
+    private void deleteTest() {
+        OnClickListener sureListener = new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                ToastUtil.toast("已删除");
+                try {
+                    mTestDao = new TestDao(EditTestActivity.this);
+                    mTestDao.deleteTestByName(mTest.getName());
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                mTestDao.close();
+                finish();
+            }
+        };
+        DialogUtil.showNormalDialog(this, R.string.dialog_title_delete,
+                "确定删除测试——" + mTest.getName() + "？", R.string.sure, sureListener, R.string.cancel,
+                null);
     }
 
     /**

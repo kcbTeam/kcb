@@ -110,9 +110,8 @@ public class SetTestTimeActivity extends BaseActivity {
     @Override
     public void onClick(View v) {
         if (v == finishButton) {
-            sTest.setDate(new Date());
             sTest.setTime(slider.getValue());
-            // TODO
+            sTest.setDate(new Date());
             try {
                 mTestDao = new TestDao(this);
                 mTestDao.add(sTest);
@@ -123,6 +122,7 @@ public class SetTestTimeActivity extends BaseActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            sTest = null;
             mTestDao.close();
             finish();
         }

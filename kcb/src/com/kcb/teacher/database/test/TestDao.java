@@ -32,7 +32,6 @@ public class TestDao {
         mSqLiteDatabase = mTestSQLiteOpenHelper.getWritableDatabase();
     }
 
-
     /**
      * 
      * @title: add
@@ -55,7 +54,6 @@ public class TestDao {
                 new String[] {test.getName(), String.valueOf(test.getTime()), date,
                         TestJsonUtils.changeQuestionsToString(test.getQuestions())});
     }
-
 
     /**
      * 
