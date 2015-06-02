@@ -15,6 +15,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.provider.MediaStore.Images.Media;
 import android.view.View;
@@ -79,7 +80,7 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
     private final int FLAG_D = 5;
 
     // test and current question index;
-    private Test mTest;
+    public static Test sTest;
     private int mCurrentQuestionIndex;
 
     // when click last/next, show a mTempQuestion, used for compare it is changed or not;
@@ -160,8 +161,7 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
         if (mAction.equals(ACTION_EDIT_TEST)) {
             cancelImageView.setImageResource(R.drawable.ic_delete_black_24dp);
         }
-        mTest = (Test) intent.getSerializableExtra(DATA_TEST);
-        testNameTextView.setText(mTest.getName() + "（共" + mTest.getQuestionNum() + "题）");
+        testNameTextView.setText(sTest.getName() + "（共" + sTest.getQuestionNum() + "题）");
         showQuestion();
     }
 
@@ -235,21 +235,21 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
 
     private void nextQuesion() {
         saveQuestion();
-        if (mCurrentQuestionIndex == mTest.getQuestionNum() - 1) {
-            if (!mTest.isCompleted()) {
-                int unCompletedIndex = mTest.getUnCompleteIndex() + 1;
+        if (mCurrentQuestionIndex == sTest.getQuestionNum() - 1) {
+            if (!sTest.isCompleted()) {
+                int unCompletedIndex = sTest.getUnCompleteIndex() + 1;
                 ToastUtil.toast(String
                         .format(getResources().getString(R.string.format_edit_empty_hint),
                                 unCompletedIndex));
             } else {
-                // if add test, goto set time activity; if edit test, finish;
-                if (ACTION_ADD_TEST.equals(mAction)) {
-                    SetTestTimeActivity.start(EditTestActivity.this, mTest);
-                    finish();
-                } else {
-                    saveEditTest();
-                    finish();
-                }
+                new Handler().postDelayed(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        SetTestTimeActivity.start(EditTestActivity.this, sTest);
+                        finish();
+                    }
+                }, 200);
             }
         } else {
             if (!getCurrentQuestion().equal(mTempQuestion)) {
@@ -263,11 +263,11 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
 
     // four click functions: add ,delete ,next ,last.
     private void addQuestion() {
-        if (mTest.getQuestionNum() == 9) {
+        if (sTest.getQuestionNum() == 9) {
             ToastUtil.toast("最多只能有9题");
             return;
         }
-        final int questionNum = mTest.getQuestionNum() + 1;
+        final int questionNum = sTest.getQuestionNum() + 1;
         DialogUtil.showNormalDialog(this, R.string.dialog_title_add,
                 String.format(getString(R.string.add_msg), questionNum), R.string.sure,
                 new OnClickListener() {
@@ -275,7 +275,7 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
                     @Override
                     public void onClick(View v) {
                         ToastUtil.toast("第" + questionNum + "题已添加");
-                        mTest.addQuestion();
+                        sTest.addQuestion();
                         showQuestionNum();
                         showNextButton();
                     }
@@ -289,11 +289,11 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
 
                     @Override
                     public void onClick(View v) {
-                        if (mTest.getQuestionNum() > 1) {
-                            int originQuestionNum = mTest.getQuestionNum();
-                            mTest.deleteQuestion(mCurrentQuestionIndex);
+                        if (sTest.getQuestionNum() > 1) {
+                            int originQuestionNum = sTest.getQuestionNum();
+                            sTest.deleteQuestion(mCurrentQuestionIndex);
                             mCurrentQuestionIndex =
-                                    mCurrentQuestionIndex == originQuestionNum - 1 ? mTest
+                                    mCurrentQuestionIndex == originQuestionNum - 1 ? sTest
                                             .getQuestionNum() - 1 : mCurrentQuestionIndex;
                             showQuestion();
                             ToastUtil.toast(R.string.delete_success);
@@ -451,14 +451,14 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
     }
 
     private void showQuestionNum() {
-        testNameTextView.setText(String.format(getString(R.string.test_name_num), mTest.getName(),
-                mTest.getQuestionNum()));
+        testNameTextView.setText(String.format(getString(R.string.test_name_num), sTest.getName(),
+                sTest.getQuestionNum()));
         inputIndexTextView.setText(String.format(getString(R.string.problem_hint),
                 mCurrentQuestionIndex + 1));
     }
 
     private void showNextButton() {
-        if (mCurrentQuestionIndex == mTest.getQuestionNum() - 1) {
+        if (mCurrentQuestionIndex == sTest.getQuestionNum() - 1) {
             nextButton.setText(getResources().getString(R.string.complete));
             nextButton.setTextColor(getResources().getColor(R.color.blue));
         } else {
@@ -588,7 +588,7 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
     }
 
     private Question getCurrentQuestion() {
-        return mTest.getQuestion(mCurrentQuestionIndex);
+        return sTest.getQuestion(mCurrentQuestionIndex);
     }
 
     /**
@@ -623,7 +623,7 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
         ToastUtil.toast("已保存");
         try {
             mTestDao = new TestDao(this);
-            mTestDao.add(mTest);
+            mTestDao.add(sTest);
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (JSONException e) {
@@ -643,7 +643,7 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
                 ToastUtil.toast("已删除");
                 try {
                     mTestDao = new TestDao(EditTestActivity.this);
-                    mTestDao.deleteTestByName(mTest.getName());
+                    mTestDao.deleteTestByName(sTest.getName());
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
@@ -652,7 +652,7 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
             }
         };
         DialogUtil.showNormalDialog(this, R.string.dialog_title_delete,
-                "确定删除测试——" + mTest.getName() + "？", R.string.sure, sureListener, R.string.cancel,
+                "确定删除测试——" + sTest.getName() + "？", R.string.sure, sureListener, R.string.cancel,
                 null);
     }
 
@@ -662,19 +662,20 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
     private static final String ACTION_ADD_TEST = "action_addTest";
     private static final String ACTION_EDIT_TEST = "action_editTest";
 
-    private static final String DATA_TEST = "data_test";
-
+    /**
+     * for better effect, use static test, don't need parse bitmap
+     */
     public static void startAddNewTest(Context context, Test test) {
         Intent intent = new Intent(context, EditTestActivity.class);
         intent.setAction(ACTION_ADD_TEST);
-        intent.putExtra(DATA_TEST, test);
         context.startActivity(intent);
+        sTest = test;
     }
 
     public static void startEditTest(Context context, Test test) {
         Intent intent = new Intent(context, EditTestActivity.class);
         intent.setAction(ACTION_EDIT_TEST);
-        intent.putExtra(DATA_TEST, test);
         context.startActivity(intent);
+        sTest = test;
     }
 }

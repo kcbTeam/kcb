@@ -1,14 +1,14 @@
 package com.kcb.teacher.model.test;
 
-import java.io.ByteArrayOutputStream;
 import java.io.Serializable;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.text.TextUtils;
+
+import com.kcb.common.util.BitmapUtil;
 
 /**
  * 
@@ -21,15 +21,15 @@ public class QuestionItem implements Serializable {
 
     private static final long serialVersionUID = 4919254309171318451L;
 
-    private String mId; // from client, only use if choice
+    private int mId; // from client, useful when item is choice
 
-    private boolean isText = true;
+    private boolean mIsText = true;
     private String mText = "";
     private Bitmap mBitmap;
-    private byte[] mBytesOfBitmap;
-    private boolean isRight = false; // only use if choice
-    private double mRate; // if the item is a choice, mRate represent a choice rate;if the item is a
-                          // question title, mRate represent the correct rate
+    private String mBitmapString;
+
+    private boolean mIsRight = false; // useful when item is choice
+    private double mRate; // useful when item is choice, mRate represent a choice rate
 
     public QuestionItem() {}
 
@@ -38,24 +38,24 @@ public class QuestionItem implements Serializable {
     }
 
     public static void copy(QuestionItem oldItem, QuestionItem newItem) {
-        if (oldItem.isText) {
+        if (oldItem.mIsText) {
             newItem.setText(oldItem.getText());
         } else {
             newItem.setBitmap(oldItem.getBitmap());
         }
-        newItem.setIsRight(oldItem.isRight);
+        newItem.setIsRight(oldItem.mIsRight);
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         mId = id;
     }
 
-    public String getId() {
+    public int getId() {
         return mId;
     }
 
     public boolean isText() {
-        return isText;
+        return mIsText;
     }
 
     public String getText() {
@@ -63,35 +63,38 @@ public class QuestionItem implements Serializable {
     }
 
     public void setText(String text) {
-        isText = true;
+        mIsText = true;
         mText = text;
         mBitmap = null;
-        mBytesOfBitmap = null;
+        mBitmapString = null;
     }
 
     public void setBitmap(Bitmap bitmap) {
-        isText = false;
+        mIsText = false;
         mText = "";
         mBitmap = bitmap;
     }
 
     public Bitmap getBitmap() {
-        if (null != mBytesOfBitmap) {
-            return BitmapFactory.decodeByteArray(mBytesOfBitmap, 0, mBytesOfBitmap.length);
+        if (null != mBitmap) {
+            return mBitmap;
+        } else if (null != mBitmapString) {
+            return BitmapUtil.stringToBitmap(mBitmapString);
+        } else {
+            return null;
         }
-        return mBitmap;
     }
 
-    public byte[] getBytesOfBitmap() {
-        return mBytesOfBitmap;
+    public String getBitmapString() {
+        return mBitmapString;
     }
 
     public void setIsRight(boolean _isRight) {
-        isRight = _isRight;
+        mIsRight = _isRight;
     }
 
     public boolean isRight() {
-        return isRight;
+        return mIsRight;
     }
 
     public double getRate() {
@@ -103,9 +106,9 @@ public class QuestionItem implements Serializable {
     }
 
     public boolean equals(QuestionItem item) {
-        if (isRight == item.isRight) {
-            if (isText == item.isText) {
-                if (isText) {
+        if (mIsRight == item.mIsRight) {
+            if (mIsText == item.mIsText) {
+                if (mIsText) {
                     return mText.equals(item.mText);
                 } else {
                     if (null != item.getBitmap()) {
@@ -120,33 +123,41 @@ public class QuestionItem implements Serializable {
         return false;
     }
 
-    public void changeBitmapToBytes() {
-        if (null != mBitmap) {
-            mBytesOfBitmap = getBytes(mBitmap);
-            mBitmap = null;
-        }
-    }
-
     public boolean isCompleted() {
-        return !TextUtils.isEmpty(mText) || mBitmap != null || mBytesOfBitmap != null;
+        return !TextUtils.isEmpty(mText) || mBitmap != null || mBitmapString != null;
     }
 
-    public static byte[] getBytes(Bitmap bitmap) {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 0, baos);
-        return baos.toByteArray();
-    }
-    
-    public JSONObject toJsonObject(){
+    /**
+     * question item to json, json to question item
+     */
+    public static final String KEY_ID = "id";
+    public static final String KEY_ISTEXT = "istext";
+    public static final String KEY_TEXT = "text";
+    public static final String KEY_BITMAPSTRING = "bitmapstring";
+    public static final String KEY_ISRIGHT = "isright";
+    public static final String KEY_RATE = "rate";
+
+    public JSONObject toJsonObject() {
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("id", mId);
-            jsonObject.put("isText", isText);
-            jsonObject.put("text", mText);
-            jsonObject.put("bitmap", mBytesOfBitmap);
-            jsonObject.put("isRight", isRight);
-        } catch (JSONException e) {
-        }
+            jsonObject.put(KEY_ID, mId);
+            jsonObject.put(KEY_ISTEXT, mIsText);
+            jsonObject.put(KEY_TEXT, mText);
+            jsonObject.put(KEY_BITMAPSTRING, mBitmapString);
+            jsonObject.put(KEY_ISRIGHT, mIsRight);
+            jsonObject.put(KEY_RATE, mRate);
+        } catch (JSONException e) {}
         return jsonObject;
+    }
+
+    public static QuestionItem fromJsonObject(JSONObject jsonObject) {
+        QuestionItem item = new QuestionItem();
+        item.mId = jsonObject.optInt(KEY_ID);
+        item.mIsText = jsonObject.optBoolean(KEY_ISTEXT);
+        item.mText = jsonObject.optString(KEY_TEXT);
+        item.mBitmapString = jsonObject.optString(KEY_BITMAPSTRING);
+        item.mIsRight = jsonObject.optBoolean(KEY_ISRIGHT);
+        item.mRate = jsonObject.optDouble(KEY_RATE);
+        return item;
     }
 }
