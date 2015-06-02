@@ -74,7 +74,7 @@ public class SetTestTimeActivity extends BaseActivity {
     @Override
     protected void initData() {
         testTimeTextView.setText(String.format(getString(R.string.settime_hint),
-                sTest.getQuestionNum(), 5));
+                sTest.getQuestionNum(), sTest.getTime()));
         slider.setValue(sTest.getTime());
 
         mEditListener = new EditQuestionListener() {
