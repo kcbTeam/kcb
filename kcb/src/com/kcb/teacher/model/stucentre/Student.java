@@ -42,6 +42,13 @@ public class Student implements Serializable {
         mTotalCheckInTimes = 0;
     }
     
+    //add by ljx
+    public Student(String name, String studentID,Double checkInRate,Double correctRate) {
+        mName = name;
+        mId = studentID;
+        mCheckInRate = checkInRate;
+        mCorrectRate = correctRate;
+    }
   
     public static Student from(JSONObject jsonObject) {
         Student studentInfo = new Student();

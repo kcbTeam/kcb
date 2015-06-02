@@ -20,14 +20,13 @@ import com.kcb.teacher.database.CommonSQLiteOpenHelper;
 import com.kcb.teacher.database.checkin.CheckInDB;
 import com.kcb.teacher.model.checkin.CheckInResult;
 import com.kcb.teacher.model.checkin.UncheckedStudent;
+import com.kcb.teacher.model.stucentre.Student;
 
 public class StudentDao {
 	private CommonSQLiteOpenHelper mCommonSQLiteOpenHelper;
     private SQLiteDatabase mSqLiteDatabase;
 
-    @SuppressLint("SimpleDateFormat")
-    public static SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-
+  
     public StudentDao(Context context) {
         mCommonSQLiteOpenHelper = new CommonSQLiteOpenHelper(context);
         mSqLiteDatabase = mCommonSQLiteOpenHelper.getWritableDatabase();
@@ -43,11 +42,10 @@ public class StudentDao {
      * @throws SQLException
      * @throws JSONException
      */
-    public void addCheckInReslt(CheckInResult checkInResult) throws SQLException, JSONException {
-        String date = formatter.format(checkInResult.getDate());
-        mSqLiteDatabase.execSQL("INSERT INTO " + CheckInDB.TABLE_NAME + " VALUES(null,?,?,?)",
-                new String[] {date, String.valueOf(checkInResult.getRate()),
-                        changeUnCheckStudentsToString(checkInResult.getUnCheckedStudents())});
+    public void insert(Student student) throws SQLException, JSONException {
+        mSqLiteDatabase.execSQL("INSERT INTO " + CheckInDB.TABLE_NAME + " VALUES(null,?,?,?,?)",
+                new String[] {student.getName(), student.getId(),
+        		String.valueOf(student.getCheckInRate()),String.valueOf(student.getCorrectRate())});
     }
 
 
@@ -62,31 +60,33 @@ public class StudentDao {
      * @throws ParseException
      * @throws JSONException
      */
-    public List<CheckInResult> getCheckInResultByDate(Date date) throws ParseException,
+    public List<Student> getStuCentreById(String stuId) throws ParseException,
             JSONException {
-        String dateString = formatter.format(date);
         Cursor cursor =
-                mSqLiteDatabase.rawQuery("SELECT * FROM " + CheckInDB.TABLE_NAME + " WHERE "
-                        + CheckInDB.KEY_DATE + "=?", new String[] {dateString});
-        List<CheckInResult> checkInResultsList = new ArrayList<CheckInResult>();
+                mSqLiteDatabase.rawQuery("SELECT * FROM " + StudentDB.TABLE_NAME + " WHERE "
+                        + StudentDB.KEY_NAME + "=?", new String[] {stuId});
+        List<Student> stuCentreList = new ArrayList<Student>();
         if (cursor.moveToFirst()) {
             do {
-                dateString = cursor.getString(cursor.getColumnIndex(CheckInDB.KEY_DATE));
-                String rate = cursor.getString(cursor.getColumnIndex(CheckInDB.KEY_RATE));
-                String uncheckStudents =
-                        cursor.getString(cursor.getColumnIndex(CheckInDB.KEY_UNCHECK_STUDENTS));
-                Date mDate = formatter.parse(dateString);
-                double mRate = Double.valueOf(rate);
-                List<UncheckedStudent> uncheckedStudentList =
-                        jsonStringToUncheckedStudent(uncheckStudents);
-                checkInResultsList.add(new CheckInResult(mDate, mRate, uncheckedStudentList));
+            	String name = cursor.getString(cursor.getColumnIndex(StudentDB.KEY_NAME));
+                String studentId = cursor.getString(cursor.getColumnIndex(StudentDB.KEY_STUID));
+               
+                String checkinRate = cursor.getString(cursor.getColumnIndex(StudentDB.KEY_CHECKINRATE));
+                String correctRate = cursor.getString(cursor.getColumnIndex(StudentDB.KEY_CORRECTRATE));
+                
+                
+                double mcheckinRate = Double.valueOf(checkinRate);
+                double mcorrectRate = Double.valueOf(correctRate);
+                
+                
+                stuCentreList.add(new Student(name, studentId, mcheckinRate,mcorrectRate));
             } while (cursor.moveToNext());
         }
         cursor.close();
-        return checkInResultsList;
+        return stuCentreList;
     }
 
-
+//here  ------------------------------------------------
     /**
      * 
      * @title: getAllCheckInResults
