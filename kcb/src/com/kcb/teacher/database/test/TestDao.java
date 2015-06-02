@@ -4,10 +4,10 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -16,8 +16,6 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.kcb.teacher.database.CommonSQLiteOpenHelper;
-import com.kcb.teacher.database.test.utils.TestJsonUtils;
-import com.kcb.teacher.model.test.Question;
 import com.kcb.teacher.model.test.Test;
 
 public class TestDao {
@@ -48,11 +46,13 @@ public class TestDao {
         if (null != test) {
             deleteTestByName(test.getName());
         }
-        String date = formatter.format(test.getDate());
-        mSqLiteDatabase.execSQL(
-                "INSERT INTO " + TestDB.TABLE_NAME + " VALUES(null,?,?,?,?)",
-                new String[] {test.getName(), String.valueOf(test.getTime()), date,
-                        TestJsonUtils.changeQuestionsToString(test.getQuestions())});
+        String hasTested = "0";
+        if(test.isTested()){
+            hasTested = "1";
+        }
+        mSqLiteDatabase.execSQL("INSERT INTO " + TestDB.TABLE_NAME + " VALUES(null,?,?,?,?,?,?)",
+                new String[] {test.getId(), test.getName(), String.valueOf(test.getTime()),
+                        test.getDate().toString(), hasTested, test.toJsonObject().toString()});
     }
 
     /**
@@ -73,13 +73,9 @@ public class TestDao {
                 mSqLiteDatabase.rawQuery("SELECT * FROM " + TestDB.TABLE_NAME + " WHERE "
                         + TestDB.KEY_NAME + "=?", new String[] {testName});
         if (cursor.moveToFirst()) {
-            int mTime = Integer.valueOf(cursor.getString(cursor.getColumnIndex(TestDB.KEY_TIME)));
-            List<Question> mQuestions =
-                    TestJsonUtils.jsonStringToQuesitonList(cursor.getString(cursor
-                            .getColumnIndex(TestDB.KEY_QUESTIONS)));
-            Date mDate = formatter.parse(cursor.getString(cursor.getColumnIndex(TestDB.KEY_DATE)));
-            test = new Test(testName, mQuestions, mTime);
-            test.setDate(mDate);
+            test =
+                    Test.fromJsonObject(new JSONObject(cursor.getString(cursor
+                            .getColumnIndex(TestDB.KEY_TEST_CONTENT))));
         }
         cursor.close();
         return test;
@@ -102,16 +98,9 @@ public class TestDao {
         List<Test> list = new ArrayList<Test>();
         if (cursor.moveToFirst()) {
             do {
-                String mName = cursor.getString(cursor.getColumnIndex(TestDB.KEY_NAME));
-                int mTime =
-                        Integer.valueOf(cursor.getString(cursor.getColumnIndex(TestDB.KEY_TIME)));
-                List<Question> mQuestions =
-                        TestJsonUtils.jsonStringToQuesitonList(cursor.getString(cursor
-                                .getColumnIndex(TestDB.KEY_QUESTIONS)));
-                Date mDate =
-                        formatter.parse(cursor.getString(cursor.getColumnIndex(TestDB.KEY_DATE)));
-                Test test = new Test(mName, mQuestions, mTime);
-                test.setDate(mDate);
+                Test test =
+                        Test.fromJsonObject(new JSONObject(cursor.getString(cursor
+                                .getColumnIndex(TestDB.KEY_TEST_CONTENT))));
                 list.add(test);
             } while (cursor.moveToNext());
         }

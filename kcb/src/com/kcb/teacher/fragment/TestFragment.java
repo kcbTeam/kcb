@@ -150,6 +150,7 @@ public class TestFragment extends BaseFragment {
                 JSONObject requestObject = new JSONObject();
                 try {
                     requestObject.put("id", KAccount.getAccountId());
+                    test.setQuestionId();
                     requestObject.put("test", test.toJsonObject());
                 } catch (JSONException e) {}
                 JsonObjectRequest request =
@@ -171,7 +172,7 @@ public class TestFragment extends BaseFragment {
             }
         };
         DialogUtil.showNormalDialog(getActivity(), R.string.starttest, "本次测试的名称为" + test.getName()
-                + "，包括" + test.getQuestionNum() + "道题，" + "时间为" + test.getTime() + "分钟",
+                + "，包括" + test.getQuestionNum() + "道题，" + "时间为" + test.getTime() + "分钟。",
                 R.string.sure, sureListener, R.string.cancel, null);
     }
 
@@ -186,7 +187,6 @@ public class TestFragment extends BaseFragment {
                             Intent intent = new Intent(getActivity(), SetTestNameActivity.class);
                             startActivity(intent);
                         } else {
-                            mTestList.get(mTestList.size() - position).changeTestToSerializable();
                             EditTestActivity.startEditTest(getActivity(),
                                     mTestList.get(mTestList.size() - position));
                         }

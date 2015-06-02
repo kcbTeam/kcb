@@ -59,7 +59,6 @@ public class SetTestTimeActivity extends BaseActivity {
         testTimeTextView = (TextView) findViewById(R.id.textview_testtime);
 
         slider = (Slider) findViewById(R.id.slider_testtime);
-        slider.setValue(5);
         slider.setOnValueChangedListener(new OnValueChangedListener() {
 
             @Override
@@ -76,6 +75,7 @@ public class SetTestTimeActivity extends BaseActivity {
     protected void initData() {
         testTimeTextView.setText(String.format(getString(R.string.settime_hint),
                 sTest.getQuestionNum(), 5));
+        slider.setValue(sTest.getTime());
 
         mEditListener = new EditQuestionListener() {
 
@@ -112,6 +112,8 @@ public class SetTestTimeActivity extends BaseActivity {
         if (v == finishButton) {
             sTest.setTime(slider.getValue());
             sTest.setDate(new Date());
+            // TODO:
+            sTest.setId("2333");
             try {
                 mTestDao = new TestDao(this);
                 mTestDao.add(sTest);
