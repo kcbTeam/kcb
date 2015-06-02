@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class Test implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -22,7 +26,6 @@ public class Test implements Serializable {
             mQuestions.add(new Question());
         }
     }
-
 
     public Test(String name, List<Question> questions, int time) {
         mName = name;
@@ -107,5 +110,20 @@ public class Test implements Serializable {
         for (int i = 0; i < mQuestions.size(); i++) {
             mQuestions.get(i).changeQuestionToSerializable();
         }
+    }
+
+    public JSONObject toJsonObject() {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("name", mName);
+            jsonObject.put("time", mTime);
+            
+            JSONArray questionArray = new JSONArray();
+            for (int i = 0; i < mQuestions.size(); i++) {
+                questionArray.put(mQuestions.get(i).toJsonObject());
+            }
+            jsonObject.put("questions", questionArray);
+        } catch (JSONException e) {}
+        return jsonObject;
     }
 }

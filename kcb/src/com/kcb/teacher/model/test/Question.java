@@ -2,6 +2,10 @@ package com.kcb.teacher.model.test;
 
 import java.io.Serializable;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 /**
  * 
  * @className: ChoiceQuestion
@@ -126,5 +130,21 @@ public class Question implements Serializable {
         mChoiceBItem.changeBitmapToBytes();
         mChoiceCItem.changeBitmapToBytes();
         mChoiceDItem.changeBitmapToBytes();
+    }
+
+    public JSONObject toJsonObject() {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("id", mId);
+            jsonObject.put("title", mTitleItem.toJsonObject());
+            
+            JSONArray choiceArray = new JSONArray();
+            choiceArray.put(mChoiceAItem.toJsonObject());
+            choiceArray.put(mChoiceBItem.toJsonObject());
+            choiceArray.put(mChoiceCItem.toJsonObject());
+            choiceArray.put(mChoiceDItem.toJsonObject());
+            jsonObject.put("choice", choiceArray);
+        } catch (JSONException e) {}
+        return jsonObject;
     }
 }

@@ -3,6 +3,9 @@ package com.kcb.teacher.model.test;
 import java.io.ByteArrayOutputStream;
 import java.io.Serializable;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.text.TextUtils;
@@ -18,13 +21,13 @@ public class QuestionItem implements Serializable {
 
     private static final long serialVersionUID = 4919254309171318451L;
 
-    private String mId; // from client
+    private String mId; // from client, only use if choice
 
     private boolean isText = true;
     private String mText = "";
     private Bitmap mBitmap;
     private byte[] mBytesOfBitmap;
-    private boolean isRight = false;
+    private boolean isRight = false; // only use if choice
     private double mRate; // if the item is a choice, mRate represent a choice rate;if the item is a
                           // question title, mRate represent the correct rate
 
@@ -132,5 +135,18 @@ public class QuestionItem implements Serializable {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 0, baos);
         return baos.toByteArray();
+    }
+    
+    public JSONObject toJsonObject(){
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("id", mId);
+            jsonObject.put("isText", isText);
+            jsonObject.put("text", mText);
+            jsonObject.put("bitmap", mBytesOfBitmap);
+            jsonObject.put("isRight", isRight);
+        } catch (JSONException e) {
+        }
+        return jsonObject;
     }
 }
