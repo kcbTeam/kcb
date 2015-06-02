@@ -20,7 +20,7 @@ public class KCBSQLiteOpenHelper extends SQLiteOpenHelper {
             // + FeedEntry.COLUMN_NAME_ENTRY_ID + "integer primary key autoincrement" + ","
             + FeedEntry.COLUMN_NAME_ENTRY_TESTNAME + TEXT_TYPE + ","
             + FeedEntry.COLUMN_NAME_TESTDATE + TEXT_TYPE + "," + FeedEntry.COLUMN_NAME_TESTTIME
-            + NUMERIC_TYPE + "," + FeedEntry.COLUMN_NAME_QUESTION + TEXT_TYPE + ","+ FeedEntry.COLUMN_NAME_QUESTIONTYPE + TEXT_TYPE + ","
+            + NUMERIC_TYPE + "," + FeedEntry.COLUMN_NAME_QUESTION + TEXT_TYPE + ","+ FeedEntry.COLUMN_NAME_QUESTIONTYPE + NUMERIC_TYPE + ","
             + FeedEntry.COLUMN_NAME_OPTIONA + TEXT_TYPE + "," + FeedEntry.COLUMN_NAME_OPTIONATYPE
             + NUMERIC_TYPE + "," + FeedEntry.COLUMN_NAME_OPTIONATF + NUMERIC_TYPE + ","
             + FeedEntry.COLUMN_NAME_OPTIONATF1 + NUMERIC_TYPE + "," + FeedEntry.COLUMN_NAME_OPTIONB

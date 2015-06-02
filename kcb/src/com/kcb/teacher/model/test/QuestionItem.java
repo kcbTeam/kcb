@@ -3,6 +3,8 @@ package com.kcb.teacher.model.test;
 import java.io.ByteArrayOutputStream;
 import java.io.Serializable;
 
+import com.kcb.student.util.ImageToJsonString;
+
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.text.TextUtils;
@@ -53,6 +55,7 @@ public class QuestionItem implements Serializable {
         return mId;
     }
 
+   
     public boolean isText() {
         return isText;
     }
@@ -69,11 +72,18 @@ public class QuestionItem implements Serializable {
         }
     }
 
+    
     public void setText(String text) {
         isText = true;
         mText = text;
         mBitmap = null;
         mBytesOfBitmap = null;
+    }
+    
+    public void setText(String text,boolean bool) {
+        isText = bool;
+        mText = text;
+        setBitmap(ImageToJsonString.decodeImagefromJson(text));
     }
 
     public void setBitmap(Bitmap bitmap) {

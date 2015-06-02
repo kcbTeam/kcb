@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
@@ -22,9 +23,9 @@ import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.student.adapter.TestRecycleAdapter;
 import com.kcb.student.constance.DataBaseContract.FeedEntry;
 import com.kcb.student.database.KCBProfileDao;
+import com.kcb.student.util.ImageToJsonString;
 import com.kcb.student.util.IntToBooleans;
 import com.kcb.student.util.RedHookDraw;
-import com.kcb.teacher.model.test.Question;
 import com.kcb.teacher.model.test.Test;
 import com.kcbTeam.R;
 
@@ -122,7 +123,7 @@ public class LookTestResultActivity extends BaseActivity {
         } else {}
     }
 
-    
+
     public void traverseQuestions() {
         Intent intent = this.getIntent();
         String string = intent.getStringExtra("testTitle1");
@@ -131,19 +132,39 @@ public class LookTestResultActivity extends BaseActivity {
         dbManager = ((KApplication) getApplication()).getDB();
         dbManager.getDataDb();
         mCursor = dbManager.select(new String[] {string, "5"});
-        int i=0;
+        int i = 0;
         while (mCursor.moveToNext()) {
             mTest.addQuestion();
-            mTest.getQuestion(i)
-                    .getTitle()
-                    .setText(
-                            new String(mCursor.getString(mCursor
-                                    .getColumnIndex(FeedEntry.COLUMN_NAME_QUESTION))));;
-            mTest.getQuestion(i)
-                    .getChoiceA()
-                    .setText(
-                            new String(mCursor.getString(mCursor
-                                    .getColumnIndex(FeedEntry.COLUMN_NAME_OPTIONA))));
+            if (mCursor.getInt(mCursor.getColumnIndex(FeedEntry.COLUMN_NAME_QUESTIONTYPE)) > 0)
+                mTest.getQuestion(i)
+                        .getTitle()
+                        .setText(
+                                new String(mCursor.getString(mCursor
+                                        .getColumnIndex(FeedEntry.COLUMN_NAME_QUESTION))));
+            else {
+                Bitmap bitmap =
+                        ImageToJsonString
+                                .getBitmapFromByte(ImageToJsonString.decode(mCursor
+                                        .getString(mCursor
+                                                .getColumnIndex(FeedEntry.COLUMN_NAME_QUESTION))));
+                mTest.getQuestion(i).getTitle().setBitmap(bitmap);
+            }
+
+            if (mCursor.getInt(mCursor.getColumnIndex(FeedEntry.COLUMN_NAME_OPTIONATYPE)) > 0)
+            {  mTest.getQuestion(i)
+                        .getChoiceA()
+                        .setText(
+                                new String(mCursor.getString(mCursor
+                                        .getColumnIndex(FeedEntry.COLUMN_NAME_OPTIONA))));
+            LogUtil.i("gfdg", "22222222222222");}
+
+            else {
+                Bitmap bitmap =
+                        ImageToJsonString.getBitmapFromByte(ImageToJsonString.decode(mCursor
+                                .getString(mCursor.getColumnIndex(FeedEntry.COLUMN_NAME_OPTIONA))));
+                mTest.getQuestion(i).getChoiceA().setBitmap(bitmap);
+                LogUtil.i("gfdg", "1111111111");
+            }
             mTest.getQuestion(i)
                     .getChoiceA()
                     .setIsRight(
@@ -154,12 +175,18 @@ public class LookTestResultActivity extends BaseActivity {
                     .setIsRight1(
                             IntToBooleans.toBoolean(mCursor.getInt((mCursor
                                     .getColumnIndex(FeedEntry.COLUMN_NAME_OPTIONATF1)))));
-
-            mTest.getQuestion(i)
-                    .getChoiceB()
-                    .setText(
-                            new String(mCursor.getString(mCursor
-                                    .getColumnIndex(FeedEntry.COLUMN_NAME_OPTIONB))));
+            if (mCursor.getInt(mCursor.getColumnIndex(FeedEntry.COLUMN_NAME_OPTIONBTYPE)) > 0)
+                mTest.getQuestion(i)
+                        .getChoiceB()
+                        .setText(
+                                new String(mCursor.getString(mCursor
+                                        .getColumnIndex(FeedEntry.COLUMN_NAME_OPTIONB))));
+            else {
+                Bitmap bitmap =
+                        ImageToJsonString.getBitmapFromByte(ImageToJsonString.decode(mCursor
+                                .getString(mCursor.getColumnIndex(FeedEntry.COLUMN_NAME_OPTIONB))));
+                mTest.getQuestion(i).getChoiceB().setBitmap(bitmap);
+            }
             mTest.getQuestion(i)
                     .getChoiceB()
                     .setIsRight(
@@ -170,12 +197,18 @@ public class LookTestResultActivity extends BaseActivity {
                     .setIsRight1(
                             IntToBooleans.toBoolean(mCursor.getInt((mCursor
                                     .getColumnIndex(FeedEntry.COLUMN_NAME_OPTIONBTF1)))));
-
-            mTest.getQuestion(i)
-                    .getChoiceC()
-                    .setText(
-                            new String(mCursor.getString(mCursor
-                                    .getColumnIndex(FeedEntry.COLUMN_NAME_OPTIONC))));
+            if (mCursor.getInt(mCursor.getColumnIndex(FeedEntry.COLUMN_NAME_OPTIONCTYPE)) > 0)
+                mTest.getQuestion(i)
+                        .getChoiceC()
+                        .setText(
+                                new String(mCursor.getString(mCursor
+                                        .getColumnIndex(FeedEntry.COLUMN_NAME_OPTIONC))));
+            else {
+                Bitmap bitmap =
+                        ImageToJsonString.getBitmapFromByte(ImageToJsonString.decode(mCursor
+                                .getString(mCursor.getColumnIndex(FeedEntry.COLUMN_NAME_OPTIONC))));
+                mTest.getQuestion(i).getChoiceC().setBitmap(bitmap);
+            }
             mTest.getQuestion(i)
                     .getChoiceC()
                     .setIsRight(
@@ -186,12 +219,18 @@ public class LookTestResultActivity extends BaseActivity {
                     .setIsRight1(
                             IntToBooleans.toBoolean(mCursor.getInt((mCursor
                                     .getColumnIndex(FeedEntry.COLUMN_NAME_OPTIONCTF1)))));
-
-            mTest.getQuestion(i)
-                    .getChoiceD()
-                    .setText(
-                            new String(mCursor.getString(mCursor
-                                    .getColumnIndex(FeedEntry.COLUMN_NAME_OPTIOND))));
+            if (mCursor.getInt(mCursor.getColumnIndex(FeedEntry.COLUMN_NAME_OPTIONCTYPE)) > 0)
+                mTest.getQuestion(i)
+                        .getChoiceD()
+                        .setText(
+                                new String(mCursor.getString(mCursor
+                                        .getColumnIndex(FeedEntry.COLUMN_NAME_OPTIOND))));
+            else {
+                Bitmap bitmap =
+                        ImageToJsonString.getBitmapFromByte(ImageToJsonString.decode(mCursor
+                                .getString(mCursor.getColumnIndex(FeedEntry.COLUMN_NAME_OPTIOND))));
+                mTest.getQuestion(i).getChoiceD().setBitmap(bitmap);
+            }
             mTest.getQuestion(i)
                     .getChoiceD()
                     .setIsRight(
@@ -208,6 +247,7 @@ public class LookTestResultActivity extends BaseActivity {
         }
         dbManager.closeDataDB();
     }
+
     @SuppressWarnings("deprecation")
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @SuppressLint("NewApi")
@@ -232,10 +272,13 @@ public class LookTestResultActivity extends BaseActivity {
         if (mTest.getQuestion(position).getChoiceA().isText()) {
             answerATextView.setText(mTest.getQuestion(position).getChoiceA().getText());
             answerATextView.setBackgroundColor(Color.WHITE);
+            LogUtil.i("esd", "33333333");
         } else {
             answerATextView.setBackground(new BitmapDrawable(mTest.getQuestion(position)
                     .getChoiceA().getBitmap()));
             answerATextView.setText("");
+            LogUtil.i("esd", "444444444");
+
         }
         if (mTest.getQuestion(position).getChoiceB().isText()) {
             answerBTextView.setText(mTest.getQuestion(position).getChoiceB().getText());

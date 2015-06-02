@@ -40,6 +40,7 @@ public class JsonObjectParserUtil {
                 if (jsonObject2.getBoolean("mQuestionType")) {
                     question.getTitle().setText(jsonObject2.getString("mQuestion"));
                 } else {
+                    question.getTitle().setText(jsonObject2.getString("mQuestion"), false);
                     Bitmap bitmap =
                             ImageToJsonString.getBitmapFromByte(ImageToJsonString
                                     .decode(jsonObject2.getString("mQuestion")));
@@ -49,6 +50,7 @@ public class JsonObjectParserUtil {
                     question.getChoiceA().setText(jsonObject2.getString("mOptionA"));
                     question.getChoiceA().setIsRight(jsonObject2.getBoolean("mOptionATf"));
                 } else {
+                    question.getChoiceA().setText(jsonObject2.getString("mOptionA"), false);
                     Bitmap bitmap =
                             ImageToJsonString.getBitmapFromByte(ImageToJsonString
                                     .decode(jsonObject2.getString("mOptionA")));
@@ -59,6 +61,7 @@ public class JsonObjectParserUtil {
                     question.getChoiceB().setText(jsonObject2.getString("mOptionB"));
                     question.getChoiceB().setIsRight(jsonObject2.getBoolean("mOptionBTf"));
                 } else {
+                    question.getChoiceB().setText(jsonObject2.getString("mOptionB"), false);
                     Bitmap bitmap =
                             ImageToJsonString.getBitmapFromByte(ImageToJsonString
                                     .decode(jsonObject2.getString("mOptionB")));
@@ -69,16 +72,19 @@ public class JsonObjectParserUtil {
                     question.getChoiceC().setText(jsonObject2.getString("mOptionC"));
                     question.getChoiceC().setIsRight(jsonObject2.getBoolean("mOptionCTf"));
                 } else {
+                    question.getChoiceC().setText(jsonObject2.getString("mOptionC"), false);
                     Bitmap bitmap =
                             ImageToJsonString.getBitmapFromByte(ImageToJsonString
                                     .decode(jsonObject2.getString("mOptionC")));
                     question.getChoiceC().setBitmap(bitmap);
                     question.getChoiceC().setIsRight(jsonObject2.getBoolean("mOptionCTf"));
+
                 }
                 if (jsonObject2.getBoolean("mOptionDType")) {
                     question.getChoiceD().setText(jsonObject2.getString("mOptionD"));
                     question.getChoiceD().setIsRight(jsonObject2.getBoolean("mOptionDTf"));
                 } else {
+                    question.getChoiceD().setText(jsonObject2.getString("mOptionD"), false);
                     Bitmap bitmap =
                             ImageToJsonString.getBitmapFromByte(ImageToJsonString
                                     .decode(jsonObject2.getString("mOptionD")));

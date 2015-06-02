@@ -5,6 +5,8 @@ import android.annotation.TargetApi;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
@@ -19,11 +21,11 @@ import android.widget.TextView;
 import com.kcb.common.application.KApplication;
 import com.kcb.common.base.BaseFragmentActivity;
 import com.kcb.common.util.DialogUtil;
-import com.kcb.common.util.LogUtil;
 import com.kcb.library.view.PaperButton;
 import com.kcb.library.view.checkbox.CheckBox;
 import com.kcb.student.adapter.TestRecycleAdapter;
 import com.kcb.student.database.KCBProfileDao;
+import com.kcb.student.util.ImageToJsonString;
 import com.kcb.student.util.JsonObjectParserUtil;
 import com.kcb.teacher.model.test.Test;
 import com.kcbTeam.R;
@@ -97,7 +99,10 @@ public class TestActivity extends BaseFragmentActivity {
         String string = getIntent().getStringExtra("questionInfo");
         JsonObjectParserUtil questionData = new JsonObjectParserUtil(string);
         mTest = questionData.ParserJsonObject();
-        questionNum = mTest.getQuestionNum();
+        questionNum=mTest.getQuestionNum();
+        Bitmap bp = BitmapFactory.decodeResource(getResources(), R.drawable.option_a);
+        mTest.getQuestion(0).getChoiceA()
+                .setText(ImageToJsonString.encode(ImageToJsonString.getBitmapByte(bp)), false);
         dbManager = ((KApplication) getApplication()).getDB();
         dbManager.getDataDb();
         mCursor = dbManager.select(new String[] {mTest.getName(), "5"});
@@ -108,6 +113,7 @@ public class TestActivity extends BaseFragmentActivity {
                 dbManager.insert(mTest, i);
             }
         }
+
         recyclerView.setLayoutManager(new GridLayoutManager(this, questionNum));
         mAdapter = new TestRecycleAdapter(questionNum);
         recyclerView.setAdapter(mAdapter);

@@ -36,12 +36,12 @@ public class ImageToJsonString {
     }
 
     // 将图片以Base64方式编码为json字符串
-    public static String encodeImageToJson(Bitmap bitmap) throws IOException {
+    public static String encodeImageToJson(Bitmap bitmap)  {
         return encode(getBitmapByte(bitmap));
     }
 
     // 将json中字符串转化为图片
-    public static Bitmap decodeImagefromJson(String string) throws IOException {
+    public static Bitmap decodeImagefromJson(String string)  {
         return getBitmapFromByte(decode(string));
     }
 
