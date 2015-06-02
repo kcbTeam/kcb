@@ -1,16 +1,13 @@
 package com.kcb.teacher.database.students;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -18,208 +15,213 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.kcb.teacher.database.CommonSQLiteOpenHelper;
 import com.kcb.teacher.database.checkin.CheckInDB;
-import com.kcb.teacher.model.checkin.CheckInResult;
-import com.kcb.teacher.model.checkin.UncheckedStudent;
 import com.kcb.teacher.model.stucentre.Student;
 
 public class StudentDao {
 	private CommonSQLiteOpenHelper mCommonSQLiteOpenHelper;
-    private SQLiteDatabase mSqLiteDatabase;
+	private SQLiteDatabase mSqLiteDatabase;
 
-  
-    public StudentDao(Context context) {
-        mCommonSQLiteOpenHelper = new CommonSQLiteOpenHelper(context);
-        mSqLiteDatabase = mCommonSQLiteOpenHelper.getWritableDatabase();
-    }
+	public StudentDao(Context context) {
+		mCommonSQLiteOpenHelper = new CommonSQLiteOpenHelper(context);
+		mSqLiteDatabase = mCommonSQLiteOpenHelper.getWritableDatabase();
+	}
 
-    /**
-     * 
-     * @title: addCheckInReslt
-     * @description: add a CheckInResult to db
-     * @author: ZQJ
-     * @date: 2015年5月31日 下午8:15:14
-     * @param checkInResult
-     * @throws SQLException
-     * @throws JSONException
-     */
-    public void insert(Student student) throws SQLException, JSONException {
-        mSqLiteDatabase.execSQL("INSERT INTO " + CheckInDB.TABLE_NAME + " VALUES(null,?,?,?,?)",
-                new String[] {student.getName(), student.getId(),
-        		String.valueOf(student.getCheckInRate()),String.valueOf(student.getCorrectRate())});
-    }
+	/**
+	 * 
+	 * @title: addCheckInReslt
+	 * @description: add a CheckInResult to db
+	 * @author: ZQJ
+	 * @date: 2015年5月31日 下午8:15:14
+	 * @param checkInResult
+	 * @throws SQLException
+	 * @throws JSONException
+	 */
+	public void insert(Student student) throws SQLException, JSONException {
+		mSqLiteDatabase.execSQL("INSERT INTO " + CheckInDB.TABLE_NAME
+				+ " VALUES(null,?,?,?,?)", new String[] { student.getName(),
+				student.getId(), String.valueOf(student.getCheckInRate()),
+				String.valueOf(student.getCorrectRate()) });
+	}
 
+	/**
+	 * 
+	 * @title: getCheckInResultByDate
+	 * @description: get CheckInResults from db by Date info
+	 * @author: ZQJ
+	 * @date: 2015年5月31日 下午8:49:27
+	 * @param date
+	 * @return
+	 * @throws ParseException
+	 * @throws JSONException
+	 */
+	public List<Student> getStuCentreById(String stuId) throws ParseException,
+			JSONException {
+		Cursor cursor = mSqLiteDatabase.rawQuery("SELECT * FROM "
+				+ StudentDB.TABLE_NAME + " WHERE " + StudentDB.KEY_NAME + "=?",
+				new String[] { stuId });
+		List<Student> stuCentreList = new ArrayList<Student>();
+		if (cursor.moveToFirst()) {
+			do {
+				String name = cursor.getString(cursor
+						.getColumnIndex(StudentDB.KEY_NAME));
+				String studentId = cursor.getString(cursor
+						.getColumnIndex(StudentDB.KEY_STUID));
 
-    /**
-     * 
-     * @title: getCheckInResultByDate
-     * @description: get CheckInResults from db by Date info
-     * @author: ZQJ
-     * @date: 2015年5月31日 下午8:49:27
-     * @param date
-     * @return
-     * @throws ParseException
-     * @throws JSONException
-     */
-    public List<Student> getStuCentreById(String stuId) throws ParseException,
-            JSONException {
-        Cursor cursor =
-                mSqLiteDatabase.rawQuery("SELECT * FROM " + StudentDB.TABLE_NAME + " WHERE "
-                        + StudentDB.KEY_NAME + "=?", new String[] {stuId});
-        List<Student> stuCentreList = new ArrayList<Student>();
-        if (cursor.moveToFirst()) {
-            do {
-            	String name = cursor.getString(cursor.getColumnIndex(StudentDB.KEY_NAME));
-                String studentId = cursor.getString(cursor.getColumnIndex(StudentDB.KEY_STUID));
-               
-                String checkinRate = cursor.getString(cursor.getColumnIndex(StudentDB.KEY_CHECKINRATE));
-                String correctRate = cursor.getString(cursor.getColumnIndex(StudentDB.KEY_CORRECTRATE));
-                
-                
-                double mcheckinRate = Double.valueOf(checkinRate);
-                double mcorrectRate = Double.valueOf(correctRate);
-                
-                
-                stuCentreList.add(new Student(name, studentId, mcheckinRate,mcorrectRate));
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        return stuCentreList;
-    }
+				String checkinRate = cursor.getString(cursor
+						.getColumnIndex(StudentDB.KEY_CHECKINRATE));
+				String correctRate = cursor.getString(cursor
+						.getColumnIndex(StudentDB.KEY_CORRECTRATE));
 
-//here  ------------------------------------------------
-    /**
-     * 
-     * @title: getAllCheckInResults
-     * @description: get all checkinresult records from db
-     * @author: ZQJ
-     * @date: 2015年5月31日 下午8:37:50
-     * @return
-     * @throws ParseException
-     * @throws JSONException
-     */
-    public List<CheckInResult> getAllCheckInResults() throws ParseException, JSONException {
-        Cursor cursor =
-                mSqLiteDatabase.query(CheckInDB.TABLE_NAME, null, null, null, null, null, null);
-        List<CheckInResult> checkInResultsList = new ArrayList<CheckInResult>();
-        if (cursor.moveToFirst()) {
-            do {
-                String date = cursor.getString(cursor.getColumnIndex(CheckInDB.KEY_DATE));
-                String rate = cursor.getString(cursor.getColumnIndex(CheckInDB.KEY_RATE));
-                String uncheckStudents =
-                        cursor.getString(cursor.getColumnIndex(CheckInDB.KEY_UNCHECK_STUDENTS));
-                Date mDate = formatter.parse(date);
-                double mRate = Double.valueOf(rate);
-                List<UncheckedStudent> uncheckedStudentList =
-                        jsonStringToUncheckedStudent(uncheckStudents);
-                checkInResultsList.add(new CheckInResult(mDate, mRate, uncheckedStudentList));
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        return checkInResultsList;
-    }
+				double mcheckinRate = Double.valueOf(checkinRate);
+				double mcorrectRate = Double.valueOf(correctRate);
 
+				stuCentreList.add(new Student(name, studentId, mcheckinRate,
+						mcorrectRate));
+			} while (cursor.moveToNext());
+		}
+		cursor.close();
+		return stuCentreList;
+	}
 
-    public void deleteCheckInResultsByDate(Date date) {
-        String dateString = formatter.format(date);
-        mSqLiteDatabase.delete(CheckInDB.TABLE_NAME, CheckInDB.KEY_DATE + "=?",
-                new String[] {dateString});
-    }
+	/**
+	 * 
+	 * @title: getAllCheckInResults
+	 * @description: get all checkinresult records from db
+	 * @author: ZQJ
+	 * @date: 2015年5月31日 下午8:37:50
+	 * @return
+	 * @throws ParseException
+	 * @throws JSONException
+	 */
+	public List<Student> getAllStuCentre() throws ParseException, JSONException {
+		Cursor cursor = mSqLiteDatabase.query(StudentDB.TABLE_NAME, null, null,
+				null, null, null, null);
+		List<Student> stuCentreList = new ArrayList<Student>();
+		if (cursor.moveToFirst()) {
+			do {
+				String name = cursor.getString(cursor
+						.getColumnIndex(StudentDB.KEY_NAME));
+				String studentId = cursor.getString(cursor
+						.getColumnIndex(StudentDB.KEY_STUID));
 
-    /**
-     * 
-     * @title: deleteAllCheckInResults
-     * @description: delete All records
-     * @author: ZQJ
-     * @date: 2015年5月31日 下午8:52:58
-     */
-    public void deleteAllCheckInResults() {
-        mSqLiteDatabase.execSQL("DELETE FROM " + CheckInDB.TABLE_NAME);
-    }
+				String checkinRate = cursor.getString(cursor
+						.getColumnIndex(StudentDB.KEY_CHECKINRATE));
+				String correctRate = cursor.getString(cursor
+						.getColumnIndex(StudentDB.KEY_CORRECTRATE));
 
-    public void close() {
-        mSqLiteDatabase.close();
-    }
+				double mcheckinRate = Double.valueOf(checkinRate);
+				double mcorrectRate = Double.valueOf(correctRate);
 
-    /**
-     * 
-     * @title: changeUnCheckStudentsToString
-     * @description: List<UnCheckedStudent> to String
-     * @author: ZQJ
-     * @date: 2015年5月31日 下午8:14:07
-     * @param list
-     * @return
-     * @throws JSONException
-     */
-    private static String changeUnCheckStudentsToString(List<UncheckedStudent> list)
-            throws JSONException {
-        int length = list.size();
-        if (length < 1) {
-            return null;
-        }
-        JSONArray jsonArray = new JSONArray();
-        for (int i = 0; i < length; i++) {
-            jsonArray.put(changeUnCheckStudentsToJsonObject(list.get(i)));
-        }
-        return jsonArray.toString();
-    }
+				stuCentreList.add(new Student(name, studentId, mcheckinRate,
+						mcorrectRate));
+			} while (cursor.moveToNext());
+		}
+		cursor.close();
+		return stuCentreList;
+	}
 
+	public void deleteStuCentreById(String stuId) {
+		mSqLiteDatabase.delete(StudentDB.TABLE_NAME,
+				StudentDB.KEY_STUID + "=?", new String[] { stuId });
+	}
 
-    /**
-     * 
-     * @title: changeUnCheckStudentsToJsonObject
-     * @description: UnCheckedStudent to JSONObject
-     * @author: ZQJ
-     * @date: 2015年5月31日 下午8:14:33
-     * @param uncheckedStudent
-     * @return
-     * @throws JSONException
-     */
-    private static JSONObject changeUnCheckStudentsToJsonObject(UncheckedStudent uncheckedStudent)
-            throws JSONException {
+	/**
+	 * 
+	 * @title: deleteAllCheckInResults
+	 * @description: delete All records
+	 * @author: ZQJ
+	 * @date: 2015年5月31日 下午8:52:58
+	 */
+	public void deleteAllStuCentre() {
+		mSqLiteDatabase.execSQL("DELETE FROM " + StudentDB.TABLE_NAME);
+	}
 
-        if (null == uncheckedStudent) {
-            return null;
-        }
+	public void close() {
+		mSqLiteDatabase.close();
+	}
 
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("mId", uncheckedStudent.getId());
-        jsonObject.put("mName", uncheckedStudent.getName());
-        jsonObject.put("mUnCheckedRate", uncheckedStudent.getUnCheckedRate());
+	/**
+	 * 
+	 * @title: changeUnCheckStudentsToString
+	 * @description: List<UnCheckedStudent> to String
+	 * @author: ZQJ
+	 * @date: 2015年5月31日 下午8:14:07
+	 * @param list
+	 * @return
+	 * @throws JSONException
+	 */
+	private static String changeStuCentreToString(List<Student> list)
+			throws JSONException {
+		int length = list.size();
+		if (length < 1) {
+			return null;
+		}
+		JSONArray jsonArray = new JSONArray();
+		for (int i = 0; i < length; i++) {
+			jsonArray.put(changeStuCentreToJsonObject(list.get(i)));
+		}
+		return jsonArray.toString();
+	}
 
-        return jsonObject;
+	/**
+	 * 
+	 * @title: changeUnCheckStudentsToJsonObject
+	 * @description: UnCheckedStudent to JSONObject
+	 * @author: ZQJ
+	 * @date: 2015年5月31日 下午8:14:33
+	 * @param uncheckedStudent
+	 * @return
+	 * @throws JSONException
+	 */
+	private static JSONObject changeStuCentreToJsonObject(Student student)
+			throws JSONException {
 
-    }
+		if (null == student) {
+			return null;
+		}
 
-    /**
-     * 
-     * @title: jsonStringToUncheckedStudent
-     * @description: jsonString to List<UnCheckedStudent>
-     * @author: ZQJ
-     * @date: 2015年5月31日 下午8:34:09
-     * @param jsonString
-     * @return
-     * @throws JSONException
-     */
-    private static List<UncheckedStudent> jsonStringToUncheckedStudent(String jsonString)
-            throws JSONException {
-        JSONArray jsonArray = new JSONArray(jsonString);
-        int length = jsonArray.length();
-        if (length < 1) {
-            return null;
-        }
-        List<UncheckedStudent> list = new ArrayList<UncheckedStudent>();
-        for (int i = 0; i < length; i++) {
-            JSONObject jsonObject = (JSONObject) jsonArray.get(i);
-            list.add(jsonObjectToUncheckedStudent(jsonObject));
-        }
-        return list;
-    }
+		JSONObject jsonObject = new JSONObject();
 
-    private static UncheckedStudent jsonObjectToUncheckedStudent(JSONObject jsonObject)
-            throws JSONException {
-        String id = jsonObject.getString("mId");
-        String name = jsonObject.getString("mName");
-        double rate = jsonObject.getDouble("mUnCheckedRate");
-        return new UncheckedStudent(id, name, rate);
-    }
+		jsonObject.put("name", student.getName());
+		jsonObject.put("studentId", student.getId());
+		jsonObject.put("checkinRate", student.getCheckInRate());
+		jsonObject.put("correctRate", student.getCorrectRate());
+
+		return jsonObject;
+
+	}
+
+	/**
+	 * 
+	 * @title: jsonStringToUncheckedStudent
+	 * @description: jsonString to List<UnCheckedStudent>
+	 * @author: ZQJ
+	 * @date: 2015年5月31日 下午8:34:09
+	 * @param jsonString
+	 * @return
+	 * @throws JSONException
+	 */
+	private static List<Student> jsonStringToStuCentre(String jsonString)
+			throws JSONException {
+		JSONArray jsonArray = new JSONArray(jsonString);
+		int length = jsonArray.length();
+		if (length < 1) {
+			return null;
+		}
+		List<Student> list = new ArrayList<Student>();
+		for (int i = 0; i < length; i++) {
+			JSONObject jsonObject = (JSONObject) jsonArray.get(i);
+			list.add(jsonObjectToStuCentre(jsonObject));
+		}
+		return list;
+	}
+
+	private static Student jsonObjectToStuCentre(JSONObject jsonObject)
+			throws JSONException {
+		String name = jsonObject.getString("name");
+		String id = jsonObject.getString("studentId");
+		double checkinRate = jsonObject.getDouble("checkinRate");
+		double correctRate = jsonObject.getDouble("correctRate");
+		return new Student(name, id, checkinRate, correctRate);
+	}
 }
