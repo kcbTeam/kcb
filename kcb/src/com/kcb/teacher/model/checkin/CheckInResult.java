@@ -1,6 +1,7 @@
 package com.kcb.teacher.model.checkin;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -23,27 +24,14 @@ public class CheckInResult implements Serializable {
     private double mRate;
     private List<UncheckedStudent> mUnCheckedStudents;
 
-    private CheckInResult() {}
+    private CheckInResult() {
+        mUnCheckedStudents = new ArrayList<UncheckedStudent>();
+    }
 
     public CheckInResult(Date signDate, Double signRate, List<UncheckedStudent> uncheckedStudents) {
         mDate = signDate;
         mRate = signRate;
         mUnCheckedStudents = uncheckedStudents;
-    }
-
-    public CheckInResult from(JSONObject jsonObject) {
-        // TODO jsonObject from server
-        CheckInResult checkInResult = new CheckInResult();
-        checkInResult.mDate = new Date(jsonObject.optLong(""));
-        checkInResult.mRate = jsonObject.optDouble("");
-        JSONArray jsonArray = jsonObject.optJSONArray("");
-        for (int i = 0; i < jsonArray.length(); i++) {
-            try {
-                UncheckedStudent student = UncheckedStudent.from(jsonArray.getJSONObject(i));
-                checkInResult.mUnCheckedStudents.add(student);
-            } catch (JSONException e) {}
-        }
-        return checkInResult;
     }
 
     public Date getDate() {
@@ -56,5 +44,47 @@ public class CheckInResult implements Serializable {
 
     public List<UncheckedStudent> getUnCheckedStudents() {
         return mUnCheckedStudents;
+    }
+
+
+
+    /**
+     * checkinresult to json ,json to checkinresult
+     */
+    public static final String KEY_DATE = "date";
+    public static final String KEY_RATE = "rate";
+    public static final String KEY_UNCHECKSTU = "uncheckstudents";
+
+    public JSONObject toJsonObject() {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put(KEY_DATE, mDate.toString());
+            jsonObject.put(KEY_RATE, mRate);
+            JSONArray jsonArray = new JSONArray();
+            for (int i = 0; i < mUnCheckedStudents.size(); i++) {
+                jsonArray.put(mUnCheckedStudents.get(i).toJsonObject());
+            }
+            jsonObject.put(KEY_UNCHECKSTU, jsonArray);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
+    }
+
+    @SuppressWarnings("deprecation")
+    public static CheckInResult fromJsonObject(JSONObject jsonObject) {
+        CheckInResult checkInResult = new CheckInResult();
+        try {
+            checkInResult.mDate = new Date(jsonObject.optString(KEY_DATE));
+            checkInResult.mRate = jsonObject.optDouble(KEY_RATE);
+            JSONArray jsonArray = jsonObject.optJSONArray(KEY_UNCHECKSTU);
+            for (int i = 0; i < jsonArray.length(); i++) {
+                checkInResult.mUnCheckedStudents.add(UncheckedStudent.fromJsonObject(jsonArray
+                        .getJSONObject(i)));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return checkInResult;
     }
 }

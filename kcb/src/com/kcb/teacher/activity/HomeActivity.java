@@ -1,9 +1,16 @@
 package com.kcb.teacher.activity;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import org.json.JSONException;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.database.SQLException;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -20,9 +27,12 @@ import com.kcb.common.base.BaseFragmentActivity;
 import com.kcb.common.util.DialogUtil;
 import com.kcb.common.util.ToastUtil;
 import com.kcb.library.view.buttonflat.ButtonFlat;
+import com.kcb.teacher.database.checkin.CheckInDao;
 import com.kcb.teacher.fragment.CheckInFragment;
 import com.kcb.teacher.fragment.StuCentreFragment;
 import com.kcb.teacher.fragment.TestFragment;
+import com.kcb.teacher.model.checkin.CheckInResult;
+import com.kcb.teacher.model.checkin.UncheckedStudent;
 import com.kcbTeam.R;
 
 /**
@@ -88,6 +98,18 @@ public class HomeActivity extends BaseFragmentActivity {
     private void setDefaultFragment() {
         mCurrentFragment = new CheckInFragment();
         onClick(checkInButton);
+        // TODO:for test
+        CheckInDao mCheckInDao = new CheckInDao(this);
+        List<UncheckedStudent> list = new ArrayList<UncheckedStudent>();
+        try {
+            mCheckInDao.addCheckInReslt(new CheckInResult(new Date(), 0.8, list));
+            mCheckInDao.addCheckInReslt(new CheckInResult(new Date(), 0.4, list));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        mCheckInDao.close();
     }
 
     @Override

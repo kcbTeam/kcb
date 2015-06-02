@@ -2,6 +2,7 @@ package com.kcb.teacher.model.checkin;
 
 import java.io.Serializable;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -21,14 +22,6 @@ public class UncheckedStudent implements Serializable {
     private String mName;
     private double mUnCheckedRate;
 
-    public static UncheckedStudent from(JSONObject jsonObject) {
-        UncheckedStudent uncheckedStudent = new UncheckedStudent();
-        uncheckedStudent.mId = jsonObject.optString("mId");
-        uncheckedStudent.mName = jsonObject.optString("mName");
-        uncheckedStudent.mUnCheckedRate = jsonObject.optDouble("mUnCheckedRate");
-        return uncheckedStudent;
-    }
-
     public UncheckedStudent() {}
 
     public String getId() {
@@ -42,6 +35,36 @@ public class UncheckedStudent implements Serializable {
     public double getUnCheckedRate() {
         return mUnCheckedRate;
     }
+
+
+    /**
+     * uncheckstudent to json
+     * 
+     */
+    public static final String KEY_ID = "id";
+    public static final String KEY_NAME = "name";
+    public static final String KEY_UNCHECKRATE = "uncheckrate";
+
+    public JSONObject toJsonObject() {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put(KEY_ID, mId);
+            jsonObject.put(KEY_NAME, mName);
+            jsonObject.put(KEY_UNCHECKRATE, mUnCheckedRate);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
+    }
+
+    public static UncheckedStudent fromJsonObject(JSONObject jsonObject) {
+        UncheckedStudent uncheckedStudent = new UncheckedStudent();
+        uncheckedStudent.mId = jsonObject.optString(KEY_ID);
+        uncheckedStudent.mName = jsonObject.optString(KEY_NAME);
+        uncheckedStudent.mUnCheckedRate = jsonObject.optDouble(KEY_UNCHECKRATE);
+        return uncheckedStudent;
+    }
+
 
     // TODO : for test
     public UncheckedStudent(String id, String name, double rate) {

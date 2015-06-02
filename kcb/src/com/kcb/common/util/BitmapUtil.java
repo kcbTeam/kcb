@@ -1,7 +1,9 @@
 package com.kcb.common.util;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.lang.ref.SoftReference;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -24,7 +26,13 @@ public class BitmapUtil {
     public static Bitmap stringToBitmap(String text) {
         byte[] bytes = Base64.decode(text, Base64.DEFAULT);
         if (bytes != null) {
-            Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inSampleSize = 8;
+            ByteArrayInputStream input = new ByteArrayInputStream(bytes);
+            @SuppressWarnings({"unchecked", "rawtypes"})
+            SoftReference softRef =
+                    new SoftReference(BitmapFactory.decodeStream(input, null, options));
+            Bitmap bitmap = (Bitmap) softRef.get();
             return bitmap;
         } else {
             return null;

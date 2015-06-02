@@ -47,7 +47,7 @@ public class TestDao {
             deleteTestByName(test.getName());
         }
         String hasTested = "0";
-        if(test.isTested()){
+        if (test.isTested()) {
             hasTested = "1";
         }
         mSqLiteDatabase.execSQL("INSERT INTO " + TestDB.TABLE_NAME + " VALUES(null,?,?,?,?,?,?)",
@@ -79,6 +79,25 @@ public class TestDao {
         }
         cursor.close();
         return test;
+    }
+
+    /**
+     * 
+     * @title: hasRecorded
+     * @description: check whether the testName is saved
+     * @author: ZQJ
+     * @date: 2015年6月2日 下午8:26:51
+     * @param testName
+     * @return
+     */
+    public boolean hasRecorded(String testName) {
+        Cursor cursor =
+                mSqLiteDatabase.rawQuery("SELECT * FROM " + TestDB.TABLE_NAME + " WHERE "
+                        + TestDB.KEY_NAME + "=?", new String[] {testName});
+        if (cursor.getCount() < 1) {
+            return false;
+        }
+        return true;
     }
 
     /**

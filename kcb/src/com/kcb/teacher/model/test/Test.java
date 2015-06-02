@@ -85,12 +85,12 @@ public class Test implements Serializable {
     public void updateQuestion(int index, Question question) {
         mQuestions.set(index, question);
     }
-    
-    public boolean isTested(){
+
+    public boolean isTested() {
         return mHasTested;
     }
-    
-    public void setTested(boolean isTested){
+
+    public void setTested(boolean isTested) {
         mHasTested = isTested;
     }
 

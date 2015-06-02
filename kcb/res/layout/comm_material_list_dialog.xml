@@ -30,7 +30,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/title"
-            android:layout_marginBottom="48dp"
             android:divider="@color/black_200"
             android:dividerHeight="1dp"
             android:listSelector="@color/white"
