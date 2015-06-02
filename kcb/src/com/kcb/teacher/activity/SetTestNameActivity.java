@@ -86,6 +86,7 @@ public class SetTestNameActivity extends BaseActivity {
 
         @Override
         public void doClick(View v) {
+            // TODO detect if has same name test
             String name = testNameEditText.getText().toString().trim();
             if (TextUtils.isEmpty(name)) {
                 AnimationUtil.shake(testNameEditText);

@@ -17,7 +17,7 @@ public class Question implements Serializable {
 
     private static final long serialVersionUID = 2L;
 
-    private String mId; // from client
+    private int mId; // from client
 
     private QuestionItem mTitleItem;
     private QuestionItem mChoiceAItem;
@@ -25,16 +25,18 @@ public class Question implements Serializable {
     private QuestionItem mChoiceCItem;
     private QuestionItem mChoiceDItem;
 
+    private double mRate;
+
     public Question() {
         mTitleItem = new QuestionItem();
         mChoiceAItem = new QuestionItem();
-        mChoiceAItem.setId("1");
+        mChoiceAItem.setId(0);
         mChoiceBItem = new QuestionItem();
-        mChoiceBItem.setId("2");
+        mChoiceBItem.setId(1);
         mChoiceCItem = new QuestionItem();
-        mChoiceCItem.setId("3");
+        mChoiceCItem.setId(2);
         mChoiceDItem = new QuestionItem();
-        mChoiceDItem.setId("4");
+        mChoiceDItem.setId(3);
     }
 
     public static Question clone(Question object) {
@@ -47,11 +49,11 @@ public class Question implements Serializable {
         return question;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         mId = id;
     }
 
-    public String getId() {
+    public int getId() {
         return mId;
     }
 
@@ -89,25 +91,6 @@ public class Question implements Serializable {
                 + mChoiceDItem.getText();
     }
 
-    public String getAnswerString() {
-        String anString = "答案：";
-        if (mChoiceAItem.isRight()) {
-            anString += "A、";
-        }
-        if (mChoiceBItem.isRight()) {
-            anString += "B、";
-        }
-        if (mChoiceCItem.isRight()) {
-            anString += "C、";
-        }
-        if (mChoiceDItem.isRight()) {
-            anString += "D、";
-        }
-
-        return anString.substring(0, anString.length() - 1);
-
-    }
-
     public boolean isAllString() {
         if (mTitleItem.isText() && mChoiceAItem.isText() && mChoiceBItem.isText()
                 && mChoiceCItem.isText() && mChoiceDItem.isText()) return true;
@@ -124,27 +107,46 @@ public class Question implements Serializable {
                         .isRight());
     }
 
-    public void changeQuestionToSerializable() {
-        mTitleItem.changeBitmapToBytes();
-        mChoiceAItem.changeBitmapToBytes();
-        mChoiceBItem.changeBitmapToBytes();
-        mChoiceCItem.changeBitmapToBytes();
-        mChoiceDItem.changeBitmapToBytes();
-    }
+    /**
+     * question to json, json to question
+     */
+    public static final String KEY_ID = "id";
+    public static final String KEY_TITLE = "title";
+    public static final String KEY_CHOICE = "choice";
+    public static final String KEY_RATE = "rate";
 
     public JSONObject toJsonObject() {
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("id", mId);
-            jsonObject.put("title", mTitleItem.toJsonObject());
-            
+            jsonObject.put(KEY_ID, mId);
+            jsonObject.put(KEY_TITLE, mTitleItem.toJsonObject());
+
             JSONArray choiceArray = new JSONArray();
             choiceArray.put(mChoiceAItem.toJsonObject());
             choiceArray.put(mChoiceBItem.toJsonObject());
             choiceArray.put(mChoiceCItem.toJsonObject());
             choiceArray.put(mChoiceDItem.toJsonObject());
-            jsonObject.put("choice", choiceArray);
+
+            jsonObject.put(KEY_CHOICE, choiceArray);
+            jsonObject.put(KEY_RATE, mRate);
         } catch (JSONException e) {}
         return jsonObject;
+    }
+
+    public static Question fromJson(JSONObject jsonObject) {
+        Question question = new Question();
+        question.mId = jsonObject.optInt(KEY_ID);
+        question.mTitleItem = QuestionItem.fromJsonObject(jsonObject.optJSONObject(KEY_TITLE));
+
+        JSONArray choiceArray = jsonObject.optJSONArray(KEY_CHOICE);
+        try {
+            question.mChoiceAItem = QuestionItem.fromJsonObject(choiceArray.getJSONObject(0));
+            question.mChoiceBItem = QuestionItem.fromJsonObject(choiceArray.getJSONObject(1));
+            question.mChoiceCItem = QuestionItem.fromJsonObject(choiceArray.getJSONObject(2));
+            question.mChoiceDItem = QuestionItem.fromJsonObject(choiceArray.getJSONObject(3));
+        } catch (JSONException e) {}
+
+        question.mRate = jsonObject.optDouble(KEY_RATE);
+        return question;
     }
 }

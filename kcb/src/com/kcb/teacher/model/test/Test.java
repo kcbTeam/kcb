@@ -15,9 +15,14 @@ public class Test implements Serializable {
 
     private String mId; // from server when start test
     private String mName; // test name
-    private int mTime; // minute
-    private List<Question> mQuestions;
+    private int mTime = 5; // default test time is 5 minutes
     private Date mDate; // test date, from server when start test
+    private boolean mHasTested; // true if teacher start test
+    private List<Question> mQuestions;
+
+    public Test() {
+        mQuestions = new ArrayList<Question>();
+    }
 
     public Test(String name, int num) {
         mName = name;
@@ -81,6 +86,15 @@ public class Test implements Serializable {
         mQuestions.set(index, question);
     }
 
+    /**
+     * set before start test, because use may add/delete question before start
+     */
+    public void setQuestionId() {
+        for (int i = 0; i < mQuestions.size(); i++) {
+            mQuestions.get(i).setId(i);
+        }
+    }
+
     public int getQuestionNum() {
         return mQuestions.size();
     }
@@ -103,27 +117,52 @@ public class Test implements Serializable {
         return -1;
     }
 
-    public void changeTestToSerializable() {
-        if (null == mQuestions || mQuestions.size() == 0) {
-            return;
-        }
-        for (int i = 0; i < mQuestions.size(); i++) {
-            mQuestions.get(i).changeQuestionToSerializable();
-        }
-    }
+    /**
+     * test to json, json to test
+     */
+    private static final String KEY_ID = "id";
+    private static final String KEY_NAME = "name";
+    private static final String KEY_TIME = "time";
+    private static final String KEY_DATE = "date";
+    private static final String KEY_HASTESTED = "hastested";
+    private static final String KEY_QUESTION = "question";
 
     public JSONObject toJsonObject() {
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("name", mName);
-            jsonObject.put("time", mTime);
+            jsonObject.put(KEY_ID, mId);
+            jsonObject.put(KEY_NAME, mName);
+            jsonObject.put(KEY_TIME, mTime);
+            jsonObject.put(KEY_DATE, mDate.toString());
+            jsonObject.put(KEY_HASTESTED, mHasTested);
 
             JSONArray questionArray = new JSONArray();
             for (int i = 0; i < mQuestions.size(); i++) {
+                mQuestions.get(i).setId(i);
                 questionArray.put(mQuestions.get(i).toJsonObject());
             }
-            jsonObject.put("questions", questionArray);
+
+            jsonObject.put(KEY_QUESTION, questionArray);
         } catch (JSONException e) {}
         return jsonObject;
+    }
+
+    @SuppressWarnings("deprecation")
+    public static Test fromJsonObject(JSONObject jsonObject) {
+        Test test = new Test();
+        test.mId = jsonObject.optString(KEY_ID);
+        test.mName = jsonObject.optString(KEY_NAME);
+        test.mTime = jsonObject.optInt(KEY_TIME);
+        test.mDate = new Date(jsonObject.optString(KEY_DATE));
+        test.mHasTested = jsonObject.optBoolean(KEY_HASTESTED);
+
+        JSONArray questionArray = jsonObject.optJSONArray(KEY_QUESTION);
+        for (int i = 0; i < questionArray.length(); i++) {
+            try {
+                Question question = Question.fromJson(questionArray.getJSONObject(i));
+                test.mQuestions.add(question);
+            } catch (JSONException e) {}
+        }
+        return test;
     }
 }
