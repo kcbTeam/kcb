@@ -14,10 +14,8 @@ import org.json.JSONObject;
  */
 public class UncheckedStudent implements Serializable {
 
-    /**
-     * 
-     */
     private static final long serialVersionUID = 6L;
+
     private String mId;
     private String mName;
     private double mUnCheckedRate;
@@ -36,14 +34,13 @@ public class UncheckedStudent implements Serializable {
         return mUnCheckedRate;
     }
 
-
     /**
-     * uncheckstudent to json
+     * uncheckedstudent to json, json to uncheckedstudent
      * 
      */
     public static final String KEY_ID = "id";
     public static final String KEY_NAME = "name";
-    public static final String KEY_UNCHECKRATE = "uncheckrate";
+    public static final String KEY_UNCHECKRATE = "uncheckedrate";
 
     public JSONObject toJsonObject() {
         JSONObject jsonObject = new JSONObject();
@@ -58,18 +55,10 @@ public class UncheckedStudent implements Serializable {
     }
 
     public static UncheckedStudent fromJsonObject(JSONObject jsonObject) {
-        UncheckedStudent uncheckedStudent = new UncheckedStudent();
-        uncheckedStudent.mId = jsonObject.optString(KEY_ID);
-        uncheckedStudent.mName = jsonObject.optString(KEY_NAME);
-        uncheckedStudent.mUnCheckedRate = jsonObject.optDouble(KEY_UNCHECKRATE);
-        return uncheckedStudent;
-    }
-
-
-    // TODO : for test
-    public UncheckedStudent(String id, String name, double rate) {
-        mId = id;
-        mName = name;
-        mUnCheckedRate = rate;
+        UncheckedStudent student = new UncheckedStudent();
+        student.mId = jsonObject.optString(KEY_ID);
+        student.mName = jsonObject.optString(KEY_NAME);
+        student.mUnCheckedRate = jsonObject.optDouble(KEY_UNCHECKRATE);
+        return student;
     }
 }

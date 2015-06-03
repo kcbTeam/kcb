@@ -15,6 +15,7 @@ import android.widget.ListView;
 
 import com.kcb.common.base.BaseActivity;
 import com.kcb.library.view.buttonflat.ButtonFlat;
+import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
 import com.kcb.teacher.adapter.LookCheckInAdapter;
 import com.kcb.teacher.database.checkin.CheckInDao;
 import com.kcb.teacher.model.checkin.CheckInResult;
@@ -30,12 +31,13 @@ import com.kcbTeam.R;
 public class LookCheckInActivity extends BaseActivity implements OnItemClickListener {
 
     private ButtonFlat backButton;
+    private ButtonFlat refreshButton;
+    private SmoothProgressBar progressBar;
+
     private ListView listView;
 
     private LookCheckInAdapter mAdapter;
-    private List<CheckInResult> mCheckInResults;
 
-    private CheckInDao mCheckInDao;
     private GetCheckInResultsTask mGetCheckInResultsTask;
 
     @Override
@@ -51,6 +53,9 @@ public class LookCheckInActivity extends BaseActivity implements OnItemClickList
     protected void initView() {
         backButton = (ButtonFlat) findViewById(R.id.button_back);
         backButton.setOnClickListener(this);
+        refreshButton = (ButtonFlat) findViewById(R.id.button_refresh);
+        refreshButton.setOnClickListener(this);
+        progressBar = (SmoothProgressBar) findViewById(R.id.progressbar_refresh);
 
         listView = (ListView) findViewById(R.id.listview);
         listView.setOnItemClickListener(this);
@@ -58,9 +63,6 @@ public class LookCheckInActivity extends BaseActivity implements OnItemClickList
 
     @Override
     protected void initData() {
-        mCheckInDao = new CheckInDao(this);
-        mCheckInResults = new ArrayList<CheckInResult>();
-
         mGetCheckInResultsTask = new GetCheckInResultsTask();
         mGetCheckInResultsTask.execute();
     }
@@ -70,6 +72,9 @@ public class LookCheckInActivity extends BaseActivity implements OnItemClickList
         switch (v.getId()) {
             case R.id.button_back:
                 finish();
+                break;
+            case R.id.button_refresh:
+                refresh();
                 break;
             default:
                 break;
@@ -81,31 +86,40 @@ public class LookCheckInActivity extends BaseActivity implements OnItemClickList
         LookCheckInDetailActivity.start(LookCheckInActivity.this, mAdapter.getItem(position));
     }
 
-    private class GetCheckInResultsTask extends AsyncTask<Integer, Integer, Integer> {
+    private class GetCheckInResultsTask extends AsyncTask<Integer, Integer, List<CheckInResult>> {
 
         @Override
-        protected Integer doInBackground(Integer... params) {
+        protected List<CheckInResult> doInBackground(Integer... params) {
+            List<CheckInResult> results = new ArrayList<CheckInResult>();
             try {
-                mCheckInResults = mCheckInDao.getAllCheckInResults();
+                CheckInDao checkInDao = new CheckInDao(LookCheckInActivity.this);
+                results = checkInDao.getAllCheckInResults();
+                checkInDao.close();
             } catch (ParseException e) {
                 e.printStackTrace();
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            return null;
+            return results;
         }
 
         @Override
-        protected void onPostExecute(Integer result) {
+        protected void onPostExecute(List<CheckInResult> result) {
             super.onPostExecute(result);
-            mAdapter = new LookCheckInAdapter(LookCheckInActivity.this, mCheckInResults);
+            mAdapter = new LookCheckInAdapter(LookCheckInActivity.this, result);
             listView.setAdapter(mAdapter);
         }
+    }
+
+    private void refresh() {
+        if (progressBar.getVisibility() == View.VISIBLE) {
+            return;
+        }
+        progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mCheckInDao.close();
     }
 }

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.kcb.library.view.buttonflat.ButtonFlat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/button_refresh"
+    style="@style/common_title_icon_layout_right"
+    tools:ignore="contentDescription" >
+
+    <ImageView
+        style="@style/common_title_icon_right"
+        android:src="@drawable/ic_refresh_black_24dp" >
+    </ImageView>
+
+</com.kcb.library.view.buttonflat.ButtonFlat>
