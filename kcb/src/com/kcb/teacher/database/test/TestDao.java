@@ -38,7 +38,7 @@ public class TestDao {
      * @throws IOException
      */
     @SuppressLint("SimpleDateFormat")
-    public void add(Test test) throws SQLException, JSONException, IOException {
+    public void addTest(Test test) throws SQLException, JSONException, IOException {
         if (null != test) {
             deleteTestByName(test.getName());
         }

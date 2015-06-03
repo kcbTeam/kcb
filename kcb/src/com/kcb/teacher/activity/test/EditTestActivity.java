@@ -623,7 +623,7 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
         ToastUtil.toast("已保存");
         try {
             mTestDao = new TestDao(this);
-            mTestDao.add(sTest);
+            mTestDao.addTest(sTest);
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (JSONException e) {
