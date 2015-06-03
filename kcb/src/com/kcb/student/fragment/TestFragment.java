@@ -11,8 +11,7 @@ import com.kcb.common.base.BaseFragment;
 import com.kcb.common.listener.DelayClickListener;
 import com.kcb.library.view.PaperButton;
 import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
-import com.kcb.student.activity.TestActivity;
-import com.kcb.student.activity.TestResultActivity;
+import com.kcb.student.activity.LookTestActivity;
 import com.kcbTeam.R;
 
 /**
@@ -22,23 +21,12 @@ import com.kcbTeam.R;
  * @date: 2015年4月23日 上午10:17:44
  */
 public class TestFragment extends BaseFragment {
-    private static final String TAG = TestFragment.class.getName();
-    private PaperButton startTestButton;
-    private PaperButton lookTestButton;
-    private SmoothProgressBar loginProgressBar;
-    public static String string =
-            new String(
-                    "{\"mTestName\":\"微积分\",\"mTestDate\":\"2015.05.23\",\"mTestTime\":5,"
-                            + "\"QuestionList\":[{\"mQuestion\":\"这是第一题选择题\",\"mQuestionType\":\"true\","
-                            + "\"mOptionA\":\"答案1\",\"mOptionAType\":\"true\",\"mOptionB\":\"答案2\",\"mOptionBType\":\"true\","
-                            + "\"mOptionC\":\"答案3\",\"mOptionCType\":\"true\",\"mOptionD\":\"答案4\",\"mOptionDType\":\"true\",\"mAnswers\":4"
-                            + "},{\"mQuestion\":\"这是第二道选择题的内容，请仔细作答\",\"mQuestionType\":\"true\",\"mOptionA\":\"答案1\","
-                            + "\"mOptionAType\":\"true\",\"mOptionB\":\"答案2\",\"mOptionBType\":\"true\",\"mOptionC\":\"答案3\","
-                            + "\"mOptionCType\":\"true\",\"mOptionD\":\"答案4\",\"mOptionDType\":\"true\",\"mAnswers\":4},{\"mQuestion\":\"这是第三道选择题的内容，请仔细作答\","
-                            + "\"mQuestionType\":\"true\",\"mOptionA\":\"答案1\",\"mOptionAType\":\"true\",\"mOptionB\":\"答案2\","
-                            + "\"mOptionBType\":\"true\",\"mOptionC\":\"答案3\",\"mOptionCType\":\"true\",\"mOptionD\":\"答案4\","
-                            + "\"mOptionDType\":\"true\",\"mAnswers\":4}]}");
 
+    private static final String TAG = TestFragment.class.getName();
+
+    private PaperButton startTestButton;
+    private PaperButton lookTestResultButton;
+    private SmoothProgressBar startProgressBar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -48,6 +36,7 @@ public class TestFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         initView();
     }
 
@@ -56,9 +45,9 @@ public class TestFragment extends BaseFragment {
         View view = getView();
         startTestButton = (PaperButton) view.findViewById(R.id.button_start_test);
         startTestButton.setOnClickListener(mClickListener);
-        lookTestButton = (PaperButton) view.findViewById(R.id.button_look_test);
-        lookTestButton.setOnClickListener(mClickListener);
-        loginProgressBar = (SmoothProgressBar) view.findViewById(R.id.progressbar_begintest);
+        lookTestResultButton = (PaperButton) view.findViewById(R.id.button_look_test);
+        lookTestResultButton.setOnClickListener(mClickListener);
+        startProgressBar = (SmoothProgressBar) view.findViewById(R.id.progressbar_begintest);
     }
 
     @Override
@@ -69,43 +58,25 @@ public class TestFragment extends BaseFragment {
 
         @Override
         public void doClick(View v) {
-            Intent intent;
-            if (v == startTestButton) {
-                if (loginProgressBar.getVisibility() == View.VISIBLE) {
-                    return;
-                }
-                Intent intent1 = new Intent(getActivity(), TestActivity.class);
-                intent1.putExtra("questionInfo", string);
-                startActivity(intent1);
-                // loginProgressBar.setVisibility(View.VISIBLE);
-                // String url = "http://m.weather.com.cn/data/101201401.html";
-                // JsonObjectRequest objRequest =
-                // new JsonObjectRequest(Method.GET, url, new Response.Listener<JSONObject>() {
-                // @Override
-                // public void onResponse(JSONObject obj) {
-                // loginProgressBar.hide(getActivity());
-                // ToastUtil.toast("成功获取天气网站的Json信息");
-                // Intent intent = new Intent(getActivity(), TestActivity.class);
-                // intent.putExtra("questionInfo", string);
-                // startActivity(intent);
-                // }
-                // }, new Response.ErrorListener() {
-                // @Override
-                // public void onErrorResponse(VolleyError error) {
-                // loginProgressBar.hide(getActivity());
-                // error.getMessage();
-                // }
-                // }) {
-                // @Override
-                // public com.android.volley.Request.Priority getPriority() {
-                // return Priority.HIGH;
-                // }
-                // };
-                // RequestUtil.getInstance().addToRequestQueue(objRequest, TAG);
-            } else if (v == lookTestButton) {
-                intent = new Intent(getActivity(), TestResultActivity.class);
-                startActivity(intent);
+            switch (v.getId()) {
+                case R.id.button_start_test:
+                    startTest();
+                    break;
+                case R.id.button_look_test:
+                    lookTestResult();
+                    break;
+                default:
+                    break;
             }
         }
     };
+
+    private void startTest() {
+
+    }
+
+    private void lookTestResult() {
+        Intent intent = new Intent(getActivity(), LookTestActivity.class);
+        startActivity(intent);
+    }
 }

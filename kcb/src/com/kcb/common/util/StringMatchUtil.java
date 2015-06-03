@@ -1,4 +1,4 @@
-package com.kcb.teacher.util;
+package com.kcb.common.util;
 
 import net.sourceforge.pinyin4j.PinyinHelper;
 import net.sourceforge.pinyin4j.format.HanyuPinyinCaseType;
@@ -7,10 +7,7 @@ import net.sourceforge.pinyin4j.format.HanyuPinyinToneType;
 import net.sourceforge.pinyin4j.format.HanyuPinyinVCharType;
 import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
 
-public class NameUtils {
-
-    @SuppressWarnings("unused")
-    private static final String TAG = "NameUtils";
+public class StringMatchUtil {
 
     @SuppressWarnings("deprecation")
     // return zhangqinjie
@@ -19,7 +16,6 @@ public class NameUtils {
         pyFormat.setCaseType(HanyuPinyinCaseType.LOWERCASE);
         pyFormat.setToneType(HanyuPinyinToneType.WITHOUT_TONE);
         pyFormat.setVCharType(HanyuPinyinVCharType.WITH_V);
-
         return PinyinHelper.toHanyuPinyinString(name, pyFormat, "");
     }
 
@@ -39,18 +35,17 @@ public class NameUtils {
                 || name.startsWith(compare) || name.toUpperCase().startsWith(compare)) {
             return true;
         }
-        if (NameUtils.getEnName(name).startsWith(compare)
-                || NameUtils.getEnName(name).toUpperCase().startsWith(compare)
-                || NameUtils.getNameAbbr(name).startsWith(compare)
-                || NameUtils.getNameAbbr(name).toUpperCase().startsWith(compare)) {
+        if (StringMatchUtil.getEnName(name).startsWith(compare)
+                || StringMatchUtil.getEnName(name).toUpperCase().startsWith(compare)
+                || StringMatchUtil.getNameAbbr(name).startsWith(compare)
+                || StringMatchUtil.getNameAbbr(name).toUpperCase().startsWith(compare)) {
             return true;
         }
         for (int i = 0; i < name.length(); i++) {
             if (String.valueOf(name.charAt(i)).startsWith(compare)
-                    || NameUtils.getEnName(String.valueOf(name.charAt(i))).startsWith(compare)) {
+                    || StringMatchUtil.getEnName(String.valueOf(name.charAt(i))).startsWith(compare)) {
                 return true;
             }
-
         }
         return false;
     }
