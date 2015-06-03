@@ -41,7 +41,7 @@ public class StartCheckInAdapter
     public CheckinViewHolder onCreateViewHolder(ViewGroup viewGroup, int position) {
         View view =
                 LayoutInflater.from(viewGroup.getContext()).inflate(
-                        R.layout.stu_view_checkin_recycler, null);
+                        R.layout.stu_recycleritem_checkin, null);
         CheckinViewHolder viewHolder = new CheckinViewHolder(view);
         return viewHolder;
     }

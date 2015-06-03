@@ -16,7 +16,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
-
 import com.kcb.common.base.BaseFragmentActivity;
 import com.kcb.common.util.DialogUtil;
 import com.kcb.library.view.PaperButton;
@@ -61,6 +60,7 @@ public class TestActivity extends BaseFragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.stu_activity_test);
+
         initView();
         initData();
     }
