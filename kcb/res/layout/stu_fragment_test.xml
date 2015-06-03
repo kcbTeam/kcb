@@ -14,7 +14,7 @@
         widget:paper_text_size="@dimen/text_size_medium" />
 
     <com.kcb.library.view.smoothprogressbar.SmoothProgressBar
-        android:id="@+id/progressbar_begintest"
+        android:id="@+id/progressbar_start"
         style="@style/SmoothProgressBar"
         android:layout_alignBottom="@id/button_start_test"
         android:layout_alignLeft="@id/button_start_test"

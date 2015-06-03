@@ -207,7 +207,7 @@ public class StartCheckInActivity extends BaseActivity {
 
                         @Override
                         public void onResponse(String response) {
-                            // TODO save checkin rate
+                            // TODO save checkin rate in db
                             ToastUtil.toast(R.string.checkin_success);
                             finish();
                         }
@@ -216,7 +216,6 @@ public class StartCheckInActivity extends BaseActivity {
                         @Override
                         public void onErrorResponse(VolleyError error) {
                             progressBar.hide(StartCheckInActivity.this);
-                            // TODO add has signed response
                             if (error.networkResponse.statusCode == 400) {
                                 ToastUtil.toast(R.string.num_error);
                                 clearNum();

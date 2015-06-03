@@ -1,26 +1,21 @@
 package com.kcb.student.activity.test;
 
-import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
-import android.graphics.Color;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.CountDownTimer;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.TextView;
 
-import com.kcb.common.base.BaseFragmentActivity;
-import com.kcb.common.util.DialogUtil;
-import com.kcb.library.view.PaperButton;
+import com.kcb.common.base.BaseActivity;
+import com.kcb.common.util.ToastUtil;
+import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.library.view.checkbox.CheckBox;
-import com.kcb.student.adapter.TestRecycleAdapter;
-import com.kcb.student.util.JsonObjectParserUtil;
+import com.kcb.teacher.activity.test.EditTestActivity;
+import com.kcb.teacher.database.test.TestDao;
+import com.kcb.teacher.model.test.Question;
+import com.kcb.teacher.model.test.QuestionItem;
 import com.kcb.teacher.model.test.Test;
 import com.kcbTeam.R;
 
@@ -31,286 +26,241 @@ import com.kcbTeam.R;
  * @author: Tao Li
  * @date: 2015-5-17 上午10:53:44
  */
-public class TestActivity extends BaseFragmentActivity {
+public class TestActivity extends BaseActivity {
 
+    private TextView testNameTextView;
     private TextView timeTextView;
+
+    private TextView inputIndexTextView;
+
     private TextView titleTextView;
-    private TextView questionTextView;
-    private TextView answerATextView;
-    private TextView answerBTextView;
-    private TextView answerCTextView;
-    private TextView answerDTextView;
-    private PaperButton preButton;
-    private PaperButton nextButton;
-    private CheckBox checkboxA;
-    private CheckBox checkboxB;
-    private CheckBox checkboxC;
-    private CheckBox checkboxD;
-    private Test mTest;
-    private fiveCountDownTimer timeCountDown;
-    private RecyclerView recyclerView;
-    private TestRecycleAdapter mAdapter;
-    private int currentPageIndex;
-    private int questionNum;
+    private TextView choiceATextView;
+    private TextView choiceBTextView;
+    private TextView choiceCTextView;
+    private TextView choiceDTextView;
+
+    private CheckBox checkBoxA;
+    private CheckBox checkBoxB;
+    private CheckBox checkBoxC;
+    private CheckBox checkBoxD;
+
+    private ButtonFlat lastButton;
+    private ButtonFlat nextButton;
+    private ButtonFlat addButton;
+
+    // tag title/A/B/C/D;
+    private final int FLAG_TITLE = 1;
+    private final int FLAG_A = 2;
+    private final int FALG_B = 3;
+    private final int FLAG_C = 4;
+    private final int FLAG_D = 5;
+
+    // test and current question index;
+    public static Test sTest;
+    private int mCurrentQuestionIndex;
+
+    // when click last/next, show a mTempQuestion, used for compare it is changed or not;
+    private Question mTempQuestion;
+
+    private TestDao mTestDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.stu_activity_test);
+
         initView();
         initData();
     }
 
     @Override
     protected void initView() {
-        titleTextView = (TextView) findViewById(R.id.textview_testtitle);
-        questionTextView = (TextView) findViewById(R.id.textview_choice_question);
-        answerATextView = (TextView) findViewById(R.id.textview_choice_a);
-        answerBTextView = (TextView) findViewById(R.id.textview_choice_b);
-        answerCTextView = (TextView) findViewById(R.id.textview_choice_c);
-        answerDTextView = (TextView) findViewById(R.id.textview_choice_d);
-        checkboxA = (CheckBox) findViewById(R.id.checkbox_a);
-        checkboxB = (CheckBox) findViewById(R.id.checkbox_b);
-        checkboxC = (CheckBox) findViewById(R.id.checkbox_c);
-        checkboxD = (CheckBox) findViewById(R.id.checkbox_d);
-        preButton = (PaperButton) findViewById(R.id.button_previous);
-        nextButton = (PaperButton) findViewById(R.id.button_next);
-        recyclerView = (RecyclerView) findViewById(R.id.my_recyclerview1);
-        preButton.setOnClickListener(this);
-        nextButton.setOnClickListener(this);
-    }
+        testNameTextView = (TextView) findViewById(R.id.textview_testname);
+        timeTextView = (TextView) findViewById(R.id.textview_time);
 
-    public void setTimeCounterDown(long totalTime) {
-        timeTextView = (TextView) findViewById(R.id.textview_timecounter);
-        timeCountDown = new fiveCountDownTimer(totalTime, 1000);
-        timeCountDown.start();
+        inputIndexTextView = (TextView) findViewById(R.id.textview_input_problem_tip);
+
+        titleTextView = (TextView) findViewById(R.id.textview_title);
+        choiceATextView = (TextView) findViewById(R.id.textview_A);
+        choiceBTextView = (TextView) findViewById(R.id.textview_B);
+        choiceCTextView = (TextView) findViewById(R.id.textview_C);
+        choiceDTextView = (TextView) findViewById(R.id.textview_D);
+
+        lastButton = (ButtonFlat) findViewById(R.id.button_last);
+        lastButton.setOnClickListener(this);
+        nextButton = (ButtonFlat) findViewById(R.id.button_next);
+        nextButton.setOnClickListener(this);
+        addButton = (ButtonFlat) findViewById(R.id.button_add);
+        addButton.setOnClickListener(this);
+
+        checkBoxA = (CheckBox) findViewById(R.id.checkBox_A);
+        checkBoxB = (CheckBox) findViewById(R.id.checkBox_B);
+        checkBoxC = (CheckBox) findViewById(R.id.checkBox_C);
+        checkBoxD = (CheckBox) findViewById(R.id.checkBox_D);
     }
 
     @Override
     protected void initData() {
-        String string = getIntent().getStringExtra("questionInfo");
-        JsonObjectParserUtil questionData = new JsonObjectParserUtil(string);
-        mTest = questionData.ParserJsonObject();
-        // JSONObject jsonObject = JSONObject.fromObject(mTest);
-        // LogUtil.i("efvgfr", jsonObject.toString());
-        questionNum = mTest.getQuestionNum();
-        recyclerView.setLayoutManager(new GridLayoutManager(this, questionNum));
-        mAdapter = new TestRecycleAdapter(questionNum);
-        recyclerView.setAdapter(mAdapter);
-        if (questionNum == 1) nextButton.setText("已完成");
-        titleTextView.setText(mTest.getName());
-        showCurrentQuestion(0);
-        setTimeCounterDown(mTest.getTime() * 60000);
+        testNameTextView.setText(sTest.getName() + "（共" + sTest.getQuestionNum() + "题）");
+        //showQuestion();
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.button_previous:
-                clickPreButton();
+            case R.id.button_last:
+                lastQuestion();
                 break;
             case R.id.button_next:
-                clickNextButton();
+                nextQuesion();
+                break;
+            case R.id.button_add:
+                break;
+            case R.id.button_delete:
                 break;
             default:
                 break;
         }
     }
 
-    public void clickPreButton() {
-        if (currentPageIndex > 0) {
-            currentPageIndex--;
-            mAdapter.setCurrentIndex(currentPageIndex);
-            if (currentPageIndex == questionNum - 1) {
-                nextButton.setText("已完成");
-            } else {
-                nextButton.setText("下一题");
+    private void lastQuestion() {
+        if (mCurrentQuestionIndex > 0) {
+            saveQuestion();
+            if (!getCurrentQuestion().equal(mTempQuestion)) {
+                ToastUtil.toast(String.format(getResources().getString(R.string.format_edit_save),
+                        1 + mCurrentQuestionIndex));
             }
-            getCheckBoxsAnswer(currentPageIndex + 1);
-            showCurrentQuestion(currentPageIndex);
-            setCheckBoxsAnswer(currentPageIndex);
+            mCurrentQuestionIndex--;
+            showQuestion();
         }
     }
 
-    public void clickNextButton() {
-        if (currentPageIndex < questionNum - 1) {
-            currentPageIndex++;
-            mAdapter.setCurrentIndex(currentPageIndex);
-            if (currentPageIndex == questionNum - 1)
-                nextButton.setText("已完成");
-            else {
-                nextButton.setText("下一题");
-            }
-            preButton.setText("上一题");
-            getCheckBoxsAnswer(currentPageIndex - 1);
-            showCurrentQuestion(currentPageIndex);
-            setCheckBoxsAnswer(currentPageIndex);
-        } else {
-            getCheckBoxsAnswer(currentPageIndex);
-            String string;
-            int i = collectAnsweredNum();
-            if (i < questionNum) {
-                string = new String("已完成了" + i + "题，还有" + (questionNum - i) + "题未完成，是否提交？");
-            } else {
-                string = new String("已全完成，是否提交？");
-            }
-            DialogUtil.showNormalDialog(this, R.string.tip, string, R.string.sure,
-                    new OnClickListener() {
-
-                        @Override
-                        public void onClick(View v) {
-                            finish();
-                        }
-                    }, R.string.cancel, null);
+    private void nextQuesion() {
+        saveQuestion();
+        if (!getCurrentQuestion().equal(mTempQuestion)) {
+            ToastUtil.toast(String.format(getResources().getString(R.string.format_edit_save),
+                    1 + mCurrentQuestionIndex));
         }
+        mCurrentQuestionIndex++;
+        showQuestion();
     }
 
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-    @SuppressLint("NewApi")
+    private void showQuestion() {
+        mTempQuestion = Question.clone(getCurrentQuestion());
+
+        showQuestionNum();
+
+        Question question = getCurrentQuestion();
+
+        showQuestionItem(FLAG_TITLE, question.getTitle());
+        showQuestionItem(FLAG_A, question.getChoiceA());
+        showQuestionItem(FALG_B, question.getChoiceB());
+        showQuestionItem(FLAG_C, question.getChoiceC());
+        showQuestionItem(FLAG_D, question.getChoiceD());
+
+        checkBoxA.setChecked(question.getChoiceA().isRight());
+        checkBoxB.setChecked(question.getChoiceB().isRight());
+        checkBoxC.setChecked(question.getChoiceC().isRight());
+        checkBoxD.setChecked(question.getChoiceD().isRight());
+    }
+
+    private void showQuestionNum() {
+        testNameTextView.setText(String.format(getString(R.string.test_name_num), sTest.getName(),
+                sTest.getQuestionNum()));
+        inputIndexTextView.setText(String.format(getString(R.string.problem_hint),
+                mCurrentQuestionIndex + 1));
+    }
+
+    private void saveQuestion() {
+        QuestionItem titleItem = getCurrentQuestion().getTitle();
+        QuestionItem aItem = getCurrentQuestion().getChoiceA();
+        QuestionItem bItem = getCurrentQuestion().getChoiceB();
+        QuestionItem cItem = getCurrentQuestion().getChoiceC();
+        QuestionItem dItem = getCurrentQuestion().getChoiceD();
+
+        aItem.setIsRight(checkBoxA.isCheck());
+        bItem.setIsRight(checkBoxB.isCheck());
+        cItem.setIsRight(checkBoxC.isCheck());
+        dItem.setIsRight(checkBoxD.isCheck());
+    }
+
     @SuppressWarnings("deprecation")
-    public void showCurrentQuestion(int position) {
-
-        if (mTest.getQuestion(position).getTitle().isText()) {
-            questionTextView.setText(Integer.toString(position + 1) + "、"
-                    + mTest.getQuestion(position).getTitle().getText());
-            questionTextView.setBackgroundColor(Color.WHITE);
+    private void showQuestionItem(int flag, QuestionItem item) {
+        TextView textView = getTextViewByTag(flag);
+        if (item.isText()) {
+            setEditMode(flag, EDIT_MODE_TEXT);
+            textView.setText(item.getText());
         } else {
-            questionTextView.setBackground(new BitmapDrawable(mTest.getQuestion(position)
-                    .getTitle().getBitmap()));
-            questionTextView.setText("");
-        }
-        if (mTest.getQuestion(position).getChoiceA().isText()) {
-            answerATextView.setText("A、" + mTest.getQuestion(position).getChoiceA().getText());
-            answerATextView.setBackgroundColor(Color.WHITE);
-        } else {
-            answerATextView.setBackground(new BitmapDrawable(mTest.getQuestion(position)
-                    .getChoiceA().getBitmap()));
-            answerATextView.setText("");
-        }
-        if (mTest.getQuestion(position).getChoiceB().isText()) {
-            answerBTextView.setText("B、" + mTest.getQuestion(position).getChoiceB().getText());
-            answerBTextView.setBackgroundColor(Color.WHITE);
-        } else {
-            answerBTextView.setBackground(new BitmapDrawable(mTest.getQuestion(position)
-                    .getChoiceB().getBitmap()));
-            answerBTextView.setText("");
-        }
-        if (mTest.getQuestion(position).getChoiceC().isText()) {
-            answerCTextView.setText("C、" + mTest.getQuestion(position).getChoiceC().getText());
-            answerCTextView.setBackgroundColor(Color.WHITE);
-        } else {
-            answerCTextView.setBackground(new BitmapDrawable(mTest.getQuestion(position)
-                    .getChoiceC().getBitmap()));
-            answerCTextView.setText("");
-        }
-        if (mTest.getQuestion(position).getTitle().isText()) {
-            answerDTextView.setText("D、" + mTest.getQuestion(position).getChoiceD().getText());
-            answerDTextView.setBackgroundColor(Color.WHITE);
-        } else {
-            answerDTextView.setBackground(new BitmapDrawable(mTest.getQuestion(position)
-                    .getChoiceD().getBitmap()));
-            answerDTextView.setText("");
+            Bitmap bitmap = item.getBitmap();
+            if (null != bitmap) {
+                setEditMode(flag, EDIT_MODE_BITMAP);
+                textView.setBackgroundDrawable(new BitmapDrawable(bitmap));
+            }
         }
     }
 
-    public void getCheckBoxsAnswer(int position) {
-        boolean[] mCorrectId = new boolean[] {false, false, false, false};
+    private final int EDIT_MODE_TEXT = 1;
+    private final int EDIT_MODE_BITMAP = 2;
 
-        mCorrectId[0] = checkboxA.isCheck();
-        mCorrectId[1] = checkboxB.isCheck();
-        mCorrectId[2] = checkboxC.isCheck();
-        mCorrectId[3] = checkboxD.isCheck();
-        // mTest.getQuestion(position).setCorrectId(mCorrectId);
-
-    }
-
-    public void setCheckBoxsAnswer(int position) {
-        boolean[] mCorrectId;
-
-        // mCorrectId = mTest.getQuestion(position).getCorrectId();
-        // checkboxA.setChecked(mCorrectId[0]);
-        // checkboxB.setChecked(mCorrectId[1]);
-        // checkboxC.setChecked(mCorrectId[2]);
-        // checkboxD.setChecked(mCorrectId[3]);
-
-    }
-
-    // 统计回答题目的数目
-    public int collectAnsweredNum() {
-        int AnsweredNum = 0;
-        // // for (int i = 0; i < mTest.getQuestionNum(); i++) {
-        // //// boolean[] bleans = mTest.getQuestion(i).getCorrectId();
-        // //// for (int j = 0; j < bleans.length; j++) {
-        // //// if (bleans[j]) {
-        // //// AnsweredNum++;
-        // //// break;
-        // //// }
-        // // }
-        //
-        // }
-        return AnsweredNum;
-    }
-
-    // 倒计时
-    protected class fiveCountDownTimer extends CountDownTimer {
-
-        private long millisUntilFinished;
-
-        public fiveCountDownTimer(long millisInFuture, long countDownInterval) {
-            super(millisInFuture, countDownInterval);
-        }
-
-        public long getMillisUntilFinished() {
-            return this.millisUntilFinished;
-        }
-
-        @Override
-        public void onTick(long millisUntilFinished) {
-            timeTextView.setText(millisUntilFinished / 60000 + ":" + millisUntilFinished % 60000
-                    / 1000);
-            this.millisUntilFinished = millisUntilFinished;
-        }
-
-        @Override
-        public void onFinish() {
-            DialogUtil.showNormalDialog(TestActivity.this, R.string.tip, R.string.if_submit_answer,
-                    R.string.sure, new OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            finish();
-                        }
-                    }, -1, null);
+    private void setEditMode(int flag, int mode) {
+        TextView editText = getTextViewByTag(flag);
+        switch (mode) {
+            case EDIT_MODE_TEXT:
+                editText.setText("");
+                editText.setFocusable(true);
+                editText.setFocusableInTouchMode(true);
+                editText.setBackgroundResource(R.drawable.stu_checkin_textview);
+                break;
+            case EDIT_MODE_BITMAP:
+                editText.setText(" ");
+                editText.setFocusable(false);
+                break;
+            default:
+                break;
         }
     }
 
+    private TextView getTextViewByTag(int flag) {
+        TextView textView = null;
+        switch (flag) {
+            case FLAG_TITLE:
+                textView = titleTextView;
+                break;
+            case FLAG_A:
+                textView = choiceATextView;
+                break;
+            case FALG_B:
+                textView = choiceBTextView;
+                break;
+            case FLAG_C:
+                textView = choiceCTextView;
+                break;
+            case FLAG_D:
+                textView = choiceDTextView;
+                break;
+            default:
+                break;
+        }
+        return textView;
+    }
+
+    private Question getCurrentQuestion() {
+        return sTest.getQuestion(mCurrentQuestionIndex);
+    }
+
+    /**
+     * 
+     * @title: onBackPressed
+     * @description: backpressed response
+     * @author: ZQJ
+     * @date: 2015年5月19日 下午9:21:02
+     */
     @Override
-    public void onBackPressed() {
-        DialogUtil.showNormalDialog(this, R.string.tip, R.string.if_giveup_answer, R.string.sure,
-                new OnClickListener() {
+    public void onBackPressed() {}
 
-                    @Override
-                    public void onClick(View v) {
-                        finish();
-                    }
-                }, R.string.cancel, null);
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        SharedPreferences sharedPref = getSharedPreferences("CounterTimes", MODE_PRIVATE);
-        long useFirst = sharedPref.getLong("CounterTimes", 0);
-        timeCountDown = new fiveCountDownTimer(useFirst, 1000);
-        timeCountDown.start();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        SharedPreferences sharedPref = getSharedPreferences("CounterTimes", MODE_PRIVATE);
-        Editor mEditor = sharedPref.edit();
-        mEditor.putLong("CounterTimes", timeCountDown.getMillisUntilFinished());
-        mEditor.commit();
-        timeCountDown.cancel();
+    public static void start(Context context, Test test) {
+        Intent intent = new Intent(context, TestActivity.class);
+        context.startActivity(intent);
+        sTest = test;
     }
 }
