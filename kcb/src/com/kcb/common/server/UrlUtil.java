@@ -73,7 +73,7 @@ public class UrlUtil {
     }
 
     // 3.2 end test
-    private static final String url_stu_test_end = IP + "/v1/stu/test/end";
+    private static final String url_stu_test_end = IP + "/v1/stu/test/finish";
 
     public static String getStuTestEndUrl(String id) { // TODO, set answer
         return url_stu_test_end + "?id=" + id;
