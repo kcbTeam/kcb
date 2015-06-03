@@ -22,6 +22,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.kcb.common.base.BaseFragment;
+import com.kcb.common.util.StringMatchUtil;
 import com.kcb.library.view.FloatingEditText;
 import com.kcb.teacher.activity.StuCentreActivity;
 import com.kcb.teacher.adapter.ListAdapterStudent;
@@ -29,7 +30,6 @@ import com.kcb.teacher.model.stucentre.Student;
 import com.kcb.teacher.util.CompareByCheckInRate;
 import com.kcb.teacher.util.CompareByCorrectRate;
 import com.kcb.teacher.util.CompareById;
-import com.kcb.teacher.util.NameUtils;
 import com.kcbTeam.R;
 
 /**
@@ -56,6 +56,7 @@ public class StuCentreFragment extends BaseFragment implements OnItemClickListen
     private ListAdapterStudent mAdapter;
     private List<Student> mList;
     private List<Student> mTempList;
+    private String mSearchKey;
     private CompareById idComparator;
     private CompareByCheckInRate checkInRateComparator;
     private CompareByCorrectRate correctRateComparator;
@@ -127,35 +128,26 @@ public class StuCentreFragment extends BaseFragment implements OnItemClickListen
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {}
 
-    private String searchContent;
-
     @Override
     public void afterTextChanged(Editable s) {
         mTempList.clear();
-        mTempList.addAll(mList);
-        searchContent = searchEditText.getText().toString().trim().replace(" ", "");
-        if (!searchContent.equals("")) {
+        mSearchKey = searchEditText.getText().toString().trim().replace(" ", "");
+        if (!mSearchKey.equals("")) {
             clearImageView.setVisibility(View.VISIBLE);
-        } else {
-            clearImageView.setVisibility(View.INVISIBLE);
-        }
-        for (int i = 0; i < mTempList.size(); i++) {
-            String name = mTempList.get(i).getName();
-            try {
-                if (NameUtils.isMatch(name, searchContent)) {
-                    continue;
-                }
-            } catch (BadHanyuPinyinOutputFormatCombination e) {
-                e.printStackTrace();
+            for (int i = 0; i < mList.size(); i++) {
+                Student student = mList.get(i);
+                String name = student.getName();
+                try {
+                    if (StringMatchUtil.isMatch(name, mSearchKey)) {
+                        mTempList.add(student);
+                    }
+                } catch (BadHanyuPinyinOutputFormatCombination e) {}
             }
-
-            mTempList.remove(i);
-            i--;
-        }
-        if (!searchContent.equals("")) {
             hideSortButton(true);
             mAdapter.notifyDataSetChanged();
         } else {
+            mTempList.addAll(mList);
+            clearImageView.setVisibility(View.INVISIBLE);
             hideSortButton(false);
             onClick(sortById);
         }
@@ -165,21 +157,21 @@ public class StuCentreFragment extends BaseFragment implements OnItemClickListen
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.textview_stuinfo:
-                if (TextUtils.isEmpty(searchContent)) {
+                if (TextUtils.isEmpty(mSearchKey)) {
                     new SortTast(INDEX_ID).execute();
-                    setImageBackGround(INDEX_ID);
+                    setSortIcon(INDEX_ID);
                 }
                 break;
             case R.id.textview_stucheckinrate:
-                if (TextUtils.isEmpty(searchContent)) {
+                if (TextUtils.isEmpty(mSearchKey)) {
                     new SortTast(INDEX_CHECKIN_RATE).execute();
-                    setImageBackGround(INDEX_CHECKIN_RATE);
+                    setSortIcon(INDEX_CHECKIN_RATE);
                 }
                 break;
             case R.id.textview_correctrate:
-                if (TextUtils.isEmpty(searchContent)) {
+                if (TextUtils.isEmpty(mSearchKey)) {
                     new SortTast(INDEX_CORRECT_RATE).execute();
-                    setImageBackGround(INDEX_CORRECT_RATE);
+                    setSortIcon(INDEX_CORRECT_RATE);
                 }
                 break;
             case R.id.imageview_clear:
@@ -193,7 +185,7 @@ public class StuCentreFragment extends BaseFragment implements OnItemClickListen
     }
 
     @SuppressLint("NewApi")
-    private void setImageBackGround(int index) {
+    private void setSortIcon(int index) {
         Drawable drawable = getResources().getDrawable(R.drawable.ic_arrow_drop_down_black_18dp);
         drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
 

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:expandable="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/activity_background"
+    tools:ignore="contentDescription" >
+
+    <LinearLayout
+        android:id="@+id/layout_title"
+        style="@style/common_title_layout" >
+
+        <include layout="@layout/comm_back_button" />
+
+        <TextView
+            style="@style/common_title"
+            android:text="@string/testresult" />
+
+        <com.kcb.library.view.buttonflat.ButtonFlat
+            android:id="@+id/button_refresh"
+            style="@style/common_title_icon_layout_right" >
+
+            <ImageView
+                style="@style/common_title_icon_right"
+                android:src="@drawable/ic_refresh_black_24dp" >
+            </ImageView>
+        </com.kcb.library.view.buttonflat.ButtonFlat>
+    </LinearLayout>
+
+    <com.kcb.library.view.smoothprogressbar.SmoothProgressBar
+        android:id="@+id/progressbar_refresh"
+        style="@style/SmoothProgressBar"
+        android:layout_alignBottom="@id/layout_title"
+        android:visibility="gone" />
+
+    <com.kcb.library.view.FloatingEditText
+        android:id="@+id/edittext_search"
+        style="@style/login_edittext"
+        android:layout_below="@id/layout_title"
+        android:layout_marginTop="5dp"
+        android:hint="@string/search" />
+
+    <ImageView
+        android:id="@+id/imageview_clear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/edittext_search"
+        android:layout_alignRight="@id/edittext_search"
+        android:layout_marginBottom="18dp"
+        android:background="@drawable/ic_cancel_grey600_24dp"
+        android:visibility="invisible" />
+
+    <LinearLayout
+        android:id="@+id/layout_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edittext_search"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/testname" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="60dp"
+            android:text="@string/questionnumber" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="75dp"
+            android:text="@string/testdate" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/listview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layout_header"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        android:listSelector="#00000000" />
+
+</RelativeLayout>

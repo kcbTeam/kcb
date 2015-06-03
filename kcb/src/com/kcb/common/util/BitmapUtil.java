@@ -29,6 +29,5 @@ public class BitmapUtil {
         } else {
             return null;
         }
-
     }
 }

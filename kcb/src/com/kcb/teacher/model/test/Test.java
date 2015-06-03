@@ -16,16 +16,18 @@ public class Test implements Serializable {
     private String mId; // from server when start test
     private String mName; // test name
     private int mTime = 5; // default test time is 5 minutes
-    private Date mDate; // test date, from server when start test
+    private Date mDate; // test date, create date or start test date
     private boolean mHasTested; // true if teacher start test
     private List<Question> mQuestions;
 
     public Test() {
+        mDate = new Date();
         mQuestions = new ArrayList<Question>();
     }
 
     public Test(String name, int num) {
         mName = name;
+        mDate = new Date();
         mQuestions = new ArrayList<Question>();
         for (int i = 0; i < num; i++) {
             mQuestions.add(new Question());
@@ -85,12 +87,12 @@ public class Test implements Serializable {
     public void updateQuestion(int index, Question question) {
         mQuestions.set(index, question);
     }
-    
-    public boolean isTested(){
+
+    public boolean isTested() {
         return mHasTested;
     }
-    
-    public void setTested(boolean isTested){
+
+    public void setTested(boolean isTested) {
         mHasTested = isTested;
     }
 

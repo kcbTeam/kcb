@@ -44,7 +44,8 @@ public class StartCheckInActivity extends BaseActivity {
 
     private TextView timeTextView;
 
-    private View numView;
+    private TextView tipTextView;
+
     private TextView num1TextView;
     private TextView num2TextView;
     private TextView num3TextView;
@@ -75,7 +76,8 @@ public class StartCheckInActivity extends BaseActivity {
     protected void initView() {
         timeTextView = (TextView) findViewById(R.id.textview_time);
 
-        numView = findViewById(R.id.linearlayout_shownum);
+        tipTextView = (TextView) findViewById(R.id.textview_tip);
+
         num1TextView = (TextView) findViewById(R.id.textview_shownum1);
         num2TextView = (TextView) findViewById(R.id.textview_shownum2);
         num3TextView = (TextView) findViewById(R.id.textview_shownum3);
@@ -195,7 +197,7 @@ public class StartCheckInActivity extends BaseActivity {
                 return;
             }
             if (!isNumCompleted()) {
-                AnimationUtil.shake(numView);
+                AnimationUtil.shake(tipTextView);
                 return;
             }
             progressBar.setVisibility(View.VISIBLE);
@@ -214,6 +216,7 @@ public class StartCheckInActivity extends BaseActivity {
                         @Override
                         public void onErrorResponse(VolleyError error) {
                             progressBar.hide(StartCheckInActivity.this);
+                            // TODO add has signed response
                             if (error.networkResponse.statusCode == 400) {
                                 ToastUtil.toast(R.string.num_error);
                                 clearNum();

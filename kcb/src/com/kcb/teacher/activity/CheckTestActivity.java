@@ -15,11 +15,11 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import com.kcb.common.base.BaseActivity;
+import com.kcb.common.util.StringMatchUtil;
 import com.kcb.library.view.FloatingEditText;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.teacher.adapter.ListAdapterCourseTest;
 import com.kcb.teacher.model.test.Test;
-import com.kcb.teacher.util.NameUtils;
 import com.kcbTeam.R;
 
 /**
@@ -123,7 +123,7 @@ public class CheckTestActivity extends BaseActivity implements TextWatcher, OnIt
         for (int i = 0; i < mTempTestList.size(); i++) {
             String name = mTempTestList.get(i).getName();
             try {
-                if (NameUtils.isMatch(name, searchContent)) {
+                if (StringMatchUtil.isMatch(name, searchContent)) {
                     continue;
                 }
             } catch (BadHanyuPinyinOutputFormatCombination e) {
