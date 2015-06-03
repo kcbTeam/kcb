@@ -30,10 +30,11 @@ import com.kcbTeam.R;
 public class LookCheckInActivity extends BaseActivity implements OnItemClickListener {
 
     private ButtonFlat backButton;
-    private ListView checkInRecordList;
+    private ListView listView;
 
     private LookCheckInAdapter mAdapter;
-    List<CheckInResult> mCheckInResults = new ArrayList<CheckInResult>();
+    private List<CheckInResult> mCheckInResults;
+
     private CheckInDao mCheckInDao;
     private GetCheckInResultsTask mGetCheckInResultsTask;
 
@@ -47,34 +48,21 @@ public class LookCheckInActivity extends BaseActivity implements OnItemClickList
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-        mGetCheckInResultsTask = new GetCheckInResultsTask();
-        mGetCheckInResultsTask.execute(0);
-    }
-
-    @Override
     protected void initView() {
         backButton = (ButtonFlat) findViewById(R.id.button_back);
         backButton.setOnClickListener(this);
 
-        checkInRecordList = (ListView) findViewById(R.id.listview);
-        checkInRecordList.setOnItemClickListener(this);
+        listView = (ListView) findViewById(R.id.listview);
+        listView.setOnItemClickListener(this);
     }
 
     @Override
     protected void initData() {
         mCheckInDao = new CheckInDao(this);
-        // TODO I don't know why Asynctask didn't work..
-        try {
-            mCheckInResults = mCheckInDao.getAllCheckInResults();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        mAdapter = new LookCheckInAdapter(this, mCheckInResults);
-        checkInRecordList.setAdapter(mAdapter);
+        mCheckInResults = new ArrayList<CheckInResult>();
+
+        mGetCheckInResultsTask = new GetCheckInResultsTask();
+        mGetCheckInResultsTask.execute();
     }
 
     @Override
@@ -110,10 +98,14 @@ public class LookCheckInActivity extends BaseActivity implements OnItemClickList
         @Override
         protected void onPostExecute(Integer result) {
             super.onPostExecute(result);
-            if (null != mAdapter) {
-                mAdapter.notifyDataSetChanged();
-            }
+            mAdapter = new LookCheckInAdapter(LookCheckInActivity.this, mCheckInResults);
+            listView.setAdapter(mAdapter);
         }
+    }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mCheckInDao.close();
     }
 }
