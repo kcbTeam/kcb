@@ -71,8 +71,8 @@ public class StuCentreActivity extends BaseActivity {
     @Override
     protected void initData() {
         mStudentInfo = (Student) getIntent().getSerializableExtra(DATA_STUDENT);
-        mCheckInRate = mStudentInfo.getCheckInRate();
-        mCorrectRate = mStudentInfo.getCorrectRate();
+        mCheckInRate = (float) mStudentInfo.getCheckInRate();
+        mCorrectRate = (float) mStudentInfo.getCorrectRate();
 
         nameIdTextView.setText(mStudentInfo.getName() + "（" + mStudentInfo.getId() + "）");
         checkInRateTextView.setText(String.format(

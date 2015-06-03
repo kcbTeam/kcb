@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.kcb.teacher.database.checkin.CheckInDB;
+import com.kcb.teacher.database.students.StudentDB;
 import com.kcb.teacher.database.test.TestDB;
 
 public class CommonSQLiteOpenHelper extends SQLiteOpenHelper {
@@ -20,6 +21,7 @@ public class CommonSQLiteOpenHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(TestDB.CREATE_TABLE_TEST);
         db.execSQL(CheckInDB.CREATE_TABLE_CHECKIN);
+        db.execSQL(StudentDB.CREATE_TABLE_STUDENT_CENTRE);
         // TODO:create new table from here
     }
 

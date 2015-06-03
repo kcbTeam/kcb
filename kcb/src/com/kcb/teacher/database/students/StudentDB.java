@@ -6,7 +6,8 @@ public class StudentDB {
 	public final static String KEY_STUID = "studentId";
 	public final static String KEY_CHECKINRATE = "checkinRate";
 	public final static String KEY_CORRECTRATE = "correctRate";
-	public final static String CREATE_TABLE_CHECKIN = "CREATE TABLE IF NOT EXISTS "
+	public final static String KEY_STUDENT = "student";
+	public final static String CREATE_TABLE_STUDENT_CENTRE = "CREATE TABLE IF NOT EXISTS "
 			+ TABLE_NAME
 			+ "(_id INTEGER PRIMARY KEY AUTOINCREMENT, "
 			+ KEY_NAME
@@ -14,5 +15,9 @@ public class StudentDB {
 			+ KEY_STUID
 			+ " text,"
 			+ KEY_CHECKINRATE
-			+ " text," + KEY_CORRECTRATE + " text)";
+			+ " text," 
+			+ KEY_CORRECTRATE 
+			+ " text,"
+			+ KEY_STUDENT
+			+ " text)";
 }
