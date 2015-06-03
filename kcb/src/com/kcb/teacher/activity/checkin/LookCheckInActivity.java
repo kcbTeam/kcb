@@ -75,7 +75,7 @@ public class LookCheckInActivity extends BaseActivity implements OnItemClickList
     @Override
     protected void initData() {
         mGetCheckInResultsTask = new GetCheckInResultsTask();
-        mGetCheckInResultsTask.execute();
+        mGetCheckInResultsTask.execute(0);
     }
 
     @Override
