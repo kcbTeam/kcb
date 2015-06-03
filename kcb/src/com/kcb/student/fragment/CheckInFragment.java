@@ -22,8 +22,8 @@ import com.kcb.common.server.UrlUtil;
 import com.kcb.common.util.ToastUtil;
 import com.kcb.library.view.PaperButton;
 import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
-import com.kcb.student.activity.LookCheckInActivity;
-import com.kcb.student.activity.StartCheckInActivity;
+import com.kcb.student.activity.checkin.LookCheckInActivity;
+import com.kcb.student.activity.checkin.StartCheckInActivity;
 import com.kcbTeam.R;
 
 /**

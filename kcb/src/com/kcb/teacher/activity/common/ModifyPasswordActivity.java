@@ -1,4 +1,4 @@
-package com.kcb.teacher.activity;
+package com.kcb.teacher.activity.common;
 
 import android.os.Bundle;
 import android.os.Handler;

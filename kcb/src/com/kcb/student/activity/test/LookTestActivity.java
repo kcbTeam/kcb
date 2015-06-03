@@ -1,10 +1,9 @@
-package com.kcb.student.activity;
+package com.kcb.student.activity.test;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
-
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;

@@ -1,9 +1,10 @@
-package com.kcb.teacher.activity;
+package com.kcb.teacher.activity.checkin;
 
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 
 import android.os.AsyncTask;
@@ -13,7 +14,15 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
+import com.android.volley.Request.Method;
+import com.android.volley.Response.ErrorListener;
+import com.android.volley.Response.Listener;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.kcb.common.application.KAccount;
 import com.kcb.common.base.BaseActivity;
+import com.kcb.common.server.RequestUtil;
+import com.kcb.common.server.UrlUtil;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
 import com.kcb.teacher.adapter.LookCheckInAdapter;
@@ -29,6 +38,8 @@ import com.kcbTeam.R;
  * @date: 2015年4月24日 下午3:22:02
  */
 public class LookCheckInActivity extends BaseActivity implements OnItemClickListener {
+
+    private static final String TAG = LookCheckInActivity.class.getName();
 
     private ButtonFlat backButton;
     private ButtonFlat refreshButton;
@@ -116,10 +127,33 @@ public class LookCheckInActivity extends BaseActivity implements OnItemClickList
             return;
         }
         progressBar.setVisibility(View.VISIBLE);
+        JsonArrayRequest request =
+                new JsonArrayRequest(Method.GET, UrlUtil.getTchCheckinGetresultUrl(KAccount
+                        .getAccountId()), new Listener<JSONArray>() {
+
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        List<CheckInResult> results = new ArrayList<CheckInResult>();
+                        for (int i = 0; i < response.length(); i++) {
+                            try {
+                                CheckInResult checkInResult =
+                                        CheckInResult.fromJsonObject(response.getJSONObject(i));
+                                results.add(checkInResult);
+                            } catch (JSONException e) {}
+                        }
+                        mAdapter.setData(results);
+                    }
+                }, new ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {}
+                });
+        RequestUtil.getInstance().addToRequestQueue(request, TAG);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        RequestUtil.getInstance().cancelPendingRequests(TAG);
     }
 }

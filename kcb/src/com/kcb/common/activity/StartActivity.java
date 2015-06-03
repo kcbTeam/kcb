@@ -14,8 +14,8 @@ import com.kcb.common.base.BaseActivity;
 import com.kcb.common.listener.DelayClickListener;
 import com.kcb.library.view.ColorAnimationView;
 import com.kcb.library.view.PaperButton;
-import com.kcb.student.activity.HomeActivity;
-import com.kcb.student.activity.LoginActivity;
+import com.kcb.student.activity.common.HomeActivity;
+import com.kcb.student.activity.common.LoginActivity;
 import com.kcbTeam.R;
 
 /**
@@ -44,7 +44,7 @@ public class StartActivity extends BaseActivity {
             if (KAccount.getAccountType() == KAccount.TYPE_STU) {
                 HomeActivity.start(this);
             } else {
-                com.kcb.teacher.activity.HomeActivity.start(this);
+                com.kcb.teacher.activity.common.HomeActivity.start(this);
             }
             finish();
         }
@@ -118,7 +118,7 @@ public class StartActivity extends BaseActivity {
                     case R.id.pagerbutton_tch:
                         intent =
                                 new Intent(StartActivity.this,
-                                        com.kcb.teacher.activity.LoginActivity.class);
+                                        com.kcb.teacher.activity.common.LoginActivity.class);
                         break;
                     default:
                         break;

@@ -1,4 +1,4 @@
-package com.kcb.teacher.activity;
+package com.kcb.teacher.activity.test;
 
 import android.os.Bundle;
 import android.text.TextUtils;

@@ -24,22 +24,27 @@ import com.kcbTeam.R;
 public class LookCheckInAdapter extends BaseAdapter {
 
     private Context mContext;
-    private List<CheckInResult> mList;
+    private List<CheckInResult> mResults;
     private final String FORMAT_RATE = "%1$d%%";
 
     public LookCheckInAdapter(Context context, List<CheckInResult> list) {
         mContext = context;
-        mList = list;
+        mResults = list;
+    }
+
+    public void setData(List<CheckInResult> results) {
+        mResults = results;
+        notifyDataSetChanged();
     }
 
     @Override
     public int getCount() {
-        return mList.size();
+        return mResults.size();
     }
 
     @Override
     public CheckInResult getItem(int position) {
-        return mList.get(position);
+        return mResults.get(position);
     }
 
     @Override

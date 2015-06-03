@@ -1,4 +1,4 @@
-package com.kcb.teacher.activity;
+package com.kcb.teacher.activity.common;
 
 import android.content.Context;
 import android.content.Intent;

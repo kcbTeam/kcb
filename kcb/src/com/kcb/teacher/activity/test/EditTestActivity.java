@@ -1,18 +1,21 @@
-package com.kcb.teacher.activity;
+package com.kcb.teacher.activity.test;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import org.json.JSONException;
+
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.database.SQLException;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.provider.MediaStore.Images.Media;
 import android.view.View;
@@ -23,28 +26,30 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.kcb.common.base.BaseActivity;
-import com.kcb.common.listener.DelayClickListener;
 import com.kcb.common.util.DialogUtil;
 import com.kcb.common.util.ToastUtil;
-import com.kcb.library.view.PaperButton;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.library.view.checkbox.CheckBox;
+import com.kcb.teacher.database.test.TestDao;
 import com.kcb.teacher.model.test.Question;
 import com.kcb.teacher.model.test.QuestionItem;
+import com.kcb.teacher.model.test.Test;
 import com.kcbTeam.R;
 
 /**
  * 
- * @className: ModifyQuestionActivty
+ * @className: EditTestActivity
  * @description:
  * @author: ZQJ
- * @date: 2015年5月27日 下午8:24:10
+ * @date: 2015年5月8日 下午6:03:59
  */
-public class EditQuestionActivty extends BaseActivity implements OnLongClickListener {
+public class EditTestActivity extends BaseActivity implements OnLongClickListener {
 
-    private TextView questionNumTextView;
-    private ButtonFlat backButton;
-    private ButtonFlat deleteButton;
+    private TextView testNameTextView;
+    private ButtonFlat cancelButton;
+    private ImageView cancelImageView;
+
+    private TextView inputIndexTextView;
 
     private EditText titleEditText;
     private ImageView deleteTitleImageView;
@@ -62,7 +67,10 @@ public class EditQuestionActivty extends BaseActivity implements OnLongClickList
     private CheckBox checkBoxC;
     private CheckBox checkBoxD;
 
-    private PaperButton finishButton;
+    private ButtonFlat lastButton;
+    private ButtonFlat nextButton;
+    private ButtonFlat addButton;
+    private ButtonFlat deleteButton;
 
     // tag title/A/B/C/D;
     private final int FLAG_TITLE = 1;
@@ -72,8 +80,11 @@ public class EditQuestionActivty extends BaseActivity implements OnLongClickList
     private final int FLAG_D = 5;
 
     // test and current question index;
-    public static Question sQuestion;
-    private int mIndex;
+    public static Test sTest;
+    private int mCurrentQuestionIndex;
+
+    // when click last/next, show a mTempQuestion, used for compare it is changed or not;
+    private Question mTempQuestion;
 
     // long click to take photo;
     private int mLongClickTag = FLAG_TITLE;
@@ -81,10 +92,14 @@ public class EditQuestionActivty extends BaseActivity implements OnLongClickList
     // save temp camera photo;
     private String mBitmapPath;
 
+    private String mAction;
+
+    private TestDao mTestDao;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.tch_activity_editquestion);
+        setContentView(R.layout.tch_activity_edittest);
 
         initView();
         initData();
@@ -92,9 +107,19 @@ public class EditQuestionActivty extends BaseActivity implements OnLongClickList
 
     @Override
     protected void initView() {
-        questionNumTextView = (TextView) findViewById(R.id.textview_title);
-        backButton = (ButtonFlat) findViewById(R.id.button_back);
-        backButton.setOnClickListener(this);
+        testNameTextView = (TextView) findViewById(R.id.textview_title);
+        cancelButton = (ButtonFlat) findViewById(R.id.button_cancel);
+        cancelButton.setOnClickListener(this);
+        cancelImageView = (ImageView) findViewById(R.id.imageview_cancel);
+
+        inputIndexTextView = (TextView) findViewById(R.id.textview_input_problem_tip);
+
+        lastButton = (ButtonFlat) findViewById(R.id.button_last);
+        lastButton.setOnClickListener(this);
+        nextButton = (ButtonFlat) findViewById(R.id.button_next);
+        nextButton.setOnClickListener(this);
+        addButton = (ButtonFlat) findViewById(R.id.button_add);
+        addButton.setOnClickListener(this);
         deleteButton = (ButtonFlat) findViewById(R.id.button_delete);
         deleteButton.setOnClickListener(this);
 
@@ -127,16 +152,16 @@ public class EditQuestionActivty extends BaseActivity implements OnLongClickList
         checkBoxB = (CheckBox) findViewById(R.id.checkBox_B);
         checkBoxC = (CheckBox) findViewById(R.id.checkBox_C);
         checkBoxD = (CheckBox) findViewById(R.id.checkBox_D);
-
-        finishButton = (PaperButton) findViewById(R.id.button_finish);
-        finishButton.setOnClickListener(mClickListener);
     }
 
     @Override
     protected void initData() {
         Intent intent = getIntent();
-        mIndex = intent.getIntExtra(DATA_INDEX, 0);
-        questionNumTextView.setText("第" + (mIndex + 1) + "题");
+        mAction = intent.getAction();
+        if (mAction.equals(ACTION_EDIT_TEST)) {
+            cancelImageView.setImageResource(R.drawable.ic_delete_black_24dp);
+        }
+        testNameTextView.setText(sTest.getName() + "（共" + sTest.getQuestionNum() + "题）");
         showQuestion();
     }
 
@@ -152,65 +177,132 @@ public class EditQuestionActivty extends BaseActivity implements OnLongClickList
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.button_back:
-                finish();
-                break;
-            case R.id.button_delete:
-                DialogUtil.showNormalDialog(this, R.string.dialog_title_delete,
-                        R.string.delete_msg, R.string.sure, new OnClickListener() {
-
-                            @Override
-                            public void onClick(View v) {
-                                Intent intent = new Intent();
-                                intent.putExtra(DATA_INDEX, mIndex);
-                                setResult(RESULT_DELETE, intent);
-                                finish();
-                            }
-                        }, R.string.cancel, null);
+            case R.id.button_cancel:
+                if (mAction.equals(ACTION_ADD_TEST)) {
+                    cancelAddTest();
+                } else {
+                    deleteTest();
+                }
                 break;
             case R.id.imageview_delete_title:
                 setEditMode(FLAG_TITLE, EDIT_MODE_TEXT);
-                sQuestion.getTitle().setText("");
+                getCurrentQuestion().getTitle().setText("");
                 break;
             case R.id.imageview_delete_a:
                 setEditMode(FLAG_A, EDIT_MODE_TEXT);
-                sQuestion.getChoiceA().setText("");
+                getCurrentQuestion().getChoiceA().setText("");
                 break;
             case R.id.imageview_delete_b:
                 setEditMode(FALG_B, EDIT_MODE_TEXT);
-                sQuestion.getChoiceB().setText("");
+                getCurrentQuestion().getChoiceB().setText("");
                 break;
             case R.id.imageview_delete_c:
                 setEditMode(FLAG_C, EDIT_MODE_TEXT);
-                sQuestion.getChoiceC().setText("");
+                getCurrentQuestion().getChoiceC().setText("");
                 break;
             case R.id.imageview_delete_d:
                 setEditMode(FLAG_D, EDIT_MODE_TEXT);
-                sQuestion.getChoiceD().setText("");
+                getCurrentQuestion().getChoiceD().setText("");
+                break;
+            case R.id.button_last:
+                lastQuestion();
+                break;
+            case R.id.button_next:
+                nextQuesion();
+                break;
+            case R.id.button_add:
+                addQuestion();
+                break;
+            case R.id.button_delete:
+                deleteQuestion();
                 break;
             default:
                 break;
         }
     }
 
-    private DelayClickListener mClickListener = new DelayClickListener(
-            DelayClickListener.DELAY_PAPER_BUTTON) {
-
-        @Override
-        public void doClick(View v) {
-            switch (v.getId()) {
-                case R.id.button_finish:
-                    saveQuestion();
-                    Intent intent = new Intent();
-                    intent.putExtra(DATA_INDEX, mIndex);
-                    setResult(RESULT_OK, intent);
-                    finish();
-                    break;
-                default:
-                    break;
+    private void lastQuestion() {
+        if (mCurrentQuestionIndex > 0) {
+            saveQuestion();
+            if (!getCurrentQuestion().equal(mTempQuestion)) {
+                ToastUtil.toast(String.format(getResources().getString(R.string.format_edit_save),
+                        1 + mCurrentQuestionIndex));
             }
+            mCurrentQuestionIndex--;
+            showQuestion();
         }
-    };
+    }
+
+    private void nextQuesion() {
+        saveQuestion();
+        if (mCurrentQuestionIndex == sTest.getQuestionNum() - 1) {
+            if (!sTest.isCompleted()) {
+                int unCompletedIndex = sTest.getUnCompleteIndex() + 1;
+                ToastUtil.toast(String
+                        .format(getResources().getString(R.string.format_edit_empty_hint),
+                                unCompletedIndex));
+            } else {
+                new Handler().postDelayed(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        SetTestTimeActivity.start(EditTestActivity.this, sTest);
+                        finish();
+                    }
+                }, 200);
+            }
+        } else {
+            if (!getCurrentQuestion().equal(mTempQuestion)) {
+                ToastUtil.toast(String.format(getResources().getString(R.string.format_edit_save),
+                        1 + mCurrentQuestionIndex));
+            }
+            mCurrentQuestionIndex++;
+            showQuestion();
+        }
+    }
+
+    // four click functions: add ,delete ,next ,last.
+    private void addQuestion() {
+        if (sTest.getQuestionNum() == 9) {
+            ToastUtil.toast("最多只能有9题");
+            return;
+        }
+        final int questionNum = sTest.getQuestionNum() + 1;
+        DialogUtil.showNormalDialog(this, R.string.dialog_title_add,
+                String.format(getString(R.string.add_msg), questionNum), R.string.sure,
+                new OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        ToastUtil.toast("第" + questionNum + "题已添加");
+                        sTest.addQuestion();
+                        showQuestionNum();
+                        showNextButton();
+                    }
+                }, R.string.cancel, null);
+    }
+
+    private void deleteQuestion() {
+        DialogUtil.showNormalDialog(this, R.string.dialog_title_delete,
+                String.format(getString(R.string.delete_question_tip), mCurrentQuestionIndex + 1),
+                R.string.sure, new OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        if (sTest.getQuestionNum() > 1) {
+                            int originQuestionNum = sTest.getQuestionNum();
+                            sTest.deleteQuestion(mCurrentQuestionIndex);
+                            mCurrentQuestionIndex =
+                                    mCurrentQuestionIndex == originQuestionNum - 1 ? sTest
+                                            .getQuestionNum() - 1 : mCurrentQuestionIndex;
+                            showQuestion();
+                            ToastUtil.toast(R.string.delete_success);
+                        } else {
+                            finish();
+                        }
+                    }
+                }, R.string.cancel, null);
+    }
 
     /**
      * 
@@ -296,27 +388,27 @@ public class EditQuestionActivty extends BaseActivity implements OnLongClickList
                         case FLAG_TITLE:
                             setEditMode(FLAG_TITLE, EDIT_MODE_BITMAP);
                             titleEditText.setBackground(new BitmapDrawable(bitmap));
-                            sQuestion.getTitle().setBitmap(bitmap);
+                            getCurrentQuestion().getTitle().setBitmap(bitmap);
                             break;
                         case FLAG_A:
                             setEditMode(FLAG_A, EDIT_MODE_BITMAP);
                             aEditText.setBackground(new BitmapDrawable(bitmap));
-                            sQuestion.getChoiceA().setBitmap(bitmap);
+                            getCurrentQuestion().getChoiceA().setBitmap(bitmap);
                             break;
                         case FALG_B:
                             setEditMode(FALG_B, EDIT_MODE_BITMAP);
                             bEditText.setBackground(new BitmapDrawable(bitmap));
-                            sQuestion.getChoiceB().setBitmap(bitmap);
+                            getCurrentQuestion().getChoiceB().setBitmap(bitmap);
                             break;
                         case FLAG_C:
                             setEditMode(FLAG_C, EDIT_MODE_BITMAP);
                             cEditText.setBackground(new BitmapDrawable(bitmap));
-                            sQuestion.getChoiceC().setBitmap(bitmap);
+                            getCurrentQuestion().getChoiceC().setBitmap(bitmap);
                             break;
                         case FLAG_D:
                             setEditMode(FLAG_D, EDIT_MODE_BITMAP);
                             dEditText.setBackground(new BitmapDrawable(bitmap));
-                            sQuestion.getChoiceD().setBitmap(bitmap);
+                            getCurrentQuestion().getChoiceD().setBitmap(bitmap);
                             break;
                         default:
                             break;
@@ -339,24 +431,48 @@ public class EditQuestionActivty extends BaseActivity implements OnLongClickList
      * @param question
      */
     private void showQuestion() {
-        showQuestionItem(FLAG_TITLE, sQuestion.getTitle());
-        showQuestionItem(FLAG_A, sQuestion.getChoiceA());
-        showQuestionItem(FALG_B, sQuestion.getChoiceB());
-        showQuestionItem(FLAG_C, sQuestion.getChoiceC());
-        showQuestionItem(FLAG_D, sQuestion.getChoiceD());
+        mTempQuestion = Question.clone(getCurrentQuestion());
 
-        checkBoxA.setChecked(sQuestion.getChoiceA().isRight());
-        checkBoxB.setChecked(sQuestion.getChoiceB().isRight());
-        checkBoxC.setChecked(sQuestion.getChoiceC().isRight());
-        checkBoxD.setChecked(sQuestion.getChoiceD().isRight());
+        showQuestionNum();
+        showNextButton();
+
+        Question question = getCurrentQuestion();
+
+        showQuestionItem(FLAG_TITLE, question.getTitle());
+        showQuestionItem(FLAG_A, question.getChoiceA());
+        showQuestionItem(FALG_B, question.getChoiceB());
+        showQuestionItem(FLAG_C, question.getChoiceC());
+        showQuestionItem(FLAG_D, question.getChoiceD());
+
+        checkBoxA.setChecked(question.getChoiceA().isRight());
+        checkBoxB.setChecked(question.getChoiceB().isRight());
+        checkBoxC.setChecked(question.getChoiceC().isRight());
+        checkBoxD.setChecked(question.getChoiceD().isRight());
+    }
+
+    private void showQuestionNum() {
+        testNameTextView.setText(String.format(getString(R.string.test_name_num), sTest.getName(),
+                sTest.getQuestionNum()));
+        inputIndexTextView.setText(String.format(getString(R.string.problem_hint),
+                mCurrentQuestionIndex + 1));
+    }
+
+    private void showNextButton() {
+        if (mCurrentQuestionIndex == sTest.getQuestionNum() - 1) {
+            nextButton.setText(getResources().getString(R.string.complete));
+            nextButton.setTextColor(getResources().getColor(R.color.blue));
+        } else {
+            nextButton.setText(getResources().getString(R.string.next_item));
+            nextButton.setTextColor(getResources().getColor(R.color.black_700));
+        }
     }
 
     private void saveQuestion() {
-        QuestionItem titleItem = sQuestion.getTitle();
-        QuestionItem aItem = sQuestion.getChoiceA();
-        QuestionItem bItem = sQuestion.getChoiceB();
-        QuestionItem cItem = sQuestion.getChoiceC();
-        QuestionItem dItem = sQuestion.getChoiceD();
+        QuestionItem titleItem = getCurrentQuestion().getTitle();
+        QuestionItem aItem = getCurrentQuestion().getChoiceA();
+        QuestionItem bItem = getCurrentQuestion().getChoiceB();
+        QuestionItem cItem = getCurrentQuestion().getChoiceC();
+        QuestionItem dItem = getCurrentQuestion().getChoiceD();
 
         String questionTitle = titleEditText.getText().toString().trim();
         if (titleItem.isText()) {
@@ -471,17 +587,95 @@ public class EditQuestionActivty extends BaseActivity implements OnLongClickList
         return deleteIcon;
     }
 
-    private static final String ACTION_EDIT_QUESTION = "action_editQuestion";
-    public static final String DATA_INDEX = "data_index";
+    private Question getCurrentQuestion() {
+        return sTest.getQuestion(mCurrentQuestionIndex);
+    }
 
-    public static final int REQUEST_EDIT = 0;
-    public static final int RESULT_DELETE = 1;
+    /**
+     * 
+     * @title: onBackPressed
+     * @description: backpressed response
+     * @author: ZQJ
+     * @date: 2015年5月19日 下午9:21:02
+     */
+    @Override
+    public void onBackPressed() {
+        if (mAction.equals(ACTION_ADD_TEST)) {
+            cancelAddTest();
+        } else {
+            saveEditTest();
+        }
+    }
 
-    public static void startForResult(Context context, int index, Question question) {
-        Intent intent = new Intent(context, EditQuestionActivty.class);
-        intent.setAction(ACTION_EDIT_QUESTION);
-        intent.putExtra(DATA_INDEX, index);
-        ((Activity) context).startActivityForResult(intent, REQUEST_EDIT);
-        sQuestion = question;
+    private void cancelAddTest() {
+        OnClickListener sureListener = new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        };
+        DialogUtil.showNormalDialog(this, R.string.leave, R.string.sureLeave, R.string.sure,
+                sureListener, R.string.cancel, null);
+    }
+
+    private void saveEditTest() {
+        ToastUtil.toast("已保存");
+        try {
+            mTestDao = new TestDao(this);
+            mTestDao.add(sTest);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        mTestDao.close();
+        finish();
+    }
+
+    private void deleteTest() {
+        OnClickListener sureListener = new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                ToastUtil.toast("已删除");
+                try {
+                    mTestDao = new TestDao(EditTestActivity.this);
+                    mTestDao.deleteTestByName(sTest.getName());
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                mTestDao.close();
+                finish();
+            }
+        };
+        DialogUtil.showNormalDialog(this, R.string.dialog_title_delete,
+                "确定删除测试——" + sTest.getName() + "？", R.string.sure, sureListener, R.string.cancel,
+                null);
+    }
+
+    /**
+     * for add a new Test or Edit Test;
+     */
+    private static final String ACTION_ADD_TEST = "action_addTest";
+    private static final String ACTION_EDIT_TEST = "action_editTest";
+
+    /**
+     * for better effect, use static test, don't need parse bitmap
+     */
+    public static void startAddNewTest(Context context, Test test) {
+        Intent intent = new Intent(context, EditTestActivity.class);
+        intent.setAction(ACTION_ADD_TEST);
+        context.startActivity(intent);
+        sTest = test;
+    }
+
+    public static void startEditTest(Context context, Test test) {
+        Intent intent = new Intent(context, EditTestActivity.class);
+        intent.setAction(ACTION_EDIT_TEST);
+        context.startActivity(intent);
+        sTest = test;
     }
 }

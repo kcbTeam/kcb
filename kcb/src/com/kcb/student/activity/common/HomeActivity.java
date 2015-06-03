@@ -1,4 +1,4 @@
-package com.kcb.student.activity;
+package com.kcb.student.activity.common;
 
 import android.content.Context;
 import android.content.Intent;
@@ -166,11 +166,11 @@ public class HomeActivity extends BaseFragmentActivity {
         ButtonFlat modifyButton = (ButtonFlat) customView.findViewById(R.id.button_modifypassword);
         modifyButton.setOnClickListener(clickListener);
         modifyButton.setTextColor(getResources().getColor(R.color.black_700));
-        // modifyButton.setTextSize(14);
+        modifyButton.setTextSize(14);
         ButtonFlat exitButton = (ButtonFlat) customView.findViewById(R.id.button_exit);
         exitButton.setOnClickListener(clickListener);
         exitButton.setTextColor(getResources().getColor(R.color.black_700));
-        // exitButton.setTextSize(14);
+        exitButton.setTextSize(14);
     }
 
     private boolean hasClickBack = false;
