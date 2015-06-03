@@ -9,7 +9,7 @@
     <com.kcb.library.view.PaperButton
         android:id="@+id/button_start_checkin"
         style="@style/home_center_button"
-        widget:paper_text="@string/start"
+        widget:paper_text="@string/stu_start_checkin"
         widget:paper_text_color="@color/black_700"
         widget:paper_text_size="@dimen/text_size_medium" />
 

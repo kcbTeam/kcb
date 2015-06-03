@@ -98,6 +98,7 @@ public class TestFragment extends BaseFragment {
 
                     @Override
                     public void onResponse(JSONObject response) {
+                        //TODO save test to database
                         Test test = Test.fromJsonObject(response);
                         TestActivity.start(getActivity(), test);
                     }

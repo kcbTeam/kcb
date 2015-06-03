@@ -82,7 +82,7 @@ public class StartActivity extends BaseActivity {
 
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
-            View view = View.inflate(StartActivity.this, R.layout.comm_view_start_pager, null);
+            View view = View.inflate(StartActivity.this, R.layout.comm_pageritem_start, null);
             ImageView backgroundImageView =
                     (ImageView) view.findViewById(R.id.imageview_background);
             backgroundImageView.setImageResource(mBackgroundBitmapIds[position]);
