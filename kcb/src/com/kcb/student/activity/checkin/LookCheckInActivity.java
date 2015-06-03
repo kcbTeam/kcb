@@ -1,7 +1,10 @@
 package com.kcb.student.activity.checkin;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.util.DisplayMetrics;
@@ -12,6 +15,7 @@ import com.android.volley.Request.Method;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
@@ -26,6 +30,7 @@ import com.kcb.common.server.ResponseUtil;
 import com.kcb.common.server.UrlUtil;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
+import com.kcb.student.model.CheckInResult;
 import com.kcbTeam.R;
 
 /**
@@ -45,9 +50,9 @@ public class LookCheckInActivity extends BaseActivity {
 
     private TextView rateTextView;
 
-    private PieChart mChart;
+    private PieChart pieChart;
     private String[] mParties = new String[] {"成功签到", "未签到"};
-    private float[] quarterly = new float[] {80, 20};
+    private float[] mRates = new float[] {80, 20};
 
     @Override
     protected void onCreate(android.os.Bundle savedInstanceState) {
@@ -67,16 +72,18 @@ public class LookCheckInActivity extends BaseActivity {
         progressBar = (SmoothProgressBar) findViewById(R.id.progressbar_refresh);
 
         rateTextView = (TextView) findViewById(R.id.textview_rate);
-        showCheckInRate();
 
-        mChart = (PieChart) findViewById(R.id.piechart_rate);
+        pieChart = (PieChart) findViewById(R.id.piechart_rate);
 
         PieData mPieData = setData(2, 100);
-        showCheckInChart(mChart, mPieData);
+        showCheckInChart(pieChart, mPieData);
     }
 
     @Override
-    protected void initData() {}
+    protected void initData() {
+        // get rate from database;
+        // showCheckInRate(totalTimes, checkedTimes);
+    }
 
     @Override
     public void onClick(View v) {
@@ -92,8 +99,10 @@ public class LookCheckInActivity extends BaseActivity {
         }
     }
 
-    private void showCheckInRate() {
-        rateTextView.setText(String.format(getString(R.string.stu_checkin_rate), 10, 8, "0.8"));
+    // wanghang: don't delete it
+    private void showCheckInRate(int totalTimes, int checkedTimes) {
+        rateTextView.setText(String.format(getString(R.string.stu_checkin_rate), totalTimes,
+                checkedTimes));
     }
 
     private void showCheckInChart(PieChart pieChart, PieData pieData) {
@@ -132,7 +141,7 @@ public class LookCheckInActivity extends BaseActivity {
         }
         ArrayList<Entry> yValues = new ArrayList<Entry>();
         for (int i = 0; i < count; i++) {
-            yValues.add(new Entry(quarterly[i], i));
+            yValues.add(new Entry(mRates[i], i));
         }
 
         PieDataSet pieDataSet = new PieDataSet(yValues, null);
@@ -154,18 +163,25 @@ public class LookCheckInActivity extends BaseActivity {
     }
 
     private void refreshRate() {
-        // TODO get checkin rate from server
         if (progressBar.getVisibility() == View.VISIBLE) {
             return;
         }
         progressBar.setVisibility(View.VISIBLE);
-        JsonObjectRequest request =
-                new JsonObjectRequest(Method.GET, UrlUtil.getStuCheckinResultUrl(KAccount
-                        .getAccountId()), new Listener<JSONObject>() {
+        JsonArrayRequest request =
+                new JsonArrayRequest(Method.GET, UrlUtil.getStuCheckinResultUrl(KAccount
+                        .getAccountId()), new Listener<JSONArray>() {
 
                     @Override
-                    public void onResponse(JSONObject response) {
-                        // TODO save checkin rate and show it;
+                    public void onResponse(JSONArray response) {
+                        List<CheckInResult> results = new ArrayList<CheckInResult>();
+                        for (int i = 0; i < response.length(); i++) {
+                            try {
+                                CheckInResult result =
+                                        CheckInResult.fromJsonObject(response.getJSONObject(i));
+                                results.add(result);
+                            } catch (JSONException e) {}
+                        }
+                        // TODO save checkin rate to database and show it;
                     }
                 }, new ErrorListener() {
 

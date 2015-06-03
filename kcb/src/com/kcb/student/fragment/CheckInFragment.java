@@ -110,8 +110,11 @@ public class CheckInFragment extends BaseFragment {
                     public void onErrorResponse(VolleyError error) {
                         progressBar.hide(getActivity());
                         if (null != error.networkResponse) {
-                            if (error.networkResponse.statusCode == 400) {
+                            int statusCode = error.networkResponse.statusCode;
+                            if (statusCode == 400) {
                                 ToastUtil.toast("没有签到");
+                            } else if (statusCode == 401) {
+                                ToastUtil.toast("已经签到过了");
                             }
                         } else {
                             ResponseUtil.toastError(error);

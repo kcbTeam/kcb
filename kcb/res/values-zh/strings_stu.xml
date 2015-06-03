@@ -54,7 +54,7 @@
 
     <!-- CheckInResultActivity Start -->
     <string name="signresult">查看签到结果</string>
-    <string name="stu_checkin_rate">老师签到了%1$d次，其中你签到成功%2$d次，到课率为%3$s。</string>
+    <string name="stu_checkin_rate">老师签到了%1$d次，其中你成功签到了%2$d次。</string>
     <!-- CheckInResultActivity End -->
 
 
