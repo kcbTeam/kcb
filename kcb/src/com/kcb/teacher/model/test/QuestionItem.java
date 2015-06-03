@@ -29,8 +29,11 @@ public class QuestionItem implements Serializable {
     private Bitmap mBitmap;
     private String mBitmapString;
 
-    private boolean mIsRight = false; // useful when item is choice
+    private boolean mIsRight; // useful when item is choice
     private double mRate; // useful when item is choice, mRate represent a choice rate
+
+    private boolean mIsSelected; // used in stu module, useful when item is choice, true if stu
+                                 // selected this choice
 
     public QuestionItem() {}
 
@@ -146,6 +149,7 @@ public class QuestionItem implements Serializable {
     public static final String KEY_BITMAPSTRING = "bitmapstring";
     public static final String KEY_ISRIGHT = "isright";
     public static final String KEY_RATE = "rate";
+    public static final String KEY_ISSELECTED = "isselected";
 
     public JSONObject toJsonObject() {
         JSONObject jsonObject = new JSONObject();
@@ -156,6 +160,7 @@ public class QuestionItem implements Serializable {
             jsonObject.put(KEY_BITMAPSTRING, getBitmapString());
             jsonObject.put(KEY_ISRIGHT, mIsRight);
             jsonObject.put(KEY_RATE, mRate);
+            jsonObject.put(KEY_ISSELECTED, mIsSelected);
         } catch (JSONException e) {}
         return jsonObject;
     }
@@ -168,6 +173,7 @@ public class QuestionItem implements Serializable {
         item.mBitmapString = jsonObject.optString(KEY_BITMAPSTRING);
         item.mIsRight = jsonObject.optBoolean(KEY_ISRIGHT);
         item.mRate = jsonObject.optDouble(KEY_RATE);
+        item.mIsSelected = jsonObject.optBoolean(KEY_ISSELECTED);
         return item;
     }
 }

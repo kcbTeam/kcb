@@ -11,21 +11,13 @@
         android:id="@+id/layout_title"
         style="@style/common_title_layout" >
 
-        <include layout="@layout/comm_back_button" />
+        <include layout="@layout/comm_button_back" />
 
         <TextView
             style="@style/common_title"
             android:text="@string/testresult" />
 
-        <com.kcb.library.view.buttonflat.ButtonFlat
-            android:id="@+id/button_refresh"
-            style="@style/common_title_icon_layout_right" >
-
-            <ImageView
-                style="@style/common_title_icon_right"
-                android:src="@drawable/ic_refresh_black_24dp" >
-            </ImageView>
-        </com.kcb.library.view.buttonflat.ButtonFlat>
+        <include layout="@layout/comm_button_refresh" />
     </LinearLayout>
 
     <com.kcb.library.view.smoothprogressbar.SmoothProgressBar

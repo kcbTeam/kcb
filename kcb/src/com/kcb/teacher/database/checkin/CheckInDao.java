@@ -19,15 +19,16 @@ import com.kcb.teacher.database.CommonSQLiteOpenHelper;
 import com.kcb.teacher.model.checkin.CheckInResult;
 
 public class CheckInDao {
-    private CommonSQLiteOpenHelper mCommonSQLiteOpenHelper;
-    private SQLiteDatabase mSqLiteDatabase;
+
+    private CommonSQLiteOpenHelper mOpenHelper;
+    private SQLiteDatabase mDatabase;
 
     @SuppressLint("SimpleDateFormat")
     public static SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
     public CheckInDao(Context context) {
-        mCommonSQLiteOpenHelper = new CommonSQLiteOpenHelper(context);
-        mSqLiteDatabase = mCommonSQLiteOpenHelper.getWritableDatabase();
+        mOpenHelper = new CommonSQLiteOpenHelper(context);
+        mDatabase = mOpenHelper.getWritableDatabase();
     }
 
     /**
@@ -41,7 +42,7 @@ public class CheckInDao {
      * @throws JSONException
      */
     public void addCheckInReslt(CheckInResult checkInResult) throws SQLException, JSONException {
-        mSqLiteDatabase.execSQL(
+        mDatabase.execSQL(
                 "INSERT INTO " + CheckInDB.TABLE_NAME + " VALUES(null,?,?,?)",
                 new String[] {checkInResult.getDate().toString(),
                         String.valueOf(checkInResult.getRate()),
@@ -63,7 +64,7 @@ public class CheckInDao {
     public List<CheckInResult> getCheckInResultByDate(Date date) throws ParseException,
             JSONException {
         Cursor cursor =
-                mSqLiteDatabase.rawQuery("SELECT * FROM " + CheckInDB.TABLE_NAME + " WHERE "
+                mDatabase.rawQuery("SELECT * FROM " + CheckInDB.TABLE_NAME + " WHERE "
                         + CheckInDB.KEY_DATE + "=?", new String[] {date.toString()});
         List<CheckInResult> checkInResultsList = new ArrayList<CheckInResult>();
         if (cursor.moveToFirst()) {
@@ -88,8 +89,7 @@ public class CheckInDao {
      * @throws JSONException
      */
     public List<CheckInResult> getAllCheckInResults() throws ParseException, JSONException {
-        Cursor cursor =
-                mSqLiteDatabase.query(CheckInDB.TABLE_NAME, null, null, null, null, null, null);
+        Cursor cursor = mDatabase.query(CheckInDB.TABLE_NAME, null, null, null, null, null, null);
         List<CheckInResult> checkInResultsList = new ArrayList<CheckInResult>();
         if (cursor.moveToFirst()) {
             do {
@@ -103,7 +103,7 @@ public class CheckInDao {
 
 
     public void deleteCheckInResultsByDate(Date date) {
-        mSqLiteDatabase.delete(CheckInDB.TABLE_NAME, CheckInDB.KEY_DATE + "=?",
+        mDatabase.delete(CheckInDB.TABLE_NAME, CheckInDB.KEY_DATE + "=?",
                 new String[] {date.toString()});
     }
 
@@ -115,11 +115,10 @@ public class CheckInDao {
      * @date: 2015年5月31日 下午8:52:58
      */
     public void deleteAllCheckInResults() {
-        mSqLiteDatabase.execSQL("DELETE FROM " + CheckInDB.TABLE_NAME);
+        mDatabase.execSQL("DELETE FROM " + CheckInDB.TABLE_NAME);
     }
 
     public void close() {
-        mSqLiteDatabase.close();
+        mDatabase.close();
     }
-
 }

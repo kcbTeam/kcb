@@ -46,8 +46,6 @@ public class CheckInResult implements Serializable {
         return mUnCheckedStudents;
     }
 
-
-
     /**
      * checkinresult to json ,json to checkinresult
      */
@@ -60,10 +58,12 @@ public class CheckInResult implements Serializable {
         try {
             jsonObject.put(KEY_DATE, mDate.toString());
             jsonObject.put(KEY_RATE, mRate);
+
             JSONArray jsonArray = new JSONArray();
             for (int i = 0; i < mUnCheckedStudents.size(); i++) {
                 jsonArray.put(mUnCheckedStudents.get(i).toJsonObject());
             }
+
             jsonObject.put(KEY_UNCHECKSTU, jsonArray);
         } catch (JSONException e) {
             e.printStackTrace();
@@ -77,6 +77,7 @@ public class CheckInResult implements Serializable {
         try {
             checkInResult.mDate = new Date(jsonObject.optString(KEY_DATE));
             checkInResult.mRate = jsonObject.optDouble(KEY_RATE);
+
             JSONArray jsonArray = jsonObject.optJSONArray(KEY_UNCHECKSTU);
             for (int i = 0; i < jsonArray.length(); i++) {
                 checkInResult.mUnCheckedStudents.add(UncheckedStudent.fromJsonObject(jsonArray
