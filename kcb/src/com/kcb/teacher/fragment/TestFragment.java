@@ -31,9 +31,9 @@ import com.kcb.common.util.DialogUtil;
 import com.kcb.common.util.ToastUtil;
 import com.kcb.common.view.MaterialListDialog.OnClickSureListener;
 import com.kcb.library.view.PaperButton;
-import com.kcb.teacher.activity.CheckTestActivity;
-import com.kcb.teacher.activity.EditTestActivity;
-import com.kcb.teacher.activity.SetTestNameActivity;
+import com.kcb.teacher.activity.test.EditTestActivity;
+import com.kcb.teacher.activity.test.LookTestActivity;
+import com.kcb.teacher.activity.test.SetTestNameActivity;
 import com.kcb.teacher.database.test.TestDao;
 import com.kcb.teacher.model.test.Test;
 import com.kcbTeam.R;
@@ -117,7 +117,7 @@ public class TestFragment extends BaseFragment {
                     addOrEditTest();
                     break;
                 case R.id.button_test_result:
-                    Intent intent = new Intent(getActivity(), CheckTestActivity.class);
+                    Intent intent = new Intent(getActivity(), LookTestActivity.class);
                     startActivity(intent);
                     break;
                 default:

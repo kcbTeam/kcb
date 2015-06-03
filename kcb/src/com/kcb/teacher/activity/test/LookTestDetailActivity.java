@@ -1,4 +1,4 @@
-package com.kcb.teacher.activity;
+package com.kcb.teacher.activity.test;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ import com.kcb.teacher.model.test.QuestionItem;
 import com.kcb.teacher.model.test.Test;
 import com.kcbTeam.R;
 
-public class CheckTestDetailsActivity extends BaseActivity {
+public class LookTestDetailActivity extends BaseActivity {
     @SuppressWarnings("unused")
     private static final String TAG = "CheckTest";
 
@@ -78,7 +78,7 @@ public class CheckTestDetailsActivity extends BaseActivity {
     @Override
     protected void initData() {
 
-        mTest = (Test) getIntent().getSerializableExtra(CheckTestActivity.CLICKED_TEST_KEY);
+        mTest = (Test) getIntent().getSerializableExtra(LookTestActivity.CLICKED_TEST_KEY);
         mQuestionList = mTest.getQuestions();
         mQuestionNum = mQuestionList.size();
         mCurrentPosition = 0;

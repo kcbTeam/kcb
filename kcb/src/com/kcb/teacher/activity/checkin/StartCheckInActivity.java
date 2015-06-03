@@ -1,7 +1,8 @@
-package com.kcb.teacher.activity;
+package com.kcb.teacher.activity.checkin;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.TextView;
 
 import com.android.volley.Request.Method;
@@ -15,6 +16,7 @@ import com.kcb.common.listener.DelayClickListener;
 import com.kcb.common.server.RequestUtil;
 import com.kcb.common.server.ResponseUtil;
 import com.kcb.common.server.UrlUtil;
+import com.kcb.common.util.DialogUtil;
 import com.kcb.common.util.ToastUtil;
 import com.kcb.library.view.PaperButton;
 import com.kcb.library.view.buttonflat.ButtonFlat;
@@ -111,28 +113,36 @@ public class StartCheckInActivity extends BaseActivity {
         if (startProgressBar.getVisibility() == View.VISIBLE) {
             return;
         }
-        startProgressBar.setVisibility(View.VISIBLE);
-        startTipTextView.setText("请稍后……");
-        // start checkin
-        StringRequest request =
-                new StringRequest(Method.POST, UrlUtil.getTchCheckinStartUrl(
-                        KAccount.getAccountId(), mNum), new Listener<String>() {
+        OnClickListener sureClickListener = new OnClickListener() {
 
-                    @Override
-                    public void onResponse(String response) {
-                        //
-                        ToastUtil.toast("签到已开始，结束后可查看结果");
-                    }
-                }, new ErrorListener() {
+            @Override
+            public void onClick(View v) {
+                startProgressBar.setVisibility(View.VISIBLE);
+                startTipTextView.setText("请稍后……");
+                // start checkin
+                StringRequest request =
+                        new StringRequest(Method.POST, UrlUtil.getTchCheckinStartUrl(
+                                KAccount.getAccountId(), mNum), new Listener<String>() {
 
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        startTipTextView.setText(getString(R.string.tipforteacher2));
-                        startProgressBar.hide(StartCheckInActivity.this);
-                        ResponseUtil.toastError(error);
-                    }
-                });
-        RequestUtil.getInstance().addToRequestQueue(request, TAG);
+                            @Override
+                            public void onResponse(String response) {
+                                ToastUtil.toast("签到已开始");
+                                finish();
+                            }
+                        }, new ErrorListener() {
+
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                startTipTextView.setText(getString(R.string.tipforteacher2));
+                                startProgressBar.hide(StartCheckInActivity.this);
+                                ResponseUtil.toastError(error);
+                            }
+                        });
+                RequestUtil.getInstance().addToRequestQueue(request, TAG);
+            }
+        };
+        DialogUtil.showNormalDialog(StartCheckInActivity.this, R.string.start, R.string.start_tip,
+                R.string.sure, sureClickListener, R.string.cancel, null);
     }
 
     @Override

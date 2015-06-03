@@ -43,7 +43,8 @@ public class StringMatchUtil {
         }
         for (int i = 0; i < name.length(); i++) {
             if (String.valueOf(name.charAt(i)).startsWith(compare)
-                    || StringMatchUtil.getEnName(String.valueOf(name.charAt(i))).startsWith(compare)) {
+                    || StringMatchUtil.getEnName(String.valueOf(name.charAt(i)))
+                            .startsWith(compare)) {
                 return true;
             }
         }

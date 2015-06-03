@@ -1,4 +1,4 @@
-package com.kcb.teacher.activity;
+package com.kcb.teacher.activity.test;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -29,7 +29,7 @@ import com.kcbTeam.R;
  * @author: ZQJ
  * @date: 2015年5月16日 下午4:00:49
  */
-public class CheckTestActivity extends BaseActivity implements TextWatcher, OnItemClickListener {
+public class LookTestActivity extends BaseActivity implements TextWatcher, OnItemClickListener {
     @SuppressWarnings("unused")
     private static final String TAG = "CheckTest";
 
@@ -47,6 +47,7 @@ public class CheckTestActivity extends BaseActivity implements TextWatcher, OnIt
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tch_activity_checktest);
+
         initView();
         initData();
     }
@@ -103,8 +104,8 @@ public class CheckTestActivity extends BaseActivity implements TextWatcher, OnIt
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Intent intent = new Intent(this, CheckTestDetailsActivity.class);
-        intent.putExtra(CheckTestActivity.CLICKED_TEST_KEY,
+        Intent intent = new Intent(this, LookTestDetailActivity.class);
+        intent.putExtra(LookTestActivity.CLICKED_TEST_KEY,
                 mTempTestList.get(mTempTestList.size() - 1 - position));
         startActivity(intent);
     }

@@ -36,12 +36,12 @@
 
         <!-- student start -->
         <activity
-            android:name="com.kcb.student.activity.LoginActivity"
+            android:name="com.kcb.student.activity.common.LoginActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateVisible" >
         </activity>
         <activity
-            android:name="com.kcb.student.activity.HomeActivity"
+            android:name="com.kcb.student.activity.common.HomeActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
@@ -57,7 +57,7 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.kcb.student.activity.ModifyPasswordActivity"
+            android:name="com.kcb.student.activity.common.ModifyPasswordActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" >
         </activity>
@@ -85,15 +85,15 @@
             android:windowSoftInputMode="adjustNothing" >
         </activity>
         <activity
-            android:name="com.kcb.teacher.activity.StartCheckInActivity"
+            android:name="com.kcb.teacher.activity.checkin.StartCheckInActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.kcb.teacher.activity.LookCheckInActivity"
+            android:name="com.kcb.teacher.activity.checkin.LookCheckInActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.kcb.teacher.activity.LookCheckInDetailActivity"
+            android:name="com.kcb.teacher.activity.checkin.LookCheckInDetailActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
@@ -123,12 +123,12 @@
             android:windowSoftInputMode="adjustPan" >
         </activity>
         <activity
-            android:name="com.kcb.teacher.activity.CheckTestActivity"
+            android:name="com.kcb.teacher.activity.LookTestActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" >
         </activity>
         <activity
-            android:name="com.kcb.teacher.activity.CheckTestDetailsActivity"
+            android:name="com.kcb.teacher.activity.LookTestDetailActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity

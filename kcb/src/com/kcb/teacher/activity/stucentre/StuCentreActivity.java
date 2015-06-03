@@ -1,4 +1,4 @@
-package com.kcb.teacher.activity;
+package com.kcb.teacher.activity.stucentre;
 
 import java.util.ArrayList;
 

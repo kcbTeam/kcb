@@ -11,7 +11,7 @@ import com.kcb.common.base.BaseFragment;
 import com.kcb.common.listener.DelayClickListener;
 import com.kcb.library.view.PaperButton;
 import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
-import com.kcb.student.activity.LookTestActivity;
+import com.kcb.student.activity.test.LookTestActivity;
 import com.kcbTeam.R;
 
 /**

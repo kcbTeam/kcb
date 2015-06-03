@@ -10,8 +10,8 @@ import android.view.ViewGroup;
 import com.kcb.common.base.BaseFragment;
 import com.kcb.common.listener.DelayClickListener;
 import com.kcb.library.view.PaperButton;
-import com.kcb.teacher.activity.LookCheckInActivity;
-import com.kcb.teacher.activity.StartCheckInActivity;
+import com.kcb.teacher.activity.checkin.LookCheckInActivity;
+import com.kcb.teacher.activity.checkin.StartCheckInActivity;
 import com.kcbTeam.R;
 
 /**

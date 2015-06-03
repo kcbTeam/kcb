@@ -1,4 +1,4 @@
-package com.kcb.student.activity;
+package com.kcb.student.activity.common;
 
 import android.os.Bundle;
 import android.os.Handler;

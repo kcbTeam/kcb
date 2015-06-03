@@ -1,4 +1,4 @@
-package com.kcb.student.activity;
+package com.kcb.student.activity.checkin;
 
 import android.content.Context;
 import android.content.Intent;

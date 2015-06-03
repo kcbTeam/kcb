@@ -117,18 +117,11 @@ public class UrlUtil {
         return url_tch_checkin_start + "?id=" + id + "&num=" + num;
     }
 
-    // 2.2 stop checkin
-    private static final String url_tch_checkin_stop = IP + "/v1/tch/checkin/stop";
+    // 2.2 get checkin result
+    private static final String url_tch_checkin_getresult = IP + "/v1/tch/checkin/getresult";
 
-    public static String getTchCheckinStopUrl(String id, int num) {
-        return url_tch_checkin_stop + "?id=" + id + "&num=" + num;
-    }
-
-    // 2.3 giveup checkin
-    private static final String url_tch_checkin_giveup = IP + "/v1/tch/checkin/giveup";
-
-    public static String getTchCheckinGiveupUrl(String id, String num) {
-        return url_tch_checkin_giveup + "?id=" + id + "&num=" + num;
+    public static String getTchCheckinGetresultUrl(String id) {
+        return url_tch_checkin_getresult + "?id=" + id;
     }
 
     /**

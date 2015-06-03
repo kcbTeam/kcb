@@ -24,7 +24,7 @@ import android.widget.TextView;
 import com.kcb.common.base.BaseFragment;
 import com.kcb.common.util.StringMatchUtil;
 import com.kcb.library.view.FloatingEditText;
-import com.kcb.teacher.activity.StuCentreActivity;
+import com.kcb.teacher.activity.stucentre.StuCentreActivity;
 import com.kcb.teacher.adapter.ListAdapterStudent;
 import com.kcb.teacher.model.stucentre.Student;
 import com.kcb.teacher.util.CompareByCheckInRate;
