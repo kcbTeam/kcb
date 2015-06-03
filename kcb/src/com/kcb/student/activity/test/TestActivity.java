@@ -2,6 +2,8 @@ package com.kcb.student.activity.test;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.graphics.Color;
@@ -46,7 +48,9 @@ public class TestActivity extends BaseFragmentActivity {
     private CheckBox checkboxB;
     private CheckBox checkboxC;
     private CheckBox checkboxD;
-    private Test mTest;
+
+    public static Test sTest;
+
     private fiveCountDownTimer timeCountDown;
     private RecyclerView recyclerView;
     private TestRecycleAdapter mAdapter;
@@ -90,17 +94,17 @@ public class TestActivity extends BaseFragmentActivity {
     protected void initData() {
         String string = getIntent().getStringExtra("questionInfo");
         JsonObjectParserUtil questionData = new JsonObjectParserUtil(string);
-        mTest = questionData.ParserJsonObject();
+        sTest = questionData.ParserJsonObject();
         // JSONObject jsonObject = JSONObject.fromObject(mTest);
         // LogUtil.i("efvgfr", jsonObject.toString());
-        questionNum = mTest.getQuestionNum();
+        questionNum = sTest.getQuestionNum();
         recyclerView.setLayoutManager(new GridLayoutManager(this, questionNum));
         mAdapter = new TestRecycleAdapter(questionNum);
         recyclerView.setAdapter(mAdapter);
         if (questionNum == 1) nextButton.setText("已完成");
-        titleTextView.setText(mTest.getName());
+        titleTextView.setText(sTest.getName());
         showCurrentQuestion(0);
-        setTimeCounterDown(mTest.getTime() * 60000);
+        setTimeCounterDown(sTest.getTime() * 60000);
     }
 
     @Override
@@ -170,44 +174,44 @@ public class TestActivity extends BaseFragmentActivity {
     @SuppressWarnings("deprecation")
     public void showCurrentQuestion(int position) {
 
-        if (mTest.getQuestion(position).getTitle().isText()) {
+        if (sTest.getQuestion(position).getTitle().isText()) {
             questionTextView.setText(Integer.toString(position + 1) + "、"
-                    + mTest.getQuestion(position).getTitle().getText());
+                    + sTest.getQuestion(position).getTitle().getText());
             questionTextView.setBackgroundColor(Color.WHITE);
         } else {
-            questionTextView.setBackground(new BitmapDrawable(mTest.getQuestion(position)
+            questionTextView.setBackground(new BitmapDrawable(sTest.getQuestion(position)
                     .getTitle().getBitmap()));
             questionTextView.setText("");
         }
-        if (mTest.getQuestion(position).getChoiceA().isText()) {
-            answerATextView.setText("A、" + mTest.getQuestion(position).getChoiceA().getText());
+        if (sTest.getQuestion(position).getChoiceA().isText()) {
+            answerATextView.setText("A、" + sTest.getQuestion(position).getChoiceA().getText());
             answerATextView.setBackgroundColor(Color.WHITE);
         } else {
-            answerATextView.setBackground(new BitmapDrawable(mTest.getQuestion(position)
+            answerATextView.setBackground(new BitmapDrawable(sTest.getQuestion(position)
                     .getChoiceA().getBitmap()));
             answerATextView.setText("");
         }
-        if (mTest.getQuestion(position).getChoiceB().isText()) {
-            answerBTextView.setText("B、" + mTest.getQuestion(position).getChoiceB().getText());
+        if (sTest.getQuestion(position).getChoiceB().isText()) {
+            answerBTextView.setText("B、" + sTest.getQuestion(position).getChoiceB().getText());
             answerBTextView.setBackgroundColor(Color.WHITE);
         } else {
-            answerBTextView.setBackground(new BitmapDrawable(mTest.getQuestion(position)
+            answerBTextView.setBackground(new BitmapDrawable(sTest.getQuestion(position)
                     .getChoiceB().getBitmap()));
             answerBTextView.setText("");
         }
-        if (mTest.getQuestion(position).getChoiceC().isText()) {
-            answerCTextView.setText("C、" + mTest.getQuestion(position).getChoiceC().getText());
+        if (sTest.getQuestion(position).getChoiceC().isText()) {
+            answerCTextView.setText("C、" + sTest.getQuestion(position).getChoiceC().getText());
             answerCTextView.setBackgroundColor(Color.WHITE);
         } else {
-            answerCTextView.setBackground(new BitmapDrawable(mTest.getQuestion(position)
+            answerCTextView.setBackground(new BitmapDrawable(sTest.getQuestion(position)
                     .getChoiceC().getBitmap()));
             answerCTextView.setText("");
         }
-        if (mTest.getQuestion(position).getTitle().isText()) {
-            answerDTextView.setText("D、" + mTest.getQuestion(position).getChoiceD().getText());
+        if (sTest.getQuestion(position).getTitle().isText()) {
+            answerDTextView.setText("D、" + sTest.getQuestion(position).getChoiceD().getText());
             answerDTextView.setBackgroundColor(Color.WHITE);
         } else {
-            answerDTextView.setBackground(new BitmapDrawable(mTest.getQuestion(position)
+            answerDTextView.setBackground(new BitmapDrawable(sTest.getQuestion(position)
                     .getChoiceD().getBitmap()));
             answerDTextView.setText("");
         }
@@ -312,5 +316,14 @@ public class TestActivity extends BaseFragmentActivity {
         mEditor.putLong("CounterTimes", timeCountDown.getMillisUntilFinished());
         mEditor.commit();
         timeCountDown.cancel();
+    }
+
+    /**
+     * start
+     */
+    public static void start(Context context, Test test) {
+        Intent intent = new Intent(context, TestActivity.class);
+        context.startActivity(intent);
+        sTest = test;
     }
 }
