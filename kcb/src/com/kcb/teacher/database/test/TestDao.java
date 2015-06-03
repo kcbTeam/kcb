@@ -2,7 +2,6 @@ package com.kcb.teacher.database.test;
 
 import java.io.IOException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,9 +20,6 @@ import com.kcb.teacher.model.test.Test;
 public class TestDao {
     private CommonSQLiteOpenHelper mTestSQLiteOpenHelper;
     private SQLiteDatabase mSqLiteDatabase;
-
-    @SuppressLint("SimpleDateFormat")
-    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
     public TestDao(Context context) {
         mTestSQLiteOpenHelper = new CommonSQLiteOpenHelper(context);
@@ -46,13 +42,13 @@ public class TestDao {
         if (null != test) {
             deleteTestByName(test.getName());
         }
-        String hasTested = "0";
+        int hasTested = 0;
         if (test.isTested()) {
-            hasTested = "1";
+            hasTested = 1;
         }
         mSqLiteDatabase.execSQL("INSERT INTO " + TestDB.TABLE_NAME + " VALUES(null,?,?,?,?,?,?)",
                 new String[] {test.getId(), test.getName(), String.valueOf(test.getTime()),
-                        test.getDate().toString(), hasTested, test.toJsonObject().toString()});
+                        test.getDate().toString(), String.valueOf(hasTested), test.toJsonObject().toString()});
     }
 
     /**
