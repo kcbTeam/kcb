@@ -122,12 +122,12 @@ public class StuCentreActivity extends BaseActivity {
         }
 
         PieDataSet dataSet = new PieDataSet(yVals1, " ");
-        dataSet.setSliceSpace(3f);
-        dataSet.setSelectionShift(5f);
+        dataSet.setSliceSpace(0);
+        // dataSet.setSelectionShift(5f);
 
         ArrayList<Integer> colors = new ArrayList<Integer>();
-        colors.add(Color.rgb(192, 255, 140));
-        colors.add(Color.GRAY);
+        colors.add(0xff427fed);
+        colors.add(0xffbdbdbd);
         colors.add(ColorTemplate.getHoloBlue());
         dataSet.setColors(colors);
 
