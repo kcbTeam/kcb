@@ -45,24 +45,24 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.kcb.student.activity.StartCheckInActivity"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
-            android:name="com.kcb.student.activity.LookCheckInActivity"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
-            android:name="com.kcb.student.activity.TestActivity"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
             android:name="com.kcb.student.activity.common.ModifyPasswordActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" >
         </activity>
         <activity
-            android:name="com.kcb.student.activity.LookTestActivity"
+            android:name="com.kcb.student.activity.checkin.StartCheckInActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.kcb.student.activity.checkin.LookCheckInActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.kcb.student.activity.test.TestActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.kcb.student.activity.test.LookTestActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" >
         </activity>
@@ -102,10 +102,6 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.kcb.teacher.activity.stucentre.StuCentreActivity"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
             android:name="com.kcb.teacher.activity.test.SetTestNameActivity"
             android:screenOrientation="portrait" >
         </activity>
@@ -134,6 +130,10 @@
         </activity>
         <activity
             android:name="com.kcb.teacher.activity.test.CropPictureActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.kcb.teacher.activity.stucentre.StuCentreActivity"
             android:screenOrientation="portrait" >
         </activity>
         <!-- teacher end -->
