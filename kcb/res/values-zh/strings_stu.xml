@@ -31,7 +31,7 @@
     <!-- HomeActivity Start -->
     <string name="signbtn">课堂签到</string>
     <string name="testbtn">课堂小测试</string>
-    <string name="start">开始签到  </string>
+    <string name="stu_start_checkin">开始签到  </string>
     <string name="check">查看签到结果</string>
     <string name="start1">开始答题</string>
     <string name="check1">查看测试结果</string>
