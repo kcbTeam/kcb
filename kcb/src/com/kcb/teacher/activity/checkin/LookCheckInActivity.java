@@ -22,6 +22,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.kcb.common.application.KAccount;
 import com.kcb.common.base.BaseActivity;
 import com.kcb.common.server.RequestUtil;
+import com.kcb.common.server.ResponseUtil;
 import com.kcb.common.server.UrlUtil;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
@@ -133,6 +134,7 @@ public class LookCheckInActivity extends BaseActivity implements OnItemClickList
 
                     @Override
                     public void onResponse(JSONArray response) {
+                        progressBar.hide(LookCheckInActivity.this);
                         List<CheckInResult> results = new ArrayList<CheckInResult>();
                         for (int i = 0; i < response.length(); i++) {
                             try {
@@ -146,7 +148,10 @@ public class LookCheckInActivity extends BaseActivity implements OnItemClickList
                 }, new ErrorListener() {
 
                     @Override
-                    public void onErrorResponse(VolleyError error) {}
+                    public void onErrorResponse(VolleyError error) {
+                        progressBar.hide(LookCheckInActivity.this);
+                        ResponseUtil.toastError(error);
+                    }
                 });
         RequestUtil.getInstance().addToRequestQueue(request, TAG);
     }

@@ -112,14 +112,13 @@ public class CheckInFragment extends BaseFragment {
                         if (null != error.networkResponse) {
                             int statusCode = error.networkResponse.statusCode;
                             if (statusCode == 400) {
-                                ToastUtil.toast("没有签到");
+                                ToastUtil.toast(R.string.stu_no_checkin);
                             } else if (statusCode == 401) {
-                                ToastUtil.toast("已经签到过了");
+                                ToastUtil.toast(R.string.stu_has_checkin);
                             }
                         } else {
                             ResponseUtil.toastError(error);
                         }
-                        StartCheckInActivity.start(getActivity(), "10");
                     };
                 });
         RequestUtil.getInstance().addToRequestQueue(request, TAG);

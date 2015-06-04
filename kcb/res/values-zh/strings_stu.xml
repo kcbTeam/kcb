@@ -54,6 +54,10 @@
 
 
     <!-- StartCheckInActivity Start -->
+    <!--  -->
+    <string name="stu_no_checkin">没有签到</string>
+    <string name="stu_has_checkin">已经签到过了</string>
+    <!--  -->
     <string name="stu_input_checkin_num">请输入老师报出的签到数字</string>
     <string name="stu_checkin_remain_time">倒计时：%1$d秒</string>
     <!--  -->

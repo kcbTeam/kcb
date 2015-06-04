@@ -99,7 +99,6 @@ public class LookTestActivity extends BaseActivity implements TextWatcher, OnIte
         mAdapter = new ListAdapterCourseTest(this, mTempTestList);
         testListView.setAdapter(mAdapter);
         testListView.setOnItemClickListener(this);
-
     }
 
     @Override
@@ -142,7 +141,6 @@ public class LookTestActivity extends BaseActivity implements TextWatcher, OnIte
             case R.id.button_back:
                 finish();
                 break;
-
             default:
                 break;
         }

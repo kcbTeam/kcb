@@ -52,10 +52,10 @@ public class ModifyPasswordActivity extends BaseActivity {
     @Override
     protected void initView() {
         backButton = (ButtonFlat) findViewById(R.id.button_back);
-        backButton.setOnClickListener(mClickListener);
+        backButton.setOnClickListener(this);
 
         nextButton = (PaperButton) findViewById(R.id.button_next);
-        nextButton.setOnClickListener(this);
+        nextButton.setOnClickListener(mClickListener);
         nextProgressBar = (SmoothProgressBar) findViewById(R.id.progressbar_next);
 
         oldPasswordEditText = (FloatingEditText) findViewById(R.id.edittext_oldpassword);
@@ -74,6 +74,17 @@ public class ModifyPasswordActivity extends BaseActivity {
     @Override
     protected void initData() {}
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.button_back:
+                finish();
+                break;
+            default:
+                break;
+        }
+    }
+
     private DelayClickListener mClickListener = new DelayClickListener(
             DelayClickListener.DELAY_PAPER_BUTTON) {
 
@@ -87,9 +98,6 @@ public class ModifyPasswordActivity extends BaseActivity {
                     break;
                 case R.id.button_complete:
                     setNewPassword();
-                    break;
-                case R.id.button_back:
-                    finish();
                     break;
             }
         }
