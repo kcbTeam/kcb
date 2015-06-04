@@ -1,8 +1,5 @@
 package com.kcb.common.model.answer;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.kcb.common.model.test.Question;
 
 /**
