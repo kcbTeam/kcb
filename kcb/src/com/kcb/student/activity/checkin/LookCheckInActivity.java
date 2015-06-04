@@ -49,7 +49,6 @@ public class LookCheckInActivity extends BaseActivity {
     private TextView rateTextView;
 
     private PieChart pieChart;
-    private String[] mParties = new String[] {"成功签到", "未签到"};
     private float[] mRates = new float[] {80, 20};
 
     @Override
@@ -134,9 +133,8 @@ public class LookCheckInActivity extends BaseActivity {
 
     private PieData setData(int count, float range) {
         ArrayList<String> xValues = new ArrayList<String>();
-        for (int i = 0; i < count; i++) {
-            xValues.add(mParties[i]);
-        }
+        xValues.add(getString(R.string.stu_success_checkin));
+        xValues.add(getString(R.string.stu_uncheckin));
         ArrayList<Entry> yValues = new ArrayList<Entry>();
         for (int i = 0; i < count; i++) {
             yValues.add(new Entry(mRates[i], i));

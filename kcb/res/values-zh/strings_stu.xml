@@ -23,9 +23,8 @@
     <!-- HomeActivity Start -->
     <string name="stu_class_checkin">课堂签到</string>
     <string name="stu_class_test">课堂小测试</string>
-    
     <string name="stu_start_checkin">开始签到  </string>
-    <string name="check">查看签到结果</string>
+    <string name="stu_look_checkin_result">查看签到结果</string>
     <string name="start1">开始答题</string>
     <string name="check1">查看测试结果</string>
     <string name="button_modify">修改密码</string>
@@ -47,6 +46,8 @@
 
 
     <!-- CheckinActivity Start -->
+    <string name="stu_success_checkin">成功签到</string>
+    <string name="stu_uncheckin">未签到</string>
     <string name="checkin">课堂签到</string>
     <string name="tip_inputnum">请输入老师报出的签到数字</string>
     <string name="checkin_remain_time">倒计时：%1$d秒</string>
@@ -60,7 +61,6 @@
 
 
     <!-- CheckInResultActivity Start -->
-    <string name="signresult">查看签到结果</string>
     <string name="stu_checkin_rate">老师签到了%1$d次，其中你成功签到了%2$d次。</string>
     <!-- CheckInResultActivity End -->
 

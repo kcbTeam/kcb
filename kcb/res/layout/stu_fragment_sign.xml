@@ -25,7 +25,7 @@
         android:id="@+id/button_look_checkin"
         style="@style/home_center_button"
         android:layout_below="@id/progressbar_start_checkin"
-        widget:paper_text="@string/check"
+        widget:paper_text="@string/stu_look_checkin_result"
         widget:paper_text_color="@color/black_700"
         widget:paper_text_size="@dimen/text_size_medium" />
 
