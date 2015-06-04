@@ -119,8 +119,8 @@ public class StartCheckInActivity extends BaseActivity {
 
     private void showTimeEndDialog() {
         MaterialDialog dialog =
-                DialogUtil.showNormalDialog(StartCheckInActivity.this, R.string.tip,
-                        R.string.checkin_time_end, R.string.sure, new OnClickListener() {
+                DialogUtil.showNormalDialog(StartCheckInActivity.this, R.string.stu_comm_tip,
+                        R.string.checkin_time_end, R.string.stu_comm_sure, new OnClickListener() {
 
                             @Override
                             public void onClick(View v) {

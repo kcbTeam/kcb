@@ -142,7 +142,7 @@ public class StartCheckInActivity extends BaseActivity {
             }
         };
         DialogUtil.showNormalDialog(StartCheckInActivity.this, R.string.start, R.string.start_tip,
-                R.string.sure, sureClickListener, R.string.cancel, null);
+                R.string.tch_comm_sure, sureClickListener, R.string.tch_comm_cancel, null);
     }
 
     @Override

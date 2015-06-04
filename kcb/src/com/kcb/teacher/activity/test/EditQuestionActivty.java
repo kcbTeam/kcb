@@ -157,7 +157,7 @@ public class EditQuestionActivty extends BaseActivity implements OnLongClickList
                 break;
             case R.id.button_delete:
                 DialogUtil.showNormalDialog(this, R.string.dialog_title_delete,
-                        R.string.delete_msg, R.string.sure, new OnClickListener() {
+                        R.string.delete_msg, R.string.tch_comm_sure, new OnClickListener() {
 
                             @Override
                             public void onClick(View v) {
@@ -166,7 +166,7 @@ public class EditQuestionActivty extends BaseActivity implements OnLongClickList
                                 setResult(RESULT_DELETE, intent);
                                 finish();
                             }
-                        }, R.string.cancel, null);
+                        }, R.string.tch_comm_cancel, null);
                 break;
             case R.id.imageview_delete_title:
                 setEditMode(FLAG_TITLE, EDIT_MODE_TEXT);

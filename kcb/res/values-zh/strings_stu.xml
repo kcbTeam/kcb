@@ -2,28 +2,36 @@
 <resources>
 
     <!-- Commom Start -->
-    <string name="sure">确定</string>
-    <string name="cancel">取消</string>
-    <string name="submit">提交</string>
-    <string name="tip">提醒</string>
+    <string name="stu_comm_sure">确定</string>
+    <string name="stu_comm_cancel">取消</string>
+    <string name="stu_comm_submit">提交</string>
+    <string name="stu_comm_tip">提醒</string>
+    <string name="stu_comm_complete">完成</string>
     <!-- Commom End -->
 
 
     <!-- LoginActivity Start -->
+    <string name="stu_stu_login">学生登录</string>
+    <string name="stu_stuid">学号</string>
+    <string name="stu_password">密码</string>
     <string name="stu_id_error">学号错误</string>
     <string name="stu_password_error">密码错误</string>
+    <string name="stu_login">登录</string>
     <!-- LoginActivity End -->
 
 
     <!-- HomeActivity Start -->
-    <string name="signbtn">课堂签到</string>
-    <string name="testbtn">课堂小测试</string>
+    <string name="stu_class_checkin">课堂签到</string>
+    <string name="stu_class_test">课堂小测试</string>
+    
     <string name="stu_start_checkin">开始签到  </string>
     <string name="check">查看签到结果</string>
     <string name="start1">开始答题</string>
     <string name="check1">查看测试结果</string>
     <string name="button_modify">修改密码</string>
     <string name="stu_exit_account">退出账号</string>
+    <string name="stu_exit_account_tip">退出后，下次使用时需要重新登录。</string>
+    <string name="stu_click_again_exit_app">再按一次退出课程宝</string>
     <!-- HomeActivity End -->
 
 
@@ -47,9 +55,6 @@
     <string name="checkin_success">签到成功</string>
     <string name="checkin_failed">签到数字错误！</string>
     <string name="button_finish">完成</string>
-    <string name="button_login">登录</string>
-    <string name="hint_password">密码</string>
-    <string name="hint_stuid">学号</string>
     <string name="checkin_time_end">时间已到，你未完成本次签到。</string>
     <!-- CheckinActivity End -->
 

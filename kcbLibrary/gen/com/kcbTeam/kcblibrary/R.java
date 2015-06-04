@@ -720,9 +720,7 @@ containing a value of this type.
     }
     public static final class string {
         public static int app_name=0x7f080001;
-        public static int cancel=0x7f080003;
         public static int spb_default_speed=0x7f080000;
-        public static int sure=0x7f080002;
     }
     public static final class style {
         /** 

@@ -9,9 +9,9 @@
 
     <TextView
         android:id="@+id/textview_title"
-        android:text="设置测试时间"
         style="@style/common_title_left"
-        android:paddingLeft="16dp" />
+        android:paddingLeft="16dp"
+        android:text="设置测试时间" />
 
     <com.kcb.library.view.buttonflat.ButtonFlat
         android:id="@+id/button_finish"
@@ -42,6 +42,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/textview_testtime"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         android:layout_marginTop="16dp"
         android:background="@color/blue"
         widget:max="10"

@@ -171,8 +171,9 @@ public class TestActivity extends BaseActivity {
 
     private void showTimeEndDialog() {
         MaterialDialog dialog =
-                DialogUtil.showNormalDialog(TestActivity.this, R.string.tip,
-                        R.string.stu_test_time_end, R.string.submit, new OnClickListener() {
+                DialogUtil.showNormalDialog(TestActivity.this, R.string.stu_comm_tip,
+                        R.string.stu_test_time_end, R.string.stu_comm_submit,
+                        new OnClickListener() {
 
                             @Override
                             public void onClick(View v) {
@@ -299,14 +300,14 @@ public class TestActivity extends BaseActivity {
             dialogMessage = getString(R.string.stu_submit_test_finish);
         }
 
-        DialogUtil.showNormalDialog(TestActivity.this, R.string.submit, dialogMessage,
-                R.string.submit, new OnClickListener() {
+        DialogUtil.showNormalDialog(TestActivity.this, R.string.stu_comm_submit, dialogMessage,
+                R.string.stu_comm_submit, new OnClickListener() {
 
                     @Override
                     public void onClick(View v) {
                         submitAnswerToServer();
                     }
-                }, R.string.cancel, null);
+                }, R.string.stu_comm_cancel, null);
     }
 
     private static final String KEY_STUID = "sutid";
