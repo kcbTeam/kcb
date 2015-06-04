@@ -78,7 +78,7 @@ public class LookCheckInActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        // get rate from database;
+        // TODO get rate from database;
         // showCheckInRate(totalTimes, checkedTimes);
     }
 
@@ -96,7 +96,7 @@ public class LookCheckInActivity extends BaseActivity {
         }
     }
 
-    // wanghang: don't delete it
+    // TODO wanghang: don't delete it
     private void showCheckInRate(int totalTimes, int checkedTimes) {
         rateTextView.setText(String.format(getString(R.string.stu_checkin_rate), totalTimes,
                 checkedTimes));
