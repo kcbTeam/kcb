@@ -119,9 +119,9 @@ public class LoginActivity extends BaseActivity {
                                         loginProgressBar.hide(LoginActivity.this);
                                         if (null != error.networkResponse) {
                                             if (error.networkResponse.statusCode == 400) {
-                                                ToastUtil.toast("学号不存在");
+                                                ToastUtil.toast(R.string.stu_id_error);
                                             } else if (error.networkResponse.statusCode == 401) {
-                                                ToastUtil.toast("密码错误");
+                                                ToastUtil.toast(R.string.stu_password_error);
                                             }
                                         } else {
                                             ResponseUtil.toastError(error);

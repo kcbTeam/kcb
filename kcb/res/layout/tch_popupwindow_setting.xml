@@ -17,7 +17,7 @@
         android:id="@+id/button_exit"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
-        android:text="@string/button_exit"
+        android:text="@string/stu_exit_account"
         widget:rippleSpeed="12" />
 
 </LinearLayout>

@@ -5,14 +5,18 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.TextView;
 
 import com.kcb.common.base.BaseActivity;
+import com.kcb.common.util.DialogUtil;
 import com.kcb.common.util.ToastUtil;
+import com.kcb.common.view.MaterialDialog;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.library.view.checkbox.CheckBox;
-import com.kcb.teacher.activity.test.EditTestActivity;
+import com.kcb.student.activity.checkin.StartCheckInActivity;
 import com.kcb.teacher.database.test.TestDao;
 import com.kcb.teacher.model.test.Question;
 import com.kcb.teacher.model.test.QuestionItem;
@@ -31,7 +35,7 @@ public class TestActivity extends BaseActivity {
     private TextView testNameTextView;
     private TextView timeTextView;
 
-    private TextView inputIndexTextView;
+    private TextView questionIndexTextView;
 
     private TextView titleTextView;
     private TextView choiceATextView;
@@ -46,7 +50,7 @@ public class TestActivity extends BaseActivity {
 
     private ButtonFlat lastButton;
     private ButtonFlat nextButton;
-    private ButtonFlat addButton;
+    private ButtonFlat submitButton;
 
     // tag title/A/B/C/D;
     private final int FLAG_TITLE = 1;
@@ -64,6 +68,10 @@ public class TestActivity extends BaseActivity {
 
     private TestDao mTestDao;
 
+    private int mRemainTime; // seconds
+    private Handler mHandler;
+    private final int MESSAGE_TIME_REDUCE = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,7 +86,7 @@ public class TestActivity extends BaseActivity {
         testNameTextView = (TextView) findViewById(R.id.textview_testname);
         timeTextView = (TextView) findViewById(R.id.textview_time);
 
-        inputIndexTextView = (TextView) findViewById(R.id.textview_input_problem_tip);
+        questionIndexTextView = (TextView) findViewById(R.id.textview_question_num);
 
         titleTextView = (TextView) findViewById(R.id.textview_title);
         choiceATextView = (TextView) findViewById(R.id.textview_A);
@@ -90,8 +98,8 @@ public class TestActivity extends BaseActivity {
         lastButton.setOnClickListener(this);
         nextButton = (ButtonFlat) findViewById(R.id.button_next);
         nextButton.setOnClickListener(this);
-        addButton = (ButtonFlat) findViewById(R.id.button_add);
-        addButton.setOnClickListener(this);
+        submitButton = (ButtonFlat) findViewById(R.id.button_submit);
+        submitButton.setOnClickListener(this);
 
         checkBoxA = (CheckBox) findViewById(R.id.checkBox_A);
         checkBoxB = (CheckBox) findViewById(R.id.checkBox_B);
@@ -102,7 +110,45 @@ public class TestActivity extends BaseActivity {
     @Override
     protected void initData() {
         testNameTextView.setText(sTest.getName() + "（共" + sTest.getQuestionNum() + "题）");
-        //showQuestion();
+        showQuestionIndex();
+        showQuestion();
+
+        mRemainTime = getIntent().getIntExtra(DATA_REMAIN_TIME, 0);
+        mHandler = new Handler(getMainLooper()) {
+            public void handleMessage(android.os.Message msg) {
+                showRemainTime();
+                if (mRemainTime == 0) {
+                    showTimeEndDialog();
+                } else {
+                    sendEmptyMessageDelayed(MESSAGE_TIME_REDUCE, 1000);
+                    mRemainTime--;
+                }
+            };
+        };
+        mHandler.sendEmptyMessage(MESSAGE_TIME_REDUCE);
+    }
+
+    private void showRemainTime() {
+        timeTextView.setText(String.format(getString(R.string.stu_remain_time), mRemainTime / 60,
+                mRemainTime % 60));
+    }
+
+    private void showTimeEndDialog() {
+        MaterialDialog dialog =
+                DialogUtil.showNormalDialog(TestActivity.this, R.string.tip,
+                        R.string.stu_test_time_end, R.string.submit, new OnClickListener() {
+
+                            @Override
+                            public void onClick(View v) {
+                                finish();
+                            }
+                        }, -1, null);
+        dialog.setCancelable(false);
+    }
+
+    private void showQuestionIndex() {
+        questionIndexTextView.setText(String.format(getString(R.string.stu_question_index),
+                mCurrentQuestionIndex + 1));
     }
 
     @Override
@@ -114,9 +160,7 @@ public class TestActivity extends BaseActivity {
             case R.id.button_next:
                 nextQuesion();
                 break;
-            case R.id.button_add:
-                break;
-            case R.id.button_delete:
+            case R.id.button_submit:
                 break;
             default:
                 break;
@@ -167,7 +211,7 @@ public class TestActivity extends BaseActivity {
     private void showQuestionNum() {
         testNameTextView.setText(String.format(getString(R.string.test_name_num), sTest.getName(),
                 sTest.getQuestionNum()));
-        inputIndexTextView.setText(String.format(getString(R.string.problem_hint),
+        questionIndexTextView.setText(String.format(getString(R.string.problem_hint),
                 mCurrentQuestionIndex + 1));
     }
 
@@ -248,18 +292,17 @@ public class TestActivity extends BaseActivity {
         return sTest.getQuestion(mCurrentQuestionIndex);
     }
 
-    /**
-     * 
-     * @title: onBackPressed
-     * @description: backpressed response
-     * @author: ZQJ
-     * @date: 2015年5月19日 下午9:21:02
-     */
     @Override
     public void onBackPressed() {}
 
-    public static void start(Context context, Test test) {
+    /**
+     * start
+     */
+    private static final String DATA_REMAIN_TIME = "remaintime";
+
+    public static void start(Context context, Test test, int remainTime) {
         Intent intent = new Intent(context, TestActivity.class);
+        intent.putExtra(DATA_REMAIN_TIME, remainTime);
         context.startActivity(intent);
         sTest = test;
     }

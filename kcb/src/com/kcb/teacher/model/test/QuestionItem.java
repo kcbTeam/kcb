@@ -42,12 +42,15 @@ public class QuestionItem implements Serializable {
     }
 
     public static void copy(QuestionItem oldItem, QuestionItem newItem) {
+        newItem.mId = oldItem.mId;
         if (oldItem.mIsText) {
-            newItem.setText(oldItem.getText());
+            newItem.setText(oldItem.mText);
         } else {
-            newItem.setBitmap(oldItem.getBitmap());
+            newItem.setBitmap(oldItem.mBitmap);
         }
-        newItem.setIsRight(oldItem.mIsRight);
+        newItem.mIsRight = oldItem.mIsRight;
+        newItem.mRate = oldItem.mRate;
+        newItem.mIsSelected = oldItem.mIsSelected;
     }
 
     public void setId(int id) {
@@ -77,6 +80,7 @@ public class QuestionItem implements Serializable {
         mIsText = false;
         mText = "";
         mBitmap = bitmap;
+        mBitmapString = null;
     }
 
     public Bitmap getBitmap() {

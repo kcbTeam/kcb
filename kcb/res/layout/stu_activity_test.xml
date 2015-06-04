@@ -22,16 +22,15 @@
         android:textSize="@dimen/text_size_medium" />
 
     <TextView
-        android:id="@+id/textview_problem_tip"
+        android:id="@+id/textview_question_num"
         style="@style/common_tip"
-        android:layout_below="@id/textview_testname"
-        android:text="题目" />
+        android:layout_below="@id/textview_testname" />
 
     <TextView
         android:id="@+id/textview_question_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textview_problem_tip"
+        android:layout_below="@id/textview_question_num"
         android:layout_marginBottom="8dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
@@ -85,7 +84,7 @@
 
                 <com.kcb.library.view.checkbox.CheckBox
                     android:id="@+id/checkBox_A"
-                    style="@style/tch_test_settime_checkicon"
+                    style="@style/stu_test_checkbox"
                     android:layout_margin="4dp" />
             </LinearLayout>
 
@@ -118,7 +117,7 @@
 
                 <com.kcb.library.view.checkbox.CheckBox
                     android:id="@+id/checkBox_B"
-                    style="@style/tch_test_settime_checkicon"
+                    style="@style/stu_test_checkbox"
                     android:layout_margin="4dp" />
             </LinearLayout>
 
@@ -151,7 +150,7 @@
 
                 <com.kcb.library.view.checkbox.CheckBox
                     android:id="@+id/checkBox_C"
-                    style="@style/tch_test_settime_checkicon"
+                    style="@style/stu_test_checkbox"
                     android:layout_margin="4dp" />
             </LinearLayout>
 
@@ -184,7 +183,7 @@
 
                 <com.kcb.library.view.checkbox.CheckBox
                     android:id="@+id/checkBox_D"
-                    style="@style/tch_test_settime_checkicon"
+                    style="@style/stu_test_checkbox"
                     android:layout_margin="4dp" />
             </LinearLayout>
         </RelativeLayout>
@@ -216,11 +215,11 @@
             widget:rippleSpeed="18" />
 
         <com.kcb.library.view.buttonflat.ButtonFlat
-            android:id="@+id/button_add"
+            android:id="@+id/button_submit"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="添加一题"
+            android:text="提交答案"
             widget:clickAfterRipple="false"
             widget:rippleSpeed="18" />
     </LinearLayout>
