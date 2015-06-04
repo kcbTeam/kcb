@@ -2,14 +2,40 @@
 <resources>
 
     <!-- Commom Start -->
+    <string name="sure">确定</string>
     <string name="cancel">取消</string>
-    <string name="confirm">确定</string>
+    <string name="submit">提交</string>
+    <string name="tip">提醒</string>
     <!-- Commom End -->
 
 
     <!-- LoginActivity Start -->
-    <string name="id_password_error">学号或密码错误</string>
+    <string name="stu_id_error">学号错误</string>
+    <string name="stu_password_error">密码错误</string>
     <!-- LoginActivity End -->
+
+
+    <!-- HomeActivity Start -->
+    <string name="signbtn">课堂签到</string>
+    <string name="testbtn">课堂小测试</string>
+    <string name="stu_start_checkin">开始签到  </string>
+    <string name="check">查看签到结果</string>
+    <string name="start1">开始答题</string>
+    <string name="check1">查看测试结果</string>
+    <string name="button_modify">修改密码</string>
+    <string name="stu_exit_account">退出账号</string>
+    <!-- HomeActivity End -->
+
+
+    <!-- Modify PassWord Start -->
+    <string name="old_password">原密码</string>
+    <string name="next_step">下一步</string>
+    <string name="new_password">新密码</string>
+    <string name="repeat_new_password">再次输入新密码</string>
+    <string name="password_error">密码错误</string>
+    <string name="setpassword">修改密码</string>
+    <string name="modified">修改成功</string>
+    <!-- Modify PassWord End -->
 
 
     <!-- CheckinActivity Start -->
@@ -28,62 +54,40 @@
     <!-- CheckinActivity End -->
 
 
-    <!-- HomeActivity Start -->
-    <string name="signbtn">课堂签到</string>
-    <string name="testbtn">课堂小测试</string>
-    <string name="stu_start_checkin">开始签到  </string>
-    <string name="check">查看签到结果</string>
-    <string name="start1">开始答题</string>
-    <string name="check1">查看测试结果</string>
-    <string name="button_modify">修改密码</string>
-    <string name="button_exit">退出账号</string>
-    <string name="quitload">退出账号</string>
-    <!-- HomeActivity End -->
-
-
-    <!-- TestActivity Start -->
-    <string name="pre_question">上一题</string>
-    <string name="next_question">下一题</string>
-    <string name="if_submit_answer">是否提交答案？</string>
-    <string name="if_giveup_answer">是否放弃答题？</string>
-    <string name="to_submit_answer">请提交答案</string>
-    <string name="end">结束!</string>
-    <string name="tip">提醒</string>
-    <!-- TestActivity End -->
-
-
     <!-- CheckInResultActivity Start -->
     <string name="signresult">查看签到结果</string>
     <string name="stu_checkin_rate">老师签到了%1$d次，其中你成功签到了%2$d次。</string>
     <!-- CheckInResultActivity End -->
 
 
-    <!-- TestResultActivity Start -->
+    <!-- TestActivity Start -->
+    <string name="stu_question_index">题目%1$d</string>
+    <string name="stu_remain_time">还剩%1$d分%2$d秒</string>
+    <string name="stu_test_time_end">时间已到，无法继续作答，请提交本次答案。</string>
+    <string name="pre_question">上一题</string>
+    <string name="next_question">下一题</string>
+    <string name="if_submit_answer">是否提交答案？</string>
+    <string name="if_giveup_answer">是否放弃答题？</string>
+    <string name="to_submit_answer">请提交答案</string>
+    <string name="end">结束!</string>
+    <!-- TestActivity End -->
+
+
+    <!-- LookTestActivity Start -->
     <string name="testresult">查看测试结果</string>
     <string name="search">搜索关键字</string>
     <string name="testname">测试名称</string>
     <string name="questionnumber">题目数量</string>
     <string name="testdate">测试日期</string>
     <string name="cannotlook">测试结束后才能查看结果</string>
-    <!-- TestResultActivity End -->
+    <!-- LookTestActivity End -->
 
 
-    <!-- LookTestResultActivity Start -->
+    <!-- LookTestDetailActivity Start -->
     <string name="question1btn">选择题1</string>
     <string name="question2btn">选择题2</string>
     <string name="question3btn">选择题3</string>
     <string name="question4btn">选择题4</string>
-    <!-- LookResultActivity End -->
-
-
-    <!-- Modify PassWord Start -->
-    <string name="old_password">原密码</string>
-    <string name="next_step">下一步</string>
-    <string name="new_password">新密码</string>
-    <string name="repeat_new_password">再次输入新密码</string>
-    <string name="password_error">密码错误</string>
-    <string name="setpassword">修改密码</string>
-    <string name="modified">修改成功</string>
-    <!-- Modify PassWord End -->
+    <!-- LookTestDetailActivity End -->
 
 </resources>

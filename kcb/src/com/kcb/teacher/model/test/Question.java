@@ -41,6 +41,8 @@ public class Question implements Serializable {
 
     public static Question clone(Question object) {
         Question question = new Question();
+        question.mId = object.mId;
+        question.mRate = object.mRate;
         QuestionItem.copy(object.mTitleItem, question.mTitleItem);
         QuestionItem.copy(object.mChoiceAItem, question.mChoiceAItem);
         QuestionItem.copy(object.mChoiceBItem, question.mChoiceBItem);

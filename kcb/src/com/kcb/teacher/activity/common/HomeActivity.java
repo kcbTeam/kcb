@@ -189,7 +189,7 @@ public class HomeActivity extends BaseFragmentActivity {
 				case R.id.button_exit:
 					mPopupWindow.dismiss();
 					DialogUtil.showNormalDialog(HomeActivity.this,
-							R.string.quitload, R.string.destroy_tip,
+							R.string.stu_exit_account, R.string.destroy_tip,
 							R.string.sure, new View.OnClickListener() {
 
 								@Override
