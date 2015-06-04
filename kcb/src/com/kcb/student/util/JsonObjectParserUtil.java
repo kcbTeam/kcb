@@ -9,8 +9,8 @@ import org.json.JSONObject;
 
 import android.graphics.Bitmap;
 
-import com.kcb.teacher.model.test.Question;
-import com.kcb.teacher.model.test.Test;
+import com.kcb.common.model.test.Question;
+import com.kcb.common.model.test.Test;
 
 /**
  * 

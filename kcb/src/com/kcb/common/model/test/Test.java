@@ -1,4 +1,4 @@
-package com.kcb.teacher.model.test;
+package com.kcb.common.model.test;
 
 import java.io.Serializable;
 import java.util.ArrayList;

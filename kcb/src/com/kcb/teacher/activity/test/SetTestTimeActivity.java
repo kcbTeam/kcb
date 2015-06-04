@@ -15,6 +15,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.kcb.common.base.BaseActivity;
+import com.kcb.common.model.test.Question;
+import com.kcb.common.model.test.Test;
 import com.kcb.common.util.DialogUtil;
 import com.kcb.common.util.ToastUtil;
 import com.kcb.library.slider.Slider;
@@ -23,8 +25,6 @@ import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.teacher.adapter.SetTestTimeAdapter;
 import com.kcb.teacher.adapter.SetTestTimeAdapter.EditQuestionListener;
 import com.kcb.teacher.database.test.TestDao;
-import com.kcb.teacher.model.test.Question;
-import com.kcb.teacher.model.test.Test;
 import com.kcbTeam.R;
 
 public class SetTestTimeActivity extends BaseActivity {

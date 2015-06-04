@@ -11,16 +11,16 @@ import android.view.View.OnClickListener;
 import android.widget.TextView;
 
 import com.kcb.common.base.BaseActivity;
+import com.kcb.common.model.answer.TestAnswer;
+import com.kcb.common.model.test.Question;
+import com.kcb.common.model.test.QuestionItem;
+import com.kcb.common.model.test.Test;
 import com.kcb.common.util.DialogUtil;
 import com.kcb.common.util.ToastUtil;
 import com.kcb.common.view.MaterialDialog;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.library.view.checkbox.CheckBox;
-import com.kcb.student.activity.checkin.StartCheckInActivity;
 import com.kcb.teacher.database.test.TestDao;
-import com.kcb.teacher.model.test.Question;
-import com.kcb.teacher.model.test.QuestionItem;
-import com.kcb.teacher.model.test.Test;
 import com.kcbTeam.R;
 
 /**
@@ -66,6 +66,8 @@ public class TestActivity extends BaseActivity {
     // when click last/next, show a mTempQuestion, used for compare it is changed or not;
     private Question mTempQuestion;
 
+    private TestAnswer mTestAnswer;
+
     private TestDao mTestDao;
 
     private int mRemainTime; // seconds
@@ -109,9 +111,11 @@ public class TestActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        testNameTextView.setText(sTest.getName() + "（共" + sTest.getQuestionNum() + "题）");
-        showQuestionIndex();
+        testNameTextView.setText(String.format(getString(R.string.test_name), sTest.getName(),
+                sTest.getQuestionNum()));
         showQuestion();
+
+        mTestAnswer = new TestAnswer(sTest);
 
         mRemainTime = getIntent().getIntExtra(DATA_REMAIN_TIME, 0);
         mHandler = new Handler(getMainLooper()) {
@@ -146,11 +150,6 @@ public class TestActivity extends BaseActivity {
         dialog.setCancelable(false);
     }
 
-    private void showQuestionIndex() {
-        questionIndexTextView.setText(String.format(getString(R.string.stu_question_index),
-                mCurrentQuestionIndex + 1));
-    }
-
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -161,6 +160,7 @@ public class TestActivity extends BaseActivity {
                 nextQuesion();
                 break;
             case R.id.button_submit:
+                submitAnswer();
                 break;
             default:
                 break;
@@ -169,32 +169,40 @@ public class TestActivity extends BaseActivity {
 
     private void lastQuestion() {
         if (mCurrentQuestionIndex > 0) {
-            saveQuestion();
-            if (!getCurrentQuestion().equal(mTempQuestion)) {
-                ToastUtil.toast(String.format(getResources().getString(R.string.format_edit_save),
-                        1 + mCurrentQuestionIndex));
-            }
+            saveAnswer();
             mCurrentQuestionIndex--;
             showQuestion();
         }
     }
 
     private void nextQuesion() {
-        saveQuestion();
-        if (!getCurrentQuestion().equal(mTempQuestion)) {
-            ToastUtil.toast(String.format(getResources().getString(R.string.format_edit_save),
-                    1 + mCurrentQuestionIndex));
+        if (mCurrentQuestionIndex < sTest.getQuestionNum() - 1) {
+            saveAnswer();
+            mCurrentQuestionIndex++;
+            showQuestion();
         }
-        mCurrentQuestionIndex++;
-        showQuestion();
+    }
+
+    private void submitAnswer() {
+        saveAnswer();
+        // TODO get unfinished question index;
+        MaterialDialog dialog =
+                DialogUtil.showNormalDialog(TestActivity.this, R.string.submit,
+                        R.string.stu_test_time_end, R.string.submit, new OnClickListener() {
+
+                            @Override
+                            public void onClick(View v) {
+                                finish();
+                            }
+                        }, R.string.cancel, null);
     }
 
     private void showQuestion() {
-        mTempQuestion = Question.clone(getCurrentQuestion());
-
-        showQuestionNum();
+        questionIndexTextView.setText(String.format(getString(R.string.stu_question_index),
+                mCurrentQuestionIndex + 1));
 
         Question question = getCurrentQuestion();
+        mTempQuestion = Question.clone(question);
 
         showQuestionItem(FLAG_TITLE, question.getTitle());
         showQuestionItem(FLAG_A, question.getChoiceA());
@@ -202,65 +210,37 @@ public class TestActivity extends BaseActivity {
         showQuestionItem(FLAG_C, question.getChoiceC());
         showQuestionItem(FLAG_D, question.getChoiceD());
 
-        checkBoxA.setChecked(question.getChoiceA().isRight());
-        checkBoxB.setChecked(question.getChoiceB().isRight());
-        checkBoxC.setChecked(question.getChoiceC().isRight());
-        checkBoxD.setChecked(question.getChoiceD().isRight());
+        checkBoxA.setChecked(question.getChoiceA().isSelected());
+        checkBoxB.setChecked(question.getChoiceB().isSelected());
+        checkBoxC.setChecked(question.getChoiceC().isSelected());
+        checkBoxD.setChecked(question.getChoiceD().isSelected());
     }
 
-    private void showQuestionNum() {
-        testNameTextView.setText(String.format(getString(R.string.test_name_num), sTest.getName(),
-                sTest.getQuestionNum()));
-        questionIndexTextView.setText(String.format(getString(R.string.problem_hint),
-                mCurrentQuestionIndex + 1));
-    }
-
-    private void saveQuestion() {
-        QuestionItem titleItem = getCurrentQuestion().getTitle();
+    private void saveAnswer() {
         QuestionItem aItem = getCurrentQuestion().getChoiceA();
         QuestionItem bItem = getCurrentQuestion().getChoiceB();
         QuestionItem cItem = getCurrentQuestion().getChoiceC();
         QuestionItem dItem = getCurrentQuestion().getChoiceD();
-
-        aItem.setIsRight(checkBoxA.isCheck());
-        bItem.setIsRight(checkBoxB.isCheck());
-        cItem.setIsRight(checkBoxC.isCheck());
-        dItem.setIsRight(checkBoxD.isCheck());
+        aItem.setIsSelected(checkBoxA.isCheck());
+        bItem.setIsSelected(checkBoxB.isCheck());
+        cItem.setIsSelected(checkBoxC.isCheck());
+        dItem.setIsSelected(checkBoxD.isCheck());
+        if (!getCurrentQuestion().equal(mTempQuestion)) {
+            ToastUtil.toast(String.format(getResources().getString(R.string.stu_question_save),
+                    mCurrentQuestionIndex + 1));
+        }
     }
 
     @SuppressWarnings("deprecation")
     private void showQuestionItem(int flag, QuestionItem item) {
         TextView textView = getTextViewByTag(flag);
         if (item.isText()) {
-            setEditMode(flag, EDIT_MODE_TEXT);
             textView.setText(item.getText());
         } else {
             Bitmap bitmap = item.getBitmap();
             if (null != bitmap) {
-                setEditMode(flag, EDIT_MODE_BITMAP);
                 textView.setBackgroundDrawable(new BitmapDrawable(bitmap));
             }
-        }
-    }
-
-    private final int EDIT_MODE_TEXT = 1;
-    private final int EDIT_MODE_BITMAP = 2;
-
-    private void setEditMode(int flag, int mode) {
-        TextView editText = getTextViewByTag(flag);
-        switch (mode) {
-            case EDIT_MODE_TEXT:
-                editText.setText("");
-                editText.setFocusable(true);
-                editText.setFocusableInTouchMode(true);
-                editText.setBackgroundResource(R.drawable.stu_checkin_textview);
-                break;
-            case EDIT_MODE_BITMAP:
-                editText.setText(" ");
-                editText.setFocusable(false);
-                break;
-            default:
-                break;
         }
     }
 

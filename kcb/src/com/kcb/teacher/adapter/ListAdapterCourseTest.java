@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.kcb.teacher.model.test.Test;
+import com.kcb.common.model.test.Test;
 import com.kcbTeam.R;
 
 public class ListAdapterCourseTest extends BaseAdapter {

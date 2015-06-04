@@ -24,13 +24,13 @@ import android.widget.TextView;
 
 import com.kcb.common.base.BaseActivity;
 import com.kcb.common.listener.DelayClickListener;
+import com.kcb.common.model.test.Question;
+import com.kcb.common.model.test.QuestionItem;
 import com.kcb.common.util.DialogUtil;
 import com.kcb.common.util.ToastUtil;
 import com.kcb.library.view.PaperButton;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.library.view.checkbox.CheckBox;
-import com.kcb.teacher.model.test.Question;
-import com.kcb.teacher.model.test.QuestionItem;
 import com.kcbTeam.R;
 
 /**

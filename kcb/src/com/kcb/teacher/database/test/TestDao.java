@@ -14,8 +14,8 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.kcb.common.model.test.Test;
 import com.kcb.teacher.database.CommonSQLiteOpenHelper;
-import com.kcb.teacher.model.test.Test;
 
 public class TestDao {
     private CommonSQLiteOpenHelper mTestSQLiteOpenHelper;
@@ -48,7 +48,8 @@ public class TestDao {
         }
         mSqLiteDatabase.execSQL("INSERT INTO " + TestDB.TABLE_NAME + " VALUES(null,?,?,?,?,?,?)",
                 new String[] {test.getId(), test.getName(), String.valueOf(test.getTime()),
-                        test.getDate().toString(), String.valueOf(hasTested), test.toJsonObject().toString()});
+                        test.getDate().toString(), String.valueOf(hasTested),
+                        test.toJsonObject().toString()});
     }
 
     /**

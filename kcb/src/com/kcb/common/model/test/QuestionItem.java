@@ -1,4 +1,4 @@
-package com.kcb.teacher.model.test;
+package com.kcb.common.model.test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.Serializable;
@@ -114,6 +114,14 @@ public class QuestionItem implements Serializable {
 
     public void setRate(double rate) {
         mRate = rate;
+    }
+
+    public void setIsSelected(boolean selected) {
+        mIsSelected = selected;
+    }
+
+    public boolean isSelected() {
+        return mIsSelected;
     }
 
     public boolean equals(QuestionItem item) {

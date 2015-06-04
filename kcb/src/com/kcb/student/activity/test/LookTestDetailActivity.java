@@ -12,12 +12,12 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.kcb.common.base.BaseActivity;
+import com.kcb.common.model.test.Test;
 import com.kcb.common.util.LogUtil;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.library.view.checkbox.CheckBox;
 import com.kcb.student.util.JsonObjectParserUtil;
 import com.kcb.student.util.RedHookDraw;
-import com.kcb.teacher.model.test.Test;
 import com.kcbTeam.R;
 
 public class LookTestDetailActivity extends BaseActivity {
