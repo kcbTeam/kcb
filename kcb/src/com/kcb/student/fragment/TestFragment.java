@@ -100,7 +100,7 @@ public class TestFragment extends BaseFragment {
                     public void onResponse(JSONObject response) {
                         //TODO save test to database
                         Test test = Test.fromJsonObject(response);
-                        TestActivity.start(getActivity(), test);
+                        TestActivity.start(getActivity(), test,20);
                     }
                 }, new ErrorListener() {
 
@@ -114,7 +114,7 @@ public class TestFragment extends BaseFragment {
                             ResponseUtil.toastError(error);
                         }
                         // TODO for test
-                        TestActivity.start(getActivity(), new Test());
+                        TestActivity.start(getActivity(), new Test(),20);
                     }
                 });
         RequestUtil.getInstance().addToRequestQueue(request, TAG);
