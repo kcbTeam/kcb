@@ -30,7 +30,7 @@ public class StartActivity extends BaseActivity {
     private ColorAnimationView colorAnimationView;
     private ViewPager viewPager;
 
-    private StartViewPagerAdapter mAdapter;
+    private StartAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +55,7 @@ public class StartActivity extends BaseActivity {
         colorAnimationView = (ColorAnimationView) findViewById(R.id.color_animation_view);
         viewPager = (ViewPager) findViewById(R.id.viewpager);
 
-        mAdapter = new StartViewPagerAdapter();
+        mAdapter = new StartAdapter();
         viewPager.setAdapter(mAdapter);
         viewPager.setOffscreenPageLimit(mAdapter.getCount());
         colorAnimationView.setmViewPager(viewPager, mAdapter.getCount(), new int[] {0xffffffff,
@@ -71,7 +71,7 @@ public class StartActivity extends BaseActivity {
     @Override
     protected void initData() {}
 
-    private class StartViewPagerAdapter extends PagerAdapter {
+    private class StartAdapter extends PagerAdapter {
         private int[] mBackgroundBitmapIds = new int[] {R.drawable.ic_launcher,
                 R.drawable.ic_launcher, R.drawable.ic_launcher};
 
@@ -88,12 +88,12 @@ public class StartActivity extends BaseActivity {
             backgroundImageView.setImageResource(mBackgroundBitmapIds[position]);
             // two button only show in third page
             if (position == getCount() - 1) {
-                PaperButton stuPaperButton = (PaperButton) view.findViewById(R.id.pagerbutton_stu);
-                PaperButton tchPaperButton = (PaperButton) view.findViewById(R.id.pagerbutton_tch);
-                stuPaperButton.setVisibility(View.VISIBLE);
-                stuPaperButton.setOnClickListener(mClickListener);
-                tchPaperButton.setVisibility(View.VISIBLE);
-                tchPaperButton.setOnClickListener(mClickListener);
+                PaperButton stuButton = (PaperButton) view.findViewById(R.id.button_stu);
+                PaperButton tchButton = (PaperButton) view.findViewById(R.id.button_tch);
+                stuButton.setVisibility(View.VISIBLE);
+                stuButton.setOnClickListener(mClickListener);
+                tchButton.setVisibility(View.VISIBLE);
+                tchButton.setOnClickListener(mClickListener);
             }
             container.addView(view);
             return view;
@@ -112,10 +112,10 @@ public class StartActivity extends BaseActivity {
             public void doClick(final View v) {
                 Intent intent = null;
                 switch (v.getId()) {
-                    case R.id.pagerbutton_stu:
+                    case R.id.button_stu:
                         intent = new Intent(StartActivity.this, LoginActivity.class);
                         break;
-                    case R.id.pagerbutton_tch:
+                    case R.id.button_tch:
                         intent =
                                 new Intent(StartActivity.this,
                                         com.kcb.teacher.activity.common.LoginActivity.class);

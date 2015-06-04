@@ -124,8 +124,7 @@ public class HomeActivity extends BaseFragmentActivity {
 
     @SuppressWarnings("deprecation")
     public void initPopupWindow() {
-        View customView =
-                getLayoutInflater().inflate(R.layout.stu_popupwindow_setting, null, false);
+        View customView = View.inflate(HomeActivity.this, R.layout.stu_popupwindow_setting, null);
         mPopupWindow =
                 new PopupWindow(customView, ViewGroup.LayoutParams.WRAP_CONTENT,
                         ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -147,7 +146,8 @@ public class HomeActivity extends BaseFragmentActivity {
                     case R.id.button_exit:
                         mPopupWindow.dismiss();
                         DialogUtil.showNormalDialog(HomeActivity.this, R.string.stu_exit_account,
-                                R.string.destroy_tip, R.string.sure, new View.OnClickListener() {
+                                R.string.stu_exit_account_tip, R.string.stu_comm_sure,
+                                new View.OnClickListener() {
 
                                     @Override
                                     public void onClick(View v) {
@@ -155,7 +155,7 @@ public class HomeActivity extends BaseFragmentActivity {
                                         LoginActivity.start(HomeActivity.this);
                                         finish();
                                     }
-                                }, R.string.cancel, null);
+                                }, R.string.stu_comm_cancel, null);
                         break;
                     default:
                         break;
@@ -179,7 +179,7 @@ public class HomeActivity extends BaseFragmentActivity {
     public void onBackPressed() {
         if (!hasClickBack) {
             hasClickBack = true;
-            ToastUtil.toast(R.string.click_again_exit_app);
+            ToastUtil.toast(R.string.stu_click_again_exit_app);
             new Handler().postDelayed(new Runnable() {
 
                 @Override

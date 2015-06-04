@@ -120,9 +120,9 @@ public class LoginActivity extends BaseActivity {
 
                                         if (null != error.networkResponse) {
                                             if (error.networkResponse.statusCode == 400) {
-                                                ToastUtil.toast("账号不存在");
+                                                ToastUtil.toast(R.string.tch_id_error);
                                             } else if (error.networkResponse.statusCode == 401) {
-                                                ToastUtil.toast("密码错误");
+                                                ToastUtil.toast(R.string.tch_password_error);
                                             }
                                         } else {
                                             ResponseUtil.toastError(error);

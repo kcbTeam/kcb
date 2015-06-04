@@ -185,8 +185,9 @@ public class HomeActivity extends BaseFragmentActivity {
                         break;
                     case R.id.button_exit:
                         mPopupWindow.dismiss();
-                        DialogUtil.showNormalDialog(HomeActivity.this, R.string.stu_exit_account,
-                                R.string.destroy_tip, R.string.sure, new View.OnClickListener() {
+                        DialogUtil.showNormalDialog(HomeActivity.this, R.string.tch_exit_account,
+                                R.string.tch_exit_account_tip, R.string.tch_comm_sure,
+                                new View.OnClickListener() {
 
                                     @Override
                                     public void onClick(View v) {
@@ -194,7 +195,7 @@ public class HomeActivity extends BaseFragmentActivity {
                                         LoginActivity.start(HomeActivity.this);
                                         finish();
                                     }
-                                }, R.string.cancel, null);
+                                }, R.string.tch_comm_cancel, null);
                         break;
                     default:
                         break;
@@ -218,7 +219,7 @@ public class HomeActivity extends BaseFragmentActivity {
     public void onBackPressed() {
         if (!hasClickBack) {
             hasClickBack = true;
-            ToastUtil.toast(R.string.click_again_exit_app);
+            ToastUtil.toast(R.string.tch_click_again_exit_app);
             new Handler().postDelayed(new Runnable() {
 
                 @Override

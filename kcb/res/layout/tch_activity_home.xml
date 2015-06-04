@@ -41,19 +41,19 @@
         <com.kcb.library.view.buttonflat.ButtonFlat
             android:id="@+id/button_checkin"
             style="@style/home_tab"
-            android:text="@string/course_signin"
+            android:text="@string/tch_class_checkin"
             widget:clickAfterRipple="false" />
 
         <com.kcb.library.view.buttonflat.ButtonFlat
             android:id="@+id/button_test"
             style="@style/home_tab"
-            android:text="@string/course_test"
+            android:text="@string/tch_class_test"
             widget:clickAfterRipple="false" />
 
         <com.kcb.library.view.buttonflat.ButtonFlat
             android:id="@+id/button_stucenter"
             style="@style/home_tab"
-            android:text="@string/student_center"
+            android:text="@string/tch_student_center"
             widget:clickAfterRipple="false" />
     </LinearLayout>
 

@@ -14,17 +14,22 @@
         android:layout_centerInParent="true" />
 
     <com.kcb.library.view.PaperButton
-        android:id="@+id/pagerbutton_stu"
-        style="@style/common_paper_button"
-        android:layout_above="@+id/pagerbutton_tch"
+        android:id="@+id/button_stu"
+        style="@style/home_center_button"
+        android:layout_above="@+id/button_tch"
         android:visibility="gone"
-        widget:paper_text="@string/i_am_stu" />
+        widget:paper_text="@string/comm_student"
+        widget:paper_text_color="@color/black_700"
+        widget:paper_text_size="@dimen/text_size_medium" />
 
     <com.kcb.library.view.PaperButton
-        android:id="@+id/pagerbutton_tch"
-        style="@style/common_paper_button"
+        android:id="@+id/button_tch"
+        style="@style/home_center_button"
         android:layout_alignParentBottom="true"
+        android:layout_marginBottom="24dp"
         android:visibility="gone"
-        widget:paper_text="@string/i_am_tch" />
+        widget:paper_text="@string/comm_teacher"
+        widget:paper_text_color="@color/black_700"
+        widget:paper_text_size="@dimen/text_size_medium" />
 
 </RelativeLayout>

@@ -16,7 +16,7 @@
         <TextView
             android:id="@+id/textview_appname"
             style="@style/common_title"
-            android:text="老师登录" />
+            android:text="@string/tch_tch_login" />
     </LinearLayout>
 
     <ImageView
@@ -31,19 +31,21 @@
         android:id="@+id/edittext_id"
         style="@style/login_edittext_id"
         android:layout_below="@id/imageview_login"
-        android:hint="@string/username" />
+        android:hint="@string/tch_account" />
 
     <com.kcb.library.view.FloatingEditText
         android:id="@+id/edittext_password"
         style="@style/login_edittext_password"
         android:layout_below="@id/edittext_id"
-        android:hint="@string/password" />
+        android:hint="@string/tch_password" />
 
     <com.kcb.library.view.PaperButton
         android:id="@+id/button_login"
         style="@style/common_paper_button"
         android:layout_below="@id/edittext_password"
-        widget:paper_text="@string/registerin" />
+        widget:paper_text="@string/tch_login"
+        widget:paper_text_color="@color/black_700"
+        widget:paper_text_size="@dimen/text_size_medium" />
 
     <com.kcb.library.view.smoothprogressbar.SmoothProgressBar
         android:id="@+id/progressbar_login"

@@ -269,7 +269,7 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
         }
         final int questionNum = sTest.getQuestionNum() + 1;
         DialogUtil.showNormalDialog(this, R.string.dialog_title_add,
-                String.format(getString(R.string.add_msg), questionNum), R.string.sure,
+                String.format(getString(R.string.add_msg), questionNum), R.string.tch_comm_sure,
                 new OnClickListener() {
 
                     @Override
@@ -279,13 +279,13 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
                         showQuestionNum();
                         showNextButton();
                     }
-                }, R.string.cancel, null);
+                }, R.string.tch_comm_cancel, null);
     }
 
     private void deleteQuestion() {
         DialogUtil.showNormalDialog(this, R.string.dialog_title_delete,
                 String.format(getString(R.string.delete_question_tip), mCurrentQuestionIndex + 1),
-                R.string.sure, new OnClickListener() {
+                R.string.tch_comm_sure, new OnClickListener() {
 
                     @Override
                     public void onClick(View v) {
@@ -301,7 +301,7 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
                             finish();
                         }
                     }
-                }, R.string.cancel, null);
+                }, R.string.tch_comm_cancel, null);
     }
 
     /**
@@ -459,7 +459,7 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
 
     private void showNextButton() {
         if (mCurrentQuestionIndex == sTest.getQuestionNum() - 1) {
-            nextButton.setText(getResources().getString(R.string.complete));
+            nextButton.setText(getResources().getString(R.string.tch_comm_complete));
             nextButton.setTextColor(getResources().getColor(R.color.blue));
         } else {
             nextButton.setText(getResources().getString(R.string.next_item));
@@ -615,8 +615,8 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
                 finish();
             }
         };
-        DialogUtil.showNormalDialog(this, R.string.leave, R.string.sureLeave, R.string.sure,
-                sureListener, R.string.cancel, null);
+        DialogUtil.showNormalDialog(this, R.string.leave, R.string.sureLeave,
+                R.string.tch_comm_sure, sureListener, R.string.tch_comm_cancel, null);
     }
 
     private void saveEditTest() {
@@ -652,8 +652,8 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
             }
         };
         DialogUtil.showNormalDialog(this, R.string.dialog_title_delete,
-                "确定删除测试——" + sTest.getName() + "？", R.string.sure, sureListener, R.string.cancel,
-                null);
+                "确定删除测试——" + sTest.getName() + "？", R.string.tch_comm_sure, sureListener,
+                R.string.tch_comm_cancel, null);
     }
 
     /**

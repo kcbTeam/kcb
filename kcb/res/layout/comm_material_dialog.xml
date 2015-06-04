@@ -46,7 +46,7 @@
             android:layout_below="@id/message_scrollView"
             android:layout_marginTop="16dp"
             android:background="@color/blue"
-            android:text="@string/sure" />
+            android:text="@string/comm_sure" />
 
         <com.kcb.library.view.buttonflat.ButtonFlat
             android:id="@+id/button_cancel"
@@ -55,7 +55,7 @@
             android:layout_alignBottom="@id/button_accept"
             android:layout_toLeftOf="@id/button_accept"
             android:background="@color/black_500"
-            android:text="@string/cancel"
+            android:text="@string/comm_cancel"
             android:visibility="gone" />
     </RelativeLayout>
 

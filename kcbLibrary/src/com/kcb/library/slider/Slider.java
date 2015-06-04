@@ -12,6 +12,7 @@ import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -408,6 +409,7 @@ public class Slider extends CustomView {
             numberIndicator = new TextView(getContext());
             numberIndicator.setTextColor(Color.WHITE);
             numberIndicator.setGravity(Gravity.CENTER);
+            numberIndicator.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16);
             content.addView(numberIndicator);
 
             indicator.setLayoutParams(new RelativeLayout.LayoutParams(

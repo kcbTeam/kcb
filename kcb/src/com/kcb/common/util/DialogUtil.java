@@ -53,19 +53,19 @@ public class DialogUtil {
      * @date: 2015-5-24 下午2:36:52
      * @param context
      * @param titleResId
-     * @param text
+     * @param message
      * @param sureResId
      * @param sureListener
      * @param cancelResId
      * @param cancelListener
      */
-    public static void showNormalDialog(Context context, int titleResId, CharSequence text,
+    public static void showNormalDialog(Context context, int titleResId, CharSequence message,
             @NonNull int sureResId, OnClickListener sureListener, int cancelResId,
             OnClickListener cancelListener) {
         MaterialDialog dialog = new MaterialDialog(context);
         dialog.show();
         dialog.setTitle(titleResId);
-        dialog.setMessage(text);
+        dialog.setMessage(message);
         dialog.setSureButton(sureResId, sureListener);
         dialog.setCancelButton(cancelResId, cancelListener);
     }
@@ -95,25 +95,4 @@ public class DialogUtil {
         dialog.setSureButton(sureText, sureListener);
         dialog.setCancelButton(cancelText, cancelListener);
     }
-
-    /**
-     * 
-     * @title: showDeletePictureDialog
-     * @description:
-     * @author: ZQJ
-     * @date: 2015年5月20日 下午5:07:11
-     * @param context
-     * @param title
-     * @param reBackgroundListener
-     * @param deleteBackgroundListener
-     */
-    // public static void showDeletePictureDialog(Context context, String title,
-    // OnClickListener reBackgroundListener, OnClickListener deleteBackgroundListener) {
-    // DeletePictureDialog dialog = new DeletePictureDialog(context);
-    // dialog.show();
-    // dialog.setTitle(title);
-    // dialog.setReBackgroundButton(reBackgroundListener);
-    // dialog.setDeleteBackgroundButton(deleteBackgroundListener);
-    // dialog.setCancelButton(null);
-    // }
 }
