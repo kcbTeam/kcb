@@ -5,6 +5,7 @@
     <string name="tch_comm_sure">确定</string>
     <string name="tch_comm_cancel">取消</string>
     <string name="tch_comm_complete">完成</string>
+    <string name="tch_comm_start">开始</string>
     <!-- Common end -->
 
 
@@ -18,73 +19,79 @@
     <!-- LoginActivity end -->
 
 
-    <!-- test activty start -->
-    <string name="tch_tip">距离测试结束还有10分钟。\n测试时间结束后课程宝将会自动终止测试并统计测试结果，您可以点击“查看测试结果”去查询。</string>
-    <string name="warmtip">温馨提示</string>
-    <string name="tipmessage">一旦点击“开始测试”按钮后学生就可以开始答题。您确定需要现在开始吗？</string>
-    <string name="tipyes">是的，请这样做。</string>
-    <string name="tipno">不，谢谢。</string>
-    <string name="classtest">课堂小测试</string>
-    <string name="edit">添加 / 编辑测试内容</string>
-    <string name="starttest">开始测试</string>
-    <!-- test activty end -->
-
-
-    <!-- home page activty start -->
+    <!-- HomeActivity start -->
+    <!-- tabs -->
     <string name="tch_class_checkin">课堂签到</string>
     <string name="tch_class_test">课堂小测试</string>
     <string name="tch_student_center">学生中心</string>
-    
-    <string name="start">开始</string>
-    <string name="start_tip">签到时间结束后可查看结果，点击确定开始签到。</string>
-    
-    <string name="begin_signin">开始签到</string>
-    <string name="signin_result">查看签到结果</string>
-    <string name="begin_test">测试</string>
-    <string name="test_result">查看测试结果</string>
-    <string name="hint_studentcenter_search">搜索学生姓名</string>
-    <string name="stu_centre_name">姓名</string>
-    <string name="stu_centre_stuId">学号</string>
-    <string name="stu_centre_info">学生信息</string>
-    <string name="stu_centre_checkinrate">签到率</string>
-    <string name="stu_centre_correctrate">正确率</string>
+    <!--  -->
+    <string name="tch_start_checkin">开始签到</string>
+    <string name="tch_look_checkin_result">查看签到结果</string>
+    <!--  -->
+    <string name="tch_start_test">开始测试</string>
+    <string name="tch_add_or_edit_test">添加 / 编辑测试内容</string>
+    <string name="tch_look_test_result">查看测试结果</string>
+    <!--  -->
+    <string name="tch_search_stu">输入姓名搜索</string>
+    <string name="tch_stu_info">学生信息</string>
+    <string name="tch_checkin_rate">签到率</string>
+    <string name="tch_correct_rate">正确率</string>
+    <!--  -->
     <string name="tch_exit_account">退出账号</string>
     <string name="tch_exit_account_tip">退出后，下次使用时需要重新登录。</string>
     <string name="tch_click_again_exit_app">再按一次退出课程宝</string>
-    <!-- home page activty end -->
+    <!-- HomeActivty end -->
 
 
-    <!-- checkin result activity start -->
-    <string name="back">返回</string>
-    <string name="checkin_date">签到日期</string>
-    <string name="checkin_rate">到课率</string>
-    <!-- checkin result activity end -->
+    <!-- Modify PassWord Start -->
+    <string name="tch_modify_password">修改密码</string>
+    <string name="tch_input_old_password">输入原密码</string>
+    <string name="tch_old_password">原密码</string>
+    <string name="tch_next_step">下一步</string>
+    <string name="tch_input_new_password">输入新密码，记住它</string>
+    <string name="tch_new_password">新密码</string>
+    <string name="tch_repeat_new_password">再次输入新密码</string>
+    <!--  -->
+    <string name="tch_twice_password_unequal">两次输入密码不一致</string>
+    <string name="tch_modify_success">修改成功</string>
+    <!-- Modify PassWord End -->
 
 
-    <!-- edittestfirst activity start -->
-    <string name="hellotip1">为本次测试起一个名字</string>
-    <string name="hellotip2">设置题目数量：%1$d</string>
-    <string name="test_name">%1$s（共%2$d题）</string>
-    <!-- edittestfirst activity end -->
+    <!-- StartCheckInActivity start -->
+    <string name="tch_tell_stu_checkin_num">将签到数字告诉在场的学生</string>
+    <string name="tch_two_min_finish_checkin">开始后，学生有两分钟完成签到</string>
+    <string name="tch_start_checkin_tip">签到时间结束后可查看结果，点击确定开始签到。</string>
+    <string name="tch_wait">请稍等……</string>
+    <string name="tch_checkin_started">签到已开始</string>
+    <!-- StartCheckInActivity end -->
 
 
-    <!-- checkin details activity start -->
-    <string name="checkin_missed_hint">以下为没有到课学生名单</string>
-    <string name="stu_info">学生信息</string>
-    <string name="checkin_misstimes">未到课次数</string>
-    <string name="checkinRate_hint">本次到课率为%1$d%%</string>
-    <!-- checkin details activity start -->
+    <!-- LookCheckInActivity start -->
+    <string name="tch_checkin_date">签到日期</string>
+    <!-- LookCheckInActivity end -->
 
 
-    <!-- student details activty start -->
-    <string name="checkin_rate_format">%1$s的到课率为%2$d%%</string>
-    <string name="correct_rate_format">%1$s的选择题正确率为%2$d%%</string>
-    <!-- student details activty end -->
+    <!-- LookCheckInDetailActivity start -->
+    <string name="tch_name">姓名</string>
+    <string name="tch_stuid">学号</string>
+    <string name="tch_unchecked_stuinfo">以下为没有到课学生名单</string>
+    <string name="tch_unchecked_time">未到课次数</string>
+    <string name="tch_checkin_rate_tip">本次到课率为%1$d%%</string>
+    <!-- LookCheckInDetailActivity start -->
+
+
+    <!-- SetTestNameActivity start -->
+    <string name="tch_add_test">添加新测试</string>
+    <string name="tch_set_test_name">为本次测试起一个名字</string>
+    <string name="tch_set_test_name_hint">例如：科学的概念和应用</string>
+    <string name="tch_set_question_num">设置题目数量：%1$d</string>
+    <string name="tch_start_edit_test">点击完成开始出题</string>
+    <string name="tch_has_same_test_name">测试名称已经被使用了</string>
+    <!-- SetTestNameActivity end -->
 
 
     <!-- EditTestActivity Start -->
-    <string name="add_newtest">添加新测试</string>
-    <string name="edittest">编辑测试内容</string>
+    <string name="tch_test_name">%1$s（共%2$d题）</string>
     <string name="last_item">上一题</string>
     <string name="next_item">下一题</string>
     <string name="problem_hint">输入题目%1$d</string>
@@ -93,53 +100,30 @@
     <string name="option_B">B</string>
     <string name="option_C">C</string>
     <string name="option_D">D</string>
-    <string name="select_hint">在正确的选项后面打钩</string>
-    <string name="leave">取消</string>
-    <string name="sureLeave">取消后，不会保存测试内容。</string>
+    <string name="tch_not_save_if_cancel">取消后，不会保存测试内容。</string>
     <string name="format_edit_save">第%1$d题已保存</string>
     <string name="format_edit_empty_hint">第%1$s题未完成</string>
     <string name="dialog_title_question">输入题目</string>
-    <string name="dialog_title_optionA">输入A选项</string>
-    <string name="dialog_title_optionB">输入B选项</string>
-    <string name="dialog_title_optionC">输入C选项</string>
-    <string name="dialog_title_optionD">输入D选项</string>
     <string name="delete_success">删除成功</string>
     <string name="dialog_title_delete">删除</string>
     <string name="delete_msg">确认删除该题吗？</string>
     <string name="delete_question_tip">确定删除第 %1$d 题？</string>
     <string name="dialog_title_add">添加</string>
     <string name="add_msg">确定添加第 %1$d 题？</string>
-    <string name="rebackground">重拍背景</string>
-    <string name="deletebackground">删除背景</string>
     <string name="edit_title_hint">输入文字，或者长按拍照</string>
-    <string name="empty_hint">不能有空</string>
     <!-- EditTestActivity End -->
 
 
     <!-- Cut Picture Activity Strat -->
     <string name="cut_title">裁剪图片</string>
-    <string name="rotate">旋转</string>
-    <string name="crop">裁剪</string>
-    <string name="preview">预览</string>
     <!-- Cut Picture Activity End -->
 
 
-    <!-- EditTestFirstActivity Start -->
-    <string name="testname_hint">例如：科学的概念和应用</string>
-    <!-- EditTestFirstActivity Start -->
-
-
     <!-- Submit Activity Start -->
-    <string name="Go_modify">去修改</string>
     <string name="settime_hint">本次测试包括%1$d道题，答题时间为：%2$d分钟</string>
     <string name="editCouseTest">编辑课堂小测试</string>
     <string name="sure_submit">完成</string>
     <!-- Submit Activity End -->
-
-
-    <!-- Modify Question Activity Start -->
-    <string name="modify_saved">修改已保存</string>
-    <!-- Modify Question Activity End -->
 
 
     <!-- Check Test Activity Start -->
@@ -151,28 +135,9 @@
     <!-- Check Test Activity End -->
 
 
-    <!-- Modify PassWord Start -->
-    <string name="old_password">原密码</string>
-    <string name="next_step">下一步</string>
-    <string name="new_password">新密码</string>
-    <string name="repeat_new_password">再次输入新密码</string>
-    <string name="password_error">密码错误</string>
-    <string name="password_empty">密码为空</string>
-    <string name="modified">修改成功</string>
-    <string name="twice_password_unequal">两次输入密码不一致！</string>
-    <!-- Modify PassWord End -->
-
-    <string name="signclass">课堂签到</string>
-    <string name="giveupsign">取消</string>
-    <string name="giveup_sign_tip">取消后，本次签到无效。</string>
-    <string name="getnumber">获取签到数字</string>
-    <string name="tipforteacher1">将签到数字告诉在场的学生</string>
-    <string name="tipforteacher2">开始后，学生有两分钟完成签到</string>
-    <string name="tipforteacher3">本次签到结束</string>
-    <string name="startsign">开始签到</string>
-    <string name="stopsign">停止签到</string>
-    <string name="stop_sign_tip">停止签到后，同学们将无法继续签到。</string>
-    <string name="classrate">本次到课率为70%</string>
-    <string name="finish">完成</string>
+    <!-- StuCentreActivty start -->
+    <string name="checkin_rate_format">%1$s的到课率为%2$d%%</string>
+    <string name="correct_rate_format">%1$s的选择题正确率为%2$d%%</string>
+    <!-- StuCentreActivty end -->
 
 </resources>

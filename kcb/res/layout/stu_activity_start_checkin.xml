@@ -13,7 +13,7 @@
         android:background="@drawable/activity_header_shadow"
         android:gravity="center_vertical"
         android:paddingLeft="16dp"
-        android:text="@string/checkin"
+        android:text="@string/stu_start_checkin"
         android:textColor="@color/black"
         android:textSize="@dimen/text_size_large" />
 
@@ -34,7 +34,7 @@
         android:layout_below="@id/textview_title"
         android:layout_centerHorizontal="true"
         android:layout_margin="16dp"
-        android:text="@string/tip_inputnum"
+        android:text="@string/stu_input_checkin_num"
         android:textColor="@color/black"
         android:textSize="@dimen/text_size_medium" />
 
@@ -75,7 +75,7 @@
         android:id="@+id/button_finish"
         style="@style/common_paper_button"
         android:layout_below="@id/recyclerview"
-        widget:paper_text="@string/button_finish"
+        widget:paper_text="@string/stu_comm_complete"
         widget:paper_text_color="@color/black_700"
         widget:paper_text_size="@dimen/text_size_medium" />
 

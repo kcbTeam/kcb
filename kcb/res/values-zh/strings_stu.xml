@@ -14,58 +14,64 @@
     <string name="stu_stu_login">学生登录</string>
     <string name="stu_stuid">学号</string>
     <string name="stu_password">密码</string>
+    <string name="stu_login">登录</string>
+    <!--  -->
     <string name="stu_id_error">学号错误</string>
     <string name="stu_password_error">密码错误</string>
-    <string name="stu_login">登录</string>
     <!-- LoginActivity End -->
 
 
     <!-- HomeActivity Start -->
+    <!-- tabs -->
     <string name="stu_class_checkin">课堂签到</string>
     <string name="stu_class_test">课堂小测试</string>
+    <!--  -->
     <string name="stu_start_checkin">开始签到  </string>
     <string name="stu_look_checkin_result">查看签到结果</string>
-    <string name="start1">开始答题</string>
-    <string name="check1">查看测试结果</string>
-    <string name="button_modify">修改密码</string>
+    <!--  -->
+    <string name="stu_start_test">开始答题</string>
+    <string name="stu_look_test_result">查看测试结果</string>
+    <!--  -->
+    <string name="stu_modify_password">修改密码</string>
     <string name="stu_exit_account">退出账号</string>
     <string name="stu_exit_account_tip">退出后，下次使用时需要重新登录。</string>
+    <!--  -->
     <string name="stu_click_again_exit_app">再按一次退出课程宝</string>
     <!-- HomeActivity End -->
 
 
     <!-- Modify PassWord Start -->
-    <string name="old_password">原密码</string>
-    <string name="next_step">下一步</string>
-    <string name="new_password">新密码</string>
-    <string name="repeat_new_password">再次输入新密码</string>
-    <string name="password_error">密码错误</string>
-    <string name="setpassword">修改密码</string>
-    <string name="modified">修改成功</string>
+    <string name="stu_input_old_password">输入原密码</string>
+    <string name="stu_old_password">原密码</string>
+    <string name="stu_next_step">下一步</string>
+    <string name="stu_input_new_password">输入新密码，记住它</string>
+    <string name="stu_new_password">新密码</string>
+    <string name="stu_repeat_new_password">再次输入新密码</string>
+    <!--  -->
+    <string name="stu_twice_password_unequal">两次输入密码不一致</string>
+    <string name="stu_modify_success">修改成功</string>
     <!-- Modify PassWord End -->
 
 
-    <!-- CheckinActivity Start -->
+    <!-- StartCheckInActivity Start -->
+    <string name="stu_input_checkin_num">请输入老师报出的签到数字</string>
+    <string name="stu_checkin_remain_time">倒计时：%1$d秒</string>
+    <!--  -->
+    <string name="stu_checkin_num_error">签到数字错误</string>
+    <string name="stu_checkin_success">签到成功</string>
+    <string name="stu_checkin_time_end">时间已到，你未完成本次签到。</string>
+    <!-- StartCheckInActivity End -->
+
+
+    <!-- LookCheckInActivity Start -->
+    <string name="stu_checkin_rate">老师签到了%1$d次，其中你成功签到了%2$d次。</string>
     <string name="stu_success_checkin">成功签到</string>
     <string name="stu_uncheckin">未签到</string>
-    <string name="checkin">课堂签到</string>
-    <string name="tip_inputnum">请输入老师报出的签到数字</string>
-    <string name="checkin_remain_time">倒计时：%1$d秒</string>
-    <string name="if_giveup_checkin">是否放弃签到？</string>
-    <string name="num_error">签到数字错误</string>
-    <string name="checkin_success">签到成功</string>
-    <string name="checkin_failed">签到数字错误！</string>
-    <string name="button_finish">完成</string>
-    <string name="checkin_time_end">时间已到，你未完成本次签到。</string>
-    <!-- CheckinActivity End -->
-
-
-    <!-- CheckInResultActivity Start -->
-    <string name="stu_checkin_rate">老师签到了%1$d次，其中你成功签到了%2$d次。</string>
-    <!-- CheckInResultActivity End -->
+    <!-- LookCheckInActivity End -->
 
 
     <!-- TestActivity Start -->
+    <string name="stu_test_name_num">%1$s（共%2$d题）</string>
     <string name="stu_question_index">题目%1$d</string>
     <string name="stu_remain_time">还剩%1$d分%2$d秒</string>
     <string name="stu_question_save">第%1$d题已保存</string>
@@ -73,30 +79,16 @@
     <string name="stu_submit_test_finish">提交后，需要等待测试结束，才可以查看测试结果。</string>
     <string name="stu_submit_test_miss">第 %1$s 题未完成，确定提交？</string>
     <string name="stu_test_unfinish">测试未结束</string>
-    <string name="pre_question">上一题</string>
-    <string name="next_question">下一题</string>
-    <string name="if_submit_answer">是否提交答案？</string>
-    <string name="if_giveup_answer">是否放弃答题？</string>
-    <string name="to_submit_answer">请提交答案</string>
-    <string name="end">结束!</string>
+    <string name="stu_last_question">上一题</string>
+    <string name="stu_next_question">下一题</string>
     <!-- TestActivity End -->
 
 
     <!-- LookTestActivity Start -->
-    <string name="testresult">查看测试结果</string>
-    <string name="search">搜索关键字</string>
-    <string name="testname">测试名称</string>
-    <string name="questionnumber">题目数量</string>
-    <string name="testdate">测试日期</string>
-    <string name="cannotlook">测试结束后才能查看结果</string>
+    <string name="stu_input_test_name_search">输入测试名称搜索</string>
+    <string name="stu_test_name">测试名称</string>
+    <string name="stu_question_num">题目数量</string>
+    <string name="stu_test_date">测试日期</string>
     <!-- LookTestActivity End -->
-
-
-    <!-- LookTestDetailActivity Start -->
-    <string name="question1btn">选择题1</string>
-    <string name="question2btn">选择题2</string>
-    <string name="question3btn">选择题3</string>
-    <string name="question4btn">选择题4</string>
-    <!-- LookTestDetailActivity End -->
 
 </resources>

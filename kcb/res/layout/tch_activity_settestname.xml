@@ -16,7 +16,7 @@
 
         <TextView
             style="@style/common_title"
-            android:text="@string/add_newtest" />
+            android:text="@string/tch_add_test" />
     </LinearLayout>
 
     <ImageView
@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@id/imageview_step1"
         android:layout_toRightOf="@id/imageview_step1"
-        android:text="@string/hellotip1"
+        android:text="@string/tch_set_test_name"
         android:textColor="@color/black"
         android:textSize="@dimen/text_size_medium" />
 
@@ -52,7 +52,7 @@
         android:id="@+id/edittext_testname"
         style="@style/login_edittext"
         android:layout_below="@id/view_divider1"
-        android:hint="@string/testname_hint" />
+        android:hint="@string/tch_set_test_name_hint" />
 
     <ImageView
         android:id="@+id/imageview_step2"
@@ -71,7 +71,6 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@id/imageview_step2"
         android:layout_toRightOf="@id/imageview_step2"
-        android:text="@string/hellotip2"
         android:textColor="@color/black"
         android:textSize="@dimen/text_size_medium" />
 
@@ -114,7 +113,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@id/imageview_step3"
         android:layout_toRightOf="@id/imageview_step3"
-        android:text="点击完成开始出题"
+        android:text="@string/tch_start_edit_test"
         android:textColor="@color/black"
         android:textSize="@dimen/text_size_medium" />
 
@@ -131,6 +130,6 @@
         style="@style/common_paper_button"
         android:layout_below="@id/view_divider3"
         android:layout_centerHorizontal="true"
-        widget:paper_text="@string/finish" />
+        widget:paper_text="@string/tch_comm_complete" />
 
 </RelativeLayout>

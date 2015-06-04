@@ -114,13 +114,15 @@ public class StartCheckInActivity extends BaseActivity {
     }
 
     private void showRemainTime() {
-        timeTextView.setText(String.format(getString(R.string.checkin_remain_time), mRemainTime));
+        timeTextView.setText(String
+                .format(getString(R.string.stu_checkin_remain_time), mRemainTime));
     }
 
     private void showTimeEndDialog() {
         MaterialDialog dialog =
                 DialogUtil.showNormalDialog(StartCheckInActivity.this, R.string.stu_comm_tip,
-                        R.string.checkin_time_end, R.string.stu_comm_sure, new OnClickListener() {
+                        R.string.stu_checkin_time_end, R.string.stu_comm_sure,
+                        new OnClickListener() {
 
                             @Override
                             public void onClick(View v) {
@@ -208,7 +210,7 @@ public class StartCheckInActivity extends BaseActivity {
                         @Override
                         public void onResponse(String response) {
                             // TODO save checkin rate in db
-                            ToastUtil.toast(R.string.checkin_success);
+                            ToastUtil.toast(R.string.stu_checkin_success);
                             finish();
                         }
                     }, new ErrorListener() {
@@ -217,7 +219,7 @@ public class StartCheckInActivity extends BaseActivity {
                         public void onErrorResponse(VolleyError error) {
                             progressBar.hide(StartCheckInActivity.this);
                             if (error.networkResponse.statusCode == 400) {
-                                ToastUtil.toast(R.string.num_error);
+                                ToastUtil.toast(R.string.stu_checkin_num_error);
                                 clearNum();
                             } else {
                                 ResponseUtil.toastError(error);

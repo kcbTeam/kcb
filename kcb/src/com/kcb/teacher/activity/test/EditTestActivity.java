@@ -451,7 +451,7 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
     }
 
     private void showQuestionNum() {
-        testNameTextView.setText(String.format(getString(R.string.test_name), sTest.getName(),
+        testNameTextView.setText(String.format(getString(R.string.tch_test_name), sTest.getName(),
                 sTest.getQuestionNum()));
         inputIndexTextView.setText(String.format(getString(R.string.problem_hint),
                 mCurrentQuestionIndex + 1));
@@ -615,7 +615,7 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
                 finish();
             }
         };
-        DialogUtil.showNormalDialog(this, R.string.leave, R.string.sureLeave,
+        DialogUtil.showNormalDialog(this, R.string.tch_comm_cancel, R.string.tch_not_save_if_cancel,
                 R.string.tch_comm_sure, sureListener, R.string.tch_comm_cancel, null);
     }
 

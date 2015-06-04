@@ -15,7 +15,7 @@
 
         <TextView
             style="@style/common_title"
-            android:text="@string/signin_result" />
+            android:text="@string/tch_look_checkin_result" />
 
         <include layout="@layout/comm_button_refresh" />
     </LinearLayout>
@@ -41,7 +41,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
-            android:text="@string/checkin_date"
+            android:text="@string/tch_checkin_date"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_small" />
 
@@ -51,7 +51,7 @@
             android:layout_marginRight="16dp"
             android:layout_weight="1"
             android:gravity="center_horizontal"
-            android:text="@string/checkin_rate"
+            android:text="@string/tch_checkin_rate"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_small" />
     </LinearLayout>

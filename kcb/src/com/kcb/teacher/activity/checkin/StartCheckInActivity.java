@@ -118,7 +118,7 @@ public class StartCheckInActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 startProgressBar.setVisibility(View.VISIBLE);
-                startTipTextView.setText("请稍后……");
+                startTipTextView.setText(R.string.tch_wait);
                 // start checkin
                 StringRequest request =
                         new StringRequest(Method.POST, UrlUtil.getTchCheckinStartUrl(
@@ -126,14 +126,15 @@ public class StartCheckInActivity extends BaseActivity {
 
                             @Override
                             public void onResponse(String response) {
-                                ToastUtil.toast("签到已开始");
+                                ToastUtil.toast(R.string.tch_checkin_started);
                                 finish();
                             }
                         }, new ErrorListener() {
 
                             @Override
                             public void onErrorResponse(VolleyError error) {
-                                startTipTextView.setText(getString(R.string.tipforteacher2));
+                                startTipTextView
+                                        .setText(getString(R.string.tch_two_min_finish_checkin));
                                 startProgressBar.hide(StartCheckInActivity.this);
                                 ResponseUtil.toastError(error);
                             }
@@ -141,8 +142,9 @@ public class StartCheckInActivity extends BaseActivity {
                 RequestUtil.getInstance().addToRequestQueue(request, TAG);
             }
         };
-        DialogUtil.showNormalDialog(StartCheckInActivity.this, R.string.start, R.string.start_tip,
-                R.string.tch_comm_sure, sureClickListener, R.string.tch_comm_cancel, null);
+        DialogUtil.showNormalDialog(StartCheckInActivity.this, R.string.tch_comm_start,
+                R.string.tch_start_checkin_tip, R.string.tch_comm_sure, sureClickListener,
+                R.string.tch_comm_cancel, null);
     }
 
     @Override

@@ -15,7 +15,7 @@
 
         <TextView
             style="@style/common_title"
-            android:text="@string/testresult" />
+            android:text="@string/stu_look_test_result" />
 
         <include layout="@layout/comm_button_refresh" />
     </LinearLayout>
@@ -31,7 +31,7 @@
         style="@style/login_edittext"
         android:layout_below="@id/layout_title"
         android:layout_marginTop="5dp"
-        android:hint="@string/search" />
+        android:hint="@string/stu_input_test_name_search" />
 
     <ImageView
         android:id="@+id/imageview_clear"
@@ -62,13 +62,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="60dp"
-            android:text="@string/questionnumber" />
+            android:text="@string/stu_question_num" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="75dp"
-            android:text="@string/testdate" />
+            android:text="@string/stu_test_date" />
     </LinearLayout>
 
     <ListView

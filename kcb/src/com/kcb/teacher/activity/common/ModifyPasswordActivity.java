@@ -135,7 +135,7 @@ public class ModifyPasswordActivity extends BaseActivity {
                             nextProgressBar.hide(ModifyPasswordActivity.this);
                             if (null != error.networkResponse
                                     && error.networkResponse.statusCode == 400) {
-                                ToastUtil.toast(R.string.password_error);
+                                ToastUtil.toast(R.string.tch_password_error);
                             } else {
                                 ResponseUtil.toastError(error);
                             }
@@ -155,7 +155,7 @@ public class ModifyPasswordActivity extends BaseActivity {
             AnimationUtil.shake(repeatPassWordEditText);
             repeatPassWordEditText.requestFocus();
         } else if (!password.equals(repeatPassword)) {
-            ToastUtil.toast("两次输入的密码不一致");
+            ToastUtil.toast(R.string.tch_twice_password_unequal);
         } else {
             if (finishProgressBar.getVisibility() == View.VISIBLE) {
                 return;
@@ -172,7 +172,7 @@ public class ModifyPasswordActivity extends BaseActivity {
 
                                 @Override
                                 public void run() {
-                                    ToastUtil.toast(R.string.modified);
+                                    ToastUtil.toast(R.string.tch_modify_success);
                                     finish();
                                 }
                             }, 500);

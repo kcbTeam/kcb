@@ -138,8 +138,9 @@ public class SetTestTimeActivity extends BaseActivity {
                 finish();
             }
         };
-        DialogUtil.showNormalDialog(this, R.string.leave, R.string.sureLeave,
-                R.string.tch_comm_sure, sureListener, R.string.tch_comm_cancel, null);
+        DialogUtil.showNormalDialog(this, R.string.tch_comm_cancel,
+                R.string.tch_not_save_if_cancel, R.string.tch_comm_sure, sureListener,
+                R.string.tch_comm_cancel, null);
     }
 
     public static void start(Context context, Test test) {

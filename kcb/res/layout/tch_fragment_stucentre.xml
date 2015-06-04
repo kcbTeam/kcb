@@ -10,7 +10,7 @@
         android:id="@+id/edittext_search"
         style="@style/login_edittext"
         android:layout_marginTop="4dp"
-        android:hint="@string/hint_studentcenter_search"
+        android:hint="@string/tch_search_stu"
         widget:floating_edit_text_color="@color/black_500"
         widget:floating_edit_text_highlighted_color="@color/blue" />
 
@@ -47,7 +47,7 @@
                 android:gravity="center_horizontal"
                 android:paddingBottom="4dp"
                 android:paddingTop="4dp"
-                android:text="@string/stu_centre_info"
+                android:text="@string/tch_stu_info"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_small" />
         </LinearLayout>
@@ -60,7 +60,7 @@
             android:gravity="center_horizontal"
             android:paddingBottom="4dp"
             android:paddingTop="4dp"
-            android:text="@string/stu_centre_checkinrate"
+            android:text="@string/tch_checkin_rate"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_small" />
 
@@ -72,7 +72,7 @@
             android:gravity="center_horizontal"
             android:paddingBottom="4dp"
             android:paddingTop="4dp"
-            android:text="@string/stu_centre_correctrate"
+            android:text="@string/tch_correct_rate"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_small" />
     </LinearLayout>

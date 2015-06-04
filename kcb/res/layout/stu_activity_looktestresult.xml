@@ -21,8 +21,8 @@
             android:id="@+id/testresult_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/edittest"
             android:layout_centerVertical="true"
+            android:text="查看测试结果"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_large" />
     </LinearLayout>
@@ -81,8 +81,8 @@
             android:layout_alignParentRight="true"
             android:layout_alignTop="@id/textview_choice_a1"
             android:background="#1E88E5"
-            android:gravity="center" 
-            android:clickable="false"/>
+            android:clickable="false"
+            android:gravity="center" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -164,24 +164,21 @@
         <com.kcb.library.view.buttonflat.ButtonFlat
             android:id="@+id/button_tab_question1"
             style="@style/home_tab"
-            android:text="@string/question1btn"
             buttonflat:rippleSpeed="18" />
 
         <com.kcb.library.view.buttonflat.ButtonFlat
             android:id="@+id/button_tab_question2"
             style="@style/home_tab"
-            android:text="@string/question2btn"
             buttonflat:rippleSpeed="18" />
-         <com.kcb.library.view.buttonflat.ButtonFlat
+
+        <com.kcb.library.view.buttonflat.ButtonFlat
             android:id="@+id/button_tab_question3"
             style="@style/home_tab"
-            android:text="@string/question3btn"
             buttonflat:rippleSpeed="18" />
 
         <com.kcb.library.view.buttonflat.ButtonFlat
             android:id="@+id/button_tab_question4"
             style="@style/home_tab"
-            android:text="@string/question4btn"
             buttonflat:rippleSpeed="18" />
     </LinearLayout>
 

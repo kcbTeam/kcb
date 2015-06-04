@@ -55,7 +55,7 @@ public class SetTestNameActivity extends BaseActivity {
         testNameEditText = (FloatingEditText) findViewById(R.id.edittext_testname);
 
         setNumTextView = (TextView) findViewById(R.id.textview_setnum);
-        setNumTextView.setText(String.format(getString(R.string.hellotip2), 3));
+        setNumTextView.setText(String.format(getString(R.string.tch_set_question_num), 3));
 
         testNumSlider = (Slider) findViewById(R.id.slider_testnum);
         testNumSlider.setValue(3);
@@ -63,7 +63,7 @@ public class SetTestNameActivity extends BaseActivity {
 
             @Override
             public void onValueChanged(int value) {
-                setNumTextView.setText(String.format(getString(R.string.hellotip2), value));
+                setNumTextView.setText(String.format(getString(R.string.tch_set_question_num), value));
             }
         });
 
@@ -94,7 +94,7 @@ public class SetTestNameActivity extends BaseActivity {
         public void doClick(View v) {
             String name = testNameEditText.getText().toString().trim();
             if (mTestDao.hasRecorded(name)) {
-                ToastUtil.toast("该测试名称已被使用过，换一个吧");
+                ToastUtil.toast(R.string.tch_has_same_test_name);
                 return;
             }
             if (TextUtils.isEmpty(name)) {

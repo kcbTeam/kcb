@@ -16,7 +16,7 @@
 
         <TextView
             style="@style/common_title"
-            android:text="@string/signclass" />
+            android:text="@string/tch_class_checkin" />
     </LinearLayout>
 
     <ImageView
@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@id/imageview_step1"
         android:layout_toRightOf="@id/imageview_step1"
-        android:text="@string/tipforteacher1"
+        android:text="@string/tch_tell_stu_checkin_num"
         android:textColor="@color/black"
         android:textSize="@dimen/text_size_medium" />
 
@@ -96,7 +96,7 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@id/imageview_step2"
             android:layout_toRightOf="@id/imageview_step2"
-            android:text="@string/tipforteacher2"
+            android:text="@string/tch_two_min_finish_checkin"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_medium" />
 
@@ -113,7 +113,7 @@
             style="@style/common_paper_button"
             android:layout_below="@id/view_divider2"
             android:layout_centerHorizontal="true"
-            widget:paper_text="@string/startsign"
+            widget:paper_text="@string/tch_start_checkin"
             widget:paper_text_color="@color/black_700"
             widget:paper_text_size="@dimen/text_size_medium" />
 

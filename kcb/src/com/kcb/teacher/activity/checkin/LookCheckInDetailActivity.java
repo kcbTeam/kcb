@@ -74,7 +74,7 @@ public class LookCheckInDetailActivity extends BaseFragmentActivity implements O
         mCheckInRate = (float) mCheckInResult.getRate();
 
         dateTextView.setText(mCheckInResult.getDate().toString());
-        rateTextView.setText(String.format(getResources().getString(R.string.checkinRate_hint),
+        rateTextView.setText(String.format(getResources().getString(R.string.tch_checkin_rate_tip),
                 (int) (100 * mCheckInRate)));
 
         mAdapter = new LookCheckInDetailAdapter(this, mCheckInResult.getUnCheckedStudents());

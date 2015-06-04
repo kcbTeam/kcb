@@ -16,7 +16,7 @@
         <TextView
             android:id="@+id/textview_date"
             style="@style/common_title"
-            android:text="@string/signin_result" />
+            android:text="@string/tch_look_checkin_result" />
     </LinearLayout>
 
     <TextView
@@ -41,7 +41,7 @@
         android:layout_below="@id/piechart"
         android:layout_marginLeft="24dp"
         android:layout_marginTop="20dp"
-        android:text="@string/checkin_missed_hint" />
+        android:text="@string/tch_unchecked_stuinfo" />
 
     <LinearLayout
         android:id="@+id/table_title"
@@ -55,19 +55,19 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/stu_centre_name" />
+            android:text="@string/tch_name" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="80dp"
-            android:text="@string/stu_centre_stuId" />
+            android:text="@string/tch_stuid" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="100dp"
-            android:text="@string/checkin_misstimes" />
+            android:text="@string/tch_unchecked_time" />
     </LinearLayout>
 
     <ListView
