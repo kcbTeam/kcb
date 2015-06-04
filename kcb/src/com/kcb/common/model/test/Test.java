@@ -1,4 +1,4 @@
-package com.kcb.teacher.model.test;
+package com.kcb.common.model.test;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -34,12 +34,6 @@ public class Test implements Serializable {
         }
     }
 
-    public Test(String name, List<Question> questions, int time) {
-        mName = name;
-        mQuestions = questions;
-        mTime = time;
-    }
-
     public void setId(String id) {
         mId = id;
     }
@@ -52,6 +46,14 @@ public class Test implements Serializable {
         return mName;
     }
 
+    public int getTime() {
+        return mTime;
+    }
+
+    public void setTime(int time) {
+        mTime = time;
+    }
+
     public Date getDate() {
         return mDate;
     }
@@ -60,12 +62,12 @@ public class Test implements Serializable {
         mDate = date;
     }
 
-    public int getTime() {
-        return mTime;
+    public boolean isTested() {
+        return mHasTested;
     }
 
-    public void setTime(int time) {
-        mTime = time;
+    public void setTested(boolean isTested) {
+        mHasTested = isTested;
     }
 
     public List<Question> getQuestions() {
@@ -86,14 +88,6 @@ public class Test implements Serializable {
 
     public void updateQuestion(int index, Question question) {
         mQuestions.set(index, question);
-    }
-
-    public boolean isTested() {
-        return mHasTested;
-    }
-
-    public void setTested(boolean isTested) {
-        mHasTested = isTested;
     }
 
     /**
@@ -125,6 +119,12 @@ public class Test implements Serializable {
             }
         }
         return -1;
+    }
+
+    public void changeStringToBitmap() {
+        for (int i = 0; i < mQuestions.size(); i++) {
+            mQuestions.get(i).changeStringToBitmap();
+        }
     }
 
     /**

@@ -51,7 +51,7 @@
     <!-- edittestfirst activity start -->
     <string name="hellotip1">为本次测试起一个名字</string>
     <string name="hellotip2">设置题目数量：%1$d</string>
-    <string name="test_name_num">%1$s（共%2$d题）</string>
+    <string name="test_name">%1$s（共%2$d题）</string>
     <!-- edittestfirst activity end -->
 
 

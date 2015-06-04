@@ -15,11 +15,11 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import com.kcb.common.base.BaseActivity;
+import com.kcb.common.model.test.Test;
 import com.kcb.common.util.StringMatchUtil;
 import com.kcb.library.view.FloatingEditText;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.teacher.adapter.ListAdapterCourseTest;
-import com.kcb.teacher.model.test.Test;
 import com.kcbTeam.R;
 
 /**

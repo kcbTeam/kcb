@@ -11,11 +11,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.kcb.common.base.BaseActivity;
+import com.kcb.common.model.test.Question;
+import com.kcb.common.model.test.QuestionItem;
+import com.kcb.common.model.test.Test;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.teacher.adapter.ListAdapterChoices;
-import com.kcb.teacher.model.test.Question;
-import com.kcb.teacher.model.test.QuestionItem;
-import com.kcb.teacher.model.test.Test;
 import com.kcbTeam.R;
 
 public class LookTestDetailActivity extends BaseActivity {

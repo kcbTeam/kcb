@@ -26,14 +26,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.kcb.common.base.BaseActivity;
+import com.kcb.common.model.test.Question;
+import com.kcb.common.model.test.QuestionItem;
+import com.kcb.common.model.test.Test;
 import com.kcb.common.util.DialogUtil;
 import com.kcb.common.util.ToastUtil;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.library.view.checkbox.CheckBox;
 import com.kcb.teacher.database.test.TestDao;
-import com.kcb.teacher.model.test.Question;
-import com.kcb.teacher.model.test.QuestionItem;
-import com.kcb.teacher.model.test.Test;
 import com.kcbTeam.R;
 
 /**
@@ -451,7 +451,7 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
     }
 
     private void showQuestionNum() {
-        testNameTextView.setText(String.format(getString(R.string.test_name_num), sTest.getName(),
+        testNameTextView.setText(String.format(getString(R.string.test_name), sTest.getName(),
                 sTest.getQuestionNum()));
         inputIndexTextView.setText(String.format(getString(R.string.problem_hint),
                 mCurrentQuestionIndex + 1));

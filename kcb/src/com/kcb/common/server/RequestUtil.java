@@ -72,7 +72,7 @@ public class RequestUtil {
      * 
      * @title: cancelPendingRequests
      * @description: cancel request according tag when activity/fragment destroy and so on
-     * @author:
+     * @author: wanghang
      * @date: 2015-5-14 下午1:35:11
      * @param tag
      */

@@ -14,12 +14,12 @@ import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.kcb.common.base.BaseActivity;
+import com.kcb.common.model.test.Test;
 import com.kcb.common.util.StringMatchUtil;
 import com.kcb.library.view.FloatingEditText;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
 import com.kcb.student.adapter.LookTestAdapter;
-import com.kcb.teacher.model.test.Test;
 import com.kcbTeam.R;
 
 /**

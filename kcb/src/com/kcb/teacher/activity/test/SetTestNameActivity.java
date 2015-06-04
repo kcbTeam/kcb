@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.kcb.common.base.BaseActivity;
 import com.kcb.common.listener.DelayClickListener;
+import com.kcb.common.model.test.Test;
 import com.kcb.common.util.AnimationUtil;
 import com.kcb.common.util.ToastUtil;
 import com.kcb.library.slider.Slider;
@@ -15,7 +16,6 @@ import com.kcb.library.view.FloatingEditText;
 import com.kcb.library.view.PaperButton;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.teacher.database.test.TestDao;
-import com.kcb.teacher.model.test.Test;
 import com.kcbTeam.R;
 
 /**

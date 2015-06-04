@@ -35,8 +35,8 @@ public class TestRecycleAdapter extends RecyclerView.Adapter<TestRecycleAdapter.
     @Override
     public TestViewHolder onCreateViewHolder(ViewGroup viewGroup, int position) {
         View view =
-                LayoutInflater.from(viewGroup.getContext()).inflate(
-                        R.layout.stu_recycleritem_test, null);
+                LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.stu_recycleritem_test,
+                        null);
         TestViewHolder viewHolder = new TestViewHolder(view);
         return viewHolder;
     }

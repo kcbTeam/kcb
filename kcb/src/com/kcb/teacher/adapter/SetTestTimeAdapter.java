@@ -10,10 +10,10 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.kcb.common.model.test.Question;
+import com.kcb.common.model.test.QuestionItem;
+import com.kcb.common.model.test.Test;
 import com.kcb.library.view.buttonflat.ButtonFlat;
-import com.kcb.teacher.model.test.Question;
-import com.kcb.teacher.model.test.QuestionItem;
-import com.kcb.teacher.model.test.Test;
 import com.kcbTeam.R;
 
 /**

@@ -14,94 +14,92 @@ import org.json.JSONObject;
  */
 public class Student implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	private String mId;
-	private String mName;
-	private double mCheckInRate;
-	private double mCorrectRate;
+    private String mId;
+    private String mName;
+    private double mCheckInRate;
+    private double mCorrectRate;
 
-	public Student() {
-	}
+    public Student() {}
 
-	public Student(String name, String studentID) {
-		mName = name;
-		mId = studentID;
-	}
+    public Student(String name, String studentID) {
+        mName = name;
+        mId = studentID;
+    }
 
-	// add by ljx
-	public Student(String name, String studentID, Double checkInRate,
-			Double correctRate) {
-		mName = name;
-		mId = studentID;
-		mCheckInRate = checkInRate;
-		mCorrectRate = correctRate;
-	}
+    // add by ljx
+    public Student(String name, String studentID, Double checkInRate, Double correctRate) {
+        mName = name;
+        mId = studentID;
+        mCheckInRate = checkInRate;
+        mCorrectRate = correctRate;
+    }
 
-	/**
-	 * 
-	 * Constructor: StudentInfo checkinTimes is success checkinTimes of the
-	 * student correctTimes is correctTimes of the student
-	 * 
-	 */
+    /**
+     * 
+     * Constructor: StudentInfo checkinTimes is success checkinTimes of the student correctTimes is
+     * correctTimes of the student
+     * 
+     */
 
-	public void setID(String mStudentID) {
-		this.mId = mStudentID;
-	}
+    public void setID(String mStudentID) {
+        this.mId = mStudentID;
+    }
 
-	public void setName(String mStudentName) {
-		this.mName = mStudentName;
-	}
+    public void setName(String mStudentName) {
+        this.mName = mStudentName;
+    }
 
-	public String getId() {
-		return this.mId;
-	}
+    public String getId() {
+        return this.mId;
+    }
 
-	public String getName() {
-		return mName;
-	}
+    public String getName() {
+        return mName;
+    }
 
-	public double getCheckInRate() {
-		return mCheckInRate;
-	}
+    public double getCheckInRate() {
+        return mCheckInRate;
+    }
 
-	public void setCheckInRate(double checkinrate) {
-		mCheckInRate = checkinrate;
-	}
+    public void setCheckInRate(double checkinrate) {
+        mCheckInRate = checkinrate;
+    }
 
-	public double getCorrectRate() {
-		return mCorrectRate;
-	}
+    public double getCorrectRate() {
+        return mCorrectRate;
+    }
 
-	public void setCorrectRate(double correctrate) {
-		mCorrectRate = correctrate;
-	}
+    public void setCorrectRate(double correctrate) {
+        mCorrectRate = correctrate;
+    }
 
-	/*
-	 * student to json,json to stu
-	 */
+    /*
+     * student to json,json to stu
+     */
 
-	private final static String KEY_NAME = "name";
-	private final static String KEY_ID = "id";
-	private final static String KEY_CHECKINRATE = "checkinrate";
-	private final static String KEY_CORRECTRATE = "correctrate";
+    private final static String KEY_NAME = "name";
+    private final static String KEY_ID = "id";
+    private final static String KEY_CHECKINRATE = "checkinrate";
+    private final static String KEY_CORRECTRATE = "correctrate";
 
-	public JSONObject toJsonObject() throws JSONException {
-		JSONObject jsonObject = new JSONObject();
-		jsonObject.put(KEY_NAME, mName);
-		jsonObject.put(KEY_ID, mId);
-		jsonObject.put(KEY_CHECKINRATE, mCheckInRate);
-		jsonObject.put(KEY_CORRECTRATE, mCorrectRate);
-		return jsonObject;
-	}
+    public JSONObject toJsonObject() throws JSONException {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put(KEY_NAME, mName);
+        jsonObject.put(KEY_ID, mId);
+        jsonObject.put(KEY_CHECKINRATE, mCheckInRate);
+        jsonObject.put(KEY_CORRECTRATE, mCorrectRate);
+        return jsonObject;
+    }
 
-	public static Student fromjsonObject(JSONObject jsonObject) {
-		Student student = new Student();
-		student.mName = jsonObject.optString(KEY_NAME);
-		student.mId = jsonObject.optString(KEY_ID);
-		student.mCheckInRate = jsonObject.optDouble(KEY_CHECKINRATE);
-		student.mCorrectRate = jsonObject.optDouble(KEY_CORRECTRATE);
-		return student;
-	}
+    public static Student fromjsonObject(JSONObject jsonObject) {
+        Student student = new Student();
+        student.mName = jsonObject.optString(KEY_NAME);
+        student.mId = jsonObject.optString(KEY_ID);
+        student.mCheckInRate = jsonObject.optDouble(KEY_CHECKINRATE);
+        student.mCorrectRate = jsonObject.optDouble(KEY_CORRECTRATE);
+        return student;
+    }
 
 }

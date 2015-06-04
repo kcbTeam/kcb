@@ -63,7 +63,11 @@
     <!-- TestActivity Start -->
     <string name="stu_question_index">题目%1$d</string>
     <string name="stu_remain_time">还剩%1$d分%2$d秒</string>
+    <string name="stu_question_save">第%1$d题已保存</string>
     <string name="stu_test_time_end">时间已到，无法继续作答，请提交本次答案。</string>
+    <string name="stu_submit_test_finish">提交后，需要等待测试结束，才可以查看测试结果。</string>
+    <string name="stu_submit_test_miss">第 %1$s 题未完成，确定提交？</string>
+    <string name="stu_test_unfinish">测试未结束</string>
     <string name="pre_question">上一题</string>
     <string name="next_question">下一题</string>
     <string name="if_submit_answer">是否提交答案？</string>

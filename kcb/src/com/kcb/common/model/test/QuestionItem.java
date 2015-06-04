@@ -1,6 +1,5 @@
-package com.kcb.teacher.model.test;
+package com.kcb.common.model.test;
 
-import java.io.ByteArrayOutputStream;
 import java.io.Serializable;
 
 import org.json.JSONException;
@@ -27,7 +26,7 @@ public class QuestionItem implements Serializable {
     private boolean mIsText = true;
     private String mText = "";
     private Bitmap mBitmap;
-    private String mBitmapString;
+    private String mBitmapString = "";
 
     private boolean mIsRight; // useful when item is choice
     private double mRate; // useful when item is choice, mRate represent a choice rate
@@ -36,10 +35,6 @@ public class QuestionItem implements Serializable {
                                  // selected this choice
 
     public QuestionItem() {}
-
-    public QuestionItem(String text) {
-        mText = text;
-    }
 
     public static void copy(QuestionItem oldItem, QuestionItem newItem) {
         newItem.mId = oldItem.mId;
@@ -73,14 +68,14 @@ public class QuestionItem implements Serializable {
         mIsText = true;
         mText = text;
         mBitmap = null;
-        mBitmapString = null;
+        mBitmapString = "";
     }
 
     public void setBitmap(Bitmap bitmap) {
         mIsText = false;
         mText = "";
         mBitmap = bitmap;
-        mBitmapString = null;
+        mBitmapString = "";
     }
 
     public Bitmap getBitmap() {
@@ -100,20 +95,28 @@ public class QuestionItem implements Serializable {
         return mBitmapString;
     }
 
-    public void setIsRight(boolean _isRight) {
-        mIsRight = _isRight;
+    public void setIsRight(boolean isRight) {
+        mIsRight = isRight;
     }
 
     public boolean isRight() {
         return mIsRight;
     }
 
+    public void setRate(double rate) {
+        mRate = rate;
+    }
+
     public double getRate() {
         return mRate;
     }
 
-    public void setRate(double rate) {
-        mRate = rate;
+    public void setIsSelected(boolean selected) {
+        mIsSelected = selected;
+    }
+
+    public boolean isSelected() {
+        return mIsSelected;
     }
 
     public boolean equals(QuestionItem item) {
@@ -138,10 +141,8 @@ public class QuestionItem implements Serializable {
         return !TextUtils.isEmpty(mText) || mBitmap != null || mBitmapString != null;
     }
 
-    public static byte[] getBytes(Bitmap bitmap) {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 0, baos);
-        return baos.toByteArray();
+    public void changeStringToBitmap() {
+        getBitmapString();
     }
 
     /**

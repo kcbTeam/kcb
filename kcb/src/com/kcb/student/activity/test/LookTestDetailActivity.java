@@ -12,12 +12,10 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.kcb.common.base.BaseActivity;
-import com.kcb.common.util.LogUtil;
+import com.kcb.common.model.test.Test;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.library.view.checkbox.CheckBox;
-import com.kcb.student.util.JsonObjectParserUtil;
 import com.kcb.student.util.RedHookDraw;
-import com.kcb.teacher.model.test.Test;
 import com.kcbTeam.R;
 
 public class LookTestDetailActivity extends BaseActivity {
@@ -108,10 +106,10 @@ public class LookTestDetailActivity extends BaseActivity {
         setTabNums();
         String string1 = getIntent().getStringExtra("questionInfo");
         // LogUtil.i("gdf", string1);
-        JsonObjectParserUtil questionData = new JsonObjectParserUtil(string1);
-        sTest = questionData.ParserJsonObject();
-        if (sTest.getQuestion(0).getTitle().isText()) LogUtil.i("df", "gg");
-        showCurrentQuestion(0);
+        // JsonObjectParserUtil questionData = new JsonObjectParserUtil(string1);
+        // sTest = questionData.ParserJsonObject();
+        // if (sTest.getQuestion(0).getTitle().isText()) LogUtil.i("df", "gg");
+        // showCurrentQuestion(0);
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)

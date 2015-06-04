@@ -18,6 +18,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.kcb.common.application.KAccount;
 import com.kcb.common.base.BaseFragment;
 import com.kcb.common.listener.DelayClickListener;
+import com.kcb.common.model.test.Test;
 import com.kcb.common.server.RequestUtil;
 import com.kcb.common.server.ResponseUtil;
 import com.kcb.common.server.UrlUtil;
@@ -26,7 +27,6 @@ import com.kcb.library.view.PaperButton;
 import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
 import com.kcb.student.activity.test.LookTestActivity;
 import com.kcb.student.activity.test.TestActivity;
-import com.kcb.teacher.model.test.Test;
 import com.kcbTeam.R;
 
 /**
@@ -98,9 +98,9 @@ public class TestFragment extends BaseFragment {
 
                     @Override
                     public void onResponse(JSONObject response) {
-                        //TODO save test to database
+                        // TODO save test to database, change bitmapstring to bitmap
                         Test test = Test.fromJsonObject(response);
-                        TestActivity.start(getActivity(), test,20);
+                        TestActivity.start(getActivity(), test, 20);
                     }
                 }, new ErrorListener() {
 
@@ -113,8 +113,6 @@ public class TestFragment extends BaseFragment {
                         } else {
                             ResponseUtil.toastError(error);
                         }
-                        // TODO for test
-                        TestActivity.start(getActivity(), new Test(),20);
                     }
                 });
         RequestUtil.getInstance().addToRequestQueue(request, TAG);

@@ -13,8 +13,8 @@ import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.kcb.teacher.model.test.Question;
-import com.kcb.teacher.model.test.QuestionItem;
+import com.kcb.common.model.test.Question;
+import com.kcb.common.model.test.QuestionItem;
 import com.kcbTeam.R;
 
 public class ListAdapterChoices extends BaseAdapter {

@@ -1,5 +1,10 @@
 package com.kcb.student.activity.test;
 
+import java.util.List;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -10,17 +15,25 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 
+import com.android.volley.Request.Method;
+import com.android.volley.Response.ErrorListener;
+import com.android.volley.Response.Listener;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.kcb.common.application.KAccount;
 import com.kcb.common.base.BaseActivity;
+import com.kcb.common.model.answer.TestAnswer;
+import com.kcb.common.model.test.Question;
+import com.kcb.common.model.test.QuestionItem;
+import com.kcb.common.model.test.Test;
+import com.kcb.common.server.RequestUtil;
+import com.kcb.common.server.UrlUtil;
 import com.kcb.common.util.DialogUtil;
 import com.kcb.common.util.ToastUtil;
 import com.kcb.common.view.MaterialDialog;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.library.view.checkbox.CheckBox;
-import com.kcb.student.activity.checkin.StartCheckInActivity;
 import com.kcb.teacher.database.test.TestDao;
-import com.kcb.teacher.model.test.Question;
-import com.kcb.teacher.model.test.QuestionItem;
-import com.kcb.teacher.model.test.Test;
 import com.kcbTeam.R;
 
 /**
@@ -31,6 +44,8 @@ import com.kcbTeam.R;
  * @date: 2015-5-17 上午10:53:44
  */
 public class TestActivity extends BaseActivity {
+
+    private static final String TAG = TestActivity.class.getName();
 
     private TextView testNameTextView;
     private TextView timeTextView;
@@ -65,6 +80,8 @@ public class TestActivity extends BaseActivity {
 
     // when click last/next, show a mTempQuestion, used for compare it is changed or not;
     private Question mTempQuestion;
+
+    private TestAnswer mTestAnswer;
 
     private TestDao mTestDao;
 
@@ -109,9 +126,11 @@ public class TestActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        testNameTextView.setText(sTest.getName() + "（共" + sTest.getQuestionNum() + "题）");
-        showQuestionIndex();
+        testNameTextView.setText(String.format(getString(R.string.test_name), sTest.getName(),
+                sTest.getQuestionNum()));
         showQuestion();
+
+        mTestAnswer = new TestAnswer(sTest);
 
         mRemainTime = getIntent().getIntExtra(DATA_REMAIN_TIME, 0);
         mHandler = new Handler(getMainLooper()) {
@@ -126,6 +145,23 @@ public class TestActivity extends BaseActivity {
             };
         };
         mHandler.sendEmptyMessage(MESSAGE_TIME_REDUCE);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.button_last:
+                lastQuestion();
+                break;
+            case R.id.button_next:
+                nextQuesion();
+                break;
+            case R.id.button_submit:
+                submitAnswer();
+                break;
+            default:
+                break;
+        }
     }
 
     private void showRemainTime() {
@@ -146,55 +182,16 @@ public class TestActivity extends BaseActivity {
         dialog.setCancelable(false);
     }
 
-    private void showQuestionIndex() {
-        questionIndexTextView.setText(String.format(getString(R.string.stu_question_index),
-                mCurrentQuestionIndex + 1));
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.button_last:
-                lastQuestion();
-                break;
-            case R.id.button_next:
-                nextQuesion();
-                break;
-            case R.id.button_submit:
-                break;
-            default:
-                break;
-        }
-    }
-
-    private void lastQuestion() {
-        if (mCurrentQuestionIndex > 0) {
-            saveQuestion();
-            if (!getCurrentQuestion().equal(mTempQuestion)) {
-                ToastUtil.toast(String.format(getResources().getString(R.string.format_edit_save),
-                        1 + mCurrentQuestionIndex));
-            }
-            mCurrentQuestionIndex--;
-            showQuestion();
-        }
-    }
-
-    private void nextQuesion() {
-        saveQuestion();
-        if (!getCurrentQuestion().equal(mTempQuestion)) {
-            ToastUtil.toast(String.format(getResources().getString(R.string.format_edit_save),
-                    1 + mCurrentQuestionIndex));
-        }
-        mCurrentQuestionIndex++;
-        showQuestion();
+    private Question getCurrentQuestion() {
+        return sTest.getQuestion(mCurrentQuestionIndex);
     }
 
     private void showQuestion() {
-        mTempQuestion = Question.clone(getCurrentQuestion());
-
-        showQuestionNum();
+        questionIndexTextView.setText(String.format(getString(R.string.stu_question_index),
+                mCurrentQuestionIndex + 1));
 
         Question question = getCurrentQuestion();
+        mTempQuestion = Question.clone(question);
 
         showQuestionItem(FLAG_TITLE, question.getTitle());
         showQuestionItem(FLAG_A, question.getChoiceA());
@@ -202,65 +199,22 @@ public class TestActivity extends BaseActivity {
         showQuestionItem(FLAG_C, question.getChoiceC());
         showQuestionItem(FLAG_D, question.getChoiceD());
 
-        checkBoxA.setChecked(question.getChoiceA().isRight());
-        checkBoxB.setChecked(question.getChoiceB().isRight());
-        checkBoxC.setChecked(question.getChoiceC().isRight());
-        checkBoxD.setChecked(question.getChoiceD().isRight());
-    }
-
-    private void showQuestionNum() {
-        testNameTextView.setText(String.format(getString(R.string.test_name_num), sTest.getName(),
-                sTest.getQuestionNum()));
-        questionIndexTextView.setText(String.format(getString(R.string.problem_hint),
-                mCurrentQuestionIndex + 1));
-    }
-
-    private void saveQuestion() {
-        QuestionItem titleItem = getCurrentQuestion().getTitle();
-        QuestionItem aItem = getCurrentQuestion().getChoiceA();
-        QuestionItem bItem = getCurrentQuestion().getChoiceB();
-        QuestionItem cItem = getCurrentQuestion().getChoiceC();
-        QuestionItem dItem = getCurrentQuestion().getChoiceD();
-
-        aItem.setIsRight(checkBoxA.isCheck());
-        bItem.setIsRight(checkBoxB.isCheck());
-        cItem.setIsRight(checkBoxC.isCheck());
-        dItem.setIsRight(checkBoxD.isCheck());
+        checkBoxA.setChecked(question.getChoiceA().isSelected());
+        checkBoxB.setChecked(question.getChoiceB().isSelected());
+        checkBoxC.setChecked(question.getChoiceC().isSelected());
+        checkBoxD.setChecked(question.getChoiceD().isSelected());
     }
 
     @SuppressWarnings("deprecation")
     private void showQuestionItem(int flag, QuestionItem item) {
         TextView textView = getTextViewByTag(flag);
         if (item.isText()) {
-            setEditMode(flag, EDIT_MODE_TEXT);
             textView.setText(item.getText());
         } else {
             Bitmap bitmap = item.getBitmap();
             if (null != bitmap) {
-                setEditMode(flag, EDIT_MODE_BITMAP);
                 textView.setBackgroundDrawable(new BitmapDrawable(bitmap));
             }
-        }
-    }
-
-    private final int EDIT_MODE_TEXT = 1;
-    private final int EDIT_MODE_BITMAP = 2;
-
-    private void setEditMode(int flag, int mode) {
-        TextView editText = getTextViewByTag(flag);
-        switch (mode) {
-            case EDIT_MODE_TEXT:
-                editText.setText("");
-                editText.setFocusable(true);
-                editText.setFocusableInTouchMode(true);
-                editText.setBackgroundResource(R.drawable.stu_checkin_textview);
-                break;
-            case EDIT_MODE_BITMAP:
-                editText.setText(" ");
-                editText.setFocusable(false);
-                break;
-            default:
-                break;
         }
     }
 
@@ -288,12 +242,109 @@ public class TestActivity extends BaseActivity {
         return textView;
     }
 
-    private Question getCurrentQuestion() {
-        return sTest.getQuestion(mCurrentQuestionIndex);
+    private void saveAnswer() {
+        QuestionItem aItem = getCurrentQuestion().getChoiceA();
+        QuestionItem bItem = getCurrentQuestion().getChoiceB();
+        QuestionItem cItem = getCurrentQuestion().getChoiceC();
+        QuestionItem dItem = getCurrentQuestion().getChoiceD();
+        aItem.setIsSelected(checkBoxA.isCheck());
+        bItem.setIsSelected(checkBoxB.isCheck());
+        cItem.setIsSelected(checkBoxC.isCheck());
+        dItem.setIsSelected(checkBoxD.isCheck());
+        if (!getCurrentQuestion().equal(mTempQuestion)) {
+            mTestAnswer.saveQuestionAnswer(getCurrentQuestion());
+            ToastUtil.toast(String.format(getResources().getString(R.string.stu_question_save),
+                    mCurrentQuestionIndex + 1));
+        }
+    }
+
+    private void lastQuestion() {
+        if (mCurrentQuestionIndex > 0) {
+            saveAnswer();
+            mCurrentQuestionIndex--;
+            showQuestion();
+        }
+    }
+
+    private void nextQuesion() {
+        if (mCurrentQuestionIndex < sTest.getQuestionNum() - 1) {
+            saveAnswer();
+            mCurrentQuestionIndex++;
+            showQuestion();
+        }
+    }
+
+    private void submitAnswer() {
+        saveAnswer();
+
+        // get unfinished question index
+        List<Integer> unFinishedIndexs = mTestAnswer.getUnFinishedIndex();
+        int unFinishedSize = unFinishedIndexs.size();
+
+        // get dialog message
+        String dialogMessage;
+        if (unFinishedSize > 0) {
+            String unFinishedIndexString = "";
+            for (int i = 0; i < unFinishedSize; i++) {
+                if (i == 0) {
+                    unFinishedIndexString = String.valueOf(i + 1);
+                } else {
+                    unFinishedIndexString += "，";
+                    unFinishedIndexString += String.valueOf(i + 1);
+                }
+            }
+            dialogMessage =
+                    String.format(getString(R.string.stu_submit_test_miss), unFinishedIndexString);
+        } else {
+            dialogMessage = getString(R.string.stu_submit_test_finish);
+        }
+
+        DialogUtil.showNormalDialog(TestActivity.this, R.string.submit, dialogMessage,
+                R.string.submit, new OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        submitAnswerToServer();
+                    }
+                }, R.string.cancel, null);
+    }
+
+    private static final String KEY_STUID = "sutid";
+    private static final String KEY_TESTANSWER = "testanswer";
+
+    private void submitAnswerToServer() {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put(KEY_STUID, KAccount.getAccountId());
+            jsonObject.put(KEY_TESTANSWER, mTestAnswer.toJsonObject());
+        } catch (JSONException e) {}
+
+        JsonObjectRequest request =
+                new JsonObjectRequest(Method.POST, UrlUtil.getStuTestFinishUrl(), jsonObject,
+                        new Listener<JSONObject>() {
+
+                            @Override
+                            public void onResponse(JSONObject response) {}
+                        }, new ErrorListener() {
+
+                            @Override
+                            public void onErrorResponse(VolleyError error) {}
+                        });
+        RequestUtil.getInstance().addToRequestQueue(request, TAG);
     }
 
     @Override
-    public void onBackPressed() {}
+    public void onBackPressed() {
+        if (mRemainTime > 0) {
+            ToastUtil.toast(R.string.stu_test_unfinish);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        RequestUtil.getInstance().cancelPendingRequests(TAG);
+    }
 
     /**
      * start
