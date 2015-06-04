@@ -3,7 +3,6 @@ package com.kcb.teacher.activity.test;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
@@ -21,7 +20,6 @@ import android.view.View.OnLongClickListener;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.kcb.common.base.BaseActivity;
 import com.kcb.common.listener.DelayClickListener;
 import com.kcb.common.model.test.Question;

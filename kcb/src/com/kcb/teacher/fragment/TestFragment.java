@@ -171,8 +171,8 @@ public class TestFragment extends BaseFragment {
                 RequestUtil.getInstance().addToRequestQueue(request, TAG);
             }
         };
-        DialogUtil.showNormalDialog(getActivity(), R.string.starttest, "本次测试的名称为" + test.getName()
-                + "，包括" + test.getQuestionNum() + "道题，" + "时间为" + test.getTime() + "分钟。",
+        DialogUtil.showNormalDialog(getActivity(), R.string.starttest, "本次测试的名称为——" + test.getName()
+                + "，包括 " + test.getQuestionNum() + " 道题，" + "时间为 " + test.getTime() + " 分钟。",
                 R.string.tch_comm_sure, sureListener, R.string.tch_comm_cancel, null);
     }
 
