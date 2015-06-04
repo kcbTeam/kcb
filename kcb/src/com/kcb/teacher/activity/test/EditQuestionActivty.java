@@ -154,8 +154,8 @@ public class EditQuestionActivty extends BaseActivity implements OnLongClickList
                 finish();
                 break;
             case R.id.button_delete:
-                DialogUtil.showNormalDialog(this, R.string.dialog_title_delete,
-                        R.string.delete_msg, R.string.tch_comm_sure, new OnClickListener() {
+                DialogUtil.showNormalDialog(this, R.string.tch_comm_delete,
+                        R.string.tch_delete_tip, R.string.tch_comm_sure, new OnClickListener() {
 
                             @Override
                             public void onClick(View v) {

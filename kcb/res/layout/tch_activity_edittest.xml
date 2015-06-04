@@ -26,7 +26,7 @@
         android:id="@+id/textview_input_problem_tip"
         style="@style/common_tip"
         android:layout_below="@id/textview_title"
-        android:text="@string/problem_hint" />
+        android:text="@string/tch_input_title" />
 
     <EditText
         android:id="@+id/edittext_question_title"
@@ -38,7 +38,7 @@
         android:layout_marginRight="16dp"
         android:background="@drawable/stu_checkin_textview"
         android:gravity="top|left"
-        android:hint="@string/edit_title_hint"
+        android:hint="@string/tch_edit_hint"
         android:lineSpacingExtra="2dp"
         android:lines="7"
         android:padding="8dp"
@@ -56,7 +56,7 @@
         android:id="@+id/input_options_hint"
         style="@style/common_tip"
         android:layout_below="@id/edittext_question_title"
-        android:text="@string/options_hint" />
+        android:text="@string/tch_input_choice" />
 
     <ScrollView
         android:id="@+id/scroll_choices"
@@ -80,7 +80,7 @@
                 <TextView
                     android:id="@+id/textview_A"
                     style="@style/tch_test_choice_tip"
-                    android:text="@string/option_A" />
+                    android:text="@string/tch_choice_A" />
 
                 <RelativeLayout
                     android:layout_width="0dp"
@@ -91,7 +91,7 @@
                     <EditText
                         android:id="@+id/edittext_A"
                         style="@style/tch_test_input_choice"
-                        android:hint="@string/edit_title_hint"
+                        android:hint="@string/tch_edit_hint"
                         android:textColorHint="@color/black_400" />
 
                     <ImageView
@@ -118,7 +118,7 @@
                 <TextView
                     android:id="@+id/textview_B"
                     style="@style/tch_test_choice_tip"
-                    android:text="@string/option_B" />
+                    android:text="@string/tch_choice_B" />
 
                 <RelativeLayout
                     android:layout_width="0dp"
@@ -154,7 +154,7 @@
                 <TextView
                     android:id="@+id/textview_C"
                     style="@style/tch_test_choice_tip"
-                    android:text="@string/option_C" />
+                    android:text="@string/tch_choice_C" />
 
                 <RelativeLayout
                     android:layout_width="0dp"
@@ -190,7 +190,7 @@
                 <TextView
                     android:id="@+id/textview_D"
                     style="@style/tch_test_choice_tip"
-                    android:text="@string/option_D" />
+                    android:text="@string/tch_choice_D" />
 
                 <RelativeLayout
                     android:layout_width="0dp"

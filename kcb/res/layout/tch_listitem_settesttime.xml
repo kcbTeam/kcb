@@ -14,7 +14,7 @@
         android:layout_marginBottom="8dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
-        android:text="@string/problem_hint"
+        android:text="@string/tch_input_title"
         android:textColor="@color/black"
         android:textSize="@dimen/text_size_medium" />
 
@@ -68,7 +68,7 @@
         <TextView
             android:id="@+id/textview_tipa"
             style="@style/tch_test_settime_choice_tip"
-            android:text="@string/option_A" />
+            android:text="@string/tch_choice_A" />
 
         <TextView
             android:id="@+id/textview_A"
@@ -101,7 +101,7 @@
         <TextView
             android:id="@+id/textview_tipb"
             style="@style/tch_test_settime_choice_tip"
-            android:text="@string/option_B" />
+            android:text="@string/tch_choice_B" />
 
         <TextView
             android:id="@+id/textview_B"
@@ -134,7 +134,7 @@
         <TextView
             android:id="@+id/textview_tipc"
             style="@style/tch_test_settime_choice_tip"
-            android:text="@string/option_C" />
+            android:text="@string/tch_choice_C" />
 
         <TextView
             android:id="@+id/textview_C"
@@ -167,7 +167,7 @@
         <TextView
             android:id="@+id/textview_tipd"
             style="@style/tch_test_settime_choice_tip"
-            android:text="@string/option_D" />
+            android:text="@string/tch_choice_D" />
 
         <TextView
             android:id="@+id/textview_D"

@@ -11,7 +11,7 @@
         android:id="@+id/textview_title"
         style="@style/common_title_left"
         android:paddingLeft="16dp"
-        android:text="设置测试时间" />
+        android:text="@string/tch_set_test_time" />
 
     <com.kcb.library.view.buttonflat.ButtonFlat
         android:id="@+id/button_finish"

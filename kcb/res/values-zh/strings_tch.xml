@@ -6,6 +6,7 @@
     <string name="tch_comm_cancel">取消</string>
     <string name="tch_comm_complete">完成</string>
     <string name="tch_comm_start">开始</string>
+    <string name="tch_comm_delete">删除</string>
     <!-- Common end -->
 
 
@@ -86,58 +87,60 @@
     <string name="tch_set_test_name_hint">例如：科学的概念和应用</string>
     <string name="tch_set_question_num">设置题目数量：%1$d</string>
     <string name="tch_start_edit_test">点击完成开始出题</string>
+    <!--  -->
     <string name="tch_has_same_test_name">测试名称已经被使用了</string>
     <!-- SetTestNameActivity end -->
 
 
     <!-- EditTestActivity Start -->
-    <string name="tch_test_name">%1$s（共%2$d题）</string>
-    <string name="last_item">上一题</string>
-    <string name="next_item">下一题</string>
-    <string name="problem_hint">输入题目%1$d</string>
-    <string name="options_hint">输入选项，并勾出正确项</string>
-    <string name="option_A">A</string>
-    <string name="option_B">B</string>
-    <string name="option_C">C</string>
-    <string name="option_D">D</string>
+    <string name="tch_test_name_num">%1$s（共%2$d题）</string>
+    <string name="tch_last_question">上一题</string>
+    <string name="tch_next_question">下一题</string>
+    <string name="tch_input_title">输入题目%1$d</string>
+    <string name="tch_input_choice">输入选项，并勾出正确项</string>
+    <string name="tch_choice_A">A</string>
+    <string name="tch_choice_B">B</string>
+    <string name="tch_choice_C">C</string>
+    <string name="tch_choice_D">D</string>
+    <!--  -->
     <string name="tch_not_save_if_cancel">取消后，不会保存测试内容。</string>
-    <string name="format_edit_save">第%1$d题已保存</string>
-    <string name="format_edit_empty_hint">第%1$s题未完成</string>
-    <string name="dialog_title_question">输入题目</string>
-    <string name="delete_success">删除成功</string>
-    <string name="dialog_title_delete">删除</string>
-    <string name="delete_msg">确认删除该题吗？</string>
-    <string name="delete_question_tip">确定删除第 %1$d 题？</string>
-    <string name="dialog_title_add">添加</string>
-    <string name="add_msg">确定添加第 %1$d 题？</string>
-    <string name="edit_title_hint">输入文字，或者长按拍照</string>
+    <string name="tch_question_saved">第%1$d题已保存</string>
+    <string name="tch_question_unfinished">第%1$s题未完成</string>
+    <string name="tch_delete_success">删除成功</string>
+    <string name="tch_delete_question_tip">确定删除第 %1$d 题？</string>
+    <string name="tch_add">添加</string>
+    <string name="tch_add_question_tip">确定添加第 %1$d 题？</string>
+    <string name="tch_edit_hint">输入文字，或者长按拍照</string>
     <!-- EditTestActivity End -->
 
 
+    <!-- EditQuestionActivity start -->
+    <string name="tch_delete_tip">确认删除该题吗？</string>
+    <!-- EditQuestionActivity end -->
+
+
     <!-- Cut Picture Activity Strat -->
-    <string name="cut_title">裁剪图片</string>
+    <string name="tch_crop_picture">裁剪图片</string>
     <!-- Cut Picture Activity End -->
 
 
-    <!-- Submit Activity Start -->
-    <string name="settime_hint">本次测试包括%1$d道题，答题时间为：%2$d分钟</string>
-    <string name="editCouseTest">编辑课堂小测试</string>
-    <string name="sure_submit">完成</string>
-    <!-- Submit Activity End -->
+    <!-- SetTestTimeActivity Start -->
+    <string name="tch_set_test_time">设置测试时间</string>
+    <string name="tch_set_test_time_tip">本次测试包括%1$d道题，答题时间为：%2$d分钟</string>
+    <!-- SetTestTimeActivity End -->
 
 
-    <!-- Check Test Activity Start -->
-    <string name="checktest">查看测试</string>
-    <string name="hint_checktest_search">搜索测试名称</string>
-    <string name="totalQuestionNum">总题数</string>
-    <string name="testdata">测试日期</string>
-    <string name="testname">测试名称</string>
-    <!-- Check Test Activity End -->
+    <!-- LookTestActivity Start -->
+    <string name="tch_input_test_name_search">输入测试名称搜索</string>
+    <string name="tch_all_question_num">总题数</string>
+    <string name="tch_test_date">测试日期</string>
+    <string name="tch_test_name">测试名称</string>
+    <!-- LookTestActivity End -->
 
 
     <!-- StuCentreActivty start -->
-    <string name="checkin_rate_format">%1$s的到课率为%2$d%%</string>
-    <string name="correct_rate_format">%1$s的选择题正确率为%2$d%%</string>
+    <string name="tch_stu_checkin_rate">%1$s的到课率为%2$d%%</string>
+    <string name="tch_stu_correct_rate">%1$s的选择题正确率为%2$d%%</string>
     <!-- StuCentreActivty end -->
 
 </resources>

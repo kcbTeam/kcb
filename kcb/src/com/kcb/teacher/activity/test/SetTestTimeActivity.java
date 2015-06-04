@@ -63,7 +63,7 @@ public class SetTestTimeActivity extends BaseActivity {
 
             @Override
             public void onValueChanged(int value) {
-                testTimeTextView.setText(String.format(getString(R.string.settime_hint),
+                testTimeTextView.setText(String.format(getString(R.string.tch_set_test_time_tip),
                         sTest.getQuestionNum(), value));
             }
         });
@@ -73,7 +73,7 @@ public class SetTestTimeActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        testTimeTextView.setText(String.format(getString(R.string.settime_hint),
+        testTimeTextView.setText(String.format(getString(R.string.tch_set_test_time_tip),
                 sTest.getQuestionNum(), sTest.getTime()));
         slider.setValue(sTest.getTime());
 
@@ -101,7 +101,7 @@ public class SetTestTimeActivity extends BaseActivity {
                 int index = data.getIntExtra(EditQuestionActivty.DATA_INDEX, 0);
                 mAdapter.deleteItem(index);
                 mAdapter.notifyDataSetChanged();
-                testTimeTextView.setText(String.format(getString(R.string.settime_hint),
+                testTimeTextView.setText(String.format(getString(R.string.tch_set_test_time_tip),
                         mAdapter.getCount(), slider.getValue()));
             }
         }

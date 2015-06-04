@@ -84,7 +84,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="@string/last_item"
+            android:text="@string/tch_last_question"
             buttonflat:clickAfterRipple="false"
             buttonflat:rippleSpeed="36" />
 
@@ -93,7 +93,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="@string/next_item"
+            android:text="@string/tch_next_question"
             buttonflat:rippleSpeed="36" />
     </LinearLayout>
 

@@ -16,7 +16,7 @@
         <TextView
             android:id="@+id/textview_title"
             style="@style/common_title"
-            android:text="@string/cut_title" />
+            android:text="@string/tch_crop_picture" />
 
         <com.kcb.library.view.buttonflat.ButtonFlat
             android:id="@+id/button_rotate"

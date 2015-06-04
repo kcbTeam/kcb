@@ -76,10 +76,10 @@ public class StuCentreActivity extends BaseActivity {
 
         nameIdTextView.setText(mStudentInfo.getName() + "（" + mStudentInfo.getId() + "）");
         checkInRateTextView.setText(String.format(
-                getResources().getString(R.string.checkin_rate_format), mStudentInfo.getName(),
+                getResources().getString(R.string.tch_stu_checkin_rate), mStudentInfo.getName(),
                 (int) (100 * mCheckInRate)));
         testRateTextView.setText(String.format(
-                getResources().getString(R.string.correct_rate_format), mStudentInfo.getName(),
+                getResources().getString(R.string.tch_stu_correct_rate), mStudentInfo.getName(),
                 (int) (100 * mCorrectRate)));
 
         initPieChart();

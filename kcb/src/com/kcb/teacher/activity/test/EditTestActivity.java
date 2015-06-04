@@ -225,7 +225,8 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
         if (mCurrentQuestionIndex > 0) {
             saveQuestion();
             if (!getCurrentQuestion().equal(mTempQuestion)) {
-                ToastUtil.toast(String.format(getResources().getString(R.string.format_edit_save),
+                ToastUtil.toast(String.format(
+                        getResources().getString(R.string.tch_question_saved),
                         1 + mCurrentQuestionIndex));
             }
             mCurrentQuestionIndex--;
@@ -238,9 +239,9 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
         if (mCurrentQuestionIndex == sTest.getQuestionNum() - 1) {
             if (!sTest.isCompleted()) {
                 int unCompletedIndex = sTest.getUnCompleteIndex() + 1;
-                ToastUtil.toast(String
-                        .format(getResources().getString(R.string.format_edit_empty_hint),
-                                unCompletedIndex));
+                ToastUtil.toast(String.format(
+                        getResources().getString(R.string.tch_question_unfinished),
+                        unCompletedIndex));
             } else {
                 new Handler().postDelayed(new Runnable() {
 
@@ -253,7 +254,8 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
             }
         } else {
             if (!getCurrentQuestion().equal(mTempQuestion)) {
-                ToastUtil.toast(String.format(getResources().getString(R.string.format_edit_save),
+                ToastUtil.toast(String.format(
+                        getResources().getString(R.string.tch_question_saved),
                         1 + mCurrentQuestionIndex));
             }
             mCurrentQuestionIndex++;
@@ -268,9 +270,9 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
             return;
         }
         final int questionNum = sTest.getQuestionNum() + 1;
-        DialogUtil.showNormalDialog(this, R.string.dialog_title_add,
-                String.format(getString(R.string.add_msg), questionNum), R.string.tch_comm_sure,
-                new OnClickListener() {
+        DialogUtil.showNormalDialog(this, R.string.tch_add,
+                String.format(getString(R.string.tch_add_question_tip), questionNum),
+                R.string.tch_comm_sure, new OnClickListener() {
 
                     @Override
                     public void onClick(View v) {
@@ -283,8 +285,8 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
     }
 
     private void deleteQuestion() {
-        DialogUtil.showNormalDialog(this, R.string.dialog_title_delete,
-                String.format(getString(R.string.delete_question_tip), mCurrentQuestionIndex + 1),
+        DialogUtil.showNormalDialog(this, R.string.tch_comm_delete, String.format(
+                getString(R.string.tch_delete_question_tip), mCurrentQuestionIndex + 1),
                 R.string.tch_comm_sure, new OnClickListener() {
 
                     @Override
@@ -296,7 +298,7 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
                                     mCurrentQuestionIndex == originQuestionNum - 1 ? sTest
                                             .getQuestionNum() - 1 : mCurrentQuestionIndex;
                             showQuestion();
-                            ToastUtil.toast(R.string.delete_success);
+                            ToastUtil.toast(R.string.tch_delete_success);
                         } else {
                             finish();
                         }
@@ -453,7 +455,7 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
     private void showQuestionNum() {
         testNameTextView.setText(String.format(getString(R.string.tch_test_name), sTest.getName(),
                 sTest.getQuestionNum()));
-        inputIndexTextView.setText(String.format(getString(R.string.problem_hint),
+        inputIndexTextView.setText(String.format(getString(R.string.tch_input_title),
                 mCurrentQuestionIndex + 1));
     }
 
@@ -462,7 +464,7 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
             nextButton.setText(getResources().getString(R.string.tch_comm_complete));
             nextButton.setTextColor(getResources().getColor(R.color.blue));
         } else {
-            nextButton.setText(getResources().getString(R.string.next_item));
+            nextButton.setText(getResources().getString(R.string.tch_next_question));
             nextButton.setTextColor(getResources().getColor(R.color.black_700));
         }
     }
@@ -615,8 +617,9 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
                 finish();
             }
         };
-        DialogUtil.showNormalDialog(this, R.string.tch_comm_cancel, R.string.tch_not_save_if_cancel,
-                R.string.tch_comm_sure, sureListener, R.string.tch_comm_cancel, null);
+        DialogUtil.showNormalDialog(this, R.string.tch_comm_cancel,
+                R.string.tch_not_save_if_cancel, R.string.tch_comm_sure, sureListener,
+                R.string.tch_comm_cancel, null);
     }
 
     private void saveEditTest() {
@@ -651,9 +654,8 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
                 finish();
             }
         };
-        DialogUtil.showNormalDialog(this, R.string.dialog_title_delete,
-                "确定删除测试——" + sTest.getName() + "？", R.string.tch_comm_sure, sureListener,
-                R.string.tch_comm_cancel, null);
+        DialogUtil.showNormalDialog(this, R.string.tch_comm_delete, "确定删除测试——" + sTest.getName()
+                + "？", R.string.tch_comm_sure, sureListener, R.string.tch_comm_cancel, null);
     }
 
     /**

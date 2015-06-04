@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:text="@string/checktest" />
+            android:text="@string/tch_look_test_result" />
     </LinearLayout>
 
     <com.kcb.library.view.FloatingEditText
@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/title"
         android:layout_marginTop="5dp"
-        android:hint="@string/hint_checktest_search" />
+        android:hint="@string/tch_input_test_name_search" />
 
     <TextView
         android:id="@+id/textview_testinfo"
@@ -36,14 +36,14 @@
         android:layout_below="@id/edittext_search"
         android:layout_marginLeft="24dp"
         android:layout_marginTop="5dp"
-        android:text="@string/testname" />
+        android:text="@string/tch_test_name" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@id/textview_testinfo"
         android:layout_centerHorizontal="true"
-        android:text="@string/totalQuestionNum" />
+        android:text="@string/tch_all_question_num" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -51,7 +51,7 @@
         android:layout_alignBaseline="@id/textview_testinfo"
         android:layout_alignParentRight="true"
         android:layout_marginRight="24dp"
-        android:text="@string/testdata" />
+        android:text="@string/tch_test_date" />
 
     <ListView
         android:id="@+id/listview_test"
