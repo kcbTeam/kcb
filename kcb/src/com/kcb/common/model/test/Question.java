@@ -18,14 +18,13 @@ public class Question implements Serializable {
     private static final long serialVersionUID = 2L;
 
     private int mId; // from client
+    private double mRate;
 
     private QuestionItem mTitleItem;
     private QuestionItem mChoiceAItem;
     private QuestionItem mChoiceBItem;
     private QuestionItem mChoiceCItem;
     private QuestionItem mChoiceDItem;
-
-    private double mRate;
 
     public Question() {
         mTitleItem = new QuestionItem();
@@ -87,18 +86,6 @@ public class Question implements Serializable {
                 && mChoiceDItem.equals(questionObj.getChoiceD());
     }
 
-    public String contentString() {
-        return mTitleItem.getText() + '\n' + '\n' + "A." + mChoiceAItem.getText() + '\n' + "B."
-                + mChoiceBItem.getText() + '\n' + "C." + mChoiceCItem.getText() + '\n' + "D."
-                + mChoiceDItem.getText();
-    }
-
-    public boolean isAllString() {
-        if (mTitleItem.isText() && mChoiceAItem.isText() && mChoiceBItem.isText()
-                && mChoiceCItem.isText() && mChoiceDItem.isText()) return true;
-        return false;
-    }
-
     public boolean isCompleted() {
         return mTitleItem.isCompleted()
                 && mChoiceAItem.isCompleted()
@@ -107,6 +94,14 @@ public class Question implements Serializable {
                 && mChoiceDItem.isCompleted()
                 && (mChoiceAItem.isRight() || mChoiceBItem.isRight() || mChoiceCItem.isRight() || mChoiceDItem
                         .isRight());
+    }
+
+    public void changeStringToBitmap() {
+        mTitleItem.changeStringToBitmap();
+        mChoiceAItem.changeStringToBitmap();
+        mChoiceBItem.changeStringToBitmap();
+        mChoiceCItem.changeStringToBitmap();
+        mChoiceDItem.changeStringToBitmap();
     }
 
     /**

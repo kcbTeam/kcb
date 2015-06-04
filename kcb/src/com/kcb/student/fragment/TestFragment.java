@@ -113,8 +113,6 @@ public class TestFragment extends BaseFragment {
                         } else {
                             ResponseUtil.toastError(error);
                         }
-                        // TODO for test
-                        TestActivity.start(getActivity(), new Test(), 20);
                     }
                 });
         RequestUtil.getInstance().addToRequestQueue(request, TAG);

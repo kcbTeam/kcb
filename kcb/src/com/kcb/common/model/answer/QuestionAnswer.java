@@ -16,17 +16,17 @@ import com.kcb.common.model.test.Question;
 public class QuestionAnswer {
 
     private int mId; // question id;
-    private ChoiceCheckInfo aCheckInfo;
-    private ChoiceCheckInfo bCheckInfo;
-    private ChoiceCheckInfo cCheckInfo;
-    private ChoiceCheckInfo dCheckInfo;
+    private ChoiceCheckInfo mAInfo;
+    private ChoiceCheckInfo mBInfo;
+    private ChoiceCheckInfo mCInfo;
+    private ChoiceCheckInfo nDInfo;
 
     public QuestionAnswer(Question question) {
         mId = question.getId();
-        aCheckInfo = new ChoiceCheckInfo(question.getChoiceA());
-        bCheckInfo = new ChoiceCheckInfo(question.getChoiceB());
-        cCheckInfo = new ChoiceCheckInfo(question.getChoiceC());
-        dCheckInfo = new ChoiceCheckInfo(question.getChoiceD());
+        mAInfo = new ChoiceCheckInfo(question.getChoiceA());
+        mBInfo = new ChoiceCheckInfo(question.getChoiceB());
+        mCInfo = new ChoiceCheckInfo(question.getChoiceC());
+        nDInfo = new ChoiceCheckInfo(question.getChoiceD());
     }
 
     public int getId() {
@@ -34,15 +34,15 @@ public class QuestionAnswer {
     }
 
     public void setAnswer(Question question) {
-        aCheckInfo.setIsSelected(question.getChoiceA());
-        bCheckInfo.setIsSelected(question.getChoiceB());
-        cCheckInfo.setIsSelected(question.getChoiceC());
-        dCheckInfo.setIsSelected(question.getChoiceD());
+        mAInfo.setIsSelected(question.getChoiceA());
+        mBInfo.setIsSelected(question.getChoiceB());
+        mCInfo.setIsSelected(question.getChoiceC());
+        nDInfo.setIsSelected(question.getChoiceD());
     }
 
     public boolean hasFinished() {
-        return aCheckInfo.isSelected() || bCheckInfo.isSelected() || cCheckInfo.isSelected()
-                || dCheckInfo.isSelected();
+        return mAInfo.isSelected() || mBInfo.isSelected() || mCInfo.isSelected()
+                || nDInfo.isSelected();
     }
 
     /**
@@ -57,10 +57,10 @@ public class QuestionAnswer {
             jsonObject.put(KEY_ID, mId);
 
             JSONArray jsonArray = new JSONArray();
-            jsonArray.put(aCheckInfo.toJsonObject());
-            jsonArray.put(bCheckInfo.toJsonObject());
-            jsonArray.put(cCheckInfo.toJsonObject());
-            jsonArray.put(dCheckInfo.toJsonObject());
+            jsonArray.put(mAInfo.toJsonObject());
+            jsonArray.put(mBInfo.toJsonObject());
+            jsonArray.put(mCInfo.toJsonObject());
+            jsonArray.put(nDInfo.toJsonObject());
 
             jsonObject.put(KEY_CHOICE, jsonArray);
         } catch (JSONException e) {}
