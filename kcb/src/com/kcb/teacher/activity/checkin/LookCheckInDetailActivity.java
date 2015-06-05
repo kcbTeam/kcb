@@ -95,7 +95,8 @@ public class LookCheckInDetailActivity extends BaseFragmentActivity implements O
     }
 
     private void initPieChart() {
-        setData(pieChart, new String[] {"成功签到", "未签到"});
+        setData(pieChart, new String[] {getResources().getString(R.string.tch_checkin_success),
+                getResources().getString(R.string.tch_checkin_failed)});
         setDefaultPieChartStyle(pieChart);
         new Handler().postDelayed(new Runnable() {
 

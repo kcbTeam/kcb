@@ -161,7 +161,9 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
         if (mAction.equals(ACTION_EDIT_TEST)) {
             cancelImageView.setImageResource(R.drawable.ic_delete_black_24dp);
         }
-        testNameTextView.setText(sTest.getName() + "（共" + sTest.getQuestionNum() + "题）");
+        testNameTextView.setText(String.format(
+                getResources().getString(R.string.tch_test_name_num), sTest.getName(),
+                sTest.getQuestionNum()));
         showQuestion();
     }
 
@@ -266,7 +268,7 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
     // four click functions: add ,delete ,next ,last.
     private void addQuestion() {
         if (sTest.getQuestionNum() == 9) {
-            ToastUtil.toast("最多只能有9题");
+            ToastUtil.toast(R.string.tch_question_uplimited);
             return;
         }
         final int questionNum = sTest.getQuestionNum() + 1;
@@ -276,7 +278,8 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
 
                     @Override
                     public void onClick(View v) {
-                        ToastUtil.toast("第" + questionNum + "题已添加");
+                        ToastUtil.toast(String.format(
+                                getResources().getString(R.string.tch_question_added), questionNum));
                         sTest.addQuestion();
                         showQuestionNum();
                         showNextButton();

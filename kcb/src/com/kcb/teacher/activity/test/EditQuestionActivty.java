@@ -134,7 +134,8 @@ public class EditQuestionActivty extends BaseActivity implements OnLongClickList
     protected void initData() {
         Intent intent = getIntent();
         mIndex = intent.getIntExtra(DATA_INDEX, 0);
-        questionNumTextView.setText("第" + (mIndex + 1) + "题");
+        questionNumTextView.setText(String.format(
+                getResources().getString(R.string.tch_question_num), mIndex + 1));
         showQuestion();
     }
 
