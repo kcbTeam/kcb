@@ -128,7 +128,7 @@ public class SetTestTimeAdapter extends BaseAdapter {
     private void showContent(TextView view, ImageView checkIcon, QuestionItem item) {
         if (item.isText()) {
             view.setText(item.getText());
-            view.setBackground(null);
+            view.setBackgroundResource(0);
         } else {
             view.setText("");
             view.setBackground(new BitmapDrawable(item.getBitmap()));
@@ -137,7 +137,7 @@ public class SetTestTimeAdapter extends BaseAdapter {
             if (item.isRight()) {
                 checkIcon.setBackgroundResource(R.drawable.ic_check_box_grey600_18dp);
             } else {
-                checkIcon.setBackgroundResource(R.drawable.ic_check_box_outline_blank_black_18dp);
+                checkIcon.setBackgroundResource(R.drawable.ic_check_box_outline_blank_grey600_18dp);
             }
         }
     }

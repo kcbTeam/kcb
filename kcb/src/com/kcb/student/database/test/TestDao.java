@@ -3,6 +3,10 @@ package com.kcb.student.database.test;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -12,41 +16,53 @@ import com.kcb.student.database.KSQLiteOpenHelper;
 
 public class TestDao {
 
-    private KSQLiteOpenHelper mStudentSQLiteOpenHelper;
-    private SQLiteDatabase mSqLiteDatabase;
+    private KSQLiteOpenHelper mSQLiteOpenHelper;
+    private SQLiteDatabase mSQLiteDatabase;
 
     public TestDao(Context context) {
-        mStudentSQLiteOpenHelper = new KSQLiteOpenHelper(context);
-        mSqLiteDatabase = mStudentSQLiteOpenHelper.getWritableDatabase();
+        mSQLiteOpenHelper = new KSQLiteOpenHelper(context);
+        mSQLiteDatabase = mSQLiteOpenHelper.getWritableDatabase();
     }
 
+    @SuppressLint("SimpleDateFormat")
     public void add(Test test) {
-        mSqLiteDatabase.beginTransaction();
+        int hasTested = 0;
+        if (test.isTested()) {
+            hasTested = 1;
+        }
+        mSQLiteDatabase.beginTransaction();
         try {
-            mSqLiteDatabase.execSQL("insert into " + TestDB.TABLE_NAME + "values(null,?,?)",
-                    new String[] {test.getName(), String.valueOf(test.getTime()),
-                            test.getDate().toString()});
-            mSqLiteDatabase.setTransactionSuccessful();
+            mSQLiteDatabase.execSQL("INSERT INTO " + TestDB.TABLE_NAME
+                    + " VALUES(null,?,?,?,?,?,?)",
+                    new String[] {test.getId(), test.getName(), String.valueOf(test.getTime()),
+                            test.getDate().toString(), String.valueOf(hasTested),
+                            test.toJsonObject().toString()});
+            mSQLiteDatabase.setTransactionSuccessful();
         } finally {
-            mSqLiteDatabase.endTransaction();
+            mSQLiteDatabase.endTransaction();
         }
     }
 
-    public List<Test> query() {
-        Cursor cursor = mSqLiteDatabase.rawQuery("select from" + TestDB.TABLE_NAME, null);
-        List<Test> list = new ArrayList<Test>();
-        while (cursor.moveToNext()) {
-            Test test = new Test();
-//            test.setName(cursor.getString(cursor.getColumnIndex(TestDB.TESTNAME)));
-//            test.setSum(cursor.getInt(cursor.getColumnIndex(TestDB.QUESTIONNUM)));
-//            test.setDate(cursor.getString(cursor.getColumnIndex(TestDB.DATE)));
-            list.add(test);
+    public List<Test> getAll() {
+        Cursor cursor =
+                mSQLiteDatabase.query(TestDB.TABLE_NAME, null, null, null, null, null, null);
+        List<Test> tests = new ArrayList<Test>();
+        if (cursor.moveToFirst()) {
+            do {
+                Test test;
+                try {
+                    test =
+                            Test.fromJsonObject(new JSONObject(cursor.getString(cursor
+                                    .getColumnIndex(TestDB.KEY_TEXT))));
+                    tests.add(test);
+                } catch (JSONException e) {}
+            } while (cursor.moveToNext());
         }
         cursor.close();
-        return list;
+        return tests;
     }
 
     public void close() {
-        mSqLiteDatabase.close();
+        mSQLiteDatabase.close();
     }
 }

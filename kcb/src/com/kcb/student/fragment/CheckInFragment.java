@@ -1,6 +1,5 @@
 package com.kcb.student.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -78,8 +77,7 @@ public class CheckInFragment extends BaseFragment {
                         startCheckIn();
                         break;
                     case R.id.button_look_checkin:
-                        Intent intent = new Intent(getActivity(), LookCheckInActivity.class);
-                        startActivity(intent);
+                        LookCheckInActivity.start(getActivity());
                         break;
                     default:
                         break;

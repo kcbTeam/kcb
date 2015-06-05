@@ -111,6 +111,10 @@
             android:windowSoftInputMode="adjustPan" >
         </activity>
         <activity
+            android:name="com.kcb.teacher.activity.test.CropPictureActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
             android:name="com.kcb.teacher.activity.test.SetTestTimeActivity"
             android:screenOrientation="portrait" >
         </activity>
@@ -126,10 +130,6 @@
         </activity>
         <activity
             android:name="com.kcb.teacher.activity.test.LookTestDetailActivity"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
-            android:name="com.kcb.teacher.activity.test.CropPictureActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity

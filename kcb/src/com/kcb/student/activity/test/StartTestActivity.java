@@ -33,7 +33,7 @@ import com.kcb.common.util.ToastUtil;
 import com.kcb.common.view.MaterialDialog;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.library.view.checkbox.CheckBox;
-import com.kcb.teacher.database.test.TestDao;
+import com.kcb.student.database.test.TestDao;
 import com.kcbTeam.R;
 
 /**
@@ -82,8 +82,6 @@ public class StartTestActivity extends BaseActivity {
     private Question mTempQuestion;
 
     private TestAnswer mTestAnswer;
-
-    private TestDao mTestDao;
 
     private int mRemainTime; // seconds
     private Handler mHandler;
@@ -300,14 +298,21 @@ public class StartTestActivity extends BaseActivity {
             dialogMessage = getString(R.string.stu_submit_test_finish);
         }
 
-        DialogUtil.showNormalDialog(StartTestActivity.this, R.string.stu_comm_submit, dialogMessage,
-                R.string.stu_comm_submit, new OnClickListener() {
+        DialogUtil.showNormalDialog(StartTestActivity.this, R.string.stu_comm_submit,
+                dialogMessage, R.string.stu_comm_submit, new OnClickListener() {
 
                     @Override
                     public void onClick(View v) {
+                        saveAnswerToDataBase();
                         submitAnswerToServer();
                     }
                 }, R.string.stu_comm_cancel, null);
+    }
+
+    private void saveAnswerToDataBase() {
+        TestDao testDao = new TestDao(StartTestActivity.this);
+        testDao.add(sTest);
+        testDao.close();
     }
 
     private static final String KEY_STUID = "sutid";
@@ -319,7 +324,6 @@ public class StartTestActivity extends BaseActivity {
             jsonObject.put(KEY_STUID, KAccount.getAccountId());
             jsonObject.put(KEY_TESTANSWER, mTestAnswer.toJsonObject());
         } catch (JSONException e) {}
-
         JsonObjectRequest request =
                 new JsonObjectRequest(Method.POST, UrlUtil.getStuTestFinishUrl(), jsonObject,
                         new Listener<JSONObject>() {

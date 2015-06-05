@@ -629,7 +629,7 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
         ToastUtil.toast(R.string.tch_saved);
         try {
             mTestDao = new TestDao(this);
-            mTestDao.addTest(sTest);
+            mTestDao.add(sTest);
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (JSONException e) {
@@ -649,7 +649,7 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
                 ToastUtil.toast(R.string.tch_deleted);
                 try {
                     mTestDao = new TestDao(EditTestActivity.this);
-                    mTestDao.deleteTestByName(sTest.getName());
+                    mTestDao.delete(sTest.getName());
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }

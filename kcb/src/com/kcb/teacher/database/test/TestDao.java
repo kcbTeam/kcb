@@ -17,79 +17,54 @@ import android.database.sqlite.SQLiteDatabase;
 import com.kcb.common.model.test.Test;
 import com.kcb.teacher.database.KSQLiteOpenHelper;
 
+/**
+ * 
+ * @className: TestDao
+ * @description:
+ * @author:
+ * @date: 2015-6-5 下午10:13:03
+ */
 public class TestDao {
-    private KSQLiteOpenHelper mTestSQLiteOpenHelper;
-    private SQLiteDatabase mSqLiteDatabase;
+
+    // TODO close cursor
+    private KSQLiteOpenHelper mSQLiteOpenHelper;
+    private SQLiteDatabase mSQLiteDatabase;
 
     public TestDao(Context context) {
-        mTestSQLiteOpenHelper = new KSQLiteOpenHelper(context);
-        mSqLiteDatabase = mTestSQLiteOpenHelper.getWritableDatabase();
+        mSQLiteOpenHelper = new KSQLiteOpenHelper(context);
+        mSQLiteDatabase = mSQLiteOpenHelper.getWritableDatabase();
     }
 
-    /**
-     * 
-     * @title: add
-     * @description: ADD a record to db
-     * @author: ZQJ
-     * @date: 2015年5月30日 下午8:44:29
-     * @param test
-     * @throws SQLException
-     * @throws JSONException
-     * @throws IOException
-     */
+    // TODO save boolean? use beginTransaction??
     @SuppressLint("SimpleDateFormat")
-    public void addTest(Test test) throws SQLException, JSONException, IOException {
-        if (null != test) {
-            deleteTestByName(test.getName());
-        }
+    public void add(Test test) throws SQLException, JSONException, IOException {
         int hasTested = 0;
         if (test.isTested()) {
             hasTested = 1;
         }
-        mSqLiteDatabase.execSQL("INSERT INTO " + TestDB.TABLE_NAME + " VALUES(null,?,?,?,?,?,?)",
+        mSQLiteDatabase.execSQL("INSERT INTO " + TestDB.TABLE_NAME + " VALUES(null,?,?,?,?,?,?)",
                 new String[] {test.getId(), test.getName(), String.valueOf(test.getTime()),
                         test.getDate().toString(), String.valueOf(hasTested),
                         test.toJsonObject().toString()});
     }
 
-    /**
-     * 
-     * @title: getTestByName
-     * @description: GET a test by name for db
-     * @author: ZQJ
-     * @date: 2015年5月30日 下午8:44:49
-     * @param testName
-     * @return
-     * @throws JSONException
-     * @throws IOException
-     * @throws ParseException
-     */
-    public Test getTestByName(String testName) throws JSONException, IOException, ParseException {
+    public Test get(String testName) throws JSONException, IOException, ParseException {
         Test test = null;
         Cursor cursor =
-                mSqLiteDatabase.rawQuery("SELECT * FROM " + TestDB.TABLE_NAME + " WHERE "
+                mSQLiteDatabase.rawQuery("SELECT * FROM " + TestDB.TABLE_NAME + " WHERE "
                         + TestDB.KEY_NAME + "=?", new String[] {testName});
         if (cursor.moveToFirst()) {
             test =
                     Test.fromJsonObject(new JSONObject(cursor.getString(cursor
-                            .getColumnIndex(TestDB.KEY_TEST_CONTENT))));
+                            .getColumnIndex(TestDB.KEY_TEXT))));
         }
         cursor.close();
         return test;
     }
 
-    /**
-     * 
-     * @title: hasRecorded
-     * @description: check whether the testName is saved
-     * @author: ZQJ
-     * @date: 2015年6月2日 下午8:26:51
-     * @param testName
-     * @return
-     */
     public boolean hasRecorded(String testName) {
         Cursor cursor =
-                mSqLiteDatabase.rawQuery("SELECT * FROM " + TestDB.TABLE_NAME + " WHERE "
+                mSQLiteDatabase.rawQuery("SELECT * FROM " + TestDB.TABLE_NAME + " WHERE "
                         + TestDB.KEY_NAME + "=?", new String[] {testName});
         if (cursor.getCount() < 1) {
             return false;
@@ -97,26 +72,15 @@ public class TestDao {
         return true;
     }
 
-    /**
-     * 
-     * @title: getAllRecord
-     * @description: GET all tests from db
-     * @author: ZQJ
-     * @date: 2015年5月30日 下午8:53:54
-     * @return
-     * @throws JSONException
-     * @throws IOException
-     * @throws ParseException
-     */
-    public List<Test> getAllRecord() throws JSONException, IOException, ParseException {
+    public List<Test> getAll() throws JSONException, IOException, ParseException {
         Cursor cursor =
-                mSqLiteDatabase.query(TestDB.TABLE_NAME, null, null, null, null, null, null);
+                mSQLiteDatabase.query(TestDB.TABLE_NAME, null, null, null, null, null, null);
         List<Test> list = new ArrayList<Test>();
         if (cursor.moveToFirst()) {
             do {
                 Test test =
                         Test.fromJsonObject(new JSONObject(cursor.getString(cursor
-                                .getColumnIndex(TestDB.KEY_TEST_CONTENT))));
+                                .getColumnIndex(TestDB.KEY_TEXT))));
                 list.add(test);
             } while (cursor.moveToNext());
         }
@@ -124,23 +88,15 @@ public class TestDao {
         return list;
     }
 
-    /**
-     * 
-     * @title: deleteTestByName
-     * @description: DELETE test by name
-     * @author: ZQJ
-     * @date: 2015年5月30日 下午8:58:39
-     * @param testName
-     */
-    public void deleteTestByName(String testName) {
-        mSqLiteDatabase.delete(TestDB.TABLE_NAME, TestDB.KEY_NAME + "=?", new String[] {testName});
+    public void delete(String testName) {
+        mSQLiteDatabase.delete(TestDB.TABLE_NAME, TestDB.KEY_NAME + "=?", new String[] {testName});
     }
 
-    public void deleteAllRecord() {
-        mSqLiteDatabase.execSQL("DELETE FROM " + TestDB.TABLE_NAME);
+    public void deleteAll() {
+        mSQLiteDatabase.execSQL("DELETE FROM " + TestDB.TABLE_NAME);
     }
 
     public void close() {
-        mSqLiteDatabase.close();
+        mSQLiteDatabase.close();
     }
 }

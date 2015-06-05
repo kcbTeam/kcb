@@ -20,6 +20,7 @@ import com.kcb.library.view.FloatingEditText;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
 import com.kcb.student.adapter.LookTestAdapter;
+import com.kcb.student.database.test.TestDao;
 import com.kcbTeam.R;
 
 /**
@@ -74,16 +75,13 @@ public class LookTestActivity extends BaseActivity implements TextWatcher, OnIte
 
     @Override
     protected void initData() {
-        // TODO get data from database;
-        mTests = new ArrayList<Test>();
+        TestDao testDao = new TestDao(LookTestActivity.this);
+        mTests = testDao.getAll();
+        testDao.close();
+
         mTempTests = new ArrayList<Test>();
-
-        for (int i = 0; i < 10; i++) {
-            Test test = new Test("导数的意义", 5);
-            mTests.add(test);
-        }
-
         mTempTests.addAll(mTests);
+
         mAdapter = new LookTestAdapter(this, mTempTests);
         listView.setAdapter(mAdapter);
     }
@@ -105,12 +103,13 @@ public class LookTestActivity extends BaseActivity implements TextWatcher, OnIte
         }
     }
 
+    // TODO
     private void refresh() {
-        // TODO get data from server
         if (progressBar.getVisibility() == View.VISIBLE) {
             return;
         }
         progressBar.setVisibility(View.VISIBLE);
+
     }
 
     private void clear() {

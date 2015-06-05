@@ -1,11 +1,12 @@
 package com.kcb.student.activity.checkin;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Handler;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -29,8 +30,8 @@ import com.kcb.common.server.ResponseUtil;
 import com.kcb.common.server.UrlUtil;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
-
-import com.kcb.student.model.checkin.CheckInResult;
+import com.kcb.student.database.checkin.CheckInDao;
+import com.kcb.student.model.CheckInResult;
 import com.kcbTeam.R;
 
 /**
@@ -51,12 +52,7 @@ public class LookCheckInActivity extends BaseActivity {
     private TextView rateTextView;
 
     private PieChart pieChart;
-    private int totalTimes;
-    private int checkedTimes;
-    //private double rate;
-    
-    //private CheckInDao mCheckInDao;
-    //private CheckIn mCheckIn;
+    private float[] mRates = new float[2];
 
     @Override
     protected void onCreate(android.os.Bundle savedInstanceState) {
@@ -78,32 +74,26 @@ public class LookCheckInActivity extends BaseActivity {
         progressBar = (SmoothProgressBar) findViewById(R.id.progressbar_refresh);
 
         rateTextView = (TextView) findViewById(R.id.textview_rate);
-
         pieChart = (PieChart) findViewById(R.id.piechart_rate);
-
-        PieData mPieData = setData();
-        showCheckInChart(pieChart, mPieData);
-        
     }
 
     @Override
     protected void initData() {
-        // TODO get rate from database;
-        
-        showCheckInRate(13, 8);
+        CheckInDao checkInDao = new CheckInDao(LookCheckInActivity.this);
+        int allTimes = checkInDao.getAllTimes();
+        int successTimes = checkInDao.getSuccessTimes();
 
-        // showCheckInRate(totalTimes, checkedTimes);
-        /*mCheckIn=new CheckIn("2015-6-12",0);
-        try{
-            mCheckInDao=new CheckInDao(this);
-            mCheckInDao.add(mCheckIn);
-            totalTimes=mCheckInDao.getSum();
-            checkedTimes=mCheckInDao.getCheckIn();
-            rate=mCheckInDao.getRate(checkedTimes, totalTimes);
-            mCheckInDao.close();
-        }catch(Exception e){
-            e.printStackTrace();
-        }*/
+        showCheckInRate(allTimes, successTimes);
+        if (allTimes == 0) {
+            mRates[0] = 0;
+            mRates[1] = 1;
+        } else {
+            mRates[0] = successTimes / allTimes;
+            mRates[1] = 1 - mRates[0];
+        }
+        showCheckInChart();
+
+        checkInDao.close();
     }
 
     @Override
@@ -126,7 +116,7 @@ public class LookCheckInActivity extends BaseActivity {
                 checkedTimes));
     }
 
-    private void showCheckInChart(final PieChart pieChart, PieData pieData) {
+    private void showCheckInChart() {
         pieChart.setUsePercentValues(true);
         pieChart.setDescription("");
 
@@ -145,7 +135,7 @@ public class LookCheckInActivity extends BaseActivity {
 
         pieChart.setCenterText("");
 
-        pieChart.setData(pieData);
+        pieChart.setData(getPieData(2, 100));
         pieChart.highlightValues(null);
         pieChart.invalidate();
         pieChart.setVisibility(View.INVISIBLE);
@@ -163,13 +153,14 @@ public class LookCheckInActivity extends BaseActivity {
         }, 150);
     }
 
-    private PieData setData() {
+    // TODO
+    private PieData getPieData(int count, float range) {
         ArrayList<String> xValues = new ArrayList<String>();
         xValues.add(getString(R.string.stu_success_checkin));
         xValues.add(getString(R.string.stu_uncheckin));
         ArrayList<Entry> yValues = new ArrayList<Entry>();
-        yValues.add(new Entry(checkedTimes, 0));
-        yValues.add(new Entry((totalTimes-checkedTimes), 1));
+        yValues.add(new Entry(mRates[0], 0));
+        yValues.add(new Entry((mRates[1]), 1));
 
         PieDataSet pieDataSet = new PieDataSet(yValues, null);
         pieDataSet.setSliceSpace(0f);
@@ -200,15 +191,16 @@ public class LookCheckInActivity extends BaseActivity {
 
                     @Override
                     public void onResponse(JSONArray response) {
-                        List<CheckInResult> results = new ArrayList<CheckInResult>();
+                        CheckInDao checkInDao = new CheckInDao(LookCheckInActivity.this);
                         for (int i = 0; i < response.length(); i++) {
                             try {
                                 CheckInResult result =
                                         CheckInResult.fromJsonObject(response.getJSONObject(i));
-                                results.add(result);
+                                checkInDao.add(result);
                             } catch (JSONException e) {}
                         }
-                        // TODO save checkin rate to database and show it;
+                        checkInDao.close();
+                        initData();
                     }
                 }, new ErrorListener() {
 
@@ -225,5 +217,13 @@ public class LookCheckInActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         RequestUtil.getInstance().cancelPendingRequests(TAG);
+    }
+
+    /**
+     * start
+     */
+    public static void start(Context context) {
+        Intent intent = new Intent(context, LookCheckInActivity.class);
+        context.startActivity(intent);
     }
 }

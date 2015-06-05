@@ -1,6 +1,4 @@
-package com.kcb.student.model.checkin;
-
-import java.util.Date;
+package com.kcb.student.model;
 
 import org.json.JSONObject;
 
@@ -9,8 +7,8 @@ public class CheckInResult {
     private long mDate;
     private boolean mHasChecked;
 
-    public Date getDate() {
-        return new Date(mDate);
+    public long getDate() {
+        return mDate;
     }
 
     public boolean hasChecked() {
