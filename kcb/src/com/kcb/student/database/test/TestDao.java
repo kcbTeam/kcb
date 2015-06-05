@@ -7,16 +7,16 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.kcb.student.database.StudentSQLiteOpenHelper;
-import com.kcb.student.model.test.Test;
+import com.kcb.common.model.test.Test;
+import com.kcb.student.database.KSQLiteOpenHelper;
 
 public class TestDao {
 
-    private StudentSQLiteOpenHelper mStudentSQLiteOpenHelper;
+    private KSQLiteOpenHelper mStudentSQLiteOpenHelper;
     private SQLiteDatabase mSqLiteDatabase;
 
     public TestDao(Context context) {
-        mStudentSQLiteOpenHelper = new StudentSQLiteOpenHelper(context);
+        mStudentSQLiteOpenHelper = new KSQLiteOpenHelper(context);
         mSqLiteDatabase = mStudentSQLiteOpenHelper.getWritableDatabase();
     }
 
@@ -24,7 +24,7 @@ public class TestDao {
         mSqLiteDatabase.beginTransaction();
         try {
             mSqLiteDatabase.execSQL("insert into " + TestDB.TABLE_NAME + "values(null,?,?)",
-                    new String[] {test.getName(), String.valueOf(test.getSum()),
+                    new String[] {test.getName(), String.valueOf(test.getTime()),
                             test.getDate().toString()});
             mSqLiteDatabase.setTransactionSuccessful();
         } finally {
@@ -37,9 +37,9 @@ public class TestDao {
         List<Test> list = new ArrayList<Test>();
         while (cursor.moveToNext()) {
             Test test = new Test();
-            test.setName(cursor.getString(cursor.getColumnIndex(TestDB.TESTNAME)));
-            test.setSum(cursor.getInt(cursor.getColumnIndex(TestDB.QUESTIONNUM)));
-            test.setDate(cursor.getString(cursor.getColumnIndex(TestDB.DATE)));
+//            test.setName(cursor.getString(cursor.getColumnIndex(TestDB.TESTNAME)));
+//            test.setSum(cursor.getInt(cursor.getColumnIndex(TestDB.QUESTIONNUM)));
+//            test.setDate(cursor.getString(cursor.getColumnIndex(TestDB.DATE)));
             list.add(test);
         }
         cursor.close();

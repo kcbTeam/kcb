@@ -29,7 +29,7 @@ import com.kcb.common.server.ResponseUtil;
 import com.kcb.common.server.UrlUtil;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
-import com.kcb.student.model.CheckInResult;
+import com.kcb.student.model.checkin.CheckInResult;
 import com.kcbTeam.R;
 
 /**

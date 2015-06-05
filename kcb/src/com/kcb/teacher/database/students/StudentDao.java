@@ -12,15 +12,15 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.kcb.teacher.database.CommonSQLiteOpenHelper;
+import com.kcb.teacher.database.KSQLiteOpenHelper;
 import com.kcb.teacher.model.stucentre.Student;
 
 public class StudentDao {
-    private CommonSQLiteOpenHelper mCommonSQLiteOpenHelper;
+    private KSQLiteOpenHelper mCommonSQLiteOpenHelper;
     private SQLiteDatabase mSqLiteDatabase;
 
     public StudentDao(Context context) {
-        mCommonSQLiteOpenHelper = new CommonSQLiteOpenHelper(context);
+        mCommonSQLiteOpenHelper = new KSQLiteOpenHelper(context);
         mSqLiteDatabase = mCommonSQLiteOpenHelper.getWritableDatabase();
     }
 

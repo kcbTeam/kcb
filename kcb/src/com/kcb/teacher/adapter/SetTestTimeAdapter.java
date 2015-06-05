@@ -67,7 +67,7 @@ public class SetTestTimeAdapter extends BaseAdapter {
     public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
         if (convertView == null) {
-            convertView = View.inflate(mContext, R.layout.tch_listitem_settesttime, null);
+            convertView = View.inflate(mContext, R.layout.tch_listitem_set_test_time, null);
             viewHolder = new ViewHolder();
             viewHolder.questionIndexTextView =
                     (TextView) convertView.findViewById(R.id.textview_questionindex);

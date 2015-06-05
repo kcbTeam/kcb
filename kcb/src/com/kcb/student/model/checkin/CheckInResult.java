@@ -1,4 +1,4 @@
-package com.kcb.student.model;
+package com.kcb.student.model.checkin;
 
 import java.util.Date;
 

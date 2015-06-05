@@ -52,7 +52,7 @@ public class StartCheckInActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.tch_activity_startcheckin);
+        setContentView(R.layout.tch_activity_start_checkin);
 
         initView();
         initData();

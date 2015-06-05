@@ -4,26 +4,26 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.kcb.student.database.StudentSQLiteOpenHelper;
-import com.kcb.student.model.checkin.CheckIn;
+import com.kcb.student.database.KSQLiteOpenHelper;
+import com.kcb.student.model.checkin.CheckInResult;
 
 public class CheckInDao {
 
-    private StudentSQLiteOpenHelper mStudentSQLiteOpenHelper;
+    private KSQLiteOpenHelper mStudentSQLiteOpenHelper;
     private SQLiteDatabase mSqLiteDatabase;
 
     public CheckInDao(Context context) {
-        mStudentSQLiteOpenHelper = new StudentSQLiteOpenHelper(context);
+        mStudentSQLiteOpenHelper = new KSQLiteOpenHelper(context);
         mSqLiteDatabase = mStudentSQLiteOpenHelper.getWritableDatabase();
     }
 
-    public void add(CheckIn check) {
+    public void add(CheckInResult check) {
         mSqLiteDatabase.beginTransaction();
         try {
-            mSqLiteDatabase.execSQL(
-                    "insert into" + CheckInDB.TABLE_NAME + "values(null,?)",
-                    new String[] {check.getDate().toString(),
-                            String.valueOf(check.getCheckInResult())});
+//            mSqLiteDatabase.execSQL(
+//                    "insert into" + CheckInDB.TABLE_NAME + "values(null,?)",
+//                    new String[] {check.getDate().toString(),
+//                            String.valueOf(check.getCheckInResult())});
             mSqLiteDatabase.setTransactionSuccessful();
         } finally {
             mSqLiteDatabase.endTransaction();

@@ -45,7 +45,7 @@ public class ModifyPasswordActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.tch_activity_modifypassword);
+        setContentView(R.layout.tch_activity_modify_password);
 
         initView();
         initData();

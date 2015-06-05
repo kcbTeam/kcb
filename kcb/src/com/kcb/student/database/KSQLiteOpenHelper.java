@@ -13,12 +13,12 @@ import com.kcb.student.database.test.TestDB;
  * @author: Ding
  * @date: 2015年6月3日 下午3:38:41
  */
-public class StudentSQLiteOpenHelper extends SQLiteOpenHelper {
+public class KSQLiteOpenHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "kcb_student.db";
     public static final int DATABASE_VERSION = 1;
 
-    public StudentSQLiteOpenHelper(Context context) {
+    public KSQLiteOpenHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
 
     }

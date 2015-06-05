@@ -17,7 +17,7 @@ import com.kcb.common.model.test.Question;
 import com.kcb.common.model.test.QuestionItem;
 import com.kcbTeam.R;
 
-public class ListAdapterChoices extends BaseAdapter {
+public class LookTestDetailAdapter extends BaseAdapter {
 
     private List<QuestionItem> mQuestonItemList;
     private Context mContext;
@@ -26,7 +26,7 @@ public class ListAdapterChoices extends BaseAdapter {
     private final String[] choiceTitleString = {"A", "B", "C", "D"};
     private final String mRateFormat = "%1$d%%";
 
-    public ListAdapterChoices(Context context, Question question) {
+    public LookTestDetailAdapter(Context context, Question question) {
         mContext = context;
         mQuestonItemList = new ArrayList<QuestionItem>();
         mQuestonItemList.add(question.getChoiceA());

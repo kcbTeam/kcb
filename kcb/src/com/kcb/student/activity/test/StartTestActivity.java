@@ -43,9 +43,9 @@ import com.kcbTeam.R;
  * @author: Tao Li
  * @date: 2015-5-17 上午10:53:44
  */
-public class TestActivity extends BaseActivity {
+public class StartTestActivity extends BaseActivity {
 
-    private static final String TAG = TestActivity.class.getName();
+    private static final String TAG = StartTestActivity.class.getName();
 
     private TextView testNameNumTextView;
     private TextView timeTextView;
@@ -171,7 +171,7 @@ public class TestActivity extends BaseActivity {
 
     private void showTimeEndDialog() {
         MaterialDialog dialog =
-                DialogUtil.showNormalDialog(TestActivity.this, R.string.stu_comm_tip,
+                DialogUtil.showNormalDialog(StartTestActivity.this, R.string.stu_comm_tip,
                         R.string.stu_test_time_end, R.string.stu_comm_submit,
                         new OnClickListener() {
 
@@ -300,7 +300,7 @@ public class TestActivity extends BaseActivity {
             dialogMessage = getString(R.string.stu_submit_test_finish);
         }
 
-        DialogUtil.showNormalDialog(TestActivity.this, R.string.stu_comm_submit, dialogMessage,
+        DialogUtil.showNormalDialog(StartTestActivity.this, R.string.stu_comm_submit, dialogMessage,
                 R.string.stu_comm_submit, new OnClickListener() {
 
                     @Override
@@ -353,7 +353,7 @@ public class TestActivity extends BaseActivity {
     private static final String DATA_REMAIN_TIME = "remaintime";
 
     public static void start(Context context, Test test, int remainTime) {
-        Intent intent = new Intent(context, TestActivity.class);
+        Intent intent = new Intent(context, StartTestActivity.class);
         intent.putExtra(DATA_REMAIN_TIME, remainTime);
         context.startActivity(intent);
         sTest = test;

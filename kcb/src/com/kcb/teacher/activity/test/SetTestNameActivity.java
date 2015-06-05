@@ -41,7 +41,7 @@ public class SetTestNameActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.tch_activity_settestname);
+        setContentView(R.layout.tch_activity_set_test_name);
 
         initView();
         initData();
