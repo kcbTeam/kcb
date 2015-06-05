@@ -14,6 +14,7 @@ import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -72,7 +73,7 @@ public class MaterialListDialog extends android.app.Dialog {
                 return false;
             }
         });
-        contentView = (RelativeLayout) findViewById(R.id.contentDialog);
+        contentView = (LinearLayout) findViewById(R.id.contentDialog);
 
         titleTextView = (TextView) findViewById(R.id.title);
         messageListView = (ListView) findViewById(R.id.listmessage);

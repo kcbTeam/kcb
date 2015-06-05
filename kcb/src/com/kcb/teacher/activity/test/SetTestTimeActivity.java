@@ -116,7 +116,7 @@ public class SetTestTimeActivity extends BaseActivity {
             sTest.setId("2333");
             try {
                 mTestDao = new TestDao(this);
-                mTestDao.addTest(sTest);
+                mTestDao.add(sTest);
             } catch (SQLException e) {
                 e.printStackTrace();
             } catch (JSONException e) {

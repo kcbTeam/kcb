@@ -130,6 +130,8 @@
         style="@style/common_paper_button"
         android:layout_below="@id/view_divider3"
         android:layout_centerHorizontal="true"
-        widget:paper_text="@string/tch_comm_complete" />
+        widget:paper_text="@string/tch_comm_complete"
+        widget:paper_text_color="@color/black_700"
+        widget:paper_text_size="@dimen/text_size_medium" />
 
 </RelativeLayout>

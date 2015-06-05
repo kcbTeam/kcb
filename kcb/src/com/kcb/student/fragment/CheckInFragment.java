@@ -1,13 +1,11 @@
 package com.kcb.student.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.android.volley.Request.Method;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
@@ -78,8 +76,7 @@ public class CheckInFragment extends BaseFragment {
                         startCheckIn();
                         break;
                     case R.id.button_look_checkin:
-                        Intent intent = new Intent(getActivity(), LookCheckInActivity.class);
-                        startActivity(intent);
+                        LookCheckInActivity.start(getActivity());
                         break;
                     default:
                         break;

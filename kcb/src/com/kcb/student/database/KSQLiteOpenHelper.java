@@ -15,24 +15,19 @@ import com.kcb.student.database.test.TestDB;
  */
 public class KSQLiteOpenHelper extends SQLiteOpenHelper {
 
-    public static final String DATABASE_NAME = "kcb_student.db";
-    public static final int DATABASE_VERSION = 1;
+    private static final String DATABASE_NAME = "kcb_student.db";
+    private static final int DATABASE_VERSION = 1;
 
     public KSQLiteOpenHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
-
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(TestDB.TABLE_STU_TEST);
-        db.execSQL(CheckInDB.TABLE_STU_CHECKIN);
+        db.execSQL(CheckInDB.CREATE_TABLE);
+        db.execSQL(TestDB.CREATE_TABLE);
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        String sql = "drop table" + DATABASE_NAME;
-        db.execSQL(sql);
-        onCreate(db);
-    }
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {}
 }

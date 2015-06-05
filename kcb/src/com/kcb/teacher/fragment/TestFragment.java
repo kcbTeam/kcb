@@ -200,7 +200,7 @@ public class TestFragment extends BaseFragment {
         @Override
         protected Integer doInBackground(Integer... params) {
             try {
-                mTestList = mTestDao.getAllRecord();
+                mTestList = mTestDao.getAll();
                 mTestNameList = new ArrayList<String>();
                 for (int i = 0; i < mTestList.size(); i++) {
                     mTestNameList.add(mTestList.get(i).getName());

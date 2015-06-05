@@ -19,9 +19,9 @@ public class KSQLiteOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(TestDB.CREATE_TABLE_TEST);
-        db.execSQL(CheckInDB.CREATE_TABLE_CHECKIN);
-        db.execSQL(StudentDB.CREATE_TABLE_STUDENT_CENTRE);
+        db.execSQL(TestDB.CREATE_TABLE);
+        db.execSQL(CheckInDB.CREATE_TABLE);
+        db.execSQL(StudentDB.CREATE_TABLE);
         // TODO:create new table from here
     }
 

@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="#55000000" >
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/contentDialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,6 +15,7 @@
         android:layout_marginRight="24dp"
         android:layout_marginTop="48dp"
         android:background="@color/white"
+        android:orientation="vertical"
         android:padding="24dp" >
 
         <TextView
@@ -22,6 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
+            android:layout_weight="0"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_large" />
 
@@ -29,39 +31,36 @@
             android:id="@+id/listmessage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/title"
+            android:layout_weight="1"
             android:divider="@color/black_200"
             android:dividerHeight="1dp"
             android:listSelector="@color/white"
             android:scrollbars="none" />
 
-        <View
-            android:id="@+id/view_dig"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_below="@id/listmessage"
-            android:background="@color/black_divider" />
-
-        <com.kcb.library.view.buttonflat.ButtonFlat
-            android:id="@+id/button_accept"
+        <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="36dp"
-            android:layout_alignParentRight="true"
-            android:layout_below="@id/view_dig"
+            android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:background="@color/blue"
-            android:text="@string/comm_sure" />
+            android:layout_weight="0"
+            android:orientation="horizontal" >
 
-        <com.kcb.library.view.buttonflat.ButtonFlat
-            android:id="@+id/button_cancel"
-            android:layout_width="wrap_content"
-            android:layout_height="36dp"
-            android:layout_below="@id/view_dig"
-            android:layout_marginTop="16dp"
-            android:layout_toLeftOf="@id/button_accept"
-            android:background="@color/black_500"
-            android:text="@string/comm_cancel"
-            android:visibility="gone" />
-    </RelativeLayout>
+            <com.kcb.library.view.buttonflat.ButtonFlat
+                android:id="@+id/button_accept"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_alignParentRight="true"
+                android:background="@color/blue"
+                android:text="@string/comm_sure" />
+
+            <com.kcb.library.view.buttonflat.ButtonFlat
+                android:id="@+id/button_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_toLeftOf="@id/button_accept"
+                android:background="@color/black_500"
+                android:text="@string/comm_cancel"
+                android:visibility="gone" />
+        </RelativeLayout>
+    </LinearLayout>
 
 </RelativeLayout>
