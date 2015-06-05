@@ -126,8 +126,8 @@ public class TestActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        testNameTextView.setText(String.format(getString(R.string.stu_test_name_num), sTest.getName(),
-                sTest.getQuestionNum()));
+        testNameTextView.setText(String.format(getString(R.string.stu_test_name_num),
+                sTest.getName(), sTest.getQuestionNum()));
         showQuestion();
 
         mTestAnswer = new TestAnswer(sTest);
