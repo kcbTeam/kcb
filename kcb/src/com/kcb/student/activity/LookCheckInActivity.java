@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.json.JSONObject;
 
+import android.os.Handler;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.TextView;
@@ -96,7 +97,7 @@ public class LookCheckInActivity extends BaseActivity {
         rateTextView.setText(String.format(getString(R.string.stu_checkin_rate), 10, 8, "0.8"));
     }
 
-    private void showCheckInChart(PieChart pieChart, PieData pieData) {
+    private void showCheckInChart(final PieChart pieChart, PieData pieData) {
         pieChart.setUsePercentValues(true);
         pieChart.setDescription("");
 
@@ -121,8 +122,14 @@ public class LookCheckInActivity extends BaseActivity {
 
         Legend mLegend = pieChart.getLegend();
         mLegend.setEnabled(false);
-
-        pieChart.animateXY(1800, 1800);
+        
+        new Handler().postDelayed(new Runnable() {
+          
+            @Override
+            public void run() {
+                pieChart.animateY(1800);
+            }
+        }, 150);       
     }
 
     private PieData setData(int count, float range) {
