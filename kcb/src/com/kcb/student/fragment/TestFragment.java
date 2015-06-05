@@ -26,7 +26,7 @@ import com.kcb.common.util.ToastUtil;
 import com.kcb.library.view.PaperButton;
 import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
 import com.kcb.student.activity.test.LookTestActivity;
-import com.kcb.student.activity.test.TestActivity;
+import com.kcb.student.activity.test.StartTestActivity;
 import com.kcbTeam.R;
 
 /**
@@ -102,7 +102,7 @@ public class TestFragment extends BaseFragment {
                         Test test = Test.fromJsonObject(response.optJSONObject("test"));
 
                         // TODO save test to database, change bitmapstring to bitmap
-                        TestActivity.start(getActivity(), test, remaintime);
+                        StartTestActivity.start(getActivity(), test, remaintime);
                         startProgressBar.hide(getActivity());
                     }
                 }, new ErrorListener() {

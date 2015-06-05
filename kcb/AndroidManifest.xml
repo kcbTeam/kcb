@@ -58,7 +58,7 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.kcb.student.activity.test.TestActivity"
+            android:name="com.kcb.student.activity.test.StartTestActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity

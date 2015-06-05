@@ -55,7 +55,7 @@ public class CropPictureActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.tch_activity_croppicture);
+        setContentView(R.layout.tch_activity_crop_picture);
 
         initData();
         initView();

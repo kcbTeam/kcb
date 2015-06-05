@@ -84,7 +84,7 @@ public class EditQuestionActivty extends BaseActivity implements OnLongClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.tch_activity_editquestion);
+        setContentView(R.layout.tch_activity_edit_question);
 
         initView();
         initData();

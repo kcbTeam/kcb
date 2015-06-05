@@ -99,7 +99,7 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.tch_activity_edittest);
+        setContentView(R.layout.tch_activity_edit_test);
 
         initView();
         initData();

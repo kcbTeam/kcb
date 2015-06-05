@@ -49,7 +49,7 @@ public class LookTestAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
         if (null == convertView) {
-            convertView = View.inflate(mContext, R.layout.tch_listitem_looktest, null);
+            convertView = View.inflate(mContext, R.layout.tch_listitem_look_test, null);
             holder = new ViewHolder();
             holder.testName = (TextView) convertView.findViewById(R.id.textview_testname);
             holder.testDate = (TextView) convertView.findViewById(R.id.textview_testdate);

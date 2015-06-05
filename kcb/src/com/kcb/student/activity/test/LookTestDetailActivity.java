@@ -53,7 +53,7 @@ public class LookTestDetailActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.stu_activity_looktestresult);
+        setContentView(R.layout.stu_activity_look_test_result);
 
         initView();
         initData();

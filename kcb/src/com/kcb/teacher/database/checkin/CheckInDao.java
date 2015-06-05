@@ -15,19 +15,19 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.kcb.teacher.database.CommonSQLiteOpenHelper;
+import com.kcb.teacher.database.KSQLiteOpenHelper;
 import com.kcb.teacher.model.checkin.CheckInResult;
 
 public class CheckInDao {
 
-    private CommonSQLiteOpenHelper mOpenHelper;
+    private KSQLiteOpenHelper mOpenHelper;
     private SQLiteDatabase mDatabase;
 
     @SuppressLint("SimpleDateFormat")
     public static SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
     public CheckInDao(Context context) {
-        mOpenHelper = new CommonSQLiteOpenHelper(context);
+        mOpenHelper = new KSQLiteOpenHelper(context);
         mDatabase = mOpenHelper.getWritableDatabase();
     }
 

@@ -17,7 +17,7 @@ import com.kcb.common.model.test.Question;
 import com.kcb.common.model.test.QuestionItem;
 import com.kcb.common.model.test.Test;
 import com.kcb.library.view.buttonflat.ButtonFlat;
-import com.kcb.teacher.adapter.ListAdapterChoices;
+import com.kcb.teacher.adapter.LookTestDetailAdapter;
 import com.kcbTeam.R;
 
 public class LookTestDetailActivity extends BaseActivity {
@@ -35,7 +35,7 @@ public class LookTestDetailActivity extends BaseActivity {
     private TextView correctRate;
 
     private ListView choiceList;
-    private ListAdapterChoices mAdapter;
+    private LookTestDetailAdapter mAdapter;
 
     public static Test sTest;
     private List<Question> mQuestionList;
@@ -48,7 +48,7 @@ public class LookTestDetailActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.tch_activity_looktest_detail);
+        setContentView(R.layout.tch_activity_look_test_detail);
         initData();
         initView();
     }
@@ -128,7 +128,7 @@ public class LookTestDetailActivity extends BaseActivity {
         showQuestionItem(questionTitle, question.getTitle());
         correctRate
                 .setText(String.format(mRateFormat, (int) (100 * question.getTitle().getRate())));
-        mAdapter = new ListAdapterChoices(this, question);
+        mAdapter = new LookTestDetailAdapter(this, question);
         choiceList.setAdapter(mAdapter);
     }
 

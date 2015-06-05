@@ -45,7 +45,7 @@ public class SetTestTimeActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.tch_activity_settesttime);
+        setContentView(R.layout.tch_activity_set_test_time);
 
         initView();
         initData();

@@ -15,14 +15,14 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.kcb.common.model.test.Test;
-import com.kcb.teacher.database.CommonSQLiteOpenHelper;
+import com.kcb.teacher.database.KSQLiteOpenHelper;
 
 public class TestDao {
-    private CommonSQLiteOpenHelper mTestSQLiteOpenHelper;
+    private KSQLiteOpenHelper mTestSQLiteOpenHelper;
     private SQLiteDatabase mSqLiteDatabase;
 
     public TestDao(Context context) {
-        mTestSQLiteOpenHelper = new CommonSQLiteOpenHelper(context);
+        mTestSQLiteOpenHelper = new KSQLiteOpenHelper(context);
         mSqLiteDatabase = mTestSQLiteOpenHelper.getWritableDatabase();
     }
 

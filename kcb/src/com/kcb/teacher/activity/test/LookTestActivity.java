@@ -64,7 +64,7 @@ public class LookTestActivity extends BaseActivity implements TextWatcher, OnIte
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.tch_activity_looktest);
+        setContentView(R.layout.tch_activity_look_test);
 
         initView();
         initData();

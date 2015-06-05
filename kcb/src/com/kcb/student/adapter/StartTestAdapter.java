@@ -10,12 +10,12 @@ import android.widget.TextView;
 
 import com.kcbTeam.R;
 
-public class TestRecycleAdapter extends RecyclerView.Adapter<TestRecycleAdapter.TestViewHolder> {
+public class StartTestAdapter extends RecyclerView.Adapter<StartTestAdapter.TestViewHolder> {
 
     private int mSize;
     private int mCurrentIndex;
 
-    public TestRecycleAdapter(int size) {
+    public StartTestAdapter(int size) {
         super();
         mSize = size;
         mCurrentIndex = 0;
