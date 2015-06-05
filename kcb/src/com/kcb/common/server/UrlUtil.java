@@ -1,6 +1,5 @@
 package com.kcb.common.server;
 
-
 /**
  * 
  * @className: UrlUtil
@@ -25,19 +24,18 @@ public class UrlUtil {
         return url_stu_login + "?id=" + id + "&password=" + password;
     }
 
-    // 1.2 modify password
-    private static final String url_stu_modifypassword = IP + "/v1/stu/account/modifypassword";
-
-    public static String getStuModifyPasswordUrl(String id, String newPassword) {
-        return url_stu_modifypassword + "?id=" + id + "&new=" + newPassword;
-    }
-
-    // 1.3 check password
+    // 1.2 check old password
     private static final String url_stu_checkoldpassword = IP + "/v1/stu/account/checkoldpassword";
 
     public static String getStuCheckOldPasswordUrl(String id, String password) {
         return url_stu_checkoldpassword + "?id=" + id + "&old=" + password;
+    }
 
+    // 1.3 modify password
+    private static final String url_stu_modifypassword = IP + "/v1/stu/account/modifypassword";
+
+    public static String getStuModifyPasswordUrl(String id, String newPassword) {
+        return url_stu_modifypassword + "?id=" + id + "&new=" + newPassword;
     }
 
     /**
@@ -92,19 +90,19 @@ public class UrlUtil {
         return url_tch_login + "?id=" + id + "&password=" + password;
     }
 
-    // 1.2 modify password
-    private static final String url_tch_modifypassword = IP + "/v1/tch/account/modifypassword";
-
-    public static String getTchModifyPasswordUrl(String id, String newPassword) {
-        return url_tch_modifypassword + "?id=" + id + "&new=" + newPassword;
-    }
-
-    // 1.3 check password
+    // 1.2 check password
     private static final String url_tch_checkoldpassword = IP + "/v1/tch/account/checkoldpassword";
 
     public static String getTchCheckOldPasswordUrl(String id, String password) {
         return url_tch_checkoldpassword + "?id=" + id + "&old=" + password;
 
+    }
+
+    // 1.3 modify password
+    private static final String url_tch_modifypassword = IP + "/v1/tch/account/modifypassword";
+
+    public static String getTchModifyPasswordUrl(String id, String newPassword) {
+        return url_tch_modifypassword + "?id=" + id + "&new=" + newPassword;
     }
 
     /**
@@ -139,5 +137,15 @@ public class UrlUtil {
 
     public static String getTchTestLookresultUrl(String id) {
         return url_tch_test_lookresult + "?id=" + id;
+    }
+
+    /**
+     * **********4, stu centre**********
+     */
+    // 4.1 look stu info
+    private static final String url_tch_stucenter_lookinfo = IP + "/v1/tch/stucenter/lookstuinfo";
+
+    public static String getTchStucenterLookinfoUrl(String id) {
+        return url_tch_stucenter_lookinfo + "?id=" + id;
     }
 }

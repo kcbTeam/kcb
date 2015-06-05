@@ -2,6 +2,8 @@ package com.kcb.teacher.activity.test;
 
 import java.util.List;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
@@ -35,7 +37,7 @@ public class LookTestDetailActivity extends BaseActivity {
     private ListView choiceList;
     private ListAdapterChoices mAdapter;
 
-    private Test mTest;
+    public static Test sTest;
     private List<Question> mQuestionList;
 
     private int mQuestionNum;
@@ -46,7 +48,7 @@ public class LookTestDetailActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.tch_activity_checktestdetails);
+        setContentView(R.layout.tch_activity_looktest_detail);
         initData();
         initView();
     }
@@ -57,7 +59,7 @@ public class LookTestDetailActivity extends BaseActivity {
         backButton.setOnClickListener(this);
 
         testNameTextView = (TextView) findViewById(R.id.textview_title);
-        testNameTextView.setText(mTest.getName());
+        testNameTextView.setText(sTest.getName());
 
         questionNumTextView = (TextView) findViewById(R.id.textview_question_num);
 
@@ -78,8 +80,8 @@ public class LookTestDetailActivity extends BaseActivity {
     @Override
     protected void initData() {
 
-        mTest = (Test) getIntent().getSerializableExtra(LookTestActivity.CLICKED_TEST_KEY);
-        mQuestionList = mTest.getQuestions();
+        sTest = (Test) getIntent().getSerializableExtra(LookTestActivity.CLICKED_TEST_KEY);
+        mQuestionList = sTest.getQuestions();
         mQuestionNum = mQuestionList.size();
         mCurrentPosition = 0;
         mQuestionList.get(mCurrentPosition).getTitle().setRate(0.8);
@@ -149,5 +151,14 @@ public class LookTestDetailActivity extends BaseActivity {
             }
             view.setFocusable(false);
         }
+    }
+
+    /**
+     * start
+     */
+    public static void start(Context context, Test test) {
+        Intent intent = new Intent(context, LookTestDetailActivity.class);
+        context.startActivity(intent);
+        sTest = test;
     }
 }

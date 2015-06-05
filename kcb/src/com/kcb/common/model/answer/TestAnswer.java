@@ -22,6 +22,8 @@ public class TestAnswer {
     private String mId; // test id
     private List<QuestionAnswer> mQuestionAnswers;
 
+    public TestAnswer() {}
+
     public TestAnswer(Test test) {
         mId = test.getId();
         for (int i = 0; i < test.getQuestionNum(); i++) {
@@ -67,5 +69,19 @@ public class TestAnswer {
             jsonObject.put(KEY_QUESTION_ANSWER, jsonArray);
         } catch (JSONException e) {}
         return jsonObject;
+    }
+
+    public static TestAnswer fromJsonObject(JSONObject jsonObject) {
+        TestAnswer testAnswer = new TestAnswer();
+        try {
+            testAnswer.mId = jsonObject.optString(KEY_ID);
+
+            JSONArray jsonArray = jsonObject.optJSONArray(KEY_QUESTION_ANSWER);
+            for (int i = 0; i < jsonArray.length(); i++) {
+                testAnswer.mQuestionAnswers.add(QuestionAnswer.fromJsonObject(jsonArray
+                        .getJSONObject(i)));
+            }
+        } catch (JSONException e) {}
+        return testAnswer;
     }
 }

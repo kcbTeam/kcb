@@ -17,6 +17,8 @@ public class ChoiceCheckInfo {
     private int mId; // choice id
     private boolean mIsSelected; // stu select it or not
 
+    public ChoiceCheckInfo() {}
+
     public ChoiceCheckInfo(QuestionItem item) {
         mId = item.getId();
     }
@@ -42,5 +44,12 @@ public class ChoiceCheckInfo {
             jsonObject.put(KEY_ISSELECTED, mIsSelected);
         } catch (JSONException e) {}
         return jsonObject;
+    }
+
+    public static ChoiceCheckInfo fromJsonObject(JSONObject jsonObject) {
+        ChoiceCheckInfo checkInfo = new ChoiceCheckInfo();
+        checkInfo.mId = jsonObject.optInt(KEY_ID);
+        checkInfo.mIsSelected = jsonObject.optBoolean(KEY_ISSELECTED);
+        return checkInfo;
     }
 }

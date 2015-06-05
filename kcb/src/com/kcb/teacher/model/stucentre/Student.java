@@ -24,14 +24,14 @@ public class Student implements Serializable {
     public Student() {}
 
     public Student(String name, String studentID) {
-        mName = name;
         mId = studentID;
+        mName = name;
     }
 
     // add by ljx
     public Student(String name, String studentID, Double checkInRate, Double correctRate) {
-        mName = name;
         mId = studentID;
+        mName = name;
         mCheckInRate = checkInRate;
         mCorrectRate = correctRate;
     }
@@ -42,17 +42,16 @@ public class Student implements Serializable {
      * correctTimes of the student
      * 
      */
-
-    public void setID(String mStudentID) {
-        this.mId = mStudentID;
+    public void setID(String id) {
+        mId = id;
     }
 
-    public void setName(String mStudentName) {
-        this.mName = mStudentName;
+    public void setName(String name) {
+        mName = name;
     }
 
     public String getId() {
-        return this.mId;
+        return mId;
     }
 
     public String getName() {
@@ -76,18 +75,17 @@ public class Student implements Serializable {
     }
 
     /*
-     * student to json,json to stu
+     * student to json,json to student
      */
-
-    private final static String KEY_NAME = "name";
     private final static String KEY_ID = "id";
+    private final static String KEY_NAME = "name";
     private final static String KEY_CHECKINRATE = "checkinrate";
     private final static String KEY_CORRECTRATE = "correctrate";
 
     public JSONObject toJsonObject() throws JSONException {
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put(KEY_NAME, mName);
         jsonObject.put(KEY_ID, mId);
+        jsonObject.put(KEY_NAME, mName);
         jsonObject.put(KEY_CHECKINRATE, mCheckInRate);
         jsonObject.put(KEY_CORRECTRATE, mCorrectRate);
         return jsonObject;
@@ -95,11 +93,10 @@ public class Student implements Serializable {
 
     public static Student fromjsonObject(JSONObject jsonObject) {
         Student student = new Student();
-        student.mName = jsonObject.optString(KEY_NAME);
         student.mId = jsonObject.optString(KEY_ID);
+        student.mName = jsonObject.optString(KEY_NAME);
         student.mCheckInRate = jsonObject.optDouble(KEY_CHECKINRATE);
         student.mCorrectRate = jsonObject.optDouble(KEY_CORRECTRATE);
         return student;
     }
-
 }

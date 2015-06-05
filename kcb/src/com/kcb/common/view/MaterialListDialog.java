@@ -19,7 +19,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.kcb.library.view.buttonflat.ButtonFlat;
-import com.kcb.teacher.adapter.ListAdapterEdit;
+import com.kcb.teacher.adapter.MaterialListDialogAdapter;
 import com.kcbTeam.R;
 
 /**
@@ -40,7 +40,7 @@ public class MaterialListDialog extends android.app.Dialog {
     private ButtonFlat cancelButton;
 
     private Context mContext;
-    private ListAdapterEdit mAdapter;
+    private MaterialListDialogAdapter mAdapter;
 
     public interface OnClickSureListener {
         void onClick(View view, int position);
@@ -137,7 +137,7 @@ public class MaterialListDialog extends android.app.Dialog {
      */
 
     public void setAdapter(List<String> mStrings) {
-        mAdapter = new ListAdapterEdit(mContext, mStrings);
+        mAdapter = new MaterialListDialogAdapter(mContext, mStrings);
         messageListView.setAdapter(mAdapter);
     }
 

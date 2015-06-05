@@ -20,14 +20,14 @@ import com.kcbTeam.R;
  * @date: 2015年4月24日 下午3:24:01
  */
 @SuppressLint("ViewHolder")
-public class ListAdapterStudent extends BaseAdapter {
+public class StuCentreAdapter extends BaseAdapter {
 
     private List<Student> mList;
     private Context mContext;
 
     private final String FORMAT_RATE = "%1$d%%";
 
-    public ListAdapterStudent(Context context, List<Student> list) {
+    public StuCentreAdapter(Context context, List<Student> list) {
         mContext = context;
         mList = list;
     }
@@ -49,8 +49,7 @@ public class ListAdapterStudent extends BaseAdapter {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-
-        ViewHolder holder = null;
+        ViewHolder holder;
         if (convertView == null) {
             convertView = View.inflate(mContext, R.layout.tch_listitem_stucentre, null);
             holder = new ViewHolder();
@@ -62,20 +61,21 @@ public class ListAdapterStudent extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        holder.studentName.setText(mList.get(position).getName());
-        holder.studentId.setText(mList.get(position).getId());
-        holder.checkInRate.setText(String.format(FORMAT_RATE, (int) (100 * mList.get(position)
-                .getCheckInRate())));
-        holder.correctRate.setText(String.format(FORMAT_RATE, (int) (100 * mList.get(position)
-                .getCorrectRate())));
+        holder.setStudent(getItem(position));
         return convertView;
     }
 
-    static class ViewHolder {
+    private class ViewHolder {
         TextView studentName;
         TextView studentId;
         TextView checkInRate;
         TextView correctRate;
-    }
 
+        public void setStudent(Student student) {
+            studentName.setText(student.getName());
+            studentId.setText(student.getId());
+            checkInRate.setText(String.format(FORMAT_RATE, (int) (100 * student.getCheckInRate())));
+            correctRate.setText(String.format(FORMAT_RATE, (int) (100 * student.getCorrectRate())));
+        }
+    }
 }
