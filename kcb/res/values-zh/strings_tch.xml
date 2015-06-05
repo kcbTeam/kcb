@@ -108,11 +108,14 @@
     <string name="tch_not_save_if_cancel">取消后，不会保存测试内容。</string>
     <string name="tch_question_saved">第%1$d题已保存</string>
     <string name="tch_question_added">第%1$d题已添加</string>
+    <string name="tch_deleted">已删除</string>
+    <string name="tch_saved">已保存</string>
     <string name="tch_question_uplimited">最多只能有9题</string>
     <string name="tch_question_num">第%1$d题</string>
     <string name="tch_question_unfinished">第%1$s题未完成</string>
     <string name="tch_delete_success">删除成功</string>
     <string name="tch_delete_question_tip">确定删除第 %1$d 题？</string>
+    <string name="tch_delete_test_tip">确定删除测试——%1$s？</string>
     <string name="tch_add">添加</string>
     <string name="tch_add_question_tip">确定添加第 %1$d 题？</string>
     <string name="tch_edit_hint">输入文字，或者长按拍照</string>

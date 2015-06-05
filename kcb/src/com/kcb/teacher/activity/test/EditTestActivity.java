@@ -626,7 +626,7 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
     }
 
     private void saveEditTest() {
-        ToastUtil.toast("已保存");
+        ToastUtil.toast(R.string.tch_saved);
         try {
             mTestDao = new TestDao(this);
             mTestDao.addTest(sTest);
@@ -646,7 +646,7 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
 
             @Override
             public void onClick(View v) {
-                ToastUtil.toast("已删除");
+                ToastUtil.toast(R.string.tch_deleted);
                 try {
                     mTestDao = new TestDao(EditTestActivity.this);
                     mTestDao.deleteTestByName(sTest.getName());
@@ -657,8 +657,12 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
                 finish();
             }
         };
-        DialogUtil.showNormalDialog(this, R.string.tch_comm_delete, "确定删除测试——" + sTest.getName()
-                + "？", R.string.tch_comm_sure, sureListener, R.string.tch_comm_cancel, null);
+        DialogUtil.showNormalDialog(
+                this,
+                R.string.tch_comm_delete,
+                String.format(getResources().getString(R.string.tch_delete_test_tip),
+                        sTest.getName()), R.string.tch_comm_sure, sureListener,
+                R.string.tch_comm_cancel, null);
     }
 
     /**
