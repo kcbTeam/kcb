@@ -209,7 +209,6 @@ public class StartCheckInActivity extends BaseActivity {
 
                         @Override
                         public void onResponse(String response) {
-                            // TODO save checkin rate in db
                             ToastUtil.toast(R.string.stu_checkin_success);
                             finish();
                         }

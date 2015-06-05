@@ -8,7 +8,7 @@ import org.json.JSONObject;
 
 /**
  * 
- * @className: ChoiceQuestion
+ * @className: Question
  * @description:
  * @author: ZQJ
  * @date: 2015年5月8日 上午10:08:21

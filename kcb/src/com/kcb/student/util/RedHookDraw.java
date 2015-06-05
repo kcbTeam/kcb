@@ -8,6 +8,7 @@ import android.graphics.Path;
 import android.util.AttributeSet;
 import android.view.View;
 
+// TODO delete?
 public class RedHookDraw extends View {
     private Paint paint;
     private Path path;

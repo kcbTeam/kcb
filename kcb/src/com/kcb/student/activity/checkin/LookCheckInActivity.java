@@ -57,6 +57,7 @@ public class LookCheckInActivity extends BaseActivity {
         setContentView(R.layout.stu_activity_look_checkin);
 
         initView();
+        initData();
     }
 
     @Override
@@ -79,7 +80,7 @@ public class LookCheckInActivity extends BaseActivity {
     @Override
     protected void initData() {
         // TODO get rate from database;
-        // showCheckInRate(totalTimes, checkedTimes);
+        showCheckInRate(13, 8);
     }
 
     @Override
@@ -89,14 +90,13 @@ public class LookCheckInActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.button_refresh:
-                refreshRate();
+                refresh();
                 break;
             default:
                 break;
         }
     }
 
-    // TODO wanghang: don't delete it
     private void showCheckInRate(int totalTimes, int checkedTimes) {
         rateTextView.setText(String.format(getString(R.string.stu_checkin_rate), totalTimes,
                 checkedTimes));
@@ -158,7 +158,7 @@ public class LookCheckInActivity extends BaseActivity {
         return pieData;
     }
 
-    private void refreshRate() {
+    private void refresh() {
         if (progressBar.getVisibility() == View.VISIBLE) {
             return;
         }
