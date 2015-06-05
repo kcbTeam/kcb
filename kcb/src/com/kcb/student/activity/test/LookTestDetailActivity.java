@@ -1,188 +1,205 @@
 package com.kcb.student.activity.test;
 
+import java.util.List;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.TextView;
 
+import com.android.volley.VolleyError;
+import com.android.volley.Request.Method;
+import com.android.volley.Response.ErrorListener;
+import com.android.volley.Response.Listener;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.kcb.common.application.KAccount;
 import com.kcb.common.base.BaseActivity;
+import com.kcb.common.model.answer.TestAnswer;
+import com.kcb.common.model.test.Question;
+import com.kcb.common.model.test.QuestionItem;
 import com.kcb.common.model.test.Test;
+import com.kcb.common.server.RequestUtil;
+import com.kcb.common.server.UrlUtil;
+import com.kcb.common.util.DialogUtil;
+import com.kcb.common.util.ToastUtil;
+import com.kcb.common.view.MaterialDialog;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.library.view.checkbox.CheckBox;
 import com.kcb.student.util.RedHookDraw;
+import com.kcb.teacher.database.test.TestDao;
 import com.kcbTeam.R;
 
 public class LookTestDetailActivity extends BaseActivity {
 
-    private TextView titleTextView;
-    private TextView choiceNumTextView;
-    private TextView questionTextView;
-    private TextView answerATextView;
-    private TextView answerBTextView;
-    private TextView answerCTextView;
-    private TextView answerDTextView;
-    private CheckBox checkboxA;
-    private CheckBox checkboxB;
-    private CheckBox checkboxC;
-    private CheckBox checkboxD;
-    private ButtonFlat qTab1Button;
-    private ButtonFlat qTab2Button;
-    private ButtonFlat qTab3Button;
-    private ButtonFlat qTab4Button;
-    private ButtonFlat backButton;
+    private TextView testNameNumTextView;
+    private TextView questionIndexTextView;
 
+    private TextView titleTextView;
+    private TextView choiceATextView;
+    private TextView choiceBTextView;
+    private TextView choiceCTextView;
+    private TextView choiceDTextView;
+
+    private CheckBox checkBoxA;
+    private CheckBox checkBoxB;
+    private CheckBox checkBoxC;
+    private CheckBox checkBoxD;
+
+    private ButtonFlat lastButton;
+    private ButtonFlat nextButton;
+    private ButtonFlat submitButton;
+
+    // tag title/A/B/C/D;
+    private final int FLAG_TITLE = 1;
+    private final int FLAG_A = 2;
+    private final int FALG_B = 3;
+    private final int FLAG_C = 4;
+    private final int FLAG_D = 5;
+
+    // test and current question index;
     public static Test sTest;
-    private int numQuestion;
-    private RedHookDraw layout;
+    private int mCurrentQuestionIndex;
+
+    // when click last/next, show a mTempQuestion, used for compare it is changed or not;
+    private Question mTempQuestion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.stu_activity_looktestresult);
+
         initView();
         initData();
     }
 
     @Override
     protected void initView() {
-        titleTextView = (TextView) findViewById(R.id.testresult_title);
-        choiceNumTextView = (TextView) findViewById(R.id.textview_testresultchioce);
-        questionTextView = (TextView) findViewById(R.id.textview_choice_question1);
-        answerATextView = (TextView) findViewById(R.id.textview_choice_a1);
-        answerBTextView = (TextView) findViewById(R.id.textview_choice_b1);
-        answerCTextView = (TextView) findViewById(R.id.textview_choice_c1);
-        answerDTextView = (TextView) findViewById(R.id.textview_choice_d1);
-        checkboxA = (CheckBox) findViewById(R.id.checkbox_a1);
-        checkboxB = (CheckBox) findViewById(R.id.checkbox_b1);
-        checkboxC = (CheckBox) findViewById(R.id.checkbox_c1);
-        checkboxD = (CheckBox) findViewById(R.id.checkbox_d1);
-        qTab1Button = (ButtonFlat) findViewById(R.id.button_tab_question1);
-        qTab2Button = (ButtonFlat) findViewById(R.id.button_tab_question2);
-        qTab3Button = (ButtonFlat) findViewById(R.id.button_tab_question3);
-        qTab4Button = (ButtonFlat) findViewById(R.id.button_tab_question4);
-        qTab1Button.setOnClickListener(this);
-        qTab2Button.setOnClickListener(this);
-        qTab3Button.setOnClickListener(this);
-        qTab4Button.setOnClickListener(this);
-        backButton = (ButtonFlat) findViewById(R.id.button_back);
-        backButton.setOnClickListener(this);
-        layout = (RedHookDraw) findViewById(R.id.relativelayout_redhook);
-        layout.setVisibility(View.INVISIBLE);
-    }
+        testNameNumTextView = (TextView) findViewById(R.id.textview_test_name_num);
+        questionIndexTextView = (TextView) findViewById(R.id.textview_question_num);
 
-    protected void setTabNums() {
-        switch (numQuestion) {
-            case 1:
-                qTab2Button.setVisibility(View.GONE);
-                qTab3Button.setVisibility(View.GONE);
-                qTab4Button.setVisibility(View.GONE);
-                break;
-            case 2:
-                qTab3Button.setVisibility(View.GONE);
-                qTab4Button.setVisibility(View.GONE);
-                break;
-            case 3:
-                qTab4Button.setVisibility(View.GONE);
-                break;
-            default:
-                break;
-        }
-    }
+        titleTextView = (TextView) findViewById(R.id.textview_title);
+        choiceATextView = (TextView) findViewById(R.id.textview_A);
+        choiceBTextView = (TextView) findViewById(R.id.textview_B);
+        choiceCTextView = (TextView) findViewById(R.id.textview_C);
+        choiceDTextView = (TextView) findViewById(R.id.textview_D);
 
-    protected void setCurrent() {}
+        lastButton = (ButtonFlat) findViewById(R.id.button_last);
+        lastButton.setOnClickListener(this);
+        nextButton = (ButtonFlat) findViewById(R.id.button_next);
+        nextButton.setOnClickListener(this);
+        submitButton = (ButtonFlat) findViewById(R.id.button_submit);
+        submitButton.setOnClickListener(this);
+
+        checkBoxA = (CheckBox) findViewById(R.id.checkBox_A);
+        checkBoxB = (CheckBox) findViewById(R.id.checkBox_B);
+        checkBoxC = (CheckBox) findViewById(R.id.checkBox_C);
+        checkBoxD = (CheckBox) findViewById(R.id.checkBox_D);
+    }
 
     @Override
     protected void initData() {
-        Intent intent = this.getIntent();
-        String string = intent.getStringExtra("testTitle1");
-        titleTextView.setText(string);
-        numQuestion = 3;
-        setTabNums();
-        String string1 = getIntent().getStringExtra("questionInfo");
-        // LogUtil.i("gdf", string1);
-        // JsonObjectParserUtil questionData = new JsonObjectParserUtil(string1);
-        // sTest = questionData.ParserJsonObject();
-        // if (sTest.getQuestion(0).getTitle().isText()) LogUtil.i("df", "gg");
-        // showCurrentQuestion(0);
-    }
-
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-    @SuppressLint("NewApi")
-    public void showCurrentQuestion(int position) {
-        if (sTest.getQuestion(position).getTitle().isText()) {
-            questionTextView.setText(Integer.toString(position + 1) + "、"
-                    + sTest.getQuestion(position).getTitle().getText());
-            questionTextView.setBackgroundColor(Color.WHITE);
-        } else {
-            questionTextView.setBackground(new BitmapDrawable(sTest.getQuestion(position)
-                    .getTitle().getBitmap()));
-            questionTextView.setText("");
-        }
-        if (sTest.getQuestion(position).getChoiceA().isText()) {
-            answerATextView.setText("A、" + sTest.getQuestion(position).getChoiceA().getText());
-            answerATextView.setBackgroundColor(Color.WHITE);
-        } else {
-            answerATextView.setBackground(new BitmapDrawable(sTest.getQuestion(position)
-                    .getChoiceA().getBitmap()));
-            answerATextView.setText("");
-        }
-        if (sTest.getQuestion(position).getChoiceB().isText()) {
-            answerBTextView.setText("B、" + sTest.getQuestion(position).getChoiceB().getText());
-            answerBTextView.setBackgroundColor(Color.WHITE);
-        } else {
-            answerBTextView.setBackground(new BitmapDrawable(sTest.getQuestion(position)
-                    .getChoiceB().getBitmap()));
-            answerBTextView.setText("");
-        }
-        if (sTest.getQuestion(position).getChoiceC().isText()) {
-            answerCTextView.setText("C、" + sTest.getQuestion(position).getChoiceC().getText());
-            answerCTextView.setBackgroundColor(Color.WHITE);
-        } else {
-            answerCTextView.setBackground(new BitmapDrawable(sTest.getQuestion(position)
-                    .getChoiceC().getBitmap()));
-            answerCTextView.setText("");
-        }
-        if (sTest.getQuestion(position).getTitle().isText()) {
-            answerDTextView.setText("D、" + sTest.getQuestion(position).getChoiceD().getText());
-            answerDTextView.setBackgroundColor(Color.WHITE);
-        } else {
-            answerDTextView.setBackground(new BitmapDrawable(sTest.getQuestion(position)
-                    .getChoiceD().getBitmap()));
-            answerDTextView.setText("");
-        }
+        testNameNumTextView.setText(String.format(getString(R.string.stu_test_name_num),
+                sTest.getName(), sTest.getQuestionNum()));
+        showQuestion();
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.button_back:
-                finish();
+            case R.id.button_last:
+                lastQuestion();
                 break;
-            case R.id.button_tab_question1:
-                showCurrentQuestion(0);
-                layout.setVisibility(View.INVISIBLE);
-                break;
-            case R.id.button_tab_question2:
-                showCurrentQuestion(1);
-                layout.setVisibility(View.VISIBLE);
-
-                break;
-            case R.id.button_tab_question3:
-                showCurrentQuestion(2);
-                layout.setVisibility(View.INVISIBLE);
-                break;
-            case R.id.button_tab_question4:
-                showCurrentQuestion(3);
-                layout.setVisibility(View.INVISIBLE);
+            case R.id.button_next:
+                nextQuesion();
                 break;
             default:
                 break;
+        }
+    }
+
+    private Question getCurrentQuestion() {
+        return sTest.getQuestion(mCurrentQuestionIndex);
+    }
+
+    private void showQuestion() {
+        questionIndexTextView.setText(String.format(getString(R.string.stu_question_index),
+                mCurrentQuestionIndex + 1));
+
+        Question question = getCurrentQuestion();
+        mTempQuestion = Question.clone(question);
+
+        showQuestionItem(FLAG_TITLE, question.getTitle());
+        showQuestionItem(FLAG_A, question.getChoiceA());
+        showQuestionItem(FALG_B, question.getChoiceB());
+        showQuestionItem(FLAG_C, question.getChoiceC());
+        showQuestionItem(FLAG_D, question.getChoiceD());
+
+        checkBoxA.setChecked(question.getChoiceA().isSelected());
+        checkBoxB.setChecked(question.getChoiceB().isSelected());
+        checkBoxC.setChecked(question.getChoiceC().isSelected());
+        checkBoxD.setChecked(question.getChoiceD().isSelected());
+    }
+
+    @SuppressWarnings("deprecation")
+    private void showQuestionItem(int flag, QuestionItem item) {
+        TextView textView = getTextViewByTag(flag);
+        if (item.isText()) {
+            textView.setText(item.getText());
+        } else {
+            Bitmap bitmap = item.getBitmap();
+            if (null != bitmap) {
+                textView.setBackgroundDrawable(new BitmapDrawable(bitmap));
+            }
+        }
+    }
+
+    private TextView getTextViewByTag(int flag) {
+        TextView textView = null;
+        switch (flag) {
+            case FLAG_TITLE:
+                textView = titleTextView;
+                break;
+            case FLAG_A:
+                textView = choiceATextView;
+                break;
+            case FALG_B:
+                textView = choiceBTextView;
+                break;
+            case FLAG_C:
+                textView = choiceCTextView;
+                break;
+            case FLAG_D:
+                textView = choiceDTextView;
+                break;
+            default:
+                break;
+        }
+        return textView;
+    }
+
+    private void lastQuestion() {
+        if (mCurrentQuestionIndex > 0) {
+            mCurrentQuestionIndex--;
+            showQuestion();
+        }
+    }
+
+    private void nextQuesion() {
+        if (mCurrentQuestionIndex < sTest.getQuestionNum() - 1) {
+            mCurrentQuestionIndex++;
+            showQuestion();
         }
     }
 

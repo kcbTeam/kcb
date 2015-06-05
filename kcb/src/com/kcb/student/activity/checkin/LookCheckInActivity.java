@@ -73,8 +73,8 @@ public class LookCheckInActivity extends BaseActivity {
 
         pieChart = (PieChart) findViewById(R.id.piechart_rate);
 
-        PieData mPieData = setData(2, 100);
-        showCheckInChart(pieChart, mPieData);
+        PieData pieData = setData(2, 100);
+        showCheckInChart(pieChart, pieData);
     }
 
     @Override

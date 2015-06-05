@@ -47,7 +47,7 @@ public class TestActivity extends BaseActivity {
 
     private static final String TAG = TestActivity.class.getName();
 
-    private TextView testNameTextView;
+    private TextView testNameNumTextView;
     private TextView timeTextView;
 
     private TextView questionIndexTextView;
@@ -100,7 +100,7 @@ public class TestActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        testNameTextView = (TextView) findViewById(R.id.textview_testname);
+        testNameNumTextView = (TextView) findViewById(R.id.textview_test_name_num);
         timeTextView = (TextView) findViewById(R.id.textview_time);
 
         questionIndexTextView = (TextView) findViewById(R.id.textview_question_num);
@@ -126,7 +126,7 @@ public class TestActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        testNameTextView.setText(String.format(getString(R.string.stu_test_name_num),
+        testNameNumTextView.setText(String.format(getString(R.string.stu_test_name_num),
                 sTest.getName(), sTest.getQuestionNum()));
         showQuestion();
 

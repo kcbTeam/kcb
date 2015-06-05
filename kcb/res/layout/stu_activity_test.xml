@@ -8,7 +8,7 @@
     tools:ignore="contentDescription" >
 
     <TextView
-        android:id="@+id/textview_testname"
+        android:id="@+id/textview_test_name_num"
         style="@style/common_title_left" />
 
     <TextView
@@ -24,7 +24,7 @@
     <TextView
         android:id="@+id/textview_question_num"
         style="@style/common_tip"
-        android:layout_below="@id/textview_testname" />
+        android:layout_below="@id/textview_test_name_num" />
 
     <TextView
         android:id="@+id/textview_question_title"
@@ -219,7 +219,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="提交答案"
+            android:text="@string/stu_submit_answer"
             widget:clickAfterRipple="false"
             widget:rippleSpeed="18" />
     </LinearLayout>
