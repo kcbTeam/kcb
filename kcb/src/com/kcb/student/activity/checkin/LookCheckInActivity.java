@@ -128,14 +128,14 @@ public class LookCheckInActivity extends BaseActivity {
 
         Legend mLegend = pieChart.getLegend();
         mLegend.setEnabled(false);
-        
+
         new Handler().postDelayed(new Runnable() {
-          
+
             @Override
             public void run() {
                 pieChart.animateY(1800);
             }
-        }, 150);       
+        }, 150);
     }
 
     private PieData setData(int count, float range) {

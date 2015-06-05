@@ -1,44 +1,19 @@
 package com.kcb.student.activity.test;
 
-import java.util.List;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.TextView;
 
-import com.android.volley.VolleyError;
-import com.android.volley.Request.Method;
-import com.android.volley.Response.ErrorListener;
-import com.android.volley.Response.Listener;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.kcb.common.application.KAccount;
 import com.kcb.common.base.BaseActivity;
-import com.kcb.common.model.answer.TestAnswer;
 import com.kcb.common.model.test.Question;
 import com.kcb.common.model.test.QuestionItem;
 import com.kcb.common.model.test.Test;
-import com.kcb.common.server.RequestUtil;
-import com.kcb.common.server.UrlUtil;
-import com.kcb.common.util.DialogUtil;
-import com.kcb.common.util.ToastUtil;
-import com.kcb.common.view.MaterialDialog;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.library.view.checkbox.CheckBox;
-import com.kcb.student.util.RedHookDraw;
-import com.kcb.teacher.database.test.TestDao;
 import com.kcbTeam.R;
 
 public class LookTestDetailActivity extends BaseActivity {

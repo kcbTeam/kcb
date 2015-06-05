@@ -185,7 +185,8 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_alignParentBottom="true"
-        android:orientation="horizontal" >
+        android:orientation="horizontal"
+        android:padding="8dp" >
 
         <com.kcb.library.view.buttonflat.ButtonFlat
             android:id="@+id/button_last"
