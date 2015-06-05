@@ -5,7 +5,10 @@ import java.util.Date;
 import java.util.List;
 
 import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
-import android.content.Intent;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -14,12 +17,23 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
+import com.android.volley.Request.Method;
+import com.android.volley.Response.ErrorListener;
+import com.android.volley.Response.Listener;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.kcb.common.application.KAccount;
 import com.kcb.common.base.BaseActivity;
+import com.kcb.common.model.answer.TestAnswer;
 import com.kcb.common.model.test.Test;
+import com.kcb.common.server.RequestUtil;
+import com.kcb.common.server.ResponseUtil;
+import com.kcb.common.server.UrlUtil;
 import com.kcb.common.util.StringMatchUtil;
 import com.kcb.library.view.FloatingEditText;
 import com.kcb.library.view.buttonflat.ButtonFlat;
-import com.kcb.teacher.adapter.ListAdapterCourseTest;
+import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
+import com.kcb.teacher.adapter.LookTestAdapter;
 import com.kcbTeam.R;
 
 /**
@@ -30,23 +44,27 @@ import com.kcbTeam.R;
  * @date: 2015年5月16日 下午4:00:49
  */
 public class LookTestActivity extends BaseActivity implements TextWatcher, OnItemClickListener {
-    @SuppressWarnings("unused")
-    private static final String TAG = "CheckTest";
+
+    private static final String TAG = LookTestActivity.class.getName();
 
     private ButtonFlat backButton;
+    private ButtonFlat refreshButton;
+    private SmoothProgressBar progressBar;
+
     private FloatingEditText searchEditText;
-    private ListView testListView;
+    private ListView listView;
+
+    private LookTestAdapter mAdapter;
 
     private List<Test> mTestList;
     private List<Test> mTempTestList;
-    private ListAdapterCourseTest mAdapter;
 
     public final static String CLICKED_TEST_KEY = "clicked_test_key";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.tch_activity_checktest);
+        setContentView(R.layout.tch_activity_looktest);
 
         initView();
         initData();
@@ -56,19 +74,19 @@ public class LookTestActivity extends BaseActivity implements TextWatcher, OnIte
     protected void initView() {
         backButton = (ButtonFlat) findViewById(R.id.button_back);
         backButton.setOnClickListener(this);
+        refreshButton = (ButtonFlat) findViewById(R.id.button_refresh);
+        refreshButton.setOnClickListener(this);
+
+        progressBar = (SmoothProgressBar) findViewById(R.id.progressbar_refresh);
+
         searchEditText = (FloatingEditText) findViewById(R.id.edittext_search);
         searchEditText.addTextChangedListener(this);
-        testListView = (ListView) findViewById(R.id.listview_test);
+        listView = (ListView) findViewById(R.id.listview_test);
     }
 
     @Override
     protected void initData() {
-        /**
-         * test data
-         */
-
         // TODO getText from local
-
         mTestList = new ArrayList<Test>();
         Test tempTest = new Test("高考数学", 2);
         tempTest.setDate(new Date());
@@ -92,21 +110,31 @@ public class LookTestActivity extends BaseActivity implements TextWatcher, OnIte
         tempTest.getQuestion(0).getChoiceD().setText("复活");
         mTestList.add(tempTest);
 
-
         mTempTestList = new ArrayList<Test>();
         mTempTestList.addAll(mTestList);
 
-        mAdapter = new ListAdapterCourseTest(this, mTempTestList);
-        testListView.setAdapter(mAdapter);
-        testListView.setOnItemClickListener(this);
+        mAdapter = new LookTestAdapter(this, mTempTestList);
+        listView.setAdapter(mAdapter);
+        listView.setOnItemClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.button_back:
+                finish();
+                break;
+            case R.id.button_refresh:
+                refresh();
+                break;
+            default:
+                break;
+        }
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Intent intent = new Intent(this, LookTestDetailActivity.class);
-        intent.putExtra(LookTestActivity.CLICKED_TEST_KEY,
-                mTempTestList.get(mTempTestList.size() - 1 - position));
-        startActivity(intent);
+        LookTestDetailActivity.start(LookTestActivity.this, mAdapter.getItem(position));
     }
 
     @Override
@@ -135,14 +163,40 @@ public class LookTestActivity extends BaseActivity implements TextWatcher, OnIte
         mAdapter.notifyDataSetChanged();
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.button_back:
-                finish();
-                break;
-            default:
-                break;
+    private void refresh() {
+        if (progressBar.getVisibility() == View.VISIBLE) {
+            return;
         }
+        progressBar.setVisibility(View.VISIBLE);
+        JsonArrayRequest request =
+                new JsonArrayRequest(Method.GET, UrlUtil.getTchTestLookresultUrl(KAccount
+                        .getAccountId()), new Listener<JSONArray>() {
+
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        progressBar.hide(LookTestActivity.this);
+                        List<TestAnswer> testAnswers = new ArrayList<TestAnswer>();
+                        for (int i = 0; i < response.length(); i++) {
+                            try {
+                                testAnswers.add(TestAnswer.fromJsonObject(response.getJSONObject(i)));
+                            } catch (JSONException e) {}
+                        }
+                        // TODO update database
+                    }
+                }, new ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        progressBar.hide(LookTestActivity.this);
+                        ResponseUtil.toastError(error);
+                    }
+                });
+        RequestUtil.getInstance().addToRequestQueue(request, TAG);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        RequestUtil.getInstance().cancelPendingRequests(TAG);
     }
 }

@@ -29,7 +29,7 @@ import com.kcb.common.base.BaseFragment;
 import com.kcb.common.util.StringMatchUtil;
 import com.kcb.library.view.FloatingEditText;
 import com.kcb.teacher.activity.stucentre.StuCentreActivity;
-import com.kcb.teacher.adapter.ListAdapterStudent;
+import com.kcb.teacher.adapter.StuCentreAdapter;
 import com.kcb.teacher.database.students.StudentDao;
 import com.kcb.teacher.model.stucentre.Student;
 import com.kcb.teacher.util.CompareByCheckInRate;
@@ -58,7 +58,7 @@ public class StuCentreFragment extends BaseFragment implements OnItemClickListen
     private ImageView clearImageView;
 
     private ListView mStudentList;
-    private ListAdapterStudent mAdapter;
+    private StuCentreAdapter mAdapter;
     private List<Student> mList;
     private List<Student> mTempList;
     private String mSearchKey;
@@ -115,7 +115,7 @@ public class StuCentreFragment extends BaseFragment implements OnItemClickListen
         Collections.sort(mList, idComparator);
         mTempList = new ArrayList<Student>();
         mTempList.addAll(mList);
-        mAdapter = new ListAdapterStudent(getActivity(), mTempList);
+        mAdapter = new StuCentreAdapter(getActivity(), mTempList);
 
         mGetAllStudenInfoTask = new GetAllStudenInfoTask();
         mGetAllStudenInfoTask.execute(0);

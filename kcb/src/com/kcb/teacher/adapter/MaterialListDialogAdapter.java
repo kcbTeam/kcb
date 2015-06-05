@@ -21,13 +21,13 @@ import com.kcbTeam.R;
  */
 // TODO use RecyclerView for better performance, learn how RecyclerView works;
 // you can ask TaoLi;
-public class ListAdapterEdit extends BaseAdapter {
+public class MaterialListDialogAdapter extends BaseAdapter {
 
     private Context mContext;
     private List<String> mTestNames;
     private int selectedIndex = 0;
 
-    public ListAdapterEdit(Context context, List<String> list) {
+    public MaterialListDialogAdapter(Context context, List<String> list) {
         mContext = context;
         mTestNames = list;
     }
