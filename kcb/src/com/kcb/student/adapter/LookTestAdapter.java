@@ -53,9 +53,9 @@ public class LookTestAdapter extends BaseAdapter {
             holder = new ViewHolder();
             convertView =
                     LayoutInflater.from(mContext).inflate(R.layout.stu_listitem_look_test, null);
-            holder.nameTextView = (TextView) convertView.findViewById(R.id.testname);
-            holder.numTextView = (TextView) convertView.findViewById(R.id.questonnumber);
-            holder.dateTextView = (TextView) convertView.findViewById(R.id.testtime);
+            holder.nameTextView = (TextView) convertView.findViewById(R.id.textview_testname);
+            holder.numTextView = (TextView) convertView.findViewById(R.id.textview_questionnum);
+            holder.dateTextView = (TextView) convertView.findViewById(R.id.textview_testdate);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -69,6 +69,7 @@ public class LookTestAdapter extends BaseAdapter {
         public TextView numTextView;
         public TextView dateTextView;
 
+        @SuppressLint("SimpleDateFormat")
         public void setTest(Test test) {
             nameTextView.setText(test.getName());
             numTextView.setText(String.valueOf(test.getQuestionNum()));

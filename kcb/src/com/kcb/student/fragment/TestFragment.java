@@ -98,9 +98,12 @@ public class TestFragment extends BaseFragment {
 
                     @Override
                     public void onResponse(JSONObject response) {
+                        int remaintime = response.optInt("remaintime");
+                        Test test = Test.fromJsonObject(response.optJSONObject("test"));
+
                         // TODO save test to database, change bitmapstring to bitmap
-                        Test test = Test.fromJsonObject(response);
-                        TestActivity.start(getActivity(), test, 20);
+                        TestActivity.start(getActivity(), test, remaintime);
+                        startProgressBar.hide(getActivity());
                     }
                 }, new ErrorListener() {
 

@@ -85,6 +85,7 @@
     <string name="stu_test_unfinish">测试未结束</string>
     <string name="stu_last_question">上一题</string>
     <string name="stu_next_question">下一题</string>
+    <string name="stu_submit_answer">提交答案</string>
     <string name="stu_choice_A">A</string>
     <string name="stu_choice_B">B</string>
     <string name="stu_choice_C">C</string>

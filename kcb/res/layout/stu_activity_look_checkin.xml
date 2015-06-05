@@ -30,8 +30,7 @@
         style="@style/common_tip"
         android:layout_below="@id/layout_title"
         android:layout_marginBottom="16dp"
-        android:layout_marginTop="16dp"
-        android:singleLine="false" />
+        android:layout_marginTop="16dp" />
 
     <com.github.mikephil.charting.charts.PieChart
         android:id="@+id/piechart_rate"

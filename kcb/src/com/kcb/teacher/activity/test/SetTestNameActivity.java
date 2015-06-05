@@ -63,7 +63,8 @@ public class SetTestNameActivity extends BaseActivity {
 
             @Override
             public void onValueChanged(int value) {
-                setNumTextView.setText(String.format(getString(R.string.tch_set_question_num), value));
+                setNumTextView.setText(String.format(getString(R.string.tch_set_question_num),
+                        value));
             }
         });
 

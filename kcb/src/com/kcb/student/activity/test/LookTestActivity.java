@@ -66,8 +66,9 @@ public class LookTestActivity extends BaseActivity implements TextWatcher, OnIte
         searchEditText = (FloatingEditText) findViewById(R.id.edittext_search);
         searchEditText.addTextChangedListener(this);
         clearImageView = (ImageView) findViewById(R.id.imageview_clear);
+        clearImageView.setOnClickListener(this);
 
-        listView = (ListView) findViewById(R.id.listview);
+        listView = (ListView) findViewById(R.id.listview_test);
         listView.setOnItemClickListener(this);
     }
 
@@ -96,6 +97,9 @@ public class LookTestActivity extends BaseActivity implements TextWatcher, OnIte
             case R.id.button_refresh:
                 refresh();
                 break;
+            case R.id.imageview_clear:
+                clear();
+                break;
             default:
                 break;
         }
@@ -109,6 +113,14 @@ public class LookTestActivity extends BaseActivity implements TextWatcher, OnIte
         progressBar.setVisibility(View.VISIBLE);
     }
 
+    private void clear() {
+        searchEditText.setText("");
+        clearImageView.setVisibility(View.INVISIBLE);
+        mTempTests.clear();
+        mTempTests.addAll(mTests);
+        mAdapter.notifyDataSetChanged();
+    }
+
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
@@ -117,8 +129,8 @@ public class LookTestActivity extends BaseActivity implements TextWatcher, OnIte
 
     @Override
     public void afterTextChanged(Editable s) {
-        mTempTests.clear();
         mSearchKey = searchEditText.getText().toString().trim().replace(" ", "");
+        mTempTests.clear();
         if (!mSearchKey.equals("")) {
             clearImageView.setVisibility(View.VISIBLE);
             for (int i = 0; i < mTests.size(); i++) {
@@ -138,6 +150,6 @@ public class LookTestActivity extends BaseActivity implements TextWatcher, OnIte
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+        LookTestDetailActivity.start(LookTestActivity.this, mAdapter.getItem(position));
     }
 }
