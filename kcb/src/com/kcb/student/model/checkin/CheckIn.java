@@ -1,18 +1,16 @@
 package com.kcb.student.model.checkin;
 
-import java.util.Date;
-
 public class CheckIn {
     
-    private Date date;
+    private String date;
     private int checkinresult;
     
-    public CheckIn(Date date,int checkinresult){
+    public CheckIn(String date,int checkinresult){
         this.date=date;
         this.checkinresult=checkinresult;
     }
     
-    public Date getDate(){
+    public String getDate(){
         return date;
     }
     

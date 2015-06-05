@@ -29,7 +29,9 @@ import com.kcb.common.server.ResponseUtil;
 import com.kcb.common.server.UrlUtil;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
+import com.kcb.student.database.checkin.CheckInDao;
 import com.kcb.student.model.CheckInResult;
+import com.kcb.student.model.checkin.CheckIn;
 import com.kcbTeam.R;
 
 /**
@@ -50,13 +52,19 @@ public class LookCheckInActivity extends BaseActivity {
     private TextView rateTextView;
 
     private PieChart pieChart;
-    private float[] mRates = new float[] {80, 20};
+    private int totalTimes;
+    private int checkedTimes;
+    private double rate;
+    
+    private CheckInDao mCheckInDao;
+    private CheckIn mCheckIn;
 
     @Override
     protected void onCreate(android.os.Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.stu_activity_look_checkin);
 
+        initData();
         initView();
     }
 
@@ -73,7 +81,7 @@ public class LookCheckInActivity extends BaseActivity {
 
         pieChart = (PieChart) findViewById(R.id.piechart_rate);
 
-        PieData mPieData = setData(2, 100);
+        PieData mPieData = setData();
         showCheckInChart(pieChart, mPieData);
     }
 
@@ -81,6 +89,17 @@ public class LookCheckInActivity extends BaseActivity {
     protected void initData() {
         // TODO get rate from database;
         // showCheckInRate(totalTimes, checkedTimes);
+        mCheckIn=new CheckIn("2015-6-12",0);
+        try{
+            mCheckInDao=new CheckInDao(this);
+            mCheckInDao.add(mCheckIn);
+            totalTimes=mCheckInDao.getSum();
+            checkedTimes=mCheckInDao.getCheckIn();
+            rate=mCheckInDao.getRate(checkedTimes, totalTimes);
+            mCheckInDao.close();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -98,6 +117,7 @@ public class LookCheckInActivity extends BaseActivity {
     }
 
     // TODO wanghang: don't delete it
+    @SuppressWarnings("unused")
     private void showCheckInRate(int totalTimes, int checkedTimes) {
         rateTextView.setText(String.format(getString(R.string.stu_checkin_rate), totalTimes,
                 checkedTimes));
@@ -125,6 +145,7 @@ public class LookCheckInActivity extends BaseActivity {
         pieChart.setData(pieData);
         pieChart.highlightValues(null);
         pieChart.invalidate();
+        pieChart.setVisibility(View.INVISIBLE);
 
         Legend mLegend = pieChart.getLegend();
         mLegend.setEnabled(false);
@@ -134,18 +155,18 @@ public class LookCheckInActivity extends BaseActivity {
             @Override
             public void run() {
                 pieChart.animateY(1800);
+                pieChart.setVisibility(View.VISIBLE);
             }
         }, 150);       
     }
 
-    private PieData setData(int count, float range) {
+    private PieData setData() {
         ArrayList<String> xValues = new ArrayList<String>();
         xValues.add(getString(R.string.stu_success_checkin));
         xValues.add(getString(R.string.stu_uncheckin));
         ArrayList<Entry> yValues = new ArrayList<Entry>();
-        for (int i = 0; i < count; i++) {
-            yValues.add(new Entry(mRates[i], i));
-        }
+        yValues.add(new Entry(checkedTimes, 0));
+        yValues.add(new Entry((totalTimes-checkedTimes), 1));
 
         PieDataSet pieDataSet = new PieDataSet(yValues, null);
         pieDataSet.setSliceSpace(0f);
