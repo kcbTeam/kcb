@@ -87,14 +87,14 @@ public class UrlUtil {
     private static final String url_tch_login = IP + "/v1/tch/account/login";
 
     public static String getTchLoginUrl(String id, String password) {
-        return url_tch_login + "?id=" + id + "&password=" + password;
+        return url_tch_login + "?tchid=" + id + "&password=" + password;
     }
 
     // 1.2 check password
     private static final String url_tch_checkoldpassword = IP + "/v1/tch/account/checkoldpassword";
 
     public static String getTchCheckOldPasswordUrl(String id, String password) {
-        return url_tch_checkoldpassword + "?id=" + id + "&old=" + password;
+        return url_tch_checkoldpassword + "?tchid=" + id + "&old=" + password;
 
     }
 
@@ -102,7 +102,7 @@ public class UrlUtil {
     private static final String url_tch_modifypassword = IP + "/v1/tch/account/modifypassword";
 
     public static String getTchModifyPasswordUrl(String id, String newPassword) {
-        return url_tch_modifypassword + "?id=" + id + "&new=" + newPassword;
+        return url_tch_modifypassword + "?tchid=" + id + "&new=" + newPassword;
     }
 
     /**
@@ -112,14 +112,14 @@ public class UrlUtil {
     private static final String url_tch_checkin_start = IP + "/v1/tch/checkin/start";
 
     public static String getTchCheckinStartUrl(String id, int num) {
-        return url_tch_checkin_start + "?id=" + id + "&num=" + num;
+        return url_tch_checkin_start + "?tchid=" + id + "&num=" + num;
     }
 
     // 2.2 get checkin result
     private static final String url_tch_checkin_getresult = IP + "/v1/tch/checkin/getresult";
 
     public static String getTchCheckinGetresultUrl(String id) {
-        return url_tch_checkin_getresult + "?id=" + id;
+        return url_tch_checkin_getresult + "?tchid=" + id;
     }
 
     /**

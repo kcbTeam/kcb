@@ -119,7 +119,6 @@ public class StartCheckInActivity extends BaseActivity {
             public void onClick(View v) {
                 startProgressBar.setVisibility(View.VISIBLE);
                 startTipTextView.setText(R.string.tch_wait);
-                // start checkin
                 StringRequest request =
                         new StringRequest(Method.POST, UrlUtil.getTchCheckinStartUrl(
                                 KAccount.getAccountId(), mNum), new Listener<String>() {
