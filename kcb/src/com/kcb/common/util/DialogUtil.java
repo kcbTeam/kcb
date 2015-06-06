@@ -78,21 +78,21 @@ public class DialogUtil {
      * @date: 2015年5月7日 下午8:06:42
      * @param context
      * @param title
-     * @param adapter
+     * @param messages
      * @param sureText , cannot be null;
      * @param sureListener , can be null (only dismiss after click);
      * @param cancelText , can be null (don't show cancel button);
      * @param cancelListener , can be null (only dismiss after click);
      * 
      */
-    public static void showListDialog(Context context, String title, List<String> adapter,
-            @NonNull String sureText, OnClickSureListener sureListener, String cancelText,
+    public static void showListDialog(Context context, int titleResId, List<String> messages,
+            @NonNull int sureResId, OnClickSureListener sureListener, int cancelResId,
             OnClickListener cancelListener) {
         MaterialListDialog dialog = new MaterialListDialog(context);
         dialog.show();
-        dialog.setTitle(title);
-        dialog.setAdapter(adapter);
-        dialog.setSureButton(sureText, sureListener);
-        dialog.setCancelButton(cancelText, cancelListener);
+        dialog.setTitle(titleResId);
+        dialog.setAdapter(messages);
+        dialog.setSureButton(sureResId, sureListener);
+        dialog.setCancelButton(cancelResId, cancelListener);
     }
 }

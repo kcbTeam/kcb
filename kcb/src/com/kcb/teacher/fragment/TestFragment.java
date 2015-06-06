@@ -1,15 +1,11 @@
 package com.kcb.teacher.fragment;
 
-import java.io.IOException;
-import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -53,11 +49,6 @@ public class TestFragment extends BaseFragment {
     private PaperButton addOrEditTestButton;
     private PaperButton lookTestResultButton;
 
-    private List<Test> mTestList;
-    private List<String> mTestNameList;
-
-    private GetTestListTask mGetTestListTask;
-
     private TestDao mTestDao;
 
     @Override
@@ -91,13 +82,6 @@ public class TestFragment extends BaseFragment {
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-        mGetTestListTask = new GetTestListTask();
-        mGetTestListTask.execute(0);
-    }
-
-    @Override
     public void onDestroy() {
         super.onDestroy();
         mTestDao.close();
@@ -127,18 +111,21 @@ public class TestFragment extends BaseFragment {
     };
 
     private void startTest() {
-        refreshNameList(TAG_ADD_OR_EDIT_TEST);
-        if (mTestNameList.isEmpty()) {
-            ToastUtil.toast("请先添加测试内容");
+        final List<String> names = getTestNames();
+        if (names.isEmpty()) {
+            ToastUtil.toast(R.string.tch_add_test_first);
         } else {
-            DialogUtil.showListDialog(getActivity(), "选择测试", mTestNameList, "确定",
-                    new OnClickSureListener() {
+            DialogUtil.showListDialog(getActivity(), R.string.tch_select_test, names,
+                    R.string.tch_comm_sure, new OnClickSureListener() {
 
                         @Override
                         public void onClick(View view, int position) {
-                            sendTestToServer(mTestList.get(position));
+                            TestDao testDao = new TestDao(getActivity());
+                            Test test = testDao.get(names.get(position));
+                            testDao.close();
+                            sendTestToServer(test);
                         }
-                    }, "取消", null);
+                    }, R.string.tch_comm_cancel, null);
         }
     }
 
@@ -178,9 +165,10 @@ public class TestFragment extends BaseFragment {
     }
 
     private void addOrEditTest() {
-        refreshNameList(TAG_START_TEST);
-        DialogUtil.showListDialog(getActivity(), "编辑测试内容", mTestNameList, "确定",
-                new OnClickSureListener() {
+        final List<String> names = getTestNames();
+        names.add(getString(R.string.tch_add_new_test));
+        DialogUtil.showListDialog(getActivity(), R.string.tch_edit_test, names,
+                R.string.tch_comm_sure, new OnClickSureListener() {
 
                     @Override
                     public void onClick(View view, int position) {
@@ -188,46 +176,19 @@ public class TestFragment extends BaseFragment {
                             Intent intent = new Intent(getActivity(), SetTestNameActivity.class);
                             startActivity(intent);
                         } else {
-                            EditTestActivity.startEditTest(getActivity(),
-                                    mTestList.get(mTestList.size() - position));
+                            TestDao testDao = new TestDao(getActivity());
+                            Test test = testDao.get(names.get(position));
+                            testDao.close();
+                            EditTestActivity.startEditTest(getActivity(), test);
                         }
                     }
-                }, "取消", null);
+                }, R.string.tch_comm_cancel, null);
     }
 
-    private class GetTestListTask extends AsyncTask<Integer, Integer, Integer> {
-
-        @Override
-        protected Integer doInBackground(Integer... params) {
-            try {
-                mTestList = mTestDao.getAll();
-                mTestNameList = new ArrayList<String>();
-                for (int i = 0; i < mTestList.size(); i++) {
-                    mTestNameList.add(mTestList.get(i).getName());
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-    }
-
-    private final int TAG_START_TEST = 1;
-    private final int TAG_ADD_OR_EDIT_TEST = 2;
-
-    private void refreshNameList(int INDEX) {
-        if (null == mTestNameList) {
-            return;
-        }
-        if (mTestNameList.contains("添加新测试")) {
-            mTestNameList.remove("添加新测试");
-        }
-        if (INDEX == TAG_START_TEST) {
-            mTestNameList.add("添加新测试");
-        }
+    private List<String> getTestNames() {
+        TestDao testDao = new TestDao(getActivity());
+        List<String> names = testDao.getAllTestName();
+        testDao.close();
+        return names;
     }
 }

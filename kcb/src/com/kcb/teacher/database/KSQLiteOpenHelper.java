@@ -22,12 +22,8 @@ public class KSQLiteOpenHelper extends SQLiteOpenHelper {
         db.execSQL(TestDB.CREATE_TABLE);
         db.execSQL(CheckInDB.CREATE_TABLE);
         db.execSQL(StudentDB.CREATE_TABLE);
-        // TODO:create new table from here
     }
 
-    // TODO , when to invoked it;
     @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("ALTER TABLE user ADD COLUMN other STRING");
-    }
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {}
 }

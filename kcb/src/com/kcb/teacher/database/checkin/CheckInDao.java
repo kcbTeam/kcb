@@ -77,7 +77,6 @@ public class CheckInDao {
         return checkInResultsList;
     }
 
-
     /**
      * 
      * @title: getAllCheckInResults
@@ -88,19 +87,22 @@ public class CheckInDao {
      * @throws ParseException
      * @throws JSONException
      */
-    public List<CheckInResult> getAllCheckInResults() throws ParseException, JSONException {
+    public List<CheckInResult> getAllCheckInResults() {
         Cursor cursor = mDatabase.query(CheckInDB.TABLE_NAME, null, null, null, null, null, null);
         List<CheckInResult> checkInResultsList = new ArrayList<CheckInResult>();
         if (cursor.moveToFirst()) {
             do {
-                checkInResultsList.add(CheckInResult.fromJsonObject(new JSONObject(cursor
-                        .getString(cursor.getColumnIndex(CheckInDB.KEY_CHECKINRESULT_CONTENT)))));
+                try {
+                    checkInResultsList
+                            .add(CheckInResult.fromJsonObject(new JSONObject(cursor
+                                    .getString(cursor
+                                            .getColumnIndex(CheckInDB.KEY_CHECKINRESULT_CONTENT)))));
+                } catch (JSONException e) {}
             } while (cursor.moveToNext());
         }
         cursor.close();
         return checkInResultsList;
     }
-
 
     public void deleteCheckInResultsByDate(Date date) {
         mDatabase.delete(CheckInDB.TABLE_NAME, CheckInDB.KEY_DATE + "=?",

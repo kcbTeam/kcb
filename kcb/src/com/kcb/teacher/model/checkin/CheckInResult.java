@@ -28,12 +28,6 @@ public class CheckInResult implements Serializable {
         mUnCheckedStudents = new ArrayList<UncheckedStudent>();
     }
 
-    public CheckInResult(Date signDate, Double signRate, List<UncheckedStudent> uncheckedStudents) {
-        mDate = signDate;
-        mRate = signRate;
-        mUnCheckedStudents = uncheckedStudents;
-    }
-
     public Date getDate() {
         return mDate;
     }

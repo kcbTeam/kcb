@@ -106,7 +106,6 @@ public class TestFragment extends BaseFragment {
                         testDao.add(test);
                         testDao.close();
 
-                        test.changeStringToBitmap();
                         StartTestActivity.start(getActivity(), test, remaintime);
                         startProgressBar.hide(getActivity());
                     }
