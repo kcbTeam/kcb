@@ -1,7 +1,6 @@
 package com.kcb.teacher.activity.test;
 
 import java.io.IOException;
-import java.util.Date;
 
 import org.json.JSONException;
 
@@ -111,9 +110,7 @@ public class SetTestTimeActivity extends BaseActivity {
     public void onClick(View v) {
         if (v == finishButton) {
             sTest.setTime(slider.getValue());
-            sTest.setDate(new Date());
-            // TODO:
-            sTest.setId("2333");
+            sTest.setDate(System.currentTimeMillis());
             try {
                 mTestDao = new TestDao(this);
                 mTestDao.add(sTest);

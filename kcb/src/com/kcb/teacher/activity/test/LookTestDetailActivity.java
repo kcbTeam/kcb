@@ -76,10 +76,8 @@ public class LookTestDetailActivity extends BaseActivity {
         showContent();
     }
 
-
     @Override
     protected void initData() {
-        sTest = (Test) getIntent().getSerializableExtra(LookTestActivity.CLICKED_TEST_KEY);
         mQuestionList = sTest.getQuestions();
         mQuestionNum = mQuestionList.size();
         mCurrentPosition = 0;
@@ -102,7 +100,6 @@ public class LookTestDetailActivity extends BaseActivity {
         }
         showContent();
     }
-
 
     private void lastQuestion() {
         if (mCurrentPosition > 0) {

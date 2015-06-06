@@ -16,18 +16,16 @@ public class Test implements Serializable {
     private String mId; // from server when start test
     private String mName; // test name
     private int mTime = 5; // default test time is 5 minutes
-    private Date mDate; // test date, create date or start test date
+    private long mDate; // test date, create date or start test date
     private boolean mHasTested; // true if teacher start test
     private List<Question> mQuestions;
 
     public Test() {
-        mDate = new Date();
         mQuestions = new ArrayList<Question>();
     }
 
     public Test(String name, int num) {
         mName = name;
-        mDate = new Date();
         mQuestions = new ArrayList<Question>();
         for (int i = 0; i < num; i++) {
             mQuestions.add(new Question());
@@ -54,15 +52,19 @@ public class Test implements Serializable {
         mTime = time;
     }
 
-    public Date getDate() {
+    public long getDate() {
         return mDate;
     }
 
-    public void setDate(Date date) {
+    public String getDateString() {
+        return new Date(mDate).toString();
+    }
+
+    public void setDate(long date) {
         mDate = date;
     }
 
-    public boolean isTested() {
+    public boolean hasTested() {
         return mHasTested;
     }
 
@@ -143,7 +145,7 @@ public class Test implements Serializable {
             jsonObject.put(KEY_ID, mId);
             jsonObject.put(KEY_NAME, mName);
             jsonObject.put(KEY_TIME, mTime);
-            jsonObject.put(KEY_DATE, mDate.toString());
+            jsonObject.put(KEY_DATE, mDate);
             jsonObject.put(KEY_HASTESTED, mHasTested);
 
             JSONArray questionArray = new JSONArray();
@@ -157,13 +159,12 @@ public class Test implements Serializable {
         return jsonObject;
     }
 
-    @SuppressWarnings("deprecation")
     public static Test fromJsonObject(JSONObject jsonObject) {
         Test test = new Test();
         test.mId = jsonObject.optString(KEY_ID);
         test.mName = jsonObject.optString(KEY_NAME);
         test.mTime = jsonObject.optInt(KEY_TIME);
-        test.mDate = new Date(jsonObject.optString(KEY_DATE));
+        test.mDate = jsonObject.optLong(KEY_DATE);
         test.mHasTested = jsonObject.optBoolean(KEY_HASTESTED);
 
         JSONArray questionArray = jsonObject.optJSONArray(KEY_QUESTION);

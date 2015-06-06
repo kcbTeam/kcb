@@ -74,7 +74,7 @@ public class LookTestAdapter extends BaseAdapter {
             nameTextView.setText(test.getName());
             numTextView.setText(String.valueOf(test.getQuestionNum()));
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-            dateTextView.setText(format.format(test.getDate()));
+            dateTextView.setText(format.format(test.getDateString()));
         }
     }
 }
