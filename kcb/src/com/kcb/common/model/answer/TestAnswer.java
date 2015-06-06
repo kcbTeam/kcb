@@ -31,6 +31,14 @@ public class TestAnswer {
         }
     }
 
+    public String getId() {
+        return mId;
+    }
+
+    public List<QuestionAnswer> getQuestionAnswers() {
+        return mQuestionAnswers;
+    }
+
     public void saveQuestionAnswer(Question question) {
         for (int i = 0; i < mQuestionAnswers.size(); i++) {
             QuestionAnswer questionAnswer = mQuestionAnswers.get(i);

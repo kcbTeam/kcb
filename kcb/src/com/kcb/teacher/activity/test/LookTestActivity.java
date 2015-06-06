@@ -45,7 +45,6 @@ import com.kcbTeam.R;
  */
 public class LookTestActivity extends BaseActivity implements TextWatcher, OnItemClickListener {
 
-    // TODO 用一个向右的小箭头表示有没有测试结果。
     private static final String TAG = LookTestActivity.class.getName();
 
     private ButtonFlat backButton;
@@ -154,17 +153,31 @@ public class LookTestActivity extends BaseActivity implements TextWatcher, OnIte
                     @Override
                     public void onResponse(JSONArray response) {
                         progressBar.hide(LookTestActivity.this);
-
+                        // get answer
                         List<TestAnswer> testAnswers = new ArrayList<TestAnswer>();
                         for (int i = 0; i < response.length(); i++) {
                             try {
                                 testAnswers.add(TestAnswer.fromJsonObject(response.getJSONObject(i)));
                             } catch (JSONException e) {}
                         }
-                        // TODO update database
+                        // set answer
+                        for (Test test : mAllTests) {
+                            for (TestAnswer testAnswer : testAnswers) {
+                                if (test.getId().equals(testAnswer.getId())) {
+                                    test.setAnswer(testAnswer);
+                                }
+                            }
+                        }
+                        // save test
                         TestDao testDao = new TestDao(LookTestActivity.this);
-
+                        for (Test test : mAllTests) {
+                            testDao.add(test);
+                        }
                         testDao.close();
+                        // show test
+                        mSearchedTests.clear();
+                        mSearchedTests.addAll(mAllTests);
+                        mAdapter.notifyDataSetChanged();
                     }
                 }, new ErrorListener() {
 

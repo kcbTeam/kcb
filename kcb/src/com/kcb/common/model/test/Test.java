@@ -9,6 +9,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.kcb.common.model.answer.QuestionAnswer;
+import com.kcb.common.model.answer.TestAnswer;
+
 public class Test implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -126,6 +129,16 @@ public class Test implements Serializable {
     public void changeStringToBitmap() {
         for (int i = 0; i < mQuestions.size(); i++) {
             mQuestions.get(i).changeStringToBitmap();
+        }
+    }
+
+    public void setAnswer(TestAnswer testAnswer) {
+        for (Question question : mQuestions) {
+            for (QuestionAnswer questionAnswer : testAnswer.getQuestionAnswers()) {
+                if (question.getId() == questionAnswer.getId()) {
+                    question.setRate(questionAnswer.getRate());
+                }
+            }
         }
     }
 

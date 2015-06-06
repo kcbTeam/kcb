@@ -1,12 +1,7 @@
 package com.kcb.teacher.activity.test;
 
-import java.io.IOException;
-
-import org.json.JSONException;
-
 import android.content.Context;
 import android.content.Intent;
-import android.database.SQLException;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -111,16 +106,8 @@ public class SetTestTimeActivity extends BaseActivity {
         if (v == finishButton) {
             sTest.setTime(slider.getValue());
             sTest.setDate(System.currentTimeMillis());
-            try {
-                mTestDao = new TestDao(this);
-                mTestDao.add(sTest);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            mTestDao = new TestDao(this);
+            mTestDao.add(sTest);
             sTest = null;
             mTestDao.close();
             finish();

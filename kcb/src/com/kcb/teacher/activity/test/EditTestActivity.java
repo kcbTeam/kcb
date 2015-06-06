@@ -4,8 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import org.json.JSONException;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -627,16 +625,8 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
 
     private void saveEditTest() {
         ToastUtil.toast(R.string.tch_saved);
-        try {
-            mTestDao = new TestDao(this);
-            mTestDao.add(sTest);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        mTestDao = new TestDao(this);
+        mTestDao.add(sTest);
         mTestDao.close();
         finish();
     }
