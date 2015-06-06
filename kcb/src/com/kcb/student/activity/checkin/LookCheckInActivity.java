@@ -23,7 +23,6 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.utils.PercentFormatter;
-import com.kcb.common.application.KAccount;
 import com.kcb.common.base.BaseActivity;
 import com.kcb.common.server.RequestUtil;
 import com.kcb.common.server.ResponseUtil;
@@ -31,7 +30,8 @@ import com.kcb.common.server.UrlUtil;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
 import com.kcb.student.database.checkin.CheckInDao;
-import com.kcb.student.model.CheckInResult;
+import com.kcb.student.model.account.KAccount;
+import com.kcb.student.model.checkin.CheckInResultDetail;
 import com.kcbTeam.R;
 
 /**
@@ -59,7 +59,6 @@ public class LookCheckInActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.stu_activity_look_checkin);
 
-        initData();
         initView();
         initData();
     }
@@ -82,6 +81,7 @@ public class LookCheckInActivity extends BaseActivity {
         CheckInDao checkInDao = new CheckInDao(LookCheckInActivity.this);
         int allTimes = checkInDao.getAllTimes();
         int successTimes = checkInDao.getSuccessTimes();
+        checkInDao.close();
 
         showCheckInRate(allTimes, successTimes);
         if (allTimes == 0) {
@@ -92,8 +92,6 @@ public class LookCheckInActivity extends BaseActivity {
             mRates[1] = 1 - mRates[0];
         }
         showCheckInChart();
-
-        checkInDao.close();
     }
 
     @Override
@@ -109,7 +107,6 @@ public class LookCheckInActivity extends BaseActivity {
                 break;
         }
     }
-
 
     private void showCheckInRate(int totalTimes, int checkedTimes) {
         rateTextView.setText(String.format(getString(R.string.stu_checkin_rate), totalTimes,
@@ -153,7 +150,6 @@ public class LookCheckInActivity extends BaseActivity {
         }, 150);
     }
 
-    // TODO
     private PieData getPieData(int count, float range) {
         ArrayList<String> xValues = new ArrayList<String>();
         xValues.add(getString(R.string.stu_success_checkin));
@@ -186,16 +182,17 @@ public class LookCheckInActivity extends BaseActivity {
         }
         progressBar.setVisibility(View.VISIBLE);
         JsonArrayRequest request =
-                new JsonArrayRequest(Method.GET, UrlUtil.getStuCheckinResultUrl(KAccount
-                        .getAccountId()), new Listener<JSONArray>() {
+                new JsonArrayRequest(Method.GET, UrlUtil.getStuCheckinResultUrl(
+                        KAccount.getAccountId(), KAccount.getTchId()), new Listener<JSONArray>() {
 
                     @Override
                     public void onResponse(JSONArray response) {
                         CheckInDao checkInDao = new CheckInDao(LookCheckInActivity.this);
                         for (int i = 0; i < response.length(); i++) {
                             try {
-                                CheckInResult result =
-                                        CheckInResult.fromJsonObject(response.getJSONObject(i));
+                                CheckInResultDetail result =
+                                        CheckInResultDetail.fromJsonObject(response
+                                                .getJSONObject(i));
                                 checkInDao.add(result);
                             } catch (JSONException e) {}
                         }

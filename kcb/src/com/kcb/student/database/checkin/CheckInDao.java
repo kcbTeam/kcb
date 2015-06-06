@@ -5,7 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.kcb.student.database.KSQLiteOpenHelper;
-import com.kcb.student.model.CheckInResult;
+import com.kcb.student.model.checkin.CheckInResultDetail;
 
 /**
  * 
@@ -24,7 +24,7 @@ public class CheckInDao {
         mSqLiteDatabase = mSQLiteOpenHelper.getWritableDatabase();
     }
 
-    public void add(CheckInResult result) {
+    public void add(CheckInResultDetail result) {
         mSqLiteDatabase.beginTransaction();
         try {
             mSqLiteDatabase.execSQL(

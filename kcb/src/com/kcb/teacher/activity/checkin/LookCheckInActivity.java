@@ -17,7 +17,6 @@ import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.kcb.common.application.KAccount;
 import com.kcb.common.base.BaseActivity;
 import com.kcb.common.server.RequestUtil;
 import com.kcb.common.server.ResponseUtil;
@@ -26,6 +25,7 @@ import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
 import com.kcb.teacher.adapter.LookCheckInAdapter;
 import com.kcb.teacher.database.checkin.CheckInDao;
+import com.kcb.teacher.model.account.KAccount;
 import com.kcb.teacher.model.checkin.CheckInResult;
 import com.kcbTeam.R;
 
