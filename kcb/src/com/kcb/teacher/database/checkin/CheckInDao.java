@@ -31,36 +31,14 @@ public class CheckInDao {
         mDatabase = mOpenHelper.getWritableDatabase();
     }
 
-    /**
-     * 
-     * @title: addCheckInReslt
-     * @description: add a CheckInResult to db
-     * @author: ZQJ
-     * @date: 2015年5月31日 下午8:15:14
-     * @param checkInResult
-     * @throws SQLException
-     * @throws JSONException
-     */
     public void addCheckInReslt(CheckInResult checkInResult) throws SQLException, JSONException {
         mDatabase.execSQL(
                 "INSERT INTO " + CheckInDB.TABLE_NAME + " VALUES(null,?,?,?)",
-                new String[] {checkInResult.getDate().toString(),
+                new String[] {String.valueOf(checkInResult.getDate()),
                         String.valueOf(checkInResult.getRate()),
                         checkInResult.toJsonObject().toString()});
     }
 
-
-    /**
-     * 
-     * @title: getCheckInResultByDate
-     * @description: get CheckInResults from db by Date info
-     * @author: ZQJ
-     * @date: 2015年5月31日 下午8:49:27
-     * @param date
-     * @return
-     * @throws ParseException
-     * @throws JSONException
-     */
     public List<CheckInResult> getCheckInResultByDate(Date date) throws ParseException,
             JSONException {
         Cursor cursor =
@@ -77,16 +55,6 @@ public class CheckInDao {
         return checkInResultsList;
     }
 
-    /**
-     * 
-     * @title: getAllCheckInResults
-     * @description: get all checkinresult records from db
-     * @author: ZQJ
-     * @date: 2015年5月31日 下午8:37:50
-     * @return
-     * @throws ParseException
-     * @throws JSONException
-     */
     public List<CheckInResult> getAllCheckInResults() {
         Cursor cursor = mDatabase.query(CheckInDB.TABLE_NAME, null, null, null, null, null, null);
         List<CheckInResult> checkInResultsList = new ArrayList<CheckInResult>();
@@ -109,13 +77,6 @@ public class CheckInDao {
                 new String[] {date.toString()});
     }
 
-    /**
-     * 
-     * @title: deleteAllCheckInResults
-     * @description: delete All records
-     * @author: ZQJ
-     * @date: 2015年5月31日 下午8:52:58
-     */
     public void deleteAllCheckInResults() {
         mDatabase.execSQL("DELETE FROM " + CheckInDB.TABLE_NAME);
     }

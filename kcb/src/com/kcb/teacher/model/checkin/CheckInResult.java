@@ -2,6 +2,7 @@ package com.kcb.teacher.model.checkin;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -29,6 +30,10 @@ public class CheckInResult implements Serializable {
 
     public long getDate() {
         return mDate;
+    }
+
+    public String getDateString() {
+        return new Date(mDate).toString();
     }
 
     public double getRate() {

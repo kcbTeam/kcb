@@ -73,7 +73,7 @@ public class LookCheckInDetailActivity extends BaseFragmentActivity implements O
         mCheckInResult = (CheckInResult) getIntent().getSerializableExtra(DATA_CHECKIN_RESULT);
         mCheckInRate = (float) mCheckInResult.getRate();
 
-        dateTextView.setText(mCheckInResult.getDate().toString());
+        dateTextView.setText(mCheckInResult.getDateString());
         rateTextView.setText(String.format(getResources().getString(R.string.tch_checkin_rate_tip),
                 (int) (100 * mCheckInRate)));
 
