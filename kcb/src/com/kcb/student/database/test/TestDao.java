@@ -27,7 +27,7 @@ public class TestDao {
     @SuppressLint("SimpleDateFormat")
     public void add(Test test) {
         int hasTested = 0;
-        if (test.isTested()) {
+        if (test.hasTested()) {
             hasTested = 1;
         }
         mSQLiteDatabase.beginTransaction();
@@ -35,7 +35,7 @@ public class TestDao {
             mSQLiteDatabase.execSQL("INSERT INTO " + TestDB.TABLE_NAME
                     + " VALUES(null,?,?,?,?,?,?)",
                     new String[] {test.getId(), test.getName(), String.valueOf(test.getTime()),
-                            test.getDate().toString(), String.valueOf(hasTested),
+                            test.getDateString().toString(), String.valueOf(hasTested),
                             test.toJsonObject().toString()});
             mSQLiteDatabase.setTransactionSuccessful();
         } finally {

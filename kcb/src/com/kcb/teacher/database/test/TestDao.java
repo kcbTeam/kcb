@@ -25,7 +25,6 @@ import com.kcb.teacher.database.KSQLiteOpenHelper;
  */
 public class TestDao {
 
-    // TODO close cursor
     private KSQLiteOpenHelper mSQLiteOpenHelper;
     private SQLiteDatabase mSQLiteDatabase;
 
@@ -34,17 +33,13 @@ public class TestDao {
         mSQLiteDatabase = mSQLiteOpenHelper.getWritableDatabase();
     }
 
-    // TODO save boolean? use beginTransaction??
+    // TODO use beginTransaction??
     @SuppressLint("SimpleDateFormat")
     public void add(Test test) throws SQLException, JSONException, IOException {
         delete(test.getName());
-        int hasTested = 0;
-        if (test.isTested()) {
-            hasTested = 1;
-        }
         mSQLiteDatabase.execSQL("INSERT INTO " + TestDB.TABLE_NAME + " VALUES(null,?,?,?,?,?,?)",
                 new String[] {test.getId(), test.getName(), String.valueOf(test.getTime()),
-                        test.getDate().toString(), String.valueOf(hasTested),
+                        test.getDateString().toString(), String.valueOf(test.hasTested()),
                         test.toJsonObject().toString()});
     }
 
@@ -69,8 +64,10 @@ public class TestDao {
                 mSQLiteDatabase.rawQuery("SELECT * FROM " + TestDB.TABLE_NAME + " WHERE "
                         + TestDB.KEY_NAME + "=?", new String[] {testName});
         if (cursor.getCount() < 1) {
+            cursor.close();
             return false;
         }
+        cursor.close();
         return true;
     }
 
@@ -90,6 +87,25 @@ public class TestDao {
         }
         cursor.close();
         return list;
+    }
+
+    public List<Test> getHasTested() {
+        Cursor cursor =
+                mSQLiteDatabase.query(TestDB.TABLE_NAME, null, "where " + TestDB.KEY_HASTESTED
+                        + "=?", new String[] {String.valueOf(true)}, null, null, null);
+        List<Test> tests = new ArrayList<Test>();
+        if (cursor.moveToFirst()) {
+            do {
+                try {
+                    Test test =
+                            Test.fromJsonObject(new JSONObject(cursor.getString(cursor
+                                    .getColumnIndex(TestDB.KEY_TEXT))));
+                    tests.add(test);
+                } catch (JSONException e) {}
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return tests;
     }
 
     public List<String> getAllTestName() {

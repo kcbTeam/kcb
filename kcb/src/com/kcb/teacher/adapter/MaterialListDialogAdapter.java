@@ -58,7 +58,7 @@ public class MaterialListDialogAdapter extends BaseAdapter {
         ViewHolder holder = null;
         if (convertView == null) {
             holder = new ViewHolder();
-            convertView = View.inflate(mContext, R.layout.tch_listitem_dialog, null);
+            convertView = View.inflate(mContext, R.layout.tch_listitem_material_list_dialog, null);
             holder.testname = (TextView) convertView.findViewById(R.id.textview_testname);
             holder.testchosen = (RadioButton) convertView.findViewById(R.id.checkBox_testchosen);
             convertView.setTag(holder);

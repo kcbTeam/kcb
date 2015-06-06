@@ -1,7 +1,6 @@
 package com.kcb.teacher.activity.test;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
@@ -33,6 +32,7 @@ import com.kcb.library.view.FloatingEditText;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
 import com.kcb.teacher.adapter.LookTestAdapter;
+import com.kcb.teacher.database.test.TestDao;
 import com.kcb.teacher.model.account.KAccount;
 import com.kcbTeam.R;
 
@@ -45,6 +45,7 @@ import com.kcbTeam.R;
  */
 public class LookTestActivity extends BaseActivity implements TextWatcher, OnItemClickListener {
 
+    // TODO 用一个向右的小箭头表示有没有测试结果。
     private static final String TAG = LookTestActivity.class.getName();
 
     private ButtonFlat backButton;
@@ -56,10 +57,8 @@ public class LookTestActivity extends BaseActivity implements TextWatcher, OnIte
 
     private LookTestAdapter mAdapter;
 
-    private List<Test> mTestList;
-    private List<Test> mTempTestList;
-
-    public final static String CLICKED_TEST_KEY = "clicked_test_key";
+    private List<Test> mAllTests;
+    private List<Test> mSearchedTests;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,34 +85,14 @@ public class LookTestActivity extends BaseActivity implements TextWatcher, OnIte
 
     @Override
     protected void initData() {
-        // TODO getText from local
-        mTestList = new ArrayList<Test>();
-        Test tempTest = new Test("高考数学", 2);
-        tempTest.setDate(new Date());
-        tempTest.addQuestion();
-        tempTest.getQuestion(0).getTitle().setText("1+1=?");
-        tempTest.getQuestion(0).getChoiceA().setText("1");
-        tempTest.getQuestion(0).getChoiceB().setText("2");
-        tempTest.getQuestion(0).getChoiceB().setIsRight(true);
-        tempTest.getQuestion(0).getChoiceC().setText("3");
-        tempTest.getQuestion(0).getChoiceD().setText("4");
-        mTestList.add(tempTest);
+        TestDao testDao = new TestDao(LookTestActivity.this);
+        mAllTests = testDao.getHasTested();
+        testDao.close();
 
-        tempTest = new Test("影视艺术赏析", 1);
-        tempTest.setDate(new Date());
-        tempTest.addQuestion();
-        tempTest.getQuestion(0).getTitle().setText("乱世佳人是根据哪部小说改编而来的？");
-        tempTest.getQuestion(0).getChoiceA().setText("战争与和平");
-        tempTest.getQuestion(0).getChoiceB().setText("安娜卡列尼娜");
-        tempTest.getQuestion(0).getChoiceC().setText("飘");
-        tempTest.getQuestion(0).getChoiceC().setIsRight(true);
-        tempTest.getQuestion(0).getChoiceD().setText("复活");
-        mTestList.add(tempTest);
+        mSearchedTests = new ArrayList<Test>();
+        mSearchedTests.addAll(mAllTests);
 
-        mTempTestList = new ArrayList<Test>();
-        mTempTestList.addAll(mTestList);
-
-        mAdapter = new LookTestAdapter(this, mTempTestList);
+        mAdapter = new LookTestAdapter(this, mSearchedTests);
         listView.setAdapter(mAdapter);
         listView.setOnItemClickListener(this);
     }
@@ -145,11 +124,11 @@ public class LookTestActivity extends BaseActivity implements TextWatcher, OnIte
 
     @Override
     public void afterTextChanged(Editable s) {
-        mTempTestList.clear();
-        mTempTestList.addAll(mTestList);
+        mSearchedTests.clear();
+        mSearchedTests.addAll(mAllTests);
         String searchContent = searchEditText.getText().toString();
-        for (int i = 0; i < mTempTestList.size(); i++) {
-            String name = mTempTestList.get(i).getName();
+        for (int i = 0; i < mSearchedTests.size(); i++) {
+            String name = mSearchedTests.get(i).getName();
             try {
                 if (StringMatchUtil.isMatch(name, searchContent)) {
                     continue;
@@ -157,7 +136,7 @@ public class LookTestActivity extends BaseActivity implements TextWatcher, OnIte
             } catch (BadHanyuPinyinOutputFormatCombination e) {
                 e.printStackTrace();
             }
-            mTempTestList.remove(i);
+            mSearchedTests.remove(i);
             i--;
         }
         mAdapter.notifyDataSetChanged();
@@ -175,6 +154,7 @@ public class LookTestActivity extends BaseActivity implements TextWatcher, OnIte
                     @Override
                     public void onResponse(JSONArray response) {
                         progressBar.hide(LookTestActivity.this);
+
                         List<TestAnswer> testAnswers = new ArrayList<TestAnswer>();
                         for (int i = 0; i < response.length(); i++) {
                             try {
@@ -182,6 +162,9 @@ public class LookTestActivity extends BaseActivity implements TextWatcher, OnIte
                             } catch (JSONException e) {}
                         }
                         // TODO update database
+                        TestDao testDao = new TestDao(LookTestActivity.this);
+
+                        testDao.close();
                     }
                 }, new ErrorListener() {
 

@@ -8,6 +8,13 @@ import com.kcb.teacher.database.checkin.CheckInDB;
 import com.kcb.teacher.database.students.StudentDB;
 import com.kcb.teacher.database.test.TestDB;
 
+/**
+ * 
+ * @className: KSQLiteOpenHelper
+ * @description: 
+ * @author: ZQJ
+ * @date: 2015-6-6 下午9:55:11
+ */
 public class KSQLiteOpenHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "kcb_teacher.db";
