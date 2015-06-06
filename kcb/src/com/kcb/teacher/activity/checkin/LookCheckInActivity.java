@@ -1,13 +1,11 @@
 package com.kcb.teacher.activity.checkin;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -50,8 +48,6 @@ public class LookCheckInActivity extends BaseActivity implements OnItemClickList
 
     private LookCheckInAdapter mAdapter;
 
-    private GetCheckInResultsTask mGetCheckInResultsTask;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,8 +71,11 @@ public class LookCheckInActivity extends BaseActivity implements OnItemClickList
 
     @Override
     protected void initData() {
-        mGetCheckInResultsTask = new GetCheckInResultsTask();
-        mGetCheckInResultsTask.execute(0);
+        CheckInDao checkInDao = new CheckInDao(LookCheckInActivity.this);
+        List<CheckInResult> results = checkInDao.getAllCheckInResults();
+        checkInDao.close();
+        mAdapter = new LookCheckInAdapter(LookCheckInActivity.this, results);
+        listView.setAdapter(mAdapter);
     }
 
     @Override
@@ -96,31 +95,6 @@ public class LookCheckInActivity extends BaseActivity implements OnItemClickList
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         LookCheckInDetailActivity.start(LookCheckInActivity.this, mAdapter.getItem(position));
-    }
-
-    private class GetCheckInResultsTask extends AsyncTask<Integer, Integer, List<CheckInResult>> {
-
-        @Override
-        protected List<CheckInResult> doInBackground(Integer... params) {
-            List<CheckInResult> results = new ArrayList<CheckInResult>();
-            try {
-                CheckInDao checkInDao = new CheckInDao(LookCheckInActivity.this);
-                results = checkInDao.getAllCheckInResults();
-                checkInDao.close();
-            } catch (ParseException e) {
-                e.printStackTrace();
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            return results;
-        }
-
-        @Override
-        protected void onPostExecute(List<CheckInResult> result) {
-            super.onPostExecute(result);
-            mAdapter = new LookCheckInAdapter(LookCheckInActivity.this, result);
-            listView.setAdapter(mAdapter);
-        }
     }
 
     private void refresh() {

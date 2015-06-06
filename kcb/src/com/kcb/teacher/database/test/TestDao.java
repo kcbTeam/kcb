@@ -1,7 +1,6 @@
 package com.kcb.teacher.database.test;
 
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,6 +37,7 @@ public class TestDao {
     // TODO save boolean? use beginTransaction??
     @SuppressLint("SimpleDateFormat")
     public void add(Test test) throws SQLException, JSONException, IOException {
+        delete(test.getName());
         int hasTested = 0;
         if (test.isTested()) {
             hasTested = 1;
@@ -48,15 +48,17 @@ public class TestDao {
                         test.toJsonObject().toString()});
     }
 
-    public Test get(String testName) throws JSONException, IOException, ParseException {
+    public Test get(String testName) {
         Test test = null;
         Cursor cursor =
                 mSQLiteDatabase.rawQuery("SELECT * FROM " + TestDB.TABLE_NAME + " WHERE "
                         + TestDB.KEY_NAME + "=?", new String[] {testName});
         if (cursor.moveToFirst()) {
-            test =
-                    Test.fromJsonObject(new JSONObject(cursor.getString(cursor
-                            .getColumnIndex(TestDB.KEY_TEXT))));
+            try {
+                test =
+                        Test.fromJsonObject(new JSONObject(cursor.getString(cursor
+                                .getColumnIndex(TestDB.KEY_TEXT))));
+            } catch (JSONException e) {}
         }
         cursor.close();
         return test;
@@ -72,20 +74,37 @@ public class TestDao {
         return true;
     }
 
-    public List<Test> getAll() throws JSONException, IOException, ParseException {
+    public List<Test> getAll() {
         Cursor cursor =
                 mSQLiteDatabase.query(TestDB.TABLE_NAME, null, null, null, null, null, null);
         List<Test> list = new ArrayList<Test>();
         if (cursor.moveToFirst()) {
             do {
-                Test test =
-                        Test.fromJsonObject(new JSONObject(cursor.getString(cursor
-                                .getColumnIndex(TestDB.KEY_TEXT))));
-                list.add(test);
+                try {
+                    Test test =
+                            Test.fromJsonObject(new JSONObject(cursor.getString(cursor
+                                    .getColumnIndex(TestDB.KEY_TEXT))));
+                    list.add(test);
+                } catch (JSONException e) {}
             } while (cursor.moveToNext());
         }
         cursor.close();
         return list;
+    }
+
+    public List<String> getAllTestName() {
+        Cursor cursor =
+                mSQLiteDatabase.query(TestDB.TABLE_NAME, new String[] {TestDB.KEY_NAME}, null,
+                        null, null, null, null);
+        List<String> names = new ArrayList<String>();
+        if (cursor.moveToFirst()) {
+            do {
+                String name = cursor.getString(cursor.getColumnIndex(TestDB.KEY_NAME));
+                names.add(name);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return names;
     }
 
     public void delete(String testName) {

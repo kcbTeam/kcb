@@ -30,7 +30,11 @@
     <string name="tch_look_checkin_result">查看签到结果</string>
     <!--  -->
     <string name="tch_start_test">开始测试</string>
-    <string name="tch_add_or_edit_test">添加 / 编辑测试内容</string>
+    <string name="tch_add_test_first">请先添加一个测试</string>
+    <string name="tch_select_test">选择测试</string>
+    <string name="tch_add_or_edit_test">添加 / 编辑测试</string>
+    <string name="tch_edit_test">编辑测试</string>
+    <string name="tch_add_new_test">添加一个新测试</string>
     <string name="tch_look_test_result">查看测试结果</string>
     <!--  -->
     <string name="tch_search_stu">输入姓名搜索</string>
@@ -117,7 +121,7 @@
     <string name="tch_delete_test_tip">确定删除测试——%1$s？</string>
     <string name="tch_add">添加</string>
     <string name="tch_add_question_tip">确定添加第 %1$d 题？</string>
-    <string name="tch_edit_hint">输入文字，或者长按拍照</string>
+    <string name="tch_edit_question_item_hint">输入文字，或者长按拍照</string>
     <!-- EditTestActivity End -->
 
 

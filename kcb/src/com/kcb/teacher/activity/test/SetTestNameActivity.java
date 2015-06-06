@@ -36,8 +36,6 @@ public class SetTestNameActivity extends BaseActivity {
 
     private PaperButton finishButton;
 
-    private TestDao mTestDao;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,9 +71,7 @@ public class SetTestNameActivity extends BaseActivity {
     }
 
     @Override
-    protected void initData() {
-        mTestDao = new TestDao(this);
-    }
+    protected void initData() {}
 
     @Override
     public void onClick(View v) {
@@ -94,16 +90,18 @@ public class SetTestNameActivity extends BaseActivity {
         @Override
         public void doClick(View v) {
             String name = testNameEditText.getText().toString().trim();
-            if (mTestDao.hasRecorded(name)) {
-                ToastUtil.toast(R.string.tch_has_same_test_name);
-                return;
-            }
             if (TextUtils.isEmpty(name)) {
                 AnimationUtil.shake(testNameEditText);
             } else {
-                EditTestActivity.startAddNewTest(SetTestNameActivity.this, new Test(name,
-                        testNumSlider.getValue()));
-                finish();
+                TestDao testDao = new TestDao(SetTestNameActivity.this);
+                if (testDao.hasRecorded(name)) {
+                    ToastUtil.toast(R.string.tch_has_same_test_name);
+                } else {
+                    EditTestActivity.startAddNewTest(SetTestNameActivity.this, new Test(name,
+                            testNumSlider.getValue()));
+                    finish();
+                }
+                testDao.close();
             }
         }
     };

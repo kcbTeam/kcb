@@ -61,7 +61,7 @@
         android:layout_marginRight="16dp"
         android:background="@drawable/stu_checkin_textview"
         android:gravity="top|left"
-        android:hint="@string/tch_edit_hint"
+        android:hint="@string/tch_edit_question_item_hint"
         android:lineSpacingExtra="2dp"
         android:lines="7"
         android:padding="8dp"
@@ -119,7 +119,7 @@
                     <EditText
                         android:id="@+id/edittext_A"
                         style="@style/tch_test_input_choice"
-                        android:hint="@string/tch_edit_hint"
+                        android:hint="@string/tch_edit_question_item_hint"
                         android:textColorHint="@color/black_400" />
 
                     <ImageView

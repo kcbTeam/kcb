@@ -361,5 +361,6 @@ public class StartTestActivity extends BaseActivity {
         intent.putExtra(DATA_REMAIN_TIME, remainTime);
         context.startActivity(intent);
         sTest = test;
+        sTest.changeStringToBitmap();
     }
 }
