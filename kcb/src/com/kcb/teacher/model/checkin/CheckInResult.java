@@ -2,7 +2,6 @@ package com.kcb.teacher.model.checkin;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -20,7 +19,7 @@ public class CheckInResult implements Serializable {
 
     private static final long serialVersionUID = 3L;
 
-    private Date mDate;
+    private long mDate;
     private double mRate;
     private List<UncheckedStudent> mUnCheckedStudents;
 
@@ -28,7 +27,7 @@ public class CheckInResult implements Serializable {
         mUnCheckedStudents = new ArrayList<UncheckedStudent>();
     }
 
-    public Date getDate() {
+    public long getDate() {
         return mDate;
     }
 
@@ -50,7 +49,7 @@ public class CheckInResult implements Serializable {
     public JSONObject toJsonObject() {
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put(KEY_DATE, mDate.toString());
+            jsonObject.put(KEY_DATE, mDate);
             jsonObject.put(KEY_RATE, mRate);
 
             JSONArray jsonArray = new JSONArray();
@@ -65,11 +64,10 @@ public class CheckInResult implements Serializable {
         return jsonObject;
     }
 
-    @SuppressWarnings("deprecation")
     public static CheckInResult fromJsonObject(JSONObject jsonObject) {
         CheckInResult checkInResult = new CheckInResult();
         try {
-            checkInResult.mDate = new Date(jsonObject.optString(KEY_DATE));
+            checkInResult.mDate = jsonObject.optLong(KEY_DATE);
             checkInResult.mRate = jsonObject.optDouble(KEY_RATE);
 
             JSONArray jsonArray = jsonObject.optJSONArray(KEY_UNCHECKSTU);

@@ -22,7 +22,6 @@ import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.kcb.common.application.KAccount;
 import com.kcb.common.base.BaseActivity;
 import com.kcb.common.model.answer.TestAnswer;
 import com.kcb.common.model.test.Test;
@@ -34,6 +33,7 @@ import com.kcb.library.view.FloatingEditText;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
 import com.kcb.teacher.adapter.LookTestAdapter;
+import com.kcb.teacher.model.account.KAccount;
 import com.kcbTeam.R;
 
 /**

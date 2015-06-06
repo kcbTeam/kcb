@@ -18,7 +18,6 @@ import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.kcb.common.application.KAccount;
 import com.kcb.common.base.BaseFragment;
 import com.kcb.common.listener.DelayClickListener;
 import com.kcb.common.model.test.Test;
@@ -32,6 +31,7 @@ import com.kcb.teacher.activity.test.EditTestActivity;
 import com.kcb.teacher.activity.test.LookTestActivity;
 import com.kcb.teacher.activity.test.SetTestNameActivity;
 import com.kcb.teacher.database.test.TestDao;
+import com.kcb.teacher.model.account.KAccount;
 import com.kcbTeam.R;
 
 /**

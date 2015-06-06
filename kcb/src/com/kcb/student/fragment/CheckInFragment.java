@@ -12,7 +12,6 @@ import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.kcb.common.application.KAccount;
 import com.kcb.common.base.BaseFragment;
 import com.kcb.common.listener.DelayClickListener;
 import com.kcb.common.server.RequestUtil;
@@ -23,6 +22,7 @@ import com.kcb.library.view.PaperButton;
 import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
 import com.kcb.student.activity.checkin.LookCheckInActivity;
 import com.kcb.student.activity.checkin.StartCheckInActivity;
+import com.kcb.student.model.account.KAccount;
 import com.kcbTeam.R;
 
 /**
@@ -92,15 +92,15 @@ public class CheckInFragment extends BaseFragment {
         }
         progressBar.setVisibility(View.VISIBLE);
         StringRequest request =
-                new StringRequest(Method.POST, UrlUtil.getStuCheckinStartUrl(KAccount
-                        .getAccountId()), new Listener<String>() {
-                    public void onResponse(final String response) {
+                new StringRequest(Method.POST, UrlUtil.getStuCheckinStartUrl(
+                        KAccount.getAccountId(), KAccount.getTchId()), new Listener<String>() {
+                    public void onResponse(final String remainTime) {
                         new Handler().postDelayed(new Runnable() {
 
                             @Override
                             public void run() {
                                 progressBar.setVisibility(View.INVISIBLE);
-                                StartCheckInActivity.start(getActivity(), response);
+                                StartCheckInActivity.start(getActivity(), remainTime);
                             }
                         }, 500);
                     };

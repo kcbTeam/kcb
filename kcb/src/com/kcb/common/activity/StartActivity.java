@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.kcb.common.application.KAccount;
+import com.kcb.common.application.AccountUtil;
 import com.kcb.common.base.BaseActivity;
 import com.kcb.common.listener.DelayClickListener;
 import com.kcb.library.view.ColorAnimationView;
@@ -37,11 +37,11 @@ public class StartActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         // if has account (has login), goto HomeActivity
-        if (!KAccount.hasAccount()) {
+        if (!AccountUtil.hasAccount()) {
             setContentView(R.layout.comm_activity_start);
             initView();
         } else {
-            if (KAccount.getAccountType() == KAccount.TYPE_STU) {
+            if (AccountUtil.getAccountType() == AccountUtil.TYPE_STU) {
                 HomeActivity.start(this);
             } else {
                 com.kcb.teacher.activity.common.HomeActivity.start(this);

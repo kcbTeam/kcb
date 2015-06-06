@@ -20,7 +20,6 @@ import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.kcb.common.application.KAccount;
 import com.kcb.common.base.BaseActivity;
 import com.kcb.common.model.answer.TestAnswer;
 import com.kcb.common.model.test.Question;
@@ -34,6 +33,7 @@ import com.kcb.common.view.MaterialDialog;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.library.view.checkbox.CheckBox;
 import com.kcb.student.database.test.TestDao;
+import com.kcb.student.model.account.KAccount;
 import com.kcbTeam.R;
 
 /**

@@ -15,7 +15,6 @@ import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.kcb.common.application.KAccount;
 import com.kcb.common.base.BaseActivity;
 import com.kcb.common.listener.DelayClickListener;
 import com.kcb.common.server.RequestUtil;
@@ -29,6 +28,7 @@ import com.kcb.library.view.PaperButton;
 import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
 import com.kcb.student.adapter.StartCheckInAdapter;
 import com.kcb.student.adapter.StartCheckInAdapter.RecyclerItemClickListener;
+import com.kcb.student.model.account.KAccount;
 import com.kcbTeam.R;
 
 /**
@@ -205,26 +205,27 @@ public class StartCheckInActivity extends BaseActivity {
             progressBar.setVisibility(View.VISIBLE);
             StringRequest request =
                     new StringRequest(Method.POST, UrlUtil.getStuCheckinSubmitUrl(
-                            KAccount.getAccountId(), getNum()), new Listener<String>() {
+                            KAccount.getAccountId(), KAccount.getTchId(), getNum()),
+                            new Listener<String>() {
 
-                        @Override
-                        public void onResponse(String response) {
-                            ToastUtil.toast(R.string.stu_checkin_success);
-                            finish();
-                        }
-                    }, new ErrorListener() {
+                                @Override
+                                public void onResponse(String response) {
+                                    ToastUtil.toast(R.string.stu_checkin_success);
+                                    finish();
+                                }
+                            }, new ErrorListener() {
 
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            progressBar.hide(StartCheckInActivity.this);
-                            if (error.networkResponse.statusCode == 400) {
-                                ToastUtil.toast(R.string.stu_checkin_num_error);
-                                clearNum();
-                            } else {
-                                ResponseUtil.toastError(error);
-                            }
-                        }
-                    });
+                                @Override
+                                public void onErrorResponse(VolleyError error) {
+                                    progressBar.hide(StartCheckInActivity.this);
+                                    if (error.networkResponse.statusCode == 400) {
+                                        ToastUtil.toast(R.string.stu_checkin_num_error);
+                                        clearNum();
+                                    } else {
+                                        ResponseUtil.toastError(error);
+                                    }
+                                }
+                            });
             RequestUtil.getInstance().addToRequestQueue(request, TAG);
         }
     };

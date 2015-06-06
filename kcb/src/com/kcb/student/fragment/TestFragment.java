@@ -15,7 +15,6 @@ import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.kcb.common.application.KAccount;
 import com.kcb.common.base.BaseFragment;
 import com.kcb.common.listener.DelayClickListener;
 import com.kcb.common.model.test.Test;
@@ -28,6 +27,7 @@ import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
 import com.kcb.student.activity.test.LookTestActivity;
 import com.kcb.student.activity.test.StartTestActivity;
 import com.kcb.student.database.test.TestDao;
+import com.kcb.student.model.account.KAccount;
 import com.kcbTeam.R;
 
 /**

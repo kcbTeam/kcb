@@ -15,7 +15,6 @@ import android.view.ViewGroup;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
-import com.kcb.common.application.KAccount;
 import com.kcb.common.base.BaseFragmentActivity;
 import com.kcb.common.util.DialogUtil;
 import com.kcb.common.util.ToastUtil;
@@ -23,6 +22,7 @@ import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.teacher.fragment.CheckInFragment;
 import com.kcb.teacher.fragment.StuCentreFragment;
 import com.kcb.teacher.fragment.TestFragment;
+import com.kcb.teacher.model.account.KAccount;
 import com.kcbTeam.R;
 
 /**

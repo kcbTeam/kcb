@@ -1,5 +1,7 @@
 package com.kcb.student.activity.common;
 
+import org.json.JSONObject;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,9 +13,9 @@ import com.android.volley.Request.Method;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.kcb.common.activity.StartActivity;
-import com.kcb.common.application.KAccount;
+import com.kcb.common.application.AccountUtil;
 import com.kcb.common.base.BaseActivity;
 import com.kcb.common.listener.DelayClickListener;
 import com.kcb.common.server.RequestUtil;
@@ -25,6 +27,7 @@ import com.kcb.library.view.FloatingEditText;
 import com.kcb.library.view.PaperButton;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
+import com.kcb.student.model.account.KAccount;
 import com.kcbTeam.R;
 
 /**
@@ -60,6 +63,7 @@ public class LoginActivity extends BaseActivity {
 
         idEditText = (FloatingEditText) findViewById(R.id.edittext_id);
         passwordEditText = (FloatingEditText) findViewById(R.id.edittext_password);
+
         loginButton = (PaperButton) findViewById(R.id.button_login);
         loginButton.setOnClickListener(mClickListener);
         loginProgressBar = (SmoothProgressBar) findViewById(R.id.progressbar_login);
@@ -84,55 +88,73 @@ public class LoginActivity extends BaseActivity {
 
         @Override
         public void doClick(View v) {
-            final String id = idEditText.getText().toString().trim().replace(" ", "");
-            final String password = passwordEditText.getText().toString();
-            if (TextUtils.isEmpty(id)) {
-                idEditText.requestFocus();
-                AnimationUtil.shake(idEditText);
-            } else if (TextUtils.isEmpty(password)) {
-                passwordEditText.requestFocus();
-                AnimationUtil.shake(passwordEditText);
-            } else {
-                if (loginProgressBar.getVisibility() == View.VISIBLE) {
-                    return;
-                }
-                loginProgressBar.setVisibility(View.VISIBLE);
-                StringRequest request =
-                        new StringRequest(Method.POST, UrlUtil.getStuLoginUrl(id, password),
-                                new Listener<String>() {
-                                    public void onResponse(final String response) {
-                                        new Handler().postDelayed(new Runnable() {
-
-                                            @Override
-                                            public void run() {
-                                                KAccount account =
-                                                        new KAccount(KAccount.TYPE_STU, id,
-                                                                response);
-                                                KAccount.saveAccount(account);
-                                                HomeActivity.start(LoginActivity.this);
-                                                finish();
-                                            }
-                                        }, 500);
-                                    };
-                                }, new ErrorListener() {
-                                    public void onErrorResponse(VolleyError error) {
-                                        loginProgressBar.hide(LoginActivity.this);
-                                        if (null != error.networkResponse) {
-                                            if (error.networkResponse.statusCode == 400) {
-                                                ToastUtil.toast(R.string.stu_id_error);
-                                            } else if (error.networkResponse.statusCode == 401) {
-                                                ToastUtil.toast(R.string.stu_password_error);
-                                            }
-                                        } else {
-                                            ResponseUtil.toastError(error);
-                                        }
-                                    };
-                                });
-                RequestUtil.getInstance().addToRequestQueue(request, TAG);
-
+            switch (v.getId()) {
+                case R.id.button_login:
+                    login();
+                    break;
+                default:
+                    break;
             }
         }
     };
+
+    private final String KEY_STUNAME = "stuname";
+    private final String KEY_TCHID = "tchid";
+    private final String KEY_TCHNAME = "tchname";
+
+    private void login() {
+        final String stuId = idEditText.getText().toString().trim().replace(" ", "");
+        final String password = passwordEditText.getText().toString();
+        if (TextUtils.isEmpty(stuId)) {
+            idEditText.requestFocus();
+            AnimationUtil.shake(idEditText);
+        } else if (TextUtils.isEmpty(password)) {
+            passwordEditText.requestFocus();
+            AnimationUtil.shake(passwordEditText);
+        } else {
+            if (loginProgressBar.getVisibility() == View.VISIBLE) {
+                return;
+            }
+            loginProgressBar.setVisibility(View.VISIBLE);
+            JsonObjectRequest request =
+                    new JsonObjectRequest(Method.POST, UrlUtil.getStuLoginUrl(stuId, password),
+                            new Listener<JSONObject>() {
+                                public void onResponse(final JSONObject response) {
+                                    new Handler().postDelayed(new Runnable() {
+
+                                        @Override
+                                        public void run() {
+                                            String stuName = response.optString(KEY_STUNAME);
+                                            String tchId = response.optString(KEY_TCHID);
+                                            String tchName = response.optString(KEY_TCHNAME);
+                                            KAccount account =
+                                                    new KAccount(stuId, stuName, tchId, tchName);
+                                            KAccount.saveAccount(account);
+
+                                            AccountUtil.setAccountType(AccountUtil.TYPE_STU);
+
+                                            HomeActivity.start(LoginActivity.this);
+                                            finish();
+                                        }
+                                    }, 500);
+                                };
+                            }, new ErrorListener() {
+                                public void onErrorResponse(VolleyError error) {
+                                    loginProgressBar.hide(LoginActivity.this);
+                                    if (null != error.networkResponse) {
+                                        if (error.networkResponse.statusCode == 400) {
+                                            ToastUtil.toast(R.string.stu_id_error);
+                                        } else if (error.networkResponse.statusCode == 401) {
+                                            ToastUtil.toast(R.string.stu_password_error);
+                                        }
+                                    } else {
+                                        ResponseUtil.toastError(error);
+                                    }
+                                };
+                            });
+            RequestUtil.getInstance().addToRequestQueue(request, TAG);
+        }
+    }
 
     @Override
     public void onBackPressed() {

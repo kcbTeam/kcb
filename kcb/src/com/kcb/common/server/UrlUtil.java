@@ -21,21 +21,21 @@ public class UrlUtil {
     private static final String url_stu_login = IP + "/v1/stu/account/login";
 
     public static String getStuLoginUrl(String id, String password) {
-        return url_stu_login + "?id=" + id + "&password=" + password;
+        return url_stu_login + "?stuid=" + id + "&password=" + password;
     }
 
     // 1.2 check old password
     private static final String url_stu_checkoldpassword = IP + "/v1/stu/account/checkoldpassword";
 
     public static String getStuCheckOldPasswordUrl(String id, String password) {
-        return url_stu_checkoldpassword + "?id=" + id + "&old=" + password;
+        return url_stu_checkoldpassword + "?stuid=" + id + "&old=" + password;
     }
 
     // 1.3 modify password
     private static final String url_stu_modifypassword = IP + "/v1/stu/account/modifypassword";
 
     public static String getStuModifyPasswordUrl(String id, String newPassword) {
-        return url_stu_modifypassword + "?id=" + id + "&new=" + newPassword;
+        return url_stu_modifypassword + "?stuid=" + id + "&new=" + newPassword;
     }
 
     /**
@@ -44,20 +44,20 @@ public class UrlUtil {
     // 2.1 start checkin
     private static final String url_stu_checkin_start = IP + "/v1/stu/checkin/start";
 
-    public static String getStuCheckinStartUrl(String id) {
-        return url_stu_checkin_start + "?id=" + id;
+    public static String getStuCheckinStartUrl(String stuId, String tchId) {
+        return url_stu_checkin_start + "?stuid=" + stuId + "&tchid=" + tchId;
     }
 
     private static final String url_stu_checkin_submit = IP + "/v1/stu/checkin/submit";
 
-    public static String getStuCheckinSubmitUrl(String id, String num) {
-        return url_stu_checkin_submit + "?id=" + id + "&num=" + num;
+    public static String getStuCheckinSubmitUrl(String stuid, String tchId, String num) {
+        return url_stu_checkin_submit + "?stuid=" + stuid + "&tchid=" + tchId + "&num=" + num;
     }
 
     private static final String url_stu_checkin_getresult = IP + "/v1/stu/checkin/start/getresult";
 
-    public static String getStuCheckinResultUrl(String id) {
-        return url_stu_checkin_getresult + "?id=" + id;
+    public static String getStuCheckinResultUrl(String stuId, String tchId) {
+        return url_stu_checkin_getresult + "?stuid=" + stuId + "&tchid=" + tchId;
     }
 
     /**
@@ -87,14 +87,14 @@ public class UrlUtil {
     private static final String url_tch_login = IP + "/v1/tch/account/login";
 
     public static String getTchLoginUrl(String id, String password) {
-        return url_tch_login + "?id=" + id + "&password=" + password;
+        return url_tch_login + "?tchid=" + id + "&password=" + password;
     }
 
     // 1.2 check password
     private static final String url_tch_checkoldpassword = IP + "/v1/tch/account/checkoldpassword";
 
     public static String getTchCheckOldPasswordUrl(String id, String password) {
-        return url_tch_checkoldpassword + "?id=" + id + "&old=" + password;
+        return url_tch_checkoldpassword + "?tchid=" + id + "&old=" + password;
 
     }
 
@@ -102,7 +102,7 @@ public class UrlUtil {
     private static final String url_tch_modifypassword = IP + "/v1/tch/account/modifypassword";
 
     public static String getTchModifyPasswordUrl(String id, String newPassword) {
-        return url_tch_modifypassword + "?id=" + id + "&new=" + newPassword;
+        return url_tch_modifypassword + "?tchid=" + id + "&new=" + newPassword;
     }
 
     /**
@@ -112,14 +112,14 @@ public class UrlUtil {
     private static final String url_tch_checkin_start = IP + "/v1/tch/checkin/start";
 
     public static String getTchCheckinStartUrl(String id, int num) {
-        return url_tch_checkin_start + "?id=" + id + "&num=" + num;
+        return url_tch_checkin_start + "?tchid=" + id + "&num=" + num;
     }
 
     // 2.2 get checkin result
     private static final String url_tch_checkin_getresult = IP + "/v1/tch/checkin/getresult";
 
     public static String getTchCheckinGetresultUrl(String id) {
-        return url_tch_checkin_getresult + "?id=" + id;
+        return url_tch_checkin_getresult + "?tchid=" + id;
     }
 
     /**
