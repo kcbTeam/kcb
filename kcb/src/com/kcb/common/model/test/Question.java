@@ -58,6 +58,10 @@ public class Question implements Serializable {
         return mId;
     }
 
+    public void setRate(double rate) {
+        mRate = rate;
+    }
+
     public double getRate() {
         return mRate;
     }

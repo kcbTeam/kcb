@@ -1,7 +1,5 @@
 package com.kcb.teacher.activity.test;
 
-import java.util.List;
-
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -9,7 +7,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.kcb.common.base.BaseActivity;
@@ -17,12 +14,9 @@ import com.kcb.common.model.test.Question;
 import com.kcb.common.model.test.QuestionItem;
 import com.kcb.common.model.test.Test;
 import com.kcb.library.view.buttonflat.ButtonFlat;
-import com.kcb.teacher.adapter.LookTestDetailAdapter;
 import com.kcbTeam.R;
 
 public class LookTestDetailActivity extends BaseActivity {
-    @SuppressWarnings("unused")
-    private static final String TAG = "CheckTest";
 
     private ButtonFlat backButton;
     private ButtonFlat lastButton;
@@ -34,11 +28,7 @@ public class LookTestDetailActivity extends BaseActivity {
     private EditText questionTitle;
     private TextView correctRate;
 
-    private ListView choiceList;
-    private LookTestDetailAdapter mAdapter;
-
     public static Test sTest;
-    private List<Question> mQuestionList;
 
     private int mQuestionNum;
     private int mCurrentPosition;
@@ -66,8 +56,6 @@ public class LookTestDetailActivity extends BaseActivity {
         questionTitle = (EditText) findViewById(R.id.edittext_question_title);
         correctRate = (TextView) findViewById(R.id.textview_correctrate);
 
-        choiceList = (ListView) findViewById(R.id.listview_choices);
-
         lastButton = (ButtonFlat) findViewById(R.id.button_last);
         lastButton.setOnClickListener(this);
         nextButton = (ButtonFlat) findViewById(R.id.button_next);
@@ -78,8 +66,7 @@ public class LookTestDetailActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        mQuestionList = sTest.getQuestions();
-        mQuestionNum = mQuestionList.size();
+        mQuestionNum = sTest.getQuestionNum();
         mCurrentPosition = 0;
     }
 
@@ -114,12 +101,10 @@ public class LookTestDetailActivity extends BaseActivity {
     }
 
     private void showContent() {
-        Question question = mQuestionList.get(mCurrentPosition);
+        Question question = sTest.getQuestion(mCurrentPosition);
         showQuestionNum();
         showQuestionItem(questionTitle, question.getTitle());
         correctRate.setText(String.format(mRateFormat, (int) (100 * question.getRate())));
-        mAdapter = new LookTestDetailAdapter(this, question);
-        choiceList.setAdapter(mAdapter);
     }
 
     private void showQuestionNum() {
@@ -150,5 +135,6 @@ public class LookTestDetailActivity extends BaseActivity {
         Intent intent = new Intent(context, LookTestDetailActivity.class);
         context.startActivity(intent);
         sTest = test;
+        sTest.changeStringToBitmap();
     }
 }

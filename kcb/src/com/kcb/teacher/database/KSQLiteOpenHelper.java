@@ -11,7 +11,7 @@ import com.kcb.teacher.database.test.TestDB;
 /**
  * 
  * @className: KSQLiteOpenHelper
- * @description: 
+ * @description:
  * @author: ZQJ
  * @date: 2015-6-6 下午9:55:11
  */

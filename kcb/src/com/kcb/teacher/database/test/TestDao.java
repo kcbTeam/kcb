@@ -1,6 +1,5 @@
 package com.kcb.teacher.database.test;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +9,6 @@ import org.json.JSONObject;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.kcb.common.model.test.Test;
@@ -35,7 +33,7 @@ public class TestDao {
 
     // TODO use beginTransaction??
     @SuppressLint("SimpleDateFormat")
-    public void add(Test test) throws SQLException, JSONException, IOException {
+    public void add(Test test) {
         delete(test.getName());
         mSQLiteDatabase.execSQL("INSERT INTO " + TestDB.TABLE_NAME + " VALUES(null,?,?,?,?,?,?)",
                 new String[] {test.getId(), test.getName(), String.valueOf(test.getTime()),
