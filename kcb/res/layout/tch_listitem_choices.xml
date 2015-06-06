@@ -23,11 +23,4 @@
         android:focusable="false"
         android:inputType="none"
         android:padding="4dp" />
-
-    <TextView
-        android:id="@+id/textview_rate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical|right" />
-
-</LinearLayout>
+</LinearLayout>

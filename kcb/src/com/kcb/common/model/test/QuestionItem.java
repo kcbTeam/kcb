@@ -29,7 +29,6 @@ public class QuestionItem implements Serializable {
     private String mBitmapString = "";
 
     private boolean mIsRight; // useful when item is choice
-    private double mRate; // useful when item is choice, mRate represent a choice rate
 
     private boolean mIsSelected; // used in stu module, useful when item is choice, true if stu
                                  // selected this choice
@@ -44,7 +43,6 @@ public class QuestionItem implements Serializable {
             newItem.setBitmap(oldItem.mBitmap);
         }
         newItem.mIsRight = oldItem.mIsRight;
-        newItem.mRate = oldItem.mRate;
         newItem.mIsSelected = oldItem.mIsSelected;
     }
 
@@ -103,14 +101,6 @@ public class QuestionItem implements Serializable {
         return mIsRight;
     }
 
-    public void setRate(double rate) {
-        mRate = rate;
-    }
-
-    public double getRate() {
-        return mRate;
-    }
-
     public void setIsSelected(boolean selected) {
         mIsSelected = selected;
     }
@@ -153,7 +143,6 @@ public class QuestionItem implements Serializable {
     public static final String KEY_TEXT = "text";
     public static final String KEY_BITMAPSTRING = "bitmapstring";
     public static final String KEY_ISRIGHT = "isright";
-    public static final String KEY_RATE = "rate";
     public static final String KEY_ISSELECTED = "isselected";
 
     public JSONObject toJsonObject() {
@@ -164,7 +153,6 @@ public class QuestionItem implements Serializable {
             jsonObject.put(KEY_TEXT, mText);
             jsonObject.put(KEY_BITMAPSTRING, getBitmapString());
             jsonObject.put(KEY_ISRIGHT, mIsRight);
-            jsonObject.put(KEY_RATE, mRate);
             jsonObject.put(KEY_ISSELECTED, mIsSelected);
         } catch (JSONException e) {}
         return jsonObject;
@@ -177,7 +165,6 @@ public class QuestionItem implements Serializable {
         item.mText = jsonObject.optString(KEY_TEXT);
         item.mBitmapString = jsonObject.optString(KEY_BITMAPSTRING);
         item.mIsRight = jsonObject.optBoolean(KEY_ISRIGHT);
-        item.mRate = jsonObject.optDouble(KEY_RATE);
         item.mIsSelected = jsonObject.optBoolean(KEY_ISSELECTED);
         return item;
     }

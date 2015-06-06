@@ -60,7 +60,6 @@ public class LookTestDetailAdapter extends BaseAdapter {
             holder = new ViewHolder();
             holder.choiceTitle = (TextView) view.findViewById(R.id.textview_choice);
             holder.choiceContent = (EditText) view.findViewById(R.id.edittext_content);
-            holder.choiceRate = (TextView) view.findViewById(R.id.textview_rate);
             convertView = view;
             convertView.setTag(holder);
         } else {
@@ -79,13 +78,11 @@ public class LookTestDetailAdapter extends BaseAdapter {
         } else {
             holder.choiceContent.setBackground(new BitmapDrawable(tempItem.getBitmap()));
         }
-        holder.choiceRate.setText(String.format(mRateFormat, (int) (100 * tempItem.getRate())));
         return convertView;
     }
 
     static class ViewHolder {
         TextView choiceTitle;
         EditText choiceContent;
-        TextView choiceRate;
     }
 }

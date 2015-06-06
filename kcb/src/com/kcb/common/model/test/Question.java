@@ -58,6 +58,10 @@ public class Question implements Serializable {
         return mId;
     }
 
+    public double getRate() {
+        return mRate;
+    }
+
     public QuestionItem getTitle() {
         return mTitleItem;
     }

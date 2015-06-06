@@ -79,16 +79,10 @@ public class LookTestDetailActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-
         sTest = (Test) getIntent().getSerializableExtra(LookTestActivity.CLICKED_TEST_KEY);
         mQuestionList = sTest.getQuestions();
         mQuestionNum = mQuestionList.size();
         mCurrentPosition = 0;
-        mQuestionList.get(mCurrentPosition).getTitle().setRate(0.8);
-        mQuestionList.get(mCurrentPosition).getChoiceA().setRate(0.3);
-        mQuestionList.get(mCurrentPosition).getChoiceB().setRate(0.4);
-        mQuestionList.get(mCurrentPosition).getChoiceC().setRate(0.5);
-        mQuestionList.get(mCurrentPosition).getChoiceD().setRate(0.2);
     }
 
     @Override
@@ -126,8 +120,7 @@ public class LookTestDetailActivity extends BaseActivity {
         Question question = mQuestionList.get(mCurrentPosition);
         showQuestionNum();
         showQuestionItem(questionTitle, question.getTitle());
-        correctRate
-                .setText(String.format(mRateFormat, (int) (100 * question.getTitle().getRate())));
+        correctRate.setText(String.format(mRateFormat, (int) (100 * question.getRate())));
         mAdapter = new LookTestDetailAdapter(this, question);
         choiceList.setAdapter(mAdapter);
     }
