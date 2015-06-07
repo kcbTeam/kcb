@@ -15,7 +15,7 @@ import com.kcbTeam.R;
 public class LookTestDetailActivity extends BaseActivity {
 
     private ButtonFlat backButton;
-    private TextView testNameTextView;
+    private TextView testNameNumTextView;
 
     private TestView testView;
 
@@ -39,8 +39,8 @@ public class LookTestDetailActivity extends BaseActivity {
         backButton = (ButtonFlat) findViewById(R.id.button_back);
         backButton.setOnClickListener(this);
 
-        testNameTextView = (TextView) findViewById(R.id.textview_title);
-        testNameTextView.setText(sTest.getName());
+        testNameNumTextView = (TextView) findViewById(R.id.textview_title);
+        testNameNumTextView.setText(sTest.getName());
 
         testView = (TestView) findViewById(R.id.testview);
 
@@ -53,7 +53,7 @@ public class LookTestDetailActivity extends BaseActivity {
     @Override
     protected void initData() {
         mCurrentPosition = 0;
-        showTest();
+        showQuestion();
     }
 
     @Override
@@ -76,18 +76,18 @@ public class LookTestDetailActivity extends BaseActivity {
     private void lastQuestion() {
         if (mCurrentPosition > 0) {
             mCurrentPosition--;
-            showTest();
+            showQuestion();
         }
     }
 
     private void nextQuestin() {
         if (mCurrentPosition != sTest.getQuestionNum() - 1) {
             mCurrentPosition++;
-            showTest();
+            showQuestion();
         }
     }
 
-    private void showTest() {
+    private void showQuestion() {
         testView.showQuestionIndex(String.format(getString(R.string.tch_question_index),
                 mCurrentPosition + 1));
         testView.showQuestion(sTest.getQuestion(mCurrentPosition));

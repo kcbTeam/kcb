@@ -13,21 +13,19 @@ import android.annotation.SuppressLint;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.Editable;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.kcb.common.base.BaseFragment;
 import com.kcb.common.util.StringMatchUtil;
-import com.kcb.library.view.FloatingEditText;
+import com.kcb.common.view.SearchEditText;
+import com.kcb.common.view.SearchEditText.SearchListener;
 import com.kcb.teacher.activity.stucentre.StuCentreActivity;
 import com.kcb.teacher.adapter.StuCentreAdapter;
 import com.kcb.teacher.database.students.StudentDao;
@@ -44,7 +42,7 @@ import com.kcbTeam.R;
  * @author: ZQJ
  * @date: 2015年4月24日 下午3:24:10
  */
-public class StuCentreFragment extends BaseFragment implements OnItemClickListener, TextWatcher {
+public class StuCentreFragment extends BaseFragment implements SearchListener, OnItemClickListener {
 
     private final int INDEX_ID = 0;
     private final int INDEX_CHECKIN_RATE = 1;
@@ -54,13 +52,12 @@ public class StuCentreFragment extends BaseFragment implements OnItemClickListen
     private TextView sortByCheckInRate;
     private TextView sortByCorrectRate;
 
-    private FloatingEditText searchEditText;
-    private ImageView clearImageView;
+    private SearchEditText searchEditText;
 
     private ListView mStudentList;
     private StuCentreAdapter mAdapter;
-    private List<Student> mList;
-    private List<Student> mTempList;
+    private List<Student> mStudents;
+    private List<Student> mTempStudents;
     private String mSearchKey;
     private CompareById idComparator;
     private CompareByCheckInRate checkInRateComparator;
@@ -88,11 +85,9 @@ public class StuCentreFragment extends BaseFragment implements OnItemClickListen
         mStudentList.setAdapter(mAdapter);
         mStudentList.setOnItemClickListener(this);
 
-        searchEditText = (FloatingEditText) view.findViewById(R.id.edittext_search);
-        searchEditText.addTextChangedListener(this);
-
-        clearImageView = (ImageView) view.findViewById(R.id.imageview_clear);
-        clearImageView.setOnClickListener(this);
+        searchEditText = (SearchEditText) view.findViewById(R.id.searchedittext);
+        searchEditText.setOnSearchListener(this);
+        searchEditText.setHint(R.string.tch_input_name_search);
 
         sortById = (TextView) view.findViewById(R.id.textview_stuinfo);
         sortById.setOnClickListener(this);
@@ -107,49 +102,18 @@ public class StuCentreFragment extends BaseFragment implements OnItemClickListen
 
     @Override
     protected void initData() {
-        mList = new ArrayList<Student>();
+        mStudents = new ArrayList<Student>();
         idComparator = new CompareById();
         correctRateComparator = new CompareByCorrectRate();
         checkInRateComparator = new CompareByCheckInRate();
 
-        Collections.sort(mList, idComparator);
-        mTempList = new ArrayList<Student>();
-        mTempList.addAll(mList);
-        mAdapter = new StuCentreAdapter(getActivity(), mTempList);
+        Collections.sort(mStudents, idComparator);
+        mTempStudents = new ArrayList<Student>();
+        mTempStudents.addAll(mStudents);
+        mAdapter = new StuCentreAdapter(getActivity(), mTempStudents);
 
         mGetAllStudenInfoTask = new GetAllStudenInfoTask();
         mGetAllStudenInfoTask.execute(0);
-    }
-
-    @Override
-    public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
-    @Override
-    public void onTextChanged(CharSequence s, int start, int before, int count) {}
-
-    @Override
-    public void afterTextChanged(Editable s) {
-        mTempList.clear();
-        mSearchKey = searchEditText.getText().toString().trim().replace(" ", "");
-        if (!mSearchKey.equals("")) {
-            clearImageView.setVisibility(View.VISIBLE);
-            for (int i = 0; i < mList.size(); i++) {
-                Student student = mList.get(i);
-                String name = student.getName();
-                try {
-                    if (StringMatchUtil.isMatch(name, mSearchKey)) {
-                        mTempList.add(student);
-                    }
-                } catch (BadHanyuPinyinOutputFormatCombination e) {}
-            }
-            hideSortButton(true);
-            mAdapter.notifyDataSetChanged();
-        } else {
-            mTempList.addAll(mList);
-            clearImageView.setVisibility(View.INVISIBLE);
-            hideSortButton(false);
-            onClick(sortById);
-        }
     }
 
     @Override
@@ -173,14 +137,42 @@ public class StuCentreFragment extends BaseFragment implements OnItemClickListen
                     setSortIcon(INDEX_CORRECT_RATE);
                 }
                 break;
-            case R.id.imageview_clear:
-                searchEditText.setText("");
-                clearImageView.setVisibility(View.INVISIBLE);
-                break;
             default:
                 break;
         }
         mAdapter.notifyDataSetChanged();
+    }
+
+    /**
+     * search listenr
+     */
+    @Override
+    public void onSearch(String text) {
+        mSearchKey = text;
+        mTempStudents.clear();
+        for (int i = 0; i < mStudents.size(); i++) {
+            Student student = mStudents.get(i);
+            String name = student.getName();
+            try {
+                if (StringMatchUtil.isMatch(name, mSearchKey)) {
+                    mTempStudents.add(student);
+                }
+            } catch (BadHanyuPinyinOutputFormatCombination e) {}
+        }
+        hideSortButton(true);
+        mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onClear() {
+        mTempStudents.addAll(mStudents);
+        hideSortButton(false);
+        onClick(sortById);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        StuCentreActivity.start(getActivity(), mAdapter.getItem(position));
     }
 
     @SuppressLint("NewApi")
@@ -219,11 +211,6 @@ public class StuCentreFragment extends BaseFragment implements OnItemClickListen
         }
     }
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        StuCentreActivity.start(getActivity(), mAdapter.getItem(position));
-    }
-
     private class SortTast extends AsyncTask<Integer, Integer, Integer> {
         private int index;
 
@@ -235,13 +222,13 @@ public class StuCentreFragment extends BaseFragment implements OnItemClickListen
         protected Integer doInBackground(Integer... params) {
             switch (index) {
                 case INDEX_ID:
-                    Collections.sort(mTempList, idComparator);
+                    Collections.sort(mTempStudents, idComparator);
                     break;
                 case INDEX_CHECKIN_RATE:
-                    Collections.sort(mTempList, checkInRateComparator);
+                    Collections.sort(mTempStudents, checkInRateComparator);
                     break;
                 case INDEX_CORRECT_RATE:
-                    Collections.sort(mTempList, correctRateComparator);
+                    Collections.sort(mTempStudents, correctRateComparator);
                     break;
                 default:
                     break;
@@ -256,21 +243,21 @@ public class StuCentreFragment extends BaseFragment implements OnItemClickListen
         protected List<Student> doInBackground(Integer... params) {
             try {
                 StudentDao mStudentDao = new StudentDao(getActivity());
-                mList = mStudentDao.getAllStuCentre();
+                mStudents = mStudentDao.getAllStuCentre();
                 mStudentDao.close();
             } catch (ParseException e) {
                 e.printStackTrace();
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            return mList;
+            return mStudents;
         }
 
         @Override
         protected void onPostExecute(List<Student> result) {
             super.onPostExecute(result);
-            mTempList.addAll(result);
-            Collections.sort(mTempList, idComparator);
+            mTempStudents.addAll(result);
+            Collections.sort(mTempStudents, idComparator);
             mAdapter.notifyDataSetChanged();
 
         }

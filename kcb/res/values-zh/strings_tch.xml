@@ -37,7 +37,7 @@
     <string name="tch_add_new_test">添加一个新测试</string>
     <string name="tch_look_test_result">查看测试结果</string>
     <!--  -->
-    <string name="tch_search_stu">输入姓名搜索</string>
+    <string name="tch_input_name_search">输入姓名搜索</string>
     <string name="tch_stu_info">学生信息</string>
     <string name="tch_checkin_rate">签到率</string>
     <string name="tch_correct_rate">正确率</string>

@@ -26,28 +26,15 @@
         android:layout_alignBottom="@id/layout_title"
         android:visibility="gone" />
 
-    <com.kcb.library.view.FloatingEditText
-        android:id="@+id/edittext_search"
-        style="@style/login_edittext"
-        android:layout_below="@id/layout_title"
-        android:layout_marginTop="5dp"
-        android:hint="@string/stu_input_test_name_search" />
-
-    <ImageView
-        android:id="@+id/imageview_clear"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/edittext_search"
-        android:layout_alignRight="@id/edittext_search"
-        android:layout_marginBottom="18dp"
-        android:background="@drawable/ic_cancel_grey600_24dp"
-        android:visibility="invisible" />
+    <com.kcb.common.view.SearchEditText
+        android:id="@+id/searchedittext"
+        android:layout_below="@id/progressbar_refresh" />
 
     <LinearLayout
         android:id="@+id/layout_listtitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/edittext_search"
+        android:layout_below="@id/searchedittext"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:orientation="horizontal"
