@@ -59,7 +59,7 @@
     <!--  -->
     <string name="tch_twice_password_unequal">两次输入密码不一致</string>
     <string name="tch_modify_success">修改成功</string>
-    <!-- Modify PassWord End -->
+    <!-- Modify PassWord end -->
 
 
     <!-- StartCheckInActivity start -->
@@ -98,7 +98,7 @@
     <!-- SetTestNameActivity end -->
 
 
-    <!-- EditTestActivity Start -->
+    <!-- EditTestActivity start -->
     <string name="tch_test_name_num">%1$s（共%2$d题）</string>
     <string name="tch_last_question">上一题</string>
     <string name="tch_next_question">下一题</string>
@@ -122,7 +122,7 @@
     <string name="tch_add">添加</string>
     <string name="tch_add_question_tip">确定添加第 %1$d 题？</string>
     <string name="tch_edit_question_item_hint">输入文字，或者长按拍照</string>
-    <!-- EditTestActivity End -->
+    <!-- EditTestActivity snd -->
 
 
     <!-- EditQuestionActivity start -->
@@ -130,23 +130,28 @@
     <!-- EditQuestionActivity end -->
 
 
-    <!-- Cut Picture Activity Strat -->
+    <!-- Cut Picture Activity strat -->
     <string name="tch_crop_picture">裁剪图片</string>
-    <!-- Cut Picture Activity End -->
+    <!-- Cut Picture Activity end -->
 
 
-    <!-- SetTestTimeActivity Start -->
+    <!-- SetTestTimeActivity start -->
     <string name="tch_set_test_time">设置测试时间</string>
     <string name="tch_set_test_time_tip">本次测试包括%1$d道题，答题时间为：%2$d分钟</string>
-    <!-- SetTestTimeActivity End -->
+    <!-- SetTestTimeActivity end -->
 
 
-    <!-- LookTestActivity Start -->
+    <!-- LookTestActivity start -->
     <string name="tch_input_test_name_search">输入名称搜索</string>
     <string name="tch_test_name">测试名称</string>
     <string name="tch_question_num">题目数量</string>
     <string name="tch_test_date">测试日期</string>
-    <!-- LookTestActivity End -->
+    <!-- LookTestActivity end -->
+
+
+    <!-- LookTestDetailActivity start -->
+    <string name="tch_question_index">题目%1$d</string>
+    <!-- LookTestDetailActivity end -->
 
 
     <!-- StuCentreActivty start -->
