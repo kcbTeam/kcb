@@ -1,7 +1,7 @@
 package com.kcb.student.adapter;
 
 import android.annotation.SuppressLint;
-import android.graphics.Color;
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +15,7 @@ import com.kcbTeam.R;
 public class StartCheckInAdapter
         extends RecyclerView.Adapter<StartCheckInAdapter.CheckinViewHolder> {
 
+    private Context mContext;
     private String[] mItems;
     public RecyclerItemClickListener mItemClickListener;
 
@@ -22,8 +23,9 @@ public class StartCheckInAdapter
         public void onItemClick(View view, int postion);
     }
 
-    public StartCheckInAdapter() {
+    public StartCheckInAdapter(Context context) {
         super();
+        mContext = context;
         mItems = new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "", "0", ""};
     }
 
@@ -60,8 +62,7 @@ public class StartCheckInAdapter
             numButton = (ButtonFlat) view.findViewById(R.id.button_num);
             numButton.setBackgroundResource(R.drawable.stu_checkin_textview);
             numButton.setTextSize(18);
-            // black_700
-            numButton.setTextColor(Color.parseColor("#616161"));
+            numButton.setTextColor(mContext.getResources().getColor(R.color.black_700));
             numButton.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {

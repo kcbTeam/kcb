@@ -343,7 +343,6 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
 
     // take photo and cut photo
     private final int REQUEST_TAKEPHOTO = 100;
-    private final int REQUEST_CUTPHOTO = 200;
 
     private void takePhoto() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -356,7 +355,7 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
         Uri uri = Uri.fromFile(file);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
         if (intent.resolveActivity(getPackageManager()) == null) {
-            ToastUtil.toast("没有可以拍照的应用程序");
+            ToastUtil.toast(R.string.tch_no_camera_app);
             return;
         }
         startActivityForResult(intent, REQUEST_TAKEPHOTO);
@@ -374,17 +373,16 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
                     Uri uri =
                             Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(),
                                     picture.getAbsolutePath(), null, null));
-                    Intent intent = new Intent(this, CropPictureActivity.class);
-                    intent.putExtra("PICTURE", uri);
-                    startActivityForResult(intent, REQUEST_CUTPHOTO);
+                    CropPictureActivity.startForResult(EditTestActivity.this, uri,
+                            CropPictureActivity.REQUEST_CUTPHOTO);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         }
-        if (requestCode == REQUEST_CUTPHOTO) {
+        if (requestCode == CropPictureActivity.REQUEST_CUTPHOTO) {
             if (resultCode == RESULT_OK) {
-                Uri uri = (Uri) data.getParcelableExtra("CUTTED_PICTURE");
+                Uri uri = (Uri) data.getParcelableExtra(CropPictureActivity.DATA_PICTURE);
                 try {
                     Bitmap bitmap = Media.getBitmap(getContentResolver(), uri);
                     switch (mLongClickTag) {
@@ -533,7 +531,7 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
                 deleteIcon.setVisibility(View.INVISIBLE);
                 break;
             case EDIT_MODE_BITMAP:
-                editText.setText(" ");
+                editText.setText("");
                 editText.setFocusable(false);
                 deleteIcon.setVisibility(View.VISIBLE);
                 break;

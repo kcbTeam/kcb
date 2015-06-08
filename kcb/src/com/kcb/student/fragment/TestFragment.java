@@ -88,6 +88,9 @@ public class TestFragment extends BaseFragment {
         }
     };
 
+    private final String KEY_REMAINTIME = "remaintime";
+    private final String KEY_TEST = "test";
+
     private void startTest() {
         if (startProgressBar.getVisibility() == View.VISIBLE) {
             return;
@@ -99,8 +102,8 @@ public class TestFragment extends BaseFragment {
 
                     @Override
                     public void onResponse(JSONObject response) {
-                        int remaintime = response.optInt("remaintime");
-                        Test test = Test.fromJsonObject(response.optJSONObject("test"));
+                        int remaintime = response.optInt(KEY_REMAINTIME);
+                        Test test = Test.fromJsonObject(response.optJSONObject(KEY_TEST));
 
                         TestDao testDao = new TestDao(getActivity());
                         testDao.add(test);
@@ -116,7 +119,7 @@ public class TestFragment extends BaseFragment {
                         startProgressBar.hide(getActivity());
                         NetworkResponse response = error.networkResponse;
                         if (null != response && response.statusCode == 400) {
-                            ToastUtil.toast("没有测试");
+                            ToastUtil.toast(R.string.stu_no_test_now);
                         } else {
                             ResponseUtil.toastError(error);
                         }

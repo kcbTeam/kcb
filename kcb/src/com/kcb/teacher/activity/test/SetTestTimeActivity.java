@@ -90,7 +90,7 @@ public class SetTestTimeActivity extends BaseActivity {
                 int index = data.getIntExtra(EditQuestionActivty.DATA_INDEX, 0);
                 mAdapter.setItem(index, EditQuestionActivty.sQuestion);
                 mAdapter.notifyDataSetChanged();
-                ToastUtil.toast("已保存");
+                ToastUtil.toast(R.string.tch_saved);
             } else if (resultCode == EditQuestionActivty.RESULT_DELETE) {
                 int index = data.getIntExtra(EditQuestionActivty.DATA_INDEX, 0);
                 mAdapter.deleteItem(index);

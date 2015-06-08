@@ -25,8 +25,6 @@ public class StuCentreAdapter extends BaseAdapter {
     private List<Student> mList;
     private Context mContext;
 
-    private final String FORMAT_RATE = "%1$d%%";
-
     public StuCentreAdapter(Context context, List<Student> list) {
         mContext = context;
         mList = list;
@@ -74,8 +72,8 @@ public class StuCentreAdapter extends BaseAdapter {
         public void setStudent(Student student) {
             studentName.setText(student.getName());
             studentId.setText(student.getId());
-            checkInRate.setText(String.format(FORMAT_RATE, (int) (100 * student.getCheckInRate())));
-            correctRate.setText(String.format(FORMAT_RATE, (int) (100 * student.getCorrectRate())));
+            checkInRate.setText(String.valueOf(student.getCheckInRate()));
+            correctRate.setText(String.valueOf(student.getCorrectRate()));
         }
     }
 }

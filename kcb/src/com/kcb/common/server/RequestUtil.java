@@ -17,7 +17,7 @@ import com.kcb.common.util.LogUtil;
  */
 public class RequestUtil {
 
-    private String TAG_REQUEST = "volley_request";
+    private String TAG_REQUEST = RequestUtil.class.getName();
 
     // singleton
     private static RequestUtil instance;

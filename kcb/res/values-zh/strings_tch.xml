@@ -25,23 +25,25 @@
     <string name="tch_class_checkin">课堂签到</string>
     <string name="tch_class_test">课堂小测试</string>
     <string name="tch_student_center">学生中心</string>
-    <!--  -->
+    <!-- check in -->
     <string name="tch_start_checkin">开始签到</string>
     <string name="tch_look_checkin_result">查看签到结果</string>
-    <!--  -->
+    <!-- test -->
     <string name="tch_start_test">开始测试</string>
     <string name="tch_add_test_first">请先添加一个测试</string>
     <string name="tch_select_test">选择测试</string>
+    <string name="tch_start_test_tip">本次测试的名称为——%1$s，包括 %2$d 道题，时间为 %3$d分钟。</string>
+    <string name="tch_test_started">测试已经开始了</string>
     <string name="tch_add_or_edit_test">添加 / 编辑测试</string>
     <string name="tch_edit_test">编辑测试</string>
     <string name="tch_add_new_test">添加一个新测试</string>
     <string name="tch_look_test_result">查看测试结果</string>
-    <!--  -->
+    <!-- stu centre -->
     <string name="tch_input_name_search">输入姓名搜索</string>
     <string name="tch_stu_info">学生信息</string>
     <string name="tch_checkin_rate">签到率</string>
     <string name="tch_correct_rate">正确率</string>
-    <!--  -->
+    <!-- menu -->
     <string name="tch_exit_account">退出账号</string>
     <string name="tch_exit_account_tip">退出后，下次使用时需要重新登录。</string>
     <string name="tch_click_again_exit_app">再按一次退出课程宝</string>
@@ -109,6 +111,7 @@
     <string name="tch_choice_C">C</string>
     <string name="tch_choice_D">D</string>
     <!--  -->
+    <string name="tch_no_camera_app">没有可以拍照的应用程序</string>
     <string name="tch_not_save_if_cancel">取消后，不会保存测试内容。</string>
     <string name="tch_question_saved">第%1$d题已保存</string>
     <string name="tch_question_added">第%1$d题已添加</string>
@@ -125,6 +128,13 @@
     <!-- EditTestActivity snd -->
 
 
+    <!-- SetTestTimeActivity start -->
+    <string name="tch_set_test_time">设置测试时间</string>
+    <string name="tch_question_index">第%1$d题</string>
+    <string name="tch_set_test_time_tip">本次测试包括%1$d道题，答题时间为：%2$d分钟</string>
+    <!-- SetTestTimeActivity end -->
+
+
     <!-- EditQuestionActivity start -->
     <string name="tch_delete_tip">确认删除该题吗？</string>
     <!-- EditQuestionActivity end -->
@@ -133,12 +143,6 @@
     <!-- Cut Picture Activity strat -->
     <string name="tch_crop_picture">裁剪图片</string>
     <!-- Cut Picture Activity end -->
-
-
-    <!-- SetTestTimeActivity start -->
-    <string name="tch_set_test_time">设置测试时间</string>
-    <string name="tch_set_test_time_tip">本次测试包括%1$d道题，答题时间为：%2$d分钟</string>
-    <!-- SetTestTimeActivity end -->
 
 
     <!-- LookTestActivity start -->
@@ -150,13 +154,16 @@
 
 
     <!-- LookTestDetailActivity start -->
-    <string name="tch_question_index">题目%1$d</string>
     <!-- LookTestDetailActivity end -->
 
 
-    <!-- StuCentreActivty start -->
+    <!-- StuCentreActivity Start -->
     <string name="tch_stu_checkin_rate">%1$s的到课率为%2$d%%</string>
     <string name="tch_stu_correct_rate">%1$s的选择题正确率为%2$d%%</string>
-    <!-- StuCentreActivty end -->
+    <string name="tch_attendance">到课</string>
+    <string name="tch_absent">缺课</string>
+    <string name="tch_correct">正确</string>
+    <string name="tch_error">错误</string>
+    <!-- StuCentreActivity End -->
 
 </resources>

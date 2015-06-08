@@ -2,7 +2,6 @@ package com.kcb.teacher.adapter;
 
 import java.util.List;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,12 +18,10 @@ import com.kcbTeam.R;
  * @author: ZQJ
  * @date: 2015年4月24日 下午3:23:50
  */
-@SuppressLint("ViewHolder")
 public class LookCheckInAdapter extends BaseAdapter {
 
     private Context mContext;
     private List<CheckInResult> mResults;
-    private final String FORMAT_RATE = "%1$d%%";
 
     public LookCheckInAdapter(Context context, List<CheckInResult> list) {
         mContext = context;
@@ -73,7 +70,7 @@ public class LookCheckInAdapter extends BaseAdapter {
 
         public void setCheckInResult(CheckInResult result) {
             dateTextView.setText(result.getDateString());
-            rateTextView.setText(String.format(FORMAT_RATE, (int) (100 * result.getRate())));
+            rateTextView.setText(String.valueOf(result.getRate()));
         }
     }
 }

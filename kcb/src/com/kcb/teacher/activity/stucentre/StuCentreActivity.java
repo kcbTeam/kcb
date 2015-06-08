@@ -97,8 +97,10 @@ public class StuCentreActivity extends BaseActivity {
     }
 
     private void initPieChart() {
-        setData(mCheckInPieChart, new String[] {"到课", "缺课"}, mCheckInRate);
-        setData(mCorrectPieChart, new String[] {"正确", "错误"}, mCorrectRate);
+        setData(mCheckInPieChart, new String[] {getResources().getString(R.string.tch_attendance),
+                getResources().getString(R.string.tch_absent)}, mCheckInRate);
+        setData(mCorrectPieChart, new String[] {getResources().getString(R.string.tch_correct),
+                getResources().getString(R.string.tch_error)}, mCorrectRate);
         defaultPieChartStyle(mCheckInPieChart);
         defaultPieChartStyle(mCorrectPieChart);
         new Handler().postDelayed(new Runnable() {
@@ -121,7 +123,7 @@ public class StuCentreActivity extends BaseActivity {
             xVals.add(infoStrings[i % infoStrings.length]);
         }
 
-        PieDataSet dataSet = new PieDataSet(yVals1, " ");
+        PieDataSet dataSet = new PieDataSet(yVals1, "");
         dataSet.setSliceSpace(0);
         // dataSet.setSelectionShift(5f);
 

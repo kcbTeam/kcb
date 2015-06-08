@@ -3,6 +3,8 @@ package com.kcb.teacher.activity.test;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
@@ -78,7 +80,7 @@ public class CropPictureActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        Uri uri = (Uri) getIntent().getParcelableExtra("PICTURE");
+        Uri uri = (Uri) getIntent().getParcelableExtra(DATA_PICTURE);
         try {
             mBitMap = Media.getBitmap(getContentResolver(), uri);
             mBitMap = ResizeBitmap(mBitMap, 1000);
@@ -118,8 +120,8 @@ public class CropPictureActivity extends BaseActivity {
                 case R.id.button_complete:
                     croppedImage = cropImageView.getCroppedImage();
                     Intent intent = new Intent();
-                    intent.putExtra("CUTTED_PICTURE", Uri.parse(MediaStore.Images.Media
-                            .insertImage(getContentResolver(), croppedImage, null, null)));
+                    intent.putExtra(DATA_PICTURE, Uri.parse(MediaStore.Images.Media.insertImage(
+                            getContentResolver(), croppedImage, null, null)));
                     setResult(RESULT_OK, intent);
                     finish();
                     break;
@@ -142,5 +144,18 @@ public class CropPictureActivity extends BaseActivity {
         Bitmap resizedBitmap = Bitmap.createBitmap(bitmap, 0, 0, width, height, matrix, true);
         bitmap.recycle();
         return resizedBitmap;
+    }
+
+    /**
+     * start
+     */
+    public static final String DATA_PICTURE = "data_picture";
+
+    public static final int REQUEST_CUTPHOTO = 1;
+
+    public static void startForResult(Context context, Uri uri, int requestCode) {
+        Intent intent = new Intent(context, CropPictureActivity.class);
+        intent.putExtra(DATA_PICTURE, uri);
+        ((Activity) context).startActivityForResult(intent, requestCode);
     }
 }
