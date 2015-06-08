@@ -11,19 +11,19 @@ import com.kcb.common.model.test.Question;
 import com.kcb.common.model.test.QuestionItem;
 import com.kcbTeam.R;
 
-public class TestView extends LinearLayout {
+public class QuestionView extends LinearLayout {
 
-    public TestView(Context context) {
+    public QuestionView(Context context) {
         super(context);
         init(context);
     }
 
-    public TestView(Context context, AttributeSet attrs) {
+    public QuestionView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context);
     }
 
-    public TestView(Context context, AttributeSet attrs, int defStyle) {
+    public QuestionView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         init(context);
     }
@@ -45,7 +45,7 @@ public class TestView extends LinearLayout {
 
     public void init(Context context) {
         mContext = context;
-        inflate(mContext, R.layout.comm_view_test, null);
+        inflate(mContext, R.layout.comm_view_question, null);
         initView();
     }
 

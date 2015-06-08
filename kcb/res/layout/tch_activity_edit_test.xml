@@ -22,7 +22,7 @@
             android:src="@drawable/ic_highlight_remove_black_24dp" />
     </com.kcb.library.view.buttonflat.ButtonFlat>
 
-    <com.kcb.common.view.EditTestView
+    <com.kcb.common.view.QuestionEditView
         android:id="@+id/edittestview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -41,7 +41,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="上一题"
+            android:text="@string/tch_last_question"
             widget:clickAfterRipple="false"
             widget:rippleSpeed="18" />
 
@@ -50,7 +50,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="下一题"
+            android:text="@string/tch_next_question"
             widget:clickAfterRipple="false"
             widget:rippleSpeed="18" />
 
@@ -59,7 +59,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="添加一题"
+            android:text="@string/tch_add_question"
             widget:clickAfterRipple="false"
             widget:rippleSpeed="18" />
 
@@ -68,7 +68,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="删除本题"
+            android:text="@string/tch_delete_question"
             widget:clickAfterRipple="false"
             widget:rippleSpeed="18" />
     </LinearLayout>

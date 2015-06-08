@@ -280,13 +280,13 @@ public class EditQuestionActivty extends BaseActivity implements OnLongClickList
                             Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(),
                                     picture.getAbsolutePath(), null, null));
                     CropPictureActivity.startForResult(EditQuestionActivty.this, uri,
-                            CropPictureActivity.REQUEST_CUTPHOTO);
+                            CropPictureActivity.REQUEST_CROPPHOTO);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         }
-        if (requestCode == CropPictureActivity.REQUEST_CUTPHOTO) {
+        if (requestCode == CropPictureActivity.REQUEST_CROPPHOTO) {
             if (resultCode == RESULT_OK) {
                 Uri uri = (Uri) data.getParcelableExtra("CUTTED_PICTURE");
                 try {
