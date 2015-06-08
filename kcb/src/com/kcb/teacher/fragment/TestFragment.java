@@ -121,7 +121,7 @@ public class TestFragment extends BaseFragment {
                         @Override
                         public void onClick(View view, int position) {
                             TestDao testDao = new TestDao(getActivity());
-                            Test test = testDao.get(names.get(position));
+                            Test test = testDao.getByName(names.get(position));
                             testDao.close();
                             sendTestToServer(test);
                         }
@@ -177,7 +177,7 @@ public class TestFragment extends BaseFragment {
                             startActivity(intent);
                         } else {
                             TestDao testDao = new TestDao(getActivity());
-                            Test test = testDao.get(names.get(position));
+                            Test test = testDao.getByName(names.get(position));
                             testDao.close();
                             EditTestActivity.startEditTest(getActivity(), test);
                         }
