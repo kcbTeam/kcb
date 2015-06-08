@@ -2,15 +2,11 @@ package com.kcb.student.activity.test;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.kcb.common.base.BaseActivity;
-import com.kcb.common.model.test.Question;
-import com.kcb.common.model.test.QuestionItem;
 import com.kcb.common.model.test.Test;
 import com.kcb.common.view.TestView;
 import com.kcb.library.view.buttonflat.ButtonFlat;
