@@ -142,6 +142,10 @@ public class Test implements Serializable {
         }
     }
 
+    public String toString() {
+        return toJsonObject().toString();
+    }
+
     /**
      * test to json, json to test
      */

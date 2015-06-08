@@ -2,8 +2,7 @@ package com.kcb.student.activity.checkin;
 
 import java.util.ArrayList;
 
-import org.json.JSONArray;
-import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,7 +15,7 @@ import com.android.volley.Request.Method;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.Entry;
@@ -31,7 +30,7 @@ import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
 import com.kcb.student.database.checkin.CheckInDao;
 import com.kcb.student.model.account.KAccount;
-import com.kcb.student.model.checkin.CheckInResultDetail;
+import com.kcb.student.model.checkin.CheckInResult;
 import com.kcbTeam.R;
 
 /**
@@ -181,22 +180,18 @@ public class LookCheckInActivity extends BaseActivity {
             return;
         }
         progressBar.setVisibility(View.VISIBLE);
-        JsonArrayRequest request =
-                new JsonArrayRequest(Method.GET, UrlUtil.getStuCheckinResultUrl(
-                        KAccount.getAccountId(), KAccount.getTchId()), new Listener<JSONArray>() {
+        JsonObjectRequest request =
+                new JsonObjectRequest(Method.GET, UrlUtil.getStuCheckinResultUrl(
+                        KAccount.getAccountId(), KAccount.getTchId()), new Listener<JSONObject>() {
 
                     @Override
-                    public void onResponse(JSONArray response) {
+                    public void onResponse(JSONObject response) {
+                        // save to database
+                        CheckInResult checkInResult = CheckInResult.fromJsonObejct(response);
                         CheckInDao checkInDao = new CheckInDao(LookCheckInActivity.this);
-                        for (int i = 0; i < response.length(); i++) {
-                            try {
-                                CheckInResultDetail result =
-                                        CheckInResultDetail.fromJsonObject(response
-                                                .getJSONObject(i));
-                                checkInDao.add(result);
-                            } catch (JSONException e) {}
-                        }
+                        checkInDao.add(checkInResult);
                         checkInDao.close();
+                        // show result
                         initData();
                     }
                 }, new ErrorListener() {

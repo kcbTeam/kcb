@@ -54,7 +54,7 @@ public class UrlUtil {
         return url_stu_checkin_submit + "?stuid=" + stuid + "&tchid=" + tchId + "&num=" + num;
     }
 
-    private static final String url_stu_checkin_getresult = IP + "/v1/stu/checkin/start/getresult";
+    private static final String url_stu_checkin_getresult = IP + "/v1/stu/checkin/getresult";
 
     public static String getStuCheckinResultUrl(String stuId, String tchId) {
         return url_stu_checkin_getresult + "?stuid=" + stuId + "&tchid=" + tchId;

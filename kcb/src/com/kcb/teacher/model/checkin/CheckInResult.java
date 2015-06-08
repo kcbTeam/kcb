@@ -44,6 +44,10 @@ public class CheckInResult implements Serializable {
         return mUnCheckedStudents;
     }
 
+    public String toString() {
+        return toJsonObject().toString();
+    }
+
     /**
      * checkinresult to json ,json to checkinresult
      */

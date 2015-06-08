@@ -72,7 +72,7 @@ public class LookCheckInActivity extends BaseActivity implements OnItemClickList
     @Override
     protected void initData() {
         CheckInDao checkInDao = new CheckInDao(LookCheckInActivity.this);
-        List<CheckInResult> results = checkInDao.getAllCheckInResults();
+        List<CheckInResult> results = checkInDao.getAll();
         checkInDao.close();
         mAdapter = new LookCheckInAdapter(LookCheckInActivity.this, results);
         listView.setAdapter(mAdapter);

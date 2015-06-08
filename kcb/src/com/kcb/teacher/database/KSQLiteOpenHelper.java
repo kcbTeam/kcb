@@ -4,9 +4,9 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.kcb.teacher.database.checkin.CheckInDB;
-import com.kcb.teacher.database.students.StudentDB;
-import com.kcb.teacher.database.test.TestDB;
+import com.kcb.teacher.database.checkin.CheckInTable;
+import com.kcb.teacher.database.students.StudentTable;
+import com.kcb.teacher.database.test.TestTable;
 
 /**
  * 
@@ -26,9 +26,9 @@ public class KSQLiteOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(TestDB.CREATE_TABLE);
-        db.execSQL(CheckInDB.CREATE_TABLE);
-        db.execSQL(StudentDB.CREATE_TABLE);
+        db.execSQL(TestTable.CREATE_TABLE);
+        db.execSQL(CheckInTable.CREATE_TABLE);
+        db.execSQL(StudentTable.CREATE_TABLE);
     }
 
     @Override

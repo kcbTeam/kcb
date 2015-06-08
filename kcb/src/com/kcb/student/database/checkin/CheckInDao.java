@@ -1,11 +1,12 @@
 package com.kcb.student.database.checkin;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.kcb.student.database.KSQLiteOpenHelper;
-import com.kcb.student.model.checkin.CheckInResultDetail;
+import com.kcb.student.model.checkin.CheckInResult;
 
 /**
  * 
@@ -16,51 +17,42 @@ import com.kcb.student.model.checkin.CheckInResultDetail;
  */
 public class CheckInDao {
 
-    private KSQLiteOpenHelper mSQLiteOpenHelper;
-    private SQLiteDatabase mSqLiteDatabase;
+    private KSQLiteOpenHelper mOpenHelper;
+    private SQLiteDatabase mDatabase;
 
     public CheckInDao(Context context) {
-        mSQLiteOpenHelper = new KSQLiteOpenHelper(context);
-        mSqLiteDatabase = mSQLiteOpenHelper.getWritableDatabase();
+        mOpenHelper = new KSQLiteOpenHelper(context);
+        mDatabase = mOpenHelper.getWritableDatabase();
     }
 
-    public void add(CheckInResultDetail result) {
-        mSqLiteDatabase.beginTransaction();
-        try {
-            mSqLiteDatabase.execSQL(
-                    "insert into " + CheckInDB.TABLE_NAME + " values(null,?)",
-                    new String[] {String.valueOf(result.getDate()),
-                            String.valueOf(result.hasChecked())});
-            mSqLiteDatabase.setTransactionSuccessful();
-        } finally {
-            mSqLiteDatabase.endTransaction();
-        }
+    public void add(CheckInResult result) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(CheckInTable.COLUMN_SUCCESS_TIMES, result.getSuccessTimes());
+        contentValues.put(CheckInTable.COLUMN_ALL_TIMES, result.getAllTimes());
+        contentValues.put(CheckInTable.COLUMN_CHECKIN, result.toString());
+        mDatabase.insert(CheckInTable.TABLE_NAME, null, contentValues);
     }
 
-    // TODO
     public int getSuccessTimes() {
-        int i = 0;
         Cursor cursor =
-                mSqLiteDatabase.rawQuery("select * from " + CheckInDB.TABLE_NAME + " where "
-                        + CheckInDB.HASCHECKED + " =? ", new String[] {"true"});
-        while (cursor.moveToNext()) {
-            i = i + 1;
-        }
+                mDatabase.query(CheckInTable.TABLE_NAME,
+                        new String[] {CheckInTable.COLUMN_SUCCESS_TIMES}, null, null, null, null,
+                        null);
+        int times = cursor.getInt(cursor.getColumnIndex(CheckInTable.COLUMN_SUCCESS_TIMES));
         cursor.close();
-        return i;
+        return times;
     }
 
-    // TODO 获取表的行数
     public int getAllTimes() {
-        int i = 0;
-        Cursor cursor = mSqLiteDatabase.rawQuery("select * from " + CheckInDB.TABLE_NAME, null);
-        while (cursor.moveToNext()) {
-            i = i + 1;
-        }
-        return cursor.getCount();
+        Cursor cursor =
+                mDatabase.query(CheckInTable.TABLE_NAME,
+                        new String[] {CheckInTable.COLUMN_ALL_TIMES}, null, null, null, null, null);
+        int times = cursor.getInt(cursor.getColumnIndex(CheckInTable.COLUMN_ALL_TIMES));
+        cursor.close();
+        return times;
     }
 
     public void close() {
-        mSqLiteDatabase.close();
+        mDatabase.close();
     }
 }

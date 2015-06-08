@@ -94,7 +94,7 @@ public class SetTestNameActivity extends BaseActivity {
                 AnimationUtil.shake(testNameEditText);
             } else {
                 TestDao testDao = new TestDao(SetTestNameActivity.this);
-                if (testDao.hasRecorded(name)) {
+                if (testDao.hasRecords(name)) {
                     ToastUtil.toast(R.string.tch_has_same_test_name);
                 } else {
                     EditTestActivity.startAddNewTest(SetTestNameActivity.this, new Test(name,

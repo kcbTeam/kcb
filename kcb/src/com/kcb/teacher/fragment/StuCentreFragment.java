@@ -243,7 +243,7 @@ public class StuCentreFragment extends BaseFragment implements SearchListener, O
         protected List<Student> doInBackground(Integer... params) {
             try {
                 StudentDao mStudentDao = new StudentDao(getActivity());
-                mStudents = mStudentDao.getAllStuCentre();
+                mStudents = mStudentDao.getAll();
                 mStudentDao.close();
             } catch (ParseException e) {
                 e.printStackTrace();

@@ -1,5 +1,7 @@
 package com.kcb.student.model.checkin;
 
+import java.util.Date;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -10,6 +12,10 @@ public class CheckInResultDetail {
 
     public long getDate() {
         return mDate;
+    }
+
+    public String getDateString() {
+        return new Date(mDate).toString();
     }
 
     public boolean hasChecked() {
