@@ -63,7 +63,7 @@ public class StartActivity extends BaseActivity {
 
         // user click back in LoginActivity, restart this activity and show third page
         Intent intent = getIntent();
-        if (null != intent && intent.getAction() == INTENT_ACTION_RESTART) {
+        if (null != intent && intent.getAction() == ACTION_RESTART) {
             viewPager.setCurrentItem(mAdapter.getCount() - 1);
         }
     }
@@ -139,6 +139,14 @@ public class StartActivity extends BaseActivity {
         System.exit(0);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        colorAnimationView = null;
+        viewPager = null;
+        mAdapter = null;
+    }
+
     /**
      * 
      * @title: restart
@@ -148,11 +156,11 @@ public class StartActivity extends BaseActivity {
      * @date: 2015-5-4 下午8:39:21
      * @param context
      */
-    public static final String INTENT_ACTION_RESTART = "restartFromLogin";
+    public static final String ACTION_RESTART = "action_restart";
 
     public static void restart(Context context) {
         Intent intent = new Intent(context, StartActivity.class);
-        intent.setAction(StartActivity.INTENT_ACTION_RESTART);
+        intent.setAction(StartActivity.ACTION_RESTART);
         context.startActivity(intent);
     }
 }

@@ -66,9 +66,8 @@ public class TestDao {
 
     public Test getByName(String testName) {
         Cursor cursor =
-                mDatabase.query(TestTable.TABLE_NAME, null,
-                        "where " + TestTable.COLUMN_NAME + "=?", new String[] {testName}, null,
-                        null, null);
+                mDatabase.query(TestTable.TABLE_NAME, null, TestTable.COLUMN_NAME + "=?",
+                        new String[] {testName}, null, null, null);
         Test test = null;
         if (cursor.moveToFirst()) {
             try {
@@ -83,8 +82,8 @@ public class TestDao {
 
     public List<Test> getHasTested() {
         Cursor cursor =
-                mDatabase.query(TestTable.TABLE_NAME, null, "where " + TestTable.COLUMN_HASTESTED
-                        + "=?", new String[] {String.valueOf(true)}, null, null, null);
+                mDatabase.query(TestTable.TABLE_NAME, null, TestTable.COLUMN_HASTESTED + "=?",
+                        new String[] {String.valueOf(true)}, null, null, null);
         List<Test> tests = new ArrayList<Test>();
         if (cursor.moveToFirst()) {
             do {
