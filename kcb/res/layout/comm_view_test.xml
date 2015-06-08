@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:ignore="contentDescription" >
+
+    <TextView
+        android:id="@+id/textview_question_index"
+        style="@style/common_tip" />
+
+    <TextView
+        android:id="@+id/textview_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:lineSpacingExtra="2dp"
+        android:padding="4dp"
+        android:textColor="@color/black_700"
+        android:textSize="@dimen/text_size_medium" />
+
+    <View
+        android:id="@+id/view_divider0"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@color/black_divider" />
+
+    <LinearLayout
+        android:id="@+id/layout_A"
+        style="@style/tch_test_settime_choice_layout"
+        android:layout_marginBottom="2dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="2dp" >
+
+        <TextView
+            android:id="@+id/textview_tipa"
+            style="@style/tch_test_settime_choice_tip"
+            android:text="@string/tch_choice_A" />
+
+        <TextView
+            android:id="@+id/textview_A"
+            style="@style/tch_test_settime_choice" />
+
+        <ImageView
+            android:id="@+id/checkBox_A"
+            style="@style/tch_test_settime_checkicon"
+            android:layout_margin="4dp" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view_divider1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@color/black_divider" />
+
+    <LinearLayout
+        android:id="@+id/layout_B"
+        style="@style/tch_test_settime_choice_layout"
+        android:layout_marginBottom="2dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="2dp" >
+
+        <TextView
+            android:id="@+id/textview_tipb"
+            style="@style/tch_test_settime_choice_tip"
+            android:text="@string/tch_choice_B" />
+
+        <TextView
+            android:id="@+id/textview_B"
+            style="@style/tch_test_settime_choice" />
+
+        <ImageView
+            android:id="@+id/checkBox_B"
+            style="@style/tch_test_settime_checkicon"
+            android:layout_margin="4dp" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view_divider2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@color/black_divider" />
+
+    <LinearLayout
+        android:id="@+id/layout_C"
+        style="@style/tch_test_settime_choice_layout"
+        android:layout_marginBottom="2dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="2dp" >
+
+        <TextView
+            android:id="@+id/textview_tipc"
+            style="@style/tch_test_settime_choice_tip"
+            android:text="@string/tch_choice_C" />
+
+        <TextView
+            android:id="@+id/textview_C"
+            style="@style/tch_test_settime_choice" />
+
+        <ImageView
+            android:id="@+id/checkBox_C"
+            style="@style/tch_test_settime_checkicon"
+            android:layout_margin="4dp" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view_divider3"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@color/black_divider" />
+
+    <LinearLayout
+        android:id="@+id/layout_D"
+        style="@style/tch_test_settime_choice_layout"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="2dp" >
+
+        <TextView
+            android:id="@+id/textview_tipd"
+            style="@style/tch_test_settime_choice_tip"
+            android:text="@string/tch_choice_D" />
+
+        <TextView
+            android:id="@+id/textview_D"
+            style="@style/tch_test_settime_choice" />
+
+        <ImageView
+            android:id="@+id/checkBox_D"
+            style="@style/tch_test_settime_checkicon"
+            android:layout_margin="4dp" />
+    </LinearLayout>
+
+</LinearLayout>

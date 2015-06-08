@@ -9,8 +9,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -28,7 +26,8 @@ import com.kcb.common.server.RequestUtil;
 import com.kcb.common.server.ResponseUtil;
 import com.kcb.common.server.UrlUtil;
 import com.kcb.common.util.StringMatchUtil;
-import com.kcb.library.view.FloatingEditText;
+import com.kcb.common.view.SearchEditText;
+import com.kcb.common.view.SearchEditText.SearchListener;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
 import com.kcb.teacher.adapter.LookTestAdapter;
@@ -43,7 +42,7 @@ import com.kcbTeam.R;
  * @author: ZQJ
  * @date: 2015年5月16日 下午4:00:49
  */
-public class LookTestActivity extends BaseActivity implements TextWatcher, OnItemClickListener {
+public class LookTestActivity extends BaseActivity implements SearchListener, OnItemClickListener {
 
     private static final String TAG = LookTestActivity.class.getName();
 
@@ -51,7 +50,8 @@ public class LookTestActivity extends BaseActivity implements TextWatcher, OnIte
     private ButtonFlat refreshButton;
     private SmoothProgressBar progressBar;
 
-    private FloatingEditText searchEditText;
+    private SearchEditText searchEditText;
+
     private ListView listView;
 
     private LookTestAdapter mAdapter;
@@ -77,8 +77,10 @@ public class LookTestActivity extends BaseActivity implements TextWatcher, OnIte
 
         progressBar = (SmoothProgressBar) findViewById(R.id.progressbar_refresh);
 
-        searchEditText = (FloatingEditText) findViewById(R.id.edittext_search);
-        searchEditText.addTextChangedListener(this);
+        searchEditText = (SearchEditText) findViewById(R.id.searchedittext);
+        searchEditText.setOnSearchListener(this);
+        searchEditText.setHint(R.string.tch_input_test_name_search);
+
         listView = (ListView) findViewById(R.id.listview_test);
     }
 
@@ -110,26 +112,17 @@ public class LookTestActivity extends BaseActivity implements TextWatcher, OnIte
         }
     }
 
+    /**
+     * search listener
+     */
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        LookTestDetailActivity.start(LookTestActivity.this, mAdapter.getItem(position));
-    }
-
-    @Override
-    public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
-    @Override
-    public void onTextChanged(CharSequence s, int start, int before, int count) {}
-
-    @Override
-    public void afterTextChanged(Editable s) {
+    public void onSearch(String text) {
         mSearchedTests.clear();
         mSearchedTests.addAll(mAllTests);
-        String searchContent = searchEditText.getText().toString();
         for (int i = 0; i < mSearchedTests.size(); i++) {
             String name = mSearchedTests.get(i).getName();
             try {
-                if (StringMatchUtil.isMatch(name, searchContent)) {
+                if (StringMatchUtil.isMatch(name, text)) {
                     continue;
                 }
             } catch (BadHanyuPinyinOutputFormatCombination e) {
@@ -139,6 +132,18 @@ public class LookTestActivity extends BaseActivity implements TextWatcher, OnIte
             i--;
         }
         mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onClear() {
+        mSearchedTests.clear();
+        mSearchedTests.addAll(mAllTests);
+        mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        LookTestDetailActivity.start(LookTestActivity.this, mAdapter.getItem(position));
     }
 
     private void refresh() {

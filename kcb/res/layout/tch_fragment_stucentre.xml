@@ -6,29 +6,13 @@
     android:layout_height="match_parent"
     tools:ignore="contentDescription" >
 
-    <com.kcb.library.view.FloatingEditText
-        android:id="@+id/edittext_search"
-        style="@style/login_edittext"
-        android:layout_marginTop="4dp"
-        android:hint="@string/tch_search_stu"
-        widget:floating_edit_text_color="@color/black_500"
-        widget:floating_edit_text_highlighted_color="@color/blue" />
-
-    <ImageView
-        android:id="@+id/imageview_clear"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/edittext_search"
-        android:layout_alignRight="@id/edittext_search"
-        android:layout_marginBottom="18dp"
-        android:background="@drawable/ic_cancel_grey600_24dp"
-        android:visibility="invisible" />
+    <com.kcb.common.view.SearchEditText android:id="@+id/searchedittext" />
 
     <LinearLayout
         android:id="@+id/layout_sort"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/edittext_search"
+        android:layout_below="@id/searchedittext"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:orientation="horizontal"
