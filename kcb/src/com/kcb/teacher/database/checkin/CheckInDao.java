@@ -29,7 +29,7 @@ public class CheckInDao {
         ContentValues contentValues = new ContentValues();
         contentValues.put(CheckInTable.COLUMN_DATE, result.getDate());
         contentValues.put(CheckInTable.COLUMN_RATE, result.getRate());
-        contentValues.put(CheckInTable.COLUMN_CHECKIN, result.toString());
+        contentValues.put(CheckInTable.COLUMN_ROW_DATA, result.toString());
         mDatabase.insert(CheckInTable.TABLE_NAME, null, contentValues);
     }
 
@@ -41,7 +41,7 @@ public class CheckInDao {
             do {
                 try {
                     results.add(CheckInResult.fromJsonObject(new JSONObject(cursor.getString(cursor
-                            .getColumnIndex(CheckInTable.COLUMN_CHECKIN)))));
+                            .getColumnIndex(CheckInTable.COLUMN_ROW_DATA)))));
                 } catch (JSONException e) {}
             } while (cursor.moveToNext());
         }

@@ -6,7 +6,6 @@ import java.util.List;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -32,39 +31,73 @@ public class TestDao {
         mDatabase = mOpenHelper.getWritableDatabase();
     }
 
-    @SuppressLint("SimpleDateFormat")
+    public boolean hasRecords(String testName) {
+        Cursor cursor = mDatabase.query(TestTable.TABLE_NAME, null, null, null, null, null, null);
+        int count = cursor.getCount();
+        cursor.close();
+        return count > 0;
+    }
+
+    public List<String> getAllTestName() {
+        Cursor cursor =
+                mDatabase.query(TestTable.TABLE_NAME, new String[] {TestTable.COLUMN_NAME}, null,
+                        null, null, null, null);
+        List<String> names = new ArrayList<String>();
+        if (cursor.moveToFirst()) {
+            do {
+                String name = cursor.getString(cursor.getColumnIndex(TestTable.COLUMN_NAME));
+                names.add(name);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return names;
+    }
+
     public void add(Test test) {
         ContentValues contentValues = new ContentValues();
-        contentValues.put(TestTable.KEY_ID, test.getId());
-        contentValues.put(TestTable.KEY_NAME, test.getName());
-        contentValues.put(TestTable.KEY_TIME, test.getTime());
-        contentValues.put(TestTable.KEY_DATE, test.getDate());
-        contentValues.put(TestTable.KEY_HASTESTED, test.hasTested());
-        contentValues.put(TestTable.KEY_TEXT, test.toString());
+        contentValues.put(TestTable.COLUMN_ID, test.getId());
+        contentValues.put(TestTable.COLUMN_NAME, test.getName());
+        contentValues.put(TestTable.COLUMN_TIME, test.getTime());
+        contentValues.put(TestTable.COLUMN_DATE, test.getDate());
+        contentValues.put(TestTable.COLUMN_HASTESTED, test.hasTested());
+        contentValues.put(TestTable.COLUMN_ROW_DATA, test.toString());
         mDatabase.insert(TestTable.TABLE_NAME, null, contentValues);
     }
 
-    public Test get(String testName) {
-        Test test = null;
+    public Test getByName(String testName) {
         Cursor cursor =
-                mDatabase.rawQuery("SELECT * FROM " + TestTable.TABLE_NAME + " WHERE "
-                        + TestTable.KEY_NAME + "=?", new String[] {testName});
+                mDatabase.query(TestTable.TABLE_NAME, null,
+                        "where " + TestTable.COLUMN_NAME + "=?", new String[] {testName}, null,
+                        null, null);
+        Test test = null;
         if (cursor.moveToFirst()) {
             try {
                 test =
                         Test.fromJsonObject(new JSONObject(cursor.getString(cursor
-                                .getColumnIndex(TestTable.KEY_TEXT))));
+                                .getColumnIndex(TestTable.COLUMN_ROW_DATA))));
             } catch (JSONException e) {}
         }
         cursor.close();
         return test;
     }
 
-    public boolean hasRecords(String testName) {
-        Cursor cursor = mDatabase.query(TestTable.TABLE_NAME, null, null, null, null, null, null);
-        int count = cursor.getCount();
+    public List<Test> getHasTested() {
+        Cursor cursor =
+                mDatabase.query(TestTable.TABLE_NAME, null, "where " + TestTable.COLUMN_HASTESTED
+                        + "=?", new String[] {String.valueOf(true)}, null, null, null);
+        List<Test> tests = new ArrayList<Test>();
+        if (cursor.moveToFirst()) {
+            do {
+                try {
+                    Test test =
+                            Test.fromJsonObject(new JSONObject(cursor.getString(cursor
+                                    .getColumnIndex(TestTable.COLUMN_ROW_DATA))));
+                    tests.add(test);
+                } catch (JSONException e) {}
+            } while (cursor.moveToNext());
+        }
         cursor.close();
-        return count > 0;
+        return tests;
     }
 
     public List<Test> getAll() {
@@ -75,51 +108,17 @@ public class TestDao {
                 try {
                     Test test =
                             Test.fromJsonObject(new JSONObject(cursor.getString(cursor
-                                    .getColumnIndex(TestTable.KEY_TEXT))));
+                                    .getColumnIndex(TestTable.COLUMN_ROW_DATA))));
                     tests.add(test);
                 } catch (JSONException e) {}
             } while (cursor.moveToNext());
         }
         cursor.close();
         return tests;
-    }
-
-    public List<Test> getHasTested() {
-        Cursor cursor =
-                mDatabase.query(TestTable.TABLE_NAME, null, "where " + TestTable.KEY_HASTESTED
-                        + "=?", new String[] {String.valueOf(true)}, null, null, null);
-        List<Test> tests = new ArrayList<Test>();
-        if (cursor.moveToFirst()) {
-            do {
-                try {
-                    Test test =
-                            Test.fromJsonObject(new JSONObject(cursor.getString(cursor
-                                    .getColumnIndex(TestTable.KEY_TEXT))));
-                    tests.add(test);
-                } catch (JSONException e) {}
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        return tests;
-    }
-
-    public List<String> getAllTestName() {
-        Cursor cursor =
-                mDatabase.query(TestTable.TABLE_NAME, new String[] {TestTable.KEY_NAME}, null,
-                        null, null, null, null);
-        List<String> names = new ArrayList<String>();
-        if (cursor.moveToFirst()) {
-            do {
-                String name = cursor.getString(cursor.getColumnIndex(TestTable.KEY_NAME));
-                names.add(name);
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        return names;
     }
 
     public void delete(Test test) {
-        mDatabase.delete(TestTable.TABLE_NAME, TestTable.KEY_NAME + "=?",
+        mDatabase.delete(TestTable.TABLE_NAME, TestTable.COLUMN_NAME + "=?",
                 new String[] {test.getName()});
     }
 

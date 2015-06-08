@@ -31,7 +31,7 @@ public class StudentDao {
         contentValues.put(StudentTable.COLUMN_NAME, student.getName());
         contentValues.put(StudentTable.COLUMN_CHECKINRATE, student.getCheckInRate());
         contentValues.put(StudentTable.COLUMN_CORRECTRATE, student.getCorrectRate());
-        contentValues.put(StudentTable.COLUMN_STUDENT, student.toString());
+        contentValues.put(StudentTable.COLUMN_ROW_DATA, student.toString());
         mDatabase.insert(StudentTable.TABLE_NAME, null, contentValues);
     }
 
@@ -42,7 +42,7 @@ public class StudentDao {
         if (cursor.moveToFirst()) {
             do {
                 students.add(Student.fromjsonObject(new JSONObject(cursor.getString(cursor
-                        .getColumnIndex(StudentTable.COLUMN_STUDENT)))));
+                        .getColumnIndex(StudentTable.COLUMN_ROW_DATA)))));
             } while (cursor.moveToNext());
         }
         cursor.close();

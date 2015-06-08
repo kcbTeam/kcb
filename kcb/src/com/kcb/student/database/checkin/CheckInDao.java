@@ -29,7 +29,7 @@ public class CheckInDao {
         ContentValues contentValues = new ContentValues();
         contentValues.put(CheckInTable.COLUMN_SUCCESS_TIMES, result.getSuccessTimes());
         contentValues.put(CheckInTable.COLUMN_ALL_TIMES, result.getAllTimes());
-        contentValues.put(CheckInTable.COLUMN_CHECKIN, result.toString());
+        contentValues.put(CheckInTable.COLUMN_ROW_DATA, result.toString());
         mDatabase.insert(CheckInTable.TABLE_NAME, null, contentValues);
     }
 
