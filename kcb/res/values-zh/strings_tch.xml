@@ -45,7 +45,7 @@
     <string name="tch_correct_rate">正确率</string>
     <!-- menu -->
     <string name="tch_exit_account">退出账号</string>
-    <string name="tch_exit_account_tip">退出后，下次使用时需要重新登录。</string>
+    <string name="tch_exit_account_tip">退出后，不会保存未进行的测试，下次使用时需要重新登录。</string>
     <string name="tch_click_again_exit_app">再按一次退出课程宝</string>
     <!-- HomeActivty end -->
 

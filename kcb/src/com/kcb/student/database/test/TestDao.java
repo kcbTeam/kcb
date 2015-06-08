@@ -52,6 +52,10 @@ public class TestDao {
         return tests;
     }
 
+    public void deleteAll() {
+        mDatabase.delete(TestTable.TABLE_NAME, null, null);
+    }
+
     public void close() {
         mDatabase.close();
     }

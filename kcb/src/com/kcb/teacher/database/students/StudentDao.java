@@ -49,6 +49,10 @@ public class StudentDao {
         return students;
     }
 
+    public void deleteAll() {
+        mDatabase.delete(StudentTable.TABLE_NAME, null, null);
+    }
+
     public void close() {
         mDatabase.close();
     }

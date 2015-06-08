@@ -452,8 +452,6 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
     }
 
     private void showQuestionNum() {
-        testNameTextView.setText(String.format(getString(R.string.tch_test_name), sTest.getName(),
-                sTest.getQuestionNum()));
         inputIndexTextView.setText(String.format(getString(R.string.tch_input_title),
                 mCurrentQuestionIndex + 1));
     }

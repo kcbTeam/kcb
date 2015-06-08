@@ -73,13 +73,6 @@ public class SetTestTimeAdapter extends BaseAdapter {
                     (TextView) convertView.findViewById(R.id.textview_questionindex);
             viewHolder.titleTextView = (TextView) convertView.findViewById(R.id.textview_title);
             viewHolder.editButton = (ButtonFlat) convertView.findViewById(R.id.button_edit);
-            viewHolder.editButton.setOnClickListener(new OnClickListener() {
-
-                @Override
-                public void onClick(View v) {
-                    mListener.onEdit(position, getItem(position));
-                }
-            });
             viewHolder.aTextView = (TextView) convertView.findViewById(R.id.textview_A);
             viewHolder.aCheckBox = (ImageView) convertView.findViewById(R.id.checkBox_A);
             viewHolder.bTextView = (TextView) convertView.findViewById(R.id.textview_B);
@@ -92,6 +85,13 @@ public class SetTestTimeAdapter extends BaseAdapter {
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
+        viewHolder.editButton.setOnClickListener(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                mListener.onEdit(position, getItem(position));
+            }
+        });
         viewHolder.setQuestion(position, getItem(position));
         return convertView;
     }

@@ -189,4 +189,11 @@ public class MaterialListDialog extends android.app.Dialog {
             }
         });
     }
+
+    /**
+     * step 5
+     */
+    public void enableAddOrEditMode() {
+        mAdapter.enableAddOrEditMode();
+    }
 }

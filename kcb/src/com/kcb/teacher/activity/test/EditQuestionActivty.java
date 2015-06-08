@@ -42,8 +42,8 @@ import com.kcbTeam.R;
  */
 public class EditQuestionActivty extends BaseActivity implements OnLongClickListener {
 
-    private TextView questionNumTextView;
     private ButtonFlat backButton;
+    private TextView questionNumTextView;
     private ButtonFlat deleteButton;
 
     private EditText titleEditText;
@@ -137,7 +137,7 @@ public class EditQuestionActivty extends BaseActivity implements OnLongClickList
         Intent intent = getIntent();
         mIndex = intent.getIntExtra(DATA_INDEX, 0);
         questionNumTextView.setText(String.format(
-                getResources().getString(R.string.tch_question_num), mIndex + 1));
+                getResources().getString(R.string.tch_question_index), mIndex + 1));
         showQuestion();
     }
 

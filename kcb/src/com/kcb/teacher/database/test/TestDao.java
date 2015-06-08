@@ -31,8 +31,10 @@ public class TestDao {
         mDatabase = mOpenHelper.getWritableDatabase();
     }
 
-    public boolean hasRecords(String testName) {
-        Cursor cursor = mDatabase.query(TestTable.TABLE_NAME, null, null, null, null, null, null);
+    public boolean hasTest(String testName) {
+        Cursor cursor =
+                mDatabase.query(TestTable.TABLE_NAME, null, TestTable.COLUMN_NAME + "=?",
+                        new String[] {testName}, null, null, null);
         int count = cursor.getCount();
         cursor.close();
         return count > 0;
@@ -119,6 +121,10 @@ public class TestDao {
     public void delete(Test test) {
         mDatabase.delete(TestTable.TABLE_NAME, TestTable.COLUMN_NAME + "=?",
                 new String[] {test.getName()});
+    }
+
+    public void deleteAll() {
+        mDatabase.delete(TestTable.TABLE_NAME, null, null);
     }
 
     public void close() {

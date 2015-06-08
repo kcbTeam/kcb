@@ -128,7 +128,7 @@ public class QuestionItem implements Serializable {
     }
 
     public boolean isCompleted() {
-        return !TextUtils.isEmpty(mText) || mBitmap != null || mBitmapString != null;
+        return !TextUtils.isEmpty(mText) || mBitmap != null;
     }
 
     public void changeStringToBitmap() {

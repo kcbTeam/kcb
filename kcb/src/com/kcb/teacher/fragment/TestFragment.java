@@ -26,6 +26,7 @@ import com.kcb.common.server.ResponseUtil;
 import com.kcb.common.server.UrlUtil;
 import com.kcb.common.util.DialogUtil;
 import com.kcb.common.util.ToastUtil;
+import com.kcb.common.view.MaterialListDialog;
 import com.kcb.common.view.MaterialListDialog.OnClickSureListener;
 import com.kcb.library.view.PaperButton;
 import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
@@ -53,8 +54,6 @@ public class TestFragment extends BaseFragment {
     private PaperButton addOrEditTestButton;
     private PaperButton lookTestResultButton;
 
-    private TestDao mTestDao;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.tch_fragment_test, container, false);
@@ -65,7 +64,6 @@ public class TestFragment extends BaseFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        initData();
         initView();
     }
 
@@ -83,14 +81,11 @@ public class TestFragment extends BaseFragment {
     }
 
     @Override
-    protected void initData() {
-        mTestDao = new TestDao(getActivity());
-    }
+    protected void initData() {}
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mTestDao.close();
         RequestUtil.getInstance().cancelPendingRequests(TAG);
     }
 
@@ -184,23 +179,26 @@ public class TestFragment extends BaseFragment {
 
     private void addOrEditTest() {
         final List<String> names = getTestNames();
-        names.add(getString(R.string.tch_add_new_test));
-        DialogUtil.showListDialog(getActivity(), R.string.tch_edit_test, names,
-                R.string.tch_comm_sure, new OnClickSureListener() {
+        names.add(0, getString(R.string.tch_add_new_test));
+        MaterialListDialog dialog =
+                DialogUtil.showListDialog(getActivity(), R.string.tch_edit_test, names,
+                        R.string.tch_comm_sure, new OnClickSureListener() {
 
-                    @Override
-                    public void onClick(View view, int position) {
-                        if (position == 0) { // add new test
-                            Intent intent = new Intent(getActivity(), SetTestNameActivity.class);
-                            startActivity(intent);
-                        } else {
-                            TestDao testDao = new TestDao(getActivity());
-                            Test test = testDao.getByName(names.get(position));
-                            testDao.close();
-                            EditTestActivity.startEditTest(getActivity(), test);
-                        }
-                    }
-                }, R.string.tch_comm_cancel, null);
+                            @Override
+                            public void onClick(View view, int position) {
+                                if (position == 0) { // add new test
+                                    Intent intent =
+                                            new Intent(getActivity(), SetTestNameActivity.class);
+                                    startActivity(intent);
+                                } else {
+                                    TestDao testDao = new TestDao(getActivity());
+                                    Test test = testDao.getByName(names.get(position));
+                                    testDao.close();
+                                    EditTestActivity.startEditTest(getActivity(), test);
+                                }
+                            }
+                        }, R.string.tch_comm_cancel, null);
+        dialog.enableAddOrEditMode();
     }
 
     private List<String> getTestNames() {

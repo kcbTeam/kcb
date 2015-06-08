@@ -85,14 +85,15 @@ public class DialogUtil {
      * @param cancelListener , can be null (only dismiss after click);
      * 
      */
-    public static void showListDialog(Context context, int titleResId, List<String> messages,
-            @NonNull int sureResId, OnClickSureListener sureListener, int cancelResId,
-            OnClickListener cancelListener) {
+    public static MaterialListDialog showListDialog(Context context, int titleResId,
+            List<String> messages, @NonNull int sureResId, OnClickSureListener sureListener,
+            int cancelResId, OnClickListener cancelListener) {
         MaterialListDialog dialog = new MaterialListDialog(context);
         dialog.show();
         dialog.setTitle(titleResId);
         dialog.setAdapter(messages);
         dialog.setSureButton(sureResId, sureListener);
         dialog.setCancelButton(cancelResId, cancelListener);
+        return dialog;
     }
 }

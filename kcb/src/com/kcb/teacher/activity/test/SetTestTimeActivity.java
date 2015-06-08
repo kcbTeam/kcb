@@ -34,8 +34,6 @@ public class SetTestTimeActivity extends BaseActivity {
     private EditQuestionListener mEditListener;
     private SetTestTimeAdapter mAdapter;
 
-    private TestDao mTestDao;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,10 +104,10 @@ public class SetTestTimeActivity extends BaseActivity {
         if (v == finishButton) {
             sTest.setTime(slider.getValue());
             sTest.setDate(System.currentTimeMillis());
-            mTestDao = new TestDao(this);
-            mTestDao.add(sTest);
+            TestDao testDao = new TestDao(this);
+            testDao.add(sTest);
             sTest = null;
-            mTestDao.close();
+            testDao.close();
             finish();
         }
     }
