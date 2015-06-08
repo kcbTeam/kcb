@@ -6,7 +6,7 @@ import java.util.List;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.annotation.SuppressLint;
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -16,44 +16,34 @@ import com.kcb.student.database.KSQLiteOpenHelper;
 
 public class TestDao {
 
-    private KSQLiteOpenHelper mSQLiteOpenHelper;
-    private SQLiteDatabase mSQLiteDatabase;
+    private KSQLiteOpenHelper mOpenHelper;
+    private SQLiteDatabase mDatabase;
 
     public TestDao(Context context) {
-        mSQLiteOpenHelper = new KSQLiteOpenHelper(context);
-        mSQLiteDatabase = mSQLiteOpenHelper.getWritableDatabase();
+        mOpenHelper = new KSQLiteOpenHelper(context);
+        mDatabase = mOpenHelper.getWritableDatabase();
     }
 
-    @SuppressLint("SimpleDateFormat")
     public void add(Test test) {
-        int hasTested = 0;
-        if (test.hasTested()) {
-            hasTested = 1;
-        }
-        mSQLiteDatabase.beginTransaction();
-        try {
-            mSQLiteDatabase.execSQL("INSERT INTO " + TestDB.TABLE_NAME
-                    + " VALUES(null,?,?,?,?,?,?)",
-                    new String[] {test.getId(), test.getName(), String.valueOf(test.getTime()),
-                            test.getDateString().toString(), String.valueOf(hasTested),
-                            test.toJsonObject().toString()});
-            mSQLiteDatabase.setTransactionSuccessful();
-        } finally {
-            mSQLiteDatabase.endTransaction();
-        }
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(TestTable.COLUMN_ID, test.getId());
+        contentValues.put(TestTable.COLUMN_NAME, test.getName());
+        contentValues.put(TestTable.COLUMN_TIME, test.getTime());
+        contentValues.put(TestTable.COLUMN_DATE, test.getDate());
+        contentValues.put(TestTable.COLUMN_HASTESTED, test.hasTested());
+        contentValues.put(TestTable.COLUMN_TEST, test.toString());
+        mDatabase.insert(TestTable.TABLE_NAME, null, contentValues);
     }
 
     public List<Test> getAll() {
-        Cursor cursor =
-                mSQLiteDatabase.query(TestDB.TABLE_NAME, null, null, null, null, null, null);
+        Cursor cursor = mDatabase.query(TestTable.TABLE_NAME, null, null, null, null, null, null);
         List<Test> tests = new ArrayList<Test>();
         if (cursor.moveToFirst()) {
             do {
-                Test test;
                 try {
-                    test =
+                    Test test =
                             Test.fromJsonObject(new JSONObject(cursor.getString(cursor
-                                    .getColumnIndex(TestDB.KEY_TEXT))));
+                                    .getColumnIndex(TestTable.COLUMN_TEST))));
                     tests.add(test);
                 } catch (JSONException e) {}
             } while (cursor.moveToNext());
@@ -63,6 +53,6 @@ public class TestDao {
     }
 
     public void close() {
-        mSQLiteDatabase.close();
+        mDatabase.close();
     }
 }

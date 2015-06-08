@@ -7,69 +7,49 @@ import java.util.List;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.kcb.teacher.database.KSQLiteOpenHelper;
 import com.kcb.teacher.model.stucentre.Student;
 
 public class StudentDao {
-    private KSQLiteOpenHelper mCommonSQLiteOpenHelper;
-    private SQLiteDatabase mSqLiteDatabase;
+
+    private KSQLiteOpenHelper mOpenHelper;
+    private SQLiteDatabase mDatabase;
 
     public StudentDao(Context context) {
-        mCommonSQLiteOpenHelper = new KSQLiteOpenHelper(context);
-        mSqLiteDatabase = mCommonSQLiteOpenHelper.getWritableDatabase();
+        mOpenHelper = new KSQLiteOpenHelper(context);
+        mDatabase = mOpenHelper.getWritableDatabase();
     }
 
-    /**
-     * 
-     * @param student
-     * @throws SQLException
-     * @throws JSONException
-     */
-    public void addStudentRecord(Student student) throws SQLException, JSONException {
-        mSqLiteDatabase
-                .execSQL(
-                        "INSERT INTO " + StudentDB.TABLE_NAME + " VALUES(null,?,?,?,?,?)",
-                        new String[] {student.getName(), student.getId(),
-                                String.valueOf(student.getCheckInRate()),
-                                String.valueOf(student.getCorrectRate()),
-                                student.toJsonObject().toString()});
+    public void add(Student student) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(StudentTable.COLUMN_STUID, student.getId());
+        contentValues.put(StudentTable.COLUMN_NAME, student.getName());
+        contentValues.put(StudentTable.COLUMN_CHECKINRATE, student.getCheckInRate());
+        contentValues.put(StudentTable.COLUMN_CORRECTRATE, student.getCorrectRate());
+        contentValues.put(StudentTable.COLUMN_STUDENT, student.toString());
+        mDatabase.insert(StudentTable.TABLE_NAME, null, contentValues);
     }
 
-    /**
-     * 
-     * @return
-     * @throws ParseException
-     * @throws JSONException
-     */
-    public List<Student> getAllStuCentre() throws ParseException, JSONException {
+    public List<Student> getAll() throws ParseException, JSONException {
         Cursor cursor =
-                mSqLiteDatabase.query(StudentDB.TABLE_NAME, null, null, null, null, null, null);
-        List<Student> stuCentreList = new ArrayList<Student>();
+                mDatabase.query(StudentTable.TABLE_NAME, null, null, null, null, null, null);
+        List<Student> students = new ArrayList<Student>();
         if (cursor.moveToFirst()) {
             do {
-                stuCentreList.add(Student.fromjsonObject(new JSONObject(cursor.getString(cursor
-                        .getColumnIndex(StudentDB.KEY_STUDENT)))));
+                students.add(Student.fromjsonObject(new JSONObject(cursor.getString(cursor
+                        .getColumnIndex(StudentTable.COLUMN_STUDENT)))));
             } while (cursor.moveToNext());
         }
         cursor.close();
-        return stuCentreList;
-    }
-
-    public void deleteStuCentreById(String stuId) {
-        mSqLiteDatabase.delete(StudentDB.TABLE_NAME, StudentDB.KEY_STUID + "=?",
-                new String[] {stuId});
-    }
-
-    public void deleteAllStuCentre() {
-        mSqLiteDatabase.execSQL("DELETE FROM " + StudentDB.TABLE_NAME);
+        return students;
     }
 
     public void close() {
-        mSqLiteDatabase.close();
+        mDatabase.close();
     }
 }

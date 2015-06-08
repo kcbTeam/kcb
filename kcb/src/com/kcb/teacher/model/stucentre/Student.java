@@ -74,6 +74,10 @@ public class Student implements Serializable {
         mCorrectRate = correctrate;
     }
 
+    public String toString() {
+        return toJsonObject().toString();
+    }
+
     /*
      * student to json,json to student
      */
@@ -82,12 +86,14 @@ public class Student implements Serializable {
     private final static String KEY_CHECKINRATE = "checkinrate";
     private final static String KEY_CORRECTRATE = "correctrate";
 
-    public JSONObject toJsonObject() throws JSONException {
+    public JSONObject toJsonObject() {
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put(KEY_ID, mId);
-        jsonObject.put(KEY_NAME, mName);
-        jsonObject.put(KEY_CHECKINRATE, mCheckInRate);
-        jsonObject.put(KEY_CORRECTRATE, mCorrectRate);
+        try {
+            jsonObject.put(KEY_ID, mId);
+            jsonObject.put(KEY_NAME, mName);
+            jsonObject.put(KEY_CHECKINRATE, mCheckInRate);
+            jsonObject.put(KEY_CORRECTRATE, mCorrectRate);
+        } catch (JSONException e) {}
         return jsonObject;
     }
 

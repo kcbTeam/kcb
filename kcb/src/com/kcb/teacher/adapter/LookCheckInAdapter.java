@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.kcb.teacher.database.checkin.CheckInDao;
 import com.kcb.teacher.model.checkin.CheckInResult;
 import com.kcbTeam.R;
 
@@ -73,7 +72,7 @@ public class LookCheckInAdapter extends BaseAdapter {
         public TextView rateTextView;
 
         public void setCheckInResult(CheckInResult result) {
-            dateTextView.setText(CheckInDao.formatter.format(result.getDate()));
+            dateTextView.setText(result.getDateString());
             rateTextView.setText(String.format(FORMAT_RATE, (int) (100 * result.getRate())));
         }
     }

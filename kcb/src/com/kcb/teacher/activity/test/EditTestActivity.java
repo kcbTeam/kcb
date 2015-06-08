@@ -639,7 +639,7 @@ public class EditTestActivity extends BaseActivity implements OnLongClickListene
                 ToastUtil.toast(R.string.tch_deleted);
                 try {
                     mTestDao = new TestDao(EditTestActivity.this);
-                    mTestDao.delete(sTest.getName());
+                    mTestDao.delete(sTest);
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }

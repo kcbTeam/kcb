@@ -9,8 +9,8 @@ import org.json.JSONObject;
 
 public class CheckInResult {
 
-    private int mSuccessTime;
-    private int mAllTime;
+    private int mSuccessTimes;
+    private int mAllTimes;
     private List<CheckInResultDetail> results;
 
     private static final String KEY_SUCCESS_TIME = "successtime";
@@ -21,14 +21,26 @@ public class CheckInResult {
         results = new ArrayList<CheckInResultDetail>();
     }
 
+    public int getSuccessTimes() {
+        return mSuccessTimes;
+    }
+
+    public int getAllTimes() {
+        return mAllTimes;
+    }
+
+    public String toString() {
+        return toJsonObject().toString();
+    }
+
     /**
      * checkin resutl to json, json to checkin result
      */
     public JSONObject toJsonObject() {
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put(KEY_SUCCESS_TIME, mSuccessTime);
-            jsonObject.put(KEY_ALL_TIME, mAllTime);
+            jsonObject.put(KEY_SUCCESS_TIME, mSuccessTimes);
+            jsonObject.put(KEY_ALL_TIME, mAllTimes);
 
             JSONArray jsonArray = new JSONArray();
             for (int i = 0; i < results.size(); i++) {
@@ -42,8 +54,8 @@ public class CheckInResult {
 
     public static CheckInResult fromJsonObejct(JSONObject jsonObject) {
         CheckInResult checkInResult = new CheckInResult();
-        checkInResult.mSuccessTime = jsonObject.optInt(KEY_SUCCESS_TIME);
-        checkInResult.mAllTime = jsonObject.optInt(KEY_ALL_TIME);
+        checkInResult.mSuccessTimes = jsonObject.optInt(KEY_SUCCESS_TIME);
+        checkInResult.mAllTimes = jsonObject.optInt(KEY_ALL_TIME);
 
         try {
             JSONArray jsonArray = jsonObject.optJSONArray(KEY_RESULT);
