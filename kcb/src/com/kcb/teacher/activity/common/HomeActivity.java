@@ -19,6 +19,9 @@ import com.kcb.common.base.BaseFragmentActivity;
 import com.kcb.common.util.DialogUtil;
 import com.kcb.common.util.ToastUtil;
 import com.kcb.library.view.buttonflat.ButtonFlat;
+import com.kcb.teacher.database.checkin.CheckInDao;
+import com.kcb.teacher.database.students.StudentDao;
+import com.kcb.teacher.database.test.TestDao;
 import com.kcb.teacher.fragment.CheckInFragment;
 import com.kcb.teacher.fragment.StuCentreFragment;
 import com.kcb.teacher.fragment.TestFragment;
@@ -185,17 +188,7 @@ public class HomeActivity extends BaseFragmentActivity {
                         break;
                     case R.id.button_exit:
                         mPopupWindow.dismiss();
-                        DialogUtil.showNormalDialog(HomeActivity.this, R.string.tch_exit_account,
-                                R.string.tch_exit_account_tip, R.string.tch_comm_sure,
-                                new View.OnClickListener() {
-
-                                    @Override
-                                    public void onClick(View v) {
-                                        KAccount.deleteAccount();
-                                        LoginActivity.start(HomeActivity.this);
-                                        finish();
-                                    }
-                                }, R.string.tch_comm_cancel, null);
+                        exitAccount();
                         break;
                     default:
                         break;
@@ -211,6 +204,37 @@ public class HomeActivity extends BaseFragmentActivity {
         exitButton.setOnClickListener(clickListener);
         exitButton.setTextColor(getResources().getColor(R.color.black_700));
         exitButton.setTextSize(14);
+    }
+
+    private void exitAccount() {
+        DialogUtil.showNormalDialog(HomeActivity.this, R.string.tch_exit_account,
+                R.string.tch_exit_account_tip, R.string.tch_comm_sure, new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        // delete account
+                        KAccount.deleteAccount();
+
+                        // delete checkin result
+                        CheckInDao checkInDao = new CheckInDao(HomeActivity.this);
+                        checkInDao.deleteAll();
+                        checkInDao.close();
+
+                        // delete test result
+                        TestDao testDao = new TestDao(HomeActivity.this);
+                        testDao.deleteAll();
+                        testDao.close();
+
+                        // delete student
+                        StudentDao studentDao = new StudentDao(HomeActivity.this);
+                        studentDao.deleteAll();
+                        studentDao.close();
+
+                        // goto login activity
+                        LoginActivity.start(HomeActivity.this);
+                        finish();
+                    }
+                }, R.string.tch_comm_cancel, null);
     }
 
     private boolean hasClickBack = false;

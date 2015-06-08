@@ -28,13 +28,15 @@
 
     <com.kcb.common.view.SearchEditText
         android:id="@+id/searchedittext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@id/layout_title" />
 
     <LinearLayout
         android:id="@+id/layout_listtitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/edittext_search"
+        android:layout_below="@id/searchedittext"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:orientation="horizontal"

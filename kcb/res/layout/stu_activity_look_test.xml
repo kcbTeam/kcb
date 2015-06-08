@@ -28,6 +28,8 @@
 
     <com.kcb.common.view.SearchEditText
         android:id="@+id/searchedittext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@id/progressbar_refresh" />
 
     <LinearLayout

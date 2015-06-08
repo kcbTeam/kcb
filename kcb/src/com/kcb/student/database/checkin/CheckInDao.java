@@ -52,6 +52,10 @@ public class CheckInDao {
         return times;
     }
 
+    public void deleteAll() {
+        mDatabase.delete(CheckInTable.TABLE_NAME, null, null);
+    }
+
     public void close() {
         mDatabase.close();
     }
