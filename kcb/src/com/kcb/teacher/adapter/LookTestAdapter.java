@@ -1,6 +1,5 @@
 package com.kcb.teacher.adapter;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import android.annotation.SuppressLint;
@@ -69,9 +68,8 @@ public class LookTestAdapter extends BaseAdapter {
 
         @SuppressLint("SimpleDateFormat")
         public void setTest(Test test) {
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
             testName.setText(test.getName());
-            testDate.setText(formatter.format(test.getDateString()).toString());
+            testDate.setText(test.getDateString());
             questionNum.setText(String.valueOf(test.getQuestionNum()));
         }
     }

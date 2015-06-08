@@ -31,6 +31,7 @@
     <!--  -->
     <string name="stu_start_test">开始答题</string>
     <string name="stu_look_test_result">查看测试结果</string>
+    <string name="stu_no_test_now">没有正在进行的测试</string>
     <!--  -->
     <string name="stu_modify_password">修改密码</string>
     <string name="stu_exit_account">退出账号</string>
@@ -63,6 +64,7 @@
     <!--  -->
     <string name="stu_checkin_num_error">签到数字错误</string>
     <string name="stu_checkin_success">签到成功</string>
+    <string name="stu_checkin_unfinish">签到未完成</string>
     <string name="stu_checkin_time_end">时间已到，你未完成本次签到。</string>
     <!-- StartCheckInActivity End -->
 
@@ -99,5 +101,4 @@
     <string name="stu_question_num">题目数量</string>
     <string name="stu_test_date">测试日期</string>
     <!-- LookTestActivity End -->
-
-</resources>
+</resources>

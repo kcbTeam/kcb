@@ -1,7 +1,7 @@
 package com.kcb.student.adapter;
 
 import android.annotation.SuppressLint;
-import android.graphics.Color;
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,11 +12,13 @@ import com.kcbTeam.R;
 
 public class StartTestAdapter extends RecyclerView.Adapter<StartTestAdapter.TestViewHolder> {
 
+    private Context mContext;
     private int mSize;
     private int mCurrentIndex;
 
-    public StartTestAdapter(int size) {
+    public StartTestAdapter(Context context, int size) {
         super();
+        mContext = context;
         mSize = size;
         mCurrentIndex = 0;
     }
@@ -59,11 +61,11 @@ public class StartTestAdapter extends RecyclerView.Adapter<StartTestAdapter.Test
         }
 
         public void setViewSelectColor() {
-            view.setBackgroundColor(Color.parseColor("#db7093"));
+            view.setBackgroundColor(mContext.getResources().getColor(R.color.blue));
         }
 
         public void setViewNormalColor() {
-            view.setBackgroundColor(Color.parseColor("#eeeeee"));
+            view.setBackgroundColor(mContext.getResources().getColor(R.color.black_400));
         }
     }
 }

@@ -90,7 +90,7 @@ public class StartCheckInActivity extends BaseActivity {
         progressBar = (SmoothProgressBar) findViewById(R.id.progressbar_finish);
 
         recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
-        mAdapter = new StartCheckInAdapter();
+        mAdapter = new StartCheckInAdapter(StartCheckInActivity.this);
         mAdapter.setRecyclerItemClickListener(mRecyclerItemClickListener);
         recyclerView.setAdapter(mAdapter);
     }
@@ -253,7 +253,7 @@ public class StartCheckInActivity extends BaseActivity {
     @Override
     public void onBackPressed() {
         if (mRemainTime > 0) {
-            ToastUtil.toast("签到未完成");
+            ToastUtil.toast(R.string.stu_checkin_unfinish);
         }
     }
 

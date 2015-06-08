@@ -116,7 +116,7 @@ public class LookCheckInDetailActivity extends BaseFragmentActivity implements O
         for (int i = 0; i < 2; i++)
             xVals.add(infoStrings[i % infoStrings.length]);
 
-        PieDataSet dataSet = new PieDataSet(yVals1, " ");
+        PieDataSet dataSet = new PieDataSet(yVals1, "");
         dataSet.setSliceSpace(0);
         // dataSet.setSelectionShift(5f);
         ArrayList<Integer> colors = new ArrayList<Integer>();

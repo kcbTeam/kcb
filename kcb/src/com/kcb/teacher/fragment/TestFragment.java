@@ -22,11 +22,13 @@ import com.kcb.common.base.BaseFragment;
 import com.kcb.common.listener.DelayClickListener;
 import com.kcb.common.model.test.Test;
 import com.kcb.common.server.RequestUtil;
+import com.kcb.common.server.ResponseUtil;
 import com.kcb.common.server.UrlUtil;
 import com.kcb.common.util.DialogUtil;
 import com.kcb.common.util.ToastUtil;
 import com.kcb.common.view.MaterialListDialog.OnClickSureListener;
 import com.kcb.library.view.PaperButton;
+import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
 import com.kcb.teacher.activity.test.EditTestActivity;
 import com.kcb.teacher.activity.test.LookTestActivity;
 import com.kcb.teacher.activity.test.SetTestNameActivity;
@@ -46,6 +48,8 @@ public class TestFragment extends BaseFragment {
     private final String TAG = TestFragment.class.getName();
 
     private PaperButton startTestButton;
+    private SmoothProgressBar startProgressBar;
+
     private PaperButton addOrEditTestButton;
     private PaperButton lookTestResultButton;
 
@@ -68,11 +72,13 @@ public class TestFragment extends BaseFragment {
     @Override
     protected void initView() {
         View view = getView();
-        addOrEditTestButton = (PaperButton) view.findViewById(R.id.button_edit_test);
-        addOrEditTestButton.setOnClickListener(mClickListener);
-        startTestButton = (PaperButton) view.findViewById(R.id.button_begin_test);
+        startTestButton = (PaperButton) view.findViewById(R.id.button_start);
         startTestButton.setOnClickListener(mClickListener);
-        lookTestResultButton = (PaperButton) view.findViewById(R.id.button_test_result);
+        startProgressBar = (SmoothProgressBar) view.findViewById(R.id.progressbar_start);
+
+        addOrEditTestButton = (PaperButton) view.findViewById(R.id.button_edit);
+        addOrEditTestButton.setOnClickListener(mClickListener);
+        lookTestResultButton = (PaperButton) view.findViewById(R.id.button_look_result);
         lookTestResultButton.setOnClickListener(mClickListener);
     }
 
@@ -94,13 +100,13 @@ public class TestFragment extends BaseFragment {
         @Override
         public void doClick(View v) {
             switch (v.getId()) {
-                case R.id.button_begin_test:
+                case R.id.button_start:
                     startTest();
                     break;
-                case R.id.button_edit_test:
+                case R.id.button_edit:
                     addOrEditTest();
                     break;
-                case R.id.button_test_result:
+                case R.id.button_look_result:
                     Intent intent = new Intent(getActivity(), LookTestActivity.class);
                     startActivity(intent);
                     break;
@@ -111,6 +117,9 @@ public class TestFragment extends BaseFragment {
     };
 
     private void startTest() {
+        if (startProgressBar.getVisibility() == View.VISIBLE) {
+            return;
+        }
         final List<String> names = getTestNames();
         if (names.isEmpty()) {
             ToastUtil.toast(R.string.tch_add_test_first);
@@ -129,16 +138,21 @@ public class TestFragment extends BaseFragment {
         }
     }
 
+    private final String KEY_ID = "id";
+    private final String KEY_TEST = "test";
+
     private void sendTestToServer(final Test test) {
         OnClickListener sureListener = new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
+                startProgressBar.setVisibility(View.VISIBLE);
+
                 JSONObject requestObject = new JSONObject();
                 try {
-                    requestObject.put("id", KAccount.getAccountId());
+                    requestObject.put(KEY_ID, KAccount.getAccountId());
                     test.setQuestionId();
-                    requestObject.put("test", test.toJsonObject());
+                    requestObject.put(KEY_TEST, test.toJsonObject());
                 } catch (JSONException e) {}
                 JsonObjectRequest request =
                         new JsonObjectRequest(Method.POST, UrlUtil.getTchTestStartUrl(),
@@ -146,22 +160,26 @@ public class TestFragment extends BaseFragment {
 
                                     @Override
                                     public void onResponse(JSONObject response) {
-                                        ToastUtil.toast("成功");
+                                        startProgressBar.hide(getActivity());
+                                        ToastUtil.toast(R.string.tch_test_started);
                                     }
                                 }, new ErrorListener() {
 
                                     @Override
                                     public void onErrorResponse(VolleyError error) {
-                                        ToastUtil.toast("失败");
+                                        startProgressBar.hide(getActivity());
+                                        ResponseUtil.toastError(error);
                                     }
                                 });
                 RequestUtil.getInstance().addToRequestQueue(request, TAG);
             }
         };
-        DialogUtil.showNormalDialog(getActivity(), R.string.tch_start_test,
-                "本次测试的名称为——" + test.getName() + "，包括 " + test.getQuestionNum() + " 道题，" + "时间为 "
-                        + test.getTime() + " 分钟。", R.string.tch_comm_sure, sureListener,
-                R.string.tch_comm_cancel, null);
+        DialogUtil.showNormalDialog(
+                getActivity(),
+                R.string.tch_start_test,
+                String.format(getString(R.string.tch_start_test_tip), test.getName(),
+                        test.getQuestionNum(), test.getTime()), R.string.tch_comm_sure,
+                sureListener, R.string.tch_comm_cancel, null);
     }
 
     private void addOrEditTest() {
