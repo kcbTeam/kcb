@@ -151,7 +151,7 @@ public class CropPictureActivity extends BaseActivity {
      */
     public static final String DATA_PICTURE = "data_picture";
 
-    public static final int REQUEST_CUTPHOTO = 1;
+    public static final int REQUEST_CROPPHOTO = 1;
 
     public static void startForResult(Context context, Uri uri, int requestCode) {
         Intent intent = new Intent(context, CropPictureActivity.class);

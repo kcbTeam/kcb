@@ -104,6 +104,8 @@
     <string name="tch_test_name_num">%1$s（共%2$d题）</string>
     <string name="tch_last_question">上一题</string>
     <string name="tch_next_question">下一题</string>
+    <string name="tch_add_question">添加一题</string>
+    <string name="tch_delete_question">删除本题</string>
     <string name="tch_input_title">输入题目%1$d</string>
     <string name="tch_input_choice">输入选项，并勾出正确项</string>
     <string name="tch_choice_A">A</string>

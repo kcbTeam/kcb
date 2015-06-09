@@ -25,12 +25,11 @@
             android:textSize="@dimen/text_size_large" />
     </LinearLayout>
 
-    <com.kcb.common.view.TestView
+    <com.kcb.common.view.QuestionView
         android:id="@+id/testview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/layout_title" >
-    </com.kcb.common.view.TestView>
+        android:layout_below="@id/layout_title" />
 
     <LinearLayout
         android:id="@+id/layout_buttons"
