@@ -44,6 +44,7 @@ public class LookCheckInActivity extends BaseActivity implements OnItemClickList
     private ButtonFlat refreshButton;
     private SmoothProgressBar progressBar;
 
+    private View listTitleLayout;
     private ListView listView;
 
     private LookCheckInAdapter mAdapter;
@@ -65,6 +66,7 @@ public class LookCheckInActivity extends BaseActivity implements OnItemClickList
         refreshButton.setOnClickListener(this);
         progressBar = (SmoothProgressBar) findViewById(R.id.progressbar_refresh);
 
+        listTitleLayout = findViewById(R.id.layout_listview_title);
         listView = (ListView) findViewById(R.id.listview);
         listView.setOnItemClickListener(this);
     }
@@ -74,6 +76,11 @@ public class LookCheckInActivity extends BaseActivity implements OnItemClickList
         CheckInDao checkInDao = new CheckInDao(LookCheckInActivity.this);
         List<CheckInResult> results = checkInDao.getAll();
         checkInDao.close();
+
+        if (results.isEmpty()) {
+            listTitleLayout.setVisibility(View.INVISIBLE);
+        }
+
         mAdapter = new LookCheckInAdapter(LookCheckInActivity.this, results);
         listView.setAdapter(mAdapter);
     }
@@ -110,6 +117,11 @@ public class LookCheckInActivity extends BaseActivity implements OnItemClickList
                     public void onResponse(JSONArray response) {
                         progressBar.hide(LookCheckInActivity.this);
                         List<CheckInResult> results = new ArrayList<CheckInResult>();
+
+                        if (!results.isEmpty()) {
+                            listTitleLayout.setVisibility(View.VISIBLE);
+                        }
+
                         for (int i = 0; i < response.length(); i++) {
                             try {
                                 CheckInResult checkInResult =
