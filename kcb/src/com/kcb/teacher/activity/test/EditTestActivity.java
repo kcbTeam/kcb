@@ -330,6 +330,5 @@ public class EditTestActivity extends BaseActivity {
         intent.setAction(ACTION_EDIT_TEST);
         context.startActivity(intent);
         sTest = test;
-        sTest.changeStringToBitmap();
     }
 }

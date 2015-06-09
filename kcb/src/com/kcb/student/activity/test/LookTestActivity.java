@@ -36,6 +36,7 @@ public class LookTestActivity extends BaseActivity implements OnSearchListener, 
 
     private SearchEditText searchEditText;
 
+    private View listTitleLayout;
     private ListView listView;
     private LookTestAdapter mAdapter;
 
@@ -67,6 +68,7 @@ public class LookTestActivity extends BaseActivity implements OnSearchListener, 
 
         listView = (ListView) findViewById(R.id.listview_test);
         listView.setOnItemClickListener(this);
+        listTitleLayout = findViewById(R.id.layout_list_title);
     }
 
     @Override
@@ -80,6 +82,10 @@ public class LookTestActivity extends BaseActivity implements OnSearchListener, 
 
         mAdapter = new LookTestAdapter(this, mTempTests);
         listView.setAdapter(mAdapter);
+
+        if (mTests.isEmpty()) {
+            listTitleLayout.setVisibility(View.INVISIBLE);
+        }
     }
 
     @Override
@@ -131,6 +137,7 @@ public class LookTestActivity extends BaseActivity implements OnSearchListener, 
             return;
         }
         progressBar.setVisibility(View.VISIBLE);
+        // if success, show listview title;
     }
 
     @Override

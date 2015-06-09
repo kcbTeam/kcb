@@ -5,11 +5,12 @@
     android:id="@+id/button_rotate"
     style="@style/common_title_icon_layout"
     tools:ignore="contentDescription"
+    widget:clickAfterRipple="false"
     widget:rippleSpeed="6" >
 
     <ImageView
         style="@style/common_title_icon"
-        android:src="@drawable/ic_rotate_left_black_24dp" >
+        android:src="@drawable/ic_rotate_right_black_24dp" >
     </ImageView>
 
 </com.kcb.library.view.buttonflat.ButtonFlat>

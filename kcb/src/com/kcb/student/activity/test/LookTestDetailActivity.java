@@ -115,6 +115,5 @@ public class LookTestDetailActivity extends BaseActivity {
         Intent intent = new Intent(context, LookTestDetailActivity.class);
         context.startActivity(intent);
         sTest = test;
-        sTest.changeStringToBitmap();
     }
 }

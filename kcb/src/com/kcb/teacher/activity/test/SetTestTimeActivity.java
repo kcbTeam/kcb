@@ -118,7 +118,6 @@ public class SetTestTimeActivity extends BaseActivity {
                 } else if (ACTION_EDIT_TEST.equals(mAction)) {
                     testDao.update(sTest);
                 }
-                sTest = null;
                 testDao.close();
                 finish();
                 break;
