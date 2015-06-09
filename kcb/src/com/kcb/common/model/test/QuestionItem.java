@@ -135,6 +135,14 @@ public class QuestionItem implements Serializable {
         getBitmapString();
     }
 
+    public void release() {
+        mBitmapString = null;
+        if (null != mBitmap) {
+            mBitmap.recycle();
+            mBitmap = null;
+        }
+    }
+
     /**
      * question item to json, json to question item
      */

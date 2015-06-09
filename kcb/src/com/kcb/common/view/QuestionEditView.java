@@ -394,4 +394,9 @@ public class QuestionEditView extends LinearLayout implements OnClickListener, O
         cItem.setIsRight(checkBoxC.isCheck());
         dItem.setIsRight(checkBoxD.isCheck());
     }
+
+    public void release() {
+        mContext = null;
+        mQuestion = null;
+    }
 }

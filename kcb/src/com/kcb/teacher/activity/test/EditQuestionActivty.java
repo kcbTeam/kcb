@@ -105,6 +105,14 @@ public class EditQuestionActivty extends BaseActivity {
         questionEditView.onActivityResult(requestCode, resultCode, data);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        questionEditView.release();
+        questionEditView = null;
+        sQuestion = null;
+    }
+
     /**
      * start
      */

@@ -112,6 +112,19 @@ public class Question implements Serializable {
         mChoiceDItem.changeStringToBitmap();
     }
 
+    public void release() {
+        mTitleItem.release();
+        mTitleItem = null;
+        mChoiceAItem.release();
+        mChoiceAItem = null;
+        mChoiceBItem.release();
+        mChoiceBItem = null;
+        mChoiceCItem.release();
+        mChoiceCItem = null;
+        mChoiceDItem.release();
+        mChoiceDItem = null;
+    }
+
     /**
      * question to json, json to question
      */

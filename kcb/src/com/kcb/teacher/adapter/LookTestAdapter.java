@@ -44,6 +44,11 @@ public class LookTestAdapter extends BaseAdapter {
         return position;
     }
 
+    public void release() {
+        mContext = null;
+        mTests = null;
+    }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder;

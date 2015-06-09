@@ -93,4 +93,8 @@ public class QuestionView extends LinearLayout {
             }
         }
     }
+
+    public void release() {
+        mContext = null;
+    }
 }

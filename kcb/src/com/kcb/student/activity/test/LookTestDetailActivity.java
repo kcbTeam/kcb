@@ -101,6 +101,13 @@ public class LookTestDetailActivity extends BaseActivity {
         questionView.showQuestion(sTest.getQuestion(mQuestionIndex));
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        questionView.release();
+        sTest = null;
+    }
+
     /**
      * start
      */
@@ -108,5 +115,6 @@ public class LookTestDetailActivity extends BaseActivity {
         Intent intent = new Intent(context, LookTestDetailActivity.class);
         context.startActivity(intent);
         sTest = test;
+        sTest.changeStringToBitmap();
     }
 }

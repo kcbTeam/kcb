@@ -129,15 +129,29 @@ public class SetTestTimeActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        OnClickListener sureListener = new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        };
-        DialogUtil.showNormalDialog(this, R.string.tch_comm_cancel,
-                R.string.tch_not_save_if_cancel, R.string.tch_comm_sure, sureListener,
-                R.string.tch_comm_cancel, null);
+        if (ACTION_ADD_TEST.equals(mAction)) {
+            OnClickListener sureListener = new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish();
+                }
+            };
+            DialogUtil.showNormalDialog(this, R.string.tch_comm_cancel,
+                    R.string.tch_not_save_if_cancel, R.string.tch_comm_sure, sureListener,
+                    R.string.tch_comm_cancel, null);
+        } else if (ACTION_EDIT_TEST.equals(mAction)) {
+            onClick(finishButton);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        sTest.release();
+        sTest = null;
+        mEditListener = null;
+        mAdapter.release();
+        mAdapter = null;
     }
 
     /**

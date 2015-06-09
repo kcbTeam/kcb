@@ -134,5 +134,7 @@ public class LookCheckInActivity extends BaseActivity implements OnItemClickList
     protected void onDestroy() {
         super.onDestroy();
         RequestUtil.getInstance().cancelPendingRequests(TAG);
+        mAdapter.release();
+        mAdapter = null;
     }
 }

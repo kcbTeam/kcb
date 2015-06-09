@@ -12,6 +12,13 @@ import android.widget.ImageView;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcbTeam.R;
 
+/**
+ * 
+ * @className: StartCheckInAdapter
+ * @description:
+ * @author: TaoLi
+ * @date: 2015-5-9 下午5:51:18
+ */
 public class StartCheckInAdapter
         extends RecyclerView.Adapter<StartCheckInAdapter.CheckinViewHolder> {
 
@@ -86,5 +93,11 @@ public class StartCheckInAdapter
                 actionImageView.setVisibility(View.GONE);
             }
         }
+    }
+
+    public void release() {
+        mContext = null;
+        mItems = null;
+        mItemClickListener = null;
     }
 }

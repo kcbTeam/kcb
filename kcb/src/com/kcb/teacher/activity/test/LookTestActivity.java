@@ -199,5 +199,14 @@ public class LookTestActivity extends BaseActivity implements OnSearchListener, 
     protected void onDestroy() {
         super.onDestroy();
         RequestUtil.getInstance().cancelPendingRequests(TAG);
+        searchEditText.release();
+        searchEditText = null;
+        mAdapter.release();
+        mAdapter = null;
+        for (Test test : mAllTests) {
+            test.release();
+        }
+        mAllTests = null;
+        mSearchedTests = null;
     }
 }

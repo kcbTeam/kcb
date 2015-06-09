@@ -44,6 +44,11 @@ public class LookTestAdapter extends BaseAdapter {
         return position;
     }
 
+    public void release() {
+        mContext = null;
+        mTests = null;
+    }
+
     @SuppressLint("InflateParams")
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {

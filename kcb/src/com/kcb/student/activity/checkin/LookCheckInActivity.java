@@ -210,6 +210,8 @@ public class LookCheckInActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         RequestUtil.getInstance().cancelPendingRequests(TAG);
+        pieChart = null;
+        mRates = null;
     }
 
     /**

@@ -349,6 +349,11 @@ public class StartTestActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         RequestUtil.getInstance().cancelPendingRequests(TAG);
+        sTest.release();
+        sTest = null;
+        mTempQuestion.release();
+        mTempQuestion = null;
+        mTestAnswer = null;
     }
 
     /**

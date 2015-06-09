@@ -1,13 +1,11 @@
 package com.kcb.teacher.adapter;
 
 import java.util.List;
-
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-
 import com.kcb.teacher.model.checkin.CheckInResult;
 import com.kcbTeam.R;
 
@@ -46,6 +44,11 @@ public class LookCheckInAdapter extends BaseAdapter {
     @Override
     public long getItemId(int position) {
         return position;
+    }
+
+    public void release() {
+        mContext = null;
+        mResults = null;
     }
 
     @Override

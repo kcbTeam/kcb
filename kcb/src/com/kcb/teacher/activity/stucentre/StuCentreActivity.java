@@ -34,8 +34,8 @@ public class StuCentreActivity extends BaseActivity {
     private ButtonFlat backButton;
     private TextView nameIdTextView;
 
-    private PieChart mCheckInPieChart;
-    private PieChart mCorrectPieChart;
+    private PieChart checkInPieChart;
+    private PieChart correctPieChart;
 
     private TextView checkInRateTextView;
     private TextView testRateTextView;
@@ -64,8 +64,8 @@ public class StuCentreActivity extends BaseActivity {
         checkInRateTextView = (TextView) findViewById(R.id.textview_stu_checkinrate);
         testRateTextView = (TextView) findViewById(R.id.textview_stu_correctrate);
 
-        mCheckInPieChart = (PieChart) findViewById(R.id.piechart_checkinrate);
-        mCorrectPieChart = (PieChart) findViewById(R.id.piechart_correctrate);
+        checkInPieChart = (PieChart) findViewById(R.id.piechart_checkinrate);
+        correctPieChart = (PieChart) findViewById(R.id.piechart_correctrate);
     }
 
     @Override
@@ -97,18 +97,18 @@ public class StuCentreActivity extends BaseActivity {
     }
 
     private void initPieChart() {
-        setData(mCheckInPieChart, new String[] {getResources().getString(R.string.tch_attendance),
+        setData(checkInPieChart, new String[] {getResources().getString(R.string.tch_attendance),
                 getResources().getString(R.string.tch_absent)}, mCheckInRate);
-        setData(mCorrectPieChart, new String[] {getResources().getString(R.string.tch_correct),
+        setData(correctPieChart, new String[] {getResources().getString(R.string.tch_correct),
                 getResources().getString(R.string.tch_error)}, mCorrectRate);
-        defaultPieChartStyle(mCheckInPieChart);
-        defaultPieChartStyle(mCorrectPieChart);
+        defaultPieChartStyle(checkInPieChart);
+        defaultPieChartStyle(correctPieChart);
         new Handler().postDelayed(new Runnable() {
             public void run() {
-                mCheckInPieChart.animateY(1800);
-                mCorrectPieChart.animateY(1800);
-                mCheckInPieChart.setVisibility(View.VISIBLE);
-                mCorrectPieChart.setVisibility(View.VISIBLE);
+                checkInPieChart.animateY(1800);
+                correctPieChart.animateY(1800);
+                checkInPieChart.setVisibility(View.VISIBLE);
+                correctPieChart.setVisibility(View.VISIBLE);
             }
         }, 150);
     }
@@ -154,6 +154,14 @@ public class StuCentreActivity extends BaseActivity {
         pieChart.setVisibility(View.INVISIBLE);
         Legend l = pieChart.getLegend();
         l.setEnabled(false);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        checkInPieChart = null;
+        correctPieChart = null;
+        mStudentInfo = null;
     }
 
     /**

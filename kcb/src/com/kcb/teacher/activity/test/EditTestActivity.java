@@ -100,7 +100,8 @@ public class EditTestActivity extends BaseActivity {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.button_back:
-
+                release();
+                finish();
                 break;
             case R.id.button_cancel:
                 if (mAction.equals(ACTION_ADD_TEST)) {
@@ -135,6 +136,8 @@ public class EditTestActivity extends BaseActivity {
                 TestDao testDao = new TestDao(EditTestActivity.this);
                 testDao.delete(sTest);
                 testDao.close();
+
+                release();
                 finish();
             }
         };
@@ -267,6 +270,9 @@ public class EditTestActivity extends BaseActivity {
     public void onBackPressed() {
         if (ACTION_ADD_TEST.equals(mAction)) {
             cancelAddTest();
+        } else if (ACTION_EDIT_TEST.equals(mAction)) {
+            release();
+            finish();
         }
     }
 
@@ -275,6 +281,7 @@ public class EditTestActivity extends BaseActivity {
 
             @Override
             public void onClick(View v) {
+                release();
                 finish();
             }
         };
@@ -284,18 +291,22 @@ public class EditTestActivity extends BaseActivity {
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mTempQuestion = null;
-        sTest = null;
-        questionEditView = null;
-
-    }
-
-    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         questionEditView.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private void release() {
+        sTest.release();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        questionEditView = null;
+        sTest = null;
+        mTempQuestion = null;
+
     }
 
     /**

@@ -146,6 +146,13 @@ public class Test implements Serializable {
         return toJsonObject().toString();
     }
 
+    public void release() {
+        for (int i = 0; i < mQuestions.size(); i++) {
+            mQuestions.get(i).release();
+        }
+        mQuestions = null;
+    }
+
     /**
      * test to json, json to test
      */

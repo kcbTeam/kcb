@@ -93,6 +93,14 @@ public class LookTestDetailActivity extends BaseActivity {
         questionView.showQuestion(sTest.getQuestion(mQuestionIndex));
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        questionView.release();
+        questionView = null;
+        sTest = null;
+    }
+
     /**
      * start
      */
