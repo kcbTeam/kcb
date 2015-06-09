@@ -128,6 +128,11 @@ public class StartActivity extends BaseActivity {
                           // activity
             }
         };
+
+        public void release() {
+            mBackgroundBitmapIds = null;
+            mClickListener = null;
+        }
     }
 
     /**
@@ -144,6 +149,7 @@ public class StartActivity extends BaseActivity {
         super.onDestroy();
         colorAnimationView = null;
         viewPager = null;
+        mAdapter.release();
         mAdapter = null;
     }
 

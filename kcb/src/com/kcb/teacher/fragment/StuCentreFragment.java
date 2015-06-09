@@ -87,7 +87,7 @@ public class StuCentreFragment extends BaseFragment
         idTextView = (TextView) view.findViewById(R.id.textview_stuinfo);
         idTextView.setOnClickListener(this);
 
-        checkInRaTextView = (TextView) view.findViewById(R.id.textview_stucheckinrate);
+        checkInRaTextView = (TextView) view.findViewById(R.id.textview_checkinrate);
         checkInRaTextView.setOnClickListener(this);
 
         correctRaTextView = (TextView) view.findViewById(R.id.textview_correctrate);

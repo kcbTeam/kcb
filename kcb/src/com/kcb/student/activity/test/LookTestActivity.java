@@ -131,6 +131,6 @@ public class LookTestActivity extends BaseActivity implements OnSearchListener, 
             return;
         }
         progressBar.setVisibility(View.VISIBLE);
-        
+
     }
 }

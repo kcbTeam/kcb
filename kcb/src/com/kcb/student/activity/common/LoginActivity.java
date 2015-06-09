@@ -160,7 +160,7 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        StartActivity.restart(this);
+        StartActivity.restart(LoginActivity.this);
         finish();
     }
 
@@ -168,6 +168,7 @@ public class LoginActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         RequestUtil.getInstance().cancelPendingRequests(TAG);
+        mClickListener = null;
     }
 
     /**
