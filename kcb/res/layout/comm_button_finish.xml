@@ -5,7 +5,6 @@
     android:id="@+id/button_finish"
     style="@style/common_title_icon_layout"
     tools:ignore="contentDescription"
-    widget:clickAfterRipple="false"
     widget:rippleSpeed="6" >
 
     <ImageView

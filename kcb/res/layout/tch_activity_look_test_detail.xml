@@ -47,6 +47,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="@string/tch_next_question"
+            buttonflat:clickAfterRipple="false"
             buttonflat:rippleSpeed="36" />
     </LinearLayout>
 
