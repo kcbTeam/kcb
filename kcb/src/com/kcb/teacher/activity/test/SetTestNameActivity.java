@@ -6,14 +6,12 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.kcb.common.base.BaseActivity;
-import com.kcb.common.listener.DelayClickListener;
 import com.kcb.common.model.test.Test;
 import com.kcb.common.util.AnimationUtil;
 import com.kcb.common.util.ToastUtil;
 import com.kcb.library.slider.Slider;
 import com.kcb.library.slider.Slider.OnValueChangedListener;
 import com.kcb.library.view.FloatingEditText;
-import com.kcb.library.view.PaperButton;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.teacher.database.test.TestDao;
 import com.kcbTeam.R;
@@ -28,13 +26,12 @@ import com.kcbTeam.R;
 public class SetTestNameActivity extends BaseActivity {
 
     private ButtonFlat backButton;
+    private ButtonFlat finishButton;
 
     private FloatingEditText testNameEditText;
 
     private TextView setNumTextView;
     private Slider testNumSlider;
-
-    private PaperButton finishButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +46,8 @@ public class SetTestNameActivity extends BaseActivity {
     protected void initView() {
         backButton = (ButtonFlat) findViewById(R.id.button_back);
         backButton.setOnClickListener(this);
+        finishButton = (ButtonFlat) findViewById(R.id.button_finish);
+        finishButton.setOnClickListener(this);
 
         testNameEditText = (FloatingEditText) findViewById(R.id.edittext_testname);
 
@@ -65,9 +64,6 @@ public class SetTestNameActivity extends BaseActivity {
                         value));
             }
         });
-
-        finishButton = (PaperButton) findViewById(R.id.button_finish);
-        finishButton.setOnClickListener(mClickListener);
     }
 
     @Override
@@ -79,30 +75,24 @@ public class SetTestNameActivity extends BaseActivity {
             case R.id.button_back:
                 finish();
                 break;
+            case R.id.button_finish:
+                String name = testNameEditText.getText().toString().trim();
+                if (TextUtils.isEmpty(name)) {
+                    AnimationUtil.shake(testNameEditText);
+                } else {
+                    TestDao testDao = new TestDao(SetTestNameActivity.this);
+                    if (testDao.hasTest(name)) {
+                        ToastUtil.toast(R.string.tch_has_same_test_name);
+                    } else {
+                        EditTestActivity.startAddNewTest(SetTestNameActivity.this, new Test(name,
+                                testNumSlider.getValue()));
+                        finish();
+                    }
+                    testDao.close();
+                }
+                break;
             default:
                 break;
         }
     }
-
-    private DelayClickListener mClickListener = new DelayClickListener(
-            DelayClickListener.DELAY_PAPER_BUTTON) {
-
-        @Override
-        public void doClick(View v) {
-            String name = testNameEditText.getText().toString().trim();
-            if (TextUtils.isEmpty(name)) {
-                AnimationUtil.shake(testNameEditText);
-            } else {
-                TestDao testDao = new TestDao(SetTestNameActivity.this);
-                if (testDao.hasTest(name)) {
-                    ToastUtil.toast(R.string.tch_has_same_test_name);
-                } else {
-                    EditTestActivity.startAddNewTest(SetTestNameActivity.this, new Test(name,
-                            testNumSlider.getValue()));
-                    finish();
-                }
-                testDao.close();
-            }
-        }
-    };
 }

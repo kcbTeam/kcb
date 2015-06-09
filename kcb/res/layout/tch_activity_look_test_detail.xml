@@ -10,19 +10,13 @@
 
     <LinearLayout
         android:id="@+id/layout_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/activity_header_shadow"
-        android:orientation="horizontal" >
+        style="@style/common_title_layout" >
 
         <include layout="@layout/comm_button_back" />
 
         <TextView
             android:id="@+id/textview_test_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:textSize="@dimen/text_size_large" />
+            style="@style/common_title" />
     </LinearLayout>
 
     <com.kcb.common.view.QuestionView
@@ -53,6 +47,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="@string/tch_next_question"
+            buttonflat:clickAfterRipple="false"
             buttonflat:rippleSpeed="36" />
     </LinearLayout>
 

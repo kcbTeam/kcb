@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.kcb.library.view.buttonflat.ButtonFlat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/button_refresh"
+    xmlns:widget="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/button_more"
     style="@style/common_title_icon_layout"
-    tools:ignore="contentDescription" >
+    tools:ignore="contentDescription"
+    widget:rippleSpeed="6" >
 
     <ImageView
         style="@style/common_title_icon"
-        android:src="@drawable/ic_refresh_black_24dp" >
+        android:src="@drawable/ic_more_vert_black_24dp" >
     </ImageView>
 
 </com.kcb.library.view.buttonflat.ButtonFlat>

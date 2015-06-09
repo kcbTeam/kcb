@@ -69,7 +69,7 @@ public class HomeActivity extends BaseFragmentActivity {
         userNameTextView = (TextView) findViewById(R.id.textview_username);
         userNameTextView.setText(KAccount.getAccountName());
 
-        settingButton = (ButtonFlat) findViewById(R.id.button_setting);
+        settingButton = (ButtonFlat) findViewById(R.id.button_more);
         settingButton.setOnClickListener(this);
 
         checkInButton = (ButtonFlat) findViewById(R.id.button_checkin);
@@ -96,7 +96,7 @@ public class HomeActivity extends BaseFragmentActivity {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.button_setting:
+            case R.id.button_more:
                 if (mPopupWindow != null && mPopupWindow.isShowing()) {
                     mPopupWindow.dismiss();
                 } else {

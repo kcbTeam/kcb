@@ -34,6 +34,8 @@ public class SetTestTimeActivity extends BaseActivity {
     private EditQuestionListener mEditListener;
     private SetTestTimeAdapter mAdapter;
 
+    private String mAction;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +67,8 @@ public class SetTestTimeActivity extends BaseActivity {
 
     @Override
     protected void initData() {
+        mAction = getIntent().getAction();
+
         testTimeTextView.setText(String.format(getString(R.string.tch_set_test_time_tip),
                 sTest.getQuestionNum(), sTest.getTime()));
         slider.setValue(sTest.getTime());
@@ -85,8 +89,6 @@ public class SetTestTimeActivity extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == EditQuestionActivty.REQUEST_EDIT) {
             if (resultCode == RESULT_OK) {
-                int index = data.getIntExtra(EditQuestionActivty.DATA_INDEX, 0);
-                mAdapter.setItem(index, EditQuestionActivty.sQuestion);
                 mAdapter.notifyDataSetChanged();
                 ToastUtil.toast(R.string.tch_saved);
             } else if (resultCode == EditQuestionActivty.RESULT_DELETE) {
@@ -101,14 +103,22 @@ public class SetTestTimeActivity extends BaseActivity {
 
     @Override
     public void onClick(View v) {
-        if (v == finishButton) {
-            sTest.setTime(slider.getValue());
-            sTest.setDate(System.currentTimeMillis());
-            TestDao testDao = new TestDao(this);
-            testDao.add(sTest);
-            sTest = null;
-            testDao.close();
-            finish();
+        switch (v.getId()) {
+            case R.id.button_finish:
+                sTest.setTime(slider.getValue());
+                sTest.setDate(System.currentTimeMillis());
+                TestDao testDao = new TestDao(this);
+                if (ACTION_ADD_TEST.equals(mAction)) {
+                    testDao.add(sTest);
+                } else if (ACTION_EDIT_TEST.equals(mAction)) {
+                    testDao.update(sTest);
+                }
+                sTest = null;
+                testDao.close();
+                finish();
+                break;
+            default:
+                break;
         }
     }
 
@@ -125,8 +135,22 @@ public class SetTestTimeActivity extends BaseActivity {
                 R.string.tch_comm_cancel, null);
     }
 
-    public static void start(Context context, Test test) {
+    /**
+     * start
+     */
+    private static final String ACTION_ADD_TEST = "action_addtest";
+    private static final String ACTION_EDIT_TEST = "action_edittest";
+
+    public static void startFromAddNewTest(Context context, Test test) {
         Intent intent = new Intent(context, SetTestTimeActivity.class);
+        intent.setAction(ACTION_ADD_TEST);
+        context.startActivity(intent);
+        sTest = test;
+    }
+
+    public static void startFromEditTest(Context context, Test test) {
+        Intent intent = new Intent(context, SetTestTimeActivity.class);
+        intent.setAction(ACTION_EDIT_TEST);
         context.startActivity(intent);
         sTest = test;
     }

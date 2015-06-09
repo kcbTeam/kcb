@@ -17,6 +17,8 @@
         <TextView
             style="@style/common_title"
             android:text="@string/tch_add_test" />
+
+        <include layout="@layout/comm_button_finish" />
     </LinearLayout>
 
     <ImageView
@@ -95,43 +97,5 @@
         materialdesign:max="9"
         materialdesign:min="1"
         materialdesign:showNumberIndicator="true" />
-
-    <ImageView
-        android:id="@+id/imageview_step3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/slider_testnum"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/ic_looks_3_grey600_24dp" />
-
-    <TextView
-        android:id="@+id/tip3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/imageview_step3"
-        android:layout_toRightOf="@id/imageview_step3"
-        android:text="@string/tch_start_edit_test"
-        android:textColor="@color/black"
-        android:textSize="@dimen/text_size_medium" />
-
-    <View
-        android:id="@+id/view_divider3"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_below="@id/imageview_step3"
-        android:layout_marginBottom="16dp"
-        android:background="@color/black_divider" />
-
-    <com.kcb.library.view.PaperButton
-        android:id="@+id/button_finish"
-        style="@style/common_paper_button"
-        android:layout_below="@id/view_divider3"
-        android:layout_centerHorizontal="true"
-        widget:paper_text="@string/tch_comm_complete"
-        widget:paper_text_color="@color/black_700"
-        widget:paper_text_size="@dimen/text_size_medium" />
 
 </RelativeLayout>

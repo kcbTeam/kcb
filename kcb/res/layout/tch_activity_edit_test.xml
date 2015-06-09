@@ -7,27 +7,23 @@
     android:background="@color/activity_background"
     tools:ignore="contentDescription" >
 
-    <TextView
-        android:id="@+id/textview_title"
-        style="@style/common_title_left" />
+    <LinearLayout
+        android:id="@+id/layout_title"
+        style="@style/common_title_layout" >
 
-    <com.kcb.library.view.buttonflat.ButtonFlat
-        android:id="@+id/button_cancel"
-        style="@style/common_title_left_icon_layout_right"
-        widget:rippleSpeed="6" >
+        <TextView
+            android:id="@+id/textview_title"
+            style="@style/common_title_left" />
 
-        <ImageView
-            android:id="@+id/imageview_cancel"
-            style="@style/common_title_icon_right"
-            android:src="@drawable/ic_highlight_remove_black_24dp" />
-    </com.kcb.library.view.buttonflat.ButtonFlat>
+        <include layout="@layout/comm_button_cancel" />
+    </LinearLayout>
 
     <com.kcb.common.view.QuestionEditView
-        android:id="@+id/edittestview"
+        android:id="@+id/questioneditview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/view_divider"
-        android:layout_below="@id/textview_title" />
+        android:layout_below="@id/layout_title" />
 
     <LinearLayout
         android:id="@+id/layout_buttons"
