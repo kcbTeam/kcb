@@ -17,7 +17,6 @@ import android.view.View;
 import com.edmodo.cropper.CropImageView;
 import com.kcb.common.base.BaseActivity;
 import com.kcb.common.listener.DelayClickListener;
-import com.kcb.library.view.PaperButton;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcbTeam.R;
 
@@ -37,7 +36,7 @@ public class CropPictureActivity extends BaseActivity {
 
     private ButtonFlat backButton;
     private ButtonFlat rotateButton;
-    private PaperButton completeButton;
+    private ButtonFlat finishButton;
 
     @Override
     protected void onSaveInstanceState(Bundle bundle) {
@@ -74,8 +73,8 @@ public class CropPictureActivity extends BaseActivity {
         cropImageView = (CropImageView) findViewById(R.id.CropImageView);
         cropImageView.setImageBitmap(mBitMap);
 
-        completeButton = (PaperButton) findViewById(R.id.button_complete);
-        completeButton.setOnClickListener(mClickListener);
+        finishButton = (ButtonFlat) findViewById(R.id.button_finish);
+        finishButton.setOnClickListener(mClickListener);
     }
 
     @Override
@@ -117,7 +116,7 @@ public class CropPictureActivity extends BaseActivity {
                 case R.id.button_rotate:
                     cropImageView.rotateImage(ROTATE_NINETY_DEGREES);
                     break;
-                case R.id.button_complete:
+                case R.id.button_finish:
                     croppedImage = cropImageView.getCroppedImage();
                     Intent intent = new Intent();
                     intent.putExtra(DATA_PICTURE, Uri.parse(MediaStore.Images.Media.insertImage(

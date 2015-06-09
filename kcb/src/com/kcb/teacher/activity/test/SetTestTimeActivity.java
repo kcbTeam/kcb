@@ -94,9 +94,14 @@ public class SetTestTimeActivity extends BaseActivity {
             } else if (resultCode == EditQuestionActivty.RESULT_DELETE) {
                 int index = data.getIntExtra(EditQuestionActivty.DATA_INDEX, 0);
                 mAdapter.deleteItem(index);
-                mAdapter.notifyDataSetChanged();
-                testTimeTextView.setText(String.format(getString(R.string.tch_set_test_time_tip),
-                        mAdapter.getCount(), slider.getValue()));
+                if (mAdapter.getCount() == 0) { // delete all question
+                    finish();
+                } else {
+                    mAdapter.notifyDataSetChanged();
+                    testTimeTextView.setText(String.format(
+                            getString(R.string.tch_set_test_time_tip), mAdapter.getCount(),
+                            slider.getValue()));
+                }
             }
         }
     }

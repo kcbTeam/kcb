@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.kcb.library.view.buttonflat.ButtonFlat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:widget="http://schemas.android.com/apk/res-auto"
     android:id="@+id/button_refresh"
     style="@style/common_title_icon_layout"
-    tools:ignore="contentDescription" >
+    tools:ignore="contentDescription"
+    widget:rippleSpeed="6" >
 
     <ImageView
         style="@style/common_title_icon"

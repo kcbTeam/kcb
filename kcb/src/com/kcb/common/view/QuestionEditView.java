@@ -200,7 +200,7 @@ public class QuestionEditView extends LinearLayout implements OnClickListener, O
                 deleteIcon.setVisibility(View.INVISIBLE);
                 break;
             case EDIT_MODE_BITMAP:
-                editText.setText("");
+                editText.setText(" ");
                 editText.setFocusable(false);
                 deleteIcon.setVisibility(View.VISIBLE);
                 break;

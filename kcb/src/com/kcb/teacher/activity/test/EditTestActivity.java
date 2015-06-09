@@ -28,7 +28,9 @@ import com.kcbTeam.R;
  */
 public class EditTestActivity extends BaseActivity {
 
-    private TextView testNameTextView;
+    private ButtonFlat backButton;
+    private TextView testNameNumTextView;
+
     private ButtonFlat cancelButton;
     private ImageView cancelImageView;
 
@@ -59,7 +61,9 @@ public class EditTestActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        testNameTextView = (TextView) findViewById(R.id.textview_title);
+        backButton = (ButtonFlat) findViewById(R.id.button_back);
+        backButton.setOnClickListener(this);
+        testNameNumTextView = (TextView) findViewById(R.id.textview_title);
 
         cancelButton = (ButtonFlat) findViewById(R.id.button_cancel);
         cancelButton.setOnClickListener(this);
@@ -82,7 +86,11 @@ public class EditTestActivity extends BaseActivity {
         Intent intent = getIntent();
         mAction = intent.getAction();
         if (mAction.equals(ACTION_EDIT_TEST)) {
+            backButton.setVisibility(View.VISIBLE);
+            testNameNumTextView.setPadding(0, 0, 0, 0);
             cancelImageView.setImageResource(R.drawable.ic_delete_black_24dp);
+        } else if (mAction.equals(ACTION_ADD_TEST)) {
+            backButton.setVisibility(View.GONE);
         }
         showTestNameNum();
         showQuestion();
@@ -91,6 +99,9 @@ public class EditTestActivity extends BaseActivity {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.button_back:
+
+                break;
             case R.id.button_cancel:
                 if (mAction.equals(ACTION_ADD_TEST)) {
                     cancelAddTest();
@@ -161,7 +172,11 @@ public class EditTestActivity extends BaseActivity {
 
                     @Override
                     public void run() {
-                        SetTestTimeActivity.startFromAddNewTest(EditTestActivity.this, sTest);
+                        if (ACTION_ADD_TEST.equals(mAction)) {
+                            SetTestTimeActivity.startFromAddNewTest(EditTestActivity.this, sTest);
+                        } else if (ACTION_EDIT_TEST.equals(mAction)) {
+                            SetTestTimeActivity.startFromEditTest(EditTestActivity.this, sTest);
+                        }
                         finish();
                     }
                 }, 200);
@@ -223,7 +238,7 @@ public class EditTestActivity extends BaseActivity {
     }
 
     private void showTestNameNum() {
-        testNameTextView.setText(String.format(
+        testNameNumTextView.setText(String.format(
                 getResources().getString(R.string.tch_test_name_num), sTest.getName(),
                 sTest.getQuestionNum()));
     }

@@ -18,7 +18,9 @@
             style="@style/common_title"
             android:text="@string/tch_crop_picture" />
 
-        <include layout="@layout/comm_button_rotate"/>
+        <include layout="@layout/comm_button_rotate" />
+
+        <include layout="@layout/comm_button_finish" />
     </LinearLayout>
 
     <ScrollView
@@ -34,14 +36,5 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </ScrollView>
-
-    <com.kcb.library.view.PaperButton
-        android:id="@+id/button_complete"
-        style="@style/common_paper_button"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="16dp"
-        widget:paper_text="@string/tch_comm_complete"
-        widget:paper_text_color="@color/black_700"
-        widget:paper_text_size="@dimen/text_size_medium" />
 
 </RelativeLayout>
