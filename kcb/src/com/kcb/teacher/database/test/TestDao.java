@@ -56,6 +56,15 @@ public class TestDao {
     }
 
     public void add(Test test) {
+        mDatabase.insert(TestTable.TABLE_NAME, null, getTestContentValues(test));
+    }
+
+    public void update(Test test) {
+        mDatabase.update(TestTable.TABLE_NAME, getTestContentValues(test), TestTable.COLUMN_NAME
+                + "=?", new String[] {test.getName()});
+    }
+
+    private ContentValues getTestContentValues(Test test) {
         ContentValues contentValues = new ContentValues();
         contentValues.put(TestTable.COLUMN_ID, test.getId());
         contentValues.put(TestTable.COLUMN_NAME, test.getName());
@@ -63,7 +72,7 @@ public class TestDao {
         contentValues.put(TestTable.COLUMN_DATE, test.getDate());
         contentValues.put(TestTable.COLUMN_HASTESTED, test.hasTested());
         contentValues.put(TestTable.COLUMN_ROW_DATA, test.toString());
-        mDatabase.insert(TestTable.TABLE_NAME, null, contentValues);
+        return contentValues;
     }
 
     public Test getByName(String testName) {

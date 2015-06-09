@@ -85,8 +85,6 @@ public class SetTestTimeActivity extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == EditQuestionActivty.REQUEST_EDIT) {
             if (resultCode == RESULT_OK) {
-                // int index = data.getIntExtra(EditQuestionActivty.DATA_INDEX, 0);
-                // mAdapter.setItem(index, EditQuestionActivty.sQuestion);
                 mAdapter.notifyDataSetChanged();
                 ToastUtil.toast(R.string.tch_saved);
             } else if (resultCode == EditQuestionActivty.RESULT_DELETE) {
@@ -101,14 +99,18 @@ public class SetTestTimeActivity extends BaseActivity {
 
     @Override
     public void onClick(View v) {
-        if (v == finishButton) {
-            sTest.setTime(slider.getValue());
-            sTest.setDate(System.currentTimeMillis());
-            TestDao testDao = new TestDao(this);
-            testDao.add(sTest);
-            sTest = null;
-            testDao.close();
-            finish();
+        switch (v.getId()) {
+            case R.id.button_finish:
+                sTest.setTime(slider.getValue());
+                sTest.setDate(System.currentTimeMillis());
+                TestDao testDao = new TestDao(this);
+                testDao.update(sTest);
+                sTest = null;
+                testDao.close();
+                finish();
+                break;
+            default:
+                break;
         }
     }
 

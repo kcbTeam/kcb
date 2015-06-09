@@ -32,7 +32,7 @@
     <string name="tch_start_test">开始测试</string>
     <string name="tch_add_test_first">请先添加一个测试</string>
     <string name="tch_select_test">选择测试</string>
-    <string name="tch_start_test_tip">本次测试的名称为——%1$s，包括 %2$d 道题，时间为 %3$d分钟。</string>
+    <string name="tch_start_test_tip">本次测试的名称为——%1$s，包括 %2$d 道题，时间为 %3$d 分钟。</string>
     <string name="tch_test_started">测试已经开始了</string>
     <string name="tch_add_or_edit_test">添加 / 编辑测试</string>
     <string name="tch_edit_test">编辑测试</string>
@@ -133,7 +133,7 @@
     <!-- SetTestTimeActivity start -->
     <string name="tch_set_test_time">设置测试时间</string>
     <string name="tch_question_index">第%1$d题</string>
-    <string name="tch_set_test_time_tip">本次测试包括%1$d道题，答题时间为：%2$d分钟</string>
+    <string name="tch_set_test_time_tip">本次测试包括 %1$d 道题，答题时间为： %2$d 分钟</string>
     <!-- SetTestTimeActivity end -->
 
 

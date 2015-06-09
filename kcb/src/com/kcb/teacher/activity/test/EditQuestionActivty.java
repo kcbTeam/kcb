@@ -105,7 +105,6 @@ public class EditQuestionActivty extends BaseActivity {
                 case R.id.button_finish:
                     questionEditView.saveQuestion();
                     Intent intent = new Intent();
-                    intent.putExtra(DATA_INDEX, mIndex);
                     setResult(RESULT_OK, intent);
                     finish();
                     break;

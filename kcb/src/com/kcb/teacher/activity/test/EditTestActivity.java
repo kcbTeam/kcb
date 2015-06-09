@@ -192,7 +192,7 @@ public class EditTestActivity extends BaseActivity {
                     public void onClick(View v) {
                         sTest.addQuestion();
                         showTestNameNum();
-                        showNextButton();
+                        switchNextButton();
                         ToastUtil.toast(String.format(
                                 getResources().getString(R.string.tch_question_added), questionNum));
                     }
@@ -231,13 +231,14 @@ public class EditTestActivity extends BaseActivity {
     private void showQuestion() {
         questionEditView.showQuestion(mCurrentQuestionIndex, getCurrentQuestion());
         mTempQuestion = Question.clone(getCurrentQuestion());
+        switchNextButton();
     }
 
     private Question getCurrentQuestion() {
         return sTest.getQuestion(mCurrentQuestionIndex);
     }
 
-    private void showNextButton() {
+    private void switchNextButton() {
         if (mCurrentQuestionIndex == sTest.getQuestionNum() - 1) {
             nextButton.setText(getResources().getString(R.string.tch_comm_complete));
             nextButton.setTextColor(getResources().getColor(R.color.blue));
