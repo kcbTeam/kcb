@@ -23,7 +23,7 @@
     </com.kcb.library.view.buttonflat.ButtonFlat>
 
     <com.kcb.common.view.QuestionEditView
-        android:id="@+id/edittestview"
+        android:id="@+id/questioneditview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/view_divider"

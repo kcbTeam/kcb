@@ -65,7 +65,7 @@ public class EditTestActivity extends BaseActivity {
         cancelButton.setOnClickListener(this);
         cancelImageView = (ImageView) findViewById(R.id.imageview_cancel);
 
-        questionEditView = (QuestionEditView) findViewById(R.id.edittestview);
+        questionEditView = (QuestionEditView) findViewById(R.id.questioneditview);
 
         lastButton = (ButtonFlat) findViewById(R.id.button_last);
         lastButton.setOnClickListener(this);

@@ -85,8 +85,8 @@ public class SetTestTimeActivity extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == EditQuestionActivty.REQUEST_EDIT) {
             if (resultCode == RESULT_OK) {
-                int index = data.getIntExtra(EditQuestionActivty.DATA_INDEX, 0);
-                mAdapter.setItem(index, EditQuestionActivty.sQuestion);
+                // int index = data.getIntExtra(EditQuestionActivty.DATA_INDEX, 0);
+                // mAdapter.setItem(index, EditQuestionActivty.sQuestion);
                 mAdapter.notifyDataSetChanged();
                 ToastUtil.toast(R.string.tch_saved);
             } else if (resultCode == EditQuestionActivty.RESULT_DELETE) {
@@ -125,6 +125,9 @@ public class SetTestTimeActivity extends BaseActivity {
                 R.string.tch_comm_cancel, null);
     }
 
+    /**
+     * start
+     */
     public static void start(Context context, Test test) {
         Intent intent = new Intent(context, SetTestTimeActivity.class);
         context.startActivity(intent);
