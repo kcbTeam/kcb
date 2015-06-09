@@ -76,18 +76,13 @@ public class TestFragment extends BaseFragment {
 
         addOrEditTestButton = (PaperButton) view.findViewById(R.id.button_edit);
         addOrEditTestButton.setOnClickListener(mClickListener);
+
         lookTestResultButton = (PaperButton) view.findViewById(R.id.button_look_result);
         lookTestResultButton.setOnClickListener(mClickListener);
     }
 
     @Override
     protected void initData() {}
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        RequestUtil.getInstance().cancelPendingRequests(TAG);
-    }
 
     private DelayClickListener mClickListener = new DelayClickListener(
             DelayClickListener.DELAY_PAPER_BUTTON) {
@@ -206,5 +201,12 @@ public class TestFragment extends BaseFragment {
         List<String> names = testDao.getAllTestName();
         testDao.close();
         return names;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        RequestUtil.getInstance().cancelPendingRequests(TAG);
+        mClickListener = null;
     }
 }

@@ -38,6 +38,7 @@ public class ModifyPasswordActivity extends BaseActivity {
     private FloatingEditText repeatPassWordEditText;
     private PaperButton finishButton;
     private SmoothProgressBar finishProgressBar;
+
     private String newPassword;
 
     @Override
@@ -46,7 +47,6 @@ public class ModifyPasswordActivity extends BaseActivity {
         setContentView(R.layout.stu_activity_modify_password);
 
         initView();
-        initData();
     }
 
     @Override
@@ -194,5 +194,6 @@ public class ModifyPasswordActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         RequestUtil.getInstance().cancelPendingRequests(TAG);
+        mClickListener = null;
     }
 }

@@ -110,4 +110,8 @@ public class SearchEditText extends RelativeLayout implements TextWatcher, OnCli
                 break;
         }
     }
+
+    public void release() {
+        mListener = null;
+    }
 }

@@ -137,5 +137,6 @@ public class TestFragment extends BaseFragment {
     public void onDestroy() {
         super.onDestroy();
         RequestUtil.getInstance().cancelPendingRequests(TAG);
+        mClickListener = null;
     }
 }

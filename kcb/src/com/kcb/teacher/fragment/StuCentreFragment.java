@@ -232,4 +232,14 @@ public class StuCentreFragment extends BaseFragment
             mAdapter.notifyDataSetChanged();
         }
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        searchEditText.release();
+        mAdapter.release();
+        mAdapter = null;
+        mStudents = null;
+        mTempStudents = null;
+    }
 }

@@ -70,4 +70,10 @@ public class CheckInFragment extends BaseFragment {
             startActivity(intent);
         }
     };
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mClickListener = null;
+    };
 }

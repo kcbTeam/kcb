@@ -48,7 +48,6 @@ public class ModifyPasswordActivity extends BaseActivity {
         setContentView(R.layout.tch_activity_modify_password);
 
         initView();
-        initData();
     }
 
     @Override
@@ -193,5 +192,6 @@ public class ModifyPasswordActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         RequestUtil.getInstance().cancelPendingRequests(TAG);
+        mClickListener = null;
     }
 }
