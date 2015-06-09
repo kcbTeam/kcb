@@ -14,7 +14,7 @@ import com.kcb.common.base.BaseActivity;
 import com.kcb.common.model.test.Test;
 import com.kcb.common.util.StringMatchUtil;
 import com.kcb.common.view.SearchEditText;
-import com.kcb.common.view.SearchEditText.SearchListener;
+import com.kcb.common.view.SearchEditText.OnSearchListener;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
 import com.kcb.student.adapter.LookTestAdapter;
@@ -28,7 +28,7 @@ import com.kcbTeam.R;
  * @author: Ding
  * @date: 2015年5月7日 下午5:09:20
  */
-public class LookTestActivity extends BaseActivity implements SearchListener, OnItemClickListener {
+public class LookTestActivity extends BaseActivity implements OnSearchListener, OnItemClickListener {
 
     private ButtonFlat backButton;
     private ButtonFlat refreshButton;
@@ -131,5 +131,6 @@ public class LookTestActivity extends BaseActivity implements SearchListener, On
             return;
         }
         progressBar.setVisibility(View.VISIBLE);
+        
     }
 }

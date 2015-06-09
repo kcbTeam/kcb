@@ -1,6 +1,5 @@
 package com.kcb.teacher.database.students;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,14 +34,16 @@ public class StudentDao {
         mDatabase.insert(StudentTable.TABLE_NAME, null, contentValues);
     }
 
-    public List<Student> getAll() throws ParseException, JSONException {
+    public List<Student> getAll() {
         Cursor cursor =
                 mDatabase.query(StudentTable.TABLE_NAME, null, null, null, null, null, null);
         List<Student> students = new ArrayList<Student>();
         if (cursor.moveToFirst()) {
             do {
-                students.add(Student.fromjsonObject(new JSONObject(cursor.getString(cursor
-                        .getColumnIndex(StudentTable.COLUMN_ROW_DATA)))));
+                try {
+                    students.add(Student.fromjsonObject(new JSONObject(cursor.getString(cursor
+                            .getColumnIndex(StudentTable.COLUMN_ROW_DATA)))));
+                } catch (JSONException e) {}
             } while (cursor.moveToNext());
         }
         cursor.close();

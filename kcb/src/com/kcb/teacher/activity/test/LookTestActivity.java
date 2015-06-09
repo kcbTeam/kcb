@@ -27,7 +27,7 @@ import com.kcb.common.server.ResponseUtil;
 import com.kcb.common.server.UrlUtil;
 import com.kcb.common.util.StringMatchUtil;
 import com.kcb.common.view.SearchEditText;
-import com.kcb.common.view.SearchEditText.SearchListener;
+import com.kcb.common.view.SearchEditText.OnSearchListener;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
 import com.kcb.teacher.adapter.LookTestAdapter;
@@ -42,7 +42,7 @@ import com.kcbTeam.R;
  * @author: ZQJ
  * @date: 2015年5月16日 下午4:00:49
  */
-public class LookTestActivity extends BaseActivity implements SearchListener, OnItemClickListener {
+public class LookTestActivity extends BaseActivity implements OnSearchListener, OnItemClickListener {
 
     private static final String TAG = LookTestActivity.class.getName();
 

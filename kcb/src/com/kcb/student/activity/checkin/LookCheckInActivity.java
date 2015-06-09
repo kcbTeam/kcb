@@ -83,6 +83,7 @@ public class LookCheckInActivity extends BaseActivity {
         checkInDao.close();
 
         showCheckInRate(allTimes, successTimes);
+
         if (allTimes == 0) {
             mRates[0] = 0;
             mRates[1] = 1;
@@ -108,8 +109,8 @@ public class LookCheckInActivity extends BaseActivity {
     }
 
     private void showCheckInRate(int totalTimes, int checkedTimes) {
-        rateTextView.setText(String.format(getString(R.string.stu_checkin_rate), totalTimes,
-                checkedTimes));
+        rateTextView.setText(String.format(getString(R.string.stu_checkin_rate),
+                KAccount.getTchName(), totalTimes, checkedTimes));
     }
 
     private void showCheckInChart() {

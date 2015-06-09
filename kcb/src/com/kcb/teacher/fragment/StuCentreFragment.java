@@ -1,15 +1,10 @@
 package com.kcb.teacher.fragment;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
-
-import org.json.JSONException;
-
-import android.annotation.SuppressLint;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -25,7 +20,7 @@ import android.widget.TextView;
 import com.kcb.common.base.BaseFragment;
 import com.kcb.common.util.StringMatchUtil;
 import com.kcb.common.view.SearchEditText;
-import com.kcb.common.view.SearchEditText.SearchListener;
+import com.kcb.common.view.SearchEditText.OnSearchListener;
 import com.kcb.teacher.activity.stucentre.StuCentreActivity;
 import com.kcb.teacher.adapter.StuCentreAdapter;
 import com.kcb.teacher.database.students.StudentDao;
@@ -42,28 +37,32 @@ import com.kcbTeam.R;
  * @author: ZQJ
  * @date: 2015年4月24日 下午3:24:10
  */
-public class StuCentreFragment extends BaseFragment implements SearchListener, OnItemClickListener {
+public class StuCentreFragment extends BaseFragment
+        implements
+            OnSearchListener,
+            OnItemClickListener {
 
     private final int INDEX_ID = 0;
     private final int INDEX_CHECKIN_RATE = 1;
     private final int INDEX_CORRECT_RATE = 2;
 
-    private TextView sortById;
-    private TextView sortByCheckInRate;
-    private TextView sortByCorrectRate;
+    private TextView idTextView;
+    private TextView checkInRaTextView;
+    private TextView correctRaTextView;
 
     private SearchEditText searchEditText;
 
-    private ListView mStudentList;
+    private ListView listView;
+
     private StuCentreAdapter mAdapter;
     private List<Student> mStudents;
     private List<Student> mTempStudents;
-    private String mSearchKey;
-    private CompareById idComparator;
-    private CompareByCheckInRate checkInRateComparator;
-    private CompareByCorrectRate correctRateComparator;
 
-    private GetAllStudenInfoTask mGetAllStudenInfoTask;
+    private String mSearchKey;
+
+    private CompareById mIdComparator;
+    private CompareByCheckInRate mCheckInRateComparator;
+    private CompareByCorrectRate mCorrectRateComparator;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -74,46 +73,48 @@ public class StuCentreFragment extends BaseFragment implements SearchListener, O
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        initData();
         initView();
+        initData();
     }
 
     @Override
     protected void initView() {
         View view = getView();
-        mStudentList = (ListView) view.findViewById(R.id.listview_student);
-        mStudentList.setAdapter(mAdapter);
-        mStudentList.setOnItemClickListener(this);
-
         searchEditText = (SearchEditText) view.findViewById(R.id.searchedittext);
         searchEditText.setOnSearchListener(this);
         searchEditText.setHint(R.string.tch_input_name_search);
 
-        sortById = (TextView) view.findViewById(R.id.textview_stuinfo);
-        sortById.setOnClickListener(this);
+        idTextView = (TextView) view.findViewById(R.id.textview_stuinfo);
+        idTextView.setOnClickListener(this);
 
-        sortByCheckInRate = (TextView) view.findViewById(R.id.textview_stucheckinrate);
-        sortByCheckInRate.setOnClickListener(this);
+        checkInRaTextView = (TextView) view.findViewById(R.id.textview_stucheckinrate);
+        checkInRaTextView.setOnClickListener(this);
 
-        sortByCorrectRate = (TextView) view.findViewById(R.id.textview_correctrate);
-        sortByCorrectRate.setOnClickListener(this);
-        onClick(sortById);
+        correctRaTextView = (TextView) view.findViewById(R.id.textview_correctrate);
+        correctRaTextView.setOnClickListener(this);
+
+        listView = (ListView) view.findViewById(R.id.listview);
+        listView.setOnItemClickListener(this);
+
+        setSortIcon(INDEX_ID);
     }
 
     @Override
     protected void initData() {
-        mStudents = new ArrayList<Student>();
-        idComparator = new CompareById();
-        correctRateComparator = new CompareByCorrectRate();
-        checkInRateComparator = new CompareByCheckInRate();
+        mIdComparator = new CompareById();
+        mCorrectRateComparator = new CompareByCorrectRate();
+        mCheckInRateComparator = new CompareByCheckInRate();
 
-        Collections.sort(mStudents, idComparator);
+        StudentDao mStudentDao = new StudentDao(getActivity());
+        mStudents = mStudentDao.getAll();
+        mStudentDao.close();
+
+        Collections.sort(mStudents, mIdComparator);
+
         mTempStudents = new ArrayList<Student>();
         mTempStudents.addAll(mStudents);
-        mAdapter = new StuCentreAdapter(getActivity(), mTempStudents);
 
-        mGetAllStudenInfoTask = new GetAllStudenInfoTask();
-        mGetAllStudenInfoTask.execute(0);
+        mAdapter = new StuCentreAdapter(getActivity(), mTempStudents);
     }
 
     @Override
@@ -125,7 +126,7 @@ public class StuCentreFragment extends BaseFragment implements SearchListener, O
                     setSortIcon(INDEX_ID);
                 }
                 break;
-            case R.id.textview_stucheckinrate:
+            case R.id.textview_checkinrate:
                 if (TextUtils.isEmpty(mSearchKey)) {
                     new SortTast(INDEX_CHECKIN_RATE).execute();
                     setSortIcon(INDEX_CHECKIN_RATE);
@@ -140,7 +141,6 @@ public class StuCentreFragment extends BaseFragment implements SearchListener, O
             default:
                 break;
         }
-        mAdapter.notifyDataSetChanged();
     }
 
     /**
@@ -159,15 +159,16 @@ public class StuCentreFragment extends BaseFragment implements SearchListener, O
                 }
             } catch (BadHanyuPinyinOutputFormatCombination e) {}
         }
-        hideSortButton(true);
+        hideSortButton();
         mAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void onClear() {
+        mTempStudents.clear();
         mTempStudents.addAll(mStudents);
-        hideSortButton(false);
-        onClick(sortById);
+        setSortIcon(INDEX_ID);
+        mAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -175,40 +176,30 @@ public class StuCentreFragment extends BaseFragment implements SearchListener, O
         StuCentreActivity.start(getActivity(), mAdapter.getItem(position));
     }
 
-    @SuppressLint("NewApi")
     private void setSortIcon(int index) {
         Drawable drawable = getResources().getDrawable(R.drawable.ic_arrow_drop_down_black_18dp);
         drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
 
-        sortById.setCompoundDrawables(null, null, null, null);
-        sortByCheckInRate.setCompoundDrawables(null, null, null, null);
-        sortByCorrectRate.setCompoundDrawables(null, null, null, null);
+        hideSortButton();
         switch (index) {
             case INDEX_ID:
-                sortById.setCompoundDrawables(null, null, null, drawable);
+                idTextView.setCompoundDrawables(null, null, null, drawable);
                 break;
             case INDEX_CHECKIN_RATE:
-                sortByCheckInRate.setCompoundDrawables(null, null, null, drawable);
+                checkInRaTextView.setCompoundDrawables(null, null, null, drawable);
                 break;
             case INDEX_CORRECT_RATE:
-                sortByCorrectRate.setCompoundDrawables(null, null, null, drawable);
+                correctRaTextView.setCompoundDrawables(null, null, null, drawable);
                 break;
             default:
                 break;
         }
     }
 
-    private void hideSortButton(boolean hide) {
-        if (hide) {
-            sortById.setCompoundDrawables(null, null, null, null);
-            sortByCheckInRate.setCompoundDrawables(null, null, null, null);
-            sortByCorrectRate.setCompoundDrawables(null, null, null, null);
-        } else {
-            Drawable drawable =
-                    getResources().getDrawable(R.drawable.ic_arrow_drop_down_black_18dp);
-            drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
-            sortById.setCompoundDrawables(null, null, null, drawable);
-        }
+    private void hideSortButton() {
+        idTextView.setCompoundDrawables(null, null, null, null);
+        checkInRaTextView.setCompoundDrawables(null, null, null, null);
+        correctRaTextView.setCompoundDrawables(null, null, null, null);
     }
 
     private class SortTast extends AsyncTask<Integer, Integer, Integer> {
@@ -222,44 +213,23 @@ public class StuCentreFragment extends BaseFragment implements SearchListener, O
         protected Integer doInBackground(Integer... params) {
             switch (index) {
                 case INDEX_ID:
-                    Collections.sort(mTempStudents, idComparator);
+                    Collections.sort(mTempStudents, mIdComparator);
                     break;
                 case INDEX_CHECKIN_RATE:
-                    Collections.sort(mTempStudents, checkInRateComparator);
+                    Collections.sort(mTempStudents, mCheckInRateComparator);
                     break;
                 case INDEX_CORRECT_RATE:
-                    Collections.sort(mTempStudents, correctRateComparator);
+                    Collections.sort(mTempStudents, mCorrectRateComparator);
                     break;
                 default:
                     break;
             }
             return null;
         }
-    }
-
-    private class GetAllStudenInfoTask extends AsyncTask<Integer, Integer, List<Student>> {
 
         @Override
-        protected List<Student> doInBackground(Integer... params) {
-            try {
-                StudentDao mStudentDao = new StudentDao(getActivity());
-                mStudents = mStudentDao.getAll();
-                mStudentDao.close();
-            } catch (ParseException e) {
-                e.printStackTrace();
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            return mStudents;
-        }
-
-        @Override
-        protected void onPostExecute(List<Student> result) {
-            super.onPostExecute(result);
-            mTempStudents.addAll(result);
-            Collections.sort(mTempStudents, idComparator);
+        protected void onPostExecute(Integer result) {
             mAdapter.notifyDataSetChanged();
-
         }
     }
 }

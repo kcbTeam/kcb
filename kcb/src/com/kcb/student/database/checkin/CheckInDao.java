@@ -38,7 +38,10 @@ public class CheckInDao {
                 mDatabase.query(CheckInTable.TABLE_NAME,
                         new String[] {CheckInTable.COLUMN_SUCCESS_TIMES}, null, null, null, null,
                         null);
-        int times = cursor.getInt(cursor.getColumnIndex(CheckInTable.COLUMN_SUCCESS_TIMES));
+        int times = 0;
+        if (cursor.moveToFirst()) {
+            times = cursor.getInt(cursor.getColumnIndex(CheckInTable.COLUMN_SUCCESS_TIMES));
+        }
         cursor.close();
         return times;
     }
@@ -47,7 +50,10 @@ public class CheckInDao {
         Cursor cursor =
                 mDatabase.query(CheckInTable.TABLE_NAME,
                         new String[] {CheckInTable.COLUMN_ALL_TIMES}, null, null, null, null, null);
-        int times = cursor.getInt(cursor.getColumnIndex(CheckInTable.COLUMN_ALL_TIMES));
+        int times = 0;
+        if (cursor.moveToFirst()) {
+            times = cursor.getInt(cursor.getColumnIndex(CheckInTable.COLUMN_ALL_TIMES));
+        }
         cursor.close();
         return times;
     }
