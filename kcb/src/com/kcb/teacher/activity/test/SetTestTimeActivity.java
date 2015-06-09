@@ -34,6 +34,8 @@ public class SetTestTimeActivity extends BaseActivity {
     private EditQuestionListener mEditListener;
     private SetTestTimeAdapter mAdapter;
 
+    private String mAction;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +67,8 @@ public class SetTestTimeActivity extends BaseActivity {
 
     @Override
     protected void initData() {
+        mAction = getIntent().getAction();
+
         testTimeTextView.setText(String.format(getString(R.string.tch_set_test_time_tip),
                 sTest.getQuestionNum(), sTest.getTime()));
         slider.setValue(sTest.getTime());
@@ -104,7 +108,11 @@ public class SetTestTimeActivity extends BaseActivity {
                 sTest.setTime(slider.getValue());
                 sTest.setDate(System.currentTimeMillis());
                 TestDao testDao = new TestDao(this);
-                testDao.update(sTest);
+                if (ACTION_ADD_TEST.equals(mAction)) {
+                    testDao.add(sTest);
+                } else if (ACTION_EDIT_TEST.equals(mAction)) {
+                    testDao.update(sTest);
+                }
                 sTest = null;
                 testDao.close();
                 finish();
@@ -130,8 +138,19 @@ public class SetTestTimeActivity extends BaseActivity {
     /**
      * start
      */
-    public static void start(Context context, Test test) {
+    private static final String ACTION_ADD_TEST = "action_addtest";
+    private static final String ACTION_EDIT_TEST = "action_edittest";
+
+    public static void startFromAddNewTest(Context context, Test test) {
         Intent intent = new Intent(context, SetTestTimeActivity.class);
+        intent.setAction(ACTION_ADD_TEST);
+        context.startActivity(intent);
+        sTest = test;
+    }
+
+    public static void startFromEditTest(Context context, Test test) {
+        Intent intent = new Intent(context, SetTestTimeActivity.class);
+        intent.setAction(ACTION_EDIT_TEST);
         context.startActivity(intent);
         sTest = test;
     }

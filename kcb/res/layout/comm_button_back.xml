@@ -3,15 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:buttonflat="http://schemas.android.com/apk/res-auto"
     android:id="@+id/button_back"
-    android:layout_width="48dp"
-    android:layout_height="56dp"
+    style="@style/common_title_icon_layout"
     buttonflat:rippleSpeed="6"
     tools:ignore="contentDescription" >
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        style="@style/common_title_icon"
         android:src="@drawable/ic_arrow_back_black_24dp" />
 
 </com.kcb.library.view.buttonflat.ButtonFlat>

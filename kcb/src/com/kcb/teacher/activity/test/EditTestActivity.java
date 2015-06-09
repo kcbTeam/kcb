@@ -161,7 +161,7 @@ public class EditTestActivity extends BaseActivity {
 
                     @Override
                     public void run() {
-                        SetTestTimeActivity.start(EditTestActivity.this, sTest);
+                        SetTestTimeActivity.startFromAddNewTest(EditTestActivity.this, sTest);
                         finish();
                     }
                 }, 200);
@@ -250,10 +250,8 @@ public class EditTestActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        if (mAction.equals(ACTION_ADD_TEST)) {
+        if (ACTION_ADD_TEST.equals(mAction)) {
             cancelAddTest();
-        } else {
-            saveEditTest();
         }
     }
 
@@ -268,14 +266,6 @@ public class EditTestActivity extends BaseActivity {
         DialogUtil.showNormalDialog(this, R.string.tch_comm_cancel,
                 R.string.tch_not_save_if_cancel, R.string.tch_comm_sure, sureListener,
                 R.string.tch_comm_cancel, null);
-    }
-
-    private void saveEditTest() {
-        ToastUtil.toast(R.string.tch_saved);
-        TestDao testDao = new TestDao(this);
-        testDao.add(sTest);
-        testDao.close();
-        finish();
     }
 
     @Override
@@ -296,8 +286,8 @@ public class EditTestActivity extends BaseActivity {
     /**
      * for add a new Test or Edit Test;
      */
-    private static final String ACTION_ADD_TEST = "action_addTest";
-    private static final String ACTION_EDIT_TEST = "action_editTest";
+    private static final String ACTION_ADD_TEST = "action_addtest";
+    private static final String ACTION_EDIT_TEST = "action_edittest";
 
     /**
      * for better effect, use static test, don't need parse bitmap

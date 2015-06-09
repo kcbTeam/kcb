@@ -24,7 +24,7 @@ import com.kcbTeam.R;
 public class CropPictureActivity extends BaseActivity {
 
     private static final int DEFAULT_ASPECT_RATIO_VALUES = 10;
-    private static final int ROTATE_NINETY_DEGREES = 90;
+    private static final int ROTATE_NINETY_DEGREES = -90;
     private static final String ASPECT_RATIO_X = "ASPECT_RATIO_X";
     private static final String ASPECT_RATIO_Y = "ASPECT_RATIO_Y";
 

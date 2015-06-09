@@ -7,31 +7,23 @@
     android:background="@color/activity_background"
     tools:ignore="contentDescription" >
 
-    <TextView
-        android:id="@+id/textview_title"
-        style="@style/common_title_left"
-        android:paddingLeft="16dp"
-        android:text="@string/tch_set_test_time" />
+    <LinearLayout
+        android:id="@+id/layout_title"
+        style="@style/common_title_layout" >
 
-    <com.kcb.library.view.buttonflat.ButtonFlat
-        android:id="@+id/button_finish"
-        android:layout_width="@dimen/top_icon_button_width"
-        android:layout_height="@dimen/top_icon_button_height"
-        android:layout_alignParentRight="true"
-        widget:rippleSpeed="6" >
+        <TextView
+            android:id="@+id/textview_title"
+            style="@style/common_title_left"
+            android:text="@string/tch_set_test_time" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:src="@drawable/ic_check_circle_black_24dp" />
-    </com.kcb.library.view.buttonflat.ButtonFlat>
+        <include layout="@layout/comm_button_finish" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/textview_testtime"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textview_title"
+        android:layout_below="@id/layout_title"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
         android:textColor="@color/black"

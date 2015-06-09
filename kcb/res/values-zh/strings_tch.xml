@@ -94,7 +94,6 @@
     <string name="tch_set_test_name">为本次测试起一个名字</string>
     <string name="tch_set_test_name_hint">例如：科学的概念和应用</string>
     <string name="tch_set_question_num">设置题目数量：%1$d</string>
-    <string name="tch_start_edit_test">点击完成开始出题</string>
     <!--  -->
     <string name="tch_has_same_test_name">测试名称已经被使用了</string>
     <!-- SetTestNameActivity end -->

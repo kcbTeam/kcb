@@ -9,51 +9,23 @@
 
     <LinearLayout
         android:id="@+id/layout_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/activity_header_shadow"
-        android:orientation="horizontal" >
+        style="@style/common_title_layout" >
 
         <include layout="@layout/comm_button_back" />
 
         <TextView
             android:id="@+id/textview_question_index"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="1"
-            android:textSize="@dimen/text_size_large" />
+            style="@style/common_title" />
 
-        <com.kcb.library.view.buttonflat.ButtonFlat
-            android:id="@+id/button_delete"
-            android:layout_width="@dimen/top_icon_button_width"
-            android:layout_height="@dimen/top_icon_button_height"
-            widget:clickAfterRipple="false"
-            widget:rippleSpeed="6" >
+        <include layout="@layout/comm_button_delete" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:src="@drawable/ic_delete_black_24dp" />
-        </com.kcb.library.view.buttonflat.ButtonFlat>
+        <include layout="@layout/comm_button_finish" />
     </LinearLayout>
 
     <com.kcb.common.view.QuestionEditView
         android:id="@+id/questioneditview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/button_finish"
         android:layout_below="@id/layout_title" />
-
-    <com.kcb.library.view.PaperButton
-        android:id="@+id/button_finish"
-        style="@style/common_paper_button"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="4dp"
-        android:layout_marginTop="4dp"
-        widget:paper_text="完成"
-        widget:paper_text_color="@color/black_700"
-        widget:paper_text_size="@dimen/text_size_medium" />
 
 </RelativeLayout>

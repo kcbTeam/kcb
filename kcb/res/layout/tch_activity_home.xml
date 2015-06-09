@@ -7,29 +7,16 @@
     android:background="@color/activity_background"
     tools:ignore="contentDescription" >
 
-    <TextView
-        android:id="@+id/textview_username"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/activity_header_shadow"
-        android:gravity="center_vertical"
-        android:paddingLeft="16dp"
-        android:textColor="@color/black"
-        android:textSize="@dimen/text_size_large" />
+    <LinearLayout
+        android:id="@+id/layout_title"
+        style="@style/common_title_layout" >
 
-    <com.kcb.library.view.buttonflat.ButtonFlat
-        android:id="@+id/button_setting"
-        android:layout_width="@dimen/top_icon_button_width"
-        android:layout_height="@dimen/top_icon_button_height"
-        android:layout_alignParentRight="true"
-        widget:rippleSpeed="6" >
+        <TextView
+            android:id="@+id/textview_username"
+            style="@style/common_title_left" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:src="@drawable/ic_more_vert_black_24dp" />
-    </com.kcb.library.view.buttonflat.ButtonFlat>
+        <include layout="@layout/comm_button_more" />
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/buttonbar"
@@ -69,7 +56,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/view_line"
-        android:layout_below="@id/textview_username" >
+        android:layout_below="@id/layout_title" >
     </FrameLayout>
 
 </RelativeLayout>
