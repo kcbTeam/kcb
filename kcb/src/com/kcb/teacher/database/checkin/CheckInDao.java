@@ -37,15 +37,20 @@ public class CheckInDao {
         Cursor cursor =
                 mDatabase.query(CheckInTable.TABLE_NAME, null, null, null, null, null, null);
         List<CheckInResult> results = new ArrayList<CheckInResult>();
-        if (cursor.moveToFirst()) {
-            do {
-                try {
-                    results.add(CheckInResult.fromJsonObject(new JSONObject(cursor.getString(cursor
-                            .getColumnIndex(CheckInTable.COLUMN_ROW_DATA)))));
-                } catch (JSONException e) {}
-            } while (cursor.moveToNext());
+        if (null != cursor) {
+            try {
+                if (cursor.moveToFirst()) {
+                    do {
+                        try {
+                            results.add(CheckInResult.fromJsonObject(new JSONObject(cursor
+                                    .getString(cursor.getColumnIndex(CheckInTable.COLUMN_ROW_DATA)))));
+                        } catch (JSONException e) {}
+                    } while (cursor.moveToNext());
+                }
+            } catch (Exception e) {} finally {
+                cursor.close();
+            }
         }
-        cursor.close();
         return results;
     }
 
