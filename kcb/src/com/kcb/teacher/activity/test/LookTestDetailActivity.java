@@ -17,13 +17,13 @@ public class LookTestDetailActivity extends BaseActivity {
     private ButtonFlat backButton;
     private TextView testNameNumTextView;
 
-    private QuestionView testView;
+    private QuestionView questionView;
 
     private ButtonFlat lastButton;
     private ButtonFlat nextButton;
 
     public static Test sTest;
-    private int mCurrentPosition;
+    private int mQuestionIndex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,10 +39,11 @@ public class LookTestDetailActivity extends BaseActivity {
         backButton = (ButtonFlat) findViewById(R.id.button_back);
         backButton.setOnClickListener(this);
 
-        testNameNumTextView = (TextView) findViewById(R.id.textview_title);
-        testNameNumTextView.setText(sTest.getName());
+        testNameNumTextView = (TextView) findViewById(R.id.textview_test_name_num);
+        testNameNumTextView.setText(String.format(getString(R.string.tch_test_name_num),
+                sTest.getName(), sTest.getQuestionNum()));
 
-        testView = (QuestionView) findViewById(R.id.testview);
+        questionView = (QuestionView) findViewById(R.id.questionview);
 
         lastButton = (ButtonFlat) findViewById(R.id.button_last);
         lastButton.setOnClickListener(this);
@@ -52,7 +53,6 @@ public class LookTestDetailActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        mCurrentPosition = 0;
         showQuestion();
     }
 
@@ -74,23 +74,31 @@ public class LookTestDetailActivity extends BaseActivity {
     }
 
     private void lastQuestion() {
-        if (mCurrentPosition > 0) {
-            mCurrentPosition--;
+        if (mQuestionIndex > 0) {
+            mQuestionIndex--;
             showQuestion();
         }
     }
 
     private void nextQuestin() {
-        if (mCurrentPosition != sTest.getQuestionNum() - 1) {
-            mCurrentPosition++;
+        if (mQuestionIndex != sTest.getQuestionNum() - 1) {
+            mQuestionIndex++;
             showQuestion();
         }
     }
 
     private void showQuestion() {
-        testView.showQuestionIndex(String.format(getString(R.string.tch_question_index),
-                mCurrentPosition + 1));
-        testView.showQuestion(sTest.getQuestion(mCurrentPosition));
+        questionView.showQuestionIndex(String.format(getString(R.string.tch_question_index),
+                mQuestionIndex + 1));
+        questionView.showQuestion(sTest.getQuestion(mQuestionIndex));
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        questionView.release();
+        questionView = null;
+        sTest = null;
     }
 
     /**
@@ -100,6 +108,5 @@ public class LookTestDetailActivity extends BaseActivity {
         Intent intent = new Intent(context, LookTestDetailActivity.class);
         context.startActivity(intent);
         sTest = test;
-        sTest.changeStringToBitmap();
     }
 }

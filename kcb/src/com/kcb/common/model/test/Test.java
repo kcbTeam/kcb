@@ -126,12 +126,6 @@ public class Test implements Serializable {
         return -1;
     }
 
-    public void changeStringToBitmap() {
-        for (int i = 0; i < mQuestions.size(); i++) {
-            mQuestions.get(i).changeStringToBitmap();
-        }
-    }
-
     public void setAnswer(TestAnswer testAnswer) {
         for (Question question : mQuestions) {
             for (QuestionAnswer questionAnswer : testAnswer.getQuestionAnswers()) {
@@ -144,6 +138,13 @@ public class Test implements Serializable {
 
     public String toString() {
         return toJsonObject().toString();
+    }
+
+    public void release() {
+        for (int i = 0; i < mQuestions.size(); i++) {
+            mQuestions.get(i).release();
+        }
+        mQuestions = null;
     }
 
     /**

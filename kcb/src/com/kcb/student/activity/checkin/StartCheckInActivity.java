@@ -57,7 +57,7 @@ public class StartCheckInActivity extends BaseActivity {
     private SmoothProgressBar progressBar;
 
     private StartCheckInAdapter mAdapter;
-    private int currentInputIndex = 0;
+    private int mCurrentIndex = 0;
 
     private int mRemainTime;
     private Handler mHandler;
@@ -132,9 +132,6 @@ public class StartCheckInActivity extends BaseActivity {
         dialog.setCancelable(false);
     }
 
-    @Override
-    public void onClick(View v) {}
-
     private RecyclerItemClickListener mRecyclerItemClickListener = new RecyclerItemClickListener() {
 
         @Override
@@ -142,7 +139,7 @@ public class StartCheckInActivity extends BaseActivity {
             if (postion == 9) { // clean all num
                 clearNum();
             } else if (postion == 11) { // clean last num
-                switch (currentInputIndex) {
+                switch (mCurrentIndex) {
                     case 1:
                         num1TextView.setText("");
                         break;
@@ -158,18 +155,18 @@ public class StartCheckInActivity extends BaseActivity {
                     default:
                         break;
                 }
-                if (currentInputIndex > 0) {
-                    currentInputIndex--;
+                if (mCurrentIndex > 0) {
+                    mCurrentIndex--;
                 } else {
-                    currentInputIndex = 0;
+                    mCurrentIndex = 0;
                 }
             } else { // input num
                 if (postion == 10) {
                     postion = -1;
                 }
-                if (currentInputIndex != 4) {
-                    currentInputIndex++;
-                    switch (currentInputIndex) {
+                if (mCurrentIndex != 4) {
+                    mCurrentIndex++;
+                    switch (mCurrentIndex) {
                         case 1:
                             num1TextView.setText(String.valueOf(postion + 1));
                             break;
@@ -247,7 +244,7 @@ public class StartCheckInActivity extends BaseActivity {
         num2TextView.setText("");
         num3TextView.setText("");
         num4TextView.setText("");
-        currentInputIndex = 0;
+        mCurrentIndex = 0;
     }
 
     @Override
@@ -260,8 +257,15 @@ public class StartCheckInActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         RequestUtil.getInstance().cancelPendingRequests(TAG);
+        recyclerView = null;
+        mAdapter.release();
+        mAdapter = null;
+        mRecyclerItemClickListener = null;
     };
 
+    /**
+     * start
+     */
     private static final String DATA_TIME = "data_time";
 
     public static void start(Context context, String time) {

@@ -40,7 +40,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/textview_stucheckinrate"
+            android:id="@+id/textview_checkinrate"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -65,7 +65,7 @@
     </LinearLayout>
 
     <ListView
-        android:id="@+id/listview_student"
+        android:id="@+id/listview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/layout_sort"

@@ -104,12 +104,17 @@ public class Question implements Serializable {
                         .isRight());
     }
 
-    public void changeStringToBitmap() {
-        mTitleItem.changeStringToBitmap();
-        mChoiceAItem.changeStringToBitmap();
-        mChoiceBItem.changeStringToBitmap();
-        mChoiceCItem.changeStringToBitmap();
-        mChoiceDItem.changeStringToBitmap();
+    public void release() {
+        mTitleItem.release();
+        mTitleItem = null;
+        mChoiceAItem.release();
+        mChoiceAItem = null;
+        mChoiceBItem.release();
+        mChoiceBItem = null;
+        mChoiceCItem.release();
+        mChoiceCItem = null;
+        mChoiceDItem.release();
+        mChoiceDItem = null;
     }
 
     /**

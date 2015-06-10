@@ -44,7 +44,7 @@ public class HomeActivity extends BaseFragmentActivity {
     private Fragment[] mFragments;
     private FragmentManager mFragmentManager;
 
-    private PopupWindow mPopupWindow;
+    private PopupWindow popupWindow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,25 +75,21 @@ public class HomeActivity extends BaseFragmentActivity {
         mFragments[INDEX_CHECKIN] = mFragmentManager.findFragmentById(R.id.fragment_checkin);
         mFragments[INDEX_TEST] = mFragmentManager.findFragmentById(R.id.fragment_test);
 
-        showDefaultFragment();
+        switchFragment(INDEX_CHECKIN);
     }
 
     @Override
     protected void initData() {}
 
-    private void showDefaultFragment() {
-        onClick(checkInButton);
-    }
-
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.button_more:
-                if (mPopupWindow != null && mPopupWindow.isShowing()) {
-                    mPopupWindow.dismiss();
+                if (popupWindow != null && popupWindow.isShowing()) {
+                    popupWindow.dismiss();
                 } else {
                     initPopupWindow();
-                    mPopupWindow.showAsDropDown(v, 0, 0);
+                    popupWindow.showAsDropDown(v, 0, 0);
                 }
                 break;
             case R.id.button_checkin:
@@ -128,13 +124,13 @@ public class HomeActivity extends BaseFragmentActivity {
     @SuppressWarnings("deprecation")
     public void initPopupWindow() {
         View customView = View.inflate(HomeActivity.this, R.layout.stu_popupwindow_setting, null);
-        mPopupWindow =
+        popupWindow =
                 new PopupWindow(customView, ViewGroup.LayoutParams.WRAP_CONTENT,
                         ViewGroup.LayoutParams.WRAP_CONTENT);
-        mPopupWindow.setTouchable(true);
-        mPopupWindow.setFocusable(true);
-        mPopupWindow.setBackgroundDrawable(new BitmapDrawable());
-        mPopupWindow.setOutsideTouchable(true);
+        popupWindow.setTouchable(true);
+        popupWindow.setFocusable(true);
+        popupWindow.setBackgroundDrawable(new BitmapDrawable());
+        popupWindow.setOutsideTouchable(true);
 
         OnClickListener clickListener = new OnClickListener() {
 
@@ -142,12 +138,12 @@ public class HomeActivity extends BaseFragmentActivity {
             public void onClick(View v) {
                 switch (v.getId()) {
                     case R.id.button_modifypassword:
-                        mPopupWindow.dismiss();
+                        popupWindow.dismiss();
                         Intent intent = new Intent(HomeActivity.this, ModifyPasswordActivity.class);
                         startActivity(intent);
                         break;
                     case R.id.button_exit:
-                        mPopupWindow.dismiss();
+                        popupWindow.dismiss();
                         exitAccount();
                         break;
                     default:
@@ -192,18 +188,18 @@ public class HomeActivity extends BaseFragmentActivity {
                 }, R.string.stu_comm_cancel, null);
     }
 
-    private boolean hasClickBack = false;
+    private boolean mHasClickBack = false;
 
     @Override
     public void onBackPressed() {
-        if (!hasClickBack) {
-            hasClickBack = true;
+        if (!mHasClickBack) {
+            mHasClickBack = true;
             ToastUtil.toast(R.string.stu_click_again_exit_app);
             new Handler().postDelayed(new Runnable() {
 
                 @Override
                 public void run() {
-                    hasClickBack = false;
+                    mHasClickBack = false;
                 }
             }, 2000);
         } else {
@@ -211,13 +207,16 @@ public class HomeActivity extends BaseFragmentActivity {
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mFragments = null;
+        mFragmentManager = null;
+        popupWindow = null;
+    }
+
     /**
-     * 
-     * @title: start
-     * @description: start HomeActivity from StartActivity or LoginActivity
-     * @author: wanghang
-     * @date: 2015-5-10 上午11:27:53
-     * @param context
+     * start
      */
     public static void start(Context context) {
         Intent intent = new Intent(context, HomeActivity.class);

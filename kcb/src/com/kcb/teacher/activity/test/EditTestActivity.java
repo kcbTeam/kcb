@@ -28,7 +28,9 @@ import com.kcbTeam.R;
  */
 public class EditTestActivity extends BaseActivity {
 
-    private TextView testNameTextView;
+    private ButtonFlat backButton;
+    private TextView testNameNumTextView;
+
     private ButtonFlat cancelButton;
     private ImageView cancelImageView;
 
@@ -59,7 +61,9 @@ public class EditTestActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        testNameTextView = (TextView) findViewById(R.id.textview_title);
+        backButton = (ButtonFlat) findViewById(R.id.button_back);
+        backButton.setOnClickListener(this);
+        testNameNumTextView = (TextView) findViewById(R.id.textview_title);
 
         cancelButton = (ButtonFlat) findViewById(R.id.button_cancel);
         cancelButton.setOnClickListener(this);
@@ -82,7 +86,11 @@ public class EditTestActivity extends BaseActivity {
         Intent intent = getIntent();
         mAction = intent.getAction();
         if (mAction.equals(ACTION_EDIT_TEST)) {
+            backButton.setVisibility(View.VISIBLE);
+            testNameNumTextView.setPadding(0, 0, 0, 0);
             cancelImageView.setImageResource(R.drawable.ic_delete_black_24dp);
+        } else if (mAction.equals(ACTION_ADD_TEST)) {
+            backButton.setVisibility(View.GONE);
         }
         showTestNameNum();
         showQuestion();
@@ -91,6 +99,10 @@ public class EditTestActivity extends BaseActivity {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.button_back:
+                release();
+                finish();
+                break;
             case R.id.button_cancel:
                 if (mAction.equals(ACTION_ADD_TEST)) {
                     cancelAddTest();
@@ -124,6 +136,8 @@ public class EditTestActivity extends BaseActivity {
                 TestDao testDao = new TestDao(EditTestActivity.this);
                 testDao.delete(sTest);
                 testDao.close();
+
+                release();
                 finish();
             }
         };
@@ -161,7 +175,11 @@ public class EditTestActivity extends BaseActivity {
 
                     @Override
                     public void run() {
-                        SetTestTimeActivity.startFromAddNewTest(EditTestActivity.this, sTest);
+                        if (ACTION_ADD_TEST.equals(mAction)) {
+                            SetTestTimeActivity.startFromAddNewTest(EditTestActivity.this, sTest);
+                        } else if (ACTION_EDIT_TEST.equals(mAction)) {
+                            SetTestTimeActivity.startFromEditTest(EditTestActivity.this, sTest);
+                        }
                         finish();
                     }
                 }, 200);
@@ -223,7 +241,7 @@ public class EditTestActivity extends BaseActivity {
     }
 
     private void showTestNameNum() {
-        testNameTextView.setText(String.format(
+        testNameNumTextView.setText(String.format(
                 getResources().getString(R.string.tch_test_name_num), sTest.getName(),
                 sTest.getQuestionNum()));
     }
@@ -252,6 +270,9 @@ public class EditTestActivity extends BaseActivity {
     public void onBackPressed() {
         if (ACTION_ADD_TEST.equals(mAction)) {
             cancelAddTest();
+        } else if (ACTION_EDIT_TEST.equals(mAction)) {
+            release();
+            finish();
         }
     }
 
@@ -260,6 +281,7 @@ public class EditTestActivity extends BaseActivity {
 
             @Override
             public void onClick(View v) {
+                release();
                 finish();
             }
         };
@@ -269,18 +291,22 @@ public class EditTestActivity extends BaseActivity {
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mTempQuestion = null;
-        sTest = null;
-        questionEditView = null;
-
-    }
-
-    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         questionEditView.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private void release() {
+        sTest.release();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        questionEditView = null;
+        sTest = null;
+        mTempQuestion = null;
+
     }
 
     /**
@@ -304,6 +330,5 @@ public class EditTestActivity extends BaseActivity {
         intent.setAction(ACTION_EDIT_TEST);
         context.startActivity(intent);
         sTest = test;
-        sTest.changeStringToBitmap();
     }
 }

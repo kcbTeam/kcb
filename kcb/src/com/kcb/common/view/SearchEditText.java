@@ -39,7 +39,7 @@ public class SearchEditText extends RelativeLayout implements TextWatcher, OnCli
     /**
      * set this listener, then you can listen user's input or clear action
      */
-    public interface SearchListener {
+    public interface OnSearchListener {
         void onSearch(String text);
 
         void onClear();
@@ -48,7 +48,7 @@ public class SearchEditText extends RelativeLayout implements TextWatcher, OnCli
     private FloatingEditText searchEditText;
     private ImageView clearImageView;
 
-    private SearchListener mListener;
+    private OnSearchListener mListener;
 
     /**
      * 1 step
@@ -69,7 +69,7 @@ public class SearchEditText extends RelativeLayout implements TextWatcher, OnCli
     /**
      * 2 step
      */
-    public void setOnSearchListener(SearchListener listener) {
+    public void setOnSearchListener(OnSearchListener listener) {
         mListener = listener;
     }
 
@@ -109,5 +109,9 @@ public class SearchEditText extends RelativeLayout implements TextWatcher, OnCli
             default:
                 break;
         }
+    }
+
+    public void release() {
+        mListener = null;
     }
 }

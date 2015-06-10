@@ -200,7 +200,7 @@ public class QuestionEditView extends LinearLayout implements OnClickListener, O
                 deleteIcon.setVisibility(View.INVISIBLE);
                 break;
             case EDIT_MODE_BITMAP:
-                editText.setText("");
+                editText.setText(" ");
                 editText.setFocusable(false);
                 deleteIcon.setVisibility(View.VISIBLE);
                 break;
@@ -393,5 +393,10 @@ public class QuestionEditView extends LinearLayout implements OnClickListener, O
         bItem.setIsRight(checkBoxB.isCheck());
         cItem.setIsRight(checkBoxC.isCheck());
         dItem.setIsRight(checkBoxD.isCheck());
+    }
+
+    public void release() {
+        mContext = null;
+        mQuestion = null;
     }
 }

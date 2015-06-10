@@ -1,6 +1,5 @@
 package com.kcb.teacher.adapter;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
 import android.view.View;
@@ -62,7 +61,12 @@ public class SetTestTimeAdapter extends BaseAdapter {
         mTest.deleteQuestion(index);
     }
 
-    @SuppressLint("ViewHolder")
+    public void release() {
+        mContext = null;
+        mTest = null;
+        mListener = null;
+    }
+
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
@@ -98,8 +102,6 @@ public class SetTestTimeAdapter extends BaseAdapter {
 
     // TODO use ImageView for low api phone
     private class ViewHolder {
-        private final String questionIndexString = "第%1$d题";
-
         private TextView questionIndexTextView;
         private TextView titleTextView;
         private ButtonFlat editButton;
@@ -112,9 +114,9 @@ public class SetTestTimeAdapter extends BaseAdapter {
         private ImageView cCheckBox;
         private ImageView dCheckBox;
 
-        @SuppressLint("NewApi")
         public void setQuestion(int index, Question question) {
-            questionIndexTextView.setText(String.format(questionIndexString, index + 1));
+            questionIndexTextView.setText(String.format(
+                    mContext.getString(R.string.tch_question_index), index + 1));
             showContent(titleTextView, null, question.getTitle());
             showContent(aTextView, aCheckBox, question.getChoiceA());
             showContent(bTextView, bCheckBox, question.getChoiceB());
@@ -124,14 +126,13 @@ public class SetTestTimeAdapter extends BaseAdapter {
     }
 
     @SuppressWarnings("deprecation")
-    @SuppressLint("NewApi")
     private void showContent(TextView view, ImageView checkIcon, QuestionItem item) {
         if (item.isText()) {
             view.setText(item.getText());
             view.setBackgroundResource(0);
         } else {
             view.setText("");
-            view.setBackground(new BitmapDrawable(item.getBitmap()));
+            view.setBackgroundDrawable(new BitmapDrawable(item.getBitmap()));
         }
         if (null != checkIcon) {
             if (item.isRight()) {

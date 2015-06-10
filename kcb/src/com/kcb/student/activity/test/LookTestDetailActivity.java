@@ -22,17 +22,16 @@ import com.kcbTeam.R;
 public class LookTestDetailActivity extends BaseActivity {
 
     private ButtonFlat backButton;
-
     private TextView testNameNumTextView;
 
-    private QuestionView testView;
+    private QuestionView questionView;
 
     private ButtonFlat lastButton;
     private ButtonFlat nextButton;
 
     // test and current question index;
     public static Test sTest;
-    private int mCurrentQuestionIndex;
+    private int mQuestionIndex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +51,7 @@ public class LookTestDetailActivity extends BaseActivity {
         testNameNumTextView.setText(String.format(getString(R.string.stu_test_name_num),
                 sTest.getName(), sTest.getQuestionNum()));
 
-        testView = (QuestionView) findViewById(R.id.testview);
+        questionView = (QuestionView) findViewById(R.id.questionview);
 
         lastButton = (ButtonFlat) findViewById(R.id.button_last);
         lastButton.setOnClickListener(this);
@@ -83,23 +82,30 @@ public class LookTestDetailActivity extends BaseActivity {
     }
 
     private void lastQuestion() {
-        if (mCurrentQuestionIndex > 0) {
-            mCurrentQuestionIndex--;
+        if (mQuestionIndex > 0) {
+            mQuestionIndex--;
             showQuestion();
         }
     }
 
     private void nextQuesion() {
-        if (mCurrentQuestionIndex < sTest.getQuestionNum() - 1) {
-            mCurrentQuestionIndex++;
+        if (mQuestionIndex < sTest.getQuestionNum() - 1) {
+            mQuestionIndex++;
             showQuestion();
         }
     }
 
     private void showQuestion() {
-        testView.showQuestionIndex(String.format(getString(R.string.stu_question_index),
-                mCurrentQuestionIndex + 1));
-        testView.showQuestion(sTest.getQuestion(mCurrentQuestionIndex));
+        questionView.showQuestionIndex(String.format(getString(R.string.stu_question_index),
+                mQuestionIndex + 1));
+        questionView.showQuestion(sTest.getQuestion(mQuestionIndex));
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        questionView.release();
+        sTest = null;
     }
 
     /**

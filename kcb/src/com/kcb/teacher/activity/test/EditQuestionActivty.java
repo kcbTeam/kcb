@@ -9,11 +9,9 @@ import android.view.View.OnClickListener;
 import android.widget.TextView;
 
 import com.kcb.common.base.BaseActivity;
-import com.kcb.common.listener.DelayClickListener;
 import com.kcb.common.model.test.Question;
 import com.kcb.common.util.DialogUtil;
 import com.kcb.common.view.QuestionEditView;
-import com.kcb.library.view.PaperButton;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcbTeam.R;
 
@@ -29,10 +27,9 @@ public class EditQuestionActivty extends BaseActivity {
     private ButtonFlat backButton;
     private TextView questionIndexTextView;
     private ButtonFlat deleteButton;
+    private ButtonFlat finishButton;
 
     private QuestionEditView questionEditView;
-
-    private PaperButton finishButton;
 
     // question and current question index;
     public static Question sQuestion;
@@ -57,10 +54,10 @@ public class EditQuestionActivty extends BaseActivity {
         deleteButton = (ButtonFlat) findViewById(R.id.button_delete);
         deleteButton.setOnClickListener(this);
 
-        questionEditView = (QuestionEditView) findViewById(R.id.questioneditview);
+        finishButton = (ButtonFlat) findViewById(R.id.button_finish);
+        finishButton.setOnClickListener(this);
 
-        finishButton = (PaperButton) findViewById(R.id.button_finish);
-        finishButton.setOnClickListener(mClickListener);
+        questionEditView = (QuestionEditView) findViewById(R.id.questioneditview);
     }
 
     @Override
@@ -91,33 +88,29 @@ public class EditQuestionActivty extends BaseActivity {
                             }
                         }, R.string.tch_comm_cancel, null);
                 break;
+            case R.id.button_finish:
+                questionEditView.saveQuestion();
+                Intent intent = new Intent();
+                setResult(RESULT_OK, intent);
+                finish();
+                break;
             default:
                 break;
         }
     }
 
-    private DelayClickListener mClickListener = new DelayClickListener(
-            DelayClickListener.DELAY_PAPER_BUTTON) {
-
-        @Override
-        public void doClick(View v) {
-            switch (v.getId()) {
-                case R.id.button_finish:
-                    questionEditView.saveQuestion();
-                    Intent intent = new Intent();
-                    setResult(RESULT_OK, intent);
-                    finish();
-                    break;
-                default:
-                    break;
-            }
-        }
-    };
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         questionEditView.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        questionEditView.release();
+        questionEditView = null;
+        sQuestion = null;
     }
 
     /**

@@ -349,6 +349,11 @@ public class StartTestActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         RequestUtil.getInstance().cancelPendingRequests(TAG);
+        sTest.release();
+        sTest = null;
+        mTempQuestion.release();
+        mTempQuestion = null;
+        mTestAnswer = null;
     }
 
     /**
@@ -361,6 +366,5 @@ public class StartTestActivity extends BaseActivity {
         intent.putExtra(DATA_REMAIN_TIME, remainTime);
         context.startActivity(intent);
         sTest = test;
-        sTest.changeStringToBitmap();
     }
 }

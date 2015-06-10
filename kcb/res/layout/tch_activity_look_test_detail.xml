@@ -15,12 +15,12 @@
         <include layout="@layout/comm_button_back" />
 
         <TextView
-            android:id="@+id/textview_test_name"
+            android:id="@+id/textview_test_name_num"
             style="@style/common_title" />
     </LinearLayout>
 
     <com.kcb.common.view.QuestionView
-        android:id="@+id/testview"
+        android:id="@+id/questionview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/layout_title" />

@@ -80,7 +80,8 @@ public class QuestionItem implements Serializable {
         if (null != mBitmap) {
             return mBitmap;
         } else if (null != mBitmapString) {
-            return BitmapUtil.stringToBitmap(mBitmapString);
+            mBitmap = BitmapUtil.stringToBitmap(mBitmapString);
+            return mBitmap;
         } else {
             return null;
         }
@@ -131,8 +132,12 @@ public class QuestionItem implements Serializable {
         return !TextUtils.isEmpty(mText) || mBitmap != null;
     }
 
-    public void changeStringToBitmap() {
-        getBitmapString();
+    public void release() {
+        mBitmapString = null;
+        if (null != mBitmap) {
+            mBitmap.recycle();
+            mBitmap = null;
+        }
     }
 
     /**

@@ -14,7 +14,7 @@ import com.kcb.common.base.BaseActivity;
 import com.kcb.common.model.test.Test;
 import com.kcb.common.util.StringMatchUtil;
 import com.kcb.common.view.SearchEditText;
-import com.kcb.common.view.SearchEditText.SearchListener;
+import com.kcb.common.view.SearchEditText.OnSearchListener;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
 import com.kcb.student.adapter.LookTestAdapter;
@@ -28,7 +28,7 @@ import com.kcbTeam.R;
  * @author: Ding
  * @date: 2015年5月7日 下午5:09:20
  */
-public class LookTestActivity extends BaseActivity implements SearchListener, OnItemClickListener {
+public class LookTestActivity extends BaseActivity implements OnSearchListener, OnItemClickListener {
 
     private ButtonFlat backButton;
     private ButtonFlat refreshButton;
@@ -36,6 +36,7 @@ public class LookTestActivity extends BaseActivity implements SearchListener, On
 
     private SearchEditText searchEditText;
 
+    private View listTitleLayout;
     private ListView listView;
     private LookTestAdapter mAdapter;
 
@@ -67,6 +68,7 @@ public class LookTestActivity extends BaseActivity implements SearchListener, On
 
         listView = (ListView) findViewById(R.id.listview_test);
         listView.setOnItemClickListener(this);
+        listTitleLayout = findViewById(R.id.layout_list_title);
     }
 
     @Override
@@ -80,6 +82,10 @@ public class LookTestActivity extends BaseActivity implements SearchListener, On
 
         mAdapter = new LookTestAdapter(this, mTempTests);
         listView.setAdapter(mAdapter);
+
+        if (mTests.isEmpty()) {
+            listTitleLayout.setVisibility(View.INVISIBLE);
+        }
     }
 
     @Override
@@ -131,5 +137,22 @@ public class LookTestActivity extends BaseActivity implements SearchListener, On
             return;
         }
         progressBar.setVisibility(View.VISIBLE);
+        // if success, show listview title;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        searchEditText.release();
+        mAdapter.release();
+        mAdapter = null;
+        for (Test test : mTests) {
+            test.release();
+        }
+        mTests = null;
+        for (Test test : mTempTests) {
+            test.release();
+        }
+        mTempTests = null;
     }
 }

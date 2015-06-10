@@ -148,6 +148,15 @@ public class LookCheckInDetailActivity extends BaseFragmentActivity implements O
         l.setEnabled(false);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        pieChart = null;
+        mCheckInResult = null;
+        mAdapter.release();
+        mAdapter = null;
+    }
+
     /**
      * start this activity
      */

@@ -43,6 +43,11 @@ public class LookCheckInDetailAdapter extends BaseAdapter {
         return position;
     }
 
+    public void release() {
+        mContext = null;
+        mList = null;
+    }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder = null;

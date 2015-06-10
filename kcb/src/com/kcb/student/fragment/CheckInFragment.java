@@ -40,8 +40,6 @@ public class CheckInFragment extends BaseFragment {
 
     private PaperButton lookCheckInButton;
 
-    private DelayClickListener mClickListener;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstaceState) {
         return inflater.inflate(R.layout.stu_fragment_sign, container, false);
@@ -51,7 +49,6 @@ public class CheckInFragment extends BaseFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        initData();
         initView();
     }
 
@@ -67,24 +64,25 @@ public class CheckInFragment extends BaseFragment {
     }
 
     @Override
-    protected void initData() {
-        mClickListener = new DelayClickListener(DelayClickListener.DELAY_PAPER_BUTTON) {
+    protected void initData() {}
 
-            @Override
-            public void doClick(View v) {
-                switch (v.getId()) {
-                    case R.id.button_start_checkin:
-                        startCheckIn();
-                        break;
-                    case R.id.button_look_checkin:
-                        LookCheckInActivity.start(getActivity());
-                        break;
-                    default:
-                        break;
-                }
+    private DelayClickListener mClickListener = new DelayClickListener(
+            DelayClickListener.DELAY_PAPER_BUTTON) {
+
+        @Override
+        public void doClick(View v) {
+            switch (v.getId()) {
+                case R.id.button_start_checkin:
+                    startCheckIn();
+                    break;
+                case R.id.button_look_checkin:
+                    LookCheckInActivity.start(getActivity());
+                    break;
+                default:
+                    break;
             }
-        };
-    }
+        }
+    };
 
     public void startCheckIn() {
         if (progressBar.getVisibility() == View.VISIBLE) {
@@ -126,5 +124,6 @@ public class CheckInFragment extends BaseFragment {
     public void onDestroy() {
         super.onDestroy();
         RequestUtil.getInstance().cancelPendingRequests(TAG);
+        mClickListener = null;
     }
 }

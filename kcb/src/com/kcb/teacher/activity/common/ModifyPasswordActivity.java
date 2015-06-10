@@ -48,7 +48,6 @@ public class ModifyPasswordActivity extends BaseActivity {
         setContentView(R.layout.tch_activity_modify_password);
 
         initView();
-        initData();
     }
 
     @Override
@@ -64,7 +63,7 @@ public class ModifyPasswordActivity extends BaseActivity {
         newPasswordLayout = findViewById(R.id.layout_newpassword);
         newPasswordEditText = (FloatingEditText) findViewById(R.id.edittext_newpassword);
         repeatPassWordEditText = (FloatingEditText) findViewById(R.id.edittext_repeatpassword);
-        finishButton = (PaperButton) findViewById(R.id.button_complete);
+        finishButton = (PaperButton) findViewById(R.id.button_finish);
         finishButton.setOnClickListener(mClickListener);
         finishProgressBar = (SmoothProgressBar) findViewById(R.id.progressbar_finish);
     }
@@ -94,7 +93,7 @@ public class ModifyPasswordActivity extends BaseActivity {
                         checkOldPassword();
                     }
                     break;
-                case R.id.button_complete:
+                case R.id.button_finish:
                     setNewPassword();
                     break;
             }
@@ -193,5 +192,6 @@ public class ModifyPasswordActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         RequestUtil.getInstance().cancelPendingRequests(TAG);
+        mClickListener = null;
     }
 }

@@ -127,12 +127,12 @@ public class LoginActivity extends BaseActivity {
                                             String stuName = response.optString(KEY_STUNAME);
                                             String tchId = response.optString(KEY_TCHID);
                                             String tchName = response.optString(KEY_TCHNAME);
+                                            // save account
                                             KAccount account =
                                                     new KAccount(stuId, stuName, tchId, tchName);
                                             KAccount.saveAccount(account);
-
                                             AccountUtil.setAccountType(AccountUtil.TYPE_STU);
-
+                                            // goto HomeActivity
                                             HomeActivity.start(LoginActivity.this);
                                             finish();
                                         }
@@ -150,6 +150,8 @@ public class LoginActivity extends BaseActivity {
                                     } else {
                                         ResponseUtil.toastError(error);
                                     }
+                                    HomeActivity.start(LoginActivity.this);
+                                    finish();
                                 };
                             });
             RequestUtil.getInstance().addToRequestQueue(request, TAG);
@@ -158,7 +160,7 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        StartActivity.restart(this);
+        StartActivity.restart(LoginActivity.this);
         finish();
     }
 
@@ -166,6 +168,7 @@ public class LoginActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         RequestUtil.getInstance().cancelPendingRequests(TAG);
+        mClickListener = null;
     }
 
     /**

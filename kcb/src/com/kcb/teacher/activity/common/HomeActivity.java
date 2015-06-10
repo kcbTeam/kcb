@@ -1,13 +1,12 @@
 package com.kcb.teacher.activity.common;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -42,26 +41,29 @@ public class HomeActivity extends BaseFragmentActivity {
     private final int INDEX_STUCENTER = 2;
 
     private TextView userNameTextView;
-    private ButtonFlat settingButton;
-    private ButtonFlat checkInButton;
-    private ButtonFlat testButton;
-    private ButtonFlat stuCenterButton;
-
-    // add some popupwindow by ljx
-    private PopupWindow mPopupWindow;
+    private ButtonFlat moreButton;
 
     private CheckInFragment mCheckInFragment;
     private TestFragment mTestFragment;
     private StuCentreFragment mStuCentreFragment;
 
-    // TODO why need? can replace by index?
-    private Fragment mCurrentFragment;
+    private FragmentManager mFragmentManager;
+
+    private ButtonFlat checkInButton;
+    private ButtonFlat testButton;
+    private ButtonFlat stuCenterButton;
+
+    private PopupWindow popupWindow;
+
+    private int mCurrentIndex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tch_activity_home);
+
         initView();
+        initData();
     }
 
     @Override
@@ -69,27 +71,26 @@ public class HomeActivity extends BaseFragmentActivity {
         userNameTextView = (TextView) findViewById(R.id.textview_username);
         userNameTextView.setText(KAccount.getAccountName());
 
-        settingButton = (ButtonFlat) findViewById(R.id.button_more);
-        settingButton.setOnClickListener(this);
+        moreButton = (ButtonFlat) findViewById(R.id.button_more);
+        moreButton.setOnClickListener(this);
 
         checkInButton = (ButtonFlat) findViewById(R.id.button_checkin);
         checkInButton.setOnClickListener(this);
         checkInButton.setTextSize(16);
+
         testButton = (ButtonFlat) findViewById(R.id.button_test);
         testButton.setOnClickListener(this);
         testButton.setTextSize(16);
+
         stuCenterButton = (ButtonFlat) findViewById(R.id.button_stucenter);
         stuCenterButton.setOnClickListener(this);
         stuCenterButton.setTextSize(16);
-
-        setDefaultFragment();
     }
 
     @Override
-    protected void initData() {}
-
-    private void setDefaultFragment() {
-        mCurrentFragment = new CheckInFragment();
+    protected void initData() {
+        mCurrentIndex = -1;
+        mFragmentManager = getSupportFragmentManager();
         onClick(checkInButton);
     }
 
@@ -97,50 +98,73 @@ public class HomeActivity extends BaseFragmentActivity {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.button_more:
-                if (mPopupWindow != null && mPopupWindow.isShowing()) {
-                    mPopupWindow.dismiss();
+                if (popupWindow != null && popupWindow.isShowing()) {
+                    popupWindow.dismiss();
                 } else {
                     initPopupWindow();
-                    mPopupWindow.showAsDropDown(v, 0, 0);
+                    popupWindow.showAsDropDown(v, 0, 0);
                 }
                 break;
             case R.id.button_checkin:
-                setButtonTextColor(INDEX_CHECKIN);
-                if (null == mCheckInFragment) {
-                    mCheckInFragment = new CheckInFragment();
+                if (mCurrentIndex != INDEX_CHECKIN) {
+                    showFragment(INDEX_CHECKIN);
                 }
-                switchContent(mCheckInFragment);
                 break;
             case R.id.button_test:
-                setButtonTextColor(INDEX_TEST);
-                if (null == mTestFragment) {
-                    mTestFragment = new TestFragment();
+                if (mCurrentIndex != INDEX_TEST) {
+                    showFragment(INDEX_TEST);
                 }
-                switchContent(mTestFragment);
                 break;
             case R.id.button_stucenter:
-                setButtonTextColor(INDEX_STUCENTER);
-                if (null == mStuCentreFragment) {
-                    mStuCentreFragment = new StuCentreFragment();
+                if (mCurrentIndex != INDEX_STUCENTER) {
+                    showFragment(INDEX_STUCENTER);
                 }
-                switchContent(mStuCentreFragment);
                 break;
             default:
                 break;
         }
     }
 
-    private void switchContent(Fragment nextFragment) {
-        if (mCurrentFragment != nextFragment) {
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            if (!nextFragment.isAdded()) {
-                transaction.hide(mCurrentFragment).add(R.id.fragment_content, nextFragment)
-                        .commit();
-            } else {
-                transaction.hide(mCurrentFragment).show(nextFragment).commit();
-            }
-            mCurrentFragment = nextFragment;
+    private void showFragment(int index) {
+        mCurrentIndex = index;
+        setButtonTextColor(index);
+
+        FragmentTransaction transaction = mFragmentManager.beginTransaction();
+        if (null != mCheckInFragment) {
+            transaction.hide(mCheckInFragment);
         }
+        if (null != mTestFragment) {
+            transaction.hide(mTestFragment);
+        }
+        if (null != mStuCentreFragment) {
+            transaction.hide(mStuCentreFragment);
+        }
+        switch (index) {
+            case INDEX_CHECKIN:
+                if (null == mCheckInFragment) {
+                    mCheckInFragment = new CheckInFragment();
+                    transaction.add(R.id.fragment_content, mCheckInFragment);
+                }
+                transaction.show(mCheckInFragment);
+                break;
+            case INDEX_TEST:
+                if (null == mTestFragment) {
+                    mTestFragment = new TestFragment();
+                    transaction.add(R.id.fragment_content, mTestFragment);
+                }
+                transaction.show(mTestFragment);
+                break;
+            case INDEX_STUCENTER:
+                if (null == mStuCentreFragment) {
+                    mStuCentreFragment = new StuCentreFragment();
+                    transaction.add(R.id.fragment_content, mStuCentreFragment);
+                }
+                transaction.show(mStuCentreFragment);
+                break;
+            default:
+                break;
+        }
+        transaction.commit();
     }
 
     private void setButtonTextColor(int index) {
@@ -164,17 +188,15 @@ public class HomeActivity extends BaseFragmentActivity {
     }
 
     @SuppressWarnings("deprecation")
-    @SuppressLint("InflateParams")
     public void initPopupWindow() {
-        View customView =
-                getLayoutInflater().inflate(R.layout.tch_popupwindow_setting, null, false);
-        mPopupWindow =
+        View customView = View.inflate(HomeActivity.this, R.layout.tch_popupwindow_setting, null);
+        popupWindow =
                 new PopupWindow(customView, ViewGroup.LayoutParams.WRAP_CONTENT,
                         ViewGroup.LayoutParams.WRAP_CONTENT);
-        mPopupWindow.setTouchable(true);
-        mPopupWindow.setFocusable(true);
-        mPopupWindow.setBackgroundDrawable(new BitmapDrawable());
-        mPopupWindow.setOutsideTouchable(true);
+        popupWindow.setTouchable(true);
+        popupWindow.setFocusable(true);
+        popupWindow.setBackgroundDrawable(new BitmapDrawable());
+        popupWindow.setOutsideTouchable(true);
 
         OnClickListener clickListener = new OnClickListener() {
 
@@ -182,12 +204,12 @@ public class HomeActivity extends BaseFragmentActivity {
             public void onClick(View v) {
                 switch (v.getId()) {
                     case R.id.button_modifypassword:
-                        mPopupWindow.dismiss();
+                        popupWindow.dismiss();
                         Intent intent = new Intent(HomeActivity.this, ModifyPasswordActivity.class);
                         startActivity(intent);
                         break;
                     case R.id.button_exit:
-                        mPopupWindow.dismiss();
+                        popupWindow.dismiss();
                         exitAccount();
                         break;
                     default:
@@ -256,13 +278,18 @@ public class HomeActivity extends BaseFragmentActivity {
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mCheckInFragment = null;
+        mTestFragment = null;
+        mStuCentreFragment = null;
+        mFragmentManager = null;
+        popupWindow = null;
+    }
+
     /**
-     * 
-     * @title: start
-     * @description: start HomeActivity from StartActivity or LoginActivity
-     * @author: wanghang
-     * @date: 2015-5-10 上午11:27:53
-     * @param context
+     * start
      */
     public static void start(Context context) {
         Intent intent = new Intent(context, HomeActivity.class);

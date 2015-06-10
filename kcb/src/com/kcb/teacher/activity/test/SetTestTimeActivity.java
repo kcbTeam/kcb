@@ -94,9 +94,14 @@ public class SetTestTimeActivity extends BaseActivity {
             } else if (resultCode == EditQuestionActivty.RESULT_DELETE) {
                 int index = data.getIntExtra(EditQuestionActivty.DATA_INDEX, 0);
                 mAdapter.deleteItem(index);
-                mAdapter.notifyDataSetChanged();
-                testTimeTextView.setText(String.format(getString(R.string.tch_set_test_time_tip),
-                        mAdapter.getCount(), slider.getValue()));
+                if (mAdapter.getCount() == 0) { // delete all question
+                    finish();
+                } else {
+                    mAdapter.notifyDataSetChanged();
+                    testTimeTextView.setText(String.format(
+                            getString(R.string.tch_set_test_time_tip), mAdapter.getCount(),
+                            slider.getValue()));
+                }
             }
         }
     }
@@ -113,7 +118,6 @@ public class SetTestTimeActivity extends BaseActivity {
                 } else if (ACTION_EDIT_TEST.equals(mAction)) {
                     testDao.update(sTest);
                 }
-                sTest = null;
                 testDao.close();
                 finish();
                 break;
@@ -124,15 +128,29 @@ public class SetTestTimeActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        OnClickListener sureListener = new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        };
-        DialogUtil.showNormalDialog(this, R.string.tch_comm_cancel,
-                R.string.tch_not_save_if_cancel, R.string.tch_comm_sure, sureListener,
-                R.string.tch_comm_cancel, null);
+        if (ACTION_ADD_TEST.equals(mAction)) {
+            OnClickListener sureListener = new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish();
+                }
+            };
+            DialogUtil.showNormalDialog(this, R.string.tch_comm_cancel,
+                    R.string.tch_not_save_if_cancel, R.string.tch_comm_sure, sureListener,
+                    R.string.tch_comm_cancel, null);
+        } else if (ACTION_EDIT_TEST.equals(mAction)) {
+            onClick(finishButton);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        sTest.release();
+        sTest = null;
+        mEditListener = null;
+        mAdapter.release();
+        mAdapter = null;
     }
 
     /**
