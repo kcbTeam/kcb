@@ -84,7 +84,7 @@ public class SetTestNameActivity extends BaseActivity {
                     if (testDao.hasTest(name)) {
                         ToastUtil.toast(R.string.tch_has_same_test_name);
                     } else {
-                        EditTestActivity.startAddNewTest(SetTestNameActivity.this, new Test(name,
+                        EditTestActivity.start(SetTestNameActivity.this, new Test(name,
                                 testNumSlider.getValue()));
                         finish();
                     }

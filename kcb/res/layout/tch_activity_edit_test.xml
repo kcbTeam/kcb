@@ -11,8 +11,6 @@
         android:id="@+id/layout_title"
         style="@style/common_title_layout" >
 
-        <include layout="@layout/comm_button_back" />
-
         <TextView
             android:id="@+id/textview_title"
             style="@style/common_title_left" />

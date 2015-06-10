@@ -27,7 +27,6 @@ public class EditQuestionActivty extends BaseActivity {
     private ButtonFlat backButton;
     private TextView questionIndexTextView;
     private ButtonFlat deleteButton;
-    private ButtonFlat finishButton;
 
     private QuestionEditView questionEditView;
 
@@ -54,9 +53,6 @@ public class EditQuestionActivty extends BaseActivity {
         deleteButton = (ButtonFlat) findViewById(R.id.button_delete);
         deleteButton.setOnClickListener(this);
 
-        finishButton = (ButtonFlat) findViewById(R.id.button_finish);
-        finishButton.setOnClickListener(this);
-
         questionEditView = (QuestionEditView) findViewById(R.id.questioneditview);
     }
 
@@ -73,6 +69,9 @@ public class EditQuestionActivty extends BaseActivity {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.button_back:
+                questionEditView.saveQuestion();
+                Intent intent = new Intent();
+                setResult(RESULT_OK, intent);
                 finish();
                 break;
             case R.id.button_delete:
@@ -88,15 +87,14 @@ public class EditQuestionActivty extends BaseActivity {
                             }
                         }, R.string.tch_comm_cancel, null);
                 break;
-            case R.id.button_finish:
-                questionEditView.saveQuestion();
-                Intent intent = new Intent();
-                setResult(RESULT_OK, intent);
-                finish();
-                break;
             default:
                 break;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        onClick(backButton);
     }
 
     @Override

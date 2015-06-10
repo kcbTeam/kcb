@@ -18,8 +18,6 @@
             style="@style/common_title" />
 
         <include layout="@layout/comm_button_delete" />
-
-        <include layout="@layout/comm_button_finish" />
     </LinearLayout>
 
     <com.kcb.common.view.QuestionEditView

@@ -30,9 +30,9 @@ import com.kcb.common.view.MaterialListDialog;
 import com.kcb.common.view.MaterialListDialog.OnClickSureListener;
 import com.kcb.library.view.PaperButton;
 import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
-import com.kcb.teacher.activity.test.EditTestActivity;
 import com.kcb.teacher.activity.test.LookTestActivity;
 import com.kcb.teacher.activity.test.SetTestNameActivity;
+import com.kcb.teacher.activity.test.SetTestTimeActivity;
 import com.kcb.teacher.database.test.TestDao;
 import com.kcb.teacher.model.account.KAccount;
 import com.kcbTeam.R;
@@ -189,7 +189,7 @@ public class TestFragment extends BaseFragment {
                                     TestDao testDao = new TestDao(getActivity());
                                     Test test = testDao.getByName(names.get(position));
                                     testDao.close();
-                                    EditTestActivity.startEditTest(getActivity(), test);
+                                    SetTestTimeActivity.startFromEditTest(getActivity(), test);
                                 }
                             }
                         }, R.string.tch_comm_cancel, null);

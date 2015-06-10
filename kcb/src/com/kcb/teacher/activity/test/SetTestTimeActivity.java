@@ -23,6 +23,8 @@ import com.kcbTeam.R;
 
 public class SetTestTimeActivity extends BaseActivity {
 
+    private TextView titleTextView;
+    private ButtonFlat deleteButton;
     private ButtonFlat finishButton;
 
     private TextView testTimeTextView;
@@ -47,6 +49,9 @@ public class SetTestTimeActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        titleTextView = (TextView) findViewById(R.id.textview_title);
+        deleteButton = (ButtonFlat) findViewById(R.id.button_delete);
+        deleteButton.setOnClickListener(this);
         finishButton = (ButtonFlat) findViewById(R.id.button_finish);
         finishButton.setOnClickListener(this);
 
@@ -68,6 +73,11 @@ public class SetTestTimeActivity extends BaseActivity {
     @Override
     protected void initData() {
         mAction = getIntent().getAction();
+        if (ACTION_ADD_TEST.equals(mAction)) {
+            deleteButton.setVisibility(View.GONE);
+        } else if (ACTION_EDIT_TEST.equals(mAction)) {
+            titleTextView.setText(R.string.tch_edit_test);
+        }
 
         testTimeTextView.setText(String.format(getString(R.string.tch_set_test_time_tip),
                 sTest.getQuestionNum(), sTest.getTime()));
@@ -85,6 +95,30 @@ public class SetTestTimeActivity extends BaseActivity {
     }
 
     @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.button_delete:
+                deleteTest();
+                break;
+            case R.id.button_finish:
+                sTest.setTime(slider.getValue());
+                sTest.setDate(System.currentTimeMillis());
+                TestDao testDao = new TestDao(this);
+                if (ACTION_ADD_TEST.equals(mAction)) {
+                    testDao.add(sTest);
+                } else if (ACTION_EDIT_TEST.equals(mAction)) {
+                    testDao.update(sTest);
+                }
+                testDao.close();
+                ToastUtil.toast(R.string.tch_saved);
+                finish();
+                break;
+            default:
+                break;
+        }
+    }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == EditQuestionActivty.REQUEST_EDIT) {
@@ -95,6 +129,7 @@ public class SetTestTimeActivity extends BaseActivity {
                 int index = data.getIntExtra(EditQuestionActivty.DATA_INDEX, 0);
                 mAdapter.deleteItem(index);
                 if (mAdapter.getCount() == 0) { // delete all question
+                    deleteTestFromDatabase();
                     finish();
                 } else {
                     mAdapter.notifyDataSetChanged();
@@ -106,24 +141,28 @@ public class SetTestTimeActivity extends BaseActivity {
         }
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.button_finish:
-                sTest.setTime(slider.getValue());
-                sTest.setDate(System.currentTimeMillis());
-                TestDao testDao = new TestDao(this);
-                if (ACTION_ADD_TEST.equals(mAction)) {
-                    testDao.add(sTest);
-                } else if (ACTION_EDIT_TEST.equals(mAction)) {
-                    testDao.update(sTest);
-                }
-                testDao.close();
+    private void deleteTest() {
+        OnClickListener sureListener = new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                ToastUtil.toast(R.string.tch_deleted);
+                deleteTestFromDatabase();
                 finish();
-                break;
-            default:
-                break;
-        }
+            }
+        };
+        DialogUtil.showNormalDialog(
+                SetTestTimeActivity.this,
+                R.string.tch_comm_delete,
+                String.format(getResources().getString(R.string.tch_delete_test_tip),
+                        sTest.getName()), R.string.tch_comm_sure, sureListener,
+                R.string.tch_comm_cancel, null);
+    }
+
+    private void deleteTestFromDatabase() {
+        TestDao testDao = new TestDao(SetTestTimeActivity.this);
+        testDao.delete(sTest);
+        testDao.close();
     }
 
     @Override

@@ -114,7 +114,7 @@
     <string name="tch_choice_D">D</string>
     <!--  -->
     <string name="tch_no_camera_app">没有可以拍照的应用程序</string>
-    <string name="tch_not_save_if_cancel">取消后，不会保存测试内容。</string>
+    <string name="tch_not_save_if_cancel">取消后，不会保存本次测试。</string>
     <string name="tch_question_saved">第%1$d题已保存</string>
     <string name="tch_question_added">第%1$d题已添加</string>
     <string name="tch_deleted">已删除</string>

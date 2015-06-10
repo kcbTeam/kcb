@@ -8,7 +8,6 @@
     widget:rippleSpeed="6" >
 
     <ImageView
-        android:id="@+id/imageview_cancel"
         style="@style/common_title_icon"
         android:src="@drawable/ic_highlight_remove_black_24dp" >
     </ImageView>
