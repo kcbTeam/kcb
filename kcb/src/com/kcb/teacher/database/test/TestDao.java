@@ -35,8 +35,14 @@ public class TestDao {
         Cursor cursor =
                 mDatabase.query(TestTable.TABLE_NAME, null, TestTable.COLUMN_NAME + "=?",
                         new String[] {testName}, null, null, null);
-        int count = cursor.getCount();
-        cursor.close();
+        int count = 0;
+        if (null != cursor) {
+            try {
+                count = cursor.getCount();
+            } catch (Exception e) {} finally {
+                cursor.close();
+            }
+        }
         return count > 0;
     }
 
@@ -45,13 +51,19 @@ public class TestDao {
                 mDatabase.query(TestTable.TABLE_NAME, new String[] {TestTable.COLUMN_NAME}, null,
                         null, null, null, null);
         List<String> names = new ArrayList<String>();
-        if (cursor.moveToFirst()) {
-            do {
-                String name = cursor.getString(cursor.getColumnIndex(TestTable.COLUMN_NAME));
-                names.add(name);
-            } while (cursor.moveToNext());
+        if (null != cursor) {
+            try {
+                if (cursor.moveToFirst()) {
+                    do {
+                        String name =
+                                cursor.getString(cursor.getColumnIndex(TestTable.COLUMN_NAME));
+                        names.add(name);
+                    } while (cursor.moveToNext());
+                }
+            } catch (Exception e) {} finally {
+                cursor.close();
+            }
         }
-        cursor.close();
         return names;
     }
 
@@ -80,14 +92,19 @@ public class TestDao {
                 mDatabase.query(TestTable.TABLE_NAME, null, TestTable.COLUMN_NAME + "=?",
                         new String[] {testName}, null, null, null);
         Test test = null;
-        if (cursor.moveToFirst()) {
+        if (null != cursor) {
             try {
-                test =
-                        Test.fromJsonObject(new JSONObject(cursor.getString(cursor
-                                .getColumnIndex(TestTable.COLUMN_ROW_DATA))));
-            } catch (JSONException e) {}
+                if (cursor.moveToFirst()) {
+                    try {
+                        test =
+                                Test.fromJsonObject(new JSONObject(cursor.getString(cursor
+                                        .getColumnIndex(TestTable.COLUMN_ROW_DATA))));
+                    } catch (JSONException e) {}
+                }
+            } catch (Exception e) {} finally {
+                cursor.close();
+            }
         }
-        cursor.close();
         return test;
     }
 
@@ -96,34 +113,44 @@ public class TestDao {
                 mDatabase.query(TestTable.TABLE_NAME, null, TestTable.COLUMN_HASTESTED + "=?",
                         new String[] {String.valueOf(true)}, null, null, null);
         List<Test> tests = new ArrayList<Test>();
-        if (cursor.moveToFirst()) {
-            do {
-                try {
-                    Test test =
-                            Test.fromJsonObject(new JSONObject(cursor.getString(cursor
-                                    .getColumnIndex(TestTable.COLUMN_ROW_DATA))));
-                    tests.add(test);
-                } catch (JSONException e) {}
-            } while (cursor.moveToNext());
+        if (null != cursor) {
+            try {
+                if (cursor.moveToFirst()) {
+                    do {
+                        try {
+                            Test test =
+                                    Test.fromJsonObject(new JSONObject(cursor.getString(cursor
+                                            .getColumnIndex(TestTable.COLUMN_ROW_DATA))));
+                            tests.add(test);
+                        } catch (JSONException e) {}
+                    } while (cursor.moveToNext());
+                }
+            } catch (Exception e) {} finally {
+                cursor.close();
+            }
         }
-        cursor.close();
         return tests;
     }
 
     public List<Test> getAll() {
         Cursor cursor = mDatabase.query(TestTable.TABLE_NAME, null, null, null, null, null, null);
         List<Test> tests = new ArrayList<Test>();
-        if (cursor.moveToFirst()) {
-            do {
-                try {
-                    Test test =
-                            Test.fromJsonObject(new JSONObject(cursor.getString(cursor
-                                    .getColumnIndex(TestTable.COLUMN_ROW_DATA))));
-                    tests.add(test);
-                } catch (JSONException e) {}
-            } while (cursor.moveToNext());
+        if (null != cursor) {
+            try {
+                if (cursor.moveToFirst()) {
+                    do {
+                        try {
+                            Test test =
+                                    Test.fromJsonObject(new JSONObject(cursor.getString(cursor
+                                            .getColumnIndex(TestTable.COLUMN_ROW_DATA))));
+                            tests.add(test);
+                        } catch (JSONException e) {}
+                    } while (cursor.moveToNext());
+                }
+            } catch (Exception e) {} finally {
+                cursor.close();
+            }
         }
-        cursor.close();
         return tests;
     }
 

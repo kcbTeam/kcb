@@ -38,17 +38,22 @@ public class TestDao {
     public List<Test> getAll() {
         Cursor cursor = mDatabase.query(TestTable.TABLE_NAME, null, null, null, null, null, null);
         List<Test> tests = new ArrayList<Test>();
-        if (cursor.moveToFirst()) {
-            do {
-                try {
-                    Test test =
-                            Test.fromJsonObject(new JSONObject(cursor.getString(cursor
-                                    .getColumnIndex(TestTable.COLUMN_ROW_DATA))));
-                    tests.add(test);
-                } catch (JSONException e) {}
-            } while (cursor.moveToNext());
+        if (null != cursor) {
+            try {
+                if (cursor.moveToFirst()) {
+                    do {
+                        try {
+                            Test test =
+                                    Test.fromJsonObject(new JSONObject(cursor.getString(cursor
+                                            .getColumnIndex(TestTable.COLUMN_ROW_DATA))));
+                            tests.add(test);
+                        } catch (JSONException e) {}
+                    } while (cursor.moveToNext());
+                }
+            } catch (Exception e) {} finally {
+                cursor.close();
+            }
         }
-        cursor.close();
         return tests;
     }
 

@@ -38,15 +38,20 @@ public class StudentDao {
         Cursor cursor =
                 mDatabase.query(StudentTable.TABLE_NAME, null, null, null, null, null, null);
         List<Student> students = new ArrayList<Student>();
-        if (cursor.moveToFirst()) {
-            do {
-                try {
-                    students.add(Student.fromjsonObject(new JSONObject(cursor.getString(cursor
-                            .getColumnIndex(StudentTable.COLUMN_ROW_DATA)))));
-                } catch (JSONException e) {}
-            } while (cursor.moveToNext());
+        if (null != cursor) {
+            try {
+                if (cursor.moveToFirst()) {
+                    do {
+                        try {
+                            students.add(Student.fromjsonObject(new JSONObject(cursor
+                                    .getString(cursor.getColumnIndex(StudentTable.COLUMN_ROW_DATA)))));
+                        } catch (JSONException e) {}
+                    } while (cursor.moveToNext());
+                }
+            } catch (Exception e) {} finally {
+                cursor.close();
+            }
         }
-        cursor.close();
         return students;
     }
 
