@@ -152,6 +152,9 @@ public class LookTestActivity extends BaseActivity implements OnSearchListener, 
 
     @Override
     public void onClear() {
+        if (mAllTests.isEmpty()) {
+            return;
+        }
         mSearchedTests.clear();
         mSearchedTests.addAll(mAllTests);
         mAdapter.notifyDataSetChanged();

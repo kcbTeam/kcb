@@ -22,6 +22,12 @@
             android:visibility="invisible" />
     </LinearLayout>
 
+    <com.kcb.library.view.smoothprogressbar.SmoothProgressBar
+        android:id="@+id/progressbar_refresh"
+        style="@style/SmoothProgressBar"
+        android:layout_alignBottom="@id/layout_title"
+        android:visibility="gone" />
+
     <LinearLayout
         android:id="@+id/layout_buttons"
         android:layout_width="match_parent"

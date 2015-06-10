@@ -143,9 +143,9 @@ public class UrlUtil {
      * **********4, stu centre**********
      */
     // 4.1 look stu info
-    private static final String url_tch_stucenter_lookinfo = IP + "/v1/tch/stucenter/lookstuinfo";
+    private static final String url_tch_stucenter_lookinfo = IP + "/v1/tch/stucenter/lookinfo";
 
     public static String getTchStucenterLookinfoUrl(String id) {
-        return url_tch_stucenter_lookinfo + "?id=" + id;
+        return url_tch_stucenter_lookinfo + "?tchid=" + id;
     }
 }

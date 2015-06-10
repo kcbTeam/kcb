@@ -18,6 +18,7 @@ import com.kcb.common.base.BaseFragmentActivity;
 import com.kcb.common.util.DialogUtil;
 import com.kcb.common.util.ToastUtil;
 import com.kcb.library.view.buttonflat.ButtonFlat;
+import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
 import com.kcb.teacher.database.checkin.CheckInDao;
 import com.kcb.teacher.database.students.StudentDao;
 import com.kcb.teacher.database.test.TestDao;
@@ -39,6 +40,8 @@ public class HomeActivity extends BaseFragmentActivity {
     private final int INDEX_CHECKIN = 0;
     private final int INDEX_TEST = 1;
     private final int INDEX_STUCENTER = 2;
+
+    private SmoothProgressBar progressBar;
 
     private ButtonFlat accountButton;
     private TextView userNameTextView;
@@ -69,6 +72,8 @@ public class HomeActivity extends BaseFragmentActivity {
 
     @Override
     protected void initView() {
+        progressBar = (SmoothProgressBar) findViewById(R.id.progressbar_refresh);
+
         accountButton = (ButtonFlat) findViewById(R.id.button_account);
         accountButton.setOnClickListener(this);
 
@@ -171,6 +176,7 @@ public class HomeActivity extends BaseFragmentActivity {
                 if (null == mStuCentreFragment) {
                     mStuCentreFragment = new StuCentreFragment();
                     transaction.add(R.id.fragment_content, mStuCentreFragment);
+                    mStuCentreFragment.setProgressBar(progressBar);
                 }
                 transaction.show(mStuCentreFragment);
                 break;
