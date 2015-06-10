@@ -21,6 +21,7 @@ import com.kcb.common.base.BaseActivity;
 import com.kcb.common.server.RequestUtil;
 import com.kcb.common.server.ResponseUtil;
 import com.kcb.common.server.UrlUtil;
+import com.kcb.common.view.EmptyTipView;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
 import com.kcb.teacher.adapter.LookCheckInAdapter;
@@ -47,6 +48,8 @@ public class LookCheckInActivity extends BaseActivity implements OnItemClickList
     private View listTitleLayout;
     private ListView listView;
 
+    private EmptyTipView emptyTipView;
+
     private LookCheckInAdapter mAdapter;
 
     @Override
@@ -69,6 +72,8 @@ public class LookCheckInActivity extends BaseActivity implements OnItemClickList
         listTitleLayout = findViewById(R.id.layout_listview_title);
         listView = (ListView) findViewById(R.id.listview);
         listView.setOnItemClickListener(this);
+
+        emptyTipView = (EmptyTipView) findViewById(R.id.emptytipview);
     }
 
     @Override
@@ -79,6 +84,8 @@ public class LookCheckInActivity extends BaseActivity implements OnItemClickList
 
         if (results.isEmpty()) {
             listTitleLayout.setVisibility(View.INVISIBLE);
+            emptyTipView.setVisibility(View.VISIBLE);
+            emptyTipView.setEmptyText(R.string.tch_no_checkin_result);
         }
 
         mAdapter = new LookCheckInAdapter(LookCheckInActivity.this, results);
@@ -120,6 +127,7 @@ public class LookCheckInActivity extends BaseActivity implements OnItemClickList
 
                         if (!results.isEmpty()) {
                             listTitleLayout.setVisibility(View.VISIBLE);
+                            emptyTipView.setVisibility(View.GONE);
                         }
 
                         for (int i = 0; i < response.length(); i++) {

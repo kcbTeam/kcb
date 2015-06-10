@@ -26,6 +26,7 @@ import com.kcb.common.server.RequestUtil;
 import com.kcb.common.server.ResponseUtil;
 import com.kcb.common.server.UrlUtil;
 import com.kcb.common.util.StringMatchUtil;
+import com.kcb.common.view.EmptyTipView;
 import com.kcb.common.view.SearchEditText;
 import com.kcb.common.view.SearchEditText.OnSearchListener;
 import com.kcb.library.view.buttonflat.ButtonFlat;
@@ -52,7 +53,10 @@ public class LookTestActivity extends BaseActivity implements OnSearchListener, 
 
     private SearchEditText searchEditText;
 
+    private View listTitleLayout;
     private ListView listView;
+
+    private EmptyTipView emptyTipView;
 
     private LookTestAdapter mAdapter;
 
@@ -81,7 +85,10 @@ public class LookTestActivity extends BaseActivity implements OnSearchListener, 
         searchEditText.setOnSearchListener(this);
         searchEditText.setHint(R.string.tch_input_test_name_search);
 
+        listTitleLayout = findViewById(R.id.layout_listview_title);
         listView = (ListView) findViewById(R.id.listview_test);
+
+        emptyTipView = (EmptyTipView) findViewById(R.id.emptytipview);
     }
 
     @Override
@@ -89,6 +96,12 @@ public class LookTestActivity extends BaseActivity implements OnSearchListener, 
         TestDao testDao = new TestDao(LookTestActivity.this);
         mAllTests = testDao.getHasTested();
         testDao.close();
+
+        if (mAllTests.isEmpty()) {
+            listTitleLayout.setVisibility(View.INVISIBLE);
+            emptyTipView.setVisibility(View.VISIBLE);
+            emptyTipView.setEmptyText(R.string.tch_no_test_result);
+        }
 
         mSearchedTests = new ArrayList<Test>();
         mSearchedTests.addAll(mAllTests);
@@ -117,6 +130,9 @@ public class LookTestActivity extends BaseActivity implements OnSearchListener, 
      */
     @Override
     public void onSearch(String text) {
+        if (mAllTests.isEmpty()) {
+            return;
+        }
         mSearchedTests.clear();
         mSearchedTests.addAll(mAllTests);
         for (int i = 0; i < mSearchedTests.size(); i++) {
@@ -157,7 +173,6 @@ public class LookTestActivity extends BaseActivity implements OnSearchListener, 
 
                     @Override
                     public void onResponse(JSONArray response) {
-                        progressBar.hide(LookTestActivity.this);
                         // get answer
                         List<TestAnswer> testAnswers = new ArrayList<TestAnswer>();
                         for (int i = 0; i < response.length(); i++) {
@@ -179,6 +194,12 @@ public class LookTestActivity extends BaseActivity implements OnSearchListener, 
                             testDao.add(test);
                         }
                         testDao.close();
+                        // switch view
+                        progressBar.hide(LookTestActivity.this);
+                        if (!mAllTests.isEmpty()) {
+                            listTitleLayout.setVisibility(View.VISIBLE);
+                            emptyTipView.setVisibility(View.GONE);
+                        }
                         // show test
                         mSearchedTests.clear();
                         mSearchedTests.addAll(mAllTests);

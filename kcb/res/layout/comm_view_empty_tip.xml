@@ -9,16 +9,15 @@
 
     <ImageView
         android:id="@+id/imageview_empty_icon"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:src="@drawable/ic_content_paste_grey600_48dp" />
 
     <TextView
         android:id="@+id/textview_empty_tip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="没有签到结果"
+        android:layout_marginTop="8dp"
         android:textColor="@color/black_700"
         android:textSize="@dimen/text_size_medium" />
 
