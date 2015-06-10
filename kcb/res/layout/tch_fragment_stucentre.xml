@@ -11,6 +11,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+    <com.kcb.library.view.smoothprogressbar.SmoothProgressBar
+        android:id="@+id/progressbar_refresh"
+        style="@style/SmoothProgressBar"
+        android:layout_alignBottom="@id/searchedittext"
+        android:layout_marginBottom="2dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:visibility="gone" />
+
     <LinearLayout
         android:id="@+id/layout_sort"
         android:layout_width="match_parent"
@@ -75,5 +84,9 @@
         android:paddingRight="16dp"
         android:scrollbars="none" >
     </ListView>
+
+    <com.kcb.common.view.EmptyTipView
+        android:id="@+id/emptytipview"
+        style="@style/common_empty_tip_view" />
 
 </RelativeLayout>

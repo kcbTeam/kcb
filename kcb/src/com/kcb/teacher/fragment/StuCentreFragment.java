@@ -19,8 +19,10 @@ import android.widget.TextView;
 
 import com.kcb.common.base.BaseFragment;
 import com.kcb.common.util.StringMatchUtil;
+import com.kcb.common.view.EmptyTipView;
 import com.kcb.common.view.SearchEditText;
 import com.kcb.common.view.SearchEditText.OnSearchListener;
+import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
 import com.kcb.teacher.activity.stucentre.StuCentreActivity;
 import com.kcb.teacher.adapter.StuCentreAdapter;
 import com.kcb.teacher.database.students.StudentDao;
@@ -46,13 +48,17 @@ public class StuCentreFragment extends BaseFragment
     private final int INDEX_CHECKIN_RATE = 1;
     private final int INDEX_CORRECT_RATE = 2;
 
+    private SmoothProgressBar progressBar;
+    private SearchEditText searchEditText;
+
+    private View sortLayout;
     private TextView idTextView;
     private TextView checkInRaTextView;
     private TextView correctRaTextView;
 
-    private SearchEditText searchEditText;
-
     private ListView listView;
+
+    private EmptyTipView emptyTipView;
 
     private StuCentreAdapter mAdapter;
     private List<Student> mStudents;
@@ -80,9 +86,13 @@ public class StuCentreFragment extends BaseFragment
     @Override
     protected void initView() {
         View view = getView();
+        progressBar = (SmoothProgressBar) view.findViewById(R.id.progressbar_refresh);
+
         searchEditText = (SearchEditText) view.findViewById(R.id.searchedittext);
         searchEditText.setOnSearchListener(this);
         searchEditText.setHint(R.string.tch_input_name_search);
+
+        sortLayout = view.findViewById(R.id.layout_sort);
 
         idTextView = (TextView) view.findViewById(R.id.textview_stuinfo);
         idTextView.setOnClickListener(this);
@@ -96,6 +106,8 @@ public class StuCentreFragment extends BaseFragment
         listView = (ListView) view.findViewById(R.id.listview);
         listView.setOnItemClickListener(this);
 
+        emptyTipView = (EmptyTipView) view.findViewById(R.id.emptytipview);
+
         setSortIcon(INDEX_ID);
     }
 
@@ -108,6 +120,12 @@ public class StuCentreFragment extends BaseFragment
         StudentDao mStudentDao = new StudentDao(getActivity());
         mStudents = mStudentDao.getAll();
         mStudentDao.close();
+
+        if (mStudents.isEmpty()) {
+            sortLayout.setVisibility(View.INVISIBLE);
+            emptyTipView.setVisibility(View.VISIBLE);
+            emptyTipView.setEmptyText(R.string.tch_no_student);
+        }
 
         Collections.sort(mStudents, mIdComparator);
 
@@ -231,6 +249,13 @@ public class StuCentreFragment extends BaseFragment
         protected void onPostExecute(Integer result) {
             mAdapter.notifyDataSetChanged();
         }
+    }
+
+    public void refresh() {
+        if (progressBar.getVisibility() == View.VISIBLE) {
+            return;
+        }
+        progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
