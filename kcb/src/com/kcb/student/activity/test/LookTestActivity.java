@@ -13,6 +13,7 @@ import android.widget.ListView;
 import com.kcb.common.base.BaseActivity;
 import com.kcb.common.model.test.Test;
 import com.kcb.common.util.StringMatchUtil;
+import com.kcb.common.view.EmptyTipView;
 import com.kcb.common.view.SearchEditText;
 import com.kcb.common.view.SearchEditText.OnSearchListener;
 import com.kcb.library.view.buttonflat.ButtonFlat;
@@ -38,6 +39,9 @@ public class LookTestActivity extends BaseActivity implements OnSearchListener, 
 
     private View listTitleLayout;
     private ListView listView;
+
+    private EmptyTipView emptyTipView;
+
     private LookTestAdapter mAdapter;
 
     private List<Test> mTests;
@@ -66,9 +70,11 @@ public class LookTestActivity extends BaseActivity implements OnSearchListener, 
         searchEditText.setOnSearchListener(this);
         searchEditText.setHint(R.string.stu_input_test_name_search);
 
+        listTitleLayout = findViewById(R.id.layout_listview_title);
         listView = (ListView) findViewById(R.id.listview_test);
         listView.setOnItemClickListener(this);
-        listTitleLayout = findViewById(R.id.layout_list_title);
+
+        emptyTipView = (EmptyTipView) findViewById(R.id.emptytipview);
     }
 
     @Override
@@ -76,6 +82,12 @@ public class LookTestActivity extends BaseActivity implements OnSearchListener, 
         TestDao testDao = new TestDao(LookTestActivity.this);
         mTests = testDao.getAll();
         testDao.close();
+
+        if (mTests.isEmpty()) {
+            listTitleLayout.setVisibility(View.INVISIBLE);
+            emptyTipView.setVisibility(View.VISIBLE);
+            emptyTipView.setEmptyText(R.string.stu_no_test_result);
+        }
 
         mTempTests = new ArrayList<Test>();
         mTempTests.addAll(mTests);
