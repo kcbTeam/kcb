@@ -14,8 +14,8 @@ public class AccountUtil {
     public static final int TYPE_STU = 0;
     public static final int TYPE_TCH = 1;
 
-    public static final String ACCOUNT = "account";
-    public static final String KEY_TYPE = "type";
+    public static final String ACCOUNT = "com.kcb.sharedpreference.account";
+    public static final String KEY_TYPE = "key_type";
 
     public static void setAccountType(int type) {
         SharedPreferences sPreferences =
