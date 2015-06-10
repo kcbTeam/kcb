@@ -3,9 +3,12 @@ package com.kcb.teacher.fragment;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
 import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
+
 import org.json.JSONArray;
 import org.json.JSONException;
+
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -17,6 +20,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
+
 import com.android.volley.Request.Method;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
@@ -131,6 +135,7 @@ public class StuCentreFragment extends BaseFragment
         mStudentDao.close();
 
         if (mAllStudents.isEmpty()) {
+            searchEditText.setVisibility(View.INVISIBLE);
             sortLayout.setVisibility(View.INVISIBLE);
             emptyTipView.setVisibility(View.VISIBLE);
             emptyTipView.setEmptyText(R.string.tch_no_student);
@@ -289,6 +294,7 @@ public class StuCentreFragment extends BaseFragment
                             } catch (JSONException e) {}
                         }
                         if (!students.isEmpty()) {
+                            searchEditText.setVisibility(View.VISIBLE);
                             sortLayout.setVisibility(View.VISIBLE);
                             emptyTipView.setVisibility(View.GONE);
                             mAllStudents.clear();

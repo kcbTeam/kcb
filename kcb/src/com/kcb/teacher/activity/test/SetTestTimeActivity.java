@@ -76,7 +76,7 @@ public class SetTestTimeActivity extends BaseActivity {
         if (ACTION_ADD_TEST.equals(mAction)) {
             deleteButton.setVisibility(View.GONE);
         } else if (ACTION_EDIT_TEST.equals(mAction)) {
-            titleTextView.setText(R.string.tch_edit_test);
+            titleTextView.setText(sTest.getName());
         }
 
         testTimeTextView.setText(String.format(getString(R.string.tch_set_test_time_tip),

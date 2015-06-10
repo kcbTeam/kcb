@@ -14,7 +14,7 @@
     <TextView
         android:id="@+id/textview_time"
         android:layout_width="wrap_content"
-        android:layout_height="56dp"
+        android:layout_height="@dimen/activity_header_height"
         android:layout_alignParentRight="true"
         android:layout_marginRight="16dp"
         android:gravity="center_vertical"
@@ -52,7 +52,7 @@
         android:id="@+id/input_options_hint"
         style="@style/common_tip"
         android:layout_below="@id/view_divider0"
-        android:text="勾出正确的选项" />
+        android:text="@string/stu_select_choice" />
 
     <ScrollView
         android:id="@+id/scroll_choices"
@@ -226,9 +226,7 @@
 
     <View
         android:id="@+id/view_divider"
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_above="@id/layout_buttons"
-        android:background="@color/divider" />
+        style="@style/common_divider"
+        android:layout_above="@id/layout_buttons" />
 
 </RelativeLayout>

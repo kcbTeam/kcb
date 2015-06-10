@@ -35,8 +35,8 @@ public class HomeActivity extends BaseFragmentActivity {
     private final int INDEX_CHECKIN = 0;
     private final int INDEX_TEST = 1;
 
+    private ButtonFlat accountButton;
     private TextView userNameTextView;
-    private ButtonFlat moreButton;
 
     private ButtonFlat checkInButton;
     private ButtonFlat testButton;
@@ -56,11 +56,11 @@ public class HomeActivity extends BaseFragmentActivity {
 
     @Override
     protected void initView() {
+        accountButton = (ButtonFlat) findViewById(R.id.button_account);
+        accountButton.setOnClickListener(this);
+
         userNameTextView = (TextView) findViewById(R.id.textview_username);
         userNameTextView.setText(KAccount.getAccountName());
-
-        moreButton = (ButtonFlat) findViewById(R.id.button_more);
-        moreButton.setOnClickListener(this);
 
         checkInButton = (ButtonFlat) findViewById(R.id.button_checkin);
         checkInButton.setOnClickListener(this);
@@ -84,7 +84,7 @@ public class HomeActivity extends BaseFragmentActivity {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.button_more:
+            case R.id.button_account:
                 if (popupWindow != null && popupWindow.isShowing()) {
                     popupWindow.dismiss();
                 } else {

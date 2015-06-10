@@ -85,6 +85,7 @@ public class LookTestActivity extends BaseActivity implements OnSearchListener, 
 
         if (mAllTests.isEmpty()) {
             listTitleLayout.setVisibility(View.INVISIBLE);
+            searchEditText.setVisibility(View.INVISIBLE);
             emptyTipView.setVisibility(View.VISIBLE);
             emptyTipView.setEmptyText(R.string.stu_no_test_result);
         }
@@ -149,7 +150,7 @@ public class LookTestActivity extends BaseActivity implements OnSearchListener, 
             return;
         }
         progressBar.setVisibility(View.VISIBLE);
-        // if success, show listview title;
+        // if success, show listview title & search edittext;
     }
 
     @Override

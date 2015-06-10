@@ -52,9 +52,7 @@
     </LinearLayout>
 
     <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_above="@id/layout_buttons"
-        android:background="@color/divider" />
+        style="@style/common_divider"
+        android:layout_above="@id/layout_buttons" />
 
 </RelativeLayout>

@@ -98,6 +98,7 @@ public class LookTestActivity extends BaseActivity implements OnSearchListener, 
         testDao.close();
 
         if (mAllTests.isEmpty()) {
+            searchEditText.setVisibility(View.INVISIBLE);
             listTitleLayout.setVisibility(View.INVISIBLE);
             emptyTipView.setVisibility(View.VISIBLE);
             emptyTipView.setEmptyText(R.string.tch_no_test_result);
@@ -201,6 +202,7 @@ public class LookTestActivity extends BaseActivity implements OnSearchListener, 
                         // switch view
                         progressBar.hide(LookTestActivity.this);
                         if (!mAllTests.isEmpty()) {
+                            searchEditText.setVisibility(View.VISIBLE);
                             listTitleLayout.setVisibility(View.VISIBLE);
                             emptyTipView.setVisibility(View.GONE);
                         }

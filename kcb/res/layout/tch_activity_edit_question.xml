@@ -11,13 +11,13 @@
         android:id="@+id/layout_title"
         style="@style/common_title_layout" >
 
-        <include layout="@layout/comm_button_back" />
-
         <TextView
             android:id="@+id/textview_question_index"
-            style="@style/common_title" />
+            style="@style/common_title_left" />
 
         <include layout="@layout/comm_button_delete" />
+
+        <include layout="@layout/comm_button_finish" />
     </LinearLayout>
 
     <com.kcb.common.view.QuestionEditView

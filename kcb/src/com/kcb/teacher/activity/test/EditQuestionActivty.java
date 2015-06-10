@@ -24,9 +24,9 @@ import com.kcbTeam.R;
  */
 public class EditQuestionActivty extends BaseActivity {
 
-    private ButtonFlat backButton;
     private TextView questionIndexTextView;
     private ButtonFlat deleteButton;
+    private ButtonFlat finishButton;
 
     private QuestionEditView questionEditView;
 
@@ -45,13 +45,13 @@ public class EditQuestionActivty extends BaseActivity {
 
     @Override
     protected void initView() {
-        backButton = (ButtonFlat) findViewById(R.id.button_back);
-        backButton.setOnClickListener(this);
-
         questionIndexTextView = (TextView) findViewById(R.id.textview_question_index);
 
         deleteButton = (ButtonFlat) findViewById(R.id.button_delete);
         deleteButton.setOnClickListener(this);
+
+        finishButton = (ButtonFlat) findViewById(R.id.button_finish);
+        finishButton.setOnClickListener(this);
 
         questionEditView = (QuestionEditView) findViewById(R.id.questioneditview);
     }
@@ -68,12 +68,6 @@ public class EditQuestionActivty extends BaseActivity {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.button_back:
-                questionEditView.saveQuestion();
-                Intent intent = new Intent();
-                setResult(RESULT_OK, intent);
-                finish();
-                break;
             case R.id.button_delete:
                 DialogUtil.showNormalDialog(this, R.string.tch_comm_delete,
                         R.string.tch_delete_tip, R.string.tch_comm_sure, new OnClickListener() {
@@ -87,6 +81,12 @@ public class EditQuestionActivty extends BaseActivity {
                             }
                         }, R.string.tch_comm_cancel, null);
                 break;
+            case R.id.button_finish:
+                questionEditView.saveQuestion();
+                Intent intent = new Intent();
+                setResult(RESULT_OK, intent);
+                finish();
+                break;
             default:
                 break;
         }
@@ -94,7 +94,7 @@ public class EditQuestionActivty extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        onClick(backButton);
+        onClick(finishButton);
     }
 
     @Override
