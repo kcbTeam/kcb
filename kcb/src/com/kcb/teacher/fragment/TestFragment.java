@@ -150,8 +150,13 @@ public class TestFragment extends BaseFragment {
 
                                     @Override
                                     public void onResponse(JSONObject response) {
-                                        startProgressBar.hide(getActivity());
+                                        TestDao testDao = new TestDao(getActivity());
+                                        test.setHasTested(true);
+                                        testDao.update(test);
+                                        testDao.close();
+
                                         ToastUtil.toast(R.string.tch_test_started);
+                                        startProgressBar.hide(getActivity());
                                     }
                                 }, new ErrorListener() {
 

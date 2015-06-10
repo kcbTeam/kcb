@@ -28,11 +28,6 @@ public class LookCheckInAdapter extends BaseAdapter {
         mResults = list;
     }
 
-    public void setData(List<CheckInResult> results) {
-        mResults = results;
-        notifyDataSetChanged();
-    }
-
     @Override
     public int getCount() {
         return mResults.size();

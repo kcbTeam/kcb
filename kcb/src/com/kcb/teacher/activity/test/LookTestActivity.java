@@ -193,6 +193,7 @@ public class LookTestActivity extends BaseActivity implements OnSearchListener, 
                         }
                         // save test
                         TestDao testDao = new TestDao(LookTestActivity.this);
+                        testDao.deleteAll();
                         for (Test test : mAllTests) {
                             testDao.add(test);
                         }

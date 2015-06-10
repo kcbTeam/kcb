@@ -281,7 +281,6 @@ public class StuCentreFragment extends BaseFragment
 
                     @Override
                     public void onResponse(JSONArray response) {
-                        progressBar.hide(getActivity());
                         List<Student> students = new ArrayList<Student>();
                         for (int i = 0; i < response.length(); i++) {
                             try {
@@ -297,7 +296,15 @@ public class StuCentreFragment extends BaseFragment
                             mSearchedStudents.clear();
                             mSearchedStudents.addAll(students);
                             mAdapter.notifyDataSetChanged();
+
+                            StudentDao studentDao = new StudentDao(getActivity());
+                            studentDao.deleteAll();
+                            for (Student stu : students) {
+                                studentDao.add(stu);
+                            }
+                            studentDao.close();
                         }
+                        progressBar.hide(getActivity());
                     }
                 }, new ErrorListener() {
 

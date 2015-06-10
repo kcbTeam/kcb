@@ -50,6 +50,7 @@ public class LookCheckInActivity extends BaseActivity implements OnItemClickList
 
     private EmptyTipView emptyTipView;
 
+    List<CheckInResult> mCheckInResults;
     private LookCheckInAdapter mAdapter;
 
     @Override
@@ -79,16 +80,16 @@ public class LookCheckInActivity extends BaseActivity implements OnItemClickList
     @Override
     protected void initData() {
         CheckInDao checkInDao = new CheckInDao(LookCheckInActivity.this);
-        List<CheckInResult> results = checkInDao.getAll();
+        mCheckInResults = checkInDao.getAll();
         checkInDao.close();
 
-        if (results.isEmpty()) {
+        if (mCheckInResults.isEmpty()) {
             listTitleLayout.setVisibility(View.INVISIBLE);
             emptyTipView.setVisibility(View.VISIBLE);
             emptyTipView.setEmptyText(R.string.tch_no_checkin_result);
         }
 
-        mAdapter = new LookCheckInAdapter(LookCheckInActivity.this, results);
+        mAdapter = new LookCheckInAdapter(LookCheckInActivity.this, mCheckInResults);
         listView.setAdapter(mAdapter);
     }
 
@@ -122,14 +123,8 @@ public class LookCheckInActivity extends BaseActivity implements OnItemClickList
 
                     @Override
                     public void onResponse(JSONArray response) {
-                        progressBar.hide(LookCheckInActivity.this);
+                        // get data
                         List<CheckInResult> results = new ArrayList<CheckInResult>();
-
-                        if (!results.isEmpty()) {
-                            listTitleLayout.setVisibility(View.VISIBLE);
-                            emptyTipView.setVisibility(View.GONE);
-                        }
-
                         for (int i = 0; i < response.length(); i++) {
                             try {
                                 CheckInResult checkInResult =
@@ -137,7 +132,24 @@ public class LookCheckInActivity extends BaseActivity implements OnItemClickList
                                 results.add(checkInResult);
                             } catch (JSONException e) {}
                         }
-                        mAdapter.setData(results);
+
+                        // show data
+                        if (!results.isEmpty()) {
+                            listTitleLayout.setVisibility(View.VISIBLE);
+                            emptyTipView.setVisibility(View.GONE);
+
+                            CheckInDao checkInDao = new CheckInDao(LookCheckInActivity.this);
+                            checkInDao.deleteAll();
+                            for (CheckInResult result : results) {
+                                checkInDao.add(result);
+                            }
+                            checkInDao.close();
+
+                            mCheckInResults.clear();
+                            mCheckInResults.addAll(results);
+                            mAdapter.notifyDataSetChanged();
+                        }
+                        progressBar.hide(LookCheckInActivity.this);
                     }
                 }, new ErrorListener() {
 

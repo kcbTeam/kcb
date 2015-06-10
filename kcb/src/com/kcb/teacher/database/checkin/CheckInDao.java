@@ -9,7 +9,6 @@ import org.json.JSONObject;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.kcb.teacher.database.KSQLiteOpenHelper;
@@ -25,7 +24,9 @@ public class CheckInDao {
         mDatabase = mOpenHelper.getWritableDatabase();
     }
 
-    public void add(CheckInResult result) throws SQLException, JSONException {
+    public void add(CheckInResult result) {
+        mDatabase.delete(CheckInTable.TABLE_NAME, CheckInTable.COLUMN_DATE + "=?",
+                new String[] {String.valueOf(result.getDate())});
         ContentValues contentValues = new ContentValues();
         contentValues.put(CheckInTable.COLUMN_DATE, result.getDate());
         contentValues.put(CheckInTable.COLUMN_RATE, result.getRate());
