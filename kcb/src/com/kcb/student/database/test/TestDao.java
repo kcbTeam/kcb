@@ -38,7 +38,6 @@ public class TestDao {
     public List<Test> getAll() {
         Cursor cursor = mDatabase.query(TestTable.TABLE_NAME, null, null, null, null, null, null);
         List<Test> tests = new ArrayList<Test>();
-
         if (null != cursor) {
             try {
                 if (cursor.moveToFirst()) {
