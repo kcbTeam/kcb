@@ -11,9 +11,10 @@
         android:id="@+id/layout_title"
         style="@style/common_title_layout" >
 
-        <TextView
+        <include layout="@layout/comm_button_avatar" />
+        <TextView
             android:id="@+id/textview_username"
-            style="@style/common_title_left" />
+            style="@style/common_title" />
 
         <include layout="@layout/comm_button_more" />
     </LinearLayout>
