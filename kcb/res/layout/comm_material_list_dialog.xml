@@ -35,7 +35,10 @@
             android:divider="@color/black_200"
             android:dividerHeight="1dp"
             android:listSelector="@color/white"
-            android:scrollbars="none" />
+            android:scrollbarSize="2dp"
+            android:scrollbarStyle="outsideInset"
+            android:scrollbarThumbVertical="@color/black_300"
+            android:scrollbars="vertical" />
 
         <RelativeLayout
             android:layout_width="wrap_content"

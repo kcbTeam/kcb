@@ -115,6 +115,8 @@ public class CheckInFragment extends BaseFragment {
                         } else {
                             ResponseUtil.toastError(error);
                         }
+                        // TODO for test
+                        StartCheckInActivity.start(getActivity(), "55");
                     };
                 });
         RequestUtil.getInstance().addToRequestQueue(request, TAG);

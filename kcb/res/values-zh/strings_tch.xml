@@ -139,6 +139,7 @@
 
 
     <!-- EditQuestionActivity start -->
+    <string name="tch_question_not_finish">题目未完成</string>
     <string name="tch_delete_tip">确认删除该题吗？</string>
     <!-- EditQuestionActivity end -->
 

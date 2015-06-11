@@ -9,13 +9,6 @@
 
     <!-- **************************************** Common module Start **************************************** -->
     <!-- ********** Common start ********** -->
-    <style name="common_paper_button">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">54dp</item>
-        <item name="android:layout_marginRight">36dp</item>
-        <item name="android:layout_marginLeft">36dp</item>
-    </style>
-
     <style name="common_title_layout">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -70,6 +63,26 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">1dp</item>
         <item name="android:background">@color/black_divider</item>
+    </style>
+
+    <style name="common_paper_button">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">54dp</item>
+        <item name="android:layout_marginRight">36dp</item>
+        <item name="android:layout_marginLeft">36dp</item>
+    </style>
+
+    <style name="common_bottom_button_layout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="common_bottom_button">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
     </style>
     <!-- ********** Common end ********** -->
 
