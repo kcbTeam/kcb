@@ -25,6 +25,12 @@
             android:textSize="@dimen/text_size_medium" />
     </LinearLayout>
 
+    <com.kcb.library.view.smoothprogressbar.SmoothProgressBar
+        android:id="@+id/progressbar_refresh"
+        style="@style/SmoothProgressBar"
+        android:layout_alignBottom="@id/layout_title"
+        android:visibility="gone" />
+
     <TextView
         android:id="@+id/textview_question_num"
         style="@style/common_tip"

@@ -1,7 +1,5 @@
 package com.kcb.student.fragment;
 
-import java.util.List;
-
 import org.json.JSONObject;
 
 import android.content.Intent;
@@ -125,10 +123,6 @@ public class TestFragment extends BaseFragment {
                         } else {
                             ResponseUtil.toastError(error);
                         }
-                        com.kcb.teacher.database.test.TestDao testDao =
-                                new com.kcb.teacher.database.test.TestDao(getActivity());
-                        Test test = testDao.getAll().get(0);
-                        StartTestActivity.start(getActivity(), test, 120);
                     }
                 });
         RequestUtil.getInstance().addToRequestQueue(request, TAG);

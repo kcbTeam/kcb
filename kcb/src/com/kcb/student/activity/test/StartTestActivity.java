@@ -26,12 +26,14 @@ import com.kcb.common.model.test.Question;
 import com.kcb.common.model.test.QuestionItem;
 import com.kcb.common.model.test.Test;
 import com.kcb.common.server.RequestUtil;
+import com.kcb.common.server.ResponseUtil;
 import com.kcb.common.server.UrlUtil;
 import com.kcb.common.util.DialogUtil;
 import com.kcb.common.util.ToastUtil;
 import com.kcb.common.view.MaterialDialog;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.library.view.checkbox.CheckBox;
+import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
 import com.kcb.student.database.test.TestDao;
 import com.kcb.student.model.account.KAccount;
 import com.kcbTeam.R;
@@ -49,6 +51,7 @@ public class StartTestActivity extends BaseActivity {
 
     private TextView testNameNumTextView;
     private TextView timeTextView;
+    private SmoothProgressBar progressBar;
 
     private TextView questionIndexTextView;
 
@@ -100,6 +103,7 @@ public class StartTestActivity extends BaseActivity {
     protected void initView() {
         testNameNumTextView = (TextView) findViewById(R.id.textview_test_name_num);
         timeTextView = (TextView) findViewById(R.id.textview_time);
+        progressBar = (SmoothProgressBar) findViewById(R.id.progressbar_refresh);
 
         questionIndexTextView = (TextView) findViewById(R.id.textview_question_num);
 
@@ -275,6 +279,9 @@ public class StartTestActivity extends BaseActivity {
     }
 
     private void submitAnswer() {
+        if (progressBar.getVisibility() == View.VISIBLE) {
+            return;
+        }
         saveAnswer();
 
         // get unfinished question index
@@ -304,6 +311,7 @@ public class StartTestActivity extends BaseActivity {
 
                     @Override
                     public void onClick(View v) {
+                        progressBar.setVisibility(View.VISIBLE);
                         saveAnswerToDataBase();
                         submitAnswerToServer();
                     }
@@ -330,11 +338,17 @@ public class StartTestActivity extends BaseActivity {
                         new Listener<JSONObject>() {
 
                             @Override
-                            public void onResponse(JSONObject response) {}
+                            public void onResponse(JSONObject response) {
+                                // TODO
+                                progressBar.hide(StartTestActivity.this);
+                            }
                         }, new ErrorListener() {
 
                             @Override
-                            public void onErrorResponse(VolleyError error) {}
+                            public void onErrorResponse(VolleyError error) {
+                                progressBar.hide(StartTestActivity.this);
+                                ResponseUtil.toastError(error);
+                            }
                         });
         RequestUtil.getInstance().addToRequestQueue(request, TAG);
     }
