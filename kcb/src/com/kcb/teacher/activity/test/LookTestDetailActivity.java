@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import com.kcb.common.base.BaseActivity;
 import com.kcb.common.model.test.Test;
-import com.kcb.common.view.QuestionView;
+import com.kcb.common.view.test.QuestionView;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcbTeam.R;
 

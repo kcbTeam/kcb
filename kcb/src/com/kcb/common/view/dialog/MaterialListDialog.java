@@ -1,4 +1,4 @@
-package com.kcb.common.view;
+package com.kcb.common.view.dialog;
 
 import java.util.List;
 

@@ -15,8 +15,8 @@ import com.kcb.common.util.ToastUtil;
 import com.kcb.library.slider.Slider;
 import com.kcb.library.slider.Slider.OnValueChangedListener;
 import com.kcb.library.view.buttonflat.ButtonFlat;
-import com.kcb.teacher.adapter.SetTestTimeAdapter;
-import com.kcb.teacher.adapter.SetTestTimeAdapter.EditQuestionListener;
+import com.kcb.teacher.adapter.test.SetTestTimeAdapter;
+import com.kcb.teacher.adapter.test.SetTestTimeAdapter.EditQuestionListener;
 import com.kcb.teacher.database.test.TestDao;
 import com.kcbTeam.R;
 

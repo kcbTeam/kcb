@@ -1,4 +1,4 @@
-package com.kcb.teacher.adapter;
+package com.kcb.teacher.adapter.test;
 
 import java.util.List;
 

@@ -13,7 +13,7 @@ import com.kcb.common.model.test.Question;
 import com.kcb.common.model.test.Test;
 import com.kcb.common.util.DialogUtil;
 import com.kcb.common.util.ToastUtil;
-import com.kcb.common.view.QuestionEditView;
+import com.kcb.common.view.test.QuestionEditView;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcbTeam.R;
 

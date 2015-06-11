@@ -6,9 +6,9 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.view.View.OnClickListener;
 
-import com.kcb.common.view.MaterialDialog;
-import com.kcb.common.view.MaterialListDialog;
-import com.kcb.common.view.MaterialListDialog.OnClickSureListener;
+import com.kcb.common.view.dialog.MaterialDialog;
+import com.kcb.common.view.dialog.MaterialListDialog;
+import com.kcb.common.view.dialog.MaterialListDialog.OnClickSureListener;
 
 /**
  * 

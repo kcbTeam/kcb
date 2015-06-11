@@ -1,4 +1,4 @@
-package com.kcb.common.view;
+package com.kcb.common.view.test;
 
 import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;

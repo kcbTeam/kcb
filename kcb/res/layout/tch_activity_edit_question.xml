@@ -20,7 +20,7 @@
         <include layout="@layout/comm_button_finish" />
     </LinearLayout>
 
-    <com.kcb.common.view.QuestionEditView
+    <com.kcb.common.view.test.QuestionEditView
         android:id="@+id/questioneditview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

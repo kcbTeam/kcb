@@ -1,4 +1,4 @@
-package com.kcb.common.view;
+package com.kcb.common.view.test;
 
 import java.io.File;
 import java.io.FileNotFoundException;

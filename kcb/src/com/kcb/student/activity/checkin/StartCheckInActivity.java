@@ -23,7 +23,7 @@ import com.kcb.common.server.UrlUtil;
 import com.kcb.common.util.AnimationUtil;
 import com.kcb.common.util.DialogUtil;
 import com.kcb.common.util.ToastUtil;
-import com.kcb.common.view.MaterialDialog;
+import com.kcb.common.view.dialog.MaterialDialog;
 import com.kcb.library.view.PaperButton;
 import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
 import com.kcb.student.adapter.StartCheckInAdapter;
