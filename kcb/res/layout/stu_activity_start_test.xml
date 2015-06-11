@@ -7,24 +7,28 @@
     android:background="@color/activity_background"
     tools:ignore="contentDescription" >
 
-    <TextView
-        android:id="@+id/textview_test_name_num"
-        style="@style/common_title_left" />
+    <LinearLayout
+        android:id="@+id/layout_title"
+        style="@style/common_title_layout" >
 
-    <TextView
-        android:id="@+id/textview_time"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/activity_header_height"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="16dp"
-        android:gravity="center_vertical"
-        android:textColor="@color/black"
-        android:textSize="@dimen/text_size_medium" />
+        <TextView
+            android:id="@+id/textview_test_name_num"
+            style="@style/common_title_left" />
+
+        <TextView
+            android:id="@+id/textview_time"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/activity_header_height"
+            android:layout_marginRight="16dp"
+            android:gravity="center_vertical"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_medium" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/textview_question_num"
         style="@style/common_tip"
-        android:layout_below="@id/textview_test_name_num" />
+        android:layout_below="@id/layout_title" />
 
     <TextView
         android:id="@+id/textview_question_title"

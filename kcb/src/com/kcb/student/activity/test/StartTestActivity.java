@@ -90,7 +90,7 @@ public class StartTestActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.stu_activity_test);
+        setContentView(R.layout.stu_activity_start_test);
 
         initView();
         initData();
@@ -103,7 +103,7 @@ public class StartTestActivity extends BaseActivity {
 
         questionIndexTextView = (TextView) findViewById(R.id.textview_question_num);
 
-        titleTextView = (TextView) findViewById(R.id.textview_title);
+        titleTextView = (TextView) findViewById(R.id.textview_question_title);
         choiceATextView = (TextView) findViewById(R.id.textview_A);
         choiceBTextView = (TextView) findViewById(R.id.textview_B);
         choiceCTextView = (TextView) findViewById(R.id.textview_C);

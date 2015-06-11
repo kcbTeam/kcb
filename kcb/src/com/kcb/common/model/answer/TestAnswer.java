@@ -26,6 +26,7 @@ public class TestAnswer {
 
     public TestAnswer(Test test) {
         mId = test.getId();
+        mQuestionAnswers = new ArrayList<QuestionAnswer>();
         for (int i = 0; i < test.getQuestionNum(); i++) {
             mQuestionAnswers.add(new QuestionAnswer(test.getQuestion(i)));
         }
