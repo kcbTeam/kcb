@@ -7,10 +7,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
-
 import com.kcb.common.base.BaseActivity;
 import com.kcb.common.model.test.Question;
 import com.kcb.common.util.DialogUtil;
+import com.kcb.common.util.ToastUtil;
 import com.kcb.common.view.QuestionEditView;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcbTeam.R;
@@ -83,9 +83,13 @@ public class EditQuestionActivty extends BaseActivity {
                 break;
             case R.id.button_finish:
                 questionEditView.saveQuestion();
-                Intent intent = new Intent();
-                setResult(RESULT_OK, intent);
-                finish();
+                if (!sQuestion.isCompleted()) {
+                    ToastUtil.toast(R.string.tch_question_not_finish);
+                } else {
+                    Intent intent = new Intent();
+                    setResult(RESULT_OK, intent);
+                    finish();
+                }
                 break;
             default:
                 break;

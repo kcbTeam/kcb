@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import com.kcb.common.base.BaseActivity;
 import com.kcb.common.model.test.Question;
 import com.kcb.common.model.test.Test;
@@ -25,6 +24,7 @@ public class SetTestTimeActivity extends BaseActivity {
 
     private TextView titleTextView;
     private ButtonFlat deleteButton;
+    private ButtonFlat cancelButton;
     private ButtonFlat finishButton;
 
     private TextView testTimeTextView;
@@ -52,6 +52,8 @@ public class SetTestTimeActivity extends BaseActivity {
         titleTextView = (TextView) findViewById(R.id.textview_title);
         deleteButton = (ButtonFlat) findViewById(R.id.button_delete);
         deleteButton.setOnClickListener(this);
+        cancelButton = (ButtonFlat) findViewById(R.id.button_cancel);
+        cancelButton.setOnClickListener(this);
         finishButton = (ButtonFlat) findViewById(R.id.button_finish);
         finishButton.setOnClickListener(this);
 
@@ -76,6 +78,7 @@ public class SetTestTimeActivity extends BaseActivity {
         if (ACTION_ADD_TEST.equals(mAction)) {
             deleteButton.setVisibility(View.GONE);
         } else if (ACTION_EDIT_TEST.equals(mAction)) {
+            cancelButton.setVisibility(View.GONE);
             titleTextView.setText(sTest.getName());
         }
 
@@ -99,6 +102,17 @@ public class SetTestTimeActivity extends BaseActivity {
         switch (v.getId()) {
             case R.id.button_delete:
                 deleteTest();
+                break;
+            case R.id.button_cancel:
+                OnClickListener sureListener = new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        finish();
+                    }
+                };
+                DialogUtil.showNormalDialog(this, R.string.tch_comm_cancel,
+                        R.string.tch_not_save_if_cancel, R.string.tch_comm_sure, sureListener,
+                        R.string.tch_comm_cancel, null);
                 break;
             case R.id.button_finish:
                 sTest.setTime(slider.getValue());
@@ -168,15 +182,7 @@ public class SetTestTimeActivity extends BaseActivity {
     @Override
     public void onBackPressed() {
         if (ACTION_ADD_TEST.equals(mAction)) {
-            OnClickListener sureListener = new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    finish();
-                }
-            };
-            DialogUtil.showNormalDialog(this, R.string.tch_comm_cancel,
-                    R.string.tch_not_save_if_cancel, R.string.tch_comm_sure, sureListener,
-                    R.string.tch_comm_cancel, null);
+            onClick(cancelButton);
         } else if (ACTION_EDIT_TEST.equals(mAction)) {
             onClick(finishButton);
         }

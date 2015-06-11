@@ -18,6 +18,8 @@
 
         <include layout="@layout/comm_button_delete" />
 
+        <include layout="@layout/comm_button_cancel" />
+
         <include layout="@layout/comm_button_finish" />
     </LinearLayout>
 
