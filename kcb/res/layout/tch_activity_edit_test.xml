@@ -11,8 +11,6 @@
         android:id="@+id/layout_title"
         style="@style/common_title_layout" >
 
-        <include layout="@layout/comm_button_back" />
-
         <TextView
             android:id="@+id/textview_title"
             style="@style/common_title_left" />
@@ -73,9 +71,7 @@
 
     <View
         android:id="@+id/view_divider"
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_above="@id/layout_buttons"
-        android:background="@color/divider" />
+        style="@style/common_divider"
+        android:layout_above="@id/layout_buttons" />
 
 </RelativeLayout>

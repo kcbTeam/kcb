@@ -7,24 +7,28 @@
     android:background="@color/activity_background"
     tools:ignore="contentDescription" >
 
-    <TextView
-        android:id="@+id/textview_test_name_num"
-        style="@style/common_title_left" />
+    <LinearLayout
+        android:id="@+id/layout_title"
+        style="@style/common_title_layout" >
 
-    <TextView
-        android:id="@+id/textview_time"
-        android:layout_width="wrap_content"
-        android:layout_height="56dp"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="16dp"
-        android:gravity="center_vertical"
-        android:textColor="@color/black"
-        android:textSize="@dimen/text_size_medium" />
+        <TextView
+            android:id="@+id/textview_test_name_num"
+            style="@style/common_title_left" />
+
+        <TextView
+            android:id="@+id/textview_time"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/activity_header_height"
+            android:layout_marginRight="16dp"
+            android:gravity="center_vertical"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_medium" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/textview_question_num"
         style="@style/common_tip"
-        android:layout_below="@id/textview_test_name_num" />
+        android:layout_below="@id/layout_title" />
 
     <TextView
         android:id="@+id/textview_question_title"
@@ -52,7 +56,7 @@
         android:id="@+id/input_options_hint"
         style="@style/common_tip"
         android:layout_below="@id/view_divider0"
-        android:text="勾出正确的选项" />
+        android:text="@string/stu_select_choice" />
 
     <ScrollView
         android:id="@+id/scroll_choices"
@@ -226,9 +230,7 @@
 
     <View
         android:id="@+id/view_divider"
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_above="@id/layout_buttons"
-        android:background="@color/divider" />
+        style="@style/common_divider"
+        android:layout_above="@id/layout_buttons" />
 
 </RelativeLayout>

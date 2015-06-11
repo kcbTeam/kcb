@@ -16,6 +16,8 @@
             style="@style/common_title_left"
             android:text="@string/tch_set_test_time" />
 
+        <include layout="@layout/comm_button_delete" />
+
         <include layout="@layout/comm_button_finish" />
     </LinearLayout>
 

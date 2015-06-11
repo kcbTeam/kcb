@@ -71,7 +71,7 @@ public class Test implements Serializable {
         return mHasTested;
     }
 
-    public void setTested(boolean isTested) {
+    public void setHasTested(boolean isTested) {
         mHasTested = isTested;
     }
 

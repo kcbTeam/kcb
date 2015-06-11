@@ -5,6 +5,10 @@ import java.util.Collections;
 import java.util.List;
 
 import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -17,13 +21,24 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.android.volley.Request.Method;
+import com.android.volley.Response.ErrorListener;
+import com.android.volley.Response.Listener;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.kcb.common.base.BaseFragment;
+import com.kcb.common.server.RequestUtil;
+import com.kcb.common.server.ResponseUtil;
+import com.kcb.common.server.UrlUtil;
 import com.kcb.common.util.StringMatchUtil;
+import com.kcb.common.view.EmptyTipView;
 import com.kcb.common.view.SearchEditText;
 import com.kcb.common.view.SearchEditText.OnSearchListener;
+import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
 import com.kcb.teacher.activity.stucentre.StuCentreActivity;
 import com.kcb.teacher.adapter.StuCentreAdapter;
 import com.kcb.teacher.database.students.StudentDao;
+import com.kcb.teacher.model.account.KAccount;
 import com.kcb.teacher.model.stucentre.Student;
 import com.kcb.teacher.util.CompareByCheckInRate;
 import com.kcb.teacher.util.CompareByCorrectRate;
@@ -42,21 +57,27 @@ public class StuCentreFragment extends BaseFragment
             OnSearchListener,
             OnItemClickListener {
 
+    private static final String TAG = StuCentreFragment.class.getName();
+
     private final int INDEX_ID = 0;
     private final int INDEX_CHECKIN_RATE = 1;
     private final int INDEX_CORRECT_RATE = 2;
 
+    private SmoothProgressBar progressBar;
+    private SearchEditText searchEditText;
+
+    private View sortLayout;
     private TextView idTextView;
     private TextView checkInRaTextView;
     private TextView correctRaTextView;
 
-    private SearchEditText searchEditText;
-
     private ListView listView;
 
+    private EmptyTipView emptyTipView;
+
     private StuCentreAdapter mAdapter;
-    private List<Student> mStudents;
-    private List<Student> mTempStudents;
+    private List<Student> mAllStudents;
+    private List<Student> mSearchedStudents;
 
     private String mSearchKey;
 
@@ -84,6 +105,8 @@ public class StuCentreFragment extends BaseFragment
         searchEditText.setOnSearchListener(this);
         searchEditText.setHint(R.string.tch_input_name_search);
 
+        sortLayout = view.findViewById(R.id.layout_sort);
+
         idTextView = (TextView) view.findViewById(R.id.textview_stuinfo);
         idTextView.setOnClickListener(this);
 
@@ -96,6 +119,8 @@ public class StuCentreFragment extends BaseFragment
         listView = (ListView) view.findViewById(R.id.listview);
         listView.setOnItemClickListener(this);
 
+        emptyTipView = (EmptyTipView) view.findViewById(R.id.emptytipview);
+
         setSortIcon(INDEX_ID);
     }
 
@@ -106,15 +131,22 @@ public class StuCentreFragment extends BaseFragment
         mCheckInRateComparator = new CompareByCheckInRate();
 
         StudentDao mStudentDao = new StudentDao(getActivity());
-        mStudents = mStudentDao.getAll();
+        mAllStudents = mStudentDao.getAll();
         mStudentDao.close();
 
-        Collections.sort(mStudents, mIdComparator);
+        if (mAllStudents.isEmpty()) {
+            searchEditText.setVisibility(View.INVISIBLE);
+            sortLayout.setVisibility(View.INVISIBLE);
+            emptyTipView.setVisibility(View.VISIBLE);
+            emptyTipView.setEmptyText(R.string.tch_no_student);
+        }
 
-        mTempStudents = new ArrayList<Student>();
-        mTempStudents.addAll(mStudents);
+        Collections.sort(mAllStudents, mIdComparator);
 
-        mAdapter = new StuCentreAdapter(getActivity(), mTempStudents);
+        mSearchedStudents = new ArrayList<Student>();
+        mSearchedStudents.addAll(mAllStudents);
+
+        mAdapter = new StuCentreAdapter(getActivity(), mSearchedStudents);
     }
 
     @Override
@@ -148,14 +180,17 @@ public class StuCentreFragment extends BaseFragment
      */
     @Override
     public void onSearch(String text) {
+        if (mAllStudents.isEmpty()) {
+            return;
+        }
         mSearchKey = text;
-        mTempStudents.clear();
-        for (int i = 0; i < mStudents.size(); i++) {
-            Student student = mStudents.get(i);
+        mSearchedStudents.clear();
+        for (int i = 0; i < mAllStudents.size(); i++) {
+            Student student = mAllStudents.get(i);
             String name = student.getName();
             try {
                 if (StringMatchUtil.isMatch(name, mSearchKey)) {
-                    mTempStudents.add(student);
+                    mSearchedStudents.add(student);
                 }
             } catch (BadHanyuPinyinOutputFormatCombination e) {}
         }
@@ -165,8 +200,11 @@ public class StuCentreFragment extends BaseFragment
 
     @Override
     public void onClear() {
-        mTempStudents.clear();
-        mTempStudents.addAll(mStudents);
+        if (mAllStudents.isEmpty()) {
+            return;
+        }
+        mSearchedStudents.clear();
+        mSearchedStudents.addAll(mAllStudents);
         setSortIcon(INDEX_ID);
         mAdapter.notifyDataSetChanged();
     }
@@ -213,13 +251,13 @@ public class StuCentreFragment extends BaseFragment
         protected Integer doInBackground(Integer... params) {
             switch (index) {
                 case INDEX_ID:
-                    Collections.sort(mTempStudents, mIdComparator);
+                    Collections.sort(mSearchedStudents, mIdComparator);
                     break;
                 case INDEX_CHECKIN_RATE:
-                    Collections.sort(mTempStudents, mCheckInRateComparator);
+                    Collections.sort(mSearchedStudents, mCheckInRateComparator);
                     break;
                 case INDEX_CORRECT_RATE:
-                    Collections.sort(mTempStudents, mCorrectRateComparator);
+                    Collections.sort(mSearchedStudents, mCorrectRateComparator);
                     break;
                 default:
                     break;
@@ -233,13 +271,66 @@ public class StuCentreFragment extends BaseFragment
         }
     }
 
+    public void setProgressBar(SmoothProgressBar _progressBar) {
+        progressBar = _progressBar;
+    }
+
+    public void refresh() {
+        if (progressBar.getVisibility() == View.VISIBLE) {
+            return;
+        }
+        progressBar.setVisibility(View.VISIBLE);
+        JsonArrayRequest request =
+                new JsonArrayRequest(Method.GET, UrlUtil.getTchStucenterLookinfoUrl(KAccount
+                        .getAccountId()), new Listener<JSONArray>() {
+
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        List<Student> students = new ArrayList<Student>();
+                        for (int i = 0; i < response.length(); i++) {
+                            try {
+                                Student student = Student.fromjsonObject(response.getJSONObject(i));
+                                students.add(student);
+                            } catch (JSONException e) {}
+                        }
+                        if (!students.isEmpty()) {
+                            searchEditText.setVisibility(View.VISIBLE);
+                            sortLayout.setVisibility(View.VISIBLE);
+                            emptyTipView.setVisibility(View.GONE);
+                            mAllStudents.clear();
+                            mAllStudents.addAll(students);
+                            mSearchedStudents.clear();
+                            mSearchedStudents.addAll(students);
+                            mAdapter.notifyDataSetChanged();
+
+                            StudentDao studentDao = new StudentDao(getActivity());
+                            studentDao.deleteAll();
+                            for (Student stu : students) {
+                                studentDao.add(stu);
+                            }
+                            studentDao.close();
+                        }
+                        progressBar.hide(getActivity());
+                    }
+                }, new ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        progressBar.hide(getActivity());
+                        ResponseUtil.toastError(error);
+                    }
+                });
+        RequestUtil.getInstance().addToRequestQueue(request, TAG);
+    }
+
     @Override
     public void onDestroy() {
         super.onDestroy();
+        RequestUtil.getInstance().cancelPendingRequests(TAG);
         searchEditText.release();
         mAdapter.release();
         mAdapter = null;
-        mStudents = null;
-        mTempStudents = null;
+        mAllStudents = null;
+        mSearchedStudents = null;
     }
 }

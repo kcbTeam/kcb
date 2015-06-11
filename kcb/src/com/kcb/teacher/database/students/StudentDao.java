@@ -25,13 +25,19 @@ public class StudentDao {
     }
 
     public void add(Student student) {
+        mDatabase.insert(StudentTable.TABLE_NAME, null, getStudentContentValues(student));
+    }
+
+    public void update(Student student) {}
+
+    private ContentValues getStudentContentValues(Student student) {
         ContentValues contentValues = new ContentValues();
         contentValues.put(StudentTable.COLUMN_STUID, student.getId());
         contentValues.put(StudentTable.COLUMN_NAME, student.getName());
         contentValues.put(StudentTable.COLUMN_CHECKINRATE, student.getCheckInRate());
         contentValues.put(StudentTable.COLUMN_CORRECTRATE, student.getCorrectRate());
         contentValues.put(StudentTable.COLUMN_ROW_DATA, student.toString());
-        mDatabase.insert(StudentTable.TABLE_NAME, null, contentValues);
+        return contentValues;
     }
 
     public List<Student> getAll() {

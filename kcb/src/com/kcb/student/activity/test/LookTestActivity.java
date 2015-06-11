@@ -44,8 +44,8 @@ public class LookTestActivity extends BaseActivity implements OnSearchListener, 
 
     private LookTestAdapter mAdapter;
 
-    private List<Test> mTests;
-    private List<Test> mTempTests;
+    private List<Test> mAllTests;
+    private List<Test> mSearchedTests;
     private String mSearchKey;
 
     @Override
@@ -80,22 +80,23 @@ public class LookTestActivity extends BaseActivity implements OnSearchListener, 
     @Override
     protected void initData() {
         TestDao testDao = new TestDao(LookTestActivity.this);
-        mTests = testDao.getAll();
+        mAllTests = testDao.getAll();
         testDao.close();
 
-        if (mTests.isEmpty()) {
+        if (mAllTests.isEmpty()) {
             listTitleLayout.setVisibility(View.INVISIBLE);
+            searchEditText.setVisibility(View.INVISIBLE);
             emptyTipView.setVisibility(View.VISIBLE);
             emptyTipView.setEmptyText(R.string.stu_no_test_result);
         }
 
-        mTempTests = new ArrayList<Test>();
-        mTempTests.addAll(mTests);
+        mSearchedTests = new ArrayList<Test>();
+        mSearchedTests.addAll(mAllTests);
 
-        mAdapter = new LookTestAdapter(this, mTempTests);
+        mAdapter = new LookTestAdapter(this, mSearchedTests);
         listView.setAdapter(mAdapter);
 
-        if (mTests.isEmpty()) {
+        if (mAllTests.isEmpty()) {
             listTitleLayout.setVisibility(View.INVISIBLE);
         }
     }
@@ -119,12 +120,12 @@ public class LookTestActivity extends BaseActivity implements OnSearchListener, 
      */
     @Override
     public void onSearch(String text) {
-        mTempTests.clear();
-        for (int i = 0; i < mTests.size(); i++) {
-            String name = mTests.get(i).getName();
+        mSearchedTests.clear();
+        for (int i = 0; i < mAllTests.size(); i++) {
+            String name = mAllTests.get(i).getName();
             try {
                 if (StringMatchUtil.isMatch(name, mSearchKey)) {
-                    mTempTests.add(mTests.get(i));
+                    mSearchedTests.add(mAllTests.get(i));
                 }
             } catch (BadHanyuPinyinOutputFormatCombination e) {}
         }
@@ -133,8 +134,8 @@ public class LookTestActivity extends BaseActivity implements OnSearchListener, 
 
     @Override
     public void onClear() {
-        mTempTests.clear();
-        mTempTests.addAll(mTests);
+        mSearchedTests.clear();
+        mSearchedTests.addAll(mAllTests);
         mAdapter.notifyDataSetChanged();
     }
 
@@ -149,7 +150,7 @@ public class LookTestActivity extends BaseActivity implements OnSearchListener, 
             return;
         }
         progressBar.setVisibility(View.VISIBLE);
-        // if success, show listview title;
+        // if success, show listview title & search edittext;
     }
 
     @Override
@@ -158,13 +159,13 @@ public class LookTestActivity extends BaseActivity implements OnSearchListener, 
         searchEditText.release();
         mAdapter.release();
         mAdapter = null;
-        for (Test test : mTests) {
+        for (Test test : mAllTests) {
             test.release();
         }
-        mTests = null;
-        for (Test test : mTempTests) {
+        mAllTests = null;
+        for (Test test : mSearchedTests) {
             test.release();
         }
-        mTempTests = null;
+        mSearchedTests = null;
     }
 }

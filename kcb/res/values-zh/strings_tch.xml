@@ -43,6 +43,7 @@
     <string name="tch_stu_info">学生信息</string>
     <string name="tch_checkin_rate">签到率</string>
     <string name="tch_correct_rate">正确率</string>
+    <string name="tch_no_student">没有学生信息</string>
     <!-- menu -->
     <string name="tch_exit_account">退出账号</string>
     <string name="tch_exit_account_tip">退出后，不会保存未进行的测试，下次使用时需要重新登录。</string>
@@ -114,7 +115,7 @@
     <string name="tch_choice_D">D</string>
     <!--  -->
     <string name="tch_no_camera_app">没有可以拍照的应用程序</string>
-    <string name="tch_not_save_if_cancel">取消后，不会保存测试内容。</string>
+    <string name="tch_not_save_if_cancel">取消后，不会保存本次测试。</string>
     <string name="tch_question_saved">第%1$d题已保存</string>
     <string name="tch_question_added">第%1$d题已添加</string>
     <string name="tch_deleted">已删除</string>

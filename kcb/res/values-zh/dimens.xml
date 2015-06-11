@@ -6,22 +6,9 @@
     <dimen name="text_size_small">14dp</dimen>
     <dimen name="text_size_medium">16dp</dimen>
     <dimen name="text_size_large">18dp</dimen>
-    <dimen name="dp_1">1dp</dimen>
-    <dimen name="dp_8">8dp</dimen>
-    <dimen name="dp_16">16dp</dimen>
-    <dimen name="dp_32">32dp</dimen>
-    <dimen name="dp_42">42dp</dimen>
-    <dimen name="dp_90">90dp</dimen>
-    <dimen name="top_icon_button_height">56dp</dimen>
-    <dimen name="top_icon_button_width">48dp</dimen>
+    <dimen name="activity_header_height">50dp</dimen>
+    <dimen name="step_tip_margin_top">24dp</dimen>
     <!-- Common end -->
-
-
-    <!-- Home start -->
-    <dimen name="home_exit_height">48dp</dimen>
-    <!-- Home end -->
-
-
     <!-- CheckIn start -->
     <dimen name="checkin_recycler_height">216dp</dimen>
     <!-- CheckIn end -->

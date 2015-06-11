@@ -21,12 +21,12 @@ public class KAccount {
     /**
      * sharedPreference keys
      */
-    private static final String STU_ACCOUNT = "stuaccount";
+    private static final String STU_ACCOUNT = "com.kcb.sharedpreference.stuaccount";
 
-    private static final String KEY_STU_ID = "stuid";
-    private static final String KEY_STU_NAME = "stuname";
-    private static final String KEY_TCH_ID = "tchid";
-    private static final String KEY_TCH_NAME = "tchname";
+    private static final String KEY_STU_ID = "key_stuid";
+    private static final String KEY_STU_NAME = "key_stuname";
+    private static final String KEY_TCH_ID = "key_tchid";
+    private static final String KEY_TCH_NAME = "key_tchname";
 
     /**
      * common account content, don't need save password local;

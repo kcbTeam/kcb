@@ -98,6 +98,7 @@ public class LookTestActivity extends BaseActivity implements OnSearchListener, 
         testDao.close();
 
         if (mAllTests.isEmpty()) {
+            searchEditText.setVisibility(View.INVISIBLE);
             listTitleLayout.setVisibility(View.INVISIBLE);
             emptyTipView.setVisibility(View.VISIBLE);
             emptyTipView.setEmptyText(R.string.tch_no_test_result);
@@ -152,6 +153,9 @@ public class LookTestActivity extends BaseActivity implements OnSearchListener, 
 
     @Override
     public void onClear() {
+        if (mAllTests.isEmpty()) {
+            return;
+        }
         mSearchedTests.clear();
         mSearchedTests.addAll(mAllTests);
         mAdapter.notifyDataSetChanged();
@@ -190,6 +194,7 @@ public class LookTestActivity extends BaseActivity implements OnSearchListener, 
                         }
                         // save test
                         TestDao testDao = new TestDao(LookTestActivity.this);
+                        testDao.deleteAll();
                         for (Test test : mAllTests) {
                             testDao.add(test);
                         }
@@ -197,6 +202,7 @@ public class LookTestActivity extends BaseActivity implements OnSearchListener, 
                         // switch view
                         progressBar.hide(LookTestActivity.this);
                         if (!mAllTests.isEmpty()) {
+                            searchEditText.setVisibility(View.VISIBLE);
                             listTitleLayout.setVisibility(View.VISIBLE);
                             emptyTipView.setVisibility(View.GONE);
                         }

@@ -19,7 +19,7 @@
     <style name="common_title_layout">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:background">@drawable/activity_header_shadow</item>
+        <item name="android:background">@drawable/activity_header</item>
         <item name="android:orientation">horizontal</item>
     </style>
 
@@ -39,7 +39,7 @@
 
     <style name="common_title_icon_layout">
         <item name="android:layout_width">48dp</item>
-        <item name="android:layout_height">56dp</item>
+        <item name="android:layout_height">@dimen/activity_header_height</item>
     </style>
 
     <style name="common_title_icon">
@@ -64,6 +64,12 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_centerInParent">true</item>
         <item name="android:visibility">gone</item>
+    </style>
+
+    <style name="common_divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/black_divider</item>
     </style>
     <!-- ********** Common end ********** -->
 

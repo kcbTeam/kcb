@@ -24,7 +24,6 @@ import com.kcbTeam.R;
  */
 public class EditQuestionActivty extends BaseActivity {
 
-    private ButtonFlat backButton;
     private TextView questionIndexTextView;
     private ButtonFlat deleteButton;
     private ButtonFlat finishButton;
@@ -46,9 +45,6 @@ public class EditQuestionActivty extends BaseActivity {
 
     @Override
     protected void initView() {
-        backButton = (ButtonFlat) findViewById(R.id.button_back);
-        backButton.setOnClickListener(this);
-
         questionIndexTextView = (TextView) findViewById(R.id.textview_question_index);
 
         deleteButton = (ButtonFlat) findViewById(R.id.button_delete);
@@ -72,9 +68,6 @@ public class EditQuestionActivty extends BaseActivity {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.button_back:
-                finish();
-                break;
             case R.id.button_delete:
                 DialogUtil.showNormalDialog(this, R.string.tch_comm_delete,
                         R.string.tch_delete_tip, R.string.tch_comm_sure, new OnClickListener() {
@@ -97,6 +90,11 @@ public class EditQuestionActivty extends BaseActivity {
             default:
                 break;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        onClick(finishButton);
     }
 
     @Override

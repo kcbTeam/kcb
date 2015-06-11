@@ -18,7 +18,7 @@
         <TextView
             android:id="@+id/textview_time"
             android:layout_width="wrap_content"
-            android:layout_height="56dp"
+            android:layout_height="@dimen/activity_header_height"
             android:layout_marginRight="16dp"
             android:gravity="center_vertical"
             android:textColor="@color/black"

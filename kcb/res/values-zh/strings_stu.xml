@@ -79,6 +79,7 @@
     <!-- TestActivity Start -->
     <string name="stu_test_name_num">%1$s（共%2$d题）</string>
     <string name="stu_question_index">题目%1$d</string>
+    <string name="stu_select_choice">勾出正确选项</string>
     <string name="stu_remain_time">还剩%1$d分%2$d秒</string>
     <string name="stu_question_save">第%1$d题已保存</string>
     <string name="stu_test_time_end">时间已到，无法继续作答，请提交本次答案。</string>

@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.kcb.common.base.BaseActivity;
@@ -16,7 +15,6 @@ import com.kcb.common.util.DialogUtil;
 import com.kcb.common.util.ToastUtil;
 import com.kcb.common.view.QuestionEditView;
 import com.kcb.library.view.buttonflat.ButtonFlat;
-import com.kcb.teacher.database.test.TestDao;
 import com.kcbTeam.R;
 
 /**
@@ -28,11 +26,8 @@ import com.kcbTeam.R;
  */
 public class EditTestActivity extends BaseActivity {
 
-    private ButtonFlat backButton;
     private TextView testNameNumTextView;
-
     private ButtonFlat cancelButton;
-    private ImageView cancelImageView;
 
     private QuestionEditView questionEditView;
 
@@ -48,8 +43,6 @@ public class EditTestActivity extends BaseActivity {
     // when click last/next, show a mTempQuestion, used for compare it is changed or not;
     private Question mTempQuestion;
 
-    private String mAction;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,13 +54,10 @@ public class EditTestActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        backButton = (ButtonFlat) findViewById(R.id.button_back);
-        backButton.setOnClickListener(this);
         testNameNumTextView = (TextView) findViewById(R.id.textview_title);
 
         cancelButton = (ButtonFlat) findViewById(R.id.button_cancel);
         cancelButton.setOnClickListener(this);
-        cancelImageView = (ImageView) findViewById(R.id.imageview_cancel);
 
         questionEditView = (QuestionEditView) findViewById(R.id.questioneditview);
 
@@ -83,15 +73,6 @@ public class EditTestActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        Intent intent = getIntent();
-        mAction = intent.getAction();
-        if (mAction.equals(ACTION_EDIT_TEST)) {
-            backButton.setVisibility(View.VISIBLE);
-            testNameNumTextView.setPadding(0, 0, 0, 0);
-            cancelImageView.setImageResource(R.drawable.ic_delete_black_24dp);
-        } else if (mAction.equals(ACTION_ADD_TEST)) {
-            backButton.setVisibility(View.GONE);
-        }
         showTestNameNum();
         showQuestion();
     }
@@ -99,16 +80,8 @@ public class EditTestActivity extends BaseActivity {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.button_back:
-                release();
-                finish();
-                break;
             case R.id.button_cancel:
-                if (mAction.equals(ACTION_ADD_TEST)) {
-                    cancelAddTest();
-                } else {
-                    deleteTest();
-                }
+                cancelAddTest();
                 break;
             case R.id.button_last:
                 lastQuestion();
@@ -125,28 +98,6 @@ public class EditTestActivity extends BaseActivity {
             default:
                 break;
         }
-    }
-
-    private void deleteTest() {
-        OnClickListener sureListener = new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                ToastUtil.toast(R.string.tch_deleted);
-                TestDao testDao = new TestDao(EditTestActivity.this);
-                testDao.delete(sTest);
-                testDao.close();
-
-                release();
-                finish();
-            }
-        };
-        DialogUtil.showNormalDialog(
-                EditTestActivity.this,
-                R.string.tch_comm_delete,
-                String.format(getResources().getString(R.string.tch_delete_test_tip),
-                        sTest.getName()), R.string.tch_comm_sure, sureListener,
-                R.string.tch_comm_cancel, null);
     }
 
     private void lastQuestion() {
@@ -175,11 +126,7 @@ public class EditTestActivity extends BaseActivity {
 
                     @Override
                     public void run() {
-                        if (ACTION_ADD_TEST.equals(mAction)) {
-                            SetTestTimeActivity.startFromAddNewTest(EditTestActivity.this, sTest);
-                        } else if (ACTION_EDIT_TEST.equals(mAction)) {
-                            SetTestTimeActivity.startFromEditTest(EditTestActivity.this, sTest);
-                        }
+                        SetTestTimeActivity.startFromAddNewTest(EditTestActivity.this, sTest);
                         finish();
                     }
                 }, 200);
@@ -268,12 +215,7 @@ public class EditTestActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        if (ACTION_ADD_TEST.equals(mAction)) {
-            cancelAddTest();
-        } else if (ACTION_EDIT_TEST.equals(mAction)) {
-            release();
-            finish();
-        }
+        cancelAddTest();
     }
 
     private void cancelAddTest() {
@@ -306,28 +248,13 @@ public class EditTestActivity extends BaseActivity {
         questionEditView = null;
         sTest = null;
         mTempQuestion = null;
-
     }
-
-    /**
-     * for add a new Test or Edit Test;
-     */
-    private static final String ACTION_ADD_TEST = "action_addtest";
-    private static final String ACTION_EDIT_TEST = "action_edittest";
 
     /**
      * for better effect, use static test, don't need parse bitmap
      */
-    public static void startAddNewTest(Context context, Test test) {
+    public static void start(Context context, Test test) {
         Intent intent = new Intent(context, EditTestActivity.class);
-        intent.setAction(ACTION_ADD_TEST);
-        context.startActivity(intent);
-        sTest = test;
-    }
-
-    public static void startEditTest(Context context, Test test) {
-        Intent intent = new Intent(context, EditTestActivity.class);
-        intent.setAction(ACTION_EDIT_TEST);
         context.startActivity(intent);
         sTest = test;
     }

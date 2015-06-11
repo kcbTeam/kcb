@@ -190,6 +190,7 @@ public class LookCheckInActivity extends BaseActivity {
                         // save to database
                         CheckInResult checkInResult = CheckInResult.fromJsonObejct(response);
                         CheckInDao checkInDao = new CheckInDao(LookCheckInActivity.this);
+                        checkInDao.deleteAll();
                         checkInDao.add(checkInResult);
                         checkInDao.close();
                         // show result
