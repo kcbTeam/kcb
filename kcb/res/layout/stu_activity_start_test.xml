@@ -28,7 +28,8 @@
     <TextView
         android:id="@+id/textview_question_num"
         style="@style/common_tip"
-        android:layout_below="@id/layout_title" />
+        android:layout_below="@id/layout_title"
+        android:layout_marginTop="8dp" />
 
     <TextView
         android:id="@+id/textview_question_title"
@@ -195,37 +196,27 @@
 
     <LinearLayout
         android:id="@+id/layout_buttons"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_alignParentBottom="true"
-        android:orientation="horizontal" >
+        style="@style/common_bottom_button_layout" >
 
         <com.kcb.library.view.buttonflat.ButtonFlat
             android:id="@+id/button_last"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
+            style="@style/common_bottom_button"
             android:text="@string/stu_last_question"
             widget:clickAfterRipple="false"
-            widget:rippleSpeed="18" />
+            widget:rippleSpeed="24" />
 
         <com.kcb.library.view.buttonflat.ButtonFlat
             android:id="@+id/button_next"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
+            style="@style/common_bottom_button"
             android:text="@string/stu_next_question"
             widget:clickAfterRipple="false"
-            widget:rippleSpeed="18" />
+            widget:rippleSpeed="24" />
 
         <com.kcb.library.view.buttonflat.ButtonFlat
             android:id="@+id/button_submit"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
+            style="@style/common_bottom_button"
             android:text="@string/stu_submit_answer"
-            widget:clickAfterRipple="false"
-            widget:rippleSpeed="18" />
+            widget:rippleSpeed="24" />
     </LinearLayout>
 
     <View

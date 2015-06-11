@@ -115,6 +115,7 @@ public class StartTestActivity extends BaseActivity {
         nextButton.setOnClickListener(this);
         submitButton = (ButtonFlat) findViewById(R.id.button_submit);
         submitButton.setOnClickListener(this);
+        submitButton.setTextColor(getResources().getColor(R.color.blue));
 
         checkBoxA = (CheckBox) findViewById(R.id.checkBox_A);
         checkBoxB = (CheckBox) findViewById(R.id.checkBox_B);

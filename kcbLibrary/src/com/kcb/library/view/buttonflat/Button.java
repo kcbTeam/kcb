@@ -28,7 +28,7 @@ public abstract class Button extends CustomView {
     Integer rippleColor;
     OnClickListener onClickListener;
     boolean clickAfterRipple = true;
-    int backgroundColor = Color.parseColor("#777777");
+    int backgroundColor = Color.parseColor("#616161");
 
     public Button(Context context, AttributeSet attrs) {
         super(context, attrs);
