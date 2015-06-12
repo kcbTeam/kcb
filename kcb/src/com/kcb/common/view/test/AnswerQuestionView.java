@@ -137,4 +137,9 @@ public class AnswerQuestionView extends LinearLayout {
         cItem.setIsSelected(checkBoxC.isCheck());
         dItem.setIsSelected(checkBoxD.isCheck());
     }
+
+    public void release() {
+        mContext = null;
+        mQuestion = null;
+    }
 }

@@ -25,6 +25,7 @@ import com.kcb.common.server.RequestUtil;
 import com.kcb.common.server.ResponseUtil;
 import com.kcb.common.server.UrlUtil;
 import com.kcb.common.util.DialogUtil;
+import com.kcb.common.util.LogUtil;
 import com.kcb.common.util.ToastUtil;
 import com.kcb.common.view.dialog.MaterialListDialog;
 import com.kcb.common.view.dialog.MaterialListDialog.OnClickSureListener;
@@ -120,6 +121,7 @@ public class TestFragment extends BaseFragment {
                         @Override
                         public void onClick(View view, int position) {
                             TestDao testDao = new TestDao(getActivity());
+                            LogUtil.e("wanghang", names.get(position));
                             Test test = testDao.getByName(names.get(position));
                             testDao.close();
                             sendTestToServer(test);

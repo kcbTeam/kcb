@@ -7,8 +7,6 @@ import org.json.JSONObject;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -23,7 +21,6 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.kcb.common.base.BaseActivity;
 import com.kcb.common.model.answer.TestAnswer;
 import com.kcb.common.model.test.Question;
-import com.kcb.common.model.test.QuestionItem;
 import com.kcb.common.model.test.Test;
 import com.kcb.common.server.RequestUtil;
 import com.kcb.common.server.ResponseUtil;
@@ -33,7 +30,6 @@ import com.kcb.common.util.ToastUtil;
 import com.kcb.common.view.dialog.MaterialDialog;
 import com.kcb.common.view.test.AnswerQuestionView;
 import com.kcb.library.view.buttonflat.ButtonFlat;
-import com.kcb.library.view.checkbox.CheckBox;
 import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
 import com.kcb.student.database.test.TestDao;
 import com.kcb.student.model.account.KAccount;
@@ -140,42 +136,9 @@ public class StartTestActivity extends BaseActivity {
         }
     }
 
-    private void showQuestion() {
-        answerQuestionView.showQuestion(getCurrentQuestion(), mQuestionIndex);
-        mTempQuestion = Question.clone(getCurrentQuestion());
-    }
-
-    private void showRemainTime() {
-        timeTextView.setText(String.format(getString(R.string.stu_remain_time), mRemainTime / 60,
-                mRemainTime % 60));
-    }
-
-    private void showTimeEndDialog() {
-        MaterialDialog dialog =
-                DialogUtil.showNormalDialog(StartTestActivity.this, R.string.stu_comm_tip,
-                        R.string.stu_test_time_end, R.string.stu_comm_submit,
-                        new OnClickListener() {
-
-                            @Override
-                            public void onClick(View v) {
-                                finish();
-                            }
-                        }, -1, null);
-        dialog.setCancelable(false);
-    }
-
-    private Question getCurrentQuestion() {
-        return sTest.getQuestion(mQuestionIndex);
-    }
-
     private void lastQuestion() {
         if (mQuestionIndex > 0) {
-            answerQuestionView.saveAnswer();
-            if (!getCurrentQuestion().equal(mTempQuestion)) {
-                mTestAnswer.saveQuestionAnswer(getCurrentQuestion());
-                ToastUtil.toast(String.format(getResources().getString(R.string.stu_question_save),
-                        mQuestionIndex + 1));
-            }
+            saveAnswer();
             mQuestionIndex--;
             showQuestion();
         }
@@ -183,12 +146,7 @@ public class StartTestActivity extends BaseActivity {
 
     private void nextQuesion() {
         if (mQuestionIndex < sTest.getQuestionNum() - 1) {
-            answerQuestionView.saveAnswer();
-            if (!getCurrentQuestion().equal(mTempQuestion)) {
-                mTestAnswer.saveQuestionAnswer(getCurrentQuestion());
-                ToastUtil.toast(String.format(getResources().getString(R.string.stu_question_save),
-                        mQuestionIndex + 1));
-            }
+            saveAnswer();
             mQuestionIndex++;
             showQuestion();
         }
@@ -198,7 +156,7 @@ public class StartTestActivity extends BaseActivity {
         if (progressBar.getVisibility() == View.VISIBLE) {
             return;
         }
-        saveAnswer();
+        answerQuestionView.saveAnswer();
 
         // get unfinished question index
         List<Integer> unFinishedIndexs = mTestAnswer.getUnFinishedIndex();
@@ -255,8 +213,9 @@ public class StartTestActivity extends BaseActivity {
 
                             @Override
                             public void onResponse(JSONObject response) {
-                                // TODO
+                                ToastUtil.toast(R.string.stu_answer_submitted);
                                 progressBar.hide(StartTestActivity.this);
+                                finish();
                             }
                         }, new ErrorListener() {
 
@@ -267,6 +226,43 @@ public class StartTestActivity extends BaseActivity {
                             }
                         });
         RequestUtil.getInstance().addToRequestQueue(request, TAG);
+    }
+
+    private void showQuestion() {
+        mTempQuestion = Question.clone(getCurrentQuestion());
+        answerQuestionView.showQuestion(getCurrentQuestion(), mQuestionIndex);
+    }
+
+    private void showRemainTime() {
+        timeTextView.setText(String.format(getString(R.string.stu_remain_time), mRemainTime / 60,
+                mRemainTime % 60));
+    }
+
+    private void showTimeEndDialog() {
+        MaterialDialog dialog =
+                DialogUtil.showNormalDialog(StartTestActivity.this, R.string.stu_comm_tip,
+                        R.string.stu_test_time_end, R.string.stu_comm_submit,
+                        new OnClickListener() {
+
+                            @Override
+                            public void onClick(View v) {
+                                finish();
+                            }
+                        }, -1, null);
+        dialog.setCancelable(false);
+    }
+
+    private void saveAnswer() {
+        answerQuestionView.saveAnswer();
+        if (!getCurrentQuestion().equal(mTempQuestion)) {
+            mTestAnswer.saveQuestionAnswer(getCurrentQuestion());
+            ToastUtil.toast(String.format(getResources().getString(R.string.stu_question_save),
+                    mQuestionIndex + 1));
+        }
+    }
+
+    private Question getCurrentQuestion() {
+        return sTest.getQuestion(mQuestionIndex);
     }
 
     @Override
@@ -285,6 +281,8 @@ public class StartTestActivity extends BaseActivity {
         mTempQuestion.release();
         mTempQuestion = null;
         mTestAnswer = null;
+        answerQuestionView.release();
+        answerQuestionView = null;
     }
 
     /**

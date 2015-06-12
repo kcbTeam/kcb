@@ -26,7 +26,7 @@ public class QuestionItem implements Serializable {
     private boolean mIsText = true;
     private String mText = "";
     private Bitmap mBitmap;
-    private String mBitmapString = "";
+    private byte[] mBitmapByteArray;
 
     private boolean mIsRight; // useful when item is choice
 
@@ -66,32 +66,42 @@ public class QuestionItem implements Serializable {
         mIsText = true;
         mText = text;
         mBitmap = null;
-        mBitmapString = "";
+        mBitmapByteArray = null;
     }
 
     public void setBitmap(Bitmap bitmap) {
         mIsText = false;
         mText = "";
         mBitmap = bitmap;
-        mBitmapString = "";
+        mBitmapByteArray = null;
     }
 
     public Bitmap getBitmap() {
         if (null != mBitmap) {
             return mBitmap;
-        } else if (null != mBitmapString) {
-            mBitmap = BitmapUtil.stringToBitmap(mBitmapString);
+        } else if (null != mBitmapByteArray) {
+            mBitmap = BitmapUtil.byteArrayToBitmap(mBitmapByteArray);
             return mBitmap;
         } else {
             return null;
         }
     }
 
-    public String getBitmapString() {
+    public byte[] getBitmapByteArray() {
+        mBitmapByteArray = null;
         if (null != mBitmap) {
-            mBitmapString = BitmapUtil.bitmapToString(mBitmap);
+            mBitmapByteArray = BitmapUtil.bitmapToByteArray(mBitmap);
         }
-        return mBitmapString;
+        return mBitmapByteArray;
+    }
+
+    public String getBitmapString() {
+        byte[] bytes = getBitmapByteArray();
+        if (null != bytes) {
+            return new String(bytes);
+        } else {
+            return "";
+        }
     }
 
     public void setIsRight(boolean isRight) {
@@ -133,7 +143,7 @@ public class QuestionItem implements Serializable {
     }
 
     public void release() {
-        mBitmapString = null;
+        mBitmapByteArray = null;
         if (null != mBitmap) {
             mBitmap.recycle();
             mBitmap = null;
@@ -168,7 +178,7 @@ public class QuestionItem implements Serializable {
         item.mId = jsonObject.optInt(KEY_ID);
         item.mIsText = jsonObject.optBoolean(KEY_ISTEXT);
         item.mText = jsonObject.optString(KEY_TEXT);
-        item.mBitmapString = jsonObject.optString(KEY_BITMAPSTRING);
+        item.mBitmapByteArray = jsonObject.optString(KEY_BITMAPSTRING).getBytes();
         item.mIsRight = jsonObject.optBoolean(KEY_ISRIGHT);
         item.mIsSelected = jsonObject.optBoolean(KEY_ISSELECTED);
         return item;

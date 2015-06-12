@@ -76,12 +76,13 @@
     <!-- LookCheckInActivity End -->
 
 
-    <!-- TestActivity Start -->
+    <!-- StartTestActivity Start -->
     <string name="stu_test_name_num">%1$s（共%2$d题）</string>
     <string name="stu_question_index">题目%1$d</string>
     <string name="stu_select_choice">勾出正确选项</string>
     <string name="stu_remain_time">还剩%1$d分%2$d秒</string>
     <string name="stu_question_save">第%1$d题已保存</string>
+    <string name="stu_answer_submitted">答案已提交，测试结束后可查看结果</string>
     <string name="stu_test_time_end">时间已到，无法继续作答，请提交本次答案。</string>
     <string name="stu_submit_test_finish">提交后，需要等待测试结束，才可以查看测试结果。</string>
     <string name="stu_submit_test_miss">第 %1$s 题未完成，确定提交？</string>
@@ -93,7 +94,7 @@
     <string name="stu_choice_B">B</string>
     <string name="stu_choice_C">C</string>
     <string name="stu_choice_D">D</string>
-    <!-- TestActivity End -->
+    <!-- StartTestActivity End -->
 
 
     <!-- LookTestActivity Start -->
