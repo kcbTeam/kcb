@@ -143,7 +143,7 @@ public class HomeActivity extends BaseFragmentActivity {
     private void showFragment(int index) {
         mCurrentIndex = index;
         setTabTip(index);
-//        setButtonTextColor(index);
+        setButtonTextColor(index);
 
         if (mCurrentIndex == INDEX_STUCENTER) {
             refreshButton.setVisibility(View.VISIBLE);

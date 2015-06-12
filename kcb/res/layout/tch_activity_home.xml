@@ -39,6 +39,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:background="@color/black_200"
         android:orientation="horizontal" >
 
         <com.kcb.library.view.buttonflat.ButtonFlat
@@ -51,18 +52,8 @@
                 android:id="@+id/imageview_checkin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:src="@drawable/ic_assignment_turned_in_grey600_36dp" />
-
-            <TextView
-                android:id="@+id/textview_checkin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/imageview_checkin"
-                android:layout_centerHorizontal="true"
-                android:text="@string/tch_class_checkin"
-                android:textColor="@color/black_400"
-                android:textSize="@dimen/text_size_micro" />
+                android:layout_centerInParent="true"
+                android:src="@drawable/ic_assignment_turned_in_white_36dp" />
         </com.kcb.library.view.buttonflat.ButtonFlat>
 
         <com.kcb.library.view.buttonflat.ButtonFlat
