@@ -41,6 +41,16 @@
         <item name="android:layout_centerInParent">true</item>
     </style>
 
+    <style name="common_title_tab">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:textColor">@color/black_700</item>
+        <item name="android:textSize">@dimen/text_size_x_large</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
     <style name="common_tip">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -202,7 +212,7 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:padding">4dp</item>
-        <item name="android:src">@drawable/ic_cancel_grey600_24dp</item>
+        <item name="android:src">@drawable/ic_remove_circle_black_24dp</item>
         <item name="android:visibility">invisible</item>
     </style>
     <!-- EditTest end -->

@@ -45,6 +45,7 @@ public class HomeActivity extends BaseFragmentActivity {
 
     private ButtonFlat accountButton;
     private TextView userNameTextView;
+    private TextView tabtipTextView;
     private ButtonFlat refreshButton;
 
     private CheckInFragment mCheckInFragment;
@@ -79,6 +80,8 @@ public class HomeActivity extends BaseFragmentActivity {
 
         userNameTextView = (TextView) findViewById(R.id.textview_username);
         userNameTextView.setText(KAccount.getAccountName());
+
+        tabtipTextView = (TextView) findViewById(R.id.textview_tabtip);
 
         refreshButton = (ButtonFlat) findViewById(R.id.button_refresh);
         refreshButton.setOnClickListener(this);
@@ -139,7 +142,8 @@ public class HomeActivity extends BaseFragmentActivity {
 
     private void showFragment(int index) {
         mCurrentIndex = index;
-        setButtonTextColor(index);
+        setTabTip(index);
+//        setButtonTextColor(index);
 
         if (mCurrentIndex == INDEX_STUCENTER) {
             refreshButton.setVisibility(View.VISIBLE);
@@ -184,6 +188,22 @@ public class HomeActivity extends BaseFragmentActivity {
                 break;
         }
         transaction.commit();
+    }
+
+    private void setTabTip(int index) {
+        switch (index) {
+            case INDEX_CHECKIN:
+                tabtipTextView.setText(R.string.tch_class_checkin);
+                break;
+            case INDEX_TEST:
+                tabtipTextView.setText(R.string.tch_class_test);
+                break;
+            case INDEX_STUCENTER:
+                tabtipTextView.setText(R.string.tch_student_center);
+                break;
+            default:
+                break;
+        }
     }
 
     private void setButtonTextColor(int index) {

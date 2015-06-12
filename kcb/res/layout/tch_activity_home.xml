@@ -15,7 +15,13 @@
 
         <TextView
             android:id="@+id/textview_username"
-            style="@style/common_title" />
+            style="@style/common_title"
+            android:layout_weight="0" />
+
+        <TextView
+            android:id="@+id/textview_tabtip"
+            style="@style/common_title_tab"
+            android:gravity="center" />
 
         <include
             layout="@layout/comm_button_refresh"
@@ -38,8 +44,26 @@
         <com.kcb.library.view.buttonflat.ButtonFlat
             android:id="@+id/button_checkin"
             style="@style/home_tab"
-            android:text="@string/tch_class_checkin"
-            widget:clickAfterRipple="false" />
+            android:text=""
+            widget:clickAfterRipple="false" >
+
+            <ImageView
+                android:id="@+id/imageview_checkin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/ic_assignment_turned_in_grey600_36dp" />
+
+            <TextView
+                android:id="@+id/textview_checkin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/imageview_checkin"
+                android:layout_centerHorizontal="true"
+                android:text="@string/tch_class_checkin"
+                android:textColor="@color/black_400"
+                android:textSize="@dimen/text_size_micro" />
+        </com.kcb.library.view.buttonflat.ButtonFlat>
 
         <com.kcb.library.view.buttonflat.ButtonFlat
             android:id="@+id/button_test"
