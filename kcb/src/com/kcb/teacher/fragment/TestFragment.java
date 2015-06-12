@@ -6,6 +6,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -137,36 +138,7 @@ public class TestFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 startProgressBar.setVisibility(View.VISIBLE);
-
-                JSONObject requestObject = new JSONObject();
-                try {
-                    requestObject.put(KEY_ID, KAccount.getAccountId());
-                    test.setQuestionId();
-                    requestObject.put(KEY_TEST, test.toJsonObject(true));
-                } catch (JSONException e) {}
-                JsonObjectRequest request =
-                        new JsonObjectRequest(Method.POST, UrlUtil.getTchTestStartUrl(),
-                                requestObject, new Listener<JSONObject>() {
-
-                                    @Override
-                                    public void onResponse(JSONObject response) {
-                                        TestDao testDao = new TestDao(getActivity());
-                                        test.setHasTested(true);
-                                        testDao.update(test);
-                                        testDao.close();
-
-                                        ToastUtil.toast(R.string.tch_test_started);
-                                        startProgressBar.hide(getActivity());
-                                    }
-                                }, new ErrorListener() {
-
-                                    @Override
-                                    public void onErrorResponse(VolleyError error) {
-                                        startProgressBar.hide(getActivity());
-                                        ResponseUtil.toastError(error);
-                                    }
-                                });
-                RequestUtil.getInstance().addToRequestQueue(request, TAG);
+                new LoadTestAsyncTask(test).execute();
             }
         };
         DialogUtil.showNormalDialog(
@@ -175,6 +147,53 @@ public class TestFragment extends BaseFragment {
                 String.format(getString(R.string.tch_start_test_tip), test.getName(),
                         test.getQuestionNum(), test.getTime()), R.string.tch_comm_sure,
                 sureListener, R.string.tch_comm_cancel, null);
+    }
+
+    private class LoadTestAsyncTask extends AsyncTask<Void, Integer, JSONObject> {
+
+        private Test mTest;
+
+        public LoadTestAsyncTask(Test test) {
+            mTest = test;
+        }
+
+        @Override
+        protected JSONObject doInBackground(Void... params) {
+            JSONObject requestObject = new JSONObject();
+            try {
+                requestObject.put(KEY_ID, KAccount.getAccountId());
+                mTest.setQuestionId();
+                requestObject.put(KEY_TEST, mTest.toJsonObject(true));
+            } catch (JSONException e) {}
+            return requestObject;
+        }
+
+        @Override
+        protected void onPostExecute(JSONObject result) {
+            JsonObjectRequest request =
+                    new JsonObjectRequest(Method.POST, UrlUtil.getTchTestStartUrl(), result,
+                            new Listener<JSONObject>() {
+
+                                @Override
+                                public void onResponse(JSONObject response) {
+                                    TestDao testDao = new TestDao(getActivity());
+                                    mTest.setHasTested(true);
+                                    testDao.update(mTest);
+                                    testDao.close();
+
+                                    ToastUtil.toast(R.string.tch_test_started);
+                                    startProgressBar.hide(getActivity());
+                                }
+                            }, new ErrorListener() {
+
+                                @Override
+                                public void onErrorResponse(VolleyError error) {
+                                    startProgressBar.hide(getActivity());
+                                    ResponseUtil.toastError(error);
+                                }
+                            });
+            RequestUtil.getInstance().addToRequestQueue(request, TAG);
+        }
     }
 
     private void addOrEditTest() {

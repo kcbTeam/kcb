@@ -139,6 +139,8 @@ public class Test implements Serializable {
         }
     }
 
+    // 转成的string存放到数据库中了
+    @Override
     public String toString() {
         return toJsonObject(false).toString();
     }

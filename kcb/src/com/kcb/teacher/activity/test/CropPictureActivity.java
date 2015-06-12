@@ -94,18 +94,9 @@ public class CropPictureActivity extends BaseActivity {
                 break;
             case R.id.button_finish:
                 mCropBitmap = cropImageView.getCroppedImage();
-
                 Uri uri =
                         Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(),
                                 mCropBitmap, null, null));
-
-                // File file = new File(FileUtil.getCropPhotoPath());
-                // try {
-                // FileOutputStream outputStream = new FileOutputStream(file);
-                // mCropBitmap.compress(CompressFormat.PNG, 100, outputStream);
-                // outputStream.flush();
-                // outputStream.close();
-                // } catch (IOException e) {}
 
                 Intent intent = new Intent();
                 intent.putExtra(DATA_PATH, uri);

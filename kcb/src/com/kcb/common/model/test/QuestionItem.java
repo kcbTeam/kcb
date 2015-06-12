@@ -72,14 +72,14 @@ public class QuestionItem implements Serializable {
         if (!TextUtils.isEmpty(mBitmapPath)) {
             new File(mBitmapPath).delete();
         }
-        mBitmapPath = null;
+        mBitmapPath = "";
     }
 
     public void setBitmap(Bitmap bitmap) {
         mIsText = false;
         mText = "";
         mBitmap = bitmap;
-        mBitmapPath = null;
+        mBitmapPath = "";
     }
 
     public Bitmap getBitmap() {
@@ -102,8 +102,9 @@ public class QuestionItem implements Serializable {
     }
 
     public String getBitmapString() {
-        if (null != getBitmap()) {
-            byte[] bytes = BitmapUtil.bitmapToByteArray(mBitmap);
+        Bitmap bitmap = getBitmap();
+        if (null != bitmap) {
+            byte[] bytes = BitmapUtil.bitmapToByteArray(bitmap);
             if (null != bytes) {
                 return new String(bytes);
             } else {
@@ -176,7 +177,7 @@ public class QuestionItem implements Serializable {
             jsonObject.put(KEY_ID, mId);
             jsonObject.put(KEY_ISTEXT, mIsText);
             jsonObject.put(KEY_TEXT, mText);
-            if (toServer) {
+            if (toServer && !TextUtils.isEmpty(mBitmapPath)) {
                 jsonObject.put(KEY_BITMAPSTRING, getBitmapString());
             }
             jsonObject.put(KEY_BITMAPPATH, mBitmapPath);
