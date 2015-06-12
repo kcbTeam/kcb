@@ -97,8 +97,8 @@ public class TestDao {
                 if (cursor.moveToFirst()) {
                     try {
                         test =
-                                Test.fromJsonObject(new JSONObject(cursor.getString(cursor
-                                        .getColumnIndex(TestTable.COLUMN_ROW_DATA))));
+                                Test.fromJsonObject(new JSONObject(new String(cursor.getBlob(cursor
+                                        .getColumnIndex(TestTable.COLUMN_ROW_DATA)))));
                     } catch (JSONException e) {}
                 }
             } catch (Exception e) {} finally {
@@ -119,8 +119,9 @@ public class TestDao {
                     do {
                         try {
                             Test test =
-                                    Test.fromJsonObject(new JSONObject(cursor.getString(cursor
-                                            .getColumnIndex(TestTable.COLUMN_ROW_DATA))));
+                                    Test.fromJsonObject(new JSONObject(new String(cursor
+                                            .getBlob(cursor
+                                                    .getColumnIndex(TestTable.COLUMN_ROW_DATA)))));
                             tests.add(test);
                         } catch (JSONException e) {}
                     } while (cursor.moveToNext());
@@ -141,8 +142,9 @@ public class TestDao {
                     do {
                         try {
                             Test test =
-                                    Test.fromJsonObject(new JSONObject(cursor.getString(cursor
-                                            .getColumnIndex(TestTable.COLUMN_ROW_DATA))));
+                                    Test.fromJsonObject(new JSONObject(new String(cursor
+                                            .getBlob(cursor
+                                                    .getColumnIndex(TestTable.COLUMN_ROW_DATA)))));
                             tests.add(test);
                         } catch (JSONException e) {}
                     } while (cursor.moveToNext());

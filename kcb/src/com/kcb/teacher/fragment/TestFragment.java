@@ -6,6 +6,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -26,8 +27,8 @@ import com.kcb.common.server.ResponseUtil;
 import com.kcb.common.server.UrlUtil;
 import com.kcb.common.util.DialogUtil;
 import com.kcb.common.util.ToastUtil;
-import com.kcb.common.view.MaterialListDialog;
-import com.kcb.common.view.MaterialListDialog.OnClickSureListener;
+import com.kcb.common.view.dialog.MaterialListDialog;
+import com.kcb.common.view.dialog.MaterialListDialog.OnClickSureListener;
 import com.kcb.library.view.PaperButton;
 import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
 import com.kcb.teacher.activity.test.LookTestActivity;
@@ -131,6 +132,7 @@ public class TestFragment extends BaseFragment {
     private final String KEY_ID = "id";
     private final String KEY_TEST = "test";
 
+    // 需要将测试中的图片转成String，如果图片过多，在创建request的时候也会阻塞UI线程，所以都需要在新的线程中做这些耗时操作。
     private void sendTestToServer(final Test test) {
         OnClickListener sureListener = new View.OnClickListener() {
 
@@ -138,35 +140,54 @@ public class TestFragment extends BaseFragment {
             public void onClick(View v) {
                 startProgressBar.setVisibility(View.VISIBLE);
 
-                JSONObject requestObject = new JSONObject();
-                try {
-                    requestObject.put(KEY_ID, KAccount.getAccountId());
-                    test.setQuestionId();
-                    requestObject.put(KEY_TEST, test.toJsonObject());
-                } catch (JSONException e) {}
-                JsonObjectRequest request =
-                        new JsonObjectRequest(Method.POST, UrlUtil.getTchTestStartUrl(),
-                                requestObject, new Listener<JSONObject>() {
+                new Thread(new Runnable() {
 
-                                    @Override
-                                    public void onResponse(JSONObject response) {
-                                        TestDao testDao = new TestDao(getActivity());
-                                        test.setHasTested(true);
-                                        testDao.update(test);
-                                        testDao.close();
+                    @Override
+                    public void run() {
+                        JSONObject requestObject = new JSONObject();
+                        try {
+                            requestObject.put(KEY_ID, KAccount.getAccountId());
+                            test.setQuestionId();
+                            requestObject.put(KEY_TEST, test.toJsonObject(true));
+                        } catch (JSONException e) {}
+                        JsonObjectRequest request =
+                                new JsonObjectRequest(Method.POST, UrlUtil.getTchTestStartUrl(),
+                                        requestObject, new Listener<JSONObject>() {
 
-                                        ToastUtil.toast(R.string.tch_test_started);
-                                        startProgressBar.hide(getActivity());
-                                    }
-                                }, new ErrorListener() {
+                                            @Override
+                                            public void onResponse(JSONObject response) {
+                                                getActivity().runOnUiThread(new Runnable() {
 
-                                    @Override
-                                    public void onErrorResponse(VolleyError error) {
-                                        startProgressBar.hide(getActivity());
-                                        ResponseUtil.toastError(error);
-                                    }
-                                });
-                RequestUtil.getInstance().addToRequestQueue(request, TAG);
+                                                    @Override
+                                                    public void run() {
+                                                        TestDao testDao =
+                                                                new TestDao(getActivity());
+                                                        test.setHasTested(true);
+                                                        testDao.update(test);
+                                                        testDao.close();
+
+                                                        ToastUtil.toast(R.string.tch_test_started);
+                                                        startProgressBar.hide(getActivity());
+                                                    }
+                                                });
+                                            }
+                                        }, new ErrorListener() {
+
+                                            @Override
+                                            public void onErrorResponse(final VolleyError error) {
+                                                getActivity().runOnUiThread(new Runnable() {
+
+                                                    @Override
+                                                    public void run() {
+                                                        startProgressBar.hide(getActivity());
+                                                        ResponseUtil.toastError(error);
+                                                    }
+                                                });
+                                            }
+                                        });
+                        RequestUtil.getInstance().addToRequestQueue(request, TAG);
+                    }
+                }).start();
             }
         };
         DialogUtil.showNormalDialog(
@@ -186,11 +207,11 @@ public class TestFragment extends BaseFragment {
 
                             @Override
                             public void onClick(View view, int position) {
-                                if (position == 0) { // add new test
+                                if (position == 0) { // 添加新测试
                                     Intent intent =
                                             new Intent(getActivity(), SetTestNameActivity.class);
                                     startActivity(intent);
-                                } else {
+                                } else { // 编辑已有的测试
                                     TestDao testDao = new TestDao(getActivity());
                                     Test test = testDao.getByName(names.get(position));
                                     testDao.close();

@@ -1,5 +1,6 @@
 package com.kcb.common.model.test;
 
+import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -11,6 +12,7 @@ import org.json.JSONObject;
 
 import com.kcb.common.model.answer.QuestionAnswer;
 import com.kcb.common.model.answer.TestAnswer;
+import com.kcb.common.util.FileUtil;
 
 public class Test implements Serializable {
 
@@ -88,6 +90,7 @@ public class Test implements Serializable {
     }
 
     public void deleteQuestion(int index) {
+        mQuestions.get(index).deleteBitmap();
         mQuestions.remove(index);
     }
 
@@ -136,8 +139,10 @@ public class Test implements Serializable {
         }
     }
 
+    // 转成的string存放到数据库中了
+    @Override
     public String toString() {
-        return toJsonObject().toString();
+        return toJsonObject(false).toString();
     }
 
     public void release() {
@@ -157,7 +162,10 @@ public class Test implements Serializable {
     private static final String KEY_HASTESTED = "hastested";
     private static final String KEY_QUESTION = "question";
 
-    public JSONObject toJsonObject() {
+    /**
+     * 发送到服务器的JsonObject包括的是图片String，保存到数据库的JsonObject包括的是图片的路径。
+     */
+    public JSONObject toJsonObject(boolean toServer) {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put(KEY_ID, mId);
@@ -169,7 +177,7 @@ public class Test implements Serializable {
             JSONArray questionArray = new JSONArray();
             for (int i = 0; i < mQuestions.size(); i++) {
                 mQuestions.get(i).setId(i);
-                questionArray.put(mQuestions.get(i).toJsonObject());
+                questionArray.put(mQuestions.get(i).toJsonObject(toServer));
             }
 
             jsonObject.put(KEY_QUESTION, questionArray);
@@ -193,5 +201,33 @@ public class Test implements Serializable {
             } catch (JSONException e) {}
         }
         return test;
+    }
+
+    /**
+     * 学生答题，从网络上获取到题目后，需要将题目中的图片String转成Bitmap保存到本地
+     */
+    public void saveBitmap() {
+        for (int i = 0; i < mQuestions.size(); i++) {
+            mQuestions.get(i).saveBitmap(mName, i);
+        }
+    }
+
+    /**
+     * 删除一个测试的时候，要把此与此测试相关的图片删除
+     */
+    public void deleteBitmap() {
+        for (int i = 0; i < mQuestions.size(); i++) {
+            mQuestions.get(i).deleteBitmap();
+        }
+        new File(FileUtil.getTestPath(mName)).delete();
+    }
+
+    /**
+     * 当删除一个测试中的一个题目的时候，需要重新命名图片的名称
+     */
+    public void renameBitmap() {
+        for (int i = 0; i < mQuestions.size(); i++) {
+            mQuestions.get(i).renameBitmap(mName, i);
+        }
     }
 }

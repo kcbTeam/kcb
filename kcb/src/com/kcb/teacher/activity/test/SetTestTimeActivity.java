@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
+
 import com.kcb.common.base.BaseActivity;
 import com.kcb.common.model.test.Question;
 import com.kcb.common.model.test.Test;
@@ -15,8 +16,8 @@ import com.kcb.common.util.ToastUtil;
 import com.kcb.library.slider.Slider;
 import com.kcb.library.slider.Slider.OnValueChangedListener;
 import com.kcb.library.view.buttonflat.ButtonFlat;
-import com.kcb.teacher.adapter.SetTestTimeAdapter;
-import com.kcb.teacher.adapter.SetTestTimeAdapter.EditQuestionListener;
+import com.kcb.teacher.adapter.test.SetTestTimeAdapter;
+import com.kcb.teacher.adapter.test.SetTestTimeAdapter.EditQuestionListener;
 import com.kcb.teacher.database.test.TestDao;
 import com.kcbTeam.R;
 
@@ -90,7 +91,8 @@ public class SetTestTimeActivity extends BaseActivity {
 
             @Override
             public void onEdit(int index, Question question) {
-                EditQuestionActivty.startForResult(SetTestTimeActivity.this, index, question);
+                EditQuestionActivty.startForResult(SetTestTimeActivity.this, sTest.getName(),
+                        index, question);
             }
         };
         mAdapter = new SetTestTimeAdapter(this, sTest, mEditListener);
@@ -144,8 +146,10 @@ public class SetTestTimeActivity extends BaseActivity {
                 mAdapter.deleteItem(index);
                 if (mAdapter.getCount() == 0) { // delete all question
                     deleteTestFromDatabase();
+                    sTest.renameBitmap();
                     finish();
                 } else {
+                    sTest.renameBitmap();
                     mAdapter.notifyDataSetChanged();
                     testTimeTextView.setText(String.format(
                             getString(R.string.tch_set_test_time_tip), mAdapter.getCount(),
@@ -160,6 +164,7 @@ public class SetTestTimeActivity extends BaseActivity {
 
             @Override
             public void onClick(View v) {
+                sTest.deleteBitmap();
                 ToastUtil.toast(R.string.tch_deleted);
                 deleteTestFromDatabase();
                 finish();

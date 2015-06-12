@@ -32,7 +32,7 @@
     <string name="tch_start_test">开始测试</string>
     <string name="tch_add_test_first">请先添加一个测试</string>
     <string name="tch_select_test">选择测试</string>
-    <string name="tch_start_test_tip">本次测试的名称为——%1$s，包括 %2$d 道题，时间为 %3$d 分钟。</string>
+    <string name="tch_start_test_tip">本次测试的名称为——%1$s，包括 %2$d 道题，时间为 %3$d 分钟。\n\n如果题目中图片较多，上传内容时间会稍长，请耐心等待。</string>
     <string name="tch_test_started">测试已经开始了</string>
     <string name="tch_add_or_edit_test">添加 / 编辑测试</string>
     <string name="tch_edit_test">编辑测试</string>
@@ -146,6 +146,7 @@
 
     <!-- Cut Picture Activity strat -->
     <string name="tch_crop_picture">裁剪图片</string>
+    <string name="tch_crop_tip">为了节省流量、提高上传题目的效率，请尽量少使用图片、尽可能地裁剪无用的图片部分。</string>
     <!-- Cut Picture Activity end -->
 
 

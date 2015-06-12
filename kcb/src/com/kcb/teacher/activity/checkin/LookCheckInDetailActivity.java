@@ -21,7 +21,7 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.PercentFormatter;
 import com.kcb.common.base.BaseFragmentActivity;
 import com.kcb.library.view.buttonflat.ButtonFlat;
-import com.kcb.teacher.adapter.LookCheckInDetailAdapter;
+import com.kcb.teacher.adapter.checkin.LookCheckInDetailAdapter;
 import com.kcb.teacher.model.checkin.CheckInResult;
 import com.kcbTeam.R;
 

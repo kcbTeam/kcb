@@ -1,4 +1,4 @@
-package com.kcb.common.view;
+package com.kcb.common.view.common;
 
 import android.content.Context;
 import android.text.Editable;

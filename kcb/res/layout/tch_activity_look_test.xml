@@ -23,7 +23,7 @@
         android:layout_alignBottom="@id/layout_title"
         android:visibility="gone" />
 
-    <com.kcb.common.view.SearchEditText
+    <com.kcb.common.view.common.SearchEditText
         android:id="@+id/searchedittext"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -87,7 +87,7 @@
         android:scrollbars="none" >
     </ListView>
 
-    <com.kcb.common.view.EmptyTipView
+    <com.kcb.common.view.common.EmptyTipView
         android:id="@+id/emptytipview"
         style="@style/common_empty_tip_view" />
 

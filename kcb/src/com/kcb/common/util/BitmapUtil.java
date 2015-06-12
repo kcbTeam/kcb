@@ -11,16 +11,24 @@ import android.util.Base64;
 
 public class BitmapUtil {
 
-    public static String bitmapToString(Bitmap bitmap) {
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
+    public static byte[] bitmapToByteArray(Bitmap bitmap) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
         try {
-            out.flush();
-            out.close();
+            baos.flush();
+            baos.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return new String(Base64.encode(out.toByteArray(), Base64.DEFAULT));
+        return baos.toByteArray();
+    }
+
+    public static Bitmap byteArrayToBitmap(byte[] bytes) {
+        if (bytes != null) {
+            return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+        } else {
+            return null;
+        }
     }
 
     public static Bitmap stringToBitmap(String text) {
