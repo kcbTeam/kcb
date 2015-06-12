@@ -1,11 +1,17 @@
 package com.kcb.common.model.test;
 
+import java.io.File;
 import java.io.Serializable;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.text.TextUtils;
+
 import com.kcb.common.util.BitmapUtil;
+import com.kcb.common.util.FileUtil;
 
 /**
  * 
@@ -24,10 +30,9 @@ public class QuestionItem implements Serializable {
     private String mText = "";
     private Bitmap mBitmap;
     private String mBitmapPath;
-    private byte[] mBitmapByteArray;
+    private String mBitmapString;
 
     private boolean mIsRight; // useful when item is choice
-
     private boolean mIsSelected; // used in stu module, useful when item is choice, true if stu
                                  // selected this choice
 
@@ -64,21 +69,22 @@ public class QuestionItem implements Serializable {
         mIsText = true;
         mText = text;
         mBitmap = null;
-        mBitmapByteArray = null;
+        new File(mBitmapPath).delete();
+        mBitmapPath = null;
     }
 
     public void setBitmap(Bitmap bitmap) {
         mIsText = false;
         mText = "";
         mBitmap = bitmap;
-        mBitmapByteArray = null;
+        mBitmapPath = null;
     }
 
     public Bitmap getBitmap() {
         if (null != mBitmap) {
             return mBitmap;
-        } else if (null != mBitmapByteArray) {
-            mBitmap = BitmapUtil.byteArrayToBitmap(mBitmapByteArray);
+        } else if (null != mBitmapPath) {
+            mBitmap = BitmapFactory.decodeFile(mBitmapPath);
             return mBitmap;
         } else {
             return null;
@@ -93,18 +99,14 @@ public class QuestionItem implements Serializable {
         return mBitmapPath;
     }
 
-    public byte[] getBitmapByteArray() {
-        mBitmapByteArray = null;
-        if (null != mBitmap) {
-            mBitmapByteArray = BitmapUtil.bitmapToByteArray(mBitmap);
-        }
-        return mBitmapByteArray;
-    }
-
     public String getBitmapString() {
-        byte[] bytes = getBitmapByteArray();
-        if (null != bytes) {
-            return new String(bytes);
+        if (null != getBitmap()) {
+            byte[] bytes = BitmapUtil.bitmapToByteArray(mBitmap);
+            if (null != bytes) {
+                return new String(bytes);
+            } else {
+                return "";
+            }
         } else {
             return "";
         }
@@ -133,10 +135,7 @@ public class QuestionItem implements Serializable {
                     return mText.equals(item.mText);
                 } else {
                     if (null != item.getBitmap()) {
-                        return getBitmap().equals(item.getBitmap()); // when use intent transport
-                                                                     // data , mBitmap must set as
-                                                                     // null,so use gtBitmap() is
-                                                                     // safer. mBitmap maybe =null
+                        return getBitmap().equals(item.getBitmap());
                     }
                 }
             }
@@ -149,7 +148,6 @@ public class QuestionItem implements Serializable {
     }
 
     public void release() {
-        mBitmapByteArray = null;
         if (null != mBitmap) {
             mBitmap.recycle();
             mBitmap = null;
@@ -184,9 +182,21 @@ public class QuestionItem implements Serializable {
         item.mId = jsonObject.optInt(KEY_ID);
         item.mIsText = jsonObject.optBoolean(KEY_ISTEXT);
         item.mText = jsonObject.optString(KEY_TEXT);
-        item.mBitmapByteArray = jsonObject.optString(KEY_BITMAPSTRING).getBytes();
+        item.mBitmapString = jsonObject.optString(KEY_BITMAPSTRING);
         item.mIsRight = jsonObject.optBoolean(KEY_ISRIGHT);
         item.mIsSelected = jsonObject.optBoolean(KEY_ISSELECTED);
         return item;
+    }
+
+    public void saveBitmap(String testName, int questionIndex, int itemIndex) {
+        String path = FileUtil.getQuestionItemPath(testName, questionIndex, itemIndex);
+        Bitmap bitmap = BitmapUtil.stringToBitmap(mBitmapString);
+        FileUtil.saveBitmap(path, bitmap);
+    }
+
+    public void deleteBitmap() {
+        if (null != mBitmapPath) {
+            new File(mBitmapPath).delete();
+        }
     }
 }

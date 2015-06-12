@@ -149,6 +149,8 @@ public class SetTestTimeActivity extends BaseActivity {
                 ToastUtil.toast(R.string.tch_saved);
             } else if (resultCode == EditQuestionActivty.RESULT_DELETE) {
                 int index = data.getIntExtra(EditQuestionActivty.DATA_INDEX, 0);
+                mAdapter.getItem(index).deleteBitmap();
+                //TODO rename bitmap
                 mAdapter.deleteItem(index);
                 if (mAdapter.getCount() == 0) { // delete all question
                     deleteTestFromDatabase();
@@ -168,6 +170,7 @@ public class SetTestTimeActivity extends BaseActivity {
 
             @Override
             public void onClick(View v) {
+                sTest.deleteBitmap();
                 ToastUtil.toast(R.string.tch_deleted);
                 deleteTestFromDatabase();
                 finish();

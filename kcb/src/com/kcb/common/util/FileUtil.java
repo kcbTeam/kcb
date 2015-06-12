@@ -1,7 +1,11 @@
 package com.kcb.common.util;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
+import android.graphics.Bitmap;
+import android.graphics.Bitmap.CompressFormat;
 import android.os.Environment;
 
 public class FileUtil {
@@ -23,12 +27,10 @@ public class FileUtil {
         if (!folder.exists()) {
             folder.mkdirs();
         }
-
         File tempFolder = new File(PATH_KCB_FOLDER, NAME_TEMP_FOLDER);
         if (!tempFolder.exists()) {
             tempFolder.mkdirs();
         }
-
         File testFolder = new File(PATH_KCB_FOLDER, NAME_TEST_FOLDER);
         if (!testFolder.exists()) {
             tempFolder.mkdirs();
@@ -36,26 +38,32 @@ public class FileUtil {
     }
 
     public static String getTakePhotoPath() {
-        LogUtil.e("wanghang", PATH_TEMP + "/takephoto.png");
-
         return PATH_TEMP + "/takephoto.png";
     }
 
     public static String getCropPhotoPath() {
-        LogUtil.e("wanghang", PATH_TEMP + "/cropphoto.png");
-
         return PATH_TEMP + "/cropphoto.png";
     }
 
-    public static String getQuestionItemPath(String testName, int questionIndex, int itemIndex) {
+    public static String getTestPath(String testName) {
         File file = new File(PATH_TEST, testName);
         if (!file.exists()) {
             file.mkdirs();
         }
+        return file.getAbsolutePath();
+    }
 
-        LogUtil.e("wanghang", file.getAbsolutePath() + "/" + questionIndex + "_" + itemIndex
-                + ".png");
+    public static String getQuestionItemPath(String testName, int questionIndex, int itemIndex) {
+        return getTestPath(testName) + "/" + questionIndex + "_" + itemIndex + ".png";
+    }
 
-        return file.getAbsolutePath() + "/" + questionIndex + "_" + itemIndex + ".png";
+    public static void saveBitmap(String path, Bitmap bitmap) {
+        File file = new File(path);
+        try {
+            FileOutputStream outputStream = new FileOutputStream(file);
+            bitmap.compress(CompressFormat.PNG, 100, outputStream);
+            outputStream.flush();
+            outputStream.close();
+        } catch (IOException e) {}
     }
 }

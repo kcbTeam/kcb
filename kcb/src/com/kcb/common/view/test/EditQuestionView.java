@@ -1,15 +1,17 @@
 package com.kcb.common.view.test;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.provider.MediaStore.Images.Media;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -309,42 +311,54 @@ public class EditQuestionView extends LinearLayout implements OnClickListener, O
             }
         } else if (requestCode == CropPictureActivity.REQUEST_CROPPHOTO) {
             if (resultCode == Activity.RESULT_OK) {
-                
-                
-                String path = data.getStringExtra(CropPictureActivity.DATA_PATH);
-                String newPath = FileUtil.getQuestionItemPath(mTestName, mIndex + 1, mLongClickTag);
-                new File(path).renameTo(new File(newPath));
-                Bitmap bitmap = BitmapFactory.decodeFile(newPath);
+                try {
+                    Uri uri = (Uri) data.getParcelableExtra(CropPictureActivity.DATA_PATH);
+                    final Bitmap bitmap = Media.getBitmap(mContext.getContentResolver(), uri);
+                    final String bitmapPath =
+                            FileUtil.getQuestionItemPath(mTestName, mIndex + 1, mLongClickTag);
+                    new Thread(new Runnable() {
 
-                switch (mLongClickTag) {
-                    case FLAG_TITLE:
-                        setEditMode(FLAG_TITLE, EDIT_MODE_BITMAP);
-                        titleEditText.setBackgroundDrawable(new BitmapDrawable(bitmap));
-                        mQuestion.getTitle().setBitmap(bitmap);
-                        break;
-                    case FLAG_A:
-                        setEditMode(FLAG_A, EDIT_MODE_BITMAP);
-                        aEditText.setBackgroundDrawable(new BitmapDrawable(bitmap));
-                        mQuestion.getChoiceA().setBitmap(bitmap);
-                        break;
-                    case FALG_B:
-                        setEditMode(FALG_B, EDIT_MODE_BITMAP);
-                        bEditText.setBackgroundDrawable(new BitmapDrawable(bitmap));
-                        mQuestion.getChoiceB().setBitmap(bitmap);
-                        break;
-                    case FLAG_C:
-                        setEditMode(FLAG_C, EDIT_MODE_BITMAP);
-                        cEditText.setBackgroundDrawable(new BitmapDrawable(bitmap));
-                        mQuestion.getChoiceC().setBitmap(bitmap);
-                        break;
-                    case FLAG_D:
-                        setEditMode(FLAG_D, EDIT_MODE_BITMAP);
-                        dEditText.setBackgroundDrawable(new BitmapDrawable(bitmap));
-                        mQuestion.getChoiceD().setBitmap(bitmap);
-                        break;
-                    default:
-                        break;
-                }
+                        @Override
+                        public void run() {
+                            FileUtil.saveBitmap(bitmapPath, bitmap);
+                        }
+                    }).start();
+
+                    switch (mLongClickTag) {
+                        case FLAG_TITLE:
+                            setEditMode(FLAG_TITLE, EDIT_MODE_BITMAP);
+                            titleEditText.setBackgroundDrawable(new BitmapDrawable(bitmap));
+                            mQuestion.getTitle().setBitmap(bitmap);
+                            mQuestion.getTitle().setBitmapPath(bitmapPath);
+                            break;
+                        case FLAG_A:
+                            setEditMode(FLAG_A, EDIT_MODE_BITMAP);
+                            aEditText.setBackgroundDrawable(new BitmapDrawable(bitmap));
+                            mQuestion.getChoiceA().setBitmap(bitmap);
+                            mQuestion.getChoiceA().setBitmapPath(bitmapPath);
+                            break;
+                        case FALG_B:
+                            setEditMode(FALG_B, EDIT_MODE_BITMAP);
+                            bEditText.setBackgroundDrawable(new BitmapDrawable(bitmap));
+                            mQuestion.getChoiceB().setBitmap(bitmap);
+                            mQuestion.getChoiceB().setBitmapPath(bitmapPath);
+                            break;
+                        case FLAG_C:
+                            setEditMode(FLAG_C, EDIT_MODE_BITMAP);
+                            cEditText.setBackgroundDrawable(new BitmapDrawable(bitmap));
+                            mQuestion.getChoiceC().setBitmap(bitmap);
+                            mQuestion.getChoiceC().setBitmapPath(bitmapPath);
+                            break;
+                        case FLAG_D:
+                            setEditMode(FLAG_D, EDIT_MODE_BITMAP);
+                            dEditText.setBackgroundDrawable(new BitmapDrawable(bitmap));
+                            mQuestion.getChoiceD().setBitmap(bitmap);
+                            mQuestion.getChoiceD().setBitmapPath(bitmapPath);
+                            break;
+                        default:
+                            break;
+                    }
+                } catch (FileNotFoundException e) {} catch (IOException e) {}
             }
         }
     }

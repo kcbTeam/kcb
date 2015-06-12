@@ -1,5 +1,6 @@
 package com.kcb.common.model.test;
 
+import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -11,6 +12,7 @@ import org.json.JSONObject;
 
 import com.kcb.common.model.answer.QuestionAnswer;
 import com.kcb.common.model.answer.TestAnswer;
+import com.kcb.common.util.FileUtil;
 
 public class Test implements Serializable {
 
@@ -88,6 +90,7 @@ public class Test implements Serializable {
     }
 
     public void deleteQuestion(int index) {
+        mQuestions.get(index).deleteBitmap();
         mQuestions.remove(index);
     }
 
@@ -193,5 +196,21 @@ public class Test implements Serializable {
             } catch (JSONException e) {}
         }
         return test;
+    }
+
+    /**
+     * 学生答题，从网络上获取到题目后，需要将题目中的图片String转成Bitmap保存到本地
+     */
+    public void saveBitmap() {
+        for (int i = 0; i < mQuestions.size(); i++) {
+            mQuestions.get(i).saveBitmap(mName, i);
+        }
+    }
+
+    /**
+     * 删除一个测试的时候，要把此与此测试相关的图片删除
+     */
+    public void deleteBitmap() {
+        new File(FileUtil.getTestPath(mName)).delete();
     }
 }

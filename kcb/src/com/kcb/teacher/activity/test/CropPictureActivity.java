@@ -1,22 +1,20 @@
 package com.kcb.teacher.activity.test;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Bitmap.CompressFormat;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 
 import com.edmodo.cropper.CropImageView;
 import com.kcb.common.base.BaseActivity;
-import com.kcb.common.util.FileUtil;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcbTeam.R;
 
@@ -96,16 +94,21 @@ public class CropPictureActivity extends BaseActivity {
                 break;
             case R.id.button_finish:
                 mCropBitmap = cropImageView.getCroppedImage();
-                File file = new File(FileUtil.getCropPhotoPath());
-                try {
-                    FileOutputStream outputStream = new FileOutputStream(file);
-                    mCropBitmap.compress(CompressFormat.PNG, 100, outputStream);
-                    outputStream.flush();
-                    outputStream.close();
-                } catch (IOException e) {}
+
+                Uri uri =
+                        Uri.parse(MediaStore.Images.Media.insertImage(getContentResolver(),
+                                mCropBitmap, null, null));
+
+                // File file = new File(FileUtil.getCropPhotoPath());
+                // try {
+                // FileOutputStream outputStream = new FileOutputStream(file);
+                // mCropBitmap.compress(CompressFormat.PNG, 100, outputStream);
+                // outputStream.flush();
+                // outputStream.close();
+                // } catch (IOException e) {}
 
                 Intent intent = new Intent();
-                intent.putExtra(DATA_PATH, file.getAbsolutePath());
+                intent.putExtra(DATA_PATH, uri);
                 setResult(RESULT_OK, intent);
                 finish();
                 break;
