@@ -31,6 +31,7 @@ import com.kcb.common.server.UrlUtil;
 import com.kcb.common.util.DialogUtil;
 import com.kcb.common.util.ToastUtil;
 import com.kcb.common.view.dialog.MaterialDialog;
+import com.kcb.common.view.test.AnswerQuestionView;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.library.view.checkbox.CheckBox;
 import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
@@ -53,33 +54,15 @@ public class StartTestActivity extends BaseActivity {
     private TextView timeTextView;
     private SmoothProgressBar progressBar;
 
-    private TextView questionIndexTextView;
-
-    private TextView titleTextView;
-    private TextView choiceATextView;
-    private TextView choiceBTextView;
-    private TextView choiceCTextView;
-    private TextView choiceDTextView;
-
-    private CheckBox checkBoxA;
-    private CheckBox checkBoxB;
-    private CheckBox checkBoxC;
-    private CheckBox checkBoxD;
+    private AnswerQuestionView answerQuestionView;
 
     private ButtonFlat lastButton;
     private ButtonFlat nextButton;
     private ButtonFlat submitButton;
 
-    // tag title/A/B/C/D;
-    private final int FLAG_TITLE = 1;
-    private final int FLAG_A = 2;
-    private final int FALG_B = 3;
-    private final int FLAG_C = 4;
-    private final int FLAG_D = 5;
-
     // test and current question index;
     public static Test sTest;
-    private int mCurrentQuestionIndex;
+    private int mQuestionIndex;
 
     // when click last/next, show a mTempQuestion, used for compare it is changed or not;
     private Question mTempQuestion;
@@ -105,13 +88,7 @@ public class StartTestActivity extends BaseActivity {
         timeTextView = (TextView) findViewById(R.id.textview_time);
         progressBar = (SmoothProgressBar) findViewById(R.id.progressbar_refresh);
 
-        questionIndexTextView = (TextView) findViewById(R.id.textview_question_num);
-
-        titleTextView = (TextView) findViewById(R.id.textview_question_title);
-        choiceATextView = (TextView) findViewById(R.id.textview_A);
-        choiceBTextView = (TextView) findViewById(R.id.textview_B);
-        choiceCTextView = (TextView) findViewById(R.id.textview_C);
-        choiceDTextView = (TextView) findViewById(R.id.textview_D);
+        answerQuestionView = (AnswerQuestionView) findViewById(R.id.answerquestionview);
 
         lastButton = (ButtonFlat) findViewById(R.id.button_last);
         lastButton.setOnClickListener(this);
@@ -120,20 +97,16 @@ public class StartTestActivity extends BaseActivity {
         submitButton = (ButtonFlat) findViewById(R.id.button_submit);
         submitButton.setOnClickListener(this);
         submitButton.setTextColor(getResources().getColor(R.color.blue));
-
-        checkBoxA = (CheckBox) findViewById(R.id.checkBox_A);
-        checkBoxB = (CheckBox) findViewById(R.id.checkBox_B);
-        checkBoxC = (CheckBox) findViewById(R.id.checkBox_C);
-        checkBoxD = (CheckBox) findViewById(R.id.checkBox_D);
     }
 
     @Override
     protected void initData() {
         testNameNumTextView.setText(String.format(getString(R.string.stu_test_name_num),
                 sTest.getName(), sTest.getQuestionNum()));
-        showQuestion();
 
         mTestAnswer = new TestAnswer(sTest);
+
+        showQuestion();
 
         mRemainTime = getIntent().getIntExtra(DATA_REMAIN_TIME, 0);
         mHandler = new Handler(getMainLooper()) {
@@ -167,6 +140,11 @@ public class StartTestActivity extends BaseActivity {
         }
     }
 
+    private void showQuestion() {
+        answerQuestionView.showQuestion(getCurrentQuestion(), mQuestionIndex);
+        mTempQuestion = Question.clone(getCurrentQuestion());
+    }
+
     private void showRemainTime() {
         timeTextView.setText(String.format(getString(R.string.stu_remain_time), mRemainTime / 60,
                 mRemainTime % 60));
@@ -187,93 +165,31 @@ public class StartTestActivity extends BaseActivity {
     }
 
     private Question getCurrentQuestion() {
-        return sTest.getQuestion(mCurrentQuestionIndex);
-    }
-
-    private void showQuestion() {
-        questionIndexTextView.setText(String.format(getString(R.string.stu_question_index),
-                mCurrentQuestionIndex + 1));
-
-        Question question = getCurrentQuestion();
-        mTempQuestion = Question.clone(question);
-
-        showQuestionItem(FLAG_TITLE, question.getTitle());
-        showQuestionItem(FLAG_A, question.getChoiceA());
-        showQuestionItem(FALG_B, question.getChoiceB());
-        showQuestionItem(FLAG_C, question.getChoiceC());
-        showQuestionItem(FLAG_D, question.getChoiceD());
-
-        checkBoxA.setChecked(question.getChoiceA().isSelected());
-        checkBoxB.setChecked(question.getChoiceB().isSelected());
-        checkBoxC.setChecked(question.getChoiceC().isSelected());
-        checkBoxD.setChecked(question.getChoiceD().isSelected());
-    }
-
-    @SuppressWarnings("deprecation")
-    private void showQuestionItem(int flag, QuestionItem item) {
-        TextView textView = getTextViewByTag(flag);
-        if (item.isText()) {
-            textView.setText(item.getText());
-        } else {
-            Bitmap bitmap = item.getBitmap();
-            if (null != bitmap) {
-                textView.setBackgroundDrawable(new BitmapDrawable(bitmap));
-            }
-        }
-    }
-
-    private TextView getTextViewByTag(int flag) {
-        TextView textView = null;
-        switch (flag) {
-            case FLAG_TITLE:
-                textView = titleTextView;
-                break;
-            case FLAG_A:
-                textView = choiceATextView;
-                break;
-            case FALG_B:
-                textView = choiceBTextView;
-                break;
-            case FLAG_C:
-                textView = choiceCTextView;
-                break;
-            case FLAG_D:
-                textView = choiceDTextView;
-                break;
-            default:
-                break;
-        }
-        return textView;
-    }
-
-    private void saveAnswer() {
-        QuestionItem aItem = getCurrentQuestion().getChoiceA();
-        QuestionItem bItem = getCurrentQuestion().getChoiceB();
-        QuestionItem cItem = getCurrentQuestion().getChoiceC();
-        QuestionItem dItem = getCurrentQuestion().getChoiceD();
-        aItem.setIsSelected(checkBoxA.isCheck());
-        bItem.setIsSelected(checkBoxB.isCheck());
-        cItem.setIsSelected(checkBoxC.isCheck());
-        dItem.setIsSelected(checkBoxD.isCheck());
-        if (!getCurrentQuestion().equal(mTempQuestion)) {
-            mTestAnswer.saveQuestionAnswer(getCurrentQuestion());
-            ToastUtil.toast(String.format(getResources().getString(R.string.stu_question_save),
-                    mCurrentQuestionIndex + 1));
-        }
+        return sTest.getQuestion(mQuestionIndex);
     }
 
     private void lastQuestion() {
-        if (mCurrentQuestionIndex > 0) {
-            saveAnswer();
-            mCurrentQuestionIndex--;
+        if (mQuestionIndex > 0) {
+            answerQuestionView.saveAnswer();
+            if (!getCurrentQuestion().equal(mTempQuestion)) {
+                mTestAnswer.saveQuestionAnswer(getCurrentQuestion());
+                ToastUtil.toast(String.format(getResources().getString(R.string.stu_question_save),
+                        mQuestionIndex + 1));
+            }
+            mQuestionIndex--;
             showQuestion();
         }
     }
 
     private void nextQuesion() {
-        if (mCurrentQuestionIndex < sTest.getQuestionNum() - 1) {
-            saveAnswer();
-            mCurrentQuestionIndex++;
+        if (mQuestionIndex < sTest.getQuestionNum() - 1) {
+            answerQuestionView.saveAnswer();
+            if (!getCurrentQuestion().equal(mTempQuestion)) {
+                mTestAnswer.saveQuestionAnswer(getCurrentQuestion());
+                ToastUtil.toast(String.format(getResources().getString(R.string.stu_question_save),
+                        mQuestionIndex + 1));
+            }
+            mQuestionIndex++;
             showQuestion();
         }
     }

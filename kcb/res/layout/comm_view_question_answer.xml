@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/textview_question_num"
+        style="@style/common_tip"
+        android:layout_marginTop="8dp" />
+
+    <TextView
+        android:id="@+id/textview_question_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:lineSpacingExtra="2dp"
+        android:padding="4dp"
+        android:textColor="@color/black_700"
+        android:textSize="@dimen/text_size_medium" />
+
+    <View
+        android:id="@+id/view_divider0"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@color/black_divider" />
+
+    <TextView
+        android:id="@+id/input_options_hint"
+        style="@style/common_tip"
+        android:text="@string/stu_select_choice" />
+
+    <ScrollView
+        android:id="@+id/scroll_choices"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <LinearLayout
+                android:id="@+id/layout_A"
+                style="@style/tch_test_settime_choice_layout"
+                android:layout_marginBottom="2dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="2dp" >
+
+                <TextView
+                    android:id="@+id/textview_tipa"
+                    style="@style/tch_test_settime_choice_tip"
+                    android:text="@string/stu_choice_A" />
+
+                <TextView
+                    android:id="@+id/textview_A"
+                    style="@style/tch_test_settime_choice" />
+
+                <com.kcb.library.view.checkbox.CheckBox
+                    android:id="@+id/checkBox_A"
+                    style="@style/stu_test_checkbox"
+                    android:layout_margin="4dp" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/view_divider1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/layout_A"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="@color/black_divider" />
+
+            <LinearLayout
+                android:id="@+id/layout_B"
+                style="@style/tch_test_settime_choice_layout"
+                android:layout_below="@id/view_divider1"
+                android:layout_marginBottom="2dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="2dp" >
+
+                <TextView
+                    android:id="@+id/textview_tipb"
+                    style="@style/tch_test_settime_choice_tip"
+                    android:text="@string/stu_choice_B" />
+
+                <TextView
+                    android:id="@+id/textview_B"
+                    style="@style/tch_test_settime_choice" />
+
+                <com.kcb.library.view.checkbox.CheckBox
+                    android:id="@+id/checkBox_B"
+                    style="@style/stu_test_checkbox"
+                    android:layout_margin="4dp" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/view_divider2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/layout_B"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="@color/black_divider" />
+
+            <LinearLayout
+                android:id="@+id/layout_C"
+                style="@style/tch_test_settime_choice_layout"
+                android:layout_below="@id/view_divider2"
+                android:layout_marginBottom="2dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="2dp" >
+
+                <TextView
+                    android:id="@+id/textview_tipc"
+                    style="@style/tch_test_settime_choice_tip"
+                    android:text="@string/stu_choice_C" />
+
+                <TextView
+                    android:id="@+id/textview_C"
+                    style="@style/tch_test_settime_choice" />
+
+                <com.kcb.library.view.checkbox.CheckBox
+                    android:id="@+id/checkBox_C"
+                    style="@style/stu_test_checkbox"
+                    android:layout_margin="4dp" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/view_divider3"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/layout_C"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:background="@color/black_divider" />
+
+            <LinearLayout
+                android:id="@+id/layout_D"
+                style="@style/tch_test_settime_choice_layout"
+                android:layout_below="@id/view_divider3"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="2dp" >
+
+                <TextView
+                    android:id="@+id/textview_tipd"
+                    style="@style/tch_test_settime_choice_tip"
+                    android:text="@string/stu_choice_D" />
+
+                <TextView
+                    android:id="@+id/textview_D"
+                    style="@style/tch_test_settime_choice" />
+
+                <com.kcb.library.view.checkbox.CheckBox
+                    android:id="@+id/checkBox_D"
+                    style="@style/stu_test_checkbox"
+                    android:layout_margin="4dp" />
+            </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>
+
+</LinearLayout>

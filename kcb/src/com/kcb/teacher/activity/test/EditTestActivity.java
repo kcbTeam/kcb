@@ -13,7 +13,7 @@ import com.kcb.common.model.test.Question;
 import com.kcb.common.model.test.Test;
 import com.kcb.common.util.DialogUtil;
 import com.kcb.common.util.ToastUtil;
-import com.kcb.common.view.test.QuestionEditView;
+import com.kcb.common.view.test.EditQuestionView;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcbTeam.R;
 
@@ -29,7 +29,7 @@ public class EditTestActivity extends BaseActivity {
     private TextView testNameNumTextView;
     private ButtonFlat cancelButton;
 
-    private QuestionEditView questionEditView;
+    private EditQuestionView questionEditView;
 
     private ButtonFlat lastButton;
     private ButtonFlat nextButton;
@@ -59,7 +59,7 @@ public class EditTestActivity extends BaseActivity {
         cancelButton = (ButtonFlat) findViewById(R.id.button_cancel);
         cancelButton.setOnClickListener(this);
 
-        questionEditView = (QuestionEditView) findViewById(R.id.questioneditview);
+        questionEditView = (EditQuestionView) findViewById(R.id.questioneditview);
 
         lastButton = (ButtonFlat) findViewById(R.id.button_last);
         lastButton.setOnClickListener(this);

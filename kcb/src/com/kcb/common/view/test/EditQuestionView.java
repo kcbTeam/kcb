@@ -29,19 +29,19 @@ import com.kcb.library.view.checkbox.CheckBox;
 import com.kcb.teacher.activity.test.CropPictureActivity;
 import com.kcbTeam.R;
 
-public class QuestionEditView extends LinearLayout implements OnClickListener, OnLongClickListener {
+public class EditQuestionView extends LinearLayout implements OnClickListener, OnLongClickListener {
 
-    public QuestionEditView(Context context) {
+    public EditQuestionView(Context context) {
         super(context);
         init(context);
     }
 
-    public QuestionEditView(Context context, AttributeSet attrs) {
+    public EditQuestionView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context);
     }
 
-    public QuestionEditView(Context context, AttributeSet attrs, int defStyle) {
+    public EditQuestionView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         init(context);
     }
