@@ -1,7 +1,9 @@
 package com.kcb.teacher.adapter.test;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.os.AsyncTask;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -132,7 +134,8 @@ public class SetTestTimeAdapter extends BaseAdapter {
             view.setBackgroundResource(0);
         } else {
             view.setText("");
-            view.setBackgroundDrawable(new BitmapDrawable(item.getBitmap()));
+            new LoadBitmapAsyncTask(view).execute(item);
+            // view.setBackgroundDrawable(new BitmapDrawable(item.getBitmap()));
         }
         if (null != checkIcon) {
             if (item.isRight()) {
@@ -140,6 +143,26 @@ public class SetTestTimeAdapter extends BaseAdapter {
             } else {
                 checkIcon.setBackgroundResource(R.drawable.ic_check_box_outline_blank_grey600_18dp);
             }
+        }
+    }
+
+    private class LoadBitmapAsyncTask extends AsyncTask<QuestionItem, Integer, Bitmap> {
+
+        private TextView textView;
+
+        public LoadBitmapAsyncTask(TextView _textview) {
+            textView = _textview;
+        }
+
+        @Override
+        protected Bitmap doInBackground(QuestionItem... params) {
+            Bitmap bitmap = params[0].getBitmap();
+            return bitmap;
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap result) {
+            textView.setBackgroundDrawable(new BitmapDrawable(result));
         }
     }
 }

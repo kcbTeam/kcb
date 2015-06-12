@@ -6,6 +6,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.util.AttributeSet;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import com.kcb.common.model.test.Question;
 import com.kcb.common.model.test.QuestionItem;
 import com.kcb.library.view.checkbox.CheckBox;

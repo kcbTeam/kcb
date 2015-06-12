@@ -5,9 +5,7 @@ import java.util.List;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -27,7 +25,6 @@ import com.kcb.common.server.RequestUtil;
 import com.kcb.common.server.ResponseUtil;
 import com.kcb.common.server.UrlUtil;
 import com.kcb.common.util.DialogUtil;
-import com.kcb.common.util.LogUtil;
 import com.kcb.common.util.ToastUtil;
 import com.kcb.common.view.dialog.MaterialListDialog;
 import com.kcb.common.view.dialog.MaterialListDialog.OnClickSureListener;
@@ -94,9 +91,7 @@ public class TestFragment extends BaseFragment {
         public void doClick(View v) {
             switch (v.getId()) {
                 case R.id.button_start:
-                    Intent intent2 = new Intent(getActivity(), SetTestNameActivity.class);
-                    startActivity(intent2);
-                    // startTest();
+                    startTest();
                     break;
                 case R.id.button_edit:
                     addOrEditTest();
@@ -147,7 +142,7 @@ public class TestFragment extends BaseFragment {
                 try {
                     requestObject.put(KEY_ID, KAccount.getAccountId());
                     test.setQuestionId();
-                    requestObject.put(KEY_TEST, test.toJsonObject());
+                    requestObject.put(KEY_TEST, test.toJsonObject(true));
                 } catch (JSONException e) {}
                 JsonObjectRequest request =
                         new JsonObjectRequest(Method.POST, UrlUtil.getTchTestStartUrl(),
@@ -191,38 +186,15 @@ public class TestFragment extends BaseFragment {
 
                             @Override
                             public void onClick(View view, int position) {
-                                if (position == 0) { // add new test
-                                    // Intent intent =
-                                    // new Intent(getActivity(), SetTestNameActivity.class);
-                                    // startActivity(intent);
-
-                                    SharedPreferences sPreferences =
-                                            getActivity().getSharedPreferences("test",
-                                                    Context.MODE_PRIVATE);
-                                    // try {
-                                    ToastUtil.toast(sPreferences.getString("testcontent", ""));
-
-                                    // Test test =
-                                    // Test.fromJsonObject(new JSONObject(sPreferences
-                                    // .getString("testcontent", "")));
-                                    // SetTestTimeActivity.startFromEditTest(getActivity(), test);
-                                    // } catch (JSONException e) {
-                                    // LogUtil.e("wanghang", e.getMessage());
-                                    // }
-
-                                } else {
-                                    // TestDao testDao = new TestDao(getActivity());
-                                    // Test test = testDao.getByName(names.get(position));
-                                    // testDao.close();
-                                    SharedPreferences sPreferences =
-                                            getActivity().getSharedPreferences("test",
-                                                    Context.MODE_PRIVATE);
-                                    try {
-                                        Test test =
-                                                Test.fromJsonObject(new JSONObject(sPreferences
-                                                        .getString("testcontent", "")));
-                                        SetTestTimeActivity.startFromEditTest(getActivity(), test);
-                                    } catch (JSONException e) {}
+                                if (position == 0) { // 添加新测试
+                                    Intent intent =
+                                            new Intent(getActivity(), SetTestNameActivity.class);
+                                    startActivity(intent);
+                                } else { // 编辑已有的测试
+                                    TestDao testDao = new TestDao(getActivity());
+                                    Test test = testDao.getByName(names.get(position));
+                                    testDao.close();
+                                    SetTestTimeActivity.startFromEditTest(getActivity(), test);
                                 }
                             }
                         }, R.string.tch_comm_cancel, null);

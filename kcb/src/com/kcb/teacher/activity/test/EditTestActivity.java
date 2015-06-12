@@ -225,6 +225,7 @@ public class EditTestActivity extends BaseActivity {
 
             @Override
             public void onClick(View v) {
+                sTest.deleteBitmap();
                 release();
                 finish();
             }

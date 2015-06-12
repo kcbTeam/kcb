@@ -87,7 +87,7 @@
         android:scrollbars="none" >
     </ListView>
 
-com.kcb.common.view.comm.EmptyTipViewpView
+    <com.kcb.common.view.common.EmptyTipView
         android:id="@+id/emptytipview"
         style="@style/common_empty_tip_view" />
 

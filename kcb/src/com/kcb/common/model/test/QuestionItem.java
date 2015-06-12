@@ -69,7 +69,9 @@ public class QuestionItem implements Serializable {
         mIsText = true;
         mText = text;
         mBitmap = null;
-        new File(mBitmapPath).delete();
+        if (!TextUtils.isEmpty(mBitmapPath)) {
+            new File(mBitmapPath).delete();
+        }
         mBitmapPath = null;
     }
 
@@ -161,16 +163,23 @@ public class QuestionItem implements Serializable {
     public static final String KEY_ISTEXT = "istext";
     public static final String KEY_TEXT = "text";
     public static final String KEY_BITMAPSTRING = "bitmapstring";
+    public static final String KEY_BITMAPPATH = "bitmappath";
     public static final String KEY_ISRIGHT = "isright";
     public static final String KEY_ISSELECTED = "isselected";
 
-    public JSONObject toJsonObject() {
+    /**
+     * 发送到服务器的JsonObject包括的是图片String，保存到数据库的JsonObject包括的是图片的路径。
+     */
+    public JSONObject toJsonObject(boolean toServer) {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put(KEY_ID, mId);
             jsonObject.put(KEY_ISTEXT, mIsText);
             jsonObject.put(KEY_TEXT, mText);
-            jsonObject.put(KEY_BITMAPSTRING, getBitmapString());
+            if (toServer) {
+                jsonObject.put(KEY_BITMAPSTRING, getBitmapString());
+            }
+            jsonObject.put(KEY_BITMAPPATH, mBitmapPath);
             jsonObject.put(KEY_ISRIGHT, mIsRight);
             jsonObject.put(KEY_ISSELECTED, mIsSelected);
         } catch (JSONException e) {}
@@ -183,13 +192,14 @@ public class QuestionItem implements Serializable {
         item.mIsText = jsonObject.optBoolean(KEY_ISTEXT);
         item.mText = jsonObject.optString(KEY_TEXT);
         item.mBitmapString = jsonObject.optString(KEY_BITMAPSTRING);
+        item.mBitmapPath = jsonObject.optString(KEY_BITMAPPATH);
         item.mIsRight = jsonObject.optBoolean(KEY_ISRIGHT);
         item.mIsSelected = jsonObject.optBoolean(KEY_ISSELECTED);
         return item;
     }
 
     public void saveBitmap(String testName, int questionIndex, int itemIndex) {
-        String path = FileUtil.getQuestionItemPath(testName, questionIndex, itemIndex);
+        String path = FileUtil.getQuestionItemPath(testName, questionIndex + 1, itemIndex);
         Bitmap bitmap = BitmapUtil.stringToBitmap(mBitmapString);
         FileUtil.saveBitmap(path, bitmap);
     }
@@ -197,6 +207,15 @@ public class QuestionItem implements Serializable {
     public void deleteBitmap() {
         if (null != mBitmapPath) {
             new File(mBitmapPath).delete();
+        }
+    }
+
+    public void renameBitmap(String testName, int questionIndex, int itemIndex) {
+        if (!TextUtils.isEmpty(mBitmapPath)) {
+            File file = new File(mBitmapPath);
+            String newPath = FileUtil.getQuestionItemPath(testName, questionIndex + 1, itemIndex);
+            file.renameTo(new File(newPath));
+            mBitmapPath = newPath;
         }
     }
 }

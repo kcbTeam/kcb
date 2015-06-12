@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
+
 import com.kcb.common.base.BaseActivity;
 import com.kcb.common.model.test.Question;
 import com.kcb.common.util.DialogUtil;
@@ -131,7 +132,7 @@ public class EditQuestionActivty extends BaseActivity {
         Intent intent = new Intent(context, EditQuestionActivty.class);
         intent.setAction(ACTION_EDIT_QUESTION);
         intent.putExtra(DATA_INDEX, index);
-        intent.putExtra(DATA_INDEX, testName);
+        intent.putExtra(DATA_TESTNAME, testName);
         ((Activity) context).startActivityForResult(intent, REQUEST_EDIT);
         sQuestion = question;
     }

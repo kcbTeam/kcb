@@ -20,5 +20,5 @@ public class TestTable {
 
     public final static String CREATE_TABLE = "create table if not exists " + TABLE_NAME + "("
             + COLUMN_ID + " text," + COLUMN_NAME + " text," + COLUMN_TIME + " integer,"
-            + COLUMN_DATE + " long," + COLUMN_HASTESTED + " boolean," + COLUMN_ROW_DATA + " BLOB)";
+            + COLUMN_DATE + " long," + COLUMN_HASTESTED + " boolean," + COLUMN_ROW_DATA + " text)";
 }

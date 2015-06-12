@@ -140,7 +140,7 @@ public class Test implements Serializable {
     }
 
     public String toString() {
-        return toJsonObject().toString();
+        return toJsonObject(false).toString();
     }
 
     public void release() {
@@ -160,7 +160,10 @@ public class Test implements Serializable {
     private static final String KEY_HASTESTED = "hastested";
     private static final String KEY_QUESTION = "question";
 
-    public JSONObject toJsonObject() {
+    /**
+     * 发送到服务器的JsonObject包括的是图片String，保存到数据库的JsonObject包括的是图片的路径。
+     */
+    public JSONObject toJsonObject(boolean toServer) {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put(KEY_ID, mId);
@@ -172,7 +175,7 @@ public class Test implements Serializable {
             JSONArray questionArray = new JSONArray();
             for (int i = 0; i < mQuestions.size(); i++) {
                 mQuestions.get(i).setId(i);
-                questionArray.put(mQuestions.get(i).toJsonObject());
+                questionArray.put(mQuestions.get(i).toJsonObject(toServer));
             }
 
             jsonObject.put(KEY_QUESTION, questionArray);
@@ -211,6 +214,18 @@ public class Test implements Serializable {
      * 删除一个测试的时候，要把此与此测试相关的图片删除
      */
     public void deleteBitmap() {
+        for (int i = 0; i < mQuestions.size(); i++) {
+            mQuestions.get(i).deleteBitmap();
+        }
         new File(FileUtil.getTestPath(mName)).delete();
+    }
+
+    /**
+     * 当删除一个测试中的一个题目的时候，需要重新命名图片的名称
+     */
+    public void renameBitmap() {
+        for (int i = 0; i < mQuestions.size(); i++) {
+            mQuestions.get(i).renameBitmap(mName, i);
+        }
     }
 }

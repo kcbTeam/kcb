@@ -125,17 +125,20 @@ public class Question implements Serializable {
     public static final String KEY_CHOICE = "choice";
     public static final String KEY_RATE = "rate";
 
-    public JSONObject toJsonObject() {
+    /**
+     * 发送到服务器的JsonObject包括的是图片String，保存到数据库的JsonObject包括的是图片的路径。
+     */
+    public JSONObject toJsonObject(boolean toServer) {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put(KEY_ID, mId);
-            jsonObject.put(KEY_TITLE, mTitleItem.toJsonObject());
+            jsonObject.put(KEY_TITLE, mTitleItem.toJsonObject(toServer));
 
             JSONArray choiceArray = new JSONArray();
-            choiceArray.put(mChoiceAItem.toJsonObject());
-            choiceArray.put(mChoiceBItem.toJsonObject());
-            choiceArray.put(mChoiceCItem.toJsonObject());
-            choiceArray.put(mChoiceDItem.toJsonObject());
+            choiceArray.put(mChoiceAItem.toJsonObject(toServer));
+            choiceArray.put(mChoiceBItem.toJsonObject(toServer));
+            choiceArray.put(mChoiceCItem.toJsonObject(toServer));
+            choiceArray.put(mChoiceDItem.toJsonObject(toServer));
 
             jsonObject.put(KEY_CHOICE, choiceArray);
             jsonObject.put(KEY_RATE, mRate);
@@ -174,5 +177,13 @@ public class Question implements Serializable {
         mChoiceBItem.deleteBitmap();
         mChoiceCItem.deleteBitmap();
         mChoiceDItem.deleteBitmap();
+    }
+
+    public void renameBitmap(String testName, int questionIndex) {
+        mTitleItem.renameBitmap(testName, questionIndex, 0);
+        mChoiceAItem.renameBitmap(testName, questionIndex, 1);
+        mChoiceBItem.renameBitmap(testName, questionIndex, 2);
+        mChoiceCItem.renameBitmap(testName, questionIndex, 3);
+        mChoiceDItem.renameBitmap(testName, questionIndex, 4);
     }
 }

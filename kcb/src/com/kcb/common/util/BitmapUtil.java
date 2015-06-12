@@ -22,7 +22,7 @@ public class BitmapUtil {
         }
         return baos.toByteArray();
     }
-    
+
     public static Bitmap byteArrayToBitmap(byte[] bytes) {
         if (bytes != null) {
             return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
