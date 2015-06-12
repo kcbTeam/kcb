@@ -12,6 +12,7 @@ import com.kcb.common.base.BaseActivity;
 import com.kcb.common.model.test.Question;
 import com.kcb.common.model.test.Test;
 import com.kcb.common.util.DialogUtil;
+import com.kcb.common.util.FileUtil;
 import com.kcb.common.util.ToastUtil;
 import com.kcb.common.view.test.EditQuestionView;
 import com.kcb.library.view.buttonflat.ButtonFlat;
@@ -73,6 +74,7 @@ public class EditTestActivity extends BaseActivity {
 
     @Override
     protected void initData() {
+        FileUtil.init();
         showTestNameNum();
         showQuestion();
     }
@@ -194,7 +196,7 @@ public class EditTestActivity extends BaseActivity {
     }
 
     private void showQuestion() {
-        questionEditView.showQuestion(mCurrentQuestionIndex, getCurrentQuestion());
+        questionEditView.showQuestion(sTest.getName(), mCurrentQuestionIndex, getCurrentQuestion());
         mTempQuestion = Question.clone(getCurrentQuestion());
         switchNextButton();
     }

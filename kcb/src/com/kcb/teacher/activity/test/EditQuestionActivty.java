@@ -31,6 +31,7 @@ public class EditQuestionActivty extends BaseActivity {
     private EditQuestionView questionEditView;
 
     // question and current question index;
+    private String mTestName;
     public static Question sQuestion;
     private int mIndex;
 
@@ -60,9 +61,10 @@ public class EditQuestionActivty extends BaseActivity {
     protected void initData() {
         Intent intent = getIntent();
         mIndex = intent.getIntExtra(DATA_INDEX, 0);
+        mTestName = intent.getStringExtra(DATA_TESTNAME);
         questionIndexTextView.setText(String.format(
                 getResources().getString(R.string.tch_question_index), mIndex + 1));
-        questionEditView.showQuestion(mIndex, sQuestion);
+        questionEditView.showQuestion(mTestName, mIndex, sQuestion);
     }
 
     @Override
@@ -120,14 +122,16 @@ public class EditQuestionActivty extends BaseActivity {
      */
     private static final String ACTION_EDIT_QUESTION = "action_editQuestion";
     public static final String DATA_INDEX = "data_index";
+    public static final String DATA_TESTNAME = "data_testname";
 
     public static final int REQUEST_EDIT = 0;
     public static final int RESULT_DELETE = 1;
 
-    public static void startForResult(Context context, int index, Question question) {
+    public static void startForResult(Context context, String testName, int index, Question question) {
         Intent intent = new Intent(context, EditQuestionActivty.class);
         intent.setAction(ACTION_EDIT_QUESTION);
         intent.putExtra(DATA_INDEX, index);
+        intent.putExtra(DATA_INDEX, testName);
         ((Activity) context).startActivityForResult(intent, REQUEST_EDIT);
         sQuestion = question;
     }

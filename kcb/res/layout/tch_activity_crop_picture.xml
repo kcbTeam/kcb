@@ -8,7 +8,7 @@
     tools:ignore="contentDescription" >
 
     <LinearLayout
-        android:id="@+id/title"
+        android:id="@+id/layout_title"
         style="@style/common_title_layout" >
 
         <include layout="@layout/comm_button_back" />
@@ -23,18 +23,31 @@
         <include layout="@layout/comm_button_finish" />
     </LinearLayout>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_marginLeft="24dp"
-        android:layout_marginRight="24dp" >
+    <TextView
+        android:id="@+id/textview_tip"
+        style="@style/common_tip"
+        android:layout_below="@id/layout_title"
+        android:layout_marginTop="8dp"
+        android:text="@string/tch_crop_tip" />
 
-        <com.edmodo.cropper.CropImageView
-            xmlns:custom="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/CropImageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </ScrollView>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/textview_tip" >
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp" >
+
+            <com.edmodo.cropper.CropImageView
+                xmlns:custom="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/CropImageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </ScrollView>
+    </RelativeLayout>
 
 </RelativeLayout>

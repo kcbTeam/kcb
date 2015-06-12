@@ -1,18 +1,15 @@
 package com.kcb.common.view.test;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
-import android.os.Environment;
 import android.provider.MediaStore;
-import android.provider.MediaStore.Images.Media;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -24,6 +21,7 @@ import android.widget.TextView;
 
 import com.kcb.common.model.test.Question;
 import com.kcb.common.model.test.QuestionItem;
+import com.kcb.common.util.FileUtil;
 import com.kcb.common.util.ToastUtil;
 import com.kcb.library.view.checkbox.CheckBox;
 import com.kcb.teacher.activity.test.CropPictureActivity;
@@ -65,20 +63,19 @@ public class EditQuestionView extends LinearLayout implements OnClickListener, O
     private CheckBox checkBoxD;
 
     private Context mContext;
+    private String mTestName;
+    private int mIndex;
     private Question mQuestion;
 
     // tag title/A/B/C/D;
-    private final int FLAG_TITLE = 1;
-    private final int FLAG_A = 2;
-    private final int FALG_B = 3;
-    private final int FLAG_C = 4;
-    private final int FLAG_D = 5;
+    private final int FLAG_TITLE = 0;
+    private final int FLAG_A = 1;
+    private final int FALG_B = 2;
+    private final int FLAG_C = 3;
+    private final int FLAG_D = 4;
 
     // long click to take photo;
     private int mLongClickTag = FLAG_TITLE;
-
-    // save temp camera photo;
-    private String mBitmapPath;
 
     private final int EDIT_MODE_TEXT = 1;
     private final int EDIT_MODE_BITMAP = 2;
@@ -123,7 +120,9 @@ public class EditQuestionView extends LinearLayout implements OnClickListener, O
         checkBoxD = (CheckBox) findViewById(R.id.checkBox_D);
     }
 
-    public void showQuestion(int index, Question question) {
+    public void showQuestion(String testName, int index, Question question) {
+        mTestName = testName;
+        mIndex = index;
         mQuestion = question;
 
         showQuestionNum(index);
@@ -288,14 +287,8 @@ public class EditQuestionView extends LinearLayout implements OnClickListener, O
 
     private void takePhoto() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        mBitmapPath = Environment.getExternalStorageDirectory() + "/kcb/";
-        File file = new File(mBitmapPath);
-        if (!file.exists()) {
-            file.mkdirs();
-        }
-        file = new File(mBitmapPath + "temp.jpg");
-        Uri uri = Uri.fromFile(file);
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+        File file = new File(FileUtil.getTakePhotoPath());
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
         if (intent.resolveActivity(mContext.getPackageManager()) == null) {
             ToastUtil.toast(R.string.tch_no_camera_app);
             return;
@@ -307,13 +300,8 @@ public class EditQuestionView extends LinearLayout implements OnClickListener, O
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_TAKEPHOTO) {
             if (resultCode != Activity.RESULT_CANCELED) {
-                File picture = new File(mBitmapPath + "temp.jpg");
                 try {
-                    Uri uri =
-                            Uri.parse(MediaStore.Images.Media.insertImage(
-                                    mContext.getContentResolver(), picture.getAbsolutePath(), null,
-                                    null));
-                    CropPictureActivity.startForResult(mContext, uri,
+                    CropPictureActivity.startForResult(mContext, FileUtil.getTakePhotoPath(),
                             CropPictureActivity.REQUEST_CROPPHOTO);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -321,42 +309,41 @@ public class EditQuestionView extends LinearLayout implements OnClickListener, O
             }
         } else if (requestCode == CropPictureActivity.REQUEST_CROPPHOTO) {
             if (resultCode == Activity.RESULT_OK) {
-                Uri uri = (Uri) data.getParcelableExtra(CropPictureActivity.DATA_PICTURE);
-                try {
-                    Bitmap bitmap = Media.getBitmap(mContext.getContentResolver(), uri);
-                    switch (mLongClickTag) {
-                        case FLAG_TITLE:
-                            setEditMode(FLAG_TITLE, EDIT_MODE_BITMAP);
-                            titleEditText.setBackgroundDrawable(new BitmapDrawable(bitmap));
-                            mQuestion.getTitle().setBitmap(bitmap);
-                            break;
-                        case FLAG_A:
-                            setEditMode(FLAG_A, EDIT_MODE_BITMAP);
-                            aEditText.setBackgroundDrawable(new BitmapDrawable(bitmap));
-                            mQuestion.getChoiceA().setBitmap(bitmap);
-                            break;
-                        case FALG_B:
-                            setEditMode(FALG_B, EDIT_MODE_BITMAP);
-                            bEditText.setBackgroundDrawable(new BitmapDrawable(bitmap));
-                            mQuestion.getChoiceB().setBitmap(bitmap);
-                            break;
-                        case FLAG_C:
-                            setEditMode(FLAG_C, EDIT_MODE_BITMAP);
-                            cEditText.setBackgroundDrawable(new BitmapDrawable(bitmap));
-                            mQuestion.getChoiceC().setBitmap(bitmap);
-                            break;
-                        case FLAG_D:
-                            setEditMode(FLAG_D, EDIT_MODE_BITMAP);
-                            dEditText.setBackgroundDrawable(new BitmapDrawable(bitmap));
-                            mQuestion.getChoiceD().setBitmap(bitmap);
-                            break;
-                        default:
-                            break;
-                    }
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
+                
+                
+                String path = data.getStringExtra(CropPictureActivity.DATA_PATH);
+                String newPath = FileUtil.getQuestionItemPath(mTestName, mIndex + 1, mLongClickTag);
+                new File(path).renameTo(new File(newPath));
+                Bitmap bitmap = BitmapFactory.decodeFile(newPath);
+
+                switch (mLongClickTag) {
+                    case FLAG_TITLE:
+                        setEditMode(FLAG_TITLE, EDIT_MODE_BITMAP);
+                        titleEditText.setBackgroundDrawable(new BitmapDrawable(bitmap));
+                        mQuestion.getTitle().setBitmap(bitmap);
+                        break;
+                    case FLAG_A:
+                        setEditMode(FLAG_A, EDIT_MODE_BITMAP);
+                        aEditText.setBackgroundDrawable(new BitmapDrawable(bitmap));
+                        mQuestion.getChoiceA().setBitmap(bitmap);
+                        break;
+                    case FALG_B:
+                        setEditMode(FALG_B, EDIT_MODE_BITMAP);
+                        bEditText.setBackgroundDrawable(new BitmapDrawable(bitmap));
+                        mQuestion.getChoiceB().setBitmap(bitmap);
+                        break;
+                    case FLAG_C:
+                        setEditMode(FLAG_C, EDIT_MODE_BITMAP);
+                        cEditText.setBackgroundDrawable(new BitmapDrawable(bitmap));
+                        mQuestion.getChoiceC().setBitmap(bitmap);
+                        break;
+                    case FLAG_D:
+                        setEditMode(FLAG_D, EDIT_MODE_BITMAP);
+                        dEditText.setBackgroundDrawable(new BitmapDrawable(bitmap));
+                        mQuestion.getChoiceD().setBitmap(bitmap);
+                        break;
+                    default:
+                        break;
                 }
             }
         }

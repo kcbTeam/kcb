@@ -1,22 +1,22 @@
 package com.kcb.teacher.activity.test;
 
-import java.io.FileNotFoundException;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Bitmap.CompressFormat;
+import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.provider.MediaStore.Images.Media;
 import android.view.View;
 
 import com.edmodo.cropper.CropImageView;
 import com.kcb.common.base.BaseActivity;
-import com.kcb.common.listener.DelayClickListener;
+import com.kcb.common.util.FileUtil;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcbTeam.R;
 
@@ -30,8 +30,8 @@ public class CropPictureActivity extends BaseActivity {
     private int mAspectRatioX = DEFAULT_ASPECT_RATIO_VALUES;
     private int mAspectRatioY = DEFAULT_ASPECT_RATIO_VALUES;
 
-    private Bitmap mBitMap;
-    private Bitmap croppedImage;
+    private Bitmap mBitmap;
+    private Bitmap mCropBitmap;
     private CropImageView cropImageView;
 
     private ButtonFlat backButton;
@@ -71,23 +71,18 @@ public class CropPictureActivity extends BaseActivity {
         rotateButton.setOnClickListener(this);
 
         cropImageView = (CropImageView) findViewById(R.id.CropImageView);
-        cropImageView.setImageBitmap(mBitMap);
+        cropImageView.setImageBitmap(mBitmap);
 
         finishButton = (ButtonFlat) findViewById(R.id.button_finish);
-        finishButton.setOnClickListener(mClickListener);
+        finishButton.setOnClickListener(this);
     }
 
     @Override
     protected void initData() {
-        Uri uri = (Uri) getIntent().getParcelableExtra(DATA_PICTURE);
-        try {
-            mBitMap = Media.getBitmap(getContentResolver(), uri);
-            mBitMap = ResizeBitmap(mBitMap, 1000);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();;
-        } catch (IOException e) {
-            e.printStackTrace();;
-        }
+        String path = getIntent().getStringExtra(DATA_PATH);
+        mBitmap = BitmapFactory.decodeFile(path);
+        new File(path).delete();
+        mBitmap = ResizeBitmap(mBitmap, 1000);
     }
 
     @Override
@@ -99,36 +94,25 @@ public class CropPictureActivity extends BaseActivity {
             case R.id.button_rotate:
                 cropImageView.rotateImage(ROTATE_NINETY_DEGREES);
                 break;
+            case R.id.button_finish:
+                mCropBitmap = cropImageView.getCroppedImage();
+                File file = new File(FileUtil.getCropPhotoPath());
+                try {
+                    FileOutputStream outputStream = new FileOutputStream(file);
+                    mCropBitmap.compress(CompressFormat.PNG, 100, outputStream);
+                    outputStream.flush();
+                    outputStream.close();
+                } catch (IOException e) {}
+
+                Intent intent = new Intent();
+                intent.putExtra(DATA_PATH, file.getAbsolutePath());
+                setResult(RESULT_OK, intent);
+                finish();
+                break;
             default:
                 break;
         }
     }
-
-    private DelayClickListener mClickListener = new DelayClickListener(
-            DelayClickListener.DELAY_PAPER_BUTTON) {
-
-        @Override
-        public void doClick(View v) {
-            switch (v.getId()) {
-                case R.id.button_back:
-                    finish();
-                    break;
-                case R.id.button_rotate:
-                    cropImageView.rotateImage(ROTATE_NINETY_DEGREES);
-                    break;
-                case R.id.button_finish:
-                    croppedImage = cropImageView.getCroppedImage();
-                    Intent intent = new Intent();
-                    intent.putExtra(DATA_PICTURE, Uri.parse(MediaStore.Images.Media.insertImage(
-                            getContentResolver(), croppedImage, null, null)));
-                    setResult(RESULT_OK, intent);
-                    finish();
-                    break;
-                default:
-                    break;
-            }
-        }
-    };
 
     private Bitmap ResizeBitmap(Bitmap bitmap, int newWidth) {
         int width = bitmap.getWidth();
@@ -148,13 +132,13 @@ public class CropPictureActivity extends BaseActivity {
     /**
      * start
      */
-    public static final String DATA_PICTURE = "data_picture";
+    public static final String DATA_PATH = "data_path";
 
     public static final int REQUEST_CROPPHOTO = 1;
 
-    public static void startForResult(Context context, Uri uri, int requestCode) {
+    public static void startForResult(Context context, String uri, int requestCode) {
         Intent intent = new Intent(context, CropPictureActivity.class);
-        intent.putExtra(DATA_PICTURE, uri);
+        intent.putExtra(DATA_PATH, uri);
         ((Activity) context).startActivityForResult(intent, requestCode);
     }
 }

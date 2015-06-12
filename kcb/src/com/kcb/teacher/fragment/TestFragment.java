@@ -5,7 +5,9 @@ import java.util.List;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -92,7 +94,9 @@ public class TestFragment extends BaseFragment {
         public void doClick(View v) {
             switch (v.getId()) {
                 case R.id.button_start:
-                    startTest();
+                    Intent intent2 = new Intent(getActivity(), SetTestNameActivity.class);
+                    startActivity(intent2);
+                    // startTest();
                     break;
                 case R.id.button_edit:
                     addOrEditTest();
@@ -121,7 +125,6 @@ public class TestFragment extends BaseFragment {
                         @Override
                         public void onClick(View view, int position) {
                             TestDao testDao = new TestDao(getActivity());
-                            LogUtil.e("wanghang", names.get(position));
                             Test test = testDao.getByName(names.get(position));
                             testDao.close();
                             sendTestToServer(test);
@@ -189,14 +192,37 @@ public class TestFragment extends BaseFragment {
                             @Override
                             public void onClick(View view, int position) {
                                 if (position == 0) { // add new test
-                                    Intent intent =
-                                            new Intent(getActivity(), SetTestNameActivity.class);
-                                    startActivity(intent);
+                                    // Intent intent =
+                                    // new Intent(getActivity(), SetTestNameActivity.class);
+                                    // startActivity(intent);
+
+                                    SharedPreferences sPreferences =
+                                            getActivity().getSharedPreferences("test",
+                                                    Context.MODE_PRIVATE);
+                                    // try {
+                                    ToastUtil.toast(sPreferences.getString("testcontent", ""));
+
+                                    // Test test =
+                                    // Test.fromJsonObject(new JSONObject(sPreferences
+                                    // .getString("testcontent", "")));
+                                    // SetTestTimeActivity.startFromEditTest(getActivity(), test);
+                                    // } catch (JSONException e) {
+                                    // LogUtil.e("wanghang", e.getMessage());
+                                    // }
+
                                 } else {
-                                    TestDao testDao = new TestDao(getActivity());
-                                    Test test = testDao.getByName(names.get(position));
-                                    testDao.close();
-                                    SetTestTimeActivity.startFromEditTest(getActivity(), test);
+                                    // TestDao testDao = new TestDao(getActivity());
+                                    // Test test = testDao.getByName(names.get(position));
+                                    // testDao.close();
+                                    SharedPreferences sPreferences =
+                                            getActivity().getSharedPreferences("test",
+                                                    Context.MODE_PRIVATE);
+                                    try {
+                                        Test test =
+                                                Test.fromJsonObject(new JSONObject(sPreferences
+                                                        .getString("testcontent", "")));
+                                        SetTestTimeActivity.startFromEditTest(getActivity(), test);
+                                    } catch (JSONException e) {}
                                 }
                             }
                         }, R.string.tch_comm_cancel, null);

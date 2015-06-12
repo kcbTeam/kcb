@@ -12,6 +12,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.kcb.common.model.test.Test;
+import com.kcb.common.util.LogUtil;
 import com.kcb.teacher.database.KSQLiteOpenHelper;
 
 /**
@@ -83,7 +84,7 @@ public class TestDao {
         contentValues.put(TestTable.COLUMN_TIME, test.getTime());
         contentValues.put(TestTable.COLUMN_DATE, test.getDate());
         contentValues.put(TestTable.COLUMN_HASTESTED, test.hasTested());
-        contentValues.put(TestTable.COLUMN_ROW_DATA, test.toString());
+        contentValues.put(TestTable.COLUMN_ROW_DATA, test.toString().getBytes());
         return contentValues;
     }
 
@@ -93,13 +94,24 @@ public class TestDao {
                         new String[] {testName}, null, null, null);
         Test test = null;
         if (null != cursor) {
+            LogUtil.e("wanghang", "cursor != null");
             try {
                 if (cursor.moveToFirst()) {
-                    try {
-                        test =
-                                Test.fromJsonObject(new JSONObject(cursor.getString(cursor
-                                        .getColumnIndex(TestTable.COLUMN_ROW_DATA))));
-                    } catch (JSONException e) {}
+                    LogUtil.e("wanghang", "cursor move to first");
+
+                    LogUtil.e(
+                            "wanghang",
+                            "cursor count " + cursor.getCount() + " index "
+                                    + cursor.getColumnIndex(TestTable.COLUMN_ROW_DATA));
+                    LogUtil.e(
+                            "wanghang",
+                            new String(cursor.getBlob(cursor
+                                    .getColumnIndex(TestTable.COLUMN_ROW_DATA))).toString());
+                    // try {
+                    // test =
+                    // Test.fromJsonObject(new JSONObject(new String(cursor.getBlob(cursor
+                    // .getColumnIndex(TestTable.COLUMN_ROW_DATA)))));
+                    // } catch (JSONException e) {}
                 }
             } catch (Exception e) {} finally {
                 cursor.close();
@@ -119,8 +131,9 @@ public class TestDao {
                     do {
                         try {
                             Test test =
-                                    Test.fromJsonObject(new JSONObject(cursor.getString(cursor
-                                            .getColumnIndex(TestTable.COLUMN_ROW_DATA))));
+                                    Test.fromJsonObject(new JSONObject(new String(cursor
+                                            .getBlob(cursor
+                                                    .getColumnIndex(TestTable.COLUMN_ROW_DATA)))));
                             tests.add(test);
                         } catch (JSONException e) {}
                     } while (cursor.moveToNext());
@@ -141,8 +154,9 @@ public class TestDao {
                     do {
                         try {
                             Test test =
-                                    Test.fromJsonObject(new JSONObject(cursor.getString(cursor
-                                            .getColumnIndex(TestTable.COLUMN_ROW_DATA))));
+                                    Test.fromJsonObject(new JSONObject(new String(cursor
+                                            .getBlob(cursor
+                                                    .getColumnIndex(TestTable.COLUMN_ROW_DATA)))));
                             tests.add(test);
                         } catch (JSONException e) {}
                     } while (cursor.moveToNext());

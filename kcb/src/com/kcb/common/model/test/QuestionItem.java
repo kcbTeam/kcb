@@ -1,13 +1,10 @@
 package com.kcb.common.model.test;
 
 import java.io.Serializable;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import android.graphics.Bitmap;
 import android.text.TextUtils;
-
 import com.kcb.common.util.BitmapUtil;
 
 /**
@@ -26,6 +23,7 @@ public class QuestionItem implements Serializable {
     private boolean mIsText = true;
     private String mText = "";
     private Bitmap mBitmap;
+    private String mBitmapPath;
     private byte[] mBitmapByteArray;
 
     private boolean mIsRight; // useful when item is choice
@@ -85,6 +83,14 @@ public class QuestionItem implements Serializable {
         } else {
             return null;
         }
+    }
+
+    public void setBitmapPath(String bitmapPath) {
+        mBitmapPath = bitmapPath;
+    }
+
+    public String getBitmapPath() {
+        return mBitmapPath;
     }
 
     public byte[] getBitmapByteArray() {

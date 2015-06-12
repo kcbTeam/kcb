@@ -2,6 +2,8 @@ package com.kcb.teacher.activity.test;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -90,7 +92,8 @@ public class SetTestTimeActivity extends BaseActivity {
 
             @Override
             public void onEdit(int index, Question question) {
-                EditQuestionActivty.startForResult(SetTestTimeActivity.this, index, question);
+                EditQuestionActivty.startForResult(SetTestTimeActivity.this, sTest.getName(),
+                        index, question);
             }
         };
         mAdapter = new SetTestTimeAdapter(this, sTest, mEditListener);
@@ -117,13 +120,18 @@ public class SetTestTimeActivity extends BaseActivity {
             case R.id.button_finish:
                 sTest.setTime(slider.getValue());
                 sTest.setDate(System.currentTimeMillis());
-                TestDao testDao = new TestDao(this);
-                if (ACTION_ADD_TEST.equals(mAction)) {
-                    testDao.add(sTest);
-                } else if (ACTION_EDIT_TEST.equals(mAction)) {
-                    testDao.update(sTest);
-                }
-                testDao.close();
+                // TestDao testDao = new TestDao(this);
+                // if (ACTION_ADD_TEST.equals(mAction)) {
+                // testDao.add(sTest);
+                // } else if (ACTION_EDIT_TEST.equals(mAction)) {
+                // testDao.update(sTest);
+                // }
+                // testDao.close();
+                SharedPreferences sPreferences = getSharedPreferences("test", Context.MODE_PRIVATE);
+                Editor editor = sPreferences.edit();
+                editor.putString("testcontent", sTest.toString());
+                editor.commit();
+
                 ToastUtil.toast(R.string.tch_saved);
                 finish();
                 break;
