@@ -147,7 +147,7 @@
 
     <!-- Cut Picture Activity strat -->
     <string name="tch_crop_picture">裁剪图片</string>
-    <string name="tch_crop_tip">为了节省流量、提高上传题目的效率，请尽量少使用图片、尽可能地裁剪无用的图片部分。</string>
+    <string name="tch_crop_tip">为了节省流量和上传题目的时间，请少用图片、只保留有效图片部分。</string>
     <!-- Cut Picture Activity end -->
 
 
