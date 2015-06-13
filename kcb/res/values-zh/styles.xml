@@ -173,6 +173,24 @@
         <item name="android:textColor">@color/black_700</item>
     </style>
     <!-- ********** Home end ********** -->
+
+
+    <!-- ********** Test start ********** -->
+    <style name="question_item_layout">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@drawable/comm_rectangle</item>
+    </style>
+
+    <style name="question_item_imageview">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">100dp</item>
+        <item name="android:padding">2dp</item>
+        <item name="android:layout_centerInParent">true</item>
+        <item name="android:scaleType">fitCenter</item>
+    </style>
+    <!-- ********** Test end ********** -->
     <!-- **************************************** Common module End **************************************** -->
 
 
@@ -183,7 +201,7 @@
         <item name="android:layout_height">54dp</item>
         <item name="android:layout_weight">1</item>
         <item name="android:gravity">center</item>
-        <item name="android:background">@drawable/stu_checkin_textview</item>
+        <item name="android:background">@drawable/comm_rectangle</item>
         <item name="android:textSize">@dimen/text_size_large</item>
         <item name="android:textColor">@color/black_700</item>
     </style>
@@ -209,7 +227,7 @@
         <item name="android:layout_height">36dp</item>
         <item name="android:layout_weight">1</item>
         <item name="android:gravity">center</item>
-        <item name="android:background">@drawable/stu_checkin_textview</item>
+        <item name="android:background">@drawable/comm_rectangle</item>
     </style>
     <!-- StartCheckIn end -->
 
@@ -238,7 +256,7 @@
         <item name="android:padding">8dp</item>
         <item name="android:textColor">@color/black_700</item>
         <item name="android:textSize">@dimen/text_size_medium</item>
-        <item name="android:background">@drawable/stu_checkin_textview</item>
+        <item name="android:background">@drawable/comm_rectangle</item>
     </style>
 
     <style name="tch_test_checkbox">
@@ -252,7 +270,7 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:padding">4dp</item>
-        <item name="android:src">@drawable/ic_remove_circle_black_24dp</item>
+        <item name="android:src">@drawable/ic_remove_circle_grey600_24dp</item>
         <item name="android:visibility">invisible</item>
     </style>
     <!-- EditTest end -->
@@ -289,6 +307,15 @@
         <item name="android:padding">4dp</item>
         <item name="android:textColor">@color/black_700</item>
         <item name="android:textSize">@dimen/text_size_medium</item>
+    </style>
+
+    <style name="tch_test_settime_choice_imageview">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">100dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:padding">4dp</item>
+        <item name="android:visibility">gone</item>
+        <item name="android:scaleType">fitCenter</item>
     </style>
     <!-- SetTestTime end -->
     <!-- **************************************** Teacher module End **************************************** -->

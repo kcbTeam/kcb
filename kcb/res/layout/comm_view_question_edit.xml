@@ -11,14 +11,14 @@
         android:text="@string/tch_input_title" />
 
     <EditText
-        android:id="@+id/edittext_question_title"
+        android:id="@+id/edittext_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/textview_input_problem_tip"
         android:layout_marginBottom="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:background="@drawable/stu_checkin_textview"
+        android:background="@drawable/comm_rectangle"
         android:gravity="top|left"
         android:hint="@string/tch_edit_question_item_hint"
         android:lineSpacingExtra="2dp"
@@ -29,24 +29,26 @@
         android:textSize="@dimen/text_size_medium" />
 
     <ImageView
-        android:id="@+id/imageview_question_title"
+        android:id="@+id/imageview_title"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignBottom="@id/edittext_question_title"
-        android:layout_alignLeft="@id/edittext_question_title"
-        android:layout_alignRight="@id/edittext_question_title"
-        android:layout_alignTop="@id/edittext_question_title" />
+        android:layout_alignBottom="@id/edittext_title"
+        android:layout_alignLeft="@id/edittext_title"
+        android:layout_alignRight="@id/edittext_title"
+        android:layout_alignTop="@id/edittext_title"
+        android:layout_margin="2dp"
+        android:scaleType="fitCenter" />
 
     <ImageView
         android:id="@+id/imageview_delete_title"
         style="@style/tch_test_delete_bitmap"
-        android:layout_alignRight="@id/edittext_question_title"
-        android:layout_alignTop="@id/edittext_question_title" />
+        android:layout_alignRight="@id/edittext_title"
+        android:layout_alignTop="@id/edittext_title" />
 
     <TextView
         android:id="@+id/input_options_hint"
         style="@style/common_tip"
-        android:layout_below="@id/edittext_question_title"
+        android:layout_below="@id/edittext_title"
         android:text="@string/tch_input_choice" />
 
     <ScrollView
@@ -73,16 +75,18 @@
                     android:text="@string/tch_choice_A" />
 
                 <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="4dp"
-                    android:layout_weight="1" >
+                    style="@style/question_item_layout"
+                    android:layout_marginRight="4dp" >
 
                     <EditText
                         android:id="@+id/edittext_A"
                         style="@style/tch_test_input_choice"
                         android:hint="@string/tch_edit_question_item_hint"
                         android:textColorHint="@color/black_400" />
+
+                    <ImageView
+                        android:id="@+id/imageview_A"
+                        style="@style/question_item_imageview" />
 
                     <ImageView
                         android:id="@+id/imageview_delete_a"
@@ -111,14 +115,16 @@
                     android:text="@string/tch_choice_B" />
 
                 <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="4dp"
-                    android:layout_weight="1" >
+                    style="@style/question_item_layout"
+                    android:layout_marginRight="4dp" >
 
                     <EditText
                         android:id="@+id/edittext_B"
                         style="@style/tch_test_input_choice" />
+
+                    <ImageView
+                        android:id="@+id/imageview_B"
+                        style="@style/question_item_imageview" />
 
                     <ImageView
                         android:id="@+id/imageview_delete_b"
@@ -147,14 +153,16 @@
                     android:text="@string/tch_choice_C" />
 
                 <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="4dp"
-                    android:layout_weight="1" >
+                    style="@style/question_item_layout"
+                    android:layout_marginRight="4dp" >
 
                     <EditText
                         android:id="@+id/edittext_C"
                         style="@style/tch_test_input_choice" />
+
+                    <ImageView
+                        android:id="@+id/imageview_C"
+                        style="@style/question_item_imageview" />
 
                     <ImageView
                         android:id="@+id/imageview_delete_c"
@@ -183,14 +191,16 @@
                     android:text="@string/tch_choice_D" />
 
                 <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="4dp"
-                    android:layout_weight="1" >
+                    style="@style/question_item_layout"
+                    android:layout_marginRight="4dp" >
 
                     <EditText
                         android:id="@+id/edittext_D"
                         style="@style/tch_test_input_choice" />
+
+                    <ImageView
+                        android:id="@+id/imageview_D"
+                        style="@style/question_item_imageview" />
 
                     <ImageView
                         android:id="@+id/imageview_delete_d"

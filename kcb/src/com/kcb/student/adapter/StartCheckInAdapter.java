@@ -67,7 +67,7 @@ public class StartCheckInAdapter
         public CheckinViewHolder(View view) {
             super(view);
             numButton = (ButtonFlat) view.findViewById(R.id.button_num);
-            numButton.setBackgroundResource(R.drawable.stu_checkin_textview);
+            numButton.setBackgroundResource(R.drawable.comm_rectangle);
             numButton.setTextSize(18);
             numButton.setTextColor(mContext.getResources().getColor(R.color.black_700));
             numButton.setOnClickListener(new OnClickListener() {
