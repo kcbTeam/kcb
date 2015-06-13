@@ -21,7 +21,7 @@
 
         <include
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/activity_header_height"
             android:layout_alignParentRight="true"
             layout="@layout/comm_button_refresh"
             android:visibility="invisible" />
