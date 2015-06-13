@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:widget="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/home_popupwindow_layout"
+    tools:ignore="contentDescription" >
+
+    <com.kcb.library.view.buttonflat.ButtonFlat
+        android:id="@+id/button_modifypassword"
+        style="@style/home_popupwindow_item_layout"
+        widget:rippleSpeed="18" >
+
+        <ImageView
+            android:id="@+id/imageview_modifypassword"
+            style="@style/home_popupwindow_imageview"
+            android:src="@drawable/ic_vpn_key_grey600_18dp" />
+
+        <TextView
+            style="@style/home_popupwindow_textview"
+            android:layout_toRightOf="@id/imageview_modifypassword"
+            android:text="@string/stu_modify_password" />
+    </com.kcb.library.view.buttonflat.ButtonFlat>
+
+    <View style="@style/common_divider" />
+
+    <com.kcb.library.view.buttonflat.ButtonFlat
+        android:id="@+id/button_exit"
+        style="@style/home_popupwindow_item_layout"
+        widget:rippleSpeed="18" >
+
+        <ImageView
+            android:id="@+id/imageview_exit"
+            style="@style/home_popupwindow_imageview"
+            android:src="@drawable/ic_exit_to_app_grey600_18dp" />
+
+        <TextView
+            style="@style/home_popupwindow_textview"
+            android:layout_toRightOf="@id/imageview_exit"
+            android:text="@string/stu_exit_account" />
+    </com.kcb.library.view.buttonflat.ButtonFlat>
+
+</LinearLayout>

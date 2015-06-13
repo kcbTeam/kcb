@@ -27,12 +27,13 @@
     <string name="tch_student_center">学生中心</string>
     <!-- check in -->
     <string name="tch_start_checkin">开始签到</string>
+    <string name="tch_start">开始</string>
     <string name="tch_look_checkin_result">查看签到结果</string>
     <!-- test -->
     <string name="tch_start_test">开始测试</string>
     <string name="tch_add_test_first">请先添加一个测试</string>
     <string name="tch_select_test">选择测试</string>
-    <string name="tch_start_test_tip">本次测试的名称为——%1$s，包括 %2$d 道题，时间为 %3$d 分钟。\n\n如果题目中图片较多，上传内容时间会稍长，请耐心等待。</string>
+    <string name="tch_start_test_tip">本次测试的名称为——%1$s，包括 %2$d 道题，时间为 %3$d 分钟。\n\n如果题目中图片较多，上传题目会较慢，请耐心等待。</string>
     <string name="tch_test_started">测试已经开始了</string>
     <string name="tch_add_or_edit_test">添加 / 编辑测试</string>
     <string name="tch_edit_test">编辑测试</string>
@@ -68,7 +69,7 @@
     <!-- StartCheckInActivity start -->
     <string name="tch_tell_stu_checkin_num">将签到数字告诉在场的学生</string>
     <string name="tch_two_min_finish_checkin">开始后，学生有两分钟完成签到</string>
-    <string name="tch_start_checkin_tip">签到时间结束后可查看结果，点击确定开始签到。</string>
+    <string name="tch_start_checkin_tip">签到结束后可查看结果，点击确定开始签到。</string>
     <string name="tch_wait">请稍等……</string>
     <string name="tch_checkin_started">签到已开始</string>
     <!-- StartCheckInActivity end -->
@@ -146,7 +147,7 @@
 
     <!-- Cut Picture Activity strat -->
     <string name="tch_crop_picture">裁剪图片</string>
-    <string name="tch_crop_tip">为了节省流量、提高上传题目的效率，请尽量少使用图片、尽可能地裁剪无用的图片部分。</string>
+    <string name="tch_crop_tip">为了节省流量和上传题目的时间，请少用图片、只保留有效图片部分。</string>
     <!-- Cut Picture Activity end -->
 
 

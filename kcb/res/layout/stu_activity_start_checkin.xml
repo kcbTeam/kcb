@@ -31,7 +31,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/layout_title"
         android:layout_centerHorizontal="true"
-        android:layout_margin="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="24dp"
         android:text="@string/stu_input_checkin_num"
         android:textColor="@color/black"
         android:textSize="@dimen/text_size_medium" />

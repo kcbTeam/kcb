@@ -113,7 +113,7 @@
             style="@style/common_paper_button"
             android:layout_below="@id/view_divider2"
             android:layout_centerHorizontal="true"
-            widget:paper_text="@string/tch_start_checkin"
+            widget:paper_text="@string/tch_start"
             widget:paper_text_color="@color/black_700"
             widget:paper_text_size="@dimen/text_size_medium" />
 
