@@ -19,8 +19,8 @@
             android:layout_weight="0" />
 
         <TextView
-            android:id="@+id/textview_tabtip"
-            style="@style/common_title_tab"
+            android:id="@+id/textview_title"
+            style="@style/home_top_title"
             android:gravity="center" />
 
         <include
@@ -39,7 +39,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/black_200"
+        android:background="@color/black_300"
         android:orientation="horizontal" >
 
         <com.kcb.library.view.buttonflat.ButtonFlat
@@ -50,26 +50,55 @@
 
             <ImageView
                 android:id="@+id/imageview_checkin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
+                style="@style/home_tab_imageview"
                 android:src="@drawable/ic_assignment_turned_in_white_36dp" />
+
+            <TextView
+                android:id="@+id/textview_tab_checkin"
+                style="@style/home_tab_textview"
+                android:layout_below="@id/imageview_checkin"
+                android:text="@string/tch_class_checkin" />
         </com.kcb.library.view.buttonflat.ButtonFlat>
 
         <com.kcb.library.view.buttonflat.ButtonFlat
             android:id="@+id/button_test"
             style="@style/home_tab"
-            android:text="@string/tch_class_test"
-            widget:clickAfterRipple="false" />
+            android:text=""
+            widget:clickAfterRipple="false" >
+
+            <ImageView
+                android:id="@+id/imageview_test"
+                style="@style/home_tab_imageview"
+                android:src="@drawable/ic_event_note_white_36dp" />
+
+            <TextView
+                android:id="@+id/textview_tab_test"
+                style="@style/home_tab_textview"
+                android:layout_below="@id/imageview_test"
+                android:text="@string/tch_class_test" />
+        </com.kcb.library.view.buttonflat.ButtonFlat>
 
         <com.kcb.library.view.buttonflat.ButtonFlat
             android:id="@+id/button_stucenter"
             style="@style/home_tab"
-            android:text="@string/tch_student_center"
-            widget:clickAfterRipple="false" />
+            android:text=""
+            widget:clickAfterRipple="false" >
+
+            <ImageView
+                android:id="@+id/imageview_stucenter"
+                style="@style/home_tab_imageview"
+                android:src="@drawable/ic_group_white_36dp" />
+
+            <TextView
+                android:id="@+id/textview_tab_stucenter"
+                style="@style/home_tab_textview"
+                android:layout_below="@id/imageview_stucenter"
+                android:text="@string/tch_student_center" />
+        </com.kcb.library.view.buttonflat.ButtonFlat>
     </LinearLayout>
 
     <View
+        android:background="@color/black_200"
         android:id="@+id/view_line"
         style="@style/common_divider"
         android:layout_above="@id/layout_buttons" />

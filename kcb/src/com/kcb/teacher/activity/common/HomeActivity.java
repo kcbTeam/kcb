@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
@@ -45,7 +46,7 @@ public class HomeActivity extends BaseFragmentActivity {
 
     private ButtonFlat accountButton;
     private TextView userNameTextView;
-    private TextView tabtipTextView;
+    private TextView titleTextView;
     private ButtonFlat refreshButton;
 
     private CheckInFragment mCheckInFragment;
@@ -55,8 +56,16 @@ public class HomeActivity extends BaseFragmentActivity {
     private FragmentManager mFragmentManager;
 
     private ButtonFlat checkInButton;
+    private ImageView checkInImageView;
+    private TextView checkInTextView;
+
     private ButtonFlat testButton;
+    private ImageView testImageView;
+    private TextView testTextView;
+
     private ButtonFlat stuCenterButton;
+    private ImageView stuCenterImageView;
+    private TextView stuCenterTextView;
 
     private PopupWindow popupWindow;
 
@@ -81,22 +90,25 @@ public class HomeActivity extends BaseFragmentActivity {
         userNameTextView = (TextView) findViewById(R.id.textview_username);
         userNameTextView.setText(KAccount.getAccountName());
 
-        tabtipTextView = (TextView) findViewById(R.id.textview_tabtip);
+        titleTextView = (TextView) findViewById(R.id.textview_title);
 
         refreshButton = (ButtonFlat) findViewById(R.id.button_refresh);
         refreshButton.setOnClickListener(this);
 
         checkInButton = (ButtonFlat) findViewById(R.id.button_checkin);
         checkInButton.setOnClickListener(this);
-        checkInButton.setTextSize(16);
+        checkInImageView = (ImageView) findViewById(R.id.imageview_checkin);
+        checkInTextView = (TextView) findViewById(R.id.textview_tab_checkin);
 
         testButton = (ButtonFlat) findViewById(R.id.button_test);
         testButton.setOnClickListener(this);
-        testButton.setTextSize(16);
+        testImageView = (ImageView) findViewById(R.id.imageview_test);
+        testTextView = (TextView) findViewById(R.id.textview_tab_test);
 
         stuCenterButton = (ButtonFlat) findViewById(R.id.button_stucenter);
         stuCenterButton.setOnClickListener(this);
-        stuCenterButton.setTextSize(16);
+        stuCenterImageView = (ImageView) findViewById(R.id.imageview_stucenter);
+        stuCenterTextView = (TextView) findViewById(R.id.textview_tab_stucenter);
     }
 
     @Override
@@ -141,10 +153,10 @@ public class HomeActivity extends BaseFragmentActivity {
     }
 
     private void showFragment(int index) {
-        mCurrentIndex = index;
         setTabTip(index);
         setButtonTextColor(index);
 
+        mCurrentIndex = index;
         if (mCurrentIndex == INDEX_STUCENTER) {
             refreshButton.setVisibility(View.VISIBLE);
         } else {
@@ -193,13 +205,13 @@ public class HomeActivity extends BaseFragmentActivity {
     private void setTabTip(int index) {
         switch (index) {
             case INDEX_CHECKIN:
-                tabtipTextView.setText(R.string.tch_class_checkin);
+                titleTextView.setText(R.string.tch_class_checkin);
                 break;
             case INDEX_TEST:
-                tabtipTextView.setText(R.string.tch_class_test);
+                titleTextView.setText(R.string.tch_class_test);
                 break;
             case INDEX_STUCENTER:
-                tabtipTextView.setText(R.string.tch_student_center);
+                titleTextView.setText(R.string.tch_student_center);
                 break;
             default:
                 break;
@@ -208,18 +220,24 @@ public class HomeActivity extends BaseFragmentActivity {
 
     private void setButtonTextColor(int index) {
         Resources res = getResources();
-        checkInButton.setTextColor(res.getColor(R.color.black_500));
-        testButton.setTextColor(res.getColor(R.color.black_500));
-        stuCenterButton.setTextColor(res.getColor(R.color.black_500));
+        checkInImageView.setImageResource(R.drawable.ic_assignment_turned_in_white_36dp);
+        checkInTextView.setTextColor(res.getColor(R.color.white));
+        testImageView.setImageResource(R.drawable.ic_event_note_white_36dp);
+        testTextView.setTextColor(res.getColor(R.color.white));
+        stuCenterImageView.setImageResource(R.drawable.ic_group_white_36dp);
+        stuCenterTextView.setTextColor(res.getColor(R.color.white));
         switch (index) {
             case INDEX_CHECKIN:
-                checkInButton.setTextColor(res.getColor(R.color.blue));
+                checkInImageView.setImageResource(R.drawable.ic_assignment_turned_in_grey600_36dp);
+                checkInTextView.setTextColor(res.getColor(R.color.black_700));
                 break;
             case INDEX_TEST:
-                testButton.setTextColor(res.getColor(R.color.blue));
+                testImageView.setImageResource(R.drawable.ic_event_note_grey600_36dp);
+                testTextView.setTextColor(res.getColor(R.color.black_700));
                 break;
             case INDEX_STUCENTER:
-                stuCenterButton.setTextColor(res.getColor(R.color.blue));
+                stuCenterImageView.setImageResource(R.drawable.ic_group_grey600_36dp);
+                stuCenterTextView.setTextColor(res.getColor(R.color.black_700));
                 break;
             default:
                 break;
