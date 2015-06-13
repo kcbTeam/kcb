@@ -34,24 +34,39 @@
             android:src="@drawable/ic_mode_edit_grey600_24dp" />
     </com.kcb.library.view.buttonflat.ButtonFlat>
 
-    <TextView
-        android:id="@+id/textview_title"
+    <RelativeLayout
+        android:id="@+id/layout_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/button_edit"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:lineSpacingExtra="2dp"
-        android:padding="4dp"
-        android:textColor="@color/black_700"
-        android:textSize="@dimen/text_size_medium" />
+        android:layout_marginBottom="8dp" >
+
+        <TextView
+            android:id="@+id/textview_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:lineSpacingExtra="2dp"
+            android:padding="4dp"
+            android:textColor="@color/black_700"
+            android:textSize="@dimen/text_size_medium" />
+
+        <ImageView
+            android:id="@+id/imageview_title"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_alignLeft="@id/textview_title"
+            android:layout_alignRight="@id/textview_title"
+            android:layout_alignTop="@id/textview_title"
+            android:scaleType="fitCenter" />
+    </RelativeLayout>
 
     <View
         android:id="@+id/view_divider0"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_below="@id/textview_title"
+        android:layout_below="@id/layout_title"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:background="@color/black_divider" />
@@ -73,6 +88,10 @@
         <TextView
             android:id="@+id/textview_A"
             style="@style/tch_test_settime_choice" />
+
+        <ImageView
+            android:id="@+id/imageview_A"
+            style="@style/tch_test_settime_choice_imageview" />
 
         <ImageView
             android:id="@+id/checkBox_A"
@@ -108,6 +127,10 @@
             style="@style/tch_test_settime_choice" />
 
         <ImageView
+            android:id="@+id/imageview_B"
+            style="@style/tch_test_settime_choice_imageview" />
+
+        <ImageView
             android:id="@+id/checkBox_B"
             style="@style/tch_test_settime_checkicon"
             android:layout_margin="4dp" />
@@ -141,6 +164,10 @@
             style="@style/tch_test_settime_choice" />
 
         <ImageView
+            android:id="@+id/imageview_C"
+            style="@style/tch_test_settime_choice_imageview" />
+
+        <ImageView
             android:id="@+id/checkBox_C"
             style="@style/tch_test_settime_checkicon"
             android:layout_margin="4dp" />
@@ -172,6 +199,10 @@
         <TextView
             android:id="@+id/textview_D"
             style="@style/tch_test_settime_choice" />
+
+        <ImageView
+            android:id="@+id/imageview_D"
+            style="@style/tch_test_settime_choice_imageview" />
 
         <ImageView
             android:id="@+id/checkBox_D"

@@ -2,7 +2,6 @@ package com.kcb.teacher.adapter.test;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -78,14 +77,19 @@ public class SetTestTimeAdapter extends BaseAdapter {
             viewHolder.questionIndexTextView =
                     (TextView) convertView.findViewById(R.id.textview_questionindex);
             viewHolder.titleTextView = (TextView) convertView.findViewById(R.id.textview_title);
+            viewHolder.titleImageView = (ImageView) convertView.findViewById(R.id.imageview_title);
             viewHolder.editButton = (ButtonFlat) convertView.findViewById(R.id.button_edit);
             viewHolder.aTextView = (TextView) convertView.findViewById(R.id.textview_A);
+            viewHolder.aImageView = (ImageView) convertView.findViewById(R.id.imageview_A);
             viewHolder.aCheckBox = (ImageView) convertView.findViewById(R.id.checkBox_A);
             viewHolder.bTextView = (TextView) convertView.findViewById(R.id.textview_B);
+            viewHolder.bImageView = (ImageView) convertView.findViewById(R.id.imageview_B);
             viewHolder.bCheckBox = (ImageView) convertView.findViewById(R.id.checkBox_B);
             viewHolder.cTextView = (TextView) convertView.findViewById(R.id.textview_C);
+            viewHolder.cImageView = (ImageView) convertView.findViewById(R.id.imageview_C);
             viewHolder.cCheckBox = (ImageView) convertView.findViewById(R.id.checkBox_C);
             viewHolder.dTextView = (TextView) convertView.findViewById(R.id.textview_D);
+            viewHolder.dImageView = (ImageView) convertView.findViewById(R.id.imageview_D);
             viewHolder.dCheckBox = (ImageView) convertView.findViewById(R.id.checkBox_D);
             convertView.setTag(viewHolder);
         } else {
@@ -102,40 +106,51 @@ public class SetTestTimeAdapter extends BaseAdapter {
         return convertView;
     }
 
-    // TODO use ImageView for low api phone
     private class ViewHolder {
         private TextView questionIndexTextView;
+
         private TextView titleTextView;
+        private ImageView titleImageView;
+
         private ButtonFlat editButton;
+
         private TextView aTextView;
-        private TextView bTextView;
-        private TextView cTextView;
-        private TextView dTextView;
+        private ImageView aImageView;
         private ImageView aCheckBox;
+
+        private TextView bTextView;
+        private ImageView bImageView;
         private ImageView bCheckBox;
+
+        private TextView cTextView;
+        private ImageView cImageView;
         private ImageView cCheckBox;
+
+        private TextView dTextView;
+        private ImageView dImageView;
         private ImageView dCheckBox;
 
         public void setQuestion(int index, Question question) {
             questionIndexTextView.setText(String.format(
                     mContext.getString(R.string.tch_question_index), index + 1));
-            showContent(titleTextView, null, question.getTitle());
-            showContent(aTextView, aCheckBox, question.getChoiceA());
-            showContent(bTextView, bCheckBox, question.getChoiceB());
-            showContent(cTextView, cCheckBox, question.getChoiceC());
-            showContent(dTextView, dCheckBox, question.getChoiceD());
+            showContent(titleTextView, titleImageView, null, question.getTitle());
+            showContent(aTextView, aImageView, aCheckBox, question.getChoiceA());
+            showContent(bTextView, bImageView, bCheckBox, question.getChoiceB());
+            showContent(cTextView, cImageView, cCheckBox, question.getChoiceC());
+            showContent(dTextView, dImageView, dCheckBox, question.getChoiceD());
         }
     }
 
-    @SuppressWarnings("deprecation")
-    private void showContent(TextView view, ImageView checkIcon, QuestionItem item) {
+    private void showContent(TextView textView, ImageView imageView, ImageView checkIcon,
+            QuestionItem item) {
         if (item.isText()) {
-            view.setText(item.getText());
-            view.setBackgroundResource(0);
+            textView.setText(item.getText());
+            textView.setVisibility(View.VISIBLE);
+            imageView.setVisibility(View.GONE);
         } else {
-            view.setText("");
-            new LoadBitmapAsyncTask(view).execute(item);
-            // view.setBackgroundDrawable(new BitmapDrawable(item.getBitmap()));
+            textView.setVisibility(View.GONE);
+            imageView.setVisibility(View.VISIBLE);
+            new LoadBitmapAsyncTask(imageView).execute(item);
         }
         if (null != checkIcon) {
             if (item.isRight()) {
@@ -148,10 +163,10 @@ public class SetTestTimeAdapter extends BaseAdapter {
 
     private class LoadBitmapAsyncTask extends AsyncTask<QuestionItem, Integer, Bitmap> {
 
-        private TextView textView;
+        private ImageView imageView;
 
-        public LoadBitmapAsyncTask(TextView _textview) {
-            textView = _textview;
+        public LoadBitmapAsyncTask(ImageView _imageView) {
+            imageView = _imageView;
         }
 
         @Override
@@ -162,7 +177,7 @@ public class SetTestTimeAdapter extends BaseAdapter {
 
         @Override
         protected void onPostExecute(Bitmap result) {
-            textView.setBackgroundDrawable(new BitmapDrawable(result));
+            imageView.setImageBitmap(result);
         }
     }
 }
