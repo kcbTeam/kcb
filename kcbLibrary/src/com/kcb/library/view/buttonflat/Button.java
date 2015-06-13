@@ -173,4 +173,8 @@ public abstract class Button extends CustomView {
     public float getRippleSpeed() {
         return this.rippleSpeed;
     }
+
+    public void setRippleColor(String color) {
+        rippleColor = Color.parseColor(color);
+    }
 }

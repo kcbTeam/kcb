@@ -4,12 +4,28 @@
     xmlns:widget="http://schemas.android.com/apk/res-auto"
     android:id="@+id/button_account"
     style="@style/common_title_icon_layout"
+    android:layout_width="wrap_content"
+    android:gravity="center"
     tools:ignore="contentDescription"
-    widget:rippleSpeed="6" >
+    widget:rippleSpeed="9" >
 
     <ImageView
-        style="@style/common_title_icon"
-        android:src="@drawable/ic_perm_identity_black_36dp" >
+        android:id="@+id/imageview_account"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/ic_perm_identity_black_24dp" >
     </ImageView>
+
+    <TextView
+        android:id="@+id/textview_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imageview_account"
+        android:layout_centerHorizontal="true"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_small" />
 
 </com.kcb.library.view.buttonflat.ButtonFlat>

@@ -41,7 +41,7 @@
 
         <com.kcb.library.view.buttonflat.ButtonFlat
             android:id="@+id/button_accept"
-            android:layout_width="wrap_content"
+            android:layout_width="72dp"
             android:layout_height="36dp"
             android:layout_alignParentRight="true"
             android:layout_below="@id/message_scrollView"
@@ -51,7 +51,7 @@
 
         <com.kcb.library.view.buttonflat.ButtonFlat
             android:id="@+id/button_cancel"
-            android:layout_width="wrap_content"
+            android:layout_width="72dp"
             android:layout_height="36dp"
             android:layout_alignBottom="@id/button_accept"
             android:layout_toLeftOf="@id/button_accept"
