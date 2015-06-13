@@ -27,6 +27,7 @@
     <string name="tch_student_center">学生中心</string>
     <!-- check in -->
     <string name="tch_start_checkin">开始签到</string>
+    <string name="tch_start">开始</string>
     <string name="tch_look_checkin_result">查看签到结果</string>
     <!-- test -->
     <string name="tch_start_test">开始测试</string>
@@ -68,7 +69,7 @@
     <!-- StartCheckInActivity start -->
     <string name="tch_tell_stu_checkin_num">将签到数字告诉在场的学生</string>
     <string name="tch_two_min_finish_checkin">开始后，学生有两分钟完成签到</string>
-    <string name="tch_start_checkin_tip">签到时间结束后可查看结果，点击确定开始签到。</string>
+    <string name="tch_start_checkin_tip">签到结束后可查看结果，点击确定开始签到。</string>
     <string name="tch_wait">请稍等……</string>
     <string name="tch_checkin_started">签到已开始</string>
     <!-- StartCheckInActivity end -->
