@@ -116,7 +116,7 @@
         <item name="android:textSize">@dimen/text_size_x_large</item>
         <item name="android:singleLine">true</item>
     </style>
-    
+
     <style name="home_tab">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">54dp</item>
@@ -144,6 +144,34 @@
         <item name="android:layout_marginLeft">36dp</item>
     </style>
 
+    <style name="home_popupwindow_layout">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/black_100</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="home_popupwindow_item_layout">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:text">""</item>
+    </style>
+
+    <style name="home_popupwindow_imageview">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">8dp</item>
+        <item name="android:layout_centerVertical">true</item>
+    </style>
+
+    <style name="home_popupwindow_textview">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingRight">16dp</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:textColor">@color/black_700</item>
+    </style>
     <!-- ********** Home end ********** -->
     <!-- **************************************** Common module End **************************************** -->
 

@@ -161,7 +161,7 @@ public class HomeActivity extends BaseFragmentActivity {
 
     @SuppressWarnings("deprecation")
     public void initPopupWindow() {
-        View customView = View.inflate(HomeActivity.this, R.layout.stu_popupwindow_setting, null);
+        View customView = View.inflate(HomeActivity.this, R.layout.stu_popupwindow_account, null);
         popupWindow =
                 new PopupWindow(customView, ViewGroup.LayoutParams.WRAP_CONTENT,
                         ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -192,12 +192,8 @@ public class HomeActivity extends BaseFragmentActivity {
 
         ButtonFlat modifyButton = (ButtonFlat) customView.findViewById(R.id.button_modifypassword);
         modifyButton.setOnClickListener(clickListener);
-        modifyButton.setTextColor(getResources().getColor(R.color.black_700));
-        modifyButton.setTextSize(14);
         ButtonFlat exitButton = (ButtonFlat) customView.findViewById(R.id.button_exit);
         exitButton.setOnClickListener(clickListener);
-        exitButton.setTextColor(getResources().getColor(R.color.black_700));
-        exitButton.setTextSize(14);
     }
 
     private void exitAccount() {
