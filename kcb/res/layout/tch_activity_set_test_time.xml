@@ -49,7 +49,7 @@
     <ListView
         android:id="@+id/listview_questions"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_below="@id/slider_testtime"
         android:layout_marginTop="8dp"
         android:divider="@color/black_divider"
