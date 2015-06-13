@@ -29,6 +29,15 @@
         android:textSize="@dimen/text_size_medium" />
 
     <ImageView
+        android:id="@+id/imageview_question_title"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignBottom="@id/edittext_question_title"
+        android:layout_alignLeft="@id/edittext_question_title"
+        android:layout_alignRight="@id/edittext_question_title"
+        android:layout_alignTop="@id/edittext_question_title" />
+
+    <ImageView
         android:id="@+id/imageview_delete_title"
         style="@style/tch_test_delete_bitmap"
         android:layout_alignRight="@id/edittext_question_title"
