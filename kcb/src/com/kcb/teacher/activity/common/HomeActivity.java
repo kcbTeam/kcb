@@ -97,16 +97,19 @@ public class HomeActivity extends BaseFragmentActivity {
 
         checkInButton = (ButtonFlat) findViewById(R.id.button_checkin);
         checkInButton.setOnClickListener(this);
+        checkInButton.setRippleColor("#bdbdbd");
         checkInImageView = (ImageView) findViewById(R.id.imageview_checkin);
         checkInTextView = (TextView) findViewById(R.id.textview_tab_checkin);
 
         testButton = (ButtonFlat) findViewById(R.id.button_test);
         testButton.setOnClickListener(this);
+        testButton.setRippleColor("#bdbdbd");
         testImageView = (ImageView) findViewById(R.id.imageview_test);
         testTextView = (TextView) findViewById(R.id.textview_tab_test);
 
         stuCenterButton = (ButtonFlat) findViewById(R.id.button_stucenter);
         stuCenterButton.setOnClickListener(this);
+        stuCenterButton.setRippleColor("#bdbdbd");
         stuCenterImageView = (ImageView) findViewById(R.id.imageview_stucenter);
         stuCenterTextView = (TextView) findViewById(R.id.textview_tab_stucenter);
     }
@@ -154,7 +157,7 @@ public class HomeActivity extends BaseFragmentActivity {
 
     private void showFragment(int index) {
         setTabTip(index);
-        setButtonTextColor(index);
+        setTap(index);
 
         mCurrentIndex = index;
         if (mCurrentIndex == INDEX_STUCENTER) {
@@ -218,7 +221,7 @@ public class HomeActivity extends BaseFragmentActivity {
         }
     }
 
-    private void setButtonTextColor(int index) {
+    private void setTap(int index) {
         Resources res = getResources();
         checkInImageView.setImageResource(R.drawable.ic_assignment_turned_in_white_36dp);
         checkInTextView.setTextColor(res.getColor(R.color.white));

@@ -7,16 +7,18 @@
     android:background="@color/activity_background"
     tools:ignore="contentDescription" >
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/layout_title"
         style="@style/common_title_layout" >
 
         <include layout="@layout/comm_button_avatar" />
 
         <TextView
-            android:id="@+id/textview_username"
-            style="@style/common_title" />
-    </LinearLayout>
+            android:id="@+id/textview_title"
+            style="@style/home_top_title"
+            android:layout_centerInParent="true"
+            android:gravity="center" />
+    </RelativeLayout>
 
     <fragment
         android:id="@+id/fragment_checkin"
@@ -37,25 +39,51 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:background="@color/black_300"
         android:orientation="horizontal" >
 
         <com.kcb.library.view.buttonflat.ButtonFlat
             android:id="@+id/button_checkin"
             style="@style/home_tab"
-            android:text="@string/stu_class_checkin"
+            android:text=""
             widget:clickAfterRipple="false"
-            widget:rippleSpeed="18" />
+            widget:rippleSpeed="18" >
+
+            <ImageView
+                android:id="@+id/imageview_checkin"
+                style="@style/home_tab_imageview"
+                android:src="@drawable/ic_assignment_turned_in_white_36dp" />
+
+            <TextView
+                android:id="@+id/textview_tab_checkin"
+                style="@style/home_tab_textview"
+                android:layout_below="@id/imageview_checkin"
+                android:text="@string/stu_class_checkin" />
+        </com.kcb.library.view.buttonflat.ButtonFlat>
 
         <com.kcb.library.view.buttonflat.ButtonFlat
             android:id="@+id/button_test"
             style="@style/home_tab"
-            android:text="@string/stu_class_test"
+            android:text=""
             widget:clickAfterRipple="false"
-            widget:rippleSpeed="18" />
+            widget:rippleSpeed="18" >
+
+            <ImageView
+                android:id="@+id/imageview_test"
+                style="@style/home_tab_imageview"
+                android:src="@drawable/ic_event_note_white_36dp" />
+
+            <TextView
+                android:id="@+id/textview_tab_test"
+                style="@style/home_tab_textview"
+                android:layout_below="@id/imageview_test"
+                android:text="@string/stu_class_test" />
+        </com.kcb.library.view.buttonflat.ButtonFlat>
     </LinearLayout>
 
     <View
         style="@style/common_divider"
-        android:layout_above="@id/layout_buttons" />
+        android:layout_above="@id/layout_buttons"
+        android:background="@color/black_200" />
 
 </RelativeLayout>

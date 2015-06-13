@@ -7,26 +7,25 @@
     android:background="@color/activity_background"
     tools:ignore="contentDescription" >
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/layout_title"
         style="@style/common_title_layout" >
 
         <include layout="@layout/comm_button_avatar" />
 
         <TextView
-            android:id="@+id/textview_username"
-            style="@style/common_title"
-            android:layout_weight="0" />
-
-        <TextView
             android:id="@+id/textview_title"
             style="@style/home_top_title"
+            android:layout_centerInParent="true"
             android:gravity="center" />
 
         <include
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
             layout="@layout/comm_button_refresh"
             android:visibility="invisible" />
-    </LinearLayout>
+    </RelativeLayout>
 
     <com.kcb.library.view.smoothprogressbar.SmoothProgressBar
         android:id="@+id/progressbar_refresh"
@@ -98,10 +97,10 @@
     </LinearLayout>
 
     <View
-        android:background="@color/black_200"
         android:id="@+id/view_line"
         style="@style/common_divider"
-        android:layout_above="@id/layout_buttons" />
+        android:layout_above="@id/layout_buttons"
+        android:background="@color/black_200" />
 
     <FrameLayout
         android:id="@+id/fragment_content"

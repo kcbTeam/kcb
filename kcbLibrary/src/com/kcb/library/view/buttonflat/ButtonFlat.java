@@ -22,7 +22,7 @@ public class ButtonFlat extends Button {
 
     protected void setDefaultProperties() {
         minHeight = 36;
-        minWidth = 88;
+        minWidth = 48;
         rippleSize = 3;
         // Min size
         setMinimumHeight(Utils.dpToPx(minHeight, getResources()));
@@ -72,7 +72,7 @@ public class ButtonFlat extends Button {
 
             Paint paint = new Paint();
             paint.setAntiAlias(true);
-            paint.setColor(makePressColor());
+            paint.setColor(rippleColor);
             canvas.drawCircle(x, y, radius, paint);
             if (radius > getHeight() / rippleSize) radius += rippleSpeed;
             if (radius >= getWidth()) {
@@ -93,7 +93,7 @@ public class ButtonFlat extends Button {
      */
     @Override
     protected int makePressColor() {
-        return Color.parseColor("#88DDDDDD");
+        return Color.parseColor("#e0e0e0");
     }
 
     public void setText(int resid) {

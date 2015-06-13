@@ -8,14 +8,14 @@
 
     <com.kcb.library.view.buttonflat.ButtonFlat
         android:id="@+id/button_modifypassword"
-        android:layout_width="wrap_content"
+        android:layout_width="96dp"
         android:layout_height="48dp"
         android:text="@string/tch_modify_password"
         widget:rippleSpeed="12" />
 
     <com.kcb.library.view.buttonflat.ButtonFlat
         android:id="@+id/button_exit"
-        android:layout_width="wrap_content"
+        android:layout_width="96dp"
         android:layout_height="48dp"
         android:text="@string/stu_exit_account"
         widget:rippleSpeed="12" />

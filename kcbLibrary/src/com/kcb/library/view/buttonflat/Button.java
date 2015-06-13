@@ -139,15 +139,13 @@ public abstract class Button extends CustomView {
      * @return
      */
     protected int makePressColor() {
-        return Color.parseColor("#9e9e9e");
-        
-//        int r = (this.backgroundColor >> 16) & 0xFF;
-//        int g = (this.backgroundColor >> 8) & 0xFF;
-//        int b = (this.backgroundColor >> 0) & 0xFF;
-//        r = (r - 30 < 0) ? 0 : r - 30;
-//        g = (g - 30 < 0) ? 0 : g - 30;
-//        b = (b - 30 < 0) ? 0 : b - 30;
-//        return Color.rgb(r, g, b);
+        int r = (this.backgroundColor >> 16) & 0xFF;
+        int g = (this.backgroundColor >> 8) & 0xFF;
+        int b = (this.backgroundColor >> 0) & 0xFF;
+        r = (r - 30 < 0) ? 0 : r - 30;
+        g = (g - 30 < 0) ? 0 : g - 30;
+        b = (b - 30 < 0) ? 0 : b - 30;
+        return Color.rgb(r, g, b);
     }
 
     @Override
@@ -174,5 +172,9 @@ public abstract class Button extends CustomView {
 
     public float getRippleSpeed() {
         return this.rippleSpeed;
+    }
+
+    public void setRippleColor(String color) {
+        rippleColor = Color.parseColor(color);
     }
 }
