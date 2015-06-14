@@ -7,7 +7,7 @@
 
     <TextView
         android:id="@+id/textview_input_problem_tip"
-        style="@style/common_tip"
+        style="@style/common_tip_textview"
         android:text="@string/tch_input_title" />
 
     <EditText
@@ -47,7 +47,7 @@
 
     <TextView
         android:id="@+id/input_options_hint"
-        style="@style/common_tip"
+        style="@style/common_tip_textview"
         android:layout_below="@id/edittext_title"
         android:text="@string/tch_input_choice" />
 

@@ -1,8 +1,10 @@
 package com.kcb.common.view.test;
 
 import android.content.Context;
-import android.graphics.drawable.BitmapDrawable;
+import android.graphics.Bitmap;
+import android.os.AsyncTask;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -31,21 +33,29 @@ public class ShowQuestionView extends LinearLayout {
     private TextView questionIndexTextView;
 
     private TextView titleTextView;
-    private TextView choiceATextView;
-    private TextView choiceBTextView;
-    private TextView choiceCTextView;
-    private TextView choiceDTextView;
+    private ImageView titleImageView;
 
-    private ImageView checkBoxA;
-    private ImageView checkBoxB;
-    private ImageView checkBoxC;
-    private ImageView checkBoxD;
+    private TextView aTextView;
+    private ImageView aImageView;
+    private ImageView aCheckBox;
+
+    private TextView bTextView;
+    private ImageView bImageView;
+    private ImageView bCheckBox;
+
+    private TextView cTextView;
+    private ImageView cImageView;
+    private ImageView cCheckBox;
+
+    private TextView dTextView;
+    private ImageView dImageView;
+    private ImageView dCheckBoxd;
 
     private Context mContext;
 
     public void init(Context context) {
         mContext = context;
-        inflate(mContext, R.layout.comm_view_question, null);
+        inflate(mContext, R.layout.comm_view_question_show, this);
         initView();
     }
 
@@ -53,37 +63,47 @@ public class ShowQuestionView extends LinearLayout {
         questionIndexTextView = (TextView) findViewById(R.id.textview_question_index);
 
         titleTextView = (TextView) findViewById(R.id.textview_title);
-        choiceATextView = (TextView) findViewById(R.id.textview_A);
-        choiceBTextView = (TextView) findViewById(R.id.textview_B);
-        choiceCTextView = (TextView) findViewById(R.id.textview_C);
-        choiceDTextView = (TextView) findViewById(R.id.textview_D);
+        titleImageView = (ImageView) findViewById(R.id.imageview_title);
 
-        checkBoxA = (ImageView) findViewById(R.id.checkBox_A);
-        checkBoxB = (ImageView) findViewById(R.id.checkBox_B);
-        checkBoxC = (ImageView) findViewById(R.id.checkBox_C);
-        checkBoxD = (ImageView) findViewById(R.id.checkBox_D);
+        aTextView = (TextView) findViewById(R.id.textview_A);
+        aImageView = (ImageView) findViewById(R.id.imageview_A);
+        aCheckBox = (ImageView) findViewById(R.id.checkBox_A);
+
+        bTextView = (TextView) findViewById(R.id.textview_B);
+        bImageView = (ImageView) findViewById(R.id.imageview_B);
+        bCheckBox = (ImageView) findViewById(R.id.checkBox_B);
+
+        cTextView = (TextView) findViewById(R.id.textview_C);
+        cImageView = (ImageView) findViewById(R.id.imageview_C);
+        cCheckBox = (ImageView) findViewById(R.id.checkBox_C);
+
+        dTextView = (TextView) findViewById(R.id.textview_D);
+        dImageView = (ImageView) findViewById(R.id.imageview_D);
+        dCheckBoxd = (ImageView) findViewById(R.id.checkBox_D);
     }
 
-    public void showQuestionIndex(String text) {
-        questionIndexTextView.setText(text);
+    public void showQuestion(int questionIndex, Question question) {
+        questionIndexTextView.setText(String.format(
+                mContext.getString(R.string.tch_question_index), questionIndex + 1));
+
+        showQuestionItem(titleTextView, titleImageView, null, question.getTitle());
+        showQuestionItem(aTextView, aImageView, aCheckBox, question.getChoiceA());
+        showQuestionItem(bTextView, bImageView, bCheckBox, question.getChoiceB());
+        showQuestionItem(cTextView, cImageView, cCheckBox, question.getChoiceC());
+        showQuestionItem(dTextView, dImageView, dCheckBoxd, question.getChoiceD());
     }
 
-    public void showQuestion(Question question) {
-        showQuestionItem(titleTextView, null, question.getTitle());
-        showQuestionItem(choiceATextView, checkBoxA, question.getChoiceA());
-        showQuestionItem(choiceBTextView, checkBoxB, question.getChoiceB());
-        showQuestionItem(choiceCTextView, checkBoxC, question.getChoiceC());
-        showQuestionItem(choiceDTextView, checkBoxD, question.getChoiceD());
-    }
-
-    @SuppressWarnings("deprecation")
-    private void showQuestionItem(TextView view, ImageView checkIcon, QuestionItem item) {
+    private void showQuestionItem(TextView textView, ImageView imageView, ImageView checkIcon,
+            QuestionItem item) {
         if (item.isText()) {
-            view.setText(item.getText());
-            view.setBackgroundResource(0);
+            textView.setText(item.getText());
+            textView.setVisibility(View.VISIBLE);
+            imageView.setVisibility(View.GONE);
         } else {
-            view.setText("");
-            view.setBackgroundDrawable(new BitmapDrawable(item.getBitmap()));
+            textView.setText("");
+            textView.setVisibility(View.GONE);
+            new LoadBitmapAsyncTask(imageView).execute(item);
+            imageView.setVisibility(View.VISIBLE);
         }
         if (null != checkIcon) {
             if (item.isSelected()) {
@@ -91,6 +111,26 @@ public class ShowQuestionView extends LinearLayout {
             } else {
                 checkIcon.setBackgroundResource(R.drawable.ic_check_box_outline_blank_grey600_18dp);
             }
+        }
+    }
+
+    private class LoadBitmapAsyncTask extends AsyncTask<QuestionItem, Integer, Bitmap> {
+
+        private ImageView imageView;
+
+        public LoadBitmapAsyncTask(ImageView _imageView) {
+            imageView = _imageView;
+        }
+
+        @Override
+        protected Bitmap doInBackground(QuestionItem... params) {
+            Bitmap bitmap = params[0].getBitmap();
+            return bitmap;
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap result) {
+            imageView.setImageBitmap(result);
         }
     }
 

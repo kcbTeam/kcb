@@ -34,7 +34,7 @@
 
     <TextView
         android:id="@+id/textview_tip"
-        style="@style/common_tip"
+        style="@style/common_tip_textview"
         android:layout_alignTop="@id/imageview_warring"
         android:layout_toRightOf="@id/imageview_warring"
         android:paddingBottom="0dp"

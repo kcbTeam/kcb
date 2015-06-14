@@ -42,7 +42,7 @@ public class CheckInFragment extends BaseFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstaceState) {
-        return inflater.inflate(R.layout.stu_fragment_sign, container, false);
+        return inflater.inflate(R.layout.stu_fragment_checkin, container, false);
     }
 
     @Override

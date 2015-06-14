@@ -15,7 +15,7 @@
 
     <com.kcb.library.view.PaperButton
         android:id="@+id/button_stu"
-        style="@style/home_center_button"
+        style="@style/common_paper_button_big"
         android:layout_above="@+id/button_tch"
         android:visibility="gone"
         widget:paper_text="@string/comm_student"
@@ -24,7 +24,7 @@
 
     <com.kcb.library.view.PaperButton
         android:id="@+id/button_tch"
-        style="@style/home_center_button"
+        style="@style/common_paper_button_big"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="24dp"
         android:visibility="gone"

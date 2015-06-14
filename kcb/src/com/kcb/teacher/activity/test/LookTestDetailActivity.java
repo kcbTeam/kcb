@@ -88,9 +88,7 @@ public class LookTestDetailActivity extends BaseActivity {
     }
 
     private void showQuestion() {
-        questionView.showQuestionIndex(String.format(getString(R.string.tch_question_index),
-                mQuestionIndex + 1));
-        questionView.showQuestion(sTest.getQuestion(mQuestionIndex));
+        questionView.showQuestion(mQuestionIndex, sTest.getQuestion(mQuestionIndex));
     }
 
     @Override
