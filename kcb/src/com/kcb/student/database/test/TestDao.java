@@ -35,6 +35,33 @@ public class TestDao {
         mDatabase.insert(TestTable.TABLE_NAME, null, contentValues);
     }
 
+    /**
+     * 获取测试时间已到的测试
+     */
+    public List<Test> getTerminatedTests() {
+        Cursor cursor =
+                mDatabase.query(TestTable.TABLE_NAME, new String[] {TestTable.COLUMN_NAME}, null,
+                        null, null, null, null);
+        List<Test> tests = new ArrayList<Test>();
+        if (null != cursor) {
+            try {
+                if (cursor.moveToFirst()) {
+                    do {
+                        try {
+                            Test test =
+                                    Test.fromJsonObject(new JSONObject(cursor.getString(cursor
+                                            .getColumnIndex(TestTable.COLUMN_ROW_DATA))));
+                            tests.add(test);
+                        } catch (JSONException e) {}
+                    } while (cursor.moveToNext());
+                }
+            } catch (Exception e) {} finally {
+                cursor.close();
+            }
+        }
+        return tests;
+    }
+
     public List<Test> getAll() {
         Cursor cursor = mDatabase.query(TestTable.TABLE_NAME, null, null, null, null, null, null);
         List<Test> tests = new ArrayList<Test>();
