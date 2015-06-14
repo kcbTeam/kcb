@@ -1,5 +1,6 @@
 package com.kcb.teacher.activity.common;
 
+import android.R.integer;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.view.View;
 import com.android.volley.Request.Method;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
+import com.android.volley.NetworkResponse;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.kcb.common.activity.StartActivity;
@@ -119,11 +121,12 @@ public class LoginActivity extends BaseActivity {
                                 }, new ErrorListener() {
                                     public void onErrorResponse(VolleyError error) {
                                         loginProgressBar.hide(LoginActivity.this);
-
-                                        if (null != error.networkResponse) {
-                                            if (error.networkResponse.statusCode == 400) {
+                                        NetworkResponse networkResponse = error.networkResponse;
+                                        if (null != networkResponse) {
+                                            int statusCode = networkResponse.statusCode;
+                                            if (statusCode == 400) {
                                                 ToastUtil.toast(R.string.tch_id_error);
-                                            } else if (error.networkResponse.statusCode == 401) {
+                                            } else if (statusCode == 401) {
                                                 ToastUtil.toast(R.string.tch_password_error);
                                             }
                                         } else {

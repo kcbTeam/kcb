@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import com.android.volley.Request.Method;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
+import com.android.volley.NetworkResponse;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.kcb.common.base.BaseFragment;
@@ -105,8 +106,9 @@ public class CheckInFragment extends BaseFragment {
                 }, new ErrorListener() {
                     public void onErrorResponse(VolleyError error) {
                         progressBar.hide(getActivity());
-                        if (null != error.networkResponse) {
-                            int statusCode = error.networkResponse.statusCode;
+                        NetworkResponse networkResponse = error.networkResponse;
+                        if (null != networkResponse) {
+                            int statusCode = networkResponse.statusCode;
                             if (statusCode == 400) {
                                 ToastUtil.toast(R.string.stu_no_checkin);
                             } else if (statusCode == 401) {

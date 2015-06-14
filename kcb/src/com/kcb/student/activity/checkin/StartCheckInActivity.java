@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request.Method;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
@@ -215,7 +216,9 @@ public class StartCheckInActivity extends BaseActivity {
                                 @Override
                                 public void onErrorResponse(VolleyError error) {
                                     progressBar.hide(StartCheckInActivity.this);
-                                    if (error.networkResponse.statusCode == 400) {
+                                    NetworkResponse networkResponse = error.networkResponse;
+                                    if (null != networkResponse
+                                            && networkResponse.statusCode == 400) {
                                         ToastUtil.toast(R.string.stu_checkin_num_error);
                                         clearNum();
                                     } else {

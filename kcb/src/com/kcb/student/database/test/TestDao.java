@@ -39,29 +39,18 @@ public class TestDao {
      * 获取测试时间已到的测试
      */
     public List<Test> getTerminatedTests() {
-        Cursor cursor =
-                mDatabase.query(TestTable.TABLE_NAME, new String[] {TestTable.COLUMN_NAME}, null,
-                        null, null, null, null);
-        List<Test> tests = new ArrayList<Test>();
-        if (null != cursor) {
-            try {
-                if (cursor.moveToFirst()) {
-                    do {
-                        try {
-                            Test test =
-                                    Test.fromJsonObject(new JSONObject(cursor.getString(cursor
-                                            .getColumnIndex(TestTable.COLUMN_ROW_DATA))));
-                            tests.add(test);
-                        } catch (JSONException e) {}
-                    } while (cursor.moveToNext());
-                }
-            } catch (Exception e) {} finally {
-                cursor.close();
+        List<Test> tests = getAll();
+        for (Test test : tests) {
+            if (test.getDate() + test.getTime() * 60 * 1000 > System.currentTimeMillis()) {
+                tests.remove(test);
             }
         }
         return tests;
     }
 
+    /**
+     * 获得所有的测试，包括已经结束的和未结束的
+     */
     public List<Test> getAll() {
         Cursor cursor = mDatabase.query(TestTable.TABLE_NAME, null, null, null, null, null, null);
         List<Test> tests = new ArrayList<Test>();

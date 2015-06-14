@@ -80,7 +80,7 @@ public class LookTestActivity extends BaseActivity implements OnSearchListener, 
     @Override
     protected void initData() {
         TestDao testDao = new TestDao(LookTestActivity.this);
-        mAllTests = testDao.getAll();
+        mAllTests = testDao.getTerminatedTests();
         testDao.close();
 
         if (mAllTests.isEmpty()) {

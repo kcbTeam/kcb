@@ -8,6 +8,7 @@ import android.view.View;
 import com.android.volley.Request.Method;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
+import com.android.volley.NetworkResponse;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.kcb.common.base.BaseActivity;
@@ -135,8 +136,8 @@ public class ModifyPasswordActivity extends BaseActivity {
                         @Override
                         public void onErrorResponse(VolleyError error) {
                             nextProgressBar.hide(ModifyPasswordActivity.this);
-                            if (null != error.networkResponse
-                                    && error.networkResponse.statusCode == 400) {
+                            NetworkResponse networkResponse = error.networkResponse;
+                            if (null != networkResponse && networkResponse.statusCode == 400) {
                                 ToastUtil.toast(R.string.stu_password_error);
                             } else {
                                 ResponseUtil.toastError(error);

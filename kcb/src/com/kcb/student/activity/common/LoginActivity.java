@@ -12,6 +12,7 @@ import android.view.View;
 import com.android.volley.Request.Method;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
+import com.android.volley.NetworkResponse;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.kcb.common.activity.StartActivity;
@@ -141,10 +142,12 @@ public class LoginActivity extends BaseActivity {
                             }, new ErrorListener() {
                                 public void onErrorResponse(VolleyError error) {
                                     loginProgressBar.hide(LoginActivity.this);
-                                    if (null != error.networkResponse) {
-                                        if (error.networkResponse.statusCode == 400) {
+                                    NetworkResponse networkResponse = error.networkResponse;
+                                    if (null != networkResponse) {
+                                        int statusCode = networkResponse.statusCode;
+                                        if (statusCode == 400) {
                                             ToastUtil.toast(R.string.stu_id_error);
-                                        } else if (error.networkResponse.statusCode == 401) {
+                                        } else if (statusCode == 401) {
                                             ToastUtil.toast(R.string.stu_password_error);
                                         }
                                     } else {
