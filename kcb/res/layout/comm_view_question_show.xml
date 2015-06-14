@@ -50,7 +50,7 @@
 
     <LinearLayout
         android:id="@+id/layout_A"
-        style="@style/tch_question_show_choice_layout"
+        style="@style/common_question_show_choice"
         android:layout_marginBottom="2dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="8dp"
@@ -58,20 +58,20 @@
 
         <TextView
             android:id="@+id/textview_tipa"
-            style="@style/tch_question_show_choice_tip"
+            style="@style/common_question_show_choice_tip"
             android:text="@string/tch_choice_A" />
 
         <TextView
             android:id="@+id/textview_A"
-            style="@style/tch_question_show_choice_textview" />
+            style="@style/common_question_show_choice_textview" />
 
         <ImageView
             android:id="@+id/imageview_A"
-            style="@style/tch_question_show_choice_imageview" />
+            style="@style/common_question_show_choice_imageview" />
 
         <ImageView
             android:id="@+id/checkBox_A"
-            style="@style/tch_question_show_choice_checkbox"
+            style="@style/common_question_show_choice_checkbox"
             android:layout_margin="4dp" />
     </LinearLayout>
 
@@ -85,7 +85,7 @@
 
     <LinearLayout
         android:id="@+id/layout_B"
-        style="@style/tch_question_show_choice_layout"
+        style="@style/common_question_show_choice"
         android:layout_marginBottom="2dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="8dp"
@@ -93,20 +93,20 @@
 
         <TextView
             android:id="@+id/textview_tipb"
-            style="@style/tch_question_show_choice_tip"
+            style="@style/common_question_show_choice_tip"
             android:text="@string/tch_choice_B" />
 
         <TextView
             android:id="@+id/textview_B"
-            style="@style/tch_question_show_choice_textview" />
+            style="@style/common_question_show_choice_textview" />
 
         <ImageView
             android:id="@+id/imageview_B"
-            style="@style/tch_question_show_choice_imageview" />
+            style="@style/common_question_show_choice_imageview" />
 
         <ImageView
             android:id="@+id/checkBox_B"
-            style="@style/tch_question_show_choice_checkbox"
+            style="@style/common_question_show_choice_checkbox"
             android:layout_margin="4dp" />
     </LinearLayout>
 
@@ -120,7 +120,7 @@
 
     <LinearLayout
         android:id="@+id/layout_C"
-        style="@style/tch_question_show_choice_layout"
+        style="@style/common_question_show_choice"
         android:layout_marginBottom="2dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="8dp"
@@ -128,20 +128,20 @@
 
         <TextView
             android:id="@+id/textview_tipc"
-            style="@style/tch_question_show_choice_tip"
+            style="@style/common_question_show_choice_tip"
             android:text="@string/tch_choice_C" />
 
         <TextView
             android:id="@+id/textview_C"
-            style="@style/tch_question_show_choice_textview" />
+            style="@style/common_question_show_choice_textview" />
 
         <ImageView
             android:id="@+id/imageview_C"
-            style="@style/tch_question_show_choice_imageview" />
+            style="@style/common_question_show_choice_imageview" />
 
         <ImageView
             android:id="@+id/checkBox_C"
-            style="@style/tch_question_show_choice_checkbox"
+            style="@style/common_question_show_choice_checkbox"
             android:layout_margin="4dp" />
     </LinearLayout>
 
@@ -155,7 +155,7 @@
 
     <LinearLayout
         android:id="@+id/layout_D"
-        style="@style/tch_question_show_choice_layout"
+        style="@style/common_question_show_choice"
         android:layout_marginBottom="8dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="8dp"
@@ -163,20 +163,20 @@
 
         <TextView
             android:id="@+id/textview_tipd"
-            style="@style/tch_question_show_choice_tip"
+            style="@style/common_question_show_choice_tip"
             android:text="@string/tch_choice_D" />
 
         <TextView
             android:id="@+id/textview_D"
-            style="@style/tch_question_show_choice_textview" />
+            style="@style/common_question_show_choice_textview" />
 
         <ImageView
             android:id="@+id/imageview_D"
-            style="@style/tch_question_show_choice_imageview" />
+            style="@style/common_question_show_choice_imageview" />
 
         <ImageView
             android:id="@+id/checkBox_D"
-            style="@style/tch_question_show_choice_checkbox"
+            style="@style/common_question_show_choice_checkbox"
             android:layout_margin="4dp" />
     </LinearLayout>
 

@@ -7,8 +7,8 @@
     <!-- ********** Application theme. ********** -->
 
 
-    <!-- **************************************** Common module Start **************************************** -->
-    <!-- **************************************** Common module Start **************************************** -->
+    <!-- **************************************** 公共模块 Start **************************************** -->
+    <!-- **************************************** 公共模块  Start **************************************** -->
     <!-- ********** Common start ********** -->
     <!-- activity 的顶部标题栏 -->
     <style name="common_title_layout">
@@ -116,7 +116,7 @@
 
     <!-- ********** Home start ********** -->
     <!-- 上方中部显示tab的文字 -->
-    <style name="home_top_title">
+    <style name="common_center_title">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/black_700</item>
@@ -124,19 +124,19 @@
         <item name="android:singleLine">true</item>
     </style>
     <!-- 下方的tab -->
-    <style name="home_tab">
+    <style name="common_tab">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">54dp</item>
         <item name="android:layout_weight">1</item>
     </style>
     <!-- 下方tab中的图片 -->
-    <style name="home_tab_imageview">
+    <style name="common_tab_imageview">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_centerHorizontal">true</item>
     </style>
     <!-- 下方tab中的文字 -->
-    <style name="home_tab_textview">
+    <style name="common_tab_textview">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_centerHorizontal">true</item>
@@ -144,20 +144,20 @@
         <item name="android:textColor">@color/white</item>
     </style>
     <!-- 弹窗的布局 -->
-    <style name="home_popupwindow_layout">
+    <style name="common_popupwindow">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:background">@color/black_100</item>
         <item name="android:orientation">vertical</item>
     </style>
     <!-- 弹窗中每一项的布局 -->
-    <style name="home_popupwindow_item">
+    <style name="common_popupwindow_item">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">48dp</item>
         <item name="android:text">""</item>
     </style>
     <!-- 弹窗中每一项的图标 -->
-    <style name="home_popupwindow_item_imageview">
+    <style name="common_popupwindow_item_imageview">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:paddingLeft">16dp</item>
@@ -165,7 +165,7 @@
         <item name="android:layout_centerVertical">true</item>
     </style>
     <!-- 弹窗中每一项的文字 -->
-    <style name="home_popupwindow_item_textview">
+    <style name="common_popupwindow_item_textview">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:paddingRight">16dp</item>
@@ -177,14 +177,14 @@
 
     <!-- ********** ShowQuestion start ********** -->
     <!-- 选项的布局 -->
-    <style name="tch_question_show_choice_layout">
+    <style name="common_question_show_choice">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:orientation">horizontal</item>
     </style>
     <!-- 选项的提示，A，B，C，D -->
-    <style name="tch_question_show_choice_tip">
+    <style name="common_question_show_choice_tip">
         <item name="android:layout_gravity">top</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -194,7 +194,7 @@
         <item name="android:textSize">@dimen/text_size_medium</item>
     </style>
     <!-- 显示选项文字 -->
-    <style name="tch_question_show_choice_textview">
+    <style name="common_question_show_choice_textview">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_weight">1</item>
@@ -203,7 +203,7 @@
         <item name="android:textSize">@dimen/text_size_medium</item>
     </style>
     <!-- 显示选项图片 -->
-    <style name="tch_question_show_choice_imageview">
+    <style name="common_question_show_choice_imageview">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:maxHeight">100dp</item>
@@ -214,18 +214,18 @@
         <item name="android:scaleType">fitCenter</item>
     </style>
     <!-- 显示选项的答案选择框 -->
-    <style name="tch_question_show_choice_checkbox">
+    <style name="common_question_show_choice_checkbox">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_gravity">top</item>
     </style>
     <!-- ********** ShowQuestion end ********** -->
-    <!-- **************************************** Common module End **************************************** -->
-    <!-- **************************************** Common module End **************************************** -->
+    <!-- **************************************** 公共模块  End **************************************** -->
+    <!-- **************************************** 公共模块  End **************************************** -->
 
 
-    <!-- **************************************** Student module Start **************************************** -->
-    <!-- **************************************** Student module Start **************************************** -->
+    <!-- **************************************** 学生模块 Start **************************************** -->
+    <!-- **************************************** 学生模块 Start **************************************** -->
     <!-- ********** CheckIn start ********** -->
     <!-- 输入四个签到数字 -->
     <style name="stu_checkin_num">
@@ -238,12 +238,12 @@
         <item name="android:background">@drawable/comm_rectangle</item>
     </style>
     <!-- ********** CheckIn end ********** -->
-    <!-- **************************************** Student module End **************************************** -->
-    <!-- **************************************** Student module End **************************************** -->
+    <!-- **************************************** 学生模块 End **************************************** -->
+    <!-- **************************************** 学生模块 End **************************************** -->
 
 
-    <!-- **************************************** Teacher module Start **************************************** -->
-    <!-- **************************************** Teacher module Start **************************************** -->
+    <!-- **************************************** 老师模块 Start **************************************** -->
+    <!-- **************************************** 老师模块 Start **************************************** -->
     <!-- StartCheckIn start -->
     <!-- 显示4个签到数字 -->
     <style name="tch_checkin_num">
@@ -318,7 +318,7 @@
         <item name="android:background">@color/blue</item>
     </style>
     <!-- Edit Question View end -->
-    <!-- **************************************** Teacher module End **************************************** -->
-    <!-- **************************************** Teacher module End **************************************** -->
+    <!-- **************************************** 老师模块 End **************************************** -->
+    <!-- **************************************** 老师模块 End **************************************** -->
 
 </resources>
