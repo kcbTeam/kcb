@@ -12,7 +12,7 @@ import org.json.JSONObject;
 
 import com.kcb.common.model.answer.QuestionAnswer;
 import com.kcb.common.model.answer.TestAnswer;
-import com.kcb.common.util.FileUtil;
+import com.kcb.student.util.FileUtil;
 
 public class Test implements Serializable {
 
@@ -139,7 +139,7 @@ public class Test implements Serializable {
         }
     }
 
-    // 转成的string存放到数据库中了
+    // 转成的string不会放到数据库中，只保存路径
     @Override
     public String toString() {
         return toJsonObject(false).toString();
