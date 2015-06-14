@@ -41,7 +41,7 @@
 
     <ImageView
         android:id="@+id/imageview_delete_title"
-        style="@style/tch_test_delete_bitmap"
+        style="@style/tch_question_edit_delete_imageview"
         android:layout_alignRight="@id/edittext_title"
         android:layout_alignTop="@id/edittext_title" />
 
@@ -63,7 +63,7 @@
 
             <LinearLayout
                 android:id="@+id/layout_A"
-                style="@style/tch_test_choice_layout"
+                style="@style/tch_question_edit_choice_layout"
                 android:layout_marginBottom="4dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="8dp"
@@ -71,38 +71,38 @@
 
                 <TextView
                     android:id="@+id/textview_A"
-                    style="@style/tch_test_choice_tip"
+                    style="@style/tch_question_edit_choice_tip"
                     android:text="@string/tch_choice_A" />
 
                 <RelativeLayout
-                    style="@style/question_item_layout"
+                    style="@style/tch_question_edit_choice_inputlayout"
                     android:layout_marginRight="4dp" >
 
                     <EditText
                         android:id="@+id/edittext_A"
-                        style="@style/tch_test_input_choice"
+                        style="@style/tch_question_edit_choice_edittext"
                         android:hint="@string/tch_edit_question_item_hint"
                         android:textColorHint="@color/black_400" />
 
                     <ImageView
                         android:id="@+id/imageview_A"
-                        style="@style/question_item_imageview" />
+                        style="@style/tch_question_edit_choice_imageview" />
 
                     <ImageView
                         android:id="@+id/imageview_delete_a"
-                        style="@style/tch_test_delete_bitmap"
+                        style="@style/tch_question_edit_delete_imageview"
                         android:layout_alignParentRight="true"
                         android:layout_alignTop="@id/edittext_A" />
                 </RelativeLayout>
 
                 <com.kcb.library.view.checkbox.CheckBox
                     android:id="@+id/checkBox_A"
-                    style="@style/tch_test_checkbox" />
+                    style="@style/tch_question_edit_choice_checkbox" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/layout_B"
-                style="@style/tch_test_choice_layout"
+                style="@style/tch_question_edit_choice_layout"
                 android:layout_below="@id/layout_A"
                 android:layout_marginBottom="4dp"
                 android:layout_marginLeft="16dp"
@@ -111,36 +111,36 @@
 
                 <TextView
                     android:id="@+id/textview_B"
-                    style="@style/tch_test_choice_tip"
+                    style="@style/tch_question_edit_choice_tip"
                     android:text="@string/tch_choice_B" />
 
                 <RelativeLayout
-                    style="@style/question_item_layout"
+                    style="@style/tch_question_edit_choice_inputlayout"
                     android:layout_marginRight="4dp" >
 
                     <EditText
                         android:id="@+id/edittext_B"
-                        style="@style/tch_test_input_choice" />
+                        style="@style/tch_question_edit_choice_edittext" />
 
                     <ImageView
                         android:id="@+id/imageview_B"
-                        style="@style/question_item_imageview" />
+                        style="@style/tch_question_edit_choice_imageview" />
 
                     <ImageView
                         android:id="@+id/imageview_delete_b"
-                        style="@style/tch_test_delete_bitmap"
+                        style="@style/tch_question_edit_delete_imageview"
                         android:layout_alignParentRight="true"
                         android:layout_alignTop="@id/edittext_B" />
                 </RelativeLayout>
 
                 <com.kcb.library.view.checkbox.CheckBox
                     android:id="@+id/checkBox_B"
-                    style="@style/tch_test_checkbox" />
+                    style="@style/tch_question_edit_choice_checkbox" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/layout_C"
-                style="@style/tch_test_choice_layout"
+                style="@style/tch_question_edit_choice_layout"
                 android:layout_below="@id/layout_B"
                 android:layout_marginBottom="4dp"
                 android:layout_marginLeft="16dp"
@@ -149,36 +149,36 @@
 
                 <TextView
                     android:id="@+id/textview_C"
-                    style="@style/tch_test_choice_tip"
+                    style="@style/tch_question_edit_choice_tip"
                     android:text="@string/tch_choice_C" />
 
                 <RelativeLayout
-                    style="@style/question_item_layout"
+                    style="@style/tch_question_edit_choice_inputlayout"
                     android:layout_marginRight="4dp" >
 
                     <EditText
                         android:id="@+id/edittext_C"
-                        style="@style/tch_test_input_choice" />
+                        style="@style/tch_question_edit_choice_edittext" />
 
                     <ImageView
                         android:id="@+id/imageview_C"
-                        style="@style/question_item_imageview" />
+                        style="@style/tch_question_edit_choice_imageview" />
 
                     <ImageView
                         android:id="@+id/imageview_delete_c"
-                        style="@style/tch_test_delete_bitmap"
+                        style="@style/tch_question_edit_delete_imageview"
                         android:layout_alignParentRight="true"
                         android:layout_alignTop="@id/edittext_C" />
                 </RelativeLayout>
 
                 <com.kcb.library.view.checkbox.CheckBox
                     android:id="@+id/checkBox_C"
-                    style="@style/tch_test_checkbox" />
+                    style="@style/tch_question_edit_choice_checkbox" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/layout_D"
-                style="@style/tch_test_choice_layout"
+                style="@style/tch_question_edit_choice_layout"
                 android:layout_below="@id/layout_C"
                 android:layout_marginBottom="4dp"
                 android:layout_marginLeft="16dp"
@@ -187,31 +187,31 @@
 
                 <TextView
                     android:id="@+id/textview_D"
-                    style="@style/tch_test_choice_tip"
+                    style="@style/tch_question_edit_choice_tip"
                     android:text="@string/tch_choice_D" />
 
                 <RelativeLayout
-                    style="@style/question_item_layout"
+                    style="@style/tch_question_edit_choice_inputlayout"
                     android:layout_marginRight="4dp" >
 
                     <EditText
                         android:id="@+id/edittext_D"
-                        style="@style/tch_test_input_choice" />
+                        style="@style/tch_question_edit_choice_edittext" />
 
                     <ImageView
                         android:id="@+id/imageview_D"
-                        style="@style/question_item_imageview" />
+                        style="@style/tch_question_edit_choice_imageview" />
 
                     <ImageView
                         android:id="@+id/imageview_delete_d"
-                        style="@style/tch_test_delete_bitmap"
+                        style="@style/tch_question_edit_delete_imageview"
                         android:layout_alignParentRight="true"
                         android:layout_alignTop="@id/edittext_D" />
                 </RelativeLayout>
 
                 <com.kcb.library.view.checkbox.CheckBox
                     android:id="@+id/checkBox_D"
-                    style="@style/tch_test_checkbox" />
+                    style="@style/tch_question_edit_choice_checkbox" />
             </LinearLayout>
         </RelativeLayout>
     </ScrollView>

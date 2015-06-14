@@ -11,19 +11,19 @@ import com.kcb.common.model.test.Question;
 import com.kcb.common.model.test.QuestionItem;
 import com.kcbTeam.R;
 
-public class QuestionView extends LinearLayout {
+public class ShowQuestionView extends LinearLayout {
 
-    public QuestionView(Context context) {
+    public ShowQuestionView(Context context) {
         super(context);
         init(context);
     }
 
-    public QuestionView(Context context, AttributeSet attrs) {
+    public ShowQuestionView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context);
     }
 
-    public QuestionView(Context context, AttributeSet attrs, int defStyle) {
+    public ShowQuestionView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         init(context);
     }

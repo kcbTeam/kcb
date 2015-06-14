@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import com.kcb.common.base.BaseActivity;
 import com.kcb.common.model.test.Test;
-import com.kcb.common.view.test.QuestionView;
+import com.kcb.common.view.test.ShowQuestionView;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcbTeam.R;
 
@@ -24,7 +24,7 @@ public class LookTestDetailActivity extends BaseActivity {
     private ButtonFlat backButton;
     private TextView testNameNumTextView;
 
-    private QuestionView questionView;
+    private ShowQuestionView questionView;
 
     private ButtonFlat lastButton;
     private ButtonFlat nextButton;
@@ -51,7 +51,7 @@ public class LookTestDetailActivity extends BaseActivity {
         testNameNumTextView.setText(String.format(getString(R.string.stu_test_name_num),
                 sTest.getName(), sTest.getQuestionNum()));
 
-        questionView = (QuestionView) findViewById(R.id.questionview);
+        questionView = (ShowQuestionView) findViewById(R.id.questionview);
 
         lastButton = (ButtonFlat) findViewById(R.id.button_last);
         lastButton.setOnClickListener(this);

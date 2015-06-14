@@ -173,24 +173,6 @@
         <item name="android:textColor">@color/black_700</item>
     </style>
     <!-- ********** Home end ********** -->
-
-
-    <!-- ********** Test start ********** -->
-    <style name="question_item_layout">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_weight">1</item>
-        <item name="android:background">@drawable/comm_rectangle</item>
-    </style>
-
-    <style name="question_item_imageview">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">100dp</item>
-        <item name="android:padding">2dp</item>
-        <item name="android:layout_centerInParent">true</item>
-        <item name="android:scaleType">fitCenter</item>
-    </style>
-    <!-- ********** Test end ********** -->
     <!-- **************************************** Common module End **************************************** -->
 
 
@@ -209,7 +191,7 @@
 
 
     <!-- ********** Test start ********** -->
-    <style name="stu_test_checkbox">
+    <style name="stu_question_answer_choice_checkbox">
         <item name="android:layout_width">32dp</item>
         <item name="android:layout_height">32dp</item>
         <item name="android:background">@color/blue</item>
@@ -218,8 +200,9 @@
     <!-- **************************************** Student module End **************************************** -->
 
 
-    <!-- **************************************** Teacher module End **************************************** -->
+    <!-- **************************************** Teacher module Start **************************************** -->
     <!-- StartCheckIn start -->
+    <!-- 4个签到数字 -->
     <style name="tch_checkin_num">
         <item name="android:textSize">@dimen/text_size_large</item>
         <item name="android:textColor">@color/black_700</item>
@@ -232,15 +215,16 @@
     <!-- StartCheckIn end -->
 
 
-    <!-- EditTest start -->
-    <style name="tch_test_choice_layout">
+    <!-- EditTestActivity start -->
+    <!-- 选项的布局 -->
+    <style name="tch_question_edit_choice_layout">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:orientation">horizontal</item>
     </style>
-
-    <style name="tch_test_choice_tip">
+    <!-- 选项的提示，A，B，C，D -->
+    <style name="tch_question_edit_choice_tip">
         <item name="android:layout_gravity">top</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -249,8 +233,15 @@
         <item name="android:textColor">@color/black_700</item>
         <item name="android:textSize">@dimen/text_size_medium</item>
     </style>
-
-    <style name="tch_test_input_choice">
+    <!-- 包括输入框、图片、删除图标 -->
+    <style name="tch_question_edit_choice_inputlayout">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@drawable/comm_rectangle</item>
+    </style>
+    <!-- 输入框 -->
+    <style name="tch_question_edit_choice_edittext">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:padding">8dp</item>
@@ -258,39 +249,44 @@
         <item name="android:textSize">@dimen/text_size_medium</item>
         <item name="android:background">@drawable/comm_rectangle</item>
     </style>
-
-    <style name="tch_test_checkbox">
-        <item name="android:layout_width">32dp</item>
-        <item name="android:layout_height">32dp</item>
-        <item name="android:layout_gravity">top</item>
-        <item name="android:background">@color/blue</item>
+    <!-- 图片 -->
+    <style name="tch_question_edit_choice_imageview">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:maxHeight">100dp</item>
+        <item name="android:adjustViewBounds">true</item>
+        <item name="android:padding">2dp</item>
+        <item name="android:layout_centerInParent">true</item>
+        <item name="android:scaleType">fitCenter</item>
     </style>
-
-    <style name="tch_test_delete_bitmap">
+    <!-- 删除图标 -->
+    <style name="tch_question_edit_delete_imageview">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:padding">4dp</item>
         <item name="android:src">@drawable/ic_remove_circle_grey600_24dp</item>
         <item name="android:visibility">invisible</item>
     </style>
-    <!-- EditTest end -->
-
-
-    <!-- SetTestTime start -->
-    <style name="tch_test_settime_checkicon">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
+    <!-- 选择框 -->
+    <style name="tch_question_edit_choice_checkbox">
+        <item name="android:layout_width">32dp</item>
+        <item name="android:layout_height">32dp</item>
         <item name="android:layout_gravity">top</item>
+        <item name="android:background">@color/blue</item>
     </style>
+    <!-- EditTestActivity end -->
 
-    <style name="tch_test_settime_choice_layout">
+
+    <!-- Common Question Show start -->
+    <!-- 选项的布局 -->
+    <style name="tch_question_show_choice_layout">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:orientation">horizontal</item>
     </style>
-
-    <style name="tch_test_settime_choice_tip">
+    <!-- 选项的提示，A，B，C，D -->
+    <style name="tch_question_show_choice_tip">
         <item name="android:layout_gravity">top</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -299,8 +295,8 @@
         <item name="android:textColor">@color/black_700</item>
         <item name="android:textSize">@dimen/text_size_medium</item>
     </style>
-
-    <style name="tch_test_settime_choice">
+    <!-- 显示选项文字 -->
+    <style name="tch_question_show_choice_textview">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_weight">1</item>
@@ -308,16 +304,24 @@
         <item name="android:textColor">@color/black_700</item>
         <item name="android:textSize">@dimen/text_size_medium</item>
     </style>
-
-    <style name="tch_test_settime_choice_imageview">
+    <!-- 显示选项图片 -->
+    <style name="tch_question_show_choice_imageview">
         <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">100dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:maxHeight">100dp</item>
+        <item name="android:adjustViewBounds">true</item>
         <item name="android:layout_weight">1</item>
         <item name="android:padding">4dp</item>
         <item name="android:visibility">gone</item>
         <item name="android:scaleType">fitCenter</item>
     </style>
-    <!-- SetTestTime end -->
+    <!-- 显示选项的答案选择框 -->
+    <style name="tch_question_show_choice_checkbox">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">top</item>
+    </style>
+    <!-- Common Question Show end -->
     <!-- **************************************** Teacher module End **************************************** -->
 
 </resources>
