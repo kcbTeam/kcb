@@ -9,7 +9,7 @@
 
     <!-- **************************************** 公共模块 Start **************************************** -->
     <!-- **************************************** 公共模块  Start **************************************** -->
-    <!-- ********** Common start ********** -->
+    <!-- ********** 基本组件 start ********** -->
     <!-- activity 的顶部标题栏 -->
     <style name="common_title_layout">
         <item name="android:layout_width">match_parent</item>
@@ -111,10 +111,10 @@
         <item name="android:layout_height">match_parent</item>
         <item name="android:layout_weight">1</item>
     </style>
-    <!-- ********** Common end ********** -->
+    <!-- ********** 基本组件 end ********** -->
 
 
-    <!-- ********** Home start ********** -->
+    <!-- ********** 主页 start ********** -->
     <!-- 上方中部显示tab的文字 -->
     <style name="common_center_title">
         <item name="android:layout_width">wrap_content</item>
@@ -172,10 +172,10 @@
         <item name="android:layout_centerVertical">true</item>
         <item name="android:textColor">@color/black_700</item>
     </style>
-    <!-- ********** Home end ********** -->
+    <!-- ********** 主页 end ********** -->
 
 
-    <!-- ********** ShowQuestion start ********** -->
+    <!-- ********** 显示题目 start ********** -->
     <!-- 选项的布局 -->
     <style name="common_question_show_choice">
         <item name="android:layout_width">match_parent</item>
@@ -219,106 +219,8 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_gravity">top</item>
     </style>
-    <!-- ********** ShowQuestion end ********** -->
+    <!-- ********** 显示题目 end ********** -->
     <!-- **************************************** 公共模块  End **************************************** -->
     <!-- **************************************** 公共模块  End **************************************** -->
-
-
-    <!-- **************************************** 学生模块 Start **************************************** -->
-    <!-- **************************************** 学生模块 Start **************************************** -->
-    <!-- ********** CheckIn start ********** -->
-    <!-- 输入四个签到数字 -->
-    <style name="stu_checkin_num">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">54dp</item>
-        <item name="android:layout_weight">1</item>
-        <item name="android:gravity">center</item>
-        <item name="android:textSize">@dimen/text_size_large</item>
-        <item name="android:textColor">@color/black_700</item>
-        <item name="android:background">@drawable/comm_rectangle</item>
-    </style>
-    <!-- ********** CheckIn end ********** -->
-    <!-- **************************************** 学生模块 End **************************************** -->
-    <!-- **************************************** 学生模块 End **************************************** -->
-
-
-    <!-- **************************************** 老师模块 Start **************************************** -->
-    <!-- **************************************** 老师模块 Start **************************************** -->
-    <!-- StartCheckIn start -->
-    <!-- 显示4个签到数字 -->
-    <style name="tch_checkin_num">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">36dp</item>
-        <item name="android:layout_weight">1</item>
-        <item name="android:gravity">center</item>
-        <item name="android:textSize">@dimen/text_size_large</item>
-        <item name="android:textColor">@color/black_700</item>
-        <item name="android:background">@drawable/comm_rectangle</item>
-    </style>
-    <!-- StartCheckIn end -->
-
-
-    <!-- Edit Question View start -->
-    <!-- 选项的布局 -->
-    <style name="tch_question_edit_choice_layout">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:gravity">center_vertical</item>
-        <item name="android:orientation">horizontal</item>
-    </style>
-    <!-- 选项的提示，A，B，C，D -->
-    <style name="tch_question_edit_choice_tip">
-        <item name="android:layout_gravity">top</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:paddingRight">4dp</item>
-        <item name="android:paddingTop">4dp</item>
-        <item name="android:textColor">@color/black_700</item>
-        <item name="android:textSize">@dimen/text_size_medium</item>
-    </style>
-    <!-- 包括输入框、图片、删除图标 -->
-    <style name="tch_question_edit_choice_inputlayout">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_weight">1</item>
-        <item name="android:background">@drawable/comm_rectangle</item>
-    </style>
-    <!-- 输入框 -->
-    <style name="tch_question_edit_choice_edittext">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:padding">8dp</item>
-        <item name="android:textColor">@color/black_700</item>
-        <item name="android:textSize">@dimen/text_size_medium</item>
-        <item name="android:background">@drawable/comm_rectangle</item>
-    </style>
-    <!-- 图片 -->
-    <style name="tch_question_edit_choice_imageview">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:maxHeight">100dp</item>
-        <item name="android:adjustViewBounds">true</item>
-        <item name="android:padding">2dp</item>
-        <item name="android:layout_centerInParent">true</item>
-        <item name="android:scaleType">fitCenter</item>
-    </style>
-    <!-- 删除图标 -->
-    <style name="tch_question_edit_delete_imageview">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:padding">4dp</item>
-        <item name="android:src">@drawable/ic_remove_circle_grey600_24dp</item>
-        <item name="android:visibility">invisible</item>
-    </style>
-    <!-- 选择框 -->
-    <style name="tch_question_edit_choice_checkbox">
-        <item name="android:layout_width">32dp</item>
-        <item name="android:layout_height">32dp</item>
-        <item name="android:layout_gravity">top</item>
-        <item name="android:background">@color/blue</item>
-    </style>
-    <!-- Edit Question View end -->
-    <!-- **************************************** 老师模块 End **************************************** -->
-    <!-- **************************************** 老师模块 End **************************************** -->
 
 </resources>

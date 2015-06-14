@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- **************************************** 学生模块 Start **************************************** -->
+    <!-- **************************************** 学生模块 Start **************************************** -->
+    <!-- ********** CheckIn start ********** -->
+    <!-- 输入四个签到数字 -->
+    <style name="stu_checkin_num">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">54dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">@dimen/text_size_large</item>
+        <item name="android:textColor">@color/black_700</item>
+        <item name="android:background">@drawable/comm_rectangle</item>
+    </style>
+    <!-- ********** CheckIn end ********** -->
+    <!-- **************************************** 学生模块 End **************************************** -->
+    <!-- **************************************** 学生模块 End **************************************** -->
+
+</resources>

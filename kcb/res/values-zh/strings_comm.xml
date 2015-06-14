@@ -3,18 +3,19 @@
 
     <string name="app_name">课程宝</string>
 
-    <string name="comm_sure"></string>
-    <string name="comm_cancel"></string>
-    
-    <!-- StartActivity start -->
+    <!-- 对话框 -->
+    <string name="comm_sure">确定</string>
+    <string name="comm_cancel">取消</string>
+
+    <!-- 引导页面 start -->
     <string name="comm_student">我是学生</string>
     <string name="comm_teacher">我是老师</string>
-    <!-- StartActivity end -->
+    <!-- 引导页面 end -->
 
 
-    <!-- Network request start -->
+    <!-- 网络请求 start -->
     <string name="network_error">网络出错了，请检查网络连接</string>
     <string name="server_error">服务器出错了，请稍后再试</string>
-    <!-- Network request end -->
+    <!-- 网络请求 end -->
 
 </resources>

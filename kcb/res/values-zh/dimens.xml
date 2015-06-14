@@ -2,16 +2,16 @@
 <resources>
 
     <!-- Common start -->
+    <!-- 标题栏的高度 -->
+    <dimen name="activity_header_height">50dp</dimen>
+    <!-- 文字大小 -->
     <dimen name="text_size_micro">12dp</dimen>
     <dimen name="text_size_small">14dp</dimen>
     <dimen name="text_size_medium">16dp</dimen>
     <dimen name="text_size_large">18dp</dimen>
     <dimen name="text_size_x_large">20dp</dimen>
-    <dimen name="activity_header_height">50dp</dimen>
+    <!-- “第1步”的提示 -->
     <dimen name="step_tip_margin_top">24dp</dimen>
     <!-- Common end -->
-    <!-- CheckIn start -->
-    <dimen name="checkin_recycler_height">216dp</dimen>
-    <!-- CheckIn end -->
 
 </resources>
