@@ -48,19 +48,19 @@
 
         <TextView
             android:id="@+id/textview_shownum1"
-            style="@style/shownum_textview" />
+            style="@style/stu_checkin_num" />
 
         <TextView
             android:id="@+id/textview_shownum2"
-            style="@style/shownum_textview" />
+            style="@style/stu_checkin_num" />
 
         <TextView
             android:id="@+id/textview_shownum3"
-            style="@style/shownum_textview" />
+            style="@style/stu_checkin_num" />
 
         <TextView
             android:id="@+id/textview_shownum4"
-            style="@style/shownum_textview" />
+            style="@style/stu_checkin_num" />
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView

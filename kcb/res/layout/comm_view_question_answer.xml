@@ -62,7 +62,7 @@
 
                 <com.kcb.library.view.checkbox.CheckBox
                     android:id="@+id/checkBox_A"
-                    style="@style/stu_question_answer_choice_checkbox"
+                    style="@style/common_checkbox"
                     android:layout_margin="4dp" />
             </LinearLayout>
 
@@ -95,7 +95,7 @@
 
                 <com.kcb.library.view.checkbox.CheckBox
                     android:id="@+id/checkBox_B"
-                    style="@style/stu_question_answer_choice_checkbox"
+                    style="@style/common_checkbox"
                     android:layout_margin="4dp" />
             </LinearLayout>
 
@@ -128,7 +128,7 @@
 
                 <com.kcb.library.view.checkbox.CheckBox
                     android:id="@+id/checkBox_C"
-                    style="@style/stu_question_answer_choice_checkbox"
+                    style="@style/common_checkbox"
                     android:layout_margin="4dp" />
             </LinearLayout>
 
@@ -161,7 +161,7 @@
 
                 <com.kcb.library.view.checkbox.CheckBox
                     android:id="@+id/checkBox_D"
-                    style="@style/stu_question_answer_choice_checkbox"
+                    style="@style/common_checkbox"
                     android:layout_margin="4dp" />
             </LinearLayout>
         </RelativeLayout>

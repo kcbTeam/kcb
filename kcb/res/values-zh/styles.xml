@@ -74,10 +74,31 @@
         <item name="android:layout_marginLeft">36dp</item>
     </style>
     <!-- 大号的纸质按钮 -->
-    <style name="comm_paper_button_big" parent="@style/common_paper_button">
+    <style name="common_paper_button_big" parent="@style/common_paper_button">
         <item name="android:layout_height">64dp</item>
     </style>
-    <!-- 底部的多个按钮布局 -->
+    <!-- 普通输入框 -->
+    <style name="common_edittext">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginRight">40dp</item>
+        <item name="android:layout_marginLeft">40dp</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:maxLength">15</item>
+        <item name="android:inputType">text</item>
+    </style>
+    <!-- 密码输入框 -->
+    <style name="common_edittext_password" parent="@style/common_edittext">
+        <item name="android:inputType">textPassword</item>
+    </style>
+    <!-- 复选框 -->
+    <style name="common_checkbox">
+        <item name="android:layout_width">32dp</item>
+        <item name="android:layout_height">32dp</item>
+        <item name="android:background">@color/blue</item>
+    </style>
+    <!-- 底部有多个按钮的布局 -->
     <style name="common_bottom_button_layout">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">48dp</item>
@@ -91,27 +112,6 @@
         <item name="android:layout_weight">1</item>
     </style>
     <!-- ********** Common end ********** -->
-
-
-    <!-- ********** Login start ********** -->
-    <style name="common_edittext">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginRight">40dp</item>
-        <item name="android:layout_marginLeft">40dp</item>
-        <item name="android:maxLines">1</item>
-        <item name="android:singleLine">true</item>
-        <item name="android:maxLength">15</item>
-    </style>
-
-    <style name="login_edittext_id" parent="@style/common_edittext">
-        <item name="android:inputType">text</item>
-    </style>
-
-    <style name="login_edittext_password" parent="@style/common_edittext">
-        <item name="android:inputType">textPassword</item>
-    </style>
-    <!-- ********** Login start ********** -->
 
 
     <!-- ********** Home start ********** -->
@@ -227,25 +227,17 @@
     <!-- **************************************** Student module Start **************************************** -->
     <!-- **************************************** Student module Start **************************************** -->
     <!-- ********** CheckIn start ********** -->
-    <style name="shownum_textview">
+    <!-- 输入四个签到数字 -->
+    <style name="stu_checkin_num">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">54dp</item>
         <item name="android:layout_weight">1</item>
         <item name="android:gravity">center</item>
-        <item name="android:background">@drawable/comm_rectangle</item>
         <item name="android:textSize">@dimen/text_size_large</item>
         <item name="android:textColor">@color/black_700</item>
+        <item name="android:background">@drawable/comm_rectangle</item>
     </style>
     <!-- ********** CheckIn end ********** -->
-
-
-    <!-- ********** Test start ********** -->
-    <style name="stu_question_answer_choice_checkbox">
-        <item name="android:layout_width">32dp</item>
-        <item name="android:layout_height">32dp</item>
-        <item name="android:background">@color/blue</item>
-    </style>
-    <!-- ********** Test end ********** -->
     <!-- **************************************** Student module End **************************************** -->
     <!-- **************************************** Student module End **************************************** -->
 
@@ -253,20 +245,20 @@
     <!-- **************************************** Teacher module Start **************************************** -->
     <!-- **************************************** Teacher module Start **************************************** -->
     <!-- StartCheckIn start -->
-    <!-- 4个签到数字 -->
+    <!-- 显示4个签到数字 -->
     <style name="tch_checkin_num">
-        <item name="android:textSize">@dimen/text_size_large</item>
-        <item name="android:textColor">@color/black_700</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">36dp</item>
         <item name="android:layout_weight">1</item>
         <item name="android:gravity">center</item>
+        <item name="android:textSize">@dimen/text_size_large</item>
+        <item name="android:textColor">@color/black_700</item>
         <item name="android:background">@drawable/comm_rectangle</item>
     </style>
     <!-- StartCheckIn end -->
 
 
-    <!-- EditTestActivity start -->
+    <!-- Edit Question View start -->
     <!-- 选项的布局 -->
     <style name="tch_question_edit_choice_layout">
         <item name="android:layout_width">match_parent</item>
@@ -325,7 +317,7 @@
         <item name="android:layout_gravity">top</item>
         <item name="android:background">@color/blue</item>
     </style>
-    <!-- EditTestActivity end -->
+    <!-- Edit Question View end -->
     <!-- **************************************** Teacher module End **************************************** -->
     <!-- **************************************** Teacher module End **************************************** -->
 

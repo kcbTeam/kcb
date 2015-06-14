@@ -29,13 +29,13 @@
 
     <com.kcb.library.view.FloatingEditText
         android:id="@+id/edittext_id"
-        style="@style/login_edittext_id"
+        style="@style/common_edittext"
         android:layout_below="@id/imageview_app"
         android:hint="@string/stu_stuid" />
 
     <com.kcb.library.view.FloatingEditText
         android:id="@+id/edittext_password"
-        style="@style/login_edittext_password"
+        style="@style/common_edittext_password"
         android:layout_below="@id/edittext_id"
         android:hint="@string/stu_password" />
 
