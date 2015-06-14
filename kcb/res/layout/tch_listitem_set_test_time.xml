@@ -7,23 +7,16 @@
     android:background="@color/activity_background"
     tools:ignore="contentDescription" >
 
-    <TextView
-        android:id="@+id/textview_questionindex"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/tch_input_title"
-        android:textColor="@color/black"
-        android:textSize="@dimen/text_size_medium" />
+    <com.kcb.common.view.test.ShowQuestionView
+        android:id="@+id/showquestionview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <com.kcb.library.view.buttonflat.ButtonFlat
         android:id="@+id/button_edit"
         android:layout_width="36dp"
         android:layout_height="36dp"
         android:layout_alignParentRight="true"
-        android:layout_alignTop="@id/textview_questionindex"
         android:layout_marginRight="8dp"
         widget:rippleSpeed="6" >
 
@@ -33,181 +26,5 @@
             android:layout_centerInParent="true"
             android:src="@drawable/ic_mode_edit_grey600_24dp" />
     </com.kcb.library.view.buttonflat.ButtonFlat>
-
-    <RelativeLayout
-        android:id="@+id/layout_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/button_edit"
-        android:layout_marginBottom="8dp" >
-
-        <TextView
-            android:id="@+id/textview_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:lineSpacingExtra="2dp"
-            android:padding="4dp"
-            android:textColor="@color/black_700"
-            android:textSize="@dimen/text_size_medium" />
-
-        <ImageView
-            android:id="@+id/imageview_title"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_alignLeft="@id/textview_title"
-            android:layout_alignRight="@id/textview_title"
-            android:layout_alignTop="@id/textview_title"
-            android:scaleType="fitCenter" />
-    </RelativeLayout>
-
-    <View
-        android:id="@+id/view_divider0"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_below="@id/layout_title"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:background="@color/black_divider" />
-
-    <LinearLayout
-        android:id="@+id/layout_A"
-        style="@style/tch_test_settime_choice_layout"
-        android:layout_below="@id/view_divider0"
-        android:layout_marginBottom="2dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="2dp" >
-
-        <TextView
-            android:id="@+id/textview_tipa"
-            style="@style/tch_test_settime_choice_tip"
-            android:text="@string/tch_choice_A" />
-
-        <TextView
-            android:id="@+id/textview_A"
-            style="@style/tch_test_settime_choice" />
-
-        <ImageView
-            android:id="@+id/imageview_A"
-            style="@style/tch_test_settime_choice_imageview" />
-
-        <ImageView
-            android:id="@+id/checkBox_A"
-            style="@style/tch_test_settime_checkicon"
-            android:layout_margin="4dp" />
-    </LinearLayout>
-
-    <View
-        android:id="@+id/view_divider1"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_below="@id/layout_A"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:background="@color/black_divider" />
-
-    <LinearLayout
-        android:id="@+id/layout_B"
-        style="@style/tch_test_settime_choice_layout"
-        android:layout_below="@id/view_divider1"
-        android:layout_marginBottom="2dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="2dp" >
-
-        <TextView
-            android:id="@+id/textview_tipb"
-            style="@style/tch_test_settime_choice_tip"
-            android:text="@string/tch_choice_B" />
-
-        <TextView
-            android:id="@+id/textview_B"
-            style="@style/tch_test_settime_choice" />
-
-        <ImageView
-            android:id="@+id/imageview_B"
-            style="@style/tch_test_settime_choice_imageview" />
-
-        <ImageView
-            android:id="@+id/checkBox_B"
-            style="@style/tch_test_settime_checkicon"
-            android:layout_margin="4dp" />
-    </LinearLayout>
-
-    <View
-        android:id="@+id/view_divider2"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_below="@id/layout_B"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:background="@color/black_divider" />
-
-    <LinearLayout
-        android:id="@+id/layout_C"
-        style="@style/tch_test_settime_choice_layout"
-        android:layout_below="@id/view_divider2"
-        android:layout_marginBottom="2dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="2dp" >
-
-        <TextView
-            android:id="@+id/textview_tipc"
-            style="@style/tch_test_settime_choice_tip"
-            android:text="@string/tch_choice_C" />
-
-        <TextView
-            android:id="@+id/textview_C"
-            style="@style/tch_test_settime_choice" />
-
-        <ImageView
-            android:id="@+id/imageview_C"
-            style="@style/tch_test_settime_choice_imageview" />
-
-        <ImageView
-            android:id="@+id/checkBox_C"
-            style="@style/tch_test_settime_checkicon"
-            android:layout_margin="4dp" />
-    </LinearLayout>
-
-    <View
-        android:id="@+id/view_divider3"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_below="@id/layout_C"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:background="@color/black_divider" />
-
-    <LinearLayout
-        android:id="@+id/layout_D"
-        style="@style/tch_test_settime_choice_layout"
-        android:layout_below="@id/view_divider3"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="2dp" >
-
-        <TextView
-            android:id="@+id/textview_tipd"
-            style="@style/tch_test_settime_choice_tip"
-            android:text="@string/tch_choice_D" />
-
-        <TextView
-            android:id="@+id/textview_D"
-            style="@style/tch_test_settime_choice" />
-
-        <ImageView
-            android:id="@+id/imageview_D"
-            style="@style/tch_test_settime_choice_imageview" />
-
-        <ImageView
-            android:id="@+id/checkBox_D"
-            style="@style/tch_test_settime_checkicon"
-            android:layout_margin="4dp" />
-    </LinearLayout>
 
 </RelativeLayout>

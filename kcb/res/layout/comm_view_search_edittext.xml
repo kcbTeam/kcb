@@ -8,7 +8,7 @@
 
     <com.kcb.library.view.FloatingEditText
         android:id="@+id/edittext_search"
-        style="@style/login_edittext"
+        style="@style/common_edittext"
         android:layout_marginTop="4dp"
         widget:floating_edit_text_color="@color/black_500"
         widget:floating_edit_text_highlighted_color="@color/blue" />

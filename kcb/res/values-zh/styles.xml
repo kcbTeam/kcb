@@ -7,15 +7,17 @@
     <!-- ********** Application theme. ********** -->
 
 
-    <!-- **************************************** Common module Start **************************************** -->
+    <!-- **************************************** 公共模块 Start **************************************** -->
+    <!-- **************************************** 公共模块  Start **************************************** -->
     <!-- ********** Common start ********** -->
+    <!-- activity 的顶部标题栏 -->
     <style name="common_title_layout">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:background">@drawable/activity_header</item>
         <item name="android:orientation">horizontal</item>
     </style>
-
+    <!-- 顶部标题栏中的文字（有返回按钮） -->
     <style name="common_title">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_weight">1</item>
@@ -25,23 +27,23 @@
         <item name="android:textSize">@dimen/text_size_large</item>
         <item name="android:singleLine">true</item>
     </style>
-
+    <!-- 顶部标题栏中靠最左边的文字（无返回按钮） -->
     <style name="common_title_left" parent="@style/common_title">
         <item name="android:paddingLeft">16dp</item>
     </style>
-
+    <!-- 顶部标题栏中的图标布局 -->
     <style name="common_title_icon_layout">
         <item name="android:layout_width">48dp</item>
         <item name="android:layout_height">@dimen/activity_header_height</item>
     </style>
-
+    <!-- 顶部标题栏中的图标 -->
     <style name="common_title_icon">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_centerInParent">true</item>
     </style>
-
-    <style name="common_tip">
+    <!-- 普通文字提示 -->
+    <style name="common_tip_textview">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:paddingTop">8dp</item>
@@ -51,34 +53,59 @@
         <item name="android:textColor">@color/black</item>
         <item name="android:textSize">@dimen/text_size_medium</item>
     </style>
-
+    <!-- 空文案提示控件 -->
     <style name="common_empty_tip_view">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_centerInParent">true</item>
         <item name="android:visibility">gone</item>
     </style>
-
+    <!-- 线 -->
     <style name="common_divider">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">1dp</item>
         <item name="android:background">@color/black_divider</item>
     </style>
-
+    <!-- 普通的纸质按钮 -->
     <style name="common_paper_button">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">54dp</item>
         <item name="android:layout_marginRight">36dp</item>
         <item name="android:layout_marginLeft">36dp</item>
     </style>
-
+    <!-- 大号的纸质按钮 -->
+    <style name="common_paper_button_big" parent="@style/common_paper_button">
+        <item name="android:layout_height">64dp</item>
+    </style>
+    <!-- 普通输入框 -->
+    <style name="common_edittext">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginRight">40dp</item>
+        <item name="android:layout_marginLeft">40dp</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:maxLength">15</item>
+        <item name="android:inputType">text</item>
+    </style>
+    <!-- 密码输入框 -->
+    <style name="common_edittext_password" parent="@style/common_edittext">
+        <item name="android:inputType">textPassword</item>
+    </style>
+    <!-- 复选框 -->
+    <style name="common_checkbox">
+        <item name="android:layout_width">32dp</item>
+        <item name="android:layout_height">32dp</item>
+        <item name="android:background">@color/blue</item>
+    </style>
+    <!-- 底部有多个按钮的布局 -->
     <style name="common_bottom_button_layout">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">48dp</item>
         <item name="android:layout_alignParentBottom">true</item>
         <item name="android:orientation">horizontal</item>
     </style>
-
+    <!-- 底部的多个按钮 -->
     <style name="common_bottom_button">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">match_parent</item>
@@ -87,85 +114,58 @@
     <!-- ********** Common end ********** -->
 
 
-    <!-- ********** Login start ********** -->
-    <style name="login_edittext">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginRight">40dp</item>
-        <item name="android:layout_marginLeft">40dp</item>
-        <item name="android:maxLines">1</item>
-        <item name="android:singleLine">true</item>
-        <item name="android:maxLength">15</item>
-    </style>
-
-    <style name="login_edittext_id" parent="@style/login_edittext">
-        <item name="android:inputType">text</item>
-    </style>
-
-    <style name="login_edittext_password" parent="@style/login_edittext">
-        <item name="android:inputType">textPassword</item>
-    </style>
-    <!-- ********** Login start ********** -->
-
-
     <!-- ********** Home start ********** -->
-    <style name="home_top_title">
+    <!-- 上方中部显示tab的文字 -->
+    <style name="common_center_title">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/black_700</item>
         <item name="android:textSize">@dimen/text_size_x_large</item>
         <item name="android:singleLine">true</item>
     </style>
-
-    <style name="home_tab">
+    <!-- 下方的tab -->
+    <style name="common_tab">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">54dp</item>
         <item name="android:layout_weight">1</item>
     </style>
-
-    <style name="home_tab_imageview">
+    <!-- 下方tab中的图片 -->
+    <style name="common_tab_imageview">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_centerHorizontal">true</item>
     </style>
-
-    <style name="home_tab_textview">
+    <!-- 下方tab中的文字 -->
+    <style name="common_tab_textview">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_centerHorizontal">true</item>
         <item name="android:textSize">@dimen/text_size_micro</item>
         <item name="android:textColor">@color/white</item>
     </style>
-
-    <style name="home_center_button">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">64dp</item>
-        <item name="android:layout_marginRight">36dp</item>
-        <item name="android:layout_marginLeft">36dp</item>
-    </style>
-
-    <style name="home_popupwindow_layout">
+    <!-- 弹窗的布局 -->
+    <style name="common_popupwindow">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:background">@color/black_100</item>
         <item name="android:orientation">vertical</item>
     </style>
-
-    <style name="home_popupwindow_item_layout">
+    <!-- 弹窗中每一项的布局 -->
+    <style name="common_popupwindow_item">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">48dp</item>
         <item name="android:text">""</item>
     </style>
-
-    <style name="home_popupwindow_imageview">
+    <!-- 弹窗中每一项的图标 -->
+    <style name="common_popupwindow_item_imageview">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:paddingLeft">16dp</item>
         <item name="android:paddingRight">8dp</item>
         <item name="android:layout_centerVertical">true</item>
     </style>
-
-    <style name="home_popupwindow_textview">
+    <!-- 弹窗中每一项的文字 -->
+    <style name="common_popupwindow_item_textview">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:paddingRight">16dp</item>
@@ -175,72 +175,16 @@
     <!-- ********** Home end ********** -->
 
 
-    <!-- ********** Test start ********** -->
-    <style name="question_item_layout">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_weight">1</item>
-        <item name="android:background">@drawable/comm_rectangle</item>
-    </style>
-
-    <style name="question_item_imageview">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">100dp</item>
-        <item name="android:padding">2dp</item>
-        <item name="android:layout_centerInParent">true</item>
-        <item name="android:scaleType">fitCenter</item>
-    </style>
-    <!-- ********** Test end ********** -->
-    <!-- **************************************** Common module End **************************************** -->
-
-
-    <!-- **************************************** Student module Start **************************************** -->
-    <!-- ********** CheckIn start ********** -->
-    <style name="shownum_textview">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">54dp</item>
-        <item name="android:layout_weight">1</item>
-        <item name="android:gravity">center</item>
-        <item name="android:background">@drawable/comm_rectangle</item>
-        <item name="android:textSize">@dimen/text_size_large</item>
-        <item name="android:textColor">@color/black_700</item>
-    </style>
-    <!-- ********** CheckIn end ********** -->
-
-
-    <!-- ********** Test start ********** -->
-    <style name="stu_test_checkbox">
-        <item name="android:layout_width">32dp</item>
-        <item name="android:layout_height">32dp</item>
-        <item name="android:background">@color/blue</item>
-    </style>
-    <!-- ********** Test end ********** -->
-    <!-- **************************************** Student module End **************************************** -->
-
-
-    <!-- **************************************** Teacher module End **************************************** -->
-    <!-- StartCheckIn start -->
-    <style name="tch_checkin_num">
-        <item name="android:textSize">@dimen/text_size_large</item>
-        <item name="android:textColor">@color/black_700</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">36dp</item>
-        <item name="android:layout_weight">1</item>
-        <item name="android:gravity">center</item>
-        <item name="android:background">@drawable/comm_rectangle</item>
-    </style>
-    <!-- StartCheckIn end -->
-
-
-    <!-- EditTest start -->
-    <style name="tch_test_choice_layout">
+    <!-- ********** ShowQuestion start ********** -->
+    <!-- 选项的布局 -->
+    <style name="common_question_show_choice">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:orientation">horizontal</item>
     </style>
-
-    <style name="tch_test_choice_tip">
+    <!-- 选项的提示，A，B，C，D -->
+    <style name="common_question_show_choice_tip">
         <item name="android:layout_gravity">top</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -249,8 +193,98 @@
         <item name="android:textColor">@color/black_700</item>
         <item name="android:textSize">@dimen/text_size_medium</item>
     </style>
+    <!-- 显示选项文字 -->
+    <style name="common_question_show_choice_textview">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:padding">4dp</item>
+        <item name="android:textColor">@color/black_700</item>
+        <item name="android:textSize">@dimen/text_size_medium</item>
+    </style>
+    <!-- 显示选项图片 -->
+    <style name="common_question_show_choice_imageview">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:maxHeight">100dp</item>
+        <item name="android:adjustViewBounds">true</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:padding">4dp</item>
+        <item name="android:visibility">gone</item>
+        <item name="android:scaleType">fitCenter</item>
+    </style>
+    <!-- 显示选项的答案选择框 -->
+    <style name="common_question_show_choice_checkbox">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">top</item>
+    </style>
+    <!-- ********** ShowQuestion end ********** -->
+    <!-- **************************************** 公共模块  End **************************************** -->
+    <!-- **************************************** 公共模块  End **************************************** -->
 
-    <style name="tch_test_input_choice">
+
+    <!-- **************************************** 学生模块 Start **************************************** -->
+    <!-- **************************************** 学生模块 Start **************************************** -->
+    <!-- ********** CheckIn start ********** -->
+    <!-- 输入四个签到数字 -->
+    <style name="stu_checkin_num">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">54dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">@dimen/text_size_large</item>
+        <item name="android:textColor">@color/black_700</item>
+        <item name="android:background">@drawable/comm_rectangle</item>
+    </style>
+    <!-- ********** CheckIn end ********** -->
+    <!-- **************************************** 学生模块 End **************************************** -->
+    <!-- **************************************** 学生模块 End **************************************** -->
+
+
+    <!-- **************************************** 老师模块 Start **************************************** -->
+    <!-- **************************************** 老师模块 Start **************************************** -->
+    <!-- StartCheckIn start -->
+    <!-- 显示4个签到数字 -->
+    <style name="tch_checkin_num">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">36dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">@dimen/text_size_large</item>
+        <item name="android:textColor">@color/black_700</item>
+        <item name="android:background">@drawable/comm_rectangle</item>
+    </style>
+    <!-- StartCheckIn end -->
+
+
+    <!-- Edit Question View start -->
+    <!-- 选项的布局 -->
+    <style name="tch_question_edit_choice_layout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+    <!-- 选项的提示，A，B，C，D -->
+    <style name="tch_question_edit_choice_tip">
+        <item name="android:layout_gravity">top</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingRight">4dp</item>
+        <item name="android:paddingTop">4dp</item>
+        <item name="android:textColor">@color/black_700</item>
+        <item name="android:textSize">@dimen/text_size_medium</item>
+    </style>
+    <!-- 包括输入框、图片、删除图标 -->
+    <style name="tch_question_edit_choice_inputlayout">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@drawable/comm_rectangle</item>
+    </style>
+    <!-- 输入框 -->
+    <style name="tch_question_edit_choice_edittext">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:padding">8dp</item>
@@ -258,66 +292,33 @@
         <item name="android:textSize">@dimen/text_size_medium</item>
         <item name="android:background">@drawable/comm_rectangle</item>
     </style>
-
-    <style name="tch_test_checkbox">
-        <item name="android:layout_width">32dp</item>
-        <item name="android:layout_height">32dp</item>
-        <item name="android:layout_gravity">top</item>
-        <item name="android:background">@color/blue</item>
+    <!-- 图片 -->
+    <style name="tch_question_edit_choice_imageview">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:maxHeight">100dp</item>
+        <item name="android:adjustViewBounds">true</item>
+        <item name="android:padding">2dp</item>
+        <item name="android:layout_centerInParent">true</item>
+        <item name="android:scaleType">fitCenter</item>
     </style>
-
-    <style name="tch_test_delete_bitmap">
+    <!-- 删除图标 -->
+    <style name="tch_question_edit_delete_imageview">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:padding">4dp</item>
         <item name="android:src">@drawable/ic_remove_circle_grey600_24dp</item>
         <item name="android:visibility">invisible</item>
     </style>
-    <!-- EditTest end -->
-
-
-    <!-- SetTestTime start -->
-    <style name="tch_test_settime_checkicon">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
+    <!-- 选择框 -->
+    <style name="tch_question_edit_choice_checkbox">
+        <item name="android:layout_width">32dp</item>
+        <item name="android:layout_height">32dp</item>
         <item name="android:layout_gravity">top</item>
+        <item name="android:background">@color/blue</item>
     </style>
-
-    <style name="tch_test_settime_choice_layout">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:gravity">center_vertical</item>
-        <item name="android:orientation">horizontal</item>
-    </style>
-
-    <style name="tch_test_settime_choice_tip">
-        <item name="android:layout_gravity">top</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:paddingRight">4dp</item>
-        <item name="android:paddingTop">4dp</item>
-        <item name="android:textColor">@color/black_700</item>
-        <item name="android:textSize">@dimen/text_size_medium</item>
-    </style>
-
-    <style name="tch_test_settime_choice">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_weight">1</item>
-        <item name="android:padding">4dp</item>
-        <item name="android:textColor">@color/black_700</item>
-        <item name="android:textSize">@dimen/text_size_medium</item>
-    </style>
-
-    <style name="tch_test_settime_choice_imageview">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">100dp</item>
-        <item name="android:layout_weight">1</item>
-        <item name="android:padding">4dp</item>
-        <item name="android:visibility">gone</item>
-        <item name="android:scaleType">fitCenter</item>
-    </style>
-    <!-- SetTestTime end -->
-    <!-- **************************************** Teacher module End **************************************** -->
+    <!-- Edit Question View end -->
+    <!-- **************************************** 老师模块 End **************************************** -->
+    <!-- **************************************** 老师模块 End **************************************** -->
 
 </resources>

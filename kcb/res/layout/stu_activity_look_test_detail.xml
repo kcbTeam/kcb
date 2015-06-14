@@ -19,7 +19,7 @@
             style="@style/common_title" />
     </LinearLayout>
 
-    <com.kcb.common.view.test.QuestionView
+    <com.kcb.common.view.test.ShowQuestionView
         android:id="@+id/questionview"
         android:layout_below="@id/layout_title" />
 

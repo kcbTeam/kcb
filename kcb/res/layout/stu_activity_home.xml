@@ -15,7 +15,7 @@
 
         <TextView
             android:id="@+id/textview_title"
-            style="@style/home_top_title"
+            style="@style/common_center_title"
             android:layout_centerInParent="true"
             android:gravity="center" />
     </RelativeLayout>
@@ -44,38 +44,38 @@
 
         <com.kcb.library.view.buttonflat.ButtonFlat
             android:id="@+id/button_checkin"
-            style="@style/home_tab"
+            style="@style/common_tab"
             android:text=""
             widget:clickAfterRipple="false"
             widget:rippleSpeed="18" >
 
             <ImageView
                 android:id="@+id/imageview_checkin"
-                style="@style/home_tab_imageview"
+                style="@style/common_tab_imageview"
                 android:src="@drawable/ic_assignment_turned_in_white_36dp" />
 
             <TextView
                 android:id="@+id/textview_tab_checkin"
-                style="@style/home_tab_textview"
+                style="@style/common_tab_textview"
                 android:layout_below="@id/imageview_checkin"
                 android:text="@string/stu_class_checkin" />
         </com.kcb.library.view.buttonflat.ButtonFlat>
 
         <com.kcb.library.view.buttonflat.ButtonFlat
             android:id="@+id/button_test"
-            style="@style/home_tab"
+            style="@style/common_tab"
             android:text=""
             widget:clickAfterRipple="false"
             widget:rippleSpeed="18" >
 
             <ImageView
                 android:id="@+id/imageview_test"
-                style="@style/home_tab_imageview"
+                style="@style/common_tab_imageview"
                 android:src="@drawable/ic_event_note_white_36dp" />
 
             <TextView
                 android:id="@+id/textview_tab_test"
-                style="@style/home_tab_textview"
+                style="@style/common_tab_textview"
                 android:layout_below="@id/imageview_test"
                 android:text="@string/stu_class_test" />
         </com.kcb.library.view.buttonflat.ButtonFlat>

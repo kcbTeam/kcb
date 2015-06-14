@@ -52,7 +52,7 @@
 
     <com.kcb.library.view.FloatingEditText
         android:id="@+id/edittext_testname"
-        style="@style/login_edittext"
+        style="@style/common_edittext"
         android:layout_below="@id/view_divider1"
         android:hint="@string/tch_set_test_name_hint" />
 

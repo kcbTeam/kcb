@@ -6,20 +6,24 @@ import java.io.IOException;
 
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
-import android.os.Environment;
+
+import com.kcb.common.application.KApplication;
 
 public class FileUtil {
 
     /**
      * invoked init() in EditTestActivity
      */
-    private static final String PATH_KCB_FOLDER = Environment.getExternalStorageDirectory()
+    private static final String PATH_KCB_FOLDER = KApplication.getInstance()
+            .getExternalFilesDir(null).getAbsolutePath()
             + "/kcb";
+    // private static final String PATH_KCB_FOLDER = Environment.getExternalStorageDirectory()
+    // + "/kcb";
 
-    private static final String PATH_TEMP = Environment.getExternalStorageDirectory() + "/kcb/temp";
+    private static final String PATH_TEMP = PATH_KCB_FOLDER + "/temp";
     private static final String NAME_TEMP_FOLDER = "temp";
 
-    private static final String PATH_TEST = Environment.getExternalStorageDirectory() + "/kcb/test";
+    private static final String PATH_TEST = PATH_KCB_FOLDER + "/test";
     private static final String NAME_TEST_FOLDER = "test";
 
     public static void init() {
@@ -39,10 +43,6 @@ public class FileUtil {
 
     public static String getTakePhotoPath() {
         return PATH_TEMP + "/takephoto.png";
-    }
-
-    public static String getCropPhotoPath() {
-        return PATH_TEMP + "/cropphoto.png";
     }
 
     public static String getTestPath(String testName) {
