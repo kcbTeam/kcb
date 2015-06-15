@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.kcb.common.model.test.Question;
 import com.kcb.common.model.test.QuestionItem;
 import com.kcbTeam.R;
@@ -52,6 +51,10 @@ public class ShowQuestionView extends LinearLayout {
     private ImageView dCheckBoxd;
 
     private Context mContext;
+    private int mType; // 两种类型，对于老师——checkbox显示正确的选项；对于学生——checkbox显示选择的选项，蓝色的A-D表示正确的选项
+
+    public static final int TYPE_STUDENT = 1;
+    public static final int TYPE_TEACHER = 2;
 
     public void init(Context context) {
         mContext = context;
@@ -82,6 +85,10 @@ public class ShowQuestionView extends LinearLayout {
         dCheckBoxd = (ImageView) findViewById(R.id.checkBox_D);
     }
 
+    public void setType(int type) {
+        mType = type;
+    }
+
     public void showQuestion(int questionIndex, Question question) {
         questionIndexTextView.setText(String.format(
                 mContext.getString(R.string.tch_question_index), questionIndex + 1));
@@ -106,10 +113,25 @@ public class ShowQuestionView extends LinearLayout {
             imageView.setVisibility(View.VISIBLE);
         }
         if (null != checkIcon) {
-            if (item.isSelected()) {
-                checkIcon.setBackgroundResource(R.drawable.ic_check_box_grey600_18dp);
-            } else {
-                checkIcon.setBackgroundResource(R.drawable.ic_check_box_outline_blank_grey600_18dp);
+            switch (mType) {
+                case TYPE_STUDENT:
+                    if (item.isSelected()) {
+                        checkIcon.setBackgroundResource(R.drawable.ic_check_box_grey600_18dp);
+                    } else {
+                        checkIcon
+                                .setBackgroundResource(R.drawable.ic_check_box_outline_blank_grey600_18dp);
+                    }
+                    break;
+                case TYPE_TEACHER:
+                    if (item.isRight()) {
+                        checkIcon.setBackgroundResource(R.drawable.ic_check_box_grey600_18dp);
+                    } else {
+                        checkIcon
+                                .setBackgroundResource(R.drawable.ic_check_box_outline_blank_grey600_18dp);
+                    }
+                    break;
+                default:
+                    break;
             }
         }
     }

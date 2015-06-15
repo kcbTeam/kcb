@@ -167,6 +167,7 @@ public class EditQuestionView extends LinearLayout implements OnClickListener, O
         if (item.isText()) {
             setEditMode(flag, EDIT_MODE_TEXT);
             editText.setText(item.getText());
+            editText.setSelection(item.getText().length());
         } else {
             Bitmap bitmap = item.getBitmap();
             if (null != bitmap) {
