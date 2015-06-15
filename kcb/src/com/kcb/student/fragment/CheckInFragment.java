@@ -7,10 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request.Method;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
-import com.android.volley.NetworkResponse;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.kcb.common.base.BaseFragment;
