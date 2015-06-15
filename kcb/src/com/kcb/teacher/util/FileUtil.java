@@ -17,7 +17,7 @@ public class FileUtil {
     /**
      * /kcb
      */
-    private static final String PATH_KCB = KApplication.getInstance().getFilesDir()
+    private static final String PATH_KCB = KApplication.getInstance().getExternalFilesDir(null)
             .getAbsolutePath()
             + "/kcb";
 
@@ -34,7 +34,7 @@ public class FileUtil {
     /**
      * /kcb/tch/tchid；一个手机可以登录不同的老师账号，需要根据tchId建立不同的路径
      */
-    private static final String PATH_KCB_TCH_TCHID = PATH_KCB_TCH + "/d";
+    private static final String PATH_KCB_TCH_TCHID = PATH_KCB_TCH + "/" + KAccount.getAccountId();
 
     /**
      * /kcb/tch/tchid/test；test路径下面存储与测试相关的图片，在此路径下继续以testname建立路径；
