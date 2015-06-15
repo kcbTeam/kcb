@@ -22,10 +22,11 @@ import android.widget.TextView;
 
 import com.kcb.common.model.test.Question;
 import com.kcb.common.model.test.QuestionItem;
-import com.kcb.common.util.FileUtil;
+import com.kcb.common.util.BitmapUtil;
 import com.kcb.common.util.ToastUtil;
 import com.kcb.library.view.checkbox.CheckBox;
 import com.kcb.teacher.activity.test.CropPictureActivity;
+import com.kcb.teacher.util.FileUtil;
 import com.kcbTeam.R;
 
 public class EditQuestionView extends LinearLayout implements OnClickListener, OnLongClickListener {
@@ -166,6 +167,7 @@ public class EditQuestionView extends LinearLayout implements OnClickListener, O
         if (item.isText()) {
             setEditMode(flag, EDIT_MODE_TEXT);
             editText.setText(item.getText());
+            editText.setSelection(item.getText().length());
         } else {
             Bitmap bitmap = item.getBitmap();
             if (null != bitmap) {
@@ -371,7 +373,7 @@ public class EditQuestionView extends LinearLayout implements OnClickListener, O
 
                         @Override
                         public void run() {
-                            FileUtil.saveBitmap(bitmapPath, bitmap);
+                            BitmapUtil.saveBitmap(bitmapPath, bitmap);
                         }
                     }).start();
 

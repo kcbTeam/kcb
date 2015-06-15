@@ -12,10 +12,10 @@ import com.kcb.common.base.BaseActivity;
 import com.kcb.common.model.test.Question;
 import com.kcb.common.model.test.Test;
 import com.kcb.common.util.DialogUtil;
-import com.kcb.common.util.FileUtil;
 import com.kcb.common.util.ToastUtil;
 import com.kcb.common.view.test.EditQuestionView;
 import com.kcb.library.view.buttonflat.ButtonFlat;
+import com.kcb.teacher.util.FileUtil;
 import com.kcbTeam.R;
 
 /**

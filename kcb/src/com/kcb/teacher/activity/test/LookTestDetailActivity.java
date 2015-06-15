@@ -17,7 +17,7 @@ public class LookTestDetailActivity extends BaseActivity {
     private ButtonFlat backButton;
     private TextView testNameNumTextView;
 
-    private ShowQuestionView questionView;
+    private ShowQuestionView showQuestionView;
 
     private ButtonFlat lastButton;
     private ButtonFlat nextButton;
@@ -43,7 +43,8 @@ public class LookTestDetailActivity extends BaseActivity {
         testNameNumTextView.setText(String.format(getString(R.string.tch_test_name_num),
                 sTest.getName(), sTest.getQuestionNum()));
 
-        questionView = (ShowQuestionView) findViewById(R.id.questionview);
+        showQuestionView = (ShowQuestionView) findViewById(R.id.questionview);
+        showQuestionView.setType(ShowQuestionView.TYPE_TEACHER);
 
         lastButton = (ButtonFlat) findViewById(R.id.button_last);
         lastButton.setOnClickListener(this);
@@ -88,14 +89,14 @@ public class LookTestDetailActivity extends BaseActivity {
     }
 
     private void showQuestion() {
-        questionView.showQuestion(mQuestionIndex, sTest.getQuestion(mQuestionIndex));
+        showQuestionView.showQuestion(mQuestionIndex, sTest.getQuestion(mQuestionIndex));
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        questionView.release();
-        questionView = null;
+        showQuestionView.release();
+        showQuestionView = null;
         sTest = null;
     }
 

@@ -35,6 +35,22 @@ public class TestDao {
         mDatabase.insert(TestTable.TABLE_NAME, null, contentValues);
     }
 
+    /**
+     * 获取测试时间已到的测试
+     */
+    public List<Test> getTerminatedTests() {
+        List<Test> tests = getAll();
+        for (Test test : tests) {
+            if (test.getDate() + test.getTime() * 60 * 1000 > System.currentTimeMillis()) {
+                tests.remove(test);
+            }
+        }
+        return tests;
+    }
+
+    /**
+     * 获得所有的测试，包括已经结束的和未结束的
+     */
     public List<Test> getAll() {
         Cursor cursor = mDatabase.query(TestTable.TABLE_NAME, null, null, null, null, null, null);
         List<Test> tests = new ArrayList<Test>();

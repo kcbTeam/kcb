@@ -94,6 +94,7 @@ public class SetTestTimeAdapter extends BaseAdapter {
         private ButtonFlat editButton;
 
         public void setQuestion(int questionIndex, Question question) {
+            showQuestionView.setType(ShowQuestionView.TYPE_TEACHER);
             showQuestionView.showQuestion(questionIndex, question);
         }
     }

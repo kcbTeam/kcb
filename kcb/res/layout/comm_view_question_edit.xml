@@ -26,6 +26,7 @@
         android:padding="8dp"
         android:textColor="@color/black_700"
         android:textColorHint="@color/black_400"
+        android:textCursorDrawable="@drawable/comm_text_cursor"
         android:textSize="@dimen/text_size_medium" />
 
     <ImageView

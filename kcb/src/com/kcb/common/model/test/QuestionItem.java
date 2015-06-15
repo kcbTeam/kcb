@@ -11,7 +11,7 @@ import android.graphics.BitmapFactory;
 import android.text.TextUtils;
 
 import com.kcb.common.util.BitmapUtil;
-import com.kcb.common.util.FileUtil;
+import com.kcb.student.util.FileUtil;
 
 /**
  * 
@@ -104,12 +104,7 @@ public class QuestionItem implements Serializable {
     public String getBitmapString() {
         Bitmap bitmap = getBitmap();
         if (null != bitmap) {
-            byte[] bytes = BitmapUtil.bitmapToByteArray(bitmap);
-            if (null != bytes) {
-                return new String(bytes);
-            } else {
-                return "";
-            }
+            return BitmapUtil.bitmapToString(bitmap);
         } else {
             return "";
         }
@@ -200,9 +195,11 @@ public class QuestionItem implements Serializable {
     }
 
     public void saveBitmap(String testName, int questionIndex, int itemIndex) {
-        String path = FileUtil.getQuestionItemPath(testName, questionIndex + 1, itemIndex);
-        Bitmap bitmap = BitmapUtil.stringToBitmap(mBitmapString);
-        FileUtil.saveBitmap(path, bitmap);
+        if (!TextUtils.isEmpty(mBitmapString)) {
+            mBitmapPath = FileUtil.getQuestionItemPath(testName, questionIndex + 1, itemIndex);
+            mBitmap = BitmapUtil.stringToBitmap(mBitmapString);
+            BitmapUtil.saveBitmap(mBitmapPath, mBitmap);
+        }
     }
 
     public void deleteBitmap() {

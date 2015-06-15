@@ -40,9 +40,10 @@ public class TestFragment extends BaseFragment {
 
     private static final String TAG = TestFragment.class.getName();
 
-    private PaperButton startTestButton;
-    private PaperButton lookTestResultButton;
+    private PaperButton startButton;
     private SmoothProgressBar startProgressBar;
+
+    private PaperButton lookResultButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -59,12 +60,12 @@ public class TestFragment extends BaseFragment {
     @Override
     protected void initView() {
         View view = getView();
-        startTestButton = (PaperButton) view.findViewById(R.id.button_start_test);
-        startTestButton.setOnClickListener(mClickListener);
+        startButton = (PaperButton) view.findViewById(R.id.button_start_test);
+        startButton.setOnClickListener(mClickListener);
         startProgressBar = (SmoothProgressBar) view.findViewById(R.id.progressbar_start);
 
-        lookTestResultButton = (PaperButton) view.findViewById(R.id.button_look_test);
-        lookTestResultButton.setOnClickListener(mClickListener);
+        lookResultButton = (PaperButton) view.findViewById(R.id.button_look_test);
+        lookResultButton.setOnClickListener(mClickListener);
     }
 
     @Override
@@ -91,38 +92,62 @@ public class TestFragment extends BaseFragment {
     private final String KEY_REMAINTIME = "remaintime";
     private final String KEY_TEST = "test";
 
+    // 获取到图片之后的操作也能使耗时的，因为会将string转成图片，而图片可能过多；所以需要异步处理图片
     private void startTest() {
         if (startProgressBar.getVisibility() == View.VISIBLE) {
             return;
         }
         startProgressBar.setVisibility(View.VISIBLE);
+        new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                getTestFromServer();
+            }
+        }).start();
+    }
+
+    private void getTestFromServer() {
         JsonObjectRequest request =
                 new JsonObjectRequest(Method.GET, UrlUtil.getStuTestStartUrl(KAccount
                         .getAccountId()), new Listener<JSONObject>() {
 
                     @Override
                     public void onResponse(JSONObject response) {
-                        int remaintime = response.optInt(KEY_REMAINTIME);
-                        Test test = Test.fromJsonObject(response.optJSONObject(KEY_TEST));
+                        final int remaintime = response.optInt(KEY_REMAINTIME);
+                        final Test test = Test.fromJsonObject(response.optJSONObject(KEY_TEST));
+                        test.saveBitmap(); // 将测试中的图片string转成图片，并记录路径
 
                         TestDao testDao = new TestDao(getActivity());
-                        testDao.add(test);
+                        testDao.add(test); // 不会保存图片本身，保存图片路径
                         testDao.close();
 
-                        StartTestActivity.start(getActivity(), test, remaintime);
-                        startProgressBar.hide(getActivity());
+                        getActivity().runOnUiThread(new Runnable() {
+
+                            @Override
+                            public void run() {
+                                StartTestActivity.start(getActivity(), test, remaintime);
+                                startProgressBar.hide(getActivity());
+                            }
+                        });
                     }
                 }, new ErrorListener() {
 
                     @Override
-                    public void onErrorResponse(VolleyError error) {
-                        startProgressBar.hide(getActivity());
-                        NetworkResponse response = error.networkResponse;
-                        if (null != response && response.statusCode == 400) {
-                            ToastUtil.toast(R.string.stu_no_test_now);
-                        } else {
-                            ResponseUtil.toastError(error);
-                        }
+                    public void onErrorResponse(final VolleyError error) {
+                        getActivity().runOnUiThread(new Runnable() {
+
+                            @Override
+                            public void run() {
+                                startProgressBar.hide(getActivity());
+                                NetworkResponse response = error.networkResponse;
+                                if (null != response && response.statusCode == 400) {
+                                    ToastUtil.toast(R.string.stu_no_test_now);
+                                } else {
+                                    ResponseUtil.toastError(error);
+                                }
+                            }
+                        });
                     }
                 });
         RequestUtil.getInstance().addToRequestQueue(request, TAG);
