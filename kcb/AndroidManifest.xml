@@ -121,7 +121,7 @@
         <activity
             android:name="com.kcb.teacher.activity.test.EditQuestionActivty"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
+            android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
         <activity
             android:name="com.kcb.teacher.activity.test.LookTestActivity"

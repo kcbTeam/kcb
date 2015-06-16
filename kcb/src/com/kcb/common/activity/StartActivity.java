@@ -92,11 +92,8 @@ public class StartActivity extends BaseActivity {
                 PaperButton tchButton = (PaperButton) view.findViewById(R.id.button_tch);
                 stuButton.setVisibility(View.VISIBLE);
                 stuButton.setOnClickListener(mClickListener);
-                stuButton.setTextColor(getResources().getColor(R.color.stu_primary));
-
                 tchButton.setVisibility(View.VISIBLE);
                 tchButton.setOnClickListener(mClickListener);
-                tchButton.setTextColor(getResources().getColor(R.color.tch_primary));
             }
             container.addView(view);
             return view;
