@@ -8,7 +8,7 @@
 
     <LinearLayout
         android:id="@+id/layout_title"
-        style="@style/common_title_layout" >
+        style="@style/stu_title_layout" >
 
         <TextView
             android:id="@+id/textview_title"

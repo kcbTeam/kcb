@@ -3,6 +3,13 @@
 
     <!-- **************************************** 老师模块 Start **************************************** -->
     <!-- **************************************** 老师模块 Start **************************************** -->
+    <!-- activity 的顶部标题栏 -->
+    <style name="tch_title_layout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/tch_activity_header</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
     <!-- StartCheckIn start -->
     <!-- 显示4个签到数字 -->
     <style name="tch_checkin_num">
