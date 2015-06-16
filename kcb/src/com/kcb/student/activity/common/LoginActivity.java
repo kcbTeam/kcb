@@ -61,6 +61,7 @@ public class LoginActivity extends BaseActivity {
     protected void initView() {
         backButton = (ButtonFlat) findViewById(R.id.button_back);
         backButton.setOnClickListener(this);
+        backButton.setRippleColor(getResources().getColor(R.color.stu_primary_dark));
 
         idEditText = (FloatingEditText) findViewById(R.id.edittext_id);
         passwordEditText = (FloatingEditText) findViewById(R.id.edittext_password);

@@ -4,6 +4,6 @@
 
     <size android:height="48dp" />
 
-    <solid android:color="#03A9F4" />
+    <solid android:color="@color/tch_primary" />
 
 </shape>

@@ -35,6 +35,12 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_centerInParent">true</item>
     </style>
+    <!-- 顶部标题栏下的进度条 -->
+    <style name="common_title_progressbar" parent="@style/SmoothProgressBar">
+        <item name="android:layout_marginRight">0dp</item>
+        <item name="android:layout_marginLeft">0dp</item>
+        <item name="android:layout_marginTop">-7dp</item>
+    </style>
     <!-- 普通文字提示 -->
     <style name="common_tip_textview">
         <item name="android:layout_width">match_parent</item>
@@ -141,7 +147,7 @@
     <style name="common_popupwindow">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:background">@color/black_100</item>
+        <item name="android:background">@color/black_200</item>
         <item name="android:orientation">vertical</item>
     </style>
     <!-- 弹窗中每一项的布局 -->

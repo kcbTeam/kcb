@@ -174,7 +174,7 @@ public abstract class Button extends CustomView {
         return this.rippleSpeed;
     }
 
-    public void setRippleColor(String color) {
-        rippleColor = Color.parseColor(color);
+    public void setRippleColor(int color) {
+        rippleColor = color;
     }
 }

@@ -46,6 +46,7 @@ public class LookTestDetailActivity extends BaseActivity {
     protected void initView() {
         backButton = (ButtonFlat) findViewById(R.id.button_back);
         backButton.setOnClickListener(this);
+        backButton.setRippleColor(getResources().getColor(R.color.stu_primary_dark));
 
         testNameNumTextView = (TextView) findViewById(R.id.textview_test_name_num);
         testNameNumTextView.setText(String.format(getString(R.string.stu_test_name_num),

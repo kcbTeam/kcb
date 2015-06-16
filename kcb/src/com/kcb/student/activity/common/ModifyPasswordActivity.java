@@ -54,6 +54,7 @@ public class ModifyPasswordActivity extends BaseActivity {
     protected void initView() {
         backButton = (ButtonFlat) findViewById(R.id.button_back);
         backButton.setOnClickListener(this);
+        backButton.setRippleColor(getResources().getColor(R.color.stu_primary_dark));
 
         nextButton = (PaperButton) findViewById(R.id.button_next);
         nextButton.setOnClickListener(mClickListener);

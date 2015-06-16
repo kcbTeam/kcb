@@ -23,7 +23,7 @@ public class ButtonFlat extends Button {
     protected void setDefaultProperties() {
         minHeight = 16;
         minWidth = 16;
-        rippleSize = 3;
+        rippleSize = 4;
         // Min size
         setMinimumHeight(Utils.dpToPx(minHeight, getResources()));
         setMinimumWidth(Utils.dpToPx(minWidth, getResources()));
@@ -93,7 +93,7 @@ public class ButtonFlat extends Button {
      */
     @Override
     protected int makePressColor() {
-        return Color.parseColor("#0288D1");
+        return Color.parseColor("#303F9F");
     }
 
     public void setText(int resid) {

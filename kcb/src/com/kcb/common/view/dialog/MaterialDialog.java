@@ -74,8 +74,11 @@ public class MaterialDialog extends android.app.Dialog {
         messageTextView = (TextView) findViewById(R.id.message);
         sureButton = (ButtonFlat) findViewById(R.id.button_accept);
         sureButton.setTextSize(16);
+        sureButton.setRippleColor(mContext.getResources().getColor(R.color.black_300));
+
         cancelButton = (ButtonFlat) findViewById(R.id.button_cancel);
         cancelButton.setTextSize(16);
+        cancelButton.setRippleColor(mContext.getResources().getColor(R.color.black_300));
     }
 
     @Override

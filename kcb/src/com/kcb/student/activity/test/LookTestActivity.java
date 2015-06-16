@@ -61,8 +61,11 @@ public class LookTestActivity extends BaseActivity implements OnSearchListener, 
     protected void initView() {
         backButton = (ButtonFlat) findViewById(R.id.button_back);
         backButton.setOnClickListener(this);
+        backButton.setRippleColor(getResources().getColor(R.color.stu_primary_dark));
+
         refreshButton = (ButtonFlat) findViewById(R.id.button_refresh);
         refreshButton.setOnClickListener(this);
+        refreshButton.setRippleColor(getResources().getColor(R.color.stu_primary_dark));
 
         progressBar = (SmoothProgressBar) findViewById(R.id.progressbar_refresh);
 
