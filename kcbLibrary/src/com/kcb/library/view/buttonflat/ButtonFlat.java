@@ -21,8 +21,8 @@ public class ButtonFlat extends Button {
     }
 
     protected void setDefaultProperties() {
-        minHeight = 36;
-        minWidth = 48;
+        minHeight = 16;
+        minWidth = 16;
         rippleSize = 3;
         // Min size
         setMinimumHeight(Utils.dpToPx(minHeight, getResources()));

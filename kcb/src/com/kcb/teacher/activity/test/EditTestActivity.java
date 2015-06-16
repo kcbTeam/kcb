@@ -7,7 +7,6 @@ import android.os.Handler;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
-
 import com.kcb.common.base.BaseActivity;
 import com.kcb.common.model.test.Question;
 import com.kcb.common.model.test.Test;
