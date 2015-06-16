@@ -53,12 +53,9 @@ public class TestDao {
         List<String> names = new ArrayList<String>();
         if (null != cursor) {
             try {
-                if (cursor.moveToFirst()) {
-                    do {
-                        String name =
-                                cursor.getString(cursor.getColumnIndex(TestTable.COLUMN_NAME));
-                        names.add(name);
-                    } while (cursor.moveToNext());
+                while (cursor.moveToNext()) {
+                    String name = cursor.getString(cursor.getColumnIndex(TestTable.COLUMN_NAME));
+                    names.add(name);
                 }
             } catch (Exception e) {} finally {
                 cursor.close();
@@ -115,16 +112,13 @@ public class TestDao {
         List<Test> tests = new ArrayList<Test>();
         if (null != cursor) {
             try {
-                if (cursor.moveToFirst()) {
-                    do {
-                        try {
-                            Test test =
-                                    Test.fromJsonObject(new JSONObject(new String(cursor
-                                            .getBlob(cursor
-                                                    .getColumnIndex(TestTable.COLUMN_ROW_DATA)))));
-                            tests.add(test);
-                        } catch (JSONException e) {}
-                    } while (cursor.moveToNext());
+                while (cursor.moveToNext()) {
+                    try {
+                        Test test =
+                                Test.fromJsonObject(new JSONObject(new String(cursor.getBlob(cursor
+                                        .getColumnIndex(TestTable.COLUMN_ROW_DATA)))));
+                        tests.add(test);
+                    } catch (JSONException e) {}
                 }
             } catch (Exception e) {} finally {
                 cursor.close();
@@ -138,16 +132,13 @@ public class TestDao {
         List<Test> tests = new ArrayList<Test>();
         if (null != cursor) {
             try {
-                if (cursor.moveToFirst()) {
-                    do {
-                        try {
-                            Test test =
-                                    Test.fromJsonObject(new JSONObject(new String(cursor
-                                            .getBlob(cursor
-                                                    .getColumnIndex(TestTable.COLUMN_ROW_DATA)))));
-                            tests.add(test);
-                        } catch (JSONException e) {}
-                    } while (cursor.moveToNext());
+                while (cursor.moveToNext()) {
+                    try {
+                        Test test =
+                                Test.fromJsonObject(new JSONObject(new String(cursor.getBlob(cursor
+                                        .getColumnIndex(TestTable.COLUMN_ROW_DATA)))));
+                        tests.add(test);
+                    } catch (JSONException e) {}
                 }
             } catch (Exception e) {} finally {
                 cursor.close();

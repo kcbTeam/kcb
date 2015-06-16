@@ -56,15 +56,13 @@ public class TestDao {
         List<Test> tests = new ArrayList<Test>();
         if (null != cursor) {
             try {
-                if (cursor.moveToFirst()) {
-                    do {
-                        try {
-                            Test test =
-                                    Test.fromJsonObject(new JSONObject(cursor.getString(cursor
-                                            .getColumnIndex(TestTable.COLUMN_ROW_DATA))));
-                            tests.add(test);
-                        } catch (JSONException e) {}
-                    } while (cursor.moveToNext());
+                while (cursor.moveToNext()) {
+                    try {
+                        Test test =
+                                Test.fromJsonObject(new JSONObject(cursor.getString(cursor
+                                        .getColumnIndex(TestTable.COLUMN_ROW_DATA))));
+                        tests.add(test);
+                    } catch (JSONException e) {}
                 }
             } catch (Exception e) {} finally {
                 cursor.close();

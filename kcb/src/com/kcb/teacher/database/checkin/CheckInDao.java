@@ -40,13 +40,11 @@ public class CheckInDao {
         List<CheckInResult> results = new ArrayList<CheckInResult>();
         if (null != cursor) {
             try {
-                if (cursor.moveToFirst()) {
-                    do {
-                        try {
-                            results.add(CheckInResult.fromJsonObject(new JSONObject(cursor
-                                    .getString(cursor.getColumnIndex(CheckInTable.COLUMN_ROW_DATA)))));
-                        } catch (JSONException e) {}
-                    } while (cursor.moveToNext());
+                while (cursor.moveToNext()) {
+                    try {
+                        results.add(CheckInResult.fromJsonObject(new JSONObject(cursor
+                                .getString(cursor.getColumnIndex(CheckInTable.COLUMN_ROW_DATA)))));
+                    } catch (JSONException e) {}
                 }
             } catch (Exception e) {} finally {
                 cursor.close();

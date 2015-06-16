@@ -97,19 +97,19 @@ public class HomeActivity extends BaseFragmentActivity {
 
         checkInButton = (ButtonFlat) findViewById(R.id.button_checkin);
         checkInButton.setOnClickListener(this);
-        checkInButton.setRippleColor(getResources().getColor(R.color.black_50));
+        checkInButton.setRippleColor(getResources().getColor(R.color.black_400));
         checkInImageView = (ImageView) findViewById(R.id.imageview_checkin);
         checkInTextView = (TextView) findViewById(R.id.textview_tab_checkin);
 
         testButton = (ButtonFlat) findViewById(R.id.button_test);
         testButton.setOnClickListener(this);
-        testButton.setRippleColor(getResources().getColor(R.color.black_50));
+        testButton.setRippleColor(getResources().getColor(R.color.black_400));
         testImageView = (ImageView) findViewById(R.id.imageview_test);
         testTextView = (TextView) findViewById(R.id.textview_tab_test);
 
         stuCenterButton = (ButtonFlat) findViewById(R.id.button_stucenter);
         stuCenterButton.setOnClickListener(this);
-        stuCenterButton.setRippleColor(getResources().getColor(R.color.black_50));
+        stuCenterButton.setRippleColor(getResources().getColor(R.color.black_400));
         stuCenterImageView = (ImageView) findViewById(R.id.imageview_stucenter);
         stuCenterTextView = (TextView) findViewById(R.id.textview_tab_stucenter);
     }

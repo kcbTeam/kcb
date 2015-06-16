@@ -15,14 +15,14 @@ import com.kcb.teacher.model.account.KAccount;
 public class FileUtil {
 
     /**
-     * /kcb
+     * /kcb 用于保存测试中图片的根目录，在内部存储中，用户不可直接访问到，随应用程序写在而删除
      */
     private static final String PATH_KCB = KApplication.getInstance().getFilesDir()
             .getAbsolutePath()
             + "/kcb";
 
     /**
-     * 用于拍照片的临时目录，裁剪照片的时候，删除拍的照片
+     * 用于拍照片的临时目录，裁剪照片的时候，删除拍的照片，需要保村在外部存储，不然没法拍照
      */
     private static final String PATH_KCB_TEMP = KApplication.getInstance()
             .getExternalFilesDir(null).getAbsolutePath()

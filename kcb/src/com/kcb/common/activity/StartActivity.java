@@ -36,7 +36,7 @@ public class StartActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // if has account (has login), goto HomeActivity
+        // 如果已经登录过了，直接进入这界面，否则显示此界面
         if (!AccountUtil.hasAccount()) {
             setContentView(R.layout.comm_activity_start);
             initView();
@@ -92,8 +92,11 @@ public class StartActivity extends BaseActivity {
                 PaperButton tchButton = (PaperButton) view.findViewById(R.id.button_tch);
                 stuButton.setVisibility(View.VISIBLE);
                 stuButton.setOnClickListener(mClickListener);
+                stuButton.setTextColor(getResources().getColor(R.color.stu_primary));
+
                 tchButton.setVisibility(View.VISIBLE);
                 tchButton.setOnClickListener(mClickListener);
+                tchButton.setTextColor(getResources().getColor(R.color.tch_primary));
             }
             container.addView(view);
             return view;

@@ -46,13 +46,11 @@ public class StudentDao {
         List<Student> students = new ArrayList<Student>();
         if (null != cursor) {
             try {
-                if (cursor.moveToFirst()) {
-                    do {
-                        try {
-                            students.add(Student.fromjsonObject(new JSONObject(cursor
-                                    .getString(cursor.getColumnIndex(StudentTable.COLUMN_ROW_DATA)))));
-                        } catch (JSONException e) {}
-                    } while (cursor.moveToNext());
+                while (cursor.moveToNext()) {
+                    try {
+                        students.add(Student.fromjsonObject(new JSONObject(cursor.getString(cursor
+                                .getColumnIndex(StudentTable.COLUMN_ROW_DATA)))));
+                    } catch (JSONException e) {}
                 }
             } catch (Exception e) {} finally {
                 cursor.close();
