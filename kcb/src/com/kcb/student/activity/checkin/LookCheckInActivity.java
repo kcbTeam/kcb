@@ -66,8 +66,11 @@ public class LookCheckInActivity extends BaseActivity {
     protected void initView() {
         backbutton = (ButtonFlat) findViewById(R.id.button_back);
         backbutton.setOnClickListener(this);
+        backbutton.setRippleColor(getResources().getColor(R.color.stu_primary_dark));
+
         refreshButton = (ButtonFlat) findViewById(R.id.button_refresh);
         refreshButton.setOnClickListener(this);
+        refreshButton.setRippleColor(getResources().getColor(R.color.stu_primary_dark));
 
         progressBar = (SmoothProgressBar) findViewById(R.id.progressbar_refresh);
 

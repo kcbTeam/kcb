@@ -8,7 +8,7 @@
 
     <LinearLayout
         android:id="@+id/layout_title"
-        style="@style/common_title_layout" >
+        style="@style/stu_title_layout" >
 
         <include layout="@layout/comm_button_back" />
 
@@ -21,8 +21,8 @@
 
     <com.kcb.library.view.smoothprogressbar.SmoothProgressBar
         android:id="@+id/progressbar_refresh"
-        style="@style/SmoothProgressBar"
-        android:layout_alignBottom="@id/layout_title"
+        style="@style/common_title_progressbar"
+        android:layout_below="@id/layout_title"
         android:visibility="gone" />
 
     <TextView

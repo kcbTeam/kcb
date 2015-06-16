@@ -3,6 +3,12 @@
 
     <!-- **************************************** 学生模块 Start **************************************** -->
     <!-- **************************************** 学生模块 Start **************************************** -->
+    <style name="stu_title_layout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/stu_activity_header</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
     <!-- ********** CheckIn start ********** -->
     <!-- 输入四个签到数字 -->
     <style name="stu_checkin_num">

@@ -4,10 +4,6 @@
 
     <size android:height="48dp" />
 
-    <gradient
-        android:angle="270"
-        android:endColor="#eeeeee"
-        android:startColor="#eeeeee"
-        android:type="linear" />
+    <solid android:color="@color/tch_primary" />
 
 </shape>

@@ -2,7 +2,7 @@
 <resources>
 
     <!-- common start -->
-    <color name="activity_background">#ffffff</color>
+    <color name="activity_background">#f5f5f5</color>
     <color name="black_divider">#e0e0e0</color>
     <!--  -->
     <color name="white">#ffffff</color>

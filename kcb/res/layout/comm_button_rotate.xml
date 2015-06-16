@@ -10,7 +10,7 @@
 
     <ImageView
         style="@style/common_title_icon"
-        android:src="@drawable/ic_rotate_right_black_24dp" >
+        android:src="@drawable/ic_rotate_right_white_24dp" >
     </ImageView>
 
 </com.kcb.library.view.buttonflat.ButtonFlat>

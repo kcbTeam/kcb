@@ -9,7 +9,7 @@
 
     <RelativeLayout
         android:id="@+id/layout_title"
-        style="@style/common_title_layout" >
+        style="@style/tch_title_layout" >
 
         <include layout="@layout/comm_button_avatar" />
 
@@ -20,7 +20,7 @@
             android:gravity="center" />
 
         <include
-            android:layout_width="wrap_content"
+            android:layout_width="48dp"
             android:layout_height="@dimen/activity_header_height"
             android:layout_alignParentRight="true"
             layout="@layout/comm_button_refresh"
@@ -29,8 +29,8 @@
 
     <com.kcb.library.view.smoothprogressbar.SmoothProgressBar
         android:id="@+id/progressbar_refresh"
-        style="@style/SmoothProgressBar"
-        android:layout_alignBottom="@id/layout_title"
+        style="@style/common_title_progressbar"
+        android:layout_below="@id/layout_title"
         android:visibility="gone" />
 
     <LinearLayout

@@ -70,6 +70,7 @@ public class StartCheckInAdapter
             numButton.setBackgroundResource(R.drawable.comm_rectangle);
             numButton.setTextSize(18);
             numButton.setTextColor(mContext.getResources().getColor(R.color.black_700));
+            numButton.setRippleColor(mContext.getResources().getColor(R.color.black_300));
             numButton.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {

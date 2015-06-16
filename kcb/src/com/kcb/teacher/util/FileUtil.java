@@ -17,14 +17,16 @@ public class FileUtil {
     /**
      * /kcb
      */
-    private static final String PATH_KCB = KApplication.getInstance().getExternalFilesDir(null)
+    private static final String PATH_KCB = KApplication.getInstance().getFilesDir()
             .getAbsolutePath()
             + "/kcb";
 
     /**
      * 用于拍照片的临时目录，裁剪照片的时候，删除拍的照片
      */
-    private static final String PATH_KCB_TEMP = PATH_KCB + "/temp";
+    private static final String PATH_KCB_TEMP = KApplication.getInstance()
+            .getExternalFilesDir(null).getAbsolutePath()
+            + "/kcbtemp";
 
     /**
      * /kcb/tch

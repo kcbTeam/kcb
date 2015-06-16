@@ -9,6 +9,6 @@
 
     <ImageView
         style="@style/common_title_icon"
-        android:src="@drawable/ic_arrow_back_black_24dp" />
+        android:src="@drawable/ic_arrow_back_white_24dp" />
 
 </com.kcb.library.view.buttonflat.ButtonFlat>

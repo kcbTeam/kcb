@@ -10,7 +10,7 @@
 
     <LinearLayout
         android:id="@+id/layout_title"
-        style="@style/common_title_layout" >
+        style="@style/tch_title_layout" >
 
         <include layout="@layout/comm_button_back" />
 
