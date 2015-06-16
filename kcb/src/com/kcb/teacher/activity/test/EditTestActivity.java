@@ -64,12 +64,19 @@ public class EditTestActivity extends BaseActivity {
 
         lastButton = (ButtonFlat) findViewById(R.id.button_last);
         lastButton.setOnClickListener(this);
+        lastButton.setRippleColor(getResources().getColor(R.color.black_400));
+
         nextButton = (ButtonFlat) findViewById(R.id.button_next);
         nextButton.setOnClickListener(this);
+        nextButton.setRippleColor(getResources().getColor(R.color.black_400));
+
         addButton = (ButtonFlat) findViewById(R.id.button_add);
         addButton.setOnClickListener(this);
+        addButton.setRippleColor(getResources().getColor(R.color.black_400));
+
         deleteButton = (ButtonFlat) findViewById(R.id.button_delete);
         deleteButton.setOnClickListener(this);
+        deleteButton.setRippleColor(getResources().getColor(R.color.black_400));
     }
 
     @Override

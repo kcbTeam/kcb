@@ -15,6 +15,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -111,6 +112,7 @@ public class EditQuestionView extends LinearLayout implements OnClickListener, O
 
         changeFocusButton = (ButtonFlat) findViewById(R.id.button_changefocus);
         changeFocusButton.setOnClickListener(this);
+        changeFocusButton.setRippleColor(mContext.getResources().getColor(R.color.black_300));
 
         aEditText = (EditText) findViewById(R.id.edittext_A);
         aEditText.setOnLongClickListener(this);
@@ -160,6 +162,7 @@ public class EditQuestionView extends LinearLayout implements OnClickListener, O
         showQuestionItem(FALG_B, mQuestion.getChoiceB());
         showQuestionItem(FLAG_C, mQuestion.getChoiceC());
         showQuestionItem(FLAG_D, mQuestion.getChoiceD());
+        titleEditText.requestFocus();
 
         checkBoxA.setChecked(mQuestion.getChoiceA().isRight());
         checkBoxB.setChecked(mQuestion.getChoiceB().isRight());
@@ -243,6 +246,10 @@ public class EditQuestionView extends LinearLayout implements OnClickListener, O
             if (mQuestion.getChoiceD().isText()) {
                 dEditText.requestFocus();
             }
+        } else if (dEditText.isFocused()) {
+            InputMethodManager imm =
+                    (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(dEditText.getWindowToken(), 0);
         }
     }
 

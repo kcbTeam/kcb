@@ -73,6 +73,8 @@ public class SetTestTimeAdapter extends BaseAdapter {
             viewHolder.showQuestionView =
                     (ShowQuestionView) convertView.findViewById(R.id.showquestionview);
             viewHolder.editButton = (ButtonFlat) convertView.findViewById(R.id.button_edit);
+            viewHolder.editButton.setRippleColor(mContext.getResources()
+                    .getColor(R.color.black_300));
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();

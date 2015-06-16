@@ -27,37 +27,36 @@
 
     <LinearLayout
         android:id="@+id/layout_buttons"
-        style="@style/common_bottom_button_layout" >
+        style="@style/common_bottom_button_layout"
+        android:background="@color/black_200" >
 
         <com.kcb.library.view.buttonflat.ButtonFlat
             android:id="@+id/button_last"
             style="@style/common_bottom_button"
             android:text="@string/tch_last_question"
             widget:clickAfterRipple="false"
-            widget:rippleSpeed="18" />
+            widget:rippleSpeed="14" />
 
         <com.kcb.library.view.buttonflat.ButtonFlat
             android:id="@+id/button_next"
             style="@style/common_bottom_button"
             android:text="@string/tch_next_question"
             widget:clickAfterRipple="false"
-            widget:rippleSpeed="18" />
+            widget:rippleSpeed="14" />
 
         <com.kcb.library.view.buttonflat.ButtonFlat
             android:id="@+id/button_add"
             style="@style/common_bottom_button"
             android:text="@string/tch_add_question"
             widget:clickAfterRipple="false"
-            widget:rippleSpeed="18" />
+            widget:rippleSpeed="14" />
 
         <com.kcb.library.view.buttonflat.ButtonFlat
             android:id="@+id/button_delete"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
+            style="@style/common_bottom_button"
             android:text="@string/tch_delete_question"
             widget:clickAfterRipple="false"
-            widget:rippleSpeed="18" />
+            widget:rippleSpeed="14" />
     </LinearLayout>
 
     <View

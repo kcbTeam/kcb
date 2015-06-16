@@ -193,11 +193,11 @@ public class HomeActivity extends BaseFragmentActivity {
 
         ButtonFlat modifyButton = (ButtonFlat) customView.findViewById(R.id.button_modifypassword);
         modifyButton.setOnClickListener(clickListener);
-        modifyButton.setRippleColor(getResources().getColor(R.color.black_300));
+        modifyButton.setRippleColor(getResources().getColor(R.color.black_400));
 
         ButtonFlat exitButton = (ButtonFlat) customView.findViewById(R.id.button_exit);
         exitButton.setOnClickListener(clickListener);
-        exitButton.setRippleColor(getResources().getColor(R.color.black_300));
+        exitButton.setRippleColor(getResources().getColor(R.color.black_400));
     }
 
     private void exitAccount() {

@@ -97,19 +97,19 @@ public class HomeActivity extends BaseFragmentActivity {
 
         checkInButton = (ButtonFlat) findViewById(R.id.button_checkin);
         checkInButton.setOnClickListener(this);
-        checkInButton.setRippleColor(getResources().getColor(R.color.black_400));
+        checkInButton.setRippleColor(getResources().getColor(R.color.black_50));
         checkInImageView = (ImageView) findViewById(R.id.imageview_checkin);
         checkInTextView = (TextView) findViewById(R.id.textview_tab_checkin);
 
         testButton = (ButtonFlat) findViewById(R.id.button_test);
         testButton.setOnClickListener(this);
-        testButton.setRippleColor(getResources().getColor(R.color.black_400));
+        testButton.setRippleColor(getResources().getColor(R.color.black_50));
         testImageView = (ImageView) findViewById(R.id.imageview_test);
         testTextView = (TextView) findViewById(R.id.textview_tab_test);
 
         stuCenterButton = (ButtonFlat) findViewById(R.id.button_stucenter);
         stuCenterButton.setOnClickListener(this);
-        stuCenterButton.setRippleColor(getResources().getColor(R.color.black_400));
+        stuCenterButton.setRippleColor(getResources().getColor(R.color.black_50));
         stuCenterImageView = (ImageView) findViewById(R.id.imageview_stucenter);
         stuCenterTextView = (TextView) findViewById(R.id.textview_tab_stucenter);
     }
@@ -280,11 +280,11 @@ public class HomeActivity extends BaseFragmentActivity {
 
         ButtonFlat modifyButton = (ButtonFlat) customView.findViewById(R.id.button_modifypassword);
         modifyButton.setOnClickListener(clickListener);
-        modifyButton.setRippleColor(getResources().getColor(R.color.black_300));
+        modifyButton.setRippleColor(getResources().getColor(R.color.black_400));
 
         ButtonFlat exitButton = (ButtonFlat) customView.findViewById(R.id.button_exit);
         exitButton.setOnClickListener(clickListener);
-        exitButton.setRippleColor(getResources().getColor(R.color.black_300));
+        exitButton.setRippleColor(getResources().getColor(R.color.black_400));
     }
 
     private void exitAccount() {
