@@ -14,7 +14,7 @@
     <style name="common_title_layout">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:background">@drawable/activity_header</item>
+        <item name="android:background">@drawable/comm_activity_header</item>
         <item name="android:orientation">horizontal</item>
     </style>
     <!-- 顶部标题栏中的文字（有返回按钮） -->

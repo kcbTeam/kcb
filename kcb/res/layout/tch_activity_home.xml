@@ -20,7 +20,7 @@
             android:gravity="center" />
 
         <include
-            android:layout_width="wrap_content"
+            android:layout_width="48dp"
             android:layout_height="@dimen/activity_header_height"
             android:layout_alignParentRight="true"
             layout="@layout/comm_button_refresh"
