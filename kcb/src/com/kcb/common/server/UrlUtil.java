@@ -66,8 +66,8 @@ public class UrlUtil {
     // 3.1 start test
     private static final String url_stu_test_start = IP + "/v1/stu/test/start";
 
-    public static String getStuTestStartUrl(String id) {
-        return url_stu_test_start + "?id=" + id;
+    public static String getStuTestStartUrl(String stuId, String tchId) {
+        return url_stu_test_start + "?stuid=" + stuId + "&tchid=" + tchId;
     }
 
     // 3.2 end test

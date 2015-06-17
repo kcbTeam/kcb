@@ -14,7 +14,7 @@ import android.view.View.OnClickListener;
  */
 public abstract class DelayClickListener implements OnClickListener {
 
-    public static final long DELAY_PAPER_BUTTON = 400; // default delay time for PaperButton's
+    public static final long DELAY_PAPER_BUTTON = 350; // default delay time for PaperButton's
                                                        // animation
 
     private long mLastClickTime = 0; // according last & this click time to detect if execute

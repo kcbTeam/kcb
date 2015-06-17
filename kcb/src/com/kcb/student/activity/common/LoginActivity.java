@@ -1,5 +1,6 @@
 package com.kcb.student.activity.common;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Context;
@@ -23,6 +24,7 @@ import com.kcb.common.server.RequestUtil;
 import com.kcb.common.server.ResponseUtil;
 import com.kcb.common.server.UrlUtil;
 import com.kcb.common.util.AnimationUtil;
+import com.kcb.common.util.LogUtil;
 import com.kcb.common.util.StatusBarUtil;
 import com.kcb.common.util.ToastUtil;
 import com.kcb.library.view.FloatingEditText;
@@ -102,6 +104,7 @@ public class LoginActivity extends BaseActivity {
         }
     };
 
+    private final String KEY_DATA = "data";
     private final String KEY_STUNAME = "stuname";
     private final String KEY_TCHID = "tchid";
     private final String KEY_TCHNAME = "tchname";
@@ -128,17 +131,21 @@ public class LoginActivity extends BaseActivity {
 
                                         @Override
                                         public void run() {
-                                            String stuName = response.optString(KEY_STUNAME);
-                                            String tchId = response.optString(KEY_TCHID);
-                                            String tchName = response.optString(KEY_TCHNAME);
-                                            // save account
-                                            KAccount account =
-                                                    new KAccount(stuId, stuName, tchId, tchName);
-                                            KAccount.saveAccount(account);
-                                            AccountUtil.setAccountType(AccountUtil.TYPE_STU);
-                                            // goto HomeActivity
-                                            HomeActivity.start(LoginActivity.this);
-                                            finish();
+                                            try {
+                                                LogUtil.i(TAG, response.toString());
+                                                JSONObject data = response.getJSONObject(KEY_DATA);
+                                                String stuName = data.optString(KEY_STUNAME);
+                                                String tchId = data.optString(KEY_TCHID);
+                                                String tchName = data.optString(KEY_TCHNAME);
+                                                // save account
+                                                KAccount account =
+                                                        new KAccount(stuId, stuName, tchId, tchName);
+                                                KAccount.saveAccount(account);
+                                                AccountUtil.setAccountType(AccountUtil.TYPE_STU);
+                                                // goto HomeActivity
+                                                HomeActivity.start(LoginActivity.this);
+                                                finish();
+                                            } catch (JSONException e) {}
                                         }
                                     }, 500);
                                 };
@@ -156,8 +163,6 @@ public class LoginActivity extends BaseActivity {
                                     } else {
                                         ResponseUtil.toastError(error);
                                     }
-                                    HomeActivity.start(LoginActivity.this);
-                                    finish();
                                 };
                             });
             RequestUtil.getInstance().addToRequestQueue(request, TAG);

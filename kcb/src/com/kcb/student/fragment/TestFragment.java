@@ -109,8 +109,8 @@ public class TestFragment extends BaseFragment {
 
     private void getTestFromServer() {
         JsonObjectRequest request =
-                new JsonObjectRequest(Method.GET, UrlUtil.getStuTestStartUrl(KAccount
-                        .getAccountId()), new Listener<JSONObject>() {
+                new JsonObjectRequest(Method.GET, UrlUtil.getStuTestStartUrl(
+                        KAccount.getAccountId(), KAccount.getTchId()), new Listener<JSONObject>() {
 
                     @Override
                     public void onResponse(JSONObject response) {

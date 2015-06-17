@@ -412,6 +412,7 @@ public class EditQuestionView extends LinearLayout implements OnClickListener, O
                 try {
                     Uri uri = (Uri) data.getParcelableExtra(CropPictureActivity.DATA_PATH);
                     final Bitmap bitmap = Media.getBitmap(mContext.getContentResolver(), uri);
+                    new File(uri.toString()).delete();
                     // 保持的图片path： /kcb/testname/题目index_选项Index.png
                     // 比如：/kcb/导数的意义/1_0.png，表示测试——导数的意义中，第1道题的题目的图片。
                     // 比如：/kcb/导数的意义/2_3.png，表示测试——导数的意义中，第2道题的C选项的图片。
