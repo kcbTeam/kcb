@@ -25,6 +25,7 @@ import com.kcb.common.model.test.Test;
 import com.kcb.common.server.RequestUtil;
 import com.kcb.common.server.ResponseUtil;
 import com.kcb.common.server.UrlUtil;
+import com.kcb.common.util.StatusBarUtil;
 import com.kcb.common.util.StringMatchUtil;
 import com.kcb.common.view.common.EmptyTipView;
 import com.kcb.common.view.common.SearchEditText;
@@ -67,6 +68,7 @@ public class LookTestActivity extends BaseActivity implements OnSearchListener, 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tch_activity_look_test);
+        StatusBarUtil.setTchStatusBarColor(this);
 
         initView();
         initData();

@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.kcb.common.base.BaseFragmentActivity;
 import com.kcb.common.util.DialogUtil;
+import com.kcb.common.util.StatusBarUtil;
 import com.kcb.common.util.ToastUtil;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.student.database.checkin.CheckInDao;
@@ -57,6 +58,7 @@ public class HomeActivity extends BaseFragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.stu_activity_home);
+        StatusBarUtil.setStuStatusBarColor(this);
 
         initView();
     }

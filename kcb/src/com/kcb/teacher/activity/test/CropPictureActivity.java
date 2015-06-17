@@ -15,6 +15,7 @@ import android.view.View;
 
 import com.edmodo.cropper.CropImageView;
 import com.kcb.common.base.BaseActivity;
+import com.kcb.common.util.StatusBarUtil;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcbTeam.R;
 
@@ -55,6 +56,7 @@ public class CropPictureActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tch_activity_crop_picture);
+        StatusBarUtil.setTchStatusBarColor(this);
 
         initData();
         initView();

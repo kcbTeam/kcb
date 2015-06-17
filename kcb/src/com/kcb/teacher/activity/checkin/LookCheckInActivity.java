@@ -21,6 +21,7 @@ import com.kcb.common.base.BaseActivity;
 import com.kcb.common.server.RequestUtil;
 import com.kcb.common.server.ResponseUtil;
 import com.kcb.common.server.UrlUtil;
+import com.kcb.common.util.StatusBarUtil;
 import com.kcb.common.view.common.EmptyTipView;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
@@ -57,6 +58,7 @@ public class LookCheckInActivity extends BaseActivity implements OnItemClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tch_activity_look_checkin);
+        StatusBarUtil.setTchStatusBarColor(this);
 
         initView();
         initData();

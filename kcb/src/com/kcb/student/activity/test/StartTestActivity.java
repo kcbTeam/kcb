@@ -26,6 +26,7 @@ import com.kcb.common.server.RequestUtil;
 import com.kcb.common.server.ResponseUtil;
 import com.kcb.common.server.UrlUtil;
 import com.kcb.common.util.DialogUtil;
+import com.kcb.common.util.StatusBarUtil;
 import com.kcb.common.util.ToastUtil;
 import com.kcb.common.view.dialog.MaterialDialog;
 import com.kcb.common.view.test.AnswerQuestionView;
@@ -73,6 +74,7 @@ public class StartTestActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.stu_activity_start_test);
+        StatusBarUtil.setStuStatusBarColor(this);
 
         initView();
         initData();

@@ -26,6 +26,7 @@ import com.kcb.common.base.BaseActivity;
 import com.kcb.common.server.RequestUtil;
 import com.kcb.common.server.ResponseUtil;
 import com.kcb.common.server.UrlUtil;
+import com.kcb.common.util.StatusBarUtil;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
 import com.kcb.student.database.checkin.CheckInDao;
@@ -57,6 +58,7 @@ public class LookCheckInActivity extends BaseActivity {
     protected void onCreate(android.os.Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.stu_activity_look_checkin);
+        StatusBarUtil.setStuStatusBarColor(this);
 
         initView();
         initData();

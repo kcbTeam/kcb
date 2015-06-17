@@ -18,6 +18,7 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.PercentFormatter;
 import com.kcb.common.base.BaseActivity;
+import com.kcb.common.util.StatusBarUtil;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.teacher.model.stucentre.Student;
 import com.kcbTeam.R;
@@ -49,6 +50,7 @@ public class StuCentreActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tch_activity_stucentre);
+        StatusBarUtil.setTchStatusBarColor(this);
 
         initView();
         initData();

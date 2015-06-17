@@ -23,6 +23,7 @@ import com.kcb.common.server.ResponseUtil;
 import com.kcb.common.server.UrlUtil;
 import com.kcb.common.util.AnimationUtil;
 import com.kcb.common.util.DialogUtil;
+import com.kcb.common.util.StatusBarUtil;
 import com.kcb.common.util.ToastUtil;
 import com.kcb.common.view.dialog.MaterialDialog;
 import com.kcb.library.view.PaperButton;
@@ -68,6 +69,7 @@ public class StartCheckInActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.stu_activity_start_checkin);
+        StatusBarUtil.setStuStatusBarColor(this);
 
         initView();
         initData();

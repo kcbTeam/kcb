@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.kcb.common.base.BaseActivity;
 import com.kcb.common.model.test.Test;
+import com.kcb.common.util.StatusBarUtil;
 import com.kcb.common.view.test.ShowQuestionView;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcbTeam.R;
@@ -37,6 +38,7 @@ public class LookTestDetailActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.stu_activity_look_test_detail);
+        StatusBarUtil.setStuStatusBarColor(this);
 
         initView();
         initData();

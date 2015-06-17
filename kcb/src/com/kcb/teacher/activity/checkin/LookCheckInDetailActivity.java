@@ -20,6 +20,7 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.PercentFormatter;
 import com.kcb.common.base.BaseFragmentActivity;
+import com.kcb.common.util.StatusBarUtil;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.teacher.adapter.checkin.LookCheckInDetailAdapter;
 import com.kcb.teacher.model.checkin.CheckInResult;
@@ -51,6 +52,7 @@ public class LookCheckInDetailActivity extends BaseFragmentActivity implements O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tch_activity_look_checkin_detail);
+        StatusBarUtil.setTchStatusBarColor(this);
 
         initView();
         initData();

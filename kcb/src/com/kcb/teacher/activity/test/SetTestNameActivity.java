@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.kcb.common.base.BaseActivity;
 import com.kcb.common.model.test.Test;
 import com.kcb.common.util.AnimationUtil;
+import com.kcb.common.util.StatusBarUtil;
 import com.kcb.common.util.ToastUtil;
 import com.kcb.library.slider.Slider;
 import com.kcb.library.slider.Slider.OnValueChangedListener;
@@ -37,6 +38,7 @@ public class SetTestNameActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tch_activity_set_test_name);
+        StatusBarUtil.setTchStatusBarColor(this);
 
         initView();
         initData();

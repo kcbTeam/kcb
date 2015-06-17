@@ -12,6 +12,7 @@ import android.widget.ListView;
 
 import com.kcb.common.base.BaseActivity;
 import com.kcb.common.model.test.Test;
+import com.kcb.common.util.StatusBarUtil;
 import com.kcb.common.util.StringMatchUtil;
 import com.kcb.common.view.common.EmptyTipView;
 import com.kcb.common.view.common.SearchEditText;
@@ -52,6 +53,7 @@ public class LookTestActivity extends BaseActivity implements OnSearchListener, 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.stu_activity_look_test);
+        StatusBarUtil.setStuStatusBarColor(this);
 
         initView();
         initData();

@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.kcb.common.base.BaseActivity;
 import com.kcb.common.model.test.Question;
 import com.kcb.common.util.DialogUtil;
+import com.kcb.common.util.StatusBarUtil;
 import com.kcb.common.util.ToastUtil;
 import com.kcb.common.view.test.EditQuestionView;
 import com.kcb.library.view.buttonflat.ButtonFlat;
@@ -40,6 +41,7 @@ public class EditQuestionActivty extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tch_activity_edit_question);
+        StatusBarUtil.setTchStatusBarColor(this);
 
         initView();
         initData();
