@@ -4,6 +4,7 @@ import com.android.volley.NetworkError;
 import com.android.volley.NoConnectionError;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
+import com.kcb.common.util.LogUtil;
 import com.kcb.common.util.ToastUtil;
 import com.kcbTeam.R;
 
@@ -16,7 +17,10 @@ import com.kcbTeam.R;
  */
 public class ResponseUtil {
 
+    private static final String TAG = ResponseUtil.class.getName();
+
     public static void toastError(VolleyError error) {
+        LogUtil.e(TAG, error.toString());
         if (isNetworkProblem(error)) {
             ToastUtil.toast(R.string.network_error);
         } else {

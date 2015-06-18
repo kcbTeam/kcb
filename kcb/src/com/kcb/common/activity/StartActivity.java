@@ -149,8 +149,10 @@ public class StartActivity extends BaseActivity {
         super.onDestroy();
         colorAnimationView = null;
         viewPager = null;
-        mAdapter.release();
-        mAdapter = null;
+        if (null != mAdapter) { // 如果已经登录过，直接进入这界面，此时mAdapter根本没有初始化，所以需要判空
+            mAdapter.release();
+            mAdapter = null;
+        }
     }
 
     /**

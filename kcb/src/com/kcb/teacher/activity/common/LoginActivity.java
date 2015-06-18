@@ -88,60 +88,67 @@ public class LoginActivity extends BaseActivity {
 
         @Override
         public void doClick(View v) {
-            final String id = idEditText.getText().toString().trim().replace(" ", "");
-            final String password = passwordEditText.getText().toString();
-            if (TextUtils.isEmpty(id)) {
-                idEditText.requestFocus();
-                AnimationUtil.shake(idEditText);
-            } else if (TextUtils.isEmpty(password)) {
-                passwordEditText.requestFocus();
-                AnimationUtil.shake(passwordEditText);
-            } else {
-                if (loginProgressBar.getVisibility() == View.VISIBLE) {
-                    return;
-                }
-                loginProgressBar.setVisibility(View.VISIBLE);
-                StringRequest request =
-                        new StringRequest(Method.POST, UrlUtil.getTchLoginUrl(id, password),
-                                new Listener<String>() {
-                                    public void onResponse(final String response) {
-                                        new Handler().postDelayed(new Runnable() {
-
-                                            @Override
-                                            public void run() {
-                                                KAccount account = new KAccount(id, response);
-                                                KAccount.saveAccount(account);
-
-                                                AccountUtil.setAccountType(AccountUtil.TYPE_TCH);
-
-                                                HomeActivity.start(LoginActivity.this);
-                                                finish();
-                                            }
-                                        }, 500);
-                                    };
-                                }, new ErrorListener() {
-                                    public void onErrorResponse(VolleyError error) {
-                                        loginProgressBar.hide(LoginActivity.this);
-                                        NetworkResponse networkResponse = error.networkResponse;
-                                        if (null != networkResponse) {
-                                            int statusCode = networkResponse.statusCode;
-                                            if (statusCode == 400) {
-                                                ToastUtil.toast(R.string.tch_id_error);
-                                            } else if (statusCode == 401) {
-                                                ToastUtil.toast(R.string.tch_password_error);
-                                            }
-                                        } else {
-                                            ResponseUtil.toastError(error);
-                                        }
-
-                                        HomeActivity.start(LoginActivity.this);
-                                        finish();
-                                    };
-                                });
-                RequestUtil.getInstance().addToRequestQueue(request, TAG);
+            switch (v.getId()) {
+                case R.id.button_login:
+                    login();
+                    break;
+                default:
+                    break;
             }
         }
     };
+
+    private void login() {
+        final String id = idEditText.getText().toString().trim().replace(" ", "");
+        final String password = passwordEditText.getText().toString();
+        if (TextUtils.isEmpty(id)) {
+            idEditText.requestFocus();
+            AnimationUtil.shake(idEditText);
+        } else if (TextUtils.isEmpty(password)) {
+            passwordEditText.requestFocus();
+            AnimationUtil.shake(passwordEditText);
+        } else {
+            if (loginProgressBar.getVisibility() == View.VISIBLE) {
+                return;
+            }
+            loginProgressBar.setVisibility(View.VISIBLE);
+            StringRequest request =
+                    new StringRequest(Method.POST, UrlUtil.getTchLoginUrl(id, password),
+                            new Listener<String>() {
+                                public void onResponse(final String response) {
+                                    new Handler().postDelayed(new Runnable() {
+
+                                        @Override
+                                        public void run() {
+                                            KAccount account = new KAccount(id, response);
+                                            KAccount.saveAccount(account);
+
+                                            AccountUtil.setAccountType(AccountUtil.TYPE_TCH);
+
+                                            HomeActivity.start(LoginActivity.this);
+                                            finish();
+                                        }
+                                    }, 500);
+                                };
+                            }, new ErrorListener() {
+                                public void onErrorResponse(VolleyError error) {
+                                    loginProgressBar.hide(LoginActivity.this);
+                                    NetworkResponse networkResponse = error.networkResponse;
+                                    if (null != networkResponse) {
+                                        int statusCode = networkResponse.statusCode;
+                                        if (statusCode == 400) {
+                                            ToastUtil.toast(R.string.tch_id_error);
+                                        } else if (statusCode == 401) {
+                                            ToastUtil.toast(R.string.tch_password_error);
+                                        }
+                                    } else {
+                                        ResponseUtil.toastError(error);
+                                    }
+                                };
+                            });
+            RequestUtil.getInstance().addToRequestQueue(request, TAG);
+        }
+    }
 
     @Override
     public void onBackPressed() {
