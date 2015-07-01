@@ -100,7 +100,7 @@ public class StartCheckInActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        String timeString = getIntent().getStringExtra(DATA_TIME);
+        String timeString = getIntent().getStringExtra(DATA_TIME);//返回的字符串中最后还有/n ，比如"0/n",转成int的时候需要去掉后两个字符。
         mRemainTime = Integer.valueOf(timeString.substring(0, timeString.length() - 1));
 
         mHandler = new Handler(getMainLooper()) {
