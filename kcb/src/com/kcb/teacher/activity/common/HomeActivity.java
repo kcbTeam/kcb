@@ -222,7 +222,15 @@ public class HomeActivity extends BaseFragmentActivity {
                 break;
         }
     }
-
+    
+    /**
+     * 
+     * @title: setTap
+     * @description: 设置按钮栏的状态
+     * @author: ZQJ
+     * @date: 2015年6月27日 下午8:49:35
+     * @param index
+     */
     private void setTap(int index) {
         Resources res = getResources();
         checkInImageView.setImageResource(R.drawable.ic_assignment_turned_in_white_36dp);

@@ -49,7 +49,7 @@ public class ShowQuestionView extends LinearLayout {
 
     private TextView dTextView;
     private ImageView dImageView;
-    private ImageView dCheckBoxd;
+    private ImageView dCheckBox;
 
     private Context mContext;
     private int mType; // 两种类型，对于老师——checkbox显示正确的选项；对于学生——checkbox显示选择的选项，蓝色的A-D表示正确的选项
@@ -83,7 +83,7 @@ public class ShowQuestionView extends LinearLayout {
 
         dTextView = (TextView) findViewById(R.id.textview_D);
         dImageView = (ImageView) findViewById(R.id.imageview_D);
-        dCheckBoxd = (ImageView) findViewById(R.id.checkBox_D);
+        dCheckBox = (ImageView) findViewById(R.id.checkBox_D);
     }
 
     public void setType(int type) {
@@ -98,7 +98,7 @@ public class ShowQuestionView extends LinearLayout {
         showQuestionItem(aTextView, aImageView, aCheckBox, question.getChoiceA());
         showQuestionItem(bTextView, bImageView, bCheckBox, question.getChoiceB());
         showQuestionItem(cTextView, cImageView, cCheckBox, question.getChoiceC());
-        showQuestionItem(dTextView, dImageView, dCheckBoxd, question.getChoiceD());
+        showQuestionItem(dTextView, dImageView, dCheckBox, question.getChoiceD());
     }
 
     private void showQuestionItem(TextView textView, ImageView imageView, ImageView checkIcon,

@@ -82,7 +82,7 @@ public class CropPictureActivity extends BaseActivity {
         String path = getIntent().getStringExtra(DATA_PATH);
         mBitmap = BitmapFactory.decodeFile(path);
         new File(path).delete();
-        mBitmap = ResizeBitmap(mBitmap, 1000);
+        mBitmap = ResizeBitmap(mBitmap, 1000);//图像重塑，节省空间，减少OOM。
     }
 
     @Override
@@ -109,7 +109,17 @@ public class CropPictureActivity extends BaseActivity {
                 break;
         }
     }
-
+    
+    /**
+     * 
+     * @title: ResizeBitmap
+     * @description: 图像尺寸调整函数
+     * @author: ZQJ
+     * @date: 2015年6月27日 下午4:56:20
+     * @param bitmap
+     * @param newWidth
+     * @return
+     */
     private Bitmap ResizeBitmap(Bitmap bitmap, int newWidth) {
         int width = bitmap.getWidth();
         int height = bitmap.getHeight();

@@ -100,7 +100,8 @@ public class StartCheckInActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        mRemainTime = Integer.valueOf(getIntent().getStringExtra(DATA_TIME));
+        String timeString = getIntent().getStringExtra(DATA_TIME);
+        mRemainTime = Integer.valueOf(timeString.substring(0, timeString.length() - 1));
 
         mHandler = new Handler(getMainLooper()) {
             public void handleMessage(android.os.Message msg) {

@@ -97,7 +97,15 @@ public class StuCentreActivity extends BaseActivity {
                 break;
         }
     }
-
+    
+    
+    /**
+     * 
+     * @title: initPieChart
+     * @description: 饼图控件初始化设置
+     * @author: ZQJ
+     * @date: 2015年6月27日 下午4:46:50
+     */
     private void initPieChart() {
         setData(checkInPieChart, new String[] {getResources().getString(R.string.tch_attendance),
                 getResources().getString(R.string.tch_absent)}, mCheckInRate);

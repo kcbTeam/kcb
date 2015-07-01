@@ -44,7 +44,7 @@ public class StuCentreAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
         if (convertView == null) {
             convertView = View.inflate(mContext, R.layout.tch_listitem_stucentre, null);
