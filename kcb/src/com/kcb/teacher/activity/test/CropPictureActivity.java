@@ -82,7 +82,7 @@ public class CropPictureActivity extends BaseActivity {
         String path = getIntent().getStringExtra(DATA_PATH);
         mBitmap = BitmapFactory.decodeFile(path);
         new File(path).delete();
-        mBitmap = ResizeBitmap(mBitmap, 1000);//图像重塑，节省空间，减少OOM。
+        mBitmap = ResizeBitmap(mBitmap, 1000);// 图像重塑，节省空间，减少OOM。
     }
 
     @Override
@@ -109,7 +109,7 @@ public class CropPictureActivity extends BaseActivity {
                 break;
         }
     }
-    
+
     /**
      * 
      * @title: ResizeBitmap

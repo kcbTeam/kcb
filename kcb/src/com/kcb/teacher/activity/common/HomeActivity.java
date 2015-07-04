@@ -222,7 +222,7 @@ public class HomeActivity extends BaseFragmentActivity {
                 break;
         }
     }
-    
+
     /**
      * 
      * @title: setTap

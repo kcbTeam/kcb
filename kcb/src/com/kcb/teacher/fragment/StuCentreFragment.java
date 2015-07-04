@@ -14,7 +14,6 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -291,12 +290,13 @@ public class StuCentreFragment extends BaseFragment
 
                     @Override
                     public void onResponse(JSONObject response) {
-                        LogUtil.i(TAG, "get stu info, response is "+ response.toString());
+                        LogUtil.i(TAG, "get stu info, response is " + response.toString());
                         JSONArray jsonArray = response.optJSONArray("infos");
                         List<Student> students = new ArrayList<Student>();
                         for (int i = 0; i < jsonArray.length(); i++) {
                             try {
-                                Student student = Student.fromjsonObject(jsonArray.getJSONObject(i));
+                                Student student =
+                                        Student.fromjsonObject(jsonArray.getJSONObject(i));
                                 students.add(student);
                             } catch (JSONException e) {}
                         }

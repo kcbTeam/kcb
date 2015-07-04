@@ -97,8 +97,8 @@ public class StuCentreActivity extends BaseActivity {
                 break;
         }
     }
-    
-    
+
+
     /**
      * 
      * @title: initPieChart
