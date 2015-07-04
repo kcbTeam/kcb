@@ -108,7 +108,7 @@
         <activity
             android:name="com.kcb.teacher.activity.test.EditTestActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" >
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" >
         </activity>
         <activity
             android:name="com.kcb.teacher.activity.test.CropPictureActivity"

@@ -15,7 +15,6 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -25,7 +24,6 @@ import com.kcb.common.model.test.Question;
 import com.kcb.common.model.test.QuestionItem;
 import com.kcb.common.util.BitmapUtil;
 import com.kcb.common.util.ToastUtil;
-import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.library.view.checkbox.CheckBox;
 import com.kcb.teacher.activity.test.CropPictureActivity;
 import com.kcb.teacher.util.FileUtil;
@@ -53,8 +51,6 @@ public class EditQuestionView extends LinearLayout implements OnClickListener, O
     private EditText titleEditText;
     private ImageView titleImageView;
     private ImageView deleteTitleImageView;
-
-    private ButtonFlat changeFocusButton;
 
     private EditText aEditText;
     private ImageView aImageView;
@@ -109,10 +105,6 @@ public class EditQuestionView extends LinearLayout implements OnClickListener, O
         titleImageView = (ImageView) findViewById(R.id.imageview_title);
         deleteTitleImageView = (ImageView) findViewById(R.id.imageview_delete_title);
         deleteTitleImageView.setOnClickListener(this);
-
-        changeFocusButton = (ButtonFlat) findViewById(R.id.button_changefocus);
-        changeFocusButton.setOnClickListener(this);
-        changeFocusButton.setRippleColor(mContext.getResources().getColor(R.color.black_300));
 
         aEditText = (EditText) findViewById(R.id.edittext_A);
         aEditText.setOnLongClickListener(this);
@@ -189,9 +181,6 @@ public class EditQuestionView extends LinearLayout implements OnClickListener, O
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.button_changefocus:
-                changeFocus();
-                break;
             case R.id.imageview_delete_title:
                 setEditMode(FLAG_TITLE, EDIT_MODE_TEXT);
                 mQuestion.getTitle().setText("");
@@ -214,42 +203,6 @@ public class EditQuestionView extends LinearLayout implements OnClickListener, O
                 break;
             default:
                 break;
-        }
-    }
-
-    private void changeFocus() {
-        if (titleEditText.isFocused()) {
-            if (mQuestion.getChoiceA().isText()) {
-                aEditText.requestFocus();
-            } else if (mQuestion.getChoiceB().isText()) {
-                bEditText.requestFocus();
-            } else if (mQuestion.getChoiceC().isText()) {
-                cEditText.requestFocus();
-            } else if (mQuestion.getChoiceD().isText()) {
-                dEditText.requestFocus();
-            }
-        } else if (aEditText.isFocused()) {
-            if (mQuestion.getChoiceB().isText()) {
-                bEditText.requestFocus();
-            } else if (mQuestion.getChoiceC().isText()) {
-                cEditText.requestFocus();
-            } else if (mQuestion.getChoiceD().isText()) {
-                dEditText.requestFocus();
-            }
-        } else if (bEditText.isFocused()) {
-            if (mQuestion.getChoiceC().isText()) {
-                cEditText.requestFocus();
-            } else if (mQuestion.getChoiceD().isText()) {
-                dEditText.requestFocus();
-            }
-        } else if (cEditText.isFocused()) {
-            if (mQuestion.getChoiceD().isText()) {
-                dEditText.requestFocus();
-            }
-        } else if (dEditText.isFocused()) {
-            InputMethodManager imm =
-                    (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(dEditText.getWindowToken(), 0);
         }
     }
 
