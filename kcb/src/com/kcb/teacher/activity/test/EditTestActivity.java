@@ -194,11 +194,11 @@ public class EditTestActivity extends BaseActivity {
                 getResources().getString(R.string.tch_test_name_num), sTest.getName(),
                 sTest.getQuestionNum()));
     }
- 
+
     private void showQuestion() {
         questionEditView.showQuestion(sTest.getName(), mCurrentQuestionIndex, getCurrentQuestion());
         mTempQuestion = Question.clone(getCurrentQuestion());
-//        switchNextButton();
+        // switchNextButton();
     }
 
     private Question getCurrentQuestion() {
