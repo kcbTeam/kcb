@@ -194,7 +194,7 @@ public class LookCheckInActivity extends BaseActivity {
 
                     @Override
                     public void onResponse(JSONObject response) {
-                        LogUtil.i(TAG, "get checkin result, response is " + response.toString());
+                        LogUtil.i(TAG, "stu get checkin result, response is " + response.toString());
                         // save to database
                         try {
                             JSONObject jsonObject = response.getJSONObject("data");
