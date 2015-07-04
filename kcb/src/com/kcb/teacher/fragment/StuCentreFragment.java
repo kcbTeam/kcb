@@ -32,6 +32,7 @@ import com.kcb.common.base.BaseFragment;
 import com.kcb.common.server.RequestUtil;
 import com.kcb.common.server.ResponseUtil;
 import com.kcb.common.server.UrlUtil;
+import com.kcb.common.util.LogUtil;
 import com.kcb.common.util.StringMatchUtil;
 import com.kcb.common.view.common.EmptyTipView;
 import com.kcb.common.view.common.SearchEditText;
@@ -149,6 +150,7 @@ public class StuCentreFragment extends BaseFragment
         mSearchedStudents.addAll(mAllStudents);
 
         mAdapter = new StuCentreAdapter(getActivity(), mSearchedStudents);
+        listView.setAdapter(mAdapter);
     }
 
     @Override
@@ -289,7 +291,7 @@ public class StuCentreFragment extends BaseFragment
 
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.i(TAG, "get stu info, response is "+ response.toString());
+                        LogUtil.i(TAG, "get stu info, response is "+ response.toString());
                         JSONArray jsonArray = response.optJSONArray("infos");
                         List<Student> students = new ArrayList<Student>();
                         for (int i = 0; i < jsonArray.length(); i++) {

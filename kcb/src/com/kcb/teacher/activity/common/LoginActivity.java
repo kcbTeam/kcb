@@ -24,6 +24,7 @@ import com.kcb.common.util.AnimationUtil;
 import com.kcb.common.util.LogUtil;
 import com.kcb.common.util.StatusBarUtil;
 import com.kcb.common.util.ToastUtil;
+import com.kcb.common.view.common.PasswordEditText;
 import com.kcb.library.view.FloatingEditText;
 import com.kcb.library.view.PaperButton;
 import com.kcb.library.view.buttonflat.ButtonFlat;
@@ -45,7 +46,7 @@ public class LoginActivity extends BaseActivity {
     private ButtonFlat backButton;
 
     private FloatingEditText idEditText;
-    private FloatingEditText passwordEditText;
+    private PasswordEditText passwordEditText;
     private PaperButton loginButton;
     private SmoothProgressBar loginProgressBar;
 
@@ -64,7 +65,9 @@ public class LoginActivity extends BaseActivity {
         backButton.setOnClickListener(this);
 
         idEditText = (FloatingEditText) findViewById(R.id.edittext_id);
-        passwordEditText = (FloatingEditText) findViewById(R.id.edittext_password);
+        passwordEditText = (PasswordEditText) findViewById(R.id.passwordedittext);
+        passwordEditText.setHint(R.string.tch_password);
+
         loginButton = (PaperButton) findViewById(R.id.button_login);
         loginButton.setOnClickListener(mClickListener);
         loginProgressBar = (SmoothProgressBar) findViewById(R.id.progressbar_login);
@@ -101,7 +104,7 @@ public class LoginActivity extends BaseActivity {
 
     private void login() {
         final String id = idEditText.getText().toString().trim().replace(" ", "");
-        final String password = passwordEditText.getText().toString();
+        final String password = passwordEditText.getText();
         if (TextUtils.isEmpty(id)) {
             idEditText.requestFocus();
             AnimationUtil.shake(idEditText);
@@ -117,7 +120,7 @@ public class LoginActivity extends BaseActivity {
                     new StringRequest(Method.POST, UrlUtil.getTchLoginUrl(id, password),
                             new Listener<String>() {
                                 public void onResponse(final String response) {
-                                    LogUtil.i(TAG, "tch login response is "+ response);
+                                    LogUtil.i(TAG, "tch login response is " + response);
                                     new Handler().postDelayed(new Runnable() {
 
                                         @Override

@@ -54,7 +54,7 @@ public class SearchEditText extends RelativeLayout implements TextWatcher, OnCli
      * 1 step
      */
     private void init(Context context) {
-        inflate(context, R.layout.comm_view_search_edittext, this);
+        inflate(context, R.layout.comm_view_edittext_search, this);
         initView();
     }
 
