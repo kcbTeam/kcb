@@ -47,7 +47,7 @@
         <activity
             android:name="com.kcb.student.activity.common.ModifyPasswordActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateVisible|adjustPan" >
+            android:windowSoftInputMode="stateAlwaysVisible|adjustResize" >
         </activity>
         <activity
             android:name="com.kcb.student.activity.checkin.StartCheckInActivity"
@@ -86,7 +86,7 @@
         <activity
             android:name="com.kcb.teacher.activity.common.ModifyPasswordActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateVisible|adjustPan" >
+            android:windowSoftInputMode="stateAlwaysVisible|adjustResize" >
         </activity>
         <activity
             android:name="com.kcb.teacher.activity.checkin.StartCheckInActivity"

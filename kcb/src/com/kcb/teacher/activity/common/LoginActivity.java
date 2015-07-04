@@ -21,6 +21,7 @@ import com.kcb.common.server.RequestUtil;
 import com.kcb.common.server.ResponseUtil;
 import com.kcb.common.server.UrlUtil;
 import com.kcb.common.util.AnimationUtil;
+import com.kcb.common.util.LogUtil;
 import com.kcb.common.util.StatusBarUtil;
 import com.kcb.common.util.ToastUtil;
 import com.kcb.library.view.FloatingEditText;
@@ -116,6 +117,7 @@ public class LoginActivity extends BaseActivity {
                     new StringRequest(Method.POST, UrlUtil.getTchLoginUrl(id, password),
                             new Listener<String>() {
                                 public void onResponse(final String response) {
+                                    LogUtil.i(TAG, "tch login response is "+ response);
                                     new Handler().postDelayed(new Runnable() {
 
                                         @Override

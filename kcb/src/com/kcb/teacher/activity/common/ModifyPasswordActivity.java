@@ -41,8 +41,6 @@ public class ModifyPasswordActivity extends BaseActivity {
     private PaperButton finishButton;
     private SmoothProgressBar finishProgressBar;
 
-    private String newPassword;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -162,10 +160,9 @@ public class ModifyPasswordActivity extends BaseActivity {
                 return;
             }
             finishProgressBar.setVisibility(View.VISIBLE);
-            newPassword = password;
             StringRequest request =
                     new StringRequest(Method.POST, UrlUtil.getTchModifyPasswordUrl(
-                            KAccount.getAccountId(), newPassword), new Listener<String>() {
+                            KAccount.getAccountId(), password), new Listener<String>() {
 
                         @Override
                         public void onResponse(String response) {

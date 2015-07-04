@@ -127,12 +127,12 @@ public class LoginActivity extends BaseActivity {
                     new JsonObjectRequest(Method.POST, UrlUtil.getStuLoginUrl(stuId, password),
                             new Listener<JSONObject>() {
                                 public void onResponse(final JSONObject response) {
+                                    LogUtil.i(TAG, "login success response: " + response.toString());
                                     new Handler().postDelayed(new Runnable() {
 
                                         @Override
                                         public void run() {
                                             try {
-                                                LogUtil.i(TAG, response.toString());
                                                 JSONObject data = response.getJSONObject(KEY_DATA);
                                                 String stuName = data.optString(KEY_STUNAME);
                                                 String tchId = data.optString(KEY_TCHID);
