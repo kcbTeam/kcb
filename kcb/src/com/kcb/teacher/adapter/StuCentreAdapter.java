@@ -3,13 +3,11 @@ package com.kcb.teacher.adapter;
 import java.util.List;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.kcb.common.util.LogUtil;
 import com.kcb.teacher.model.stucentre.Student;
 import com.kcbTeam.R;
 
