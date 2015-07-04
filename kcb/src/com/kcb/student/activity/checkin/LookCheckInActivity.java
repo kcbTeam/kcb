@@ -205,6 +205,7 @@ public class LookCheckInActivity extends BaseActivity {
                             checkInDao.close();
                             // show result
                             initData();
+                            progressBar.hide(LookCheckInActivity.this);
                         } catch (JSONException e) {
                             LogUtil.e(TAG, e.getMessage());
                         }
