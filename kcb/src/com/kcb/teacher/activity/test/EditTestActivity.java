@@ -28,8 +28,9 @@ import com.kcbTeam.R;
  */
 public class EditTestActivity extends BaseActivity {
 
+    private ButtonFlat backButton;
     private TextView testNameNumTextView;
-    private ButtonFlat cancelButton;
+    private ButtonFlat finishButton;
 
     private EditQuestionView questionEditView;
 
@@ -57,10 +58,13 @@ public class EditTestActivity extends BaseActivity {
 
     @Override
     protected void initView() {
+        backButton = (ButtonFlat) findViewById(R.id.button_back);
+        backButton.setOnClickListener(this);
+
         testNameNumTextView = (TextView) findViewById(R.id.textview_title);
 
-        cancelButton = (ButtonFlat) findViewById(R.id.button_cancel);
-        cancelButton.setOnClickListener(this);
+        finishButton = (ButtonFlat) findViewById(R.id.button_finish);
+        finishButton.setOnClickListener(this);
 
         questionEditView = (EditQuestionView) findViewById(R.id.questioneditview);
 
@@ -91,8 +95,11 @@ public class EditTestActivity extends BaseActivity {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.button_cancel:
-                cancelAddTest();
+            case R.id.button_back:
+                cancelEditTest();
+                break;
+            case R.id.button_finish:
+                finishEditTest();
                 break;
             case R.id.button_last:
                 lastQuestion();
@@ -126,23 +133,7 @@ public class EditTestActivity extends BaseActivity {
 
     private void nextQuesion() {
         questionEditView.saveQuestion();
-        if (mCurrentQuestionIndex == sTest.getQuestionNum() - 1) {
-            if (!sTest.isCompleted()) {
-                int unCompletedIndex = sTest.getUnCompleteIndex() + 1;
-                ToastUtil.toast(String.format(
-                        getResources().getString(R.string.tch_question_unfinished),
-                        unCompletedIndex));
-            } else {
-                new Handler().postDelayed(new Runnable() {
-
-                    @Override
-                    public void run() {
-                        SetTestTimeActivity.startFromAddNewTest(EditTestActivity.this, sTest);
-                        finish();
-                    }
-                }, 200);
-            }
-        } else {
+        if (mCurrentQuestionIndex < sTest.getQuestionNum() - 1) {
             if (!getCurrentQuestion().equal(mTempQuestion)) {
                 ToastUtil.toast(String.format(
                         getResources().getString(R.string.tch_question_saved),
@@ -203,11 +194,11 @@ public class EditTestActivity extends BaseActivity {
                 getResources().getString(R.string.tch_test_name_num), sTest.getName(),
                 sTest.getQuestionNum()));
     }
-
+ 
     private void showQuestion() {
         questionEditView.showQuestion(sTest.getName(), mCurrentQuestionIndex, getCurrentQuestion());
         mTempQuestion = Question.clone(getCurrentQuestion());
-        switchNextButton();
+//        switchNextButton();
     }
 
     private Question getCurrentQuestion() {
@@ -226,10 +217,28 @@ public class EditTestActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        cancelAddTest();
+        cancelEditTest();
     }
 
-    private void cancelAddTest() {
+    private void finishEditTest() {
+        questionEditView.saveQuestion();
+        if (!sTest.isCompleted()) {
+            int unCompletedIndex = sTest.getUnCompleteIndex() + 1;
+            ToastUtil.toast(String.format(getResources()
+                    .getString(R.string.tch_question_unfinished), unCompletedIndex));
+        } else {
+            new Handler().postDelayed(new Runnable() {
+
+                @Override
+                public void run() {
+                    SetTestTimeActivity.startFromAddNewTest(EditTestActivity.this, sTest);
+                    finish();
+                }
+            }, 200);
+        }
+    }
+
+    private void cancelEditTest() {
         OnClickListener sureListener = new OnClickListener() {
 
             @Override

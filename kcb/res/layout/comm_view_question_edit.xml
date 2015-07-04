@@ -53,188 +53,158 @@
         android:layout_below="@id/edittext_title"
         android:text="@string/tch_input_choice" />
 
-    <com.kcb.library.view.buttonflat.ButtonFlat
-        android:id="@+id/button_changefocus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/textview_input_choice_tip"
-        android:layout_alignRight="@id/textview_input_choice_tip"
-        android:layout_marginBottom="2dp"
-        android:layout_marginRight="54dp"
-        android:text=""
-        widget:clickAfterRipple="false"
-        widget:rippleSpeed="4" >
+    <LinearLayout
+        android:id="@+id/layout_A"
+        style="@style/tch_question_edit_choice_layout"
+        android:layout_below="@id/textview_input_choice_tip"
+        android:layout_marginBottom="4dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="4dp" >
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="4dp"
-            android:src="@drawable/ic_keyboard_return_grey600_24dp" />
-    </com.kcb.library.view.buttonflat.ButtonFlat>
-
-    <ScrollView
-        android:id="@+id/scroll_choices"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/textview_input_choice_tip" >
+        <TextView
+            android:id="@+id/textview_A"
+            style="@style/tch_question_edit_choice_tip"
+            android:text="@string/tch_choice_A" />
 
         <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+            style="@style/tch_question_edit_choice_inputlayout"
+            android:layout_marginRight="4dp" >
 
-            <LinearLayout
-                android:id="@+id/layout_A"
-                style="@style/tch_question_edit_choice_layout"
-                android:layout_marginBottom="4dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginTop="4dp" >
+            <EditText
+                android:id="@+id/edittext_A"
+                style="@style/tch_question_edit_choice_edittext"
+                android:hint="@string/tch_edit_question_item_hint"
+                android:textColorHint="@color/black_400" />
 
-                <TextView
-                    android:id="@+id/textview_A"
-                    style="@style/tch_question_edit_choice_tip"
-                    android:text="@string/tch_choice_A" />
+            <ImageView
+                android:id="@+id/imageview_A"
+                style="@style/tch_question_edit_choice_imageview" />
 
-                <RelativeLayout
-                    style="@style/tch_question_edit_choice_inputlayout"
-                    android:layout_marginRight="4dp" >
-
-                    <EditText
-                        android:id="@+id/edittext_A"
-                        style="@style/tch_question_edit_choice_edittext"
-                        android:hint="@string/tch_edit_question_item_hint"
-                        android:textColorHint="@color/black_400" />
-
-                    <ImageView
-                        android:id="@+id/imageview_A"
-                        style="@style/tch_question_edit_choice_imageview" />
-
-                    <ImageView
-                        android:id="@+id/imageview_delete_a"
-                        style="@style/tch_question_edit_delete_imageview"
-                        android:layout_alignParentRight="true"
-                        android:layout_alignTop="@id/edittext_A" />
-                </RelativeLayout>
-
-                <com.kcb.library.view.checkbox.CheckBox
-                    android:id="@+id/checkBox_A"
-                    style="@style/tch_question_edit_choice_checkbox" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/layout_B"
-                style="@style/tch_question_edit_choice_layout"
-                android:layout_below="@id/layout_A"
-                android:layout_marginBottom="4dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginTop="4dp" >
-
-                <TextView
-                    android:id="@+id/textview_B"
-                    style="@style/tch_question_edit_choice_tip"
-                    android:text="@string/tch_choice_B" />
-
-                <RelativeLayout
-                    style="@style/tch_question_edit_choice_inputlayout"
-                    android:layout_marginRight="4dp" >
-
-                    <EditText
-                        android:id="@+id/edittext_B"
-                        style="@style/tch_question_edit_choice_edittext" />
-
-                    <ImageView
-                        android:id="@+id/imageview_B"
-                        style="@style/tch_question_edit_choice_imageview" />
-
-                    <ImageView
-                        android:id="@+id/imageview_delete_b"
-                        style="@style/tch_question_edit_delete_imageview"
-                        android:layout_alignParentRight="true"
-                        android:layout_alignTop="@id/edittext_B" />
-                </RelativeLayout>
-
-                <com.kcb.library.view.checkbox.CheckBox
-                    android:id="@+id/checkBox_B"
-                    style="@style/tch_question_edit_choice_checkbox" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/layout_C"
-                style="@style/tch_question_edit_choice_layout"
-                android:layout_below="@id/layout_B"
-                android:layout_marginBottom="4dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginTop="4dp" >
-
-                <TextView
-                    android:id="@+id/textview_C"
-                    style="@style/tch_question_edit_choice_tip"
-                    android:text="@string/tch_choice_C" />
-
-                <RelativeLayout
-                    style="@style/tch_question_edit_choice_inputlayout"
-                    android:layout_marginRight="4dp" >
-
-                    <EditText
-                        android:id="@+id/edittext_C"
-                        style="@style/tch_question_edit_choice_edittext" />
-
-                    <ImageView
-                        android:id="@+id/imageview_C"
-                        style="@style/tch_question_edit_choice_imageview" />
-
-                    <ImageView
-                        android:id="@+id/imageview_delete_c"
-                        style="@style/tch_question_edit_delete_imageview"
-                        android:layout_alignParentRight="true"
-                        android:layout_alignTop="@id/edittext_C" />
-                </RelativeLayout>
-
-                <com.kcb.library.view.checkbox.CheckBox
-                    android:id="@+id/checkBox_C"
-                    style="@style/tch_question_edit_choice_checkbox" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/layout_D"
-                style="@style/tch_question_edit_choice_layout"
-                android:layout_below="@id/layout_C"
-                android:layout_marginBottom="4dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginTop="4dp" >
-
-                <TextView
-                    android:id="@+id/textview_D"
-                    style="@style/tch_question_edit_choice_tip"
-                    android:text="@string/tch_choice_D" />
-
-                <RelativeLayout
-                    style="@style/tch_question_edit_choice_inputlayout"
-                    android:layout_marginRight="4dp" >
-
-                    <EditText
-                        android:id="@+id/edittext_D"
-                        style="@style/tch_question_edit_choice_edittext" />
-
-                    <ImageView
-                        android:id="@+id/imageview_D"
-                        style="@style/tch_question_edit_choice_imageview" />
-
-                    <ImageView
-                        android:id="@+id/imageview_delete_d"
-                        style="@style/tch_question_edit_delete_imageview"
-                        android:layout_alignParentRight="true"
-                        android:layout_alignTop="@id/edittext_D" />
-                </RelativeLayout>
-
-                <com.kcb.library.view.checkbox.CheckBox
-                    android:id="@+id/checkBox_D"
-                    style="@style/tch_question_edit_choice_checkbox" />
-            </LinearLayout>
+            <ImageView
+                android:id="@+id/imageview_delete_a"
+                style="@style/tch_question_edit_delete_imageview"
+                android:layout_alignParentRight="true"
+                android:layout_alignTop="@id/edittext_A" />
         </RelativeLayout>
-    </ScrollView>
+
+        <com.kcb.library.view.checkbox.CheckBox
+            android:id="@+id/checkBox_A"
+            style="@style/tch_question_edit_choice_checkbox" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_B"
+        style="@style/tch_question_edit_choice_layout"
+        android:layout_below="@id/layout_A"
+        android:layout_marginBottom="4dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="4dp" >
+
+        <TextView
+            android:id="@+id/textview_B"
+            style="@style/tch_question_edit_choice_tip"
+            android:text="@string/tch_choice_B" />
+
+        <RelativeLayout
+            style="@style/tch_question_edit_choice_inputlayout"
+            android:layout_marginRight="4dp" >
+
+            <EditText
+                android:id="@+id/edittext_B"
+                style="@style/tch_question_edit_choice_edittext" />
+
+            <ImageView
+                android:id="@+id/imageview_B"
+                style="@style/tch_question_edit_choice_imageview" />
+
+            <ImageView
+                android:id="@+id/imageview_delete_b"
+                style="@style/tch_question_edit_delete_imageview"
+                android:layout_alignParentRight="true"
+                android:layout_alignTop="@id/edittext_B" />
+        </RelativeLayout>
+
+        <com.kcb.library.view.checkbox.CheckBox
+            android:id="@+id/checkBox_B"
+            style="@style/tch_question_edit_choice_checkbox" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_C"
+        style="@style/tch_question_edit_choice_layout"
+        android:layout_below="@id/layout_B"
+        android:layout_marginBottom="4dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="4dp" >
+
+        <TextView
+            android:id="@+id/textview_C"
+            style="@style/tch_question_edit_choice_tip"
+            android:text="@string/tch_choice_C" />
+
+        <RelativeLayout
+            style="@style/tch_question_edit_choice_inputlayout"
+            android:layout_marginRight="4dp" >
+
+            <EditText
+                android:id="@+id/edittext_C"
+                style="@style/tch_question_edit_choice_edittext" />
+
+            <ImageView
+                android:id="@+id/imageview_C"
+                style="@style/tch_question_edit_choice_imageview" />
+
+            <ImageView
+                android:id="@+id/imageview_delete_c"
+                style="@style/tch_question_edit_delete_imageview"
+                android:layout_alignParentRight="true"
+                android:layout_alignTop="@id/edittext_C" />
+        </RelativeLayout>
+
+        <com.kcb.library.view.checkbox.CheckBox
+            android:id="@+id/checkBox_C"
+            style="@style/tch_question_edit_choice_checkbox" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_D"
+        style="@style/tch_question_edit_choice_layout"
+        android:layout_below="@id/layout_C"
+        android:layout_marginBottom="4dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="4dp" >
+
+        <TextView
+            android:id="@+id/textview_D"
+            style="@style/tch_question_edit_choice_tip"
+            android:text="@string/tch_choice_D" />
+
+        <RelativeLayout
+            style="@style/tch_question_edit_choice_inputlayout"
+            android:layout_marginRight="4dp" >
+
+            <EditText
+                android:id="@+id/edittext_D"
+                style="@style/tch_question_edit_choice_edittext" />
+
+            <ImageView
+                android:id="@+id/imageview_D"
+                style="@style/tch_question_edit_choice_imageview" />
+
+            <ImageView
+                android:id="@+id/imageview_delete_d"
+                style="@style/tch_question_edit_delete_imageview"
+                android:layout_alignParentRight="true"
+                android:layout_alignTop="@id/edittext_D" />
+        </RelativeLayout>
+
+        <com.kcb.library.view.checkbox.CheckBox
+            android:id="@+id/checkBox_D"
+            style="@style/tch_question_edit_choice_checkbox" />
+    </LinearLayout>
 
 </RelativeLayout>
