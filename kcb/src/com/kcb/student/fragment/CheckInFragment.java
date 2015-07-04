@@ -3,6 +3,7 @@ package com.kcb.student.fragment;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import com.kcb.common.listener.DelayClickListener;
 import com.kcb.common.server.RequestUtil;
 import com.kcb.common.server.ResponseUtil;
 import com.kcb.common.server.UrlUtil;
+import com.kcb.common.util.LogUtil;
 import com.kcb.common.util.ToastUtil;
 import com.kcb.library.view.PaperButton;
 import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
@@ -94,6 +96,7 @@ public class CheckInFragment extends BaseFragment {
                 new StringRequest(Method.POST, UrlUtil.getStuCheckinStartUrl(
                         KAccount.getAccountId(), KAccount.getTchId()), new Listener<String>() {
                     public void onResponse(final String remainTime) {
+                        LogUtil.i(TAG, "start checkin, remainTime is "+remainTime);
                         new Handler().postDelayed(new Runnable() {
 
                             @Override

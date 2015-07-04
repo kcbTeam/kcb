@@ -2,6 +2,7 @@ package com.kcb.student.activity.checkin;
 
 import java.util.ArrayList;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Context;
@@ -26,6 +27,7 @@ import com.kcb.common.base.BaseActivity;
 import com.kcb.common.server.RequestUtil;
 import com.kcb.common.server.ResponseUtil;
 import com.kcb.common.server.UrlUtil;
+import com.kcb.common.util.LogUtil;
 import com.kcb.common.util.StatusBarUtil;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
@@ -192,14 +194,20 @@ public class LookCheckInActivity extends BaseActivity {
 
                     @Override
                     public void onResponse(JSONObject response) {
+                        LogUtil.i(TAG, "stu get checkin result, response is " + response.toString());
                         // save to database
-                        CheckInResult checkInResult = CheckInResult.fromJsonObejct(response);
-                        CheckInDao checkInDao = new CheckInDao(LookCheckInActivity.this);
-                        checkInDao.deleteAll();
-                        checkInDao.add(checkInResult);
-                        checkInDao.close();
-                        // show result
-                        initData();
+                        try {
+                            JSONObject jsonObject = response.getJSONObject("data");
+                            CheckInResult checkInResult = CheckInResult.fromJsonObejct(jsonObject);
+                            CheckInDao checkInDao = new CheckInDao(LookCheckInActivity.this);
+                            checkInDao.deleteAll();
+                            checkInDao.add(checkInResult);
+                            checkInDao.close();
+                            // show result
+                            initData();
+                        } catch (JSONException e) {
+                            LogUtil.e(TAG, e.getMessage());
+                        }
                     }
                 }, new ErrorListener() {
 

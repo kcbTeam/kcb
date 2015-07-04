@@ -8,11 +8,13 @@ import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombi
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +27,7 @@ import com.android.volley.Request.Method;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.kcb.common.base.BaseFragment;
 import com.kcb.common.server.RequestUtil;
 import com.kcb.common.server.ResponseUtil;
@@ -280,16 +282,19 @@ public class StuCentreFragment extends BaseFragment
             return;
         }
         progressBar.setVisibility(View.VISIBLE);
-        JsonArrayRequest request =
-                new JsonArrayRequest(Method.GET, UrlUtil.getTchStucenterLookinfoUrl(KAccount
-                        .getAccountId()), new Listener<JSONArray>() {
+
+        JsonObjectRequest request =
+                new JsonObjectRequest(Method.GET, UrlUtil.getTchStucenterLookinfoUrl(KAccount
+                        .getAccountId()), new Listener<JSONObject>() {
 
                     @Override
-                    public void onResponse(JSONArray response) {
+                    public void onResponse(JSONObject response) {
+                        Log.i(TAG, "get stu info, response is "+ response.toString());
+                        JSONArray jsonArray = response.optJSONArray("infos");
                         List<Student> students = new ArrayList<Student>();
-                        for (int i = 0; i < response.length(); i++) {
+                        for (int i = 0; i < jsonArray.length(); i++) {
                             try {
-                                Student student = Student.fromjsonObject(response.getJSONObject(i));
+                                Student student = Student.fromjsonObject(jsonArray.getJSONObject(i));
                                 students.add(student);
                             } catch (JSONException e) {}
                         }

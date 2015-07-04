@@ -1,11 +1,17 @@
 package com.kcb.student.model.checkin;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.kcb.common.util.LogUtil;
+
 public class CheckInResultDetail {
+
+    private static final String TAG = CheckInResultDetail.class.getName();
 
     private long mDate;
     private boolean mHasChecked;
@@ -39,7 +45,13 @@ public class CheckInResultDetail {
 
     public static CheckInResultDetail fromJsonObject(JSONObject jsonObject) {
         CheckInResultDetail result = new CheckInResultDetail();
-        result.mDate = jsonObject.optLong(KEY_DATE);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try {
+            Date date = sdf.parse(jsonObject.optString(KEY_DATE));
+            result.mDate = date.getTime();
+        } catch (ParseException e) {
+            LogUtil.e(TAG, e.getMessage());
+        }
         result.mHasChecked = jsonObject.optBoolean(KEY_HASCHECKED);
         return result;
     }
