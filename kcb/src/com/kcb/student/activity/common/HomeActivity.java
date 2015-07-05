@@ -1,14 +1,17 @@
 package com.kcb.student.activity.common;
 
+import static android.view.Gravity.START;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.DrawerLayout;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -20,6 +23,7 @@ import com.kcb.common.base.BaseFragmentActivity;
 import com.kcb.common.util.DialogUtil;
 import com.kcb.common.util.StatusBarUtil;
 import com.kcb.common.util.ToastUtil;
+import com.kcb.library.view.DrawerArrowDrawable;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.student.database.checkin.CheckInDao;
 import com.kcb.student.database.test.TestDao;
@@ -36,6 +40,13 @@ public class HomeActivity extends BaseFragmentActivity {
 
     private final int INDEX_CHECKIN = 0;
     private final int INDEX_TEST = 1;
+
+    // 侧边栏
+    private DrawerLayout drawer;
+    private ImageView indicatorImageView;
+    private DrawerArrowDrawable drawerArrowDrawable;
+    private float offset;
+    private boolean flipped;
 
     private ButtonFlat accountButton;
     private TextView userNameTextView;
@@ -65,6 +76,32 @@ public class HomeActivity extends BaseFragmentActivity {
 
     @Override
     protected void initView() {
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        indicatorImageView = (ImageView) findViewById(R.id.imageview_indicator);
+        indicatorImageView.setOnClickListener(this);
+        Resources resources = getResources();
+
+        drawerArrowDrawable = new DrawerArrowDrawable(resources);
+        drawerArrowDrawable.setStrokeColor(Color.WHITE);
+        indicatorImageView.setImageDrawable(drawerArrowDrawable);
+
+        drawer.setDrawerListener(new DrawerLayout.SimpleDrawerListener() {
+            @Override
+            public void onDrawerSlide(View drawerView, float slideOffset) {
+                offset = slideOffset;
+                // Sometimes slideOffset ends up so close to but not quite 1 or 0.
+                if (slideOffset >= .995) {
+                    flipped = true;
+                    drawerArrowDrawable.setFlip(flipped);
+                } else if (slideOffset <= .005) {
+                    flipped = false;
+                    drawerArrowDrawable.setFlip(flipped);
+                }
+
+                drawerArrowDrawable.setParameter(offset);
+            }
+        });
+
         accountButton = (ButtonFlat) findViewById(R.id.button_account);
         accountButton.setOnClickListener(this);
         accountButton.setRippleColor(getResources().getColor(R.color.stu_primary_dark));
@@ -101,6 +138,13 @@ public class HomeActivity extends BaseFragmentActivity {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.imageview_indicator:
+                if (drawer.isDrawerVisible(START)) {
+                    drawer.closeDrawer(START);
+                } else {
+                    drawer.openDrawer(START);
+                }
+                break;
             case R.id.button_account:
                 if (null != popupWindow && popupWindow.isShowing()) {
                     popupWindow.dismiss();
