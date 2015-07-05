@@ -95,7 +95,7 @@ public class LookCheckInActivity extends BaseActivity {
             mRates[0] = 0;
             mRates[1] = 1;
         } else {
-            mRates[0] = (float)successTimes / allTimes;
+            mRates[0] = (float) successTimes / (float) allTimes;
             mRates[1] = 1 - mRates[0];
         }
         showCheckInChart();

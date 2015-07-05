@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
@@ -23,6 +24,7 @@ import com.kcb.common.server.ResponseUtil;
 import com.kcb.common.server.UrlUtil;
 import com.kcb.common.util.AnimationUtil;
 import com.kcb.common.util.DialogUtil;
+import com.kcb.common.util.LogUtil;
 import com.kcb.common.util.StatusBarUtil;
 import com.kcb.common.util.ToastUtil;
 import com.kcb.common.view.dialog.MaterialDialog;
@@ -100,9 +102,9 @@ public class StartCheckInActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        String timeString = getIntent().getStringExtra(DATA_TIME);// 返回的字符串中最后还有/n
-                                                                  // ，比如"0/n",转成int的时候需要去掉后两个字符。
-        mRemainTime = Integer.valueOf(timeString.substring(0, timeString.length() - 1));
+        mRemainTime = 10;
+//        mRemainTime = Integer.valueOf(getIntent().getStringExtra(DATA_TIME));
+        LogUtil.i(TAG, "remain time is " + mRemainTime);
 
         mHandler = new Handler(getMainLooper()) {
             public void handleMessage(android.os.Message msg) {
@@ -110,8 +112,8 @@ public class StartCheckInActivity extends BaseActivity {
                 if (mRemainTime == 0) {
                     showTimeEndDialog();
                 } else {
-                    sendEmptyMessageDelayed(MESSAGE_TIME_REDUCE, 1000);
                     mRemainTime--;
+                    sendEmptyMessageDelayed(MESSAGE_TIME_REDUCE, 1000);
                 }
             };
         };
