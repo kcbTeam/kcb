@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.TextView;
 
@@ -15,7 +16,6 @@ import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
-import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.PercentFormatter;
 import com.kcb.common.base.BaseActivity;
 import com.kcb.common.util.StatusBarUtil;
@@ -41,7 +41,7 @@ public class StuCentreActivity extends BaseActivity {
     private TextView checkInRateTextView;
     private TextView testRateTextView;
 
-    private Student mStudentInfo;
+    private Student mStudent;
 
     private float mCheckInRate;
     private float mCorrectRate;
@@ -72,16 +72,16 @@ public class StuCentreActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        mStudentInfo = (Student) getIntent().getSerializableExtra(DATA_STUDENT);
-        mCheckInRate = (float) mStudentInfo.getCheckInRate();
-        mCorrectRate = (float) mStudentInfo.getCorrectRate();
+        mStudent = (Student) getIntent().getSerializableExtra(DATA_STUDENT);
+        mCheckInRate = (float) mStudent.getCheckInRate();
+        mCorrectRate = (float) mStudent.getCorrectRate();
 
-        nameIdTextView.setText(mStudentInfo.getName() + "（" + mStudentInfo.getId() + "）");
+        nameIdTextView.setText(mStudent.getName() + "（" + mStudent.getId() + "）");
         checkInRateTextView.setText(String.format(
-                getResources().getString(R.string.tch_stu_checkin_rate), mStudentInfo.getName(),
+                getResources().getString(R.string.tch_stu_checkin_rate), mStudent.getName(),
                 (int) (100 * mCheckInRate)));
         testRateTextView.setText(String.format(
-                getResources().getString(R.string.tch_stu_correct_rate), mStudentInfo.getName(),
+                getResources().getString(R.string.tch_stu_correct_rate), mStudent.getName(),
                 (int) (100 * mCorrectRate)));
 
         initPieChart();
@@ -108,9 +108,9 @@ public class StuCentreActivity extends BaseActivity {
      */
     private void initPieChart() {
         setData(checkInPieChart, new String[] {getResources().getString(R.string.tch_attendance),
-                getResources().getString(R.string.tch_absent)}, mCheckInRate);
+                getResources().getString(R.string.tch_absent)}, 0);
         setData(correctPieChart, new String[] {getResources().getString(R.string.tch_correct),
-                getResources().getString(R.string.tch_error)}, mCorrectRate);
+                getResources().getString(R.string.tch_error)}, 0);
         defaultPieChartStyle(checkInPieChart);
         defaultPieChartStyle(correctPieChart);
         new Handler().postDelayed(new Runnable() {
@@ -140,13 +140,16 @@ public class StuCentreActivity extends BaseActivity {
         ArrayList<Integer> colors = new ArrayList<Integer>();
         colors.add(0xff427fed);
         colors.add(0xffbdbdbd);
-        colors.add(ColorTemplate.getHoloBlue());
+//        colors.add(ColorTemplate.getHoloBlue());
         dataSet.setColors(colors);
 
+        DisplayMetrics metrics = getResources().getDisplayMetrics();
+        float px = 5 * (metrics.densityDpi / 160f);
+        dataSet.setSelectionShift(px);
         PieData data = new PieData(xVals, dataSet);
         data.setValueFormatter(new PercentFormatter());
-        data.setValueTextSize(11f);
-        data.setValueTextColor(Color.BLUE);
+        data.setValueTextSize(12f);
+        data.setValueTextColor(Color.WHITE);
 
         pieChart.setData(data);
         pieChart.highlightValues(null);
@@ -171,7 +174,7 @@ public class StuCentreActivity extends BaseActivity {
         super.onDestroy();
         checkInPieChart = null;
         correctPieChart = null;
-        mStudentInfo = null;
+        mStudent = null;
     }
 
     /**

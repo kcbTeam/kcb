@@ -102,10 +102,12 @@ public class HomeActivity extends BaseFragmentActivity {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.button_account:
-                if (popupWindow != null && popupWindow.isShowing()) {
+                if (null != popupWindow && popupWindow.isShowing()) {
                     popupWindow.dismiss();
                 } else {
-                    initPopupWindow();
+                    if (null == popupWindow) {
+                        initPopupWindow();
+                    }
                     popupWindow.showAsDropDown(v, 0, 0);
                 }
                 break;
