@@ -19,6 +19,8 @@ import com.kcb.common.view.dialog.MaterialListDialog.OnClickSureListener;
  */
 public class DialogUtil {
 
+    private static final String TAG = DialogUtil.class.getName();
+
     /**
      * 
      * @title: showDialog
@@ -37,11 +39,15 @@ public class DialogUtil {
             int messageResId, @NonNull int sureResId, OnClickListener sureListener,
             int cancelResId, OnClickListener cancelListener) {
         MaterialDialog dialog = new MaterialDialog(context);
-        dialog.show();
-        dialog.setTitle(titleResId);
-        dialog.setMessage(messageResId);
-        dialog.setSureButton(sureResId, sureListener);
-        dialog.setCancelButton(cancelResId, cancelListener);
+        try {
+            dialog.show();
+            dialog.setTitle(titleResId);
+            dialog.setMessage(messageResId);
+            dialog.setSureButton(sureResId, sureListener);
+            dialog.setCancelButton(cancelResId, cancelListener);
+        } catch (Exception e) {
+            LogUtil.e(TAG, e.getMessage());
+        }
         return dialog;
     }
 
@@ -62,12 +68,16 @@ public class DialogUtil {
     public static void showNormalDialog(Context context, int titleResId, CharSequence message,
             @NonNull int sureResId, OnClickListener sureListener, int cancelResId,
             OnClickListener cancelListener) {
-        MaterialDialog dialog = new MaterialDialog(context);
-        dialog.show();
-        dialog.setTitle(titleResId);
-        dialog.setMessage(message);
-        dialog.setSureButton(sureResId, sureListener);
-        dialog.setCancelButton(cancelResId, cancelListener);
+        try {
+            MaterialDialog dialog = new MaterialDialog(context);
+            dialog.show();
+            dialog.setTitle(titleResId);
+            dialog.setMessage(message);
+            dialog.setSureButton(sureResId, sureListener);
+            dialog.setCancelButton(cancelResId, cancelListener);
+        } catch (Exception e) {
+            LogUtil.e(TAG, e.getMessage());
+        }
     }
 
     /**
@@ -89,11 +99,15 @@ public class DialogUtil {
             List<String> messages, @NonNull int sureResId, OnClickSureListener sureListener,
             int cancelResId, OnClickListener cancelListener) {
         MaterialListDialog dialog = new MaterialListDialog(context);
-        dialog.show();
-        dialog.setTitle(titleResId);
-        dialog.setAdapter(messages);
-        dialog.setSureButton(sureResId, sureListener);
-        dialog.setCancelButton(cancelResId, cancelListener);
+        try {
+            dialog.show();
+            dialog.setTitle(titleResId);
+            dialog.setAdapter(messages);
+            dialog.setSureButton(sureResId, sureListener);
+            dialog.setCancelButton(cancelResId, cancelListener);
+        } catch (Exception e) {
+            LogUtil.e(TAG, e.getMessage());
+        }
         return dialog;
     }
 }
