@@ -9,32 +9,18 @@
     android:orientation="vertical"
     tools:ignore="contentDescription" >
 
-    <RelativeLayout
-        android:id="@+id/layout_title"
-        style="@style/stu_title_layout" >
-
-        <ImageView
-            android:id="@+id/imageview_indicator"
-            android:layout_width="@dimen/activity_header_height"
-            android:layout_height="@dimen/activity_header_height"
-            android:scaleType="centerInside" />
-
-        <TextView
-            android:id="@+id/textview_title"
-            style="@style/common_center_title"
-            android:layout_centerInParent="true"
-            android:gravity="center" />
-    </RelativeLayout>
-
     <android.support.v4.widget.DrawerLayout
-        android:id="@+id/drawer_layout"
+        android:id="@+id/drawerlayout"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" >
+        android:layout_height="match_parent" >
 
         <include layout="@layout/stu_activity_home_content" />
 
-        <include layout="@layout/stu_activity_home_leftdrawer" />
+        <com.kcb.student.view.LeftDrawerLayout
+            android:id="@+id/drawer_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="start" />
     </android.support.v4.widget.DrawerLayout>
 
 </LinearLayout>

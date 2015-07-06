@@ -1,21 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:widget="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/view_content"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    tools:ignore="contentDescription" >
+
+    <RelativeLayout
+        android:id="@+id/layout_title"
+        style="@style/stu_title_layout" >
+
+        <ImageView
+            android:id="@+id/imageview_menu"
+            android:layout_width="@dimen/activity_header_height"
+            android:layout_height="@dimen/activity_header_height"
+            android:scaleType="centerInside" />
+
+        <TextView
+            android:id="@+id/textview_title"
+            style="@style/common_center_title"
+            android:layout_centerInParent="true"
+            android:gravity="center" />
+    </RelativeLayout>
 
     <fragment
         android:id="@+id/fragment_checkin"
         android:name="com.kcb.student.fragment.CheckInFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_below="@id/layout_title" />
 
     <fragment
         android:id="@+id/fragment_test"
         android:name="com.kcb.student.fragment.TestFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_below="@id/layout_title" />
 
     <LinearLayout
         android:id="@+id/layout_buttons"

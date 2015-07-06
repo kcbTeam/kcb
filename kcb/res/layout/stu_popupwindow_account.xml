@@ -13,12 +13,12 @@
         <ImageView
             android:id="@+id/imageview_modifypassword"
             style="@style/common_popupwindow_item_imageview"
-            android:src="@drawable/ic_vpn_key_grey600_18dp" />
+            android:src="@drawable/ic_vpn_key_grey600_24dp" />
 
         <TextView
             style="@style/common_popupwindow_item_textview"
             android:layout_toRightOf="@id/imageview_modifypassword"
-            android:text="@string/stu_modify_password" />
+            android:text="@string/stu_drawer_modify_password" />
     </com.kcb.library.view.buttonflat.ButtonFlat>
 
     <View style="@style/common_divider" />
@@ -31,12 +31,12 @@
         <ImageView
             android:id="@+id/imageview_exit"
             style="@style/common_popupwindow_item_imageview"
-            android:src="@drawable/ic_exit_to_app_grey600_18dp" />
+            android:src="@drawable/ic_exit_to_app_grey600_24dp" />
 
         <TextView
             style="@style/common_popupwindow_item_textview"
             android:layout_toRightOf="@id/imageview_exit"
-            android:text="@string/stu_exit_account" />
+            android:text="@string/stu_drawer_exit_account" />
     </com.kcb.library.view.buttonflat.ButtonFlat>
 
 </LinearLayout>
