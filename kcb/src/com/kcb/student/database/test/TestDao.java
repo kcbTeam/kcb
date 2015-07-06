@@ -41,7 +41,7 @@ public class TestDao {
     public List<Test> getTerminatedTests() {
         List<Test> tests = getAll();
         for (Test test : tests) {
-            if (test.getDate() + test.getTime() * 60 * 1000 > System.currentTimeMillis()) {
+            if (test.getDate() + test.getTime() * 1000 > System.currentTimeMillis()) {
                 tests.remove(test);
             }
         }
