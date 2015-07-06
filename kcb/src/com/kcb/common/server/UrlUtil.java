@@ -1,5 +1,7 @@
 package com.kcb.common.server;
 
+import org.json.JSONObject;
+
 /**
  * 
  * @className: UrlUtil
@@ -128,15 +130,15 @@ public class UrlUtil {
     // 3.1 start test
     private static final String url_tch_test_start = IP + "/v1/tch/test/start";
 
-    public static String getTchTestStartUrl() {
-        return url_tch_test_start;
+    public static String getTchTestStartUrl(JSONObject jsonObject) {
+        return url_tch_test_start + "?data=" + jsonObject.toString();
     }
 
     // 3.2 look test result
     private static final String url_tch_test_lookresult = IP + "/v1/tch/test/lookresult";
 
     public static String getTchTestLookresultUrl(String id) {
-        return url_tch_test_lookresult + "?id=" + id;
+        return url_tch_test_lookresult + "?tchid=" + id;
     }
 
     /**

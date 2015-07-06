@@ -25,6 +25,7 @@ import com.kcb.common.server.RequestUtil;
 import com.kcb.common.server.ResponseUtil;
 import com.kcb.common.server.UrlUtil;
 import com.kcb.common.util.DialogUtil;
+import com.kcb.common.util.LogUtil;
 import com.kcb.common.util.ToastUtil;
 import com.kcb.common.view.dialog.MaterialListDialog;
 import com.kcb.common.view.dialog.MaterialListDialog.OnClickSureListener;
@@ -128,7 +129,7 @@ public class TestFragment extends BaseFragment {
         }
     }
 
-    private final String KEY_ID = "id";
+    private final String KEY_ID = "tchid";
     private final String KEY_TEST = "test";
 
     // 需要将测试中的图片转成String，如果图片过多，在创建request的时候也会阻塞UI线程，所以都需要在新的线程中做这些耗时操作。
@@ -143,18 +144,27 @@ public class TestFragment extends BaseFragment {
 
                     @Override
                     public void run() {
+                        // TODO 参数放在请求体里面
+                        JSONObject jsonObject2 = new JSONObject();
+
                         JSONObject requestObject = new JSONObject();
                         try {
                             requestObject.put(KEY_ID, KAccount.getAccountId());
                             test.setQuestionId();
                             requestObject.put(KEY_TEST, test.toJsonObject(true));
+
+                            jsonObject2.put("data", requestObject);
                         } catch (JSONException e) {}
+
                         JsonObjectRequest request =
-                                new JsonObjectRequest(Method.POST, UrlUtil.getTchTestStartUrl(),
-                                        requestObject, new Listener<JSONObject>() {
+                                new JsonObjectRequest(Method.POST,
+                                        UrlUtil.getTchTestStartUrl(requestObject), jsonObject2,
+                                        new Listener<JSONObject>() {
 
                                             @Override
                                             public void onResponse(JSONObject response) {
+                                                LogUtil.i(TAG, "tch start test, response is "
+                                                        + response);
                                                 TestDao testDao = new TestDao(getActivity());
                                                 test.setHasTested(true);
                                                 testDao.update(test);
@@ -191,7 +201,7 @@ public class TestFragment extends BaseFragment {
                 getActivity(),
                 R.string.tch_start_test,
                 String.format(getString(R.string.tch_start_test_tip), test.getName(),
-                        test.getQuestionNum(), test.getTime()), R.string.tch_comm_sure,
+                        test.getQuestionNum(), test.getMinTime()), R.string.tch_comm_sure,
                 sureListener, R.string.tch_comm_cancel, null);
     }
 

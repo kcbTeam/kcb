@@ -25,6 +25,7 @@ import com.kcb.common.model.test.Test;
 import com.kcb.common.server.RequestUtil;
 import com.kcb.common.server.ResponseUtil;
 import com.kcb.common.server.UrlUtil;
+import com.kcb.common.util.LogUtil;
 import com.kcb.common.util.StatusBarUtil;
 import com.kcb.common.util.StringMatchUtil;
 import com.kcb.common.view.common.EmptyTipView;
@@ -179,6 +180,7 @@ public class LookTestActivity extends BaseActivity implements OnSearchListener, 
 
                     @Override
                     public void onResponse(JSONArray response) {
+                        LogUtil.i(TAG, "tch get test result, response is " + response);
                         // get answer
                         List<TestAnswer> testAnswers = new ArrayList<TestAnswer>();
                         for (int i = 0; i < response.length(); i++) {

@@ -20,7 +20,7 @@ public class Test implements Serializable {
 
     private String mId; // from server when start test
     private String mName; // test name
-    private int mTime = 5; // default test time is 5 minutes
+    private int mTime = 300; // default test time is 5 minutes，即300s
     private long mDate; // test date, create date or start test date
     private boolean mHasTested; // true if teacher start test
     private List<Question> mQuestions;
@@ -51,6 +51,10 @@ public class Test implements Serializable {
 
     public int getTime() {
         return mTime;
+    }
+
+    public int getMinTime() {
+        return mTime / 60;
     }
 
     public void setTime(int time) {

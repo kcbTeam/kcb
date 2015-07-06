@@ -86,8 +86,8 @@ public class SetTestTimeActivity extends BaseActivity {
         }
 
         testTimeTextView.setText(String.format(getString(R.string.tch_set_test_time_tip),
-                sTest.getQuestionNum(), sTest.getTime()));
-        slider.setValue(sTest.getTime());
+                sTest.getQuestionNum(), sTest.getMinTime()));
+        slider.setValue(sTest.getMinTime());
 
         mEditListener = new EditQuestionListener() {
 
@@ -119,7 +119,7 @@ public class SetTestTimeActivity extends BaseActivity {
                         R.string.tch_comm_cancel, null);
                 break;
             case R.id.button_finish:
-                sTest.setTime(slider.getValue());
+                sTest.setTime(slider.getValue() * 60);
                 sTest.setDate(System.currentTimeMillis());
                 TestDao testDao = new TestDao(this);
                 if (ACTION_ADD_TEST.equals(mAction)) {

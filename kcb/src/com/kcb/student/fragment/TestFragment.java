@@ -21,6 +21,7 @@ import com.kcb.common.model.test.Test;
 import com.kcb.common.server.RequestUtil;
 import com.kcb.common.server.ResponseUtil;
 import com.kcb.common.server.UrlUtil;
+import com.kcb.common.util.LogUtil;
 import com.kcb.common.util.ToastUtil;
 import com.kcb.library.view.PaperButton;
 import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
@@ -114,6 +115,8 @@ public class TestFragment extends BaseFragment {
 
                     @Override
                     public void onResponse(JSONObject response) {
+                        LogUtil.i(TAG, "stu get test from server, response is " + response);
+
                         final int remaintime = response.optInt(KEY_REMAINTIME);
                         final Test test = Test.fromJsonObject(response.optJSONObject(KEY_TEST));
                         test.saveBitmap(); // 将测试中的图片string转成图片，并记录路径

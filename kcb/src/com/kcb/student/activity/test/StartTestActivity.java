@@ -26,6 +26,7 @@ import com.kcb.common.server.RequestUtil;
 import com.kcb.common.server.ResponseUtil;
 import com.kcb.common.server.UrlUtil;
 import com.kcb.common.util.DialogUtil;
+import com.kcb.common.util.LogUtil;
 import com.kcb.common.util.StatusBarUtil;
 import com.kcb.common.util.ToastUtil;
 import com.kcb.common.view.dialog.MaterialDialog;
@@ -90,11 +91,16 @@ public class StartTestActivity extends BaseActivity {
 
         lastButton = (ButtonFlat) findViewById(R.id.button_last);
         lastButton.setOnClickListener(this);
+        lastButton.setRippleColor(getResources().getColor(R.color.black_400));
+
         nextButton = (ButtonFlat) findViewById(R.id.button_next);
         nextButton.setOnClickListener(this);
+        nextButton.setRippleColor(getResources().getColor(R.color.black_400));
+
         submitButton = (ButtonFlat) findViewById(R.id.button_submit);
         submitButton.setOnClickListener(this);
         submitButton.setTextColor(getResources().getColor(R.color.blue));
+        submitButton.setRippleColor(getResources().getColor(R.color.black_400));
     }
 
     @Override
@@ -201,14 +207,17 @@ public class StartTestActivity extends BaseActivity {
     }
 
     private static final String KEY_STUID = "sutid";
+    private static final String KEY_TESTID = "testid";
     private static final String KEY_TESTANSWER = "testanswer";
 
     private void submitAnswerToServer() {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put(KEY_STUID, KAccount.getAccountId());
-            jsonObject.put(KEY_TESTANSWER, mTestAnswer.toJsonObject());
+            jsonObject.put(KEY_TESTID, mTestAnswer.getId());
+            jsonObject.put(KEY_TESTANSWER, mTestAnswer.toJsonArray());
         } catch (JSONException e) {}
+        LogUtil.i(TAG, "stu send answer to server, body is " + jsonObject.toString());
         JsonObjectRequest request =
                 new JsonObjectRequest(Method.POST, UrlUtil.getStuTestFinishUrl(), jsonObject,
                         new Listener<JSONObject>() {

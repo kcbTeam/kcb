@@ -80,6 +80,14 @@ public class TestAnswer {
         return jsonObject;
     }
 
+    public JSONArray toJsonArray() {
+        JSONArray jsonArray = new JSONArray();
+        for (int i = 0; i < mQuestionAnswers.size(); i++) {
+            jsonArray.put(mQuestionAnswers.get(i).toJsonObject());
+        }
+        return jsonArray;
+    }
+
     public static TestAnswer fromJsonObject(JSONObject jsonObject) {
         TestAnswer testAnswer = new TestAnswer();
         try {
