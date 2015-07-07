@@ -4,15 +4,18 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.util.AttributeSet;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.kcb.common.model.test.Question;
 import com.kcb.common.model.test.QuestionItem;
+import com.kcb.common.util.DialogUtil;
 import com.kcb.library.view.checkbox.CheckBox;
 import com.kcbTeam.R;
 
-public class AnswerQuestionView extends LinearLayout {
+public class AnswerQuestionView extends LinearLayout implements OnClickListener {
 
     public AnswerQuestionView(Context context) {
         super(context);
@@ -32,25 +35,18 @@ public class AnswerQuestionView extends LinearLayout {
     private TextView questionIndexTextView;
 
     private TextView titleTextView;
-    private TextView choiceATextView;
-    private TextView choiceBTextView;
-    private TextView choiceCTextView;
-    private TextView choiceDTextView;
+    private TextView aTextView;
+    private TextView bTextView;
+    private TextView cTextView;
+    private TextView dTextView;
 
-    private CheckBox checkBoxA;
-    private CheckBox checkBoxB;
-    private CheckBox checkBoxC;
-    private CheckBox checkBoxD;
+    private CheckBox aCheckBox;
+    private CheckBox bCheckBox;
+    private CheckBox cCheckBox;
+    private CheckBox dCheckBox;
 
     private Context mContext;
     private Question mQuestion;
-
-    // tag title/A/B/C/D;
-    private final int FLAG_TITLE = 1;
-    private final int FLAG_A = 2;
-    private final int FALG_B = 3;
-    private final int FLAG_C = 4;
-    private final int FLAG_D = 5;
 
     private void init(Context context) {
         mContext = context;
@@ -62,15 +58,43 @@ public class AnswerQuestionView extends LinearLayout {
         questionIndexTextView = (TextView) findViewById(R.id.textview_question_num);
 
         titleTextView = (TextView) findViewById(R.id.textview_question_title);
-        choiceATextView = (TextView) findViewById(R.id.textview_A);
-        choiceBTextView = (TextView) findViewById(R.id.textview_B);
-        choiceCTextView = (TextView) findViewById(R.id.textview_C);
-        choiceDTextView = (TextView) findViewById(R.id.textview_D);
+        titleTextView.setOnClickListener(this);
+        aTextView = (TextView) findViewById(R.id.textview_A);
+        aTextView.setOnClickListener(this);
+        bTextView = (TextView) findViewById(R.id.textview_B);
+        bTextView.setOnClickListener(this);
+        cTextView = (TextView) findViewById(R.id.textview_C);
+        cTextView.setOnClickListener(this);
+        dTextView = (TextView) findViewById(R.id.textview_D);
+        dTextView.setOnClickListener(this);
 
-        checkBoxA = (CheckBox) findViewById(R.id.checkBox_A);
-        checkBoxB = (CheckBox) findViewById(R.id.checkBox_B);
-        checkBoxC = (CheckBox) findViewById(R.id.checkBox_C);
-        checkBoxD = (CheckBox) findViewById(R.id.checkBox_D);
+        aCheckBox = (CheckBox) findViewById(R.id.checkBox_A);
+        bCheckBox = (CheckBox) findViewById(R.id.checkBox_B);
+        cCheckBox = (CheckBox) findViewById(R.id.checkBox_C);
+        dCheckBox = (CheckBox) findViewById(R.id.checkBox_D);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.textview_question_title:
+                showBitmapDialog(R.string.comm_bitmap_dialog_title_title, mQuestion.getTitle());
+                break;
+            case R.id.textview_A:
+                showBitmapDialog(R.string.comm_bitmap_dialog_title_A, mQuestion.getChoiceA());
+                break;
+            case R.id.textview_B:
+                showBitmapDialog(R.string.comm_bitmap_dialog_title_B, mQuestion.getChoiceB());
+                break;
+            case R.id.textview_C:
+                showBitmapDialog(R.string.comm_bitmap_dialog_title_C, mQuestion.getChoiceC());
+                break;
+            case R.id.textview_D:
+                showBitmapDialog(R.string.comm_bitmap_dialog_title_D, mQuestion.getChoiceD());
+                break;
+            default:
+                break;
+        }
     }
 
     public void showQuestion(Question question, int questionIndex) {
@@ -79,21 +103,20 @@ public class AnswerQuestionView extends LinearLayout {
         questionIndexTextView.setText(String.format(
                 mContext.getString(R.string.stu_question_index), questionIndex + 1));
 
-        showQuestionItem(FLAG_TITLE, mQuestion.getTitle());
-        showQuestionItem(FLAG_A, mQuestion.getChoiceA());
-        showQuestionItem(FALG_B, mQuestion.getChoiceB());
-        showQuestionItem(FLAG_C, mQuestion.getChoiceC());
-        showQuestionItem(FLAG_D, mQuestion.getChoiceD());
+        showQuestionItem(titleTextView, mQuestion.getTitle());
+        showQuestionItem(aTextView, mQuestion.getChoiceA());
+        showQuestionItem(bTextView, mQuestion.getChoiceB());
+        showQuestionItem(cTextView, mQuestion.getChoiceC());
+        showQuestionItem(dTextView, mQuestion.getChoiceD());
 
-        checkBoxA.setChecked(mQuestion.getChoiceA().isSelected());
-        checkBoxB.setChecked(mQuestion.getChoiceB().isSelected());
-        checkBoxC.setChecked(mQuestion.getChoiceC().isSelected());
-        checkBoxD.setChecked(mQuestion.getChoiceD().isSelected());
+        aCheckBox.setChecked(mQuestion.getChoiceA().isSelected());
+        bCheckBox.setChecked(mQuestion.getChoiceB().isSelected());
+        cCheckBox.setChecked(mQuestion.getChoiceC().isSelected());
+        dCheckBox.setChecked(mQuestion.getChoiceD().isSelected());
     }
 
     @SuppressWarnings("deprecation")
-    private void showQuestionItem(int flag, QuestionItem item) {
-        TextView textView = getTextViewByTag(flag);
+    private void showQuestionItem(TextView textView, QuestionItem item) {
         if (item.isText()) {
             textView.setText(item.getText());
         } else {
@@ -104,28 +127,14 @@ public class AnswerQuestionView extends LinearLayout {
         }
     }
 
-    private TextView getTextViewByTag(int flag) {
-        TextView textView = null;
-        switch (flag) {
-            case FLAG_TITLE:
-                textView = titleTextView;
-                break;
-            case FLAG_A:
-                textView = choiceATextView;
-                break;
-            case FALG_B:
-                textView = choiceBTextView;
-                break;
-            case FLAG_C:
-                textView = choiceCTextView;
-                break;
-            case FLAG_D:
-                textView = choiceDTextView;
-                break;
-            default:
-                break;
+    /**
+     * 单击图片显示放大的图片
+     */
+    private void showBitmapDialog(int titleResId, QuestionItem item) {
+        // 先判断是不是图片
+        if (!item.isText()) {
+            DialogUtil.showBitmapDialog(mContext, titleResId, item.getBitmap(), null, -1);
         }
-        return textView;
     }
 
     public void saveAnswer() {
@@ -133,10 +142,10 @@ public class AnswerQuestionView extends LinearLayout {
         QuestionItem bItem = mQuestion.getChoiceB();
         QuestionItem cItem = mQuestion.getChoiceC();
         QuestionItem dItem = mQuestion.getChoiceD();
-        aItem.setIsSelected(checkBoxA.isCheck());
-        bItem.setIsSelected(checkBoxB.isCheck());
-        cItem.setIsSelected(checkBoxC.isCheck());
-        dItem.setIsSelected(checkBoxD.isCheck());
+        aItem.setIsSelected(aCheckBox.isCheck());
+        bItem.setIsSelected(bCheckBox.isCheck());
+        cItem.setIsSelected(cCheckBox.isCheck());
+        dItem.setIsSelected(dCheckBox.isCheck());
     }
 
     public void release() {

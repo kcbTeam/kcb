@@ -102,7 +102,7 @@ public class StartCheckInActivity extends BaseActivity {
     @Override
     protected void initData() {
         mRemainTime = 10;
-//        mRemainTime = Integer.valueOf(getIntent().getStringExtra(DATA_TIME));
+        // mRemainTime = Integer.valueOf(getIntent().getStringExtra(DATA_TIME));
         LogUtil.i(TAG, "remain time is " + mRemainTime);
 
         mHandler = new Handler(getMainLooper()) {

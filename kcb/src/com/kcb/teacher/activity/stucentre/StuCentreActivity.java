@@ -140,7 +140,7 @@ public class StuCentreActivity extends BaseActivity {
         ArrayList<Integer> colors = new ArrayList<Integer>();
         colors.add(0xff427fed);
         colors.add(0xffbdbdbd);
-//        colors.add(ColorTemplate.getHoloBlue());
+        // colors.add(ColorTemplate.getHoloBlue());
         dataSet.setColors(colors);
 
         DisplayMetrics metrics = getResources().getDisplayMetrics();

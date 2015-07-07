@@ -59,7 +59,7 @@
         <TextView
             android:id="@+id/textview_tipa"
             style="@style/common_question_show_choice_tip"
-            android:text="@string/tch_choice_A" />
+            android:text="@string/comm_choice_A" />
 
         <TextView
             android:id="@+id/textview_A"
@@ -94,7 +94,7 @@
         <TextView
             android:id="@+id/textview_tipb"
             style="@style/common_question_show_choice_tip"
-            android:text="@string/tch_choice_B" />
+            android:text="@string/comm_choice_B" />
 
         <TextView
             android:id="@+id/textview_B"
@@ -129,7 +129,7 @@
         <TextView
             android:id="@+id/textview_tipc"
             style="@style/common_question_show_choice_tip"
-            android:text="@string/tch_choice_C" />
+            android:text="@string/comm_choice_C" />
 
         <TextView
             android:id="@+id/textview_C"
@@ -164,7 +164,7 @@
         <TextView
             android:id="@+id/textview_tipd"
             style="@style/common_question_show_choice_tip"
-            android:text="@string/tch_choice_D" />
+            android:text="@string/comm_choice_D" />
 
         <TextView
             android:id="@+id/textview_D"

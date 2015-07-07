@@ -3,9 +3,12 @@ package com.kcb.common.util;
 import java.util.List;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.view.View.OnClickListener;
 
+import com.kcb.common.view.dialog.MaterialBitmapDialog;
+import com.kcb.common.view.dialog.MaterialBitmapDialog.OnActionListener;
 import com.kcb.common.view.dialog.MaterialDialog;
 import com.kcb.common.view.dialog.MaterialListDialog;
 import com.kcb.common.view.dialog.MaterialListDialog.OnClickSureListener;
@@ -23,7 +26,7 @@ public class DialogUtil {
 
     /**
      * 
-     * @title: showDialog
+     * @title: showNormalDialog
      * @description: show a dialog with title/message/sure button/cancel button
      * @author: wanghang
      * @date: 2015-5-4 下午10:29:45
@@ -32,7 +35,7 @@ public class DialogUtil {
      * @param messageResId
      * @param sureResId , cannot be null;
      * @param sureListener , can be null (only dismiss after click);
-     * @param cancelResId , can be null (don't show cancel button);
+     * @param cancelResId , can be -1 (don't show cancel button);
      * @param cancelListener , can be null (only dismiss after click);
      */
     public static MaterialDialog showNormalDialog(Context context, int titleResId,
@@ -91,7 +94,7 @@ public class DialogUtil {
      * @param messages
      * @param sureText , cannot be null;
      * @param sureListener , can be null (only dismiss after click);
-     * @param cancelText , can be null (don't show cancel button);
+     * @param cancelText , can be -1 (don't show cancel button);
      * @param cancelListener , can be null (only dismiss after click);
      * 
      */
@@ -109,5 +112,30 @@ public class DialogUtil {
             LogUtil.e(TAG, e.getMessage());
         }
         return dialog;
+    }
+
+    /**
+     * 
+     * @title: showBitmapDialog
+     * @description:
+     * @author:
+     * @date: 2015-7-7 下午2:27:16
+     * @param context
+     * @param titleResId
+     * @param bitmap
+     * @param listener, if is null, only has sure button
+     * @param flag , if has action, must has
+     */
+    public static void showBitmapDialog(Context context, int titleResId, Bitmap bitmap,
+            OnActionListener listener, int flag) {
+        MaterialBitmapDialog dialog = new MaterialBitmapDialog(context);
+        try {
+            dialog.show();
+            dialog.setTitle(titleResId);
+            dialog.setImageView(bitmap);
+            dialog.setOnActionListener(flag, listener);
+        } catch (Exception e) {
+            LogUtil.e(TAG, e.getMessage());
+        }
     }
 }

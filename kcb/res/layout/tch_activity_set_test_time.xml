@@ -24,35 +24,42 @@
         <include layout="@layout/comm_button_finish" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/textview_testtime"
+    <LinearLayout
+        android:id="@+id/layout_settime"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/layout_title"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
-        android:textColor="@color/black"
-        android:textSize="@dimen/text_size_medium" />
+        android:background="@color/black_300"
+        android:orientation="vertical"
+        android:paddingTop="8dp" >
 
-    <com.kcb.library.slider.Slider
-        android:id="@+id/slider_testtime"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/textview_testtime"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="16dp"
-        android:background="@color/blue"
-        widget:max="10"
-        widget:min="2"
-        widget:showNumberIndicator="true" />
+        <TextView
+            android:id="@+id/textview_testtime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_medium" />
+
+        <com.kcb.library.slider.Slider
+            android:id="@+id/slider_testtime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/blue"
+            widget:max="10"
+            widget:min="2"
+            widget:showNumberIndicator="true" />
+    </LinearLayout>
 
     <ListView
         android:id="@+id/listview_questions"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/slider_testtime"
-        android:layout_marginTop="8dp"
+        android:layout_below="@id/layout_settime"
         android:divider="@color/black_divider"
         android:dividerHeight="16dp" >
     </ListView>

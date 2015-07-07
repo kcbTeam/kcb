@@ -23,7 +23,9 @@ import android.widget.TextView;
 import com.kcb.common.model.test.Question;
 import com.kcb.common.model.test.QuestionItem;
 import com.kcb.common.util.BitmapUtil;
+import com.kcb.common.util.DialogUtil;
 import com.kcb.common.util.ToastUtil;
+import com.kcb.common.view.dialog.MaterialBitmapDialog.OnActionListener;
 import com.kcb.library.view.checkbox.CheckBox;
 import com.kcb.teacher.activity.test.CropPictureActivity;
 import com.kcb.teacher.util.FileUtil;
@@ -50,23 +52,18 @@ public class EditQuestionView extends LinearLayout implements OnClickListener, O
 
     private EditText titleEditText;
     private ImageView titleImageView;
-    private ImageView deleteTitleImageView;
 
     private EditText aEditText;
     private ImageView aImageView;
-    private ImageView deleteAImageView;
 
     private EditText bEditText;
     private ImageView bImageView;
-    private ImageView deleteBImageView;
 
     private EditText cEditText;
     private ImageView cImageView;
-    private ImageView deleteCImageView;
 
     private EditText dEditText;
     private ImageView dImageView;
-    private ImageView deleteDImageView;
 
     private CheckBox checkBoxA;
     private CheckBox checkBoxB;
@@ -81,7 +78,7 @@ public class EditQuestionView extends LinearLayout implements OnClickListener, O
     // tag title/A/B/C/D;
     private final int FLAG_TITLE = 0;
     private final int FLAG_A = 1;
-    private final int FALG_B = 2;
+    private final int FLAG_B = 2;
     private final int FLAG_C = 3;
     private final int FLAG_D = 4;
 
@@ -103,36 +100,32 @@ public class EditQuestionView extends LinearLayout implements OnClickListener, O
         titleEditText = (EditText) findViewById(R.id.edittext_title);
         titleEditText.setOnLongClickListener(this);
         titleImageView = (ImageView) findViewById(R.id.imageview_title);
-        deleteTitleImageView = (ImageView) findViewById(R.id.imageview_delete_title);
-        deleteTitleImageView.setOnClickListener(this);
+        titleImageView.setOnClickListener(this);
+        titleImageView.setOnLongClickListener(this);
 
         aEditText = (EditText) findViewById(R.id.edittext_A);
         aEditText.setOnLongClickListener(this);
         aImageView = (ImageView) findViewById(R.id.imageview_A);
+        aImageView.setOnClickListener(this);
         aImageView.setOnLongClickListener(this);
-        deleteAImageView = (ImageView) findViewById(R.id.imageview_delete_a);
-        deleteAImageView.setOnClickListener(this);
 
         bEditText = (EditText) findViewById(R.id.edittext_B);
         bEditText.setOnLongClickListener(this);
         bImageView = (ImageView) findViewById(R.id.imageview_B);
+        bImageView.setOnClickListener(this);
         bImageView.setOnLongClickListener(this);
-        deleteBImageView = (ImageView) findViewById(R.id.imageview_delete_b);
-        deleteBImageView.setOnClickListener(this);
 
         cEditText = (EditText) findViewById(R.id.edittext_C);
         cEditText.setOnLongClickListener(this);
         cImageView = (ImageView) findViewById(R.id.imageview_C);
+        cImageView.setOnClickListener(this);
         cImageView.setOnLongClickListener(this);
-        deleteCImageView = (ImageView) findViewById(R.id.imageview_delete_c);
-        deleteCImageView.setOnClickListener(this);
 
         dEditText = (EditText) findViewById(R.id.edittext_D);
         dEditText.setOnLongClickListener(this);
         dImageView = (ImageView) findViewById(R.id.imageview_D);
+        dImageView.setOnClickListener(this);
         dImageView.setOnLongClickListener(this);
-        deleteDImageView = (ImageView) findViewById(R.id.imageview_delete_d);
-        deleteDImageView.setOnClickListener(this);
 
         checkBoxA = (CheckBox) findViewById(R.id.checkBox_A);
         checkBoxB = (CheckBox) findViewById(R.id.checkBox_B);
@@ -151,7 +144,7 @@ public class EditQuestionView extends LinearLayout implements OnClickListener, O
 
         showQuestionItem(FLAG_TITLE, mQuestion.getTitle());
         showQuestionItem(FLAG_A, mQuestion.getChoiceA());
-        showQuestionItem(FALG_B, mQuestion.getChoiceB());
+        showQuestionItem(FLAG_B, mQuestion.getChoiceB());
         showQuestionItem(FLAG_C, mQuestion.getChoiceC());
         showQuestionItem(FLAG_D, mQuestion.getChoiceD());
         titleEditText.requestFocus();
@@ -181,25 +174,25 @@ public class EditQuestionView extends LinearLayout implements OnClickListener, O
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.imageview_delete_title:
-                setEditMode(FLAG_TITLE, EDIT_MODE_TEXT);
-                mQuestion.getTitle().setText("");
+            case R.id.imageview_title:
+                showBitmapDialog(R.string.comm_bitmap_dialog_title_title, mQuestion.getTitle(),
+                        FLAG_TITLE);
                 break;
-            case R.id.imageview_delete_a:
-                setEditMode(FLAG_A, EDIT_MODE_TEXT);
-                mQuestion.getChoiceA().setText("");
+            case R.id.imageview_A:
+                showBitmapDialog(R.string.comm_bitmap_dialog_title_A, mQuestion.getChoiceA(),
+                        FLAG_A);
                 break;
-            case R.id.imageview_delete_b:
-                setEditMode(FALG_B, EDIT_MODE_TEXT);
-                mQuestion.getChoiceB().setText("");
+            case R.id.imageview_B:
+                showBitmapDialog(R.string.comm_bitmap_dialog_title_B, mQuestion.getChoiceB(),
+                        FLAG_B);
                 break;
-            case R.id.imageview_delete_c:
-                setEditMode(FLAG_C, EDIT_MODE_TEXT);
-                mQuestion.getChoiceC().setText("");
+            case R.id.imageview_C:
+                showBitmapDialog(R.string.comm_bitmap_dialog_title_C, mQuestion.getChoiceC(),
+                        FLAG_C);
                 break;
-            case R.id.imageview_delete_d:
-                setEditMode(FLAG_D, EDIT_MODE_TEXT);
-                mQuestion.getChoiceD().setText("");
+            case R.id.imageview_D:
+                showBitmapDialog(R.string.comm_bitmap_dialog_title_D, mQuestion.getChoiceD(),
+                        FLAG_D);
                 break;
             default:
                 break;
@@ -209,7 +202,6 @@ public class EditQuestionView extends LinearLayout implements OnClickListener, O
     private void setEditMode(int flag, int mode) {
         EditText editText = getEditTextByFlag(flag);
         ImageView imageView = getImageViewByFlag(flag);
-        ImageView deleteIcon = getDeleteIconByTag(flag);
         switch (mode) {
             case EDIT_MODE_TEXT:
                 editText.setText("");
@@ -219,7 +211,6 @@ public class EditQuestionView extends LinearLayout implements OnClickListener, O
                 editText.setVisibility(View.VISIBLE);
                 imageView.setImageBitmap(null);
                 imageView.setVisibility(View.GONE);
-                deleteIcon.setVisibility(View.GONE);
                 break;
             case EDIT_MODE_BITMAP:
                 editText.setText(" ");
@@ -228,7 +219,6 @@ public class EditQuestionView extends LinearLayout implements OnClickListener, O
                     editText.setVisibility(View.INVISIBLE);
                 }
                 imageView.setVisibility(View.VISIBLE);
-                deleteIcon.setVisibility(View.VISIBLE);
                 break;
             default:
                 break;
@@ -244,7 +234,7 @@ public class EditQuestionView extends LinearLayout implements OnClickListener, O
             case FLAG_A:
                 editText = aEditText;
                 break;
-            case FALG_B:
+            case FLAG_B:
                 editText = bEditText;
                 break;
             case FLAG_C:
@@ -268,7 +258,7 @@ public class EditQuestionView extends LinearLayout implements OnClickListener, O
             case FLAG_A:
                 imageView = aImageView;
                 break;
-            case FALG_B:
+            case FLAG_B:
                 imageView = bImageView;
                 break;
             case FLAG_C:
@@ -283,34 +273,58 @@ public class EditQuestionView extends LinearLayout implements OnClickListener, O
         return imageView;
     }
 
-    private ImageView getDeleteIconByTag(int flag) {
-        ImageView deleteIcon = null;
-        switch (flag) {
-            case FLAG_TITLE:
-                deleteIcon = deleteTitleImageView;
-                break;
-            case FLAG_A:
-                deleteIcon = deleteAImageView;
-                break;
-            case FALG_B:
-                deleteIcon = deleteBImageView;
-                break;
-            case FLAG_C:
-                deleteIcon = deleteCImageView;
-                break;
-            case FLAG_D:
-                deleteIcon = deleteDImageView;
-                break;
-            default:
-                break;
+    /**
+     * 单击图片显示放大的图片
+     */
+    private void showBitmapDialog(int titleResId, QuestionItem item, int flag) {
+        // 先判断是不是图片
+        if (!item.isText()) {
+            OnActionListener listener = new OnActionListener() {
+
+                @Override
+                public void onDelete(final int flag) {
+
+                    switch (flag) {
+                        case FLAG_TITLE:
+                            setEditMode(FLAG_TITLE, EDIT_MODE_TEXT);
+                            mQuestion.getTitle().setText("");
+                            break;
+                        case FLAG_A:
+                            setEditMode(FLAG_A, EDIT_MODE_TEXT);
+                            mQuestion.getChoiceA().setText("");
+                            break;
+                        case FLAG_B:
+                            setEditMode(FLAG_B, EDIT_MODE_TEXT);
+                            mQuestion.getChoiceB().setText("");
+                            break;
+                        case FLAG_C:
+                            setEditMode(FLAG_C, EDIT_MODE_TEXT);
+                            mQuestion.getChoiceC().setText("");
+                            break;
+                        case FLAG_D:
+                            setEditMode(FLAG_D, EDIT_MODE_TEXT);
+                            mQuestion.getChoiceD().setText("");
+                            break;
+                        default:
+                            break;
+                    }
+                }
+
+                @Override
+                public void onReTakePhoto(int flag) {
+                    mLongClickTag = flag;
+                    takePhoto();
+                }
+            };
+            DialogUtil.showBitmapDialog(mContext, titleResId, item.getBitmap(), listener, flag);
         }
-        return deleteIcon;
     }
 
     @Override
     public boolean onLongClick(View v) {
         switch (v.getId()) {
             case R.id.edittext_title:
+            case R.id.imageview_title:
                 mLongClickTag = FLAG_TITLE;
                 break;
             case R.id.edittext_A:
@@ -319,7 +333,7 @@ public class EditQuestionView extends LinearLayout implements OnClickListener, O
                 break;
             case R.id.edittext_B:
             case R.id.imageview_B:
-                mLongClickTag = FALG_B;
+                mLongClickTag = FLAG_B;
                 break;
             case R.id.edittext_C:
             case R.id.imageview_C:
@@ -392,8 +406,8 @@ public class EditQuestionView extends LinearLayout implements OnClickListener, O
                             mQuestion.getChoiceA().setBitmap(bitmap);
                             mQuestion.getChoiceA().setBitmapPath(bitmapPath);
                             break;
-                        case FALG_B:
-                            setEditMode(FALG_B, EDIT_MODE_BITMAP);
+                        case FLAG_B:
+                            setEditMode(FLAG_B, EDIT_MODE_BITMAP);
                             bImageView.setImageBitmap(bitmap);
                             mQuestion.getChoiceB().setBitmap(bitmap);
                             mQuestion.getChoiceB().setBitmapPath(bitmapPath);
