@@ -3,9 +3,15 @@
 
     <string name="app_name">课程宝</string>
 
-    <!-- 对话框 -->
+    <!-- 对话框 start -->
     <string name="comm_sure">确定</string>
     <string name="comm_cancel">取消</string>
+    <string name="comm_delete">删除</string>
+    <string name="comm_retakephoto">重拍</string>
+    <string name="comm_delete_bitmap">确定删除这张图片？</string>
+    <string name="comm_zoom_tip">可以双击或捏合手指来缩放图片。</string>
+    <!-- 对话框 end -->
+
 
     <!-- 引导页面 start -->
     <string name="comm_student">我是学生</string>
@@ -17,5 +23,18 @@
     <string name="network_error">网络出错了，请检查网络连接</string>
     <string name="server_error">服务器出错了，请稍后再试</string>
     <!-- 网络请求 end -->
+
+
+    <!-- 选项 start -->
+    <string name="comm_choice_A">A</string>
+    <string name="comm_choice_B">B</string>
+    <string name="comm_choice_C">C</string>
+    <string name="comm_choice_D">D</string>
+    <string name="comm_bitmap_dialog_title_title">题目</string>
+    <string name="comm_bitmap_dialog_title_A">A选项</string>
+    <string name="comm_bitmap_dialog_title_B">B选项</string>
+    <string name="comm_bitmap_dialog_title_C">C选项</string>
+    <string name="comm_bitmap_dialog_title_D">D选项</string>
+    <!-- 选项 end -->
 
 </resources>

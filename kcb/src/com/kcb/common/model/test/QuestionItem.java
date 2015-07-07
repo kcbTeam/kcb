@@ -158,8 +158,8 @@ public class QuestionItem implements Serializable {
     public static final String KEY_ID = "id";
     public static final String KEY_ISTEXT = "isText";
     public static final String KEY_TEXT = "text";
-    //bitmapstring
-    //TODO
+    // bitmapstring
+    // TODO
     public static final String KEY_BITMAPSTRING = "bitmap";
     public static final String KEY_BITMAPPATH = "bitmappath";
     public static final String KEY_ISRIGHT = "isright";
@@ -176,7 +176,7 @@ public class QuestionItem implements Serializable {
             jsonObject.put(KEY_TEXT, mText);
             if (toServer && !TextUtils.isEmpty(mBitmapPath)) {
                 jsonObject.put(KEY_BITMAPSTRING, getBitmapString());
-            }else {
+            } else {
                 jsonObject.put(KEY_BITMAPSTRING, "");
             }
             jsonObject.put(KEY_BITMAPPATH, mBitmapPath);

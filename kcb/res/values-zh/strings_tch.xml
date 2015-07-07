@@ -110,10 +110,6 @@
     <string name="tch_delete_question">删除本题</string>
     <string name="tch_input_title">输入题目%1$d</string>
     <string name="tch_input_choice">输入选项，并勾出正确项</string>
-    <string name="tch_choice_A">A</string>
-    <string name="tch_choice_B">B</string>
-    <string name="tch_choice_C">C</string>
-    <string name="tch_choice_D">D</string>
     <!--  -->
     <string name="tch_no_camera_app">没有可以拍照的应用程序</string>
     <string name="tch_not_save_if_cancel">取消后，不会保存本次测试。</string>
