@@ -107,6 +107,10 @@ public class TestFragment extends BaseFragment {
         }
     };
 
+    //TODO 更改图片上传方式
+    // 改成 entity
+    
+    // 判断是否有未完成的测试
     private void startTest() {
         if (startProgressBar.getVisibility() == View.VISIBLE) {
             return;
@@ -129,8 +133,13 @@ public class TestFragment extends BaseFragment {
         }
     }
 
+    // request
     private final String KEY_ID = "tchid";
     private final String KEY_TEST = "test";
+
+    // response
+    private final String KEY_DATE = "date";
+    private final String KEY_TESTID = "testid";
 
     // 需要将测试中的图片转成String，如果图片过多，在创建request的时候也会阻塞UI线程，所以都需要在新的线程中做这些耗时操作。
     private void sendTestToServer(final Test test) {
@@ -155,18 +164,32 @@ public class TestFragment extends BaseFragment {
 
                             jsonObject2.put("data", requestObject);
                         } catch (JSONException e) {}
+                        
+                        LogUtil.i(TAG, "tch start test, request body is "+jsonObject2.toString());
 
+                        //TODO post 返回 500
                         JsonObjectRequest request =
                                 new JsonObjectRequest(Method.POST,
-                                        UrlUtil.getTchTestStartUrl(requestObject), jsonObject2,
+                                        UrlUtil.getTchTestStartUrl(requestObject), new JSONObject(),
                                         new Listener<JSONObject>() {
 
                                             @Override
                                             public void onResponse(JSONObject response) {
                                                 LogUtil.i(TAG, "tch start test, response is "
                                                         + response);
+                                                long date = response.optLong(KEY_DATE);
+                                                String testId = response.optString(KEY_TESTID);
+                                                LogUtil.i(TAG, "tch start test, get date is "
+                                                        + date);
+                                                LogUtil.i(TAG, "tch start test, get testId is "
+                                                        + testId);
+
                                                 TestDao testDao = new TestDao(getActivity());
+
                                                 test.setHasTested(true);
+                                                test.setDate(date);
+                                                test.setId(testId);
+
                                                 testDao.update(test);
                                                 testDao.close();
                                                 getActivity().runOnUiThread(new Runnable() {

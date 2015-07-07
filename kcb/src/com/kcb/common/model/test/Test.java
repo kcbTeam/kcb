@@ -2,6 +2,8 @@ package com.kcb.common.model.test;
 
 import java.io.File;
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -173,7 +175,10 @@ public class Test implements Serializable {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put(KEY_ID, mId);
-            jsonObject.put(KEY_NAME, mName);
+
+//            jsonObject.put(KEY_NAME, mName);
+            jsonObject.put(KEY_NAME, getUTF8XMLString(mName));
+            
             jsonObject.put(KEY_TIME, mTime);
             jsonObject.put(KEY_DATE, mDate);
             jsonObject.put(KEY_HASTESTED, mHasTested);
@@ -187,6 +192,29 @@ public class Test implements Serializable {
             jsonObject.put(KEY_QUESTION, questionArray);
         } catch (JSONException e) {}
         return jsonObject;
+    }
+
+    /**
+     * Get XML String of utf-8
+     * 
+     * @return XML-Formed string
+     */
+    public static String getUTF8XMLString(String xml) {
+        // A StringBuffer Object
+        StringBuffer sb = new StringBuffer();
+        sb.append(xml);
+        String xmString = "";
+        String xmlUTF8 = "";
+        try {
+            xmString = new String(sb.toString().getBytes("UTF-8"));
+            xmlUTF8 = URLEncoder.encode(xmString, "UTF-8");
+            System.out.println("utf-8 编码：" + xmlUTF8);
+        } catch (UnsupportedEncodingException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        // return to String Formed
+        return xmlUTF8;
     }
 
     public static Test fromJsonObject(JSONObject jsonObject) {

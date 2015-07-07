@@ -20,32 +20,36 @@
             style="@style/common_title" />
     </LinearLayout>
 
-    <com.kcb.common.view.test.ShowQuestionView
-        android:id="@+id/questionview"
-        android:layout_below="@id/layout_title" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/view_divider"
+        android:layout_below="@id/layout_title" >
+
+        <com.kcb.common.view.test.ShowQuestionView
+            android:id="@+id/questionview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </ScrollView>
 
     <LinearLayout
         android:id="@+id/layout_buttons"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_alignParentBottom="true"
-        android:orientation="horizontal"
-        android:padding="8dp" >
+        android:background="@color/black_200"
+        android:orientation="horizontal" >
 
         <com.kcb.library.view.buttonflat.ButtonFlat
             android:id="@+id/button_last"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
+            style="@style/common_bottom_button"
             android:text="@string/stu_last_question"
             widget:clickAfterRipple="false"
             widget:rippleSpeed="18" />
 
         <com.kcb.library.view.buttonflat.ButtonFlat
             android:id="@+id/button_next"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
+            style="@style/common_bottom_button"
             android:text="@string/stu_next_question"
             widget:clickAfterRipple="false"
             widget:rippleSpeed="18" />

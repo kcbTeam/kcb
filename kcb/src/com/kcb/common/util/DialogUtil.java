@@ -1,12 +1,10 @@
 package com.kcb.common.util;
 
 import java.util.List;
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.view.View.OnClickListener;
-
 import com.kcb.common.view.dialog.MaterialBitmapDialog;
 import com.kcb.common.view.dialog.MaterialBitmapDialog.OnActionListener;
 import com.kcb.common.view.dialog.MaterialDialog;
