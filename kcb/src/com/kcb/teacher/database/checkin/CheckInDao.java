@@ -60,6 +60,10 @@ public class CheckInDao {
         return results;
     }
 
+    public void deleteAll() {
+        mDatabase.delete(CheckInTable.TABLE_NAME, null, null);
+    }
+
     public void close() {
         mDatabase.close();
     }

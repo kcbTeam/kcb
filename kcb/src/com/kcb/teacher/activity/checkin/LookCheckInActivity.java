@@ -146,7 +146,7 @@ public class LookCheckInActivity extends BaseActivity implements OnItemClickList
                                 if (!results.isEmpty()) {
                                     if (mCheckInResults.isEmpty()) {
                                         listTitleLayout.setVisibility(View.VISIBLE);
-                                        emptyTipView.setVisibility(View.GONE);                                        
+                                        emptyTipView.setVisibility(View.GONE);
                                     }
 
                                     CheckInDao checkInDao =

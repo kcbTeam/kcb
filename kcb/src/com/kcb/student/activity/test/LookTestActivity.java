@@ -13,10 +13,10 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
-import com.android.volley.VolleyError;
 import com.android.volley.Request.Method;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.kcb.common.base.BaseActivity;
 import com.kcb.common.model.test.Test;
@@ -183,6 +183,14 @@ public class LookTestActivity extends BaseActivity implements OnSearchListener, 
                         List<Test> tests = new ArrayList<Test>();
                         for (int i = 0; i < response.length(); i++) {
                             Test test = Test.fromJsonObject(response.optJSONObject(i));
+                            tests.add(test);
+                        }
+                        if (!tests.isEmpty()) {
+                            mAllTests.addAll(tests);
+                            mSearchedTests.clear();
+                            mSearchedTests.addAll(mAllTests);
+                            mAdapter.notifyDataSetChanged();
+                            listTitleLayout.setVisibility(View.VISIBLE);
                         }
                     }
                 }, new ErrorListener() {
