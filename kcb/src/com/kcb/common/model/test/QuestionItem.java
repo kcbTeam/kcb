@@ -26,11 +26,12 @@ public class QuestionItem implements Serializable {
 
     private int mId; // from client, useful when item is choice
 
-    private boolean mIsText = true;
-    private String mText = "";
-    private Bitmap mBitmap;
-    private String mBitmapPath;
-    private String mBitmapString;
+    private boolean mIsText = true; // 内容是否是文字
+    private String mText = ""; // 文字内容
+
+    private Bitmap mBitmap; // 图片内容
+    private String mBitmapPath; // 如果是老师出题，题目在本地的保存路径
+    private String mBitmapUrl; // 如果从后台拿取图片，拿的是图片的url
 
     private boolean mIsRight; // useful when item is choice
     private boolean mIsSelected; // used in stu module, useful when item is choice, true if stu
@@ -158,9 +159,6 @@ public class QuestionItem implements Serializable {
     public static final String KEY_ID = "id";
     public static final String KEY_ISTEXT = "isText";
     public static final String KEY_TEXT = "text";
-    // bitmapstring
-    // TODO
-    public static final String KEY_BITMAPSTRING = "bitmap";
     public static final String KEY_BITMAPPATH = "bitmappath";
     public static final String KEY_ISRIGHT = "isright";
     public static final String KEY_ISSELECTED = "isselected";
@@ -174,11 +172,6 @@ public class QuestionItem implements Serializable {
             jsonObject.put(KEY_ID, mId);
             jsonObject.put(KEY_ISTEXT, mIsText);
             jsonObject.put(KEY_TEXT, mText);
-            if (toServer && !TextUtils.isEmpty(mBitmapPath)) {
-                jsonObject.put(KEY_BITMAPSTRING, getBitmapString());
-            } else {
-                jsonObject.put(KEY_BITMAPSTRING, "");
-            }
             jsonObject.put(KEY_BITMAPPATH, mBitmapPath);
             jsonObject.put(KEY_ISRIGHT, mIsRight);
             jsonObject.put(KEY_ISSELECTED, mIsSelected);
@@ -191,19 +184,10 @@ public class QuestionItem implements Serializable {
         item.mId = jsonObject.optInt(KEY_ID);
         item.mIsText = jsonObject.optBoolean(KEY_ISTEXT);
         item.mText = jsonObject.optString(KEY_TEXT);
-        item.mBitmapString = jsonObject.optString(KEY_BITMAPSTRING);
         item.mBitmapPath = jsonObject.optString(KEY_BITMAPPATH);
         item.mIsRight = jsonObject.optBoolean(KEY_ISRIGHT);
         item.mIsSelected = jsonObject.optBoolean(KEY_ISSELECTED);
         return item;
-    }
-
-    public void saveBitmap(String testName, int questionIndex, int itemIndex) {
-        if (!TextUtils.isEmpty(mBitmapString)) {
-            mBitmapPath = FileUtil.getQuestionItemPath(testName, questionIndex + 1, itemIndex);
-            mBitmap = BitmapUtil.stringToBitmap(mBitmapString);
-            BitmapUtil.saveBitmap(mBitmapPath, mBitmap);
-        }
     }
 
     public void deleteBitmap() {

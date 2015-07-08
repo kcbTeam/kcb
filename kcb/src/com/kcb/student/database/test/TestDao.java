@@ -36,7 +36,7 @@ public class TestDao {
     }
 
     /**
-     * 获取测试时间已到的测试
+     * 获取测试时间已到的测试 TODO 使用合适的查询语句
      */
     public List<Test> getTerminatedTests() {
         List<Test> tests = getAll();

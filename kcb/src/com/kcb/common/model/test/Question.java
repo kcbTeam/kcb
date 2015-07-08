@@ -18,7 +18,7 @@ public class Question implements Serializable {
     private static final long serialVersionUID = 2L;
 
     private int mId; // from client
-    private double mRate;
+    private double mRate; // 此题的正确率
 
     private QuestionItem mTitleItem;
     private QuestionItem mChoiceAItem;
@@ -28,14 +28,15 @@ public class Question implements Serializable {
 
     public Question() {
         mTitleItem = new QuestionItem();
+        mTitleItem.setId(0);
         mChoiceAItem = new QuestionItem();
-        mChoiceAItem.setId(0);
+        mChoiceAItem.setId(1);
         mChoiceBItem = new QuestionItem();
-        mChoiceBItem.setId(1);
+        mChoiceBItem.setId(2);
         mChoiceCItem = new QuestionItem();
-        mChoiceCItem.setId(2);
+        mChoiceCItem.setId(3);
         mChoiceDItem = new QuestionItem();
-        mChoiceDItem.setId(3);
+        mChoiceDItem.setId(4);
     }
 
     public static Question clone(Question object) {
@@ -161,14 +162,6 @@ public class Question implements Serializable {
 
         question.mRate = jsonObject.optDouble(KEY_RATE);
         return question;
-    }
-
-    public void saveBitmap(String testName, int questionIndex) {
-        mTitleItem.saveBitmap(testName, questionIndex, 0);
-        mChoiceAItem.saveBitmap(testName, questionIndex, 1);
-        mChoiceBItem.saveBitmap(testName, questionIndex, 2);
-        mChoiceCItem.saveBitmap(testName, questionIndex, 3);
-        mChoiceDItem.saveBitmap(testName, questionIndex, 4);
     }
 
     public void deleteBitmap() {

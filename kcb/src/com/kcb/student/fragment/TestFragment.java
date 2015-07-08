@@ -119,7 +119,6 @@ public class TestFragment extends BaseFragment {
 
                         final int remaintime = response.optInt(KEY_REMAINTIME);
                         final Test test = Test.fromJsonObject(response.optJSONObject(KEY_TEST));
-                        test.saveBitmap(); // 将测试中的图片string转成图片，并记录路径
 
                         TestDao testDao = new TestDao(getActivity());
                         testDao.add(test); // 不会保存图片本身，保存图片路径
