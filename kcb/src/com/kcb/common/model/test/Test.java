@@ -289,15 +289,6 @@ public class Test implements Serializable {
     }
 
     /**
-     * 学生答题，从网络上获取到题目后，需要将题目中的图片String转成Bitmap保存到本地
-     */
-    public void saveBitmap() {
-        for (int i = 0; i < mQuestions.size(); i++) {
-            mQuestions.get(i).saveBitmap(mName, i);
-        }
-    }
-
-    /**
      * 删除一个测试的时候，要把此与此测试相关的图片删除
      */
     public void deleteBitmap() {

@@ -164,14 +164,6 @@ public class Question implements Serializable {
         return question;
     }
 
-    public void saveBitmap(String testName, int questionIndex) {
-        mTitleItem.saveBitmap(testName, questionIndex, 0);
-        mChoiceAItem.saveBitmap(testName, questionIndex, 1);
-        mChoiceBItem.saveBitmap(testName, questionIndex, 2);
-        mChoiceCItem.saveBitmap(testName, questionIndex, 3);
-        mChoiceDItem.saveBitmap(testName, questionIndex, 4);
-    }
-
     public void deleteBitmap() {
         mTitleItem.deleteBitmap();
         mChoiceAItem.deleteBitmap();
