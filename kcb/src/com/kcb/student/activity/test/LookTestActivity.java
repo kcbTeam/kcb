@@ -4,14 +4,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
+
+import org.json.JSONArray;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
+import com.android.volley.VolleyError;
+import com.android.volley.Request.Method;
+import com.android.volley.Response.ErrorListener;
+import com.android.volley.Response.Listener;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.kcb.common.base.BaseActivity;
 import com.kcb.common.model.test.Test;
+import com.kcb.common.server.RequestUtil;
+import com.kcb.common.server.UrlUtil;
 import com.kcb.common.util.StatusBarUtil;
 import com.kcb.common.util.StringMatchUtil;
 import com.kcb.common.view.common.EmptyTipView;
@@ -21,6 +31,7 @@ import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
 import com.kcb.student.adapter.LookTestAdapter;
 import com.kcb.student.database.test.TestDao;
+import com.kcb.student.model.account.KAccount;
 import com.kcbTeam.R;
 
 /**
@@ -31,6 +42,8 @@ import com.kcbTeam.R;
  * @date: 2015年5月7日 下午5:09:20
  */
 public class LookTestActivity extends BaseActivity implements OnSearchListener, OnItemClickListener {
+
+    private static final String TAG = LookTestActivity.class.getName();
 
     private ButtonFlat backButton;
     private ButtonFlat refreshButton;
@@ -149,13 +162,34 @@ public class LookTestActivity extends BaseActivity implements OnSearchListener, 
         LookTestDetailActivity.start(LookTestActivity.this, mAdapter.getItem(position));
     }
 
-    // TODO
+    /**
+     * 刷新，根据学号、本地保存的最近一次测试时间戳获取测试；
+     */
     private void refresh() {
         if (progressBar.getVisibility() == View.VISIBLE) {
             return;
         }
         progressBar.setVisibility(View.VISIBLE);
         // if success, show listview title & search edittext;
+        long date = 0;
+        if (mAdapter.getCount() > 0) {
+            date = mAdapter.getItem(0).getDate();
+        }
+        JsonArrayRequest request =
+                new JsonArrayRequest(Method.GET, UrlUtil.getStuTestLookResultUrl(
+                        KAccount.getAccountId(), date), new Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        List<Test> tests = new ArrayList<Test>();
+                        for (int i = 0; i < response.length(); i++) {
+                            Test test = Test.fromJsonObject(response.optJSONObject(i));
+                        }
+                    }
+                }, new ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {}
+                });
+        RequestUtil.getInstance().addToRequestQueue(request, TAG);
     }
 
     @Override

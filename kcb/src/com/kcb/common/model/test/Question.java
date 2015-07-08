@@ -147,7 +147,7 @@ public class Question implements Serializable {
         return jsonObject;
     }
 
-    public static Question fromJson(JSONObject jsonObject) {
+    public static Question fromJsonObject(JSONObject jsonObject) {
         Question question = new Question();
         question.mId = jsonObject.optInt(KEY_ID);
         question.mTitleItem = QuestionItem.fromJsonObject(jsonObject.optJSONObject(KEY_TITLE));

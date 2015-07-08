@@ -81,8 +81,8 @@ public class UrlUtil {
     // 3.3 查看测试结果
     private static final String url_stu_test_lookresult = IP + "/v1/stu/test/lookresult";
 
-    public static String getStuTestLookResultUrl() {
-        return url_stu_test_lookresult;
+    public static String getStuTestLookResultUrl(String stuId, long date) {
+        return url_stu_test_lookresult + "?stuid=" + stuId + "&date=" + date;
     }
 
     /**
