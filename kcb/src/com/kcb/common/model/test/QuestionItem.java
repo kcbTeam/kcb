@@ -174,6 +174,7 @@ public class QuestionItem implements Serializable {
             jsonObject.put(KEY_ISTEXT, mIsText);
             jsonObject.put(KEY_TEXT, mText);
             jsonObject.put(KEY_BITMAPPATH, mBitmapPath);
+            jsonObject.put(KEY_BITMAPURL, mBitmapUrl);
             jsonObject.put(KEY_ISRIGHT, mIsRight);
             jsonObject.put(KEY_ISSELECTED, mIsSelected);
         } catch (JSONException e) {}
