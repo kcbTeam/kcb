@@ -84,7 +84,7 @@
     <!-- LookCheckInDetailActivity start -->
     <string name="tch_name">姓名</string>
     <string name="tch_stuid">学号</string>
-    <string name="tch_unchecked_stuinfo">以下为没有到课学生名单</string>
+    <string name="tch_unchecked_stuinfo">未到课学生信息</string>
     <string name="tch_unchecked_time">未到课次数</string>
     <string name="tch_checkin_rate_tip">本次到课率为%1$d%%</string>
     <string name="tch_checkin_success">成功签到</string>

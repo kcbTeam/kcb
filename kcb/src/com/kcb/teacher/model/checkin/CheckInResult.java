@@ -11,8 +11,8 @@ import org.json.JSONObject;
 
 /**
  * 
- * @className: CheckInRecordInfo
- * @description:
+ * @className: CheckInResult
+ * @description: 老师的单次签到结果，包括签到日期、签到率、未到课学生情况
  * @author: ZQJ
  * @date: 2015年4月24日 下午7:08:01
  */
@@ -75,18 +75,15 @@ public class CheckInResult implements Serializable {
 
     public static CheckInResult fromJsonObject(JSONObject jsonObject) {
         CheckInResult checkInResult = new CheckInResult();
-        try {
-            checkInResult.mDate = jsonObject.optLong(KEY_DATE);
-            checkInResult.mRate = jsonObject.optDouble(KEY_RATE);
+        checkInResult.mDate = jsonObject.optLong(KEY_DATE);
+        checkInResult.mRate = jsonObject.optDouble(KEY_RATE);
 
-            JSONArray jsonArray = jsonObject.optJSONArray(KEY_UNCHECKSTU);
-            for (int i = 0; i < jsonArray.length(); i++) {
-                checkInResult.mUnCheckedStudents.add(UncheckedStudent.fromJsonObject(jsonArray
-                        .getJSONObject(i)));
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        // TODO 王航，重构api
+        // JSONArray jsonArray = jsonObject.optJSONArray(KEY_UNCHECKSTU);
+        // for (int i = 0; i < jsonArray.length(); i++) {
+        // checkInResult.mUnCheckedStudents.add(UncheckedStudent.fromJsonObject(jsonArray
+        // .getJSONObject(i)));
+        // }
         return checkInResult;
     }
 }

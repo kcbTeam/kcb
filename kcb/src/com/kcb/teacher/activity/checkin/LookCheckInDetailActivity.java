@@ -1,6 +1,10 @@
 package com.kcb.teacher.activity.checkin;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +16,11 @@ import android.view.View.OnClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.android.volley.Request.Method;
+import com.android.volley.Response.ErrorListener;
+import com.android.volley.Response.Listener;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.Entry;
@@ -20,10 +29,17 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.PercentFormatter;
 import com.kcb.common.base.BaseFragmentActivity;
+import com.kcb.common.server.RequestUtil;
+import com.kcb.common.server.ResponseUtil;
+import com.kcb.common.server.UrlUtil;
 import com.kcb.common.util.StatusBarUtil;
 import com.kcb.library.view.buttonflat.ButtonFlat;
+import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
 import com.kcb.teacher.adapter.checkin.LookCheckInDetailAdapter;
+import com.kcb.teacher.database.checkin.CheckInDao;
+import com.kcb.teacher.model.account.KAccount;
 import com.kcb.teacher.model.checkin.CheckInResult;
+import com.kcb.teacher.model.checkin.UncheckedStudent;
 import com.kcbTeam.R;
 
 /**
@@ -35,15 +51,23 @@ import com.kcbTeam.R;
  */
 public class LookCheckInDetailActivity extends BaseFragmentActivity implements OnClickListener {
 
+    private static final String TAG = LookCheckInDetailActivity.class.getName();
+
     private ButtonFlat backButton;
+    private ButtonFlat refreshButton;
+    private SmoothProgressBar progressBar;
+
     private TextView dateTextView;
     private TextView rateTextView;
 
     private PieChart pieChart;
 
+    private TextView stuInfoTipTextView;
+    private View listviewTitleLayout;
     private ListView listView;
 
-    private CheckInResult mCheckInResult;
+    // 静态变量，由LookCheckInActivity传入；因为此类中可能请求签到详情，所以使用静态变量可以方便更新上一个界面中对应的签到详情，避免再次读取数据库
+    private static CheckInResult sCheckInResult;
     private float mCheckInRate;
 
     private LookCheckInDetailAdapter mAdapter;
@@ -62,27 +86,94 @@ public class LookCheckInDetailActivity extends BaseFragmentActivity implements O
     protected void initView() {
         backButton = (ButtonFlat) findViewById(R.id.button_back);
         backButton.setOnClickListener(this);
+        refreshButton = (ButtonFlat) findViewById(R.id.button_refresh);
+        refreshButton.setOnClickListener(this);
+
+        progressBar = (SmoothProgressBar) findViewById(R.id.progressbar_refresh);
 
         dateTextView = (TextView) findViewById(R.id.textview_date);
         rateTextView = (TextView) findViewById(R.id.textview_rate);
 
         pieChart = (PieChart) findViewById(R.id.piechart);
+
+        stuInfoTipTextView = (TextView) findViewById(R.id.textview_stuinfotip);
+        listviewTitleLayout = findViewById(R.id.layout_listview_title);
         listView = (ListView) findViewById(R.id.listview);
     }
 
     @Override
     protected void initData() {
-        mCheckInResult = (CheckInResult) getIntent().getSerializableExtra(DATA_CHECKIN_RESULT);
-        mCheckInRate = (float) mCheckInResult.getRate();
+        mCheckInRate = (float) sCheckInResult.getRate();
 
-        dateTextView.setText(mCheckInResult.getDateString());
+        dateTextView.setText(sCheckInResult.getDateString());
         rateTextView.setText(String.format(getResources().getString(R.string.tch_checkin_rate_tip),
                 (int) (100 * mCheckInRate)));
 
-        mAdapter = new LookCheckInDetailAdapter(this, mCheckInResult.getUnCheckedStudents());
-        listView.setAdapter(mAdapter);
-
+        List<UncheckedStudent> students = sCheckInResult.getUnCheckedStudents();
+        if (mCheckInRate != 1) { // 如果签到率不为1
+            if (students.isEmpty()) { // 但是有没有未签到的学生信息，需要请求学生信息；
+                refreshButton.setVisibility(View.VISIBLE);
+                refresh();
+            } else { // 否则，显示学生信息即可
+                showUncheckedStudents();
+            }
+        }
         initPieChart();
+    }
+
+    private void refresh() {
+        if (progressBar.getVisibility() == View.VISIBLE) {
+            return;
+        }
+        progressBar.setVisibility(View.VISIBLE);
+        // 返回的结果是多个学生信息，包括姓名、学号、未签到率，需要终端按未签到率排序
+        JsonArrayRequest request =
+                new JsonArrayRequest(Method.GET, UrlUtil.getTchCheckinGetResultDetailUrl(
+                        KAccount.getAccountId(), sCheckInResult.getDate()),
+                        new Listener<JSONArray>() {
+
+                            @Override
+                            public void onResponse(JSONArray response) {
+                                // 解析未签到学生详情，保存到数据库中
+                                // 更新UI
+                                try {
+                                    List<UncheckedStudent> students =
+                                            new ArrayList<UncheckedStudent>();
+                                    for (int i = 0; i < response.length(); i++) {
+                                        UncheckedStudent student =
+                                                UncheckedStudent.fromJsonObject(response
+                                                        .getJSONObject(i));
+                                        students.add(student);
+                                    }
+                                    sCheckInResult.getUnCheckedStudents().addAll(students);
+                                    CheckInDao checkInDao =
+                                            new CheckInDao(LookCheckInDetailActivity.this);
+                                    checkInDao.update(sCheckInResult);
+                                    checkInDao.close();
+
+                                    showUncheckedStudents();
+                                } catch (JSONException e) {}
+
+                                refreshButton.setVisibility(View.GONE);
+                                progressBar.hide(LookCheckInDetailActivity.this);
+                            }
+                        }, new ErrorListener() {
+
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                progressBar.hide(LookCheckInDetailActivity.this);
+                                ResponseUtil.toastError(error);
+                            }
+                        });
+        RequestUtil.getInstance().addToRequestQueue(request, TAG);
+    }
+
+    private void showUncheckedStudents() {
+        stuInfoTipTextView.setVisibility(View.VISIBLE);
+        listviewTitleLayout.setVisibility(View.VISIBLE);
+        listView.setVisibility(View.VISIBLE);
+        mAdapter = new LookCheckInDetailAdapter(this, sCheckInResult.getUnCheckedStudents());
+        listView.setAdapter(mAdapter);
     }
 
     @Override
@@ -90,6 +181,9 @@ public class LookCheckInDetailActivity extends BaseFragmentActivity implements O
         switch (v.getId()) {
             case R.id.button_back:
                 finish();
+                break;
+            case R.id.button_refresh:
+                refresh();
                 break;
             default:
                 break;
@@ -154,7 +248,7 @@ public class LookCheckInDetailActivity extends BaseFragmentActivity implements O
     protected void onDestroy() {
         super.onDestroy();
         pieChart = null;
-        mCheckInResult = null;
+        sCheckInResult = null;
         mAdapter.release();
         mAdapter = null;
     }
@@ -162,11 +256,10 @@ public class LookCheckInDetailActivity extends BaseFragmentActivity implements O
     /**
      * start this activity
      */
-    private static final String DATA_CHECKIN_RESULT = "data_checkin_result";
 
     public static void start(Context context, CheckInResult checkInResult) {
         Intent intent = new Intent(context, LookCheckInDetailActivity.class);
-        intent.putExtra(DATA_CHECKIN_RESULT, checkInResult);
         context.startActivity(intent);
+        sCheckInResult = checkInResult;
     }
 }

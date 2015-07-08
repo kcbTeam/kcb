@@ -123,11 +123,19 @@ public class UrlUtil {
         return url_tch_checkin_start + "?tchid=" + id + "&num=" + num;
     }
 
-    // 2.2 get checkin result
+    // 2.2 查看签到结果
     private static final String url_tch_checkin_getresult = IP + "/v1/tch/checkin/getresult";
 
-    public static String getTchCheckinGetresultUrl(String id) {
-        return url_tch_checkin_getresult + "?tchid=" + id;
+    public static String getTchCheckinGetresultUrl(String tchId, long date) {
+        return url_tch_checkin_getresult + "?tchid=" + tchId + "&date=" + date;
+    }
+
+    // 2.3 查看签到结果详情
+    private static final String url_tch_checkin_getresultdetail = IP
+            + "/v1/tch/checkin/getresultdetail";
+
+    public static String getTchCheckinGetResultDetailUrl(String tchId, long date) {
+        return url_tch_checkin_getresultdetail + "?tchid=" + tchId + "&date=" + date;
     }
 
     /**
