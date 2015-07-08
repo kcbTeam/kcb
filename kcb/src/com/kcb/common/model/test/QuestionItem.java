@@ -30,7 +30,7 @@ public class QuestionItem implements Serializable {
     private String mText = "";
     private Bitmap mBitmap;
     private String mBitmapPath;
-    private String mBitmapString;
+    private String mBitmapString; // TODO 修改上传测试的方式后，应该不需要此字段了
 
     private boolean mIsRight; // useful when item is choice
     private boolean mIsSelected; // used in stu module, useful when item is choice, true if stu
@@ -174,11 +174,11 @@ public class QuestionItem implements Serializable {
             jsonObject.put(KEY_ID, mId);
             jsonObject.put(KEY_ISTEXT, mIsText);
             jsonObject.put(KEY_TEXT, mText);
-            if (toServer && !TextUtils.isEmpty(mBitmapPath)) {
-                jsonObject.put(KEY_BITMAPSTRING, getBitmapString());
-            } else {
-                jsonObject.put(KEY_BITMAPSTRING, "");
-            }
+            // if (toServer && !TextUtils.isEmpty(mBitmapPath)) {
+            // jsonObject.put(KEY_BITMAPSTRING, getBitmapString());
+            // } else {
+            // jsonObject.put(KEY_BITMAPSTRING, "");
+            // }
             jsonObject.put(KEY_BITMAPPATH, mBitmapPath);
             jsonObject.put(KEY_ISRIGHT, mIsRight);
             jsonObject.put(KEY_ISSELECTED, mIsSelected);

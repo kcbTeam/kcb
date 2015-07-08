@@ -2,7 +2,6 @@ package com.kcb.teacher.fragment;
 
 import java.util.List;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Intent;
@@ -17,10 +16,10 @@ import com.android.volley.Request.Method;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.kcb.common.base.BaseFragment;
 import com.kcb.common.listener.DelayClickListener;
 import com.kcb.common.model.test.Test;
+import com.kcb.common.server.MultipartRequest;
 import com.kcb.common.server.RequestUtil;
 import com.kcb.common.server.ResponseUtil;
 import com.kcb.common.server.UrlUtil;
@@ -35,7 +34,6 @@ import com.kcb.teacher.activity.test.LookTestActivity;
 import com.kcb.teacher.activity.test.SetTestNameActivity;
 import com.kcb.teacher.activity.test.SetTestTimeActivity;
 import com.kcb.teacher.database.test.TestDao;
-import com.kcb.teacher.model.account.KAccount;
 import com.kcbTeam.R;
 
 /**
@@ -107,9 +105,9 @@ public class TestFragment extends BaseFragment {
         }
     };
 
-    //TODO 更改图片上传方式
+    // TODO 更改图片上传方式
     // 改成 entity
-    
+
     // 判断是否有未完成的测试
     private void startTest() {
         if (startProgressBar.getVisibility() == View.VISIBLE) {
@@ -133,10 +131,6 @@ public class TestFragment extends BaseFragment {
         }
     }
 
-    // request
-    private final String KEY_ID = "tchid";
-    private final String KEY_TEST = "test";
-
     // response
     private final String KEY_DATE = "date";
     private final String KEY_TESTID = "testid";
@@ -153,25 +147,24 @@ public class TestFragment extends BaseFragment {
 
                     @Override
                     public void run() {
-                        // TODO 参数放在请求体里面
-                        JSONObject jsonObject2 = new JSONObject();
+                        // // TODO 参数放在请求体里面
+                        // JSONObject jsonObject2 = new JSONObject();
+                        //
+                        // JSONObject requestObject = new JSONObject();
+                        // try {
+                        // requestObject.put(KEY_ID, KAccount.getAccountId());
+                        // test.setQuestionId();
+                        // requestObject.put(KEY_TEST, test.toJsonObject(true));
+                        //
+                        // jsonObject2.put("data", requestObject);
+                        // } catch (JSONException e) {}
 
-                        JSONObject requestObject = new JSONObject();
-                        try {
-                            requestObject.put(KEY_ID, KAccount.getAccountId());
-                            test.setQuestionId();
-                            requestObject.put(KEY_TEST, test.toJsonObject(true));
+                        // LogUtil.i(TAG, "tch start test, request body is " +
+                        // jsonObject2.toString());
 
-                            jsonObject2.put("data", requestObject);
-                        } catch (JSONException e) {}
-                        
-                        LogUtil.i(TAG, "tch start test, request body is "+jsonObject2.toString());
-
-                        //TODO post 返回 500
-                        JsonObjectRequest request =
-                                new JsonObjectRequest(Method.POST,
-                                        UrlUtil.getTchTestStartUrl(requestObject), new JSONObject(),
-                                        new Listener<JSONObject>() {
+                        MultipartRequest request2 =
+                                new MultipartRequest(Method.POST, UrlUtil.getTchTestStartUrl(),
+                                        test.toHttpEntity(), new Listener<JSONObject>() {
 
                                             @Override
                                             public void onResponse(JSONObject response) {
@@ -200,22 +193,38 @@ public class TestFragment extends BaseFragment {
                                                         startProgressBar.hide(getActivity());
                                                     }
                                                 });
+
                                             }
                                         }, new ErrorListener() {
 
                                             @Override
-                                            public void onErrorResponse(final VolleyError error) {
-                                                getActivity().runOnUiThread(new Runnable() {
-
-                                                    @Override
-                                                    public void run() {
-                                                        startProgressBar.hide(getActivity());
-                                                        ResponseUtil.toastError(error);
-                                                    }
-                                                });
+                                            public void onErrorResponse(VolleyError error) {
+                                                startProgressBar.hide(getActivity());
+                                                ResponseUtil.toastError(error);
                                             }
                                         });
-                        RequestUtil.getInstance().addToRequestQueue(request, TAG);
+
+
+                        // TODO post 返回 500
+                        // JsonObjectRequest request =
+                        // new JsonObjectRequest(Method.POST,
+                        // UrlUtil.getTchTestStartUrl(requestObject),
+                        // new JSONObject(), new Listener<JSONObject>() {
+                        //
+                        // @Override
+                        // public void onResponse(JSONObject response) {}
+                        // }, new ErrorListener() {
+                        //
+                        // @Override
+                        // public void onErrorResponse(final VolleyError error) {
+                        // getActivity().runOnUiThread(new Runnable() {
+                        //
+                        // @Override
+                        // public void run() {}
+                        // });
+                        // }
+                        // });
+                        RequestUtil.getInstance().addToRequestQueue(request2, TAG);
                     }
                 }).start();
             }

@@ -101,31 +101,26 @@ public class EditQuestionView extends LinearLayout implements OnClickListener, O
         titleEditText.setOnLongClickListener(this);
         titleImageView = (ImageView) findViewById(R.id.imageview_title);
         titleImageView.setOnClickListener(this);
-        titleImageView.setOnLongClickListener(this);
 
         aEditText = (EditText) findViewById(R.id.edittext_A);
         aEditText.setOnLongClickListener(this);
         aImageView = (ImageView) findViewById(R.id.imageview_A);
         aImageView.setOnClickListener(this);
-        aImageView.setOnLongClickListener(this);
 
         bEditText = (EditText) findViewById(R.id.edittext_B);
         bEditText.setOnLongClickListener(this);
         bImageView = (ImageView) findViewById(R.id.imageview_B);
         bImageView.setOnClickListener(this);
-        bImageView.setOnLongClickListener(this);
 
         cEditText = (EditText) findViewById(R.id.edittext_C);
         cEditText.setOnLongClickListener(this);
         cImageView = (ImageView) findViewById(R.id.imageview_C);
         cImageView.setOnClickListener(this);
-        cImageView.setOnLongClickListener(this);
 
         dEditText = (EditText) findViewById(R.id.edittext_D);
         dEditText.setOnLongClickListener(this);
         dImageView = (ImageView) findViewById(R.id.imageview_D);
         dImageView.setOnClickListener(this);
-        dImageView.setOnLongClickListener(this);
 
         checkBoxA = (CheckBox) findViewById(R.id.checkBox_A);
         checkBoxB = (CheckBox) findViewById(R.id.checkBox_B);
@@ -324,23 +319,18 @@ public class EditQuestionView extends LinearLayout implements OnClickListener, O
     public boolean onLongClick(View v) {
         switch (v.getId()) {
             case R.id.edittext_title:
-            case R.id.imageview_title:
                 mLongClickTag = FLAG_TITLE;
                 break;
             case R.id.edittext_A:
-            case R.id.imageview_A:
                 mLongClickTag = FLAG_A;
                 break;
             case R.id.edittext_B:
-            case R.id.imageview_B:
                 mLongClickTag = FLAG_B;
                 break;
             case R.id.edittext_C:
-            case R.id.imageview_C:
                 mLongClickTag = FLAG_C;
                 break;
             case R.id.edittext_D:
-            case R.id.imageview_D:
                 mLongClickTag = FLAG_D;
                 break;
             default:

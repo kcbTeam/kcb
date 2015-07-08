@@ -28,14 +28,15 @@ public class Question implements Serializable {
 
     public Question() {
         mTitleItem = new QuestionItem();
+        mTitleItem.setId(0);
         mChoiceAItem = new QuestionItem();
-        mChoiceAItem.setId(0);
+        mChoiceAItem.setId(1);
         mChoiceBItem = new QuestionItem();
-        mChoiceBItem.setId(1);
+        mChoiceBItem.setId(2);
         mChoiceCItem = new QuestionItem();
-        mChoiceCItem.setId(2);
+        mChoiceCItem.setId(3);
         mChoiceDItem = new QuestionItem();
-        mChoiceDItem.setId(3);
+        mChoiceDItem.setId(4);
     }
 
     public static Question clone(Question object) {

@@ -3,11 +3,15 @@ package com.kcb.common.model.test;
 import java.io.File;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.entity.mime.HttpMultipartMode;
+import org.apache.http.entity.mime.MultipartEntity;
+import org.apache.http.entity.mime.content.FileBody;
+import org.apache.http.entity.mime.content.StringBody;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -15,6 +19,7 @@ import org.json.JSONObject;
 import com.kcb.common.model.answer.QuestionAnswer;
 import com.kcb.common.model.answer.TestAnswer;
 import com.kcb.student.util.FileUtil;
+import com.kcb.teacher.model.account.KAccount;
 
 public class Test implements Serializable {
 
@@ -168,6 +173,54 @@ public class Test implements Serializable {
     private static final String KEY_HASTESTED = "hastested";
     private static final String KEY_QUESTION = "question";
 
+    public HttpEntity toHttpEntity() {
+        final String KEY_ID = "tchid";
+        final String KEY_TEST = "test";
+
+        JSONObject requestObject = new JSONObject();
+        try {
+            requestObject.put(KEY_ID, KAccount.getAccountId());
+            setQuestionId();
+            requestObject.put(KEY_TEST, toJsonObject(true));
+        } catch (JSONException e) {}
+
+        MultipartEntity entity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
+        try {
+            entity.addPart("data", new StringBody(requestObject.toString()));
+        } catch (UnsupportedEncodingException e) {
+        }
+
+        for (int i = 0; i < mQuestions.size(); i++) {
+            Question question = mQuestions.get(i);
+            if (!question.getTitle().isText()) {
+                entity.addPart("question_" + question.getId() + "_item_"
+                        + question.getTitle().getId(), new FileBody(new File(question.getTitle()
+                        .getBitmapPath())));
+            }
+            if (!question.getChoiceA().isText()) {
+                entity.addPart("question_" + question.getId() + "_item_"
+                        + question.getChoiceA().getId(), new FileBody(new File(question
+                        .getChoiceA().getBitmapPath())));
+            }
+            if (!question.getChoiceB().isText()) {
+                entity.addPart("question_" + question.getId() + "_item_"
+                        + question.getChoiceB().getId(), new FileBody(new File(question
+                        .getChoiceB().getBitmapPath())));
+            }
+            if (!question.getChoiceC().isText()) {
+                entity.addPart("question_" + question.getId() + "_item_"
+                        + question.getChoiceC().getId(), new FileBody(new File(question
+                        .getChoiceC().getBitmapPath())));
+            }
+            if (!question.getChoiceD().isText()) {
+                entity.addPart("question_" + question.getId() + "_item_"
+                        + question.getChoiceD().getId(), new FileBody(new File(question
+                        .getChoiceD().getBitmapPath())));
+            }
+        }
+        return entity;
+    }
+
     /**
      * 发送到服务器的JsonObject包括的是图片String，保存到数据库的JsonObject包括的是图片的路径。
      */
@@ -176,9 +229,9 @@ public class Test implements Serializable {
         try {
             jsonObject.put(KEY_ID, mId);
 
-//            jsonObject.put(KEY_NAME, mName);
-            jsonObject.put(KEY_NAME, getUTF8XMLString(mName));
-            
+            jsonObject.put(KEY_NAME, mName);
+            // jsonObject.put(KEY_NAME, getUTF8XMLString(mName));
+
             jsonObject.put(KEY_TIME, mTime);
             jsonObject.put(KEY_DATE, mDate);
             jsonObject.put(KEY_HASTESTED, mHasTested);
@@ -199,23 +252,23 @@ public class Test implements Serializable {
      * 
      * @return XML-Formed string
      */
-    public static String getUTF8XMLString(String xml) {
-        // A StringBuffer Object
-        StringBuffer sb = new StringBuffer();
-        sb.append(xml);
-        String xmString = "";
-        String xmlUTF8 = "";
-        try {
-            xmString = new String(sb.toString().getBytes("UTF-8"));
-            xmlUTF8 = URLEncoder.encode(xmString, "UTF-8");
-            System.out.println("utf-8 编码：" + xmlUTF8);
-        } catch (UnsupportedEncodingException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        // return to String Formed
-        return xmlUTF8;
-    }
+    // public static String getUTF8XMLString(String xml) {
+    // // A StringBuffer Object
+    // StringBuffer sb = new StringBuffer();
+    // sb.append(xml);
+    // String xmString = "";
+    // String xmlUTF8 = "";
+    // try {
+    // xmString = new String(sb.toString().getBytes("UTF-8"));
+    // xmlUTF8 = URLEncoder.encode(xmString, "UTF-8");
+    // System.out.println("utf-8 编码：" + xmlUTF8);
+    // } catch (UnsupportedEncodingException e) {
+    // // TODO Auto-generated catch block
+    // e.printStackTrace();
+    // }
+    // // return to String Formed
+    // return xmlUTF8;
+    // }
 
     public static Test fromJsonObject(JSONObject jsonObject) {
         Test test = new Test();
