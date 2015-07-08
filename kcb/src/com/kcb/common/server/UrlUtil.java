@@ -74,8 +74,15 @@ public class UrlUtil {
     // 3.2 end test
     private static final String url_stu_test_end = IP + "/v1/stu/test/finish";
 
-    public static String getStuTestFinishUrl() { // TODO, set answer
+    public static String getStuTestFinishUrl() {
         return url_stu_test_end;
+    }
+
+    // 3.3 查看测试结果
+    private static final String url_stu_test_lookresult = IP + "/v1/stu/test/lookresult";
+
+    public static String getStuTestLookResultUrl() {
+        return url_stu_test_lookresult;
     }
 
     /**
@@ -126,14 +133,21 @@ public class UrlUtil {
     /**
      * **********3, test**********
      */
-    // 3.1 start test
+    // 3.1 检测有没有正在进行的测试
+    private static final String url_tch_test_detect = IP + "/v1/tch/test/detect";
+
+    public static String getTchTestDetectUrl(String tchId) {
+        return url_tch_test_detect + "?tchid=" + tchId;
+    }
+
+    // 3.2 start test
     private static final String url_tch_test_start = IP + "/v1/tch/test/start";
 
     public static String getTchTestStartUrl() {
         return url_tch_test_start;
     }
 
-    // 3.2 look test result
+    // 3.3 look test result
     private static final String url_tch_test_lookresult = IP + "/v1/tch/test/lookresult";
 
     public static String getTchTestLookresultUrl(String id) {

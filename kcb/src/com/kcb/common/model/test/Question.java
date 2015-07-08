@@ -18,7 +18,7 @@ public class Question implements Serializable {
     private static final long serialVersionUID = 2L;
 
     private int mId; // from client
-    private double mRate;
+    private double mRate; // 此题的正确率
 
     private QuestionItem mTitleItem;
     private QuestionItem mChoiceAItem;

@@ -46,10 +46,11 @@ public class TestDao {
         return count > 0;
     }
 
-    public List<String> getAllTestName() {
+    public List<String> getUnStartTestName() {
         Cursor cursor =
-                mDatabase.query(TestTable.TABLE_NAME, new String[] {TestTable.COLUMN_NAME}, null,
-                        null, null, null, null);
+                mDatabase.query(TestTable.TABLE_NAME, new String[] {TestTable.COLUMN_NAME},
+                        TestTable.COLUMN_HASTESTED + "=?", new String[] {String.valueOf(false)},
+                        null, null, null);
         List<String> names = new ArrayList<String>();
         if (null != cursor) {
             try {

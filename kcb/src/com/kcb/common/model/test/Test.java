@@ -187,8 +187,7 @@ public class Test implements Serializable {
         MultipartEntity entity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
         try {
             entity.addPart("data", new StringBody(requestObject.toString()));
-        } catch (UnsupportedEncodingException e) {
-        }
+        } catch (UnsupportedEncodingException e) {}
 
         for (int i = 0; i < mQuestions.size(); i++) {
             Question question = mQuestions.get(i);

@@ -16,6 +16,7 @@ import com.android.volley.Request.Method;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.kcb.common.base.BaseFragment;
 import com.kcb.common.listener.DelayClickListener;
 import com.kcb.common.model.test.Test;
@@ -34,6 +35,7 @@ import com.kcb.teacher.activity.test.LookTestActivity;
 import com.kcb.teacher.activity.test.SetTestNameActivity;
 import com.kcb.teacher.activity.test.SetTestTimeActivity;
 import com.kcb.teacher.database.test.TestDao;
+import com.kcb.teacher.model.account.KAccount;
 import com.kcbTeam.R;
 
 /**
@@ -90,7 +92,8 @@ public class TestFragment extends BaseFragment {
         public void doClick(View v) {
             switch (v.getId()) {
                 case R.id.button_start:
-                    startTest();
+                    // 判断是否有未结束的测试，如果有，不能开始一个新的测试
+                    detectTest();
                     break;
                 case R.id.button_edit:
                     addOrEditTest();
@@ -105,15 +108,46 @@ public class TestFragment extends BaseFragment {
         }
     };
 
-    // TODO 更改图片上传方式
-    // 改成 entity
+    /**
+     * 检测是否有正在进行的测试
+     */
+    private void detectTest() {
+        if (startProgressBar.getVisibility() == View.VISIBLE) {
+            return;
+        }
+        startProgressBar.setVisibility(View.VISIBLE);
+        StringRequest request =
+                new StringRequest(Method.GET, UrlUtil.getTchTestDetectUrl(KAccount.getAccountId()),
+                        new Listener<String>() {
 
-    // 判断是否有未完成的测试
+                            @Override
+                            public void onResponse(String response) {
+                                startProgressBar.hide(getActivity());
+                                if ("true".equals(response)) { // 有正在进行的测试
+                                    ToastUtil.toast("有正在进行的测试");
+                                } else {
+                                    startTest();
+                                }
+                            }
+                        }, new ErrorListener() {
+
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                startProgressBar.hide(getActivity());
+                                ResponseUtil.toastError(error);
+                            }
+                        });
+        RequestUtil.getInstance().addToRequestQueue(request, TAG);
+    }
+
+    /**
+     * 显示可以开始的测试列表，供用户选择后开始
+     */
     private void startTest() {
         if (startProgressBar.getVisibility() == View.VISIBLE) {
             return;
         }
-        final List<String> names = getTestNames();
+        final List<String> names = getUnStartTestNames();
         if (names.isEmpty()) {
             ToastUtil.toast(R.string.tch_add_test_first);
         } else {
@@ -135,7 +169,9 @@ public class TestFragment extends BaseFragment {
     private final String KEY_DATE = "date";
     private final String KEY_TESTID = "testid";
 
-    // 需要将测试中的图片转成String，如果图片过多，在创建request的时候也会阻塞UI线程，所以都需要在新的线程中做这些耗时操作。
+    /**
+     * 将选择的测试发送到后台
+     */
     private void sendTestToServer(final Test test) {
         OnClickListener sureListener = new View.OnClickListener() {
 
@@ -143,90 +179,75 @@ public class TestFragment extends BaseFragment {
             public void onClick(View v) {
                 startProgressBar.setVisibility(View.VISIBLE);
 
-                new Thread(new Runnable() {
+                // // TODO 参数放在请求体里面
+                // JSONObject jsonObject2 = new JSONObject();
+                //
+                // JSONObject requestObject = new JSONObject();
+                // try {
+                // requestObject.put(KEY_ID, KAccount.getAccountId());
+                // test.setQuestionId();
+                // requestObject.put(KEY_TEST, test.toJsonObject(true));
+                //
+                // jsonObject2.put("data", requestObject);
+                // } catch (JSONException e) {}
 
-                    @Override
-                    public void run() {
-                        // // TODO 参数放在请求体里面
-                        // JSONObject jsonObject2 = new JSONObject();
-                        //
-                        // JSONObject requestObject = new JSONObject();
-                        // try {
-                        // requestObject.put(KEY_ID, KAccount.getAccountId());
-                        // test.setQuestionId();
-                        // requestObject.put(KEY_TEST, test.toJsonObject(true));
-                        //
-                        // jsonObject2.put("data", requestObject);
-                        // } catch (JSONException e) {}
+                // LogUtil.i(TAG, "tch start test, request body is " +
+                // jsonObject2.toString());
 
-                        // LogUtil.i(TAG, "tch start test, request body is " +
-                        // jsonObject2.toString());
+                MultipartRequest request2 =
+                        new MultipartRequest(Method.POST, UrlUtil.getTchTestStartUrl(),
+                                test.toHttpEntity(), new Listener<JSONObject>() {
 
-                        MultipartRequest request2 =
-                                new MultipartRequest(Method.POST, UrlUtil.getTchTestStartUrl(),
-                                        test.toHttpEntity(), new Listener<JSONObject>() {
+                                    @Override
+                                    public void onResponse(JSONObject response) {
+                                        LogUtil.i(TAG, "tch start test, response is " + response);
+                                        long date = response.optLong(KEY_DATE);
+                                        String testId = response.optString(KEY_TESTID);
+                                        LogUtil.i(TAG, "tch start test, get date is " + date);
+                                        LogUtil.i(TAG, "tch start test, get testId is " + testId);
 
-                                            @Override
-                                            public void onResponse(JSONObject response) {
-                                                LogUtil.i(TAG, "tch start test, response is "
-                                                        + response);
-                                                long date = response.optLong(KEY_DATE);
-                                                String testId = response.optString(KEY_TESTID);
-                                                LogUtil.i(TAG, "tch start test, get date is "
-                                                        + date);
-                                                LogUtil.i(TAG, "tch start test, get testId is "
-                                                        + testId);
+                                        TestDao testDao = new TestDao(getActivity());
 
-                                                TestDao testDao = new TestDao(getActivity());
+                                        test.setHasTested(true);
+                                        test.setDate(date);
+                                        test.setId(testId);
 
-                                                test.setHasTested(true);
-                                                test.setDate(date);
-                                                test.setId(testId);
+                                        testDao.update(test);
+                                        testDao.close();
 
-                                                testDao.update(test);
-                                                testDao.close();
-                                                getActivity().runOnUiThread(new Runnable() {
+                                        ToastUtil.toast(R.string.tch_test_started);
+                                        startProgressBar.hide(getActivity());
+                                    }
+                                }, new ErrorListener() {
 
-                                                    @Override
-                                                    public void run() {
-                                                        ToastUtil.toast(R.string.tch_test_started);
-                                                        startProgressBar.hide(getActivity());
-                                                    }
-                                                });
-
-                                            }
-                                        }, new ErrorListener() {
-
-                                            @Override
-                                            public void onErrorResponse(VolleyError error) {
-                                                startProgressBar.hide(getActivity());
-                                                ResponseUtil.toastError(error);
-                                            }
-                                        });
+                                    @Override
+                                    public void onErrorResponse(VolleyError error) {
+                                        startProgressBar.hide(getActivity());
+                                        ResponseUtil.toastError(error);
+                                    }
+                                });
 
 
-                        // TODO post 返回 500
-                        // JsonObjectRequest request =
-                        // new JsonObjectRequest(Method.POST,
-                        // UrlUtil.getTchTestStartUrl(requestObject),
-                        // new JSONObject(), new Listener<JSONObject>() {
-                        //
-                        // @Override
-                        // public void onResponse(JSONObject response) {}
-                        // }, new ErrorListener() {
-                        //
-                        // @Override
-                        // public void onErrorResponse(final VolleyError error) {
-                        // getActivity().runOnUiThread(new Runnable() {
-                        //
-                        // @Override
-                        // public void run() {}
-                        // });
-                        // }
-                        // });
-                        RequestUtil.getInstance().addToRequestQueue(request2, TAG);
-                    }
-                }).start();
+                // TODO post 返回 500
+                // JsonObjectRequest request =
+                // new JsonObjectRequest(Method.POST,
+                // UrlUtil.getTchTestStartUrl(requestObject),
+                // new JSONObject(), new Listener<JSONObject>() {
+                //
+                // @Override
+                // public void onResponse(JSONObject response) {}
+                // }, new ErrorListener() {
+                //
+                // @Override
+                // public void onErrorResponse(final VolleyError error) {
+                // getActivity().runOnUiThread(new Runnable() {
+                //
+                // @Override
+                // public void run() {}
+                // });
+                // }
+                // });
+                RequestUtil.getInstance().addToRequestQueue(request2, TAG);
             }
         };
         DialogUtil.showNormalDialog(
@@ -238,7 +259,7 @@ public class TestFragment extends BaseFragment {
     }
 
     private void addOrEditTest() {
-        final List<String> names = getTestNames();
+        final List<String> names = getUnStartTestNames();
         names.add(0, getString(R.string.tch_add_new_test));
         MaterialListDialog dialog =
                 DialogUtil.showListDialog(getActivity(), R.string.tch_edit_test, names,
@@ -261,9 +282,9 @@ public class TestFragment extends BaseFragment {
         dialog.enableAddOrEditMode();
     }
 
-    private List<String> getTestNames() {
+    private List<String> getUnStartTestNames() {
         TestDao testDao = new TestDao(getActivity());
-        List<String> names = testDao.getAllTestName();
+        List<String> names = testDao.getUnStartTestName();
         testDao.close();
         return names;
     }
