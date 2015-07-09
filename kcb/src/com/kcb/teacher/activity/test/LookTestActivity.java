@@ -174,9 +174,14 @@ public class LookTestActivity extends BaseActivity implements OnSearchListener, 
             return;
         }
         progressBar.setVisibility(View.VISIBLE);
+        // 获取此时间戳之后的测试
+        long date = 0;
+        if (mAdapter.getCount() > 0) {
+            date = mAdapter.getItem(0).getDate();
+        }
         JsonArrayRequest request =
-                new JsonArrayRequest(Method.GET, UrlUtil.getTchTestLookresultUrl(KAccount
-                        .getAccountId()), new Listener<JSONArray>() {
+                new JsonArrayRequest(Method.GET, UrlUtil.getTchTestLookresultUrl(
+                        KAccount.getAccountId(), date), new Listener<JSONArray>() {
 
                     @Override
                     public void onResponse(JSONArray response) {

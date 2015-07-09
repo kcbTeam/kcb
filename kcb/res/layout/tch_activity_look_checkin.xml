@@ -18,9 +18,7 @@
             style="@style/common_title"
             android:text="@string/tch_look_checkin_result" />
 
-        <include
-            layout="@layout/comm_button_refresh"
-            android:visibility="gone" />
+        <include layout="@layout/comm_button_refresh" />
     </LinearLayout>
 
     <com.kcb.library.view.smoothprogressbar.SmoothProgressBar

@@ -158,8 +158,8 @@ public class UrlUtil {
     // 3.3 look test result
     private static final String url_tch_test_lookresult = IP + "/v1/tch/test/lookresult";
 
-    public static String getTchTestLookresultUrl(String id) {
-        return url_tch_test_lookresult + "?tchid=" + id;
+    public static String getTchTestLookresultUrl(String id, long date) {
+        return url_tch_test_lookresult + "?tchid=" + id + "&date=" + date;
     }
 
     /**
