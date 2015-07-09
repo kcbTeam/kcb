@@ -34,7 +34,8 @@
     <string name="tch_add_test_first">请先添加一个测试</string>
     <string name="tch_select_test">选择测试</string>
     <string name="tch_start_test_tip">本次测试的名称为——%1$s，包括 %2$d 道题，时间为 %3$d 分钟。\n\n如果题目中图片较多，上传题目会较慢，请耐心等待。</string>
-    <string name="tch_test_started">测试已经开始了</string>
+    <string name="tch_has_starting_test">有一个正在进行的测试</string>
+    <string name="tch_test_started">测试已开始，结束后可查看结果</string>
     <string name="tch_add_or_edit_test">添加 / 编辑测试</string>
     <string name="tch_edit_test">编辑测试</string>
     <string name="tch_add_new_test">添加一个新测试</string>

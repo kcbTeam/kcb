@@ -27,8 +27,8 @@ import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
 import com.kcb.teacher.adapter.checkin.LookCheckInAdapter;
 import com.kcb.teacher.database.checkin.CheckInDao;
-import com.kcb.teacher.model.account.KAccount;
-import com.kcb.teacher.model.checkin.CheckInResult;
+import com.kcb.teacher.database.checkin.CheckInResult;
+import com.kcb.teacher.model.KAccount;
 import com.kcbTeam.R;
 
 /**

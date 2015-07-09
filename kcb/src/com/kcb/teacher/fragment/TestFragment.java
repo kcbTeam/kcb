@@ -35,7 +35,7 @@ import com.kcb.teacher.activity.test.LookTestActivity;
 import com.kcb.teacher.activity.test.SetTestNameActivity;
 import com.kcb.teacher.activity.test.SetTestTimeActivity;
 import com.kcb.teacher.database.test.TestDao;
-import com.kcb.teacher.model.account.KAccount;
+import com.kcb.teacher.model.KAccount;
 import com.kcbTeam.R;
 
 /**
@@ -124,7 +124,7 @@ public class TestFragment extends BaseFragment {
                             public void onResponse(String response) {
                                 startProgressBar.hide(getActivity());
                                 if ("true".equals(response)) { // 有正在进行的测试
-                                    ToastUtil.toast("有正在进行的测试");
+                                    ToastUtil.toast(R.string.tch_has_starting_test);
                                 } else {
                                     startTest();
                                 }

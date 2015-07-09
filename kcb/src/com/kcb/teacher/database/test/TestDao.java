@@ -31,6 +31,9 @@ public class TestDao {
         mDatabase = mOpenHelper.getWritableDatabase();
     }
 
+    /**
+     * 是否有这个测试了，如果有，不能添加重名的测试；
+     */
     public boolean hasTest(String testName) {
         Cursor cursor =
                 mDatabase.query(TestTable.TABLE_NAME, null, TestTable.COLUMN_NAME + "=?",
@@ -46,6 +49,9 @@ public class TestDao {
         return count > 0;
     }
 
+    /**
+     * 获取为开始的测试，可以用来开始、编辑
+     */
     public List<String> getUnStartTestName() {
         Cursor cursor =
                 mDatabase.query(TestTable.TABLE_NAME, new String[] {TestTable.COLUMN_NAME},
@@ -65,6 +71,11 @@ public class TestDao {
         return names;
     }
 
+    /**
+     * 编辑测试后，保存到数据库；
+     * 查看测试结果，保存到数据库；
+     * 每次开始一个测试后，删除此测试，之后，此测试只能通过查看测试结果页面刷新出来；
+     */
     public void add(Test test) {
         mDatabase.insert(TestTable.TABLE_NAME, null, getTestContentValues(test));
     }

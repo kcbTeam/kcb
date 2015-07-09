@@ -27,7 +27,7 @@ import com.kcb.teacher.database.test.TestDao;
 import com.kcb.teacher.fragment.CheckInFragment;
 import com.kcb.teacher.fragment.StuCentreFragment;
 import com.kcb.teacher.fragment.TestFragment;
-import com.kcb.teacher.model.account.KAccount;
+import com.kcb.teacher.model.KAccount;
 import com.kcbTeam.R;
 
 /**

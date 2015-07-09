@@ -32,6 +32,6 @@ public class AccountUtil {
     }
 
     public static boolean hasAccount() {
-        return KAccount.hasAccount() || com.kcb.teacher.model.account.KAccount.hasAccount();
+        return KAccount.hasAccount() || com.kcb.teacher.model.KAccount.hasAccount();
     }
 }

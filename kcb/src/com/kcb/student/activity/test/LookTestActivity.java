@@ -100,7 +100,7 @@ public class LookTestActivity extends BaseActivity implements OnSearchListener, 
     @Override
     protected void initData() {
         TestDao testDao = new TestDao(LookTestActivity.this);
-        mAllTests = testDao.getTerminatedTests();
+        mAllTests = testDao.getAll();
         testDao.close();
 
         if (mAllTests.isEmpty()) {
@@ -175,7 +175,7 @@ public class LookTestActivity extends BaseActivity implements OnSearchListener, 
     }
 
     /**
-     * 刷新，根据学号、本地保存的最近一次测试时间戳获取测试；
+     * 刷新，根据学号、本地保存的最近一次测试时间戳获取测试； 将获取到的内容存到数据库，刷新UI；
      */
     private void refresh() {
         if (progressBar.getVisibility() == View.VISIBLE) {
@@ -191,16 +191,22 @@ public class LookTestActivity extends BaseActivity implements OnSearchListener, 
                         KAccount.getAccountId(), date), new Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
+                        // 获取测试，并存到数据库中；
                         List<Test> tests = new ArrayList<Test>();
+                        TestDao testDao = new TestDao(LookTestActivity.this);
                         for (int i = 0; i < response.length(); i++) {
                             Test test = Test.fromJsonObject(response.optJSONObject(i));
                             tests.add(test);
+                            testDao.add(test);
                         }
+                        testDao.close();
+                        // 刷新UI；
                         if (!tests.isEmpty()) {
                             mAllTests.addAll(tests);
                             mSearchedTests.clear();
                             mSearchedTests.addAll(mAllTests);
                             mAdapter.notifyDataSetChanged();
+                            searchEditText.setText(""); // 清空搜索框内容
                             listTitleLayout.setVisibility(View.VISIBLE);
                         }
                         progressBar.hide(LookTestActivity.this);

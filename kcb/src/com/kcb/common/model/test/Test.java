@@ -20,7 +20,8 @@ import org.json.JSONObject;
 import com.kcb.common.model.answer.QuestionAnswer;
 import com.kcb.common.model.answer.TestAnswer;
 import com.kcb.student.util.FileUtil;
-import com.kcb.teacher.model.account.KAccount;
+import com.kcb.teacher.database.test.QuestionResult;
+import com.kcb.teacher.model.KAccount;
 
 public class Test implements Serializable {
 
@@ -164,6 +165,17 @@ public class Test implements Serializable {
         }
     }
 
+    /**
+     * 请求单个测试的结果，设置
+     */
+    public void setQuestionResult(QuestionResult result) {
+        for (Question question : mQuestions) {
+            if (question.getId() == result.getId()) {
+                question.setRate(result.getRate());
+            }
+        }
+    }
+
     @Override
     public String toString() {
         return toJsonObject().toString();
@@ -176,6 +188,25 @@ public class Test implements Serializable {
             questionArray.put(mQuestions.get(i).toJsonObject());
         }
         return questionArray.toString();
+    }
+
+    /**
+     * 删除一个测试的时候，要把此与此测试相关的图片删除
+     */
+    public void deleteBitmap() {
+        for (int i = 0; i < mQuestions.size(); i++) {
+            mQuestions.get(i).deleteBitmap();
+        }
+        new File(FileUtil.getTestPath(mName)).delete();
+    }
+
+    /**
+     * 当删除一个测试中的一个题目的时候，需要重新命名保存的图片名称； 因为图片名称和题目id有关，而删除题目后，题目的id会变化； 题目id从0开始递增；
+     */
+    public void renameBitmap() {
+        for (int i = 0; i < mQuestions.size(); i++) {
+            mQuestions.get(i).renameBitmap(mName, i);
+        }
     }
 
     public void release() {
@@ -303,24 +334,5 @@ public class Test implements Serializable {
             } catch (JSONException e) {}
         }
         return test;
-    }
-
-    /**
-     * 删除一个测试的时候，要把此与此测试相关的图片删除
-     */
-    public void deleteBitmap() {
-        for (int i = 0; i < mQuestions.size(); i++) {
-            mQuestions.get(i).deleteBitmap();
-        }
-        new File(FileUtil.getTestPath(mName)).delete();
-    }
-
-    /**
-     * 当删除一个测试中的一个题目的时候，需要重新命名保存的图片名称； 因为图片名称和题目id有关，而删除题目后，题目的id会变化； 题目id从0开始递增；
-     */
-    public void renameBitmap() {
-        for (int i = 0; i < mQuestions.size(); i++) {
-            mQuestions.get(i).renameBitmap(mName, i);
-        }
     }
 }

@@ -111,6 +111,10 @@ public class SearchEditText extends RelativeLayout implements TextWatcher, OnCli
         }
     }
 
+    public void setText(String text) {
+        searchEditText.setText(text);
+    }
+
     public void release() {
         mListener = null;
     }

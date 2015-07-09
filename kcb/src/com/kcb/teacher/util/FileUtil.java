@@ -3,7 +3,7 @@ package com.kcb.teacher.util;
 import java.io.File;
 
 import com.kcb.common.application.KApplication;
-import com.kcb.teacher.model.account.KAccount;
+import com.kcb.teacher.model.KAccount;
 
 /**
  * 

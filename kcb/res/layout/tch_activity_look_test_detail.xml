@@ -18,7 +18,15 @@
         <TextView
             android:id="@+id/textview_test_name_num"
             style="@style/common_title" />
+
+        <include layout="@layout/comm_button_refresh" />
     </LinearLayout>
+
+    <com.kcb.library.view.smoothprogressbar.SmoothProgressBar
+        android:id="@+id/progressbar_refresh"
+        style="@style/common_title_progressbar"
+        android:layout_below="@id/layout_title"
+        android:visibility="gone" />
 
     <com.kcb.common.view.test.ShowQuestionView
         android:id="@+id/questionview"
