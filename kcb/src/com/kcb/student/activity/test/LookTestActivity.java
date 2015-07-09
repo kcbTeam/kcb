@@ -24,6 +24,7 @@ import com.kcb.common.server.RequestUtil;
 import com.kcb.common.server.UrlUtil;
 import com.kcb.common.util.StatusBarUtil;
 import com.kcb.common.util.StringMatchUtil;
+import com.kcb.common.util.ToastUtil;
 import com.kcb.common.view.common.EmptyTipView;
 import com.kcb.common.view.common.SearchEditText;
 import com.kcb.common.view.common.SearchEditText.OnSearchListener;
@@ -157,9 +158,19 @@ public class LookTestActivity extends BaseActivity implements OnSearchListener, 
         mAdapter.notifyDataSetChanged();
     }
 
+    /**
+     * 点击列表的某一项，判断测试是否结束了，如果结束了可以进入，并刷新UI； 如果没有结束，提示结束后才可查看结果；
+     * 
+     */
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        LookTestDetailActivity.start(LookTestActivity.this, mAdapter.getItem(position));
+        Test test = mAdapter.getItem(position);
+        if (test.hasEnded()) {
+            mAdapter.notifyDataSetChanged();
+            LookTestDetailActivity.start(LookTestActivity.this, mAdapter.getItem(position));
+        } else {
+            ToastUtil.toast("测试结束后才可查看结果");
+        }
     }
 
     /**
@@ -170,7 +181,6 @@ public class LookTestActivity extends BaseActivity implements OnSearchListener, 
             return;
         }
         progressBar.setVisibility(View.VISIBLE);
-        // if success, show listview title & search edittext;
         long date = 0;
         if (mAdapter.getCount() > 0) {
             date = mAdapter.getItem(0).getDate();

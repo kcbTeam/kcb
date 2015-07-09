@@ -88,6 +88,11 @@ public class Test implements Serializable {
         mHasTested = isTested;
     }
 
+    // 如果测试的结束时间 < 现在的时间，表示已经结束了
+    public boolean hasEnded() {
+        return getDate() + getTime() * 1000 < System.currentTimeMillis();
+    }
+
     public List<Question> getQuestions() {
         return mQuestions;
     }
