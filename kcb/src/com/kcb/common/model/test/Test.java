@@ -166,7 +166,7 @@ public class Test implements Serializable {
     /**
      * test to json, json to test
      */
-    private static final String KEY_ID = "id";
+    private static final String KEY_ID = "testid";
     private static final String KEY_NAME = "name";
     private static final String KEY_TIME = "time";
     private static final String KEY_DATE = "date";
@@ -280,7 +280,7 @@ public class Test implements Serializable {
         JSONArray questionArray = jsonObject.optJSONArray(KEY_QUESTION);
         for (int i = 0; i < questionArray.length(); i++) {
             try {
-                Question question = Question.fromJson(questionArray.getJSONObject(i));
+                Question question = Question.fromJsonObject(questionArray.getJSONObject(i));
                 test.mQuestions.add(question);
             } catch (JSONException e) {}
         }

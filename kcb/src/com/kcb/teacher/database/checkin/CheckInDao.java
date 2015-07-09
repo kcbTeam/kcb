@@ -25,13 +25,20 @@ public class CheckInDao {
     }
 
     public void add(CheckInResult result) {
-        mDatabase.delete(CheckInTable.TABLE_NAME, CheckInTable.COLUMN_DATE + "=?",
-                new String[] {String.valueOf(result.getDate())});
         ContentValues contentValues = new ContentValues();
         contentValues.put(CheckInTable.COLUMN_DATE, result.getDate());
         contentValues.put(CheckInTable.COLUMN_RATE, result.getRate());
         contentValues.put(CheckInTable.COLUMN_ROW_DATA, result.toString());
         mDatabase.insert(CheckInTable.TABLE_NAME, null, contentValues);
+    }
+
+    public void update(CheckInResult result) {
+        ContentValues values = new ContentValues();
+        values.put(CheckInTable.COLUMN_DATE, result.getDate());
+        values.put(CheckInTable.COLUMN_RATE, result.getRate());
+        values.put(CheckInTable.COLUMN_ROW_DATA, result.toString());
+        mDatabase.update(CheckInTable.TABLE_NAME, values, CheckInTable.COLUMN_DATE + "=?",
+                new String[] {String.valueOf(result.getDate())});
     }
 
     public List<CheckInResult> getAll() {

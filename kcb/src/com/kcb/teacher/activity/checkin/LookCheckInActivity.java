@@ -114,53 +114,61 @@ public class LookCheckInActivity extends BaseActivity implements OnItemClickList
         LookCheckInDetailActivity.start(LookCheckInActivity.this, mAdapter.getItem(position));
     }
 
+    /**
+     * 刷新，获取签到结果； 根据tchId和本地最近一次的签到时间
+     */
     private void refresh() {
         if (progressBar.getVisibility() == View.VISIBLE) {
             return;
         }
         progressBar.setVisibility(View.VISIBLE);
         JsonArrayRequest request =
-                new JsonArrayRequest(Method.GET, UrlUtil.getTchCheckinGetresultUrl(KAccount
-                        .getAccountId()), new Listener<JSONArray>() {
+                new JsonArrayRequest(Method.GET, UrlUtil.getTchCheckinGetresultUrl(
+                        KAccount.getAccountId(), mAdapter.getItem(0).getDate()),
+                        new Listener<JSONArray>() {
 
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        // get data
-                        List<CheckInResult> results = new ArrayList<CheckInResult>();
-                        for (int i = 0; i < response.length(); i++) {
-                            try {
-                                CheckInResult checkInResult =
-                                        CheckInResult.fromJsonObject(response.getJSONObject(i));
-                                results.add(checkInResult);
-                            } catch (JSONException e) {}
-                        }
+                            @Override
+                            public void onResponse(JSONArray response) {
+                                // 解析结果，保存到数据库
+                                // 因为后台查询耗时很长，所以结果中只有日期和签到率
+                                // 点击列表中的每一项后，如果本地没有数据，会在下一个页面向后台发送一次请求
+                                List<CheckInResult> results = new ArrayList<CheckInResult>();
+                                for (int i = 0; i < response.length(); i++) {
+                                    try {
+                                        CheckInResult checkInResult =
+                                                CheckInResult.fromJsonObject(response
+                                                        .getJSONObject(i));
+                                        results.add(checkInResult);
+                                    } catch (JSONException e) {}
+                                }
 
-                        // show data
-                        if (!results.isEmpty()) {
-                            listTitleLayout.setVisibility(View.VISIBLE);
-                            emptyTipView.setVisibility(View.GONE);
+                                // show data
+                                if (!results.isEmpty()) {
+                                    if (mCheckInResults.isEmpty()) {
+                                        listTitleLayout.setVisibility(View.VISIBLE);
+                                        emptyTipView.setVisibility(View.GONE);
+                                    }
 
-                            CheckInDao checkInDao = new CheckInDao(LookCheckInActivity.this);
-                            checkInDao.deleteAll();
-                            for (CheckInResult result : results) {
-                                checkInDao.add(result);
+                                    CheckInDao checkInDao =
+                                            new CheckInDao(LookCheckInActivity.this);
+                                    for (CheckInResult result : results) {
+                                        checkInDao.add(result);
+                                    }
+                                    checkInDao.close();
+
+                                    mCheckInResults.addAll(results);
+                                    mAdapter.notifyDataSetChanged();
+                                }
+                                progressBar.hide(LookCheckInActivity.this);
                             }
-                            checkInDao.close();
+                        }, new ErrorListener() {
 
-                            mCheckInResults.clear();
-                            mCheckInResults.addAll(results);
-                            mAdapter.notifyDataSetChanged();
-                        }
-                        progressBar.hide(LookCheckInActivity.this);
-                    }
-                }, new ErrorListener() {
-
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        progressBar.hide(LookCheckInActivity.this);
-                        ResponseUtil.toastError(error);
-                    }
-                });
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                progressBar.hide(LookCheckInActivity.this);
+                                ResponseUtil.toastError(error);
+                            }
+                        });
         RequestUtil.getInstance().addToRequestQueue(request, TAG);
     }
 

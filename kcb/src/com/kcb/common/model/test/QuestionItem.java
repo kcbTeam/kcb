@@ -160,6 +160,7 @@ public class QuestionItem implements Serializable {
     public static final String KEY_ISTEXT = "isText";
     public static final String KEY_TEXT = "text";
     public static final String KEY_BITMAPPATH = "bitmappath";
+    public static final String KEY_BITMAPURL = "bitmapurl";
     public static final String KEY_ISRIGHT = "isright";
     public static final String KEY_ISSELECTED = "isselected";
 
@@ -173,6 +174,7 @@ public class QuestionItem implements Serializable {
             jsonObject.put(KEY_ISTEXT, mIsText);
             jsonObject.put(KEY_TEXT, mText);
             jsonObject.put(KEY_BITMAPPATH, mBitmapPath);
+            jsonObject.put(KEY_BITMAPURL, mBitmapUrl);
             jsonObject.put(KEY_ISRIGHT, mIsRight);
             jsonObject.put(KEY_ISSELECTED, mIsSelected);
         } catch (JSONException e) {}
@@ -185,6 +187,7 @@ public class QuestionItem implements Serializable {
         item.mIsText = jsonObject.optBoolean(KEY_ISTEXT);
         item.mText = jsonObject.optString(KEY_TEXT);
         item.mBitmapPath = jsonObject.optString(KEY_BITMAPPATH);
+        item.mBitmapUrl = jsonObject.optString(KEY_BITMAPURL);
         item.mIsRight = jsonObject.optBoolean(KEY_ISRIGHT);
         item.mIsSelected = jsonObject.optBoolean(KEY_ISSELECTED);
         return item;

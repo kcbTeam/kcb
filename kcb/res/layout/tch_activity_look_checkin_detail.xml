@@ -18,7 +18,15 @@
             android:id="@+id/textview_date"
             style="@style/common_title"
             android:text="@string/tch_look_checkin_result" />
+
+        <include layout="@layout/comm_button_refresh" />
     </LinearLayout>
+
+    <com.kcb.library.view.smoothprogressbar.SmoothProgressBar
+        android:id="@+id/progressbar_refresh"
+        style="@style/common_title_progressbar"
+        android:layout_below="@id/layout_title"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/textview_rate"
@@ -36,22 +44,24 @@
         android:layout_marginTop="10dp" />
 
     <TextView
-        android:id="@+id/textview"
+        android:id="@+id/textview_stuinfotip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/piechart"
         android:layout_marginLeft="24dp"
         android:layout_marginTop="20dp"
-        android:text="@string/tch_unchecked_stuinfo" />
+        android:text="@string/tch_unchecked_stuinfo"
+        android:visibility="gone" />
 
     <LinearLayout
-        android:id="@+id/table_title"
+        android:id="@+id/layout_listview_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textview"
+        android:layout_below="@id/textview_stuinfotip"
         android:layout_marginLeft="24dp"
         android:layout_marginRight="24dp"
-        android:orientation="horizontal" >
+        android:orientation="horizontal"
+        android:visibility="gone" >
 
         <TextView
             android:layout_width="wrap_content"
@@ -75,10 +85,11 @@
         android:id="@+id/listview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/table_title"
+        android:layout_below="@id/layout_listview_title"
         android:layout_marginLeft="24dp"
         android:layout_marginRight="24dp"
-        android:layout_marginTop="20dp" >
+        android:layout_marginTop="20dp"
+        android:visibility="gone" >
     </ListView>
 
 </RelativeLayout>
