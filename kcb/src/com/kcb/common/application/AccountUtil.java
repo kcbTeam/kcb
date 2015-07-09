@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
-import com.kcb.student.model.account.KAccount;
+import com.kcb.student.model.KAccount;
 
 public class AccountUtil {
 

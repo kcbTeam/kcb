@@ -17,14 +17,14 @@ public class Question implements Serializable {
 
     private static final long serialVersionUID = 2L;
 
-    private int mId; // from client
+    private int mId; // 题号，由客户端确定，从0开始递增，如果删除了一个测试中的某个题目，题目需要重新设置id，以保持id的连续性
     private double mRate; // 此题的正确率
 
-    private QuestionItem mTitleItem;
-    private QuestionItem mChoiceAItem;
-    private QuestionItem mChoiceBItem;
-    private QuestionItem mChoiceCItem;
-    private QuestionItem mChoiceDItem;
+    private QuestionItem mTitleItem; // 题目描述内容
+    private QuestionItem mChoiceAItem; // 选项A
+    private QuestionItem mChoiceBItem; // 选项B
+    private QuestionItem mChoiceCItem; // 选项C
+    private QuestionItem mChoiceDItem; // 选项D
 
     public Question() {
         mTitleItem = new QuestionItem();
@@ -95,12 +95,15 @@ public class Question implements Serializable {
                 && mChoiceDItem.equals(questionObj.getChoiceD());
     }
 
-    public boolean isCompleted() {
-        return mTitleItem.isCompleted()
-                && mChoiceAItem.isCompleted()
-                && mChoiceBItem.isCompleted()
-                && mChoiceCItem.isCompleted()
-                && mChoiceDItem.isCompleted()
+    /**
+     * 编辑测试：此题是否编辑完成了
+     */
+    public boolean isEditFinish() {
+        return mTitleItem.isEidtFinish()
+                && mChoiceAItem.isEidtFinish()
+                && mChoiceBItem.isEidtFinish()
+                && mChoiceCItem.isEidtFinish()
+                && mChoiceDItem.isEidtFinish()
                 && (mChoiceAItem.isRight() || mChoiceBItem.isRight() || mChoiceCItem.isRight() || mChoiceDItem
                         .isRight());
     }
@@ -122,32 +125,31 @@ public class Question implements Serializable {
      * question to json, json to question
      */
     public static final String KEY_ID = "id";
-    public static final String KEY_TITLE = "title";
-    public static final String KEY_CHOICE = "choice";
     public static final String KEY_RATE = "rate";
+    public static final String KEY_TITLE = "title";
+    public static final String KEY_CHOICES = "choices";
 
-    /**
-     * 发送到服务器的JsonObject包括的是图片String，保存到数据库的JsonObject包括的是图片的路径。
-     */
-    public JSONObject toJsonObject(boolean toServer) {
+    public JSONObject toJsonObject() {
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put(KEY_ID, mId);
-            mTitleItem.setBitmapKey("question_" + getId() + "_item_0");
-            jsonObject.put(KEY_TITLE, mTitleItem.toJsonObject(toServer));
+            jsonObject.put(KEY_ID, mId); // 题目id
+            jsonObject.put(KEY_RATE, mRate); // 此题的正确率
+
+            // 需要设置题目内容和选项的bitmapkey，如果包括图片，上传图片的时候需要用到bitmapkey
+            mTitleItem.setBitmapKey(getId());
+            jsonObject.put(KEY_TITLE, mTitleItem.toJsonObject()); // 题目内容
 
             JSONArray choiceArray = new JSONArray();
-            mChoiceAItem.setBitmapKey("question_" + getId() + "_item_1");
-            choiceArray.put(mChoiceAItem.toJsonObject(toServer));
-            mChoiceBItem.setBitmapKey("question_" + getId() + "_item_2");
-            choiceArray.put(mChoiceBItem.toJsonObject(toServer));
-            mChoiceCItem.setBitmapKey("question_" + getId() + "_item_3");
-            choiceArray.put(mChoiceCItem.toJsonObject(toServer));
-            mChoiceDItem.setBitmapKey("question_" + getId() + "_item_4");
-            choiceArray.put(mChoiceDItem.toJsonObject(toServer));
+            mChoiceAItem.setBitmapKey(getId());
+            choiceArray.put(mChoiceAItem.toJsonObject());
+            mChoiceBItem.setBitmapKey(getId());
+            choiceArray.put(mChoiceBItem.toJsonObject());
+            mChoiceCItem.setBitmapKey(getId());
+            choiceArray.put(mChoiceCItem.toJsonObject());
+            mChoiceDItem.setBitmapKey(getId());
+            choiceArray.put(mChoiceDItem.toJsonObject());
 
-            jsonObject.put(KEY_CHOICE, choiceArray);
-            jsonObject.put(KEY_RATE, mRate);
+            jsonObject.put(KEY_CHOICES, choiceArray); // 四个选项
         } catch (JSONException e) {}
         return jsonObject;
     }
@@ -157,7 +159,7 @@ public class Question implements Serializable {
         question.mId = jsonObject.optInt(KEY_ID);
         question.mTitleItem = QuestionItem.fromJsonObject(jsonObject.optJSONObject(KEY_TITLE));
 
-        JSONArray choiceArray = jsonObject.optJSONArray(KEY_CHOICE);
+        JSONArray choiceArray = jsonObject.optJSONArray(KEY_CHOICES);
         try {
             question.mChoiceAItem = QuestionItem.fromJsonObject(choiceArray.getJSONObject(0));
             question.mChoiceBItem = QuestionItem.fromJsonObject(choiceArray.getJSONObject(1));

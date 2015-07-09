@@ -23,7 +23,7 @@ import com.kcb.common.util.ToastUtil;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.student.database.checkin.CheckInDao;
 import com.kcb.student.database.test.TestDao;
-import com.kcb.student.model.account.KAccount;
+import com.kcb.student.model.KAccount;
 import com.kcbTeam.R;
 
 /**

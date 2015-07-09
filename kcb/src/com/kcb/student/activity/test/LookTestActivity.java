@@ -21,6 +21,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.kcb.common.base.BaseActivity;
 import com.kcb.common.model.test.Test;
 import com.kcb.common.server.RequestUtil;
+import com.kcb.common.server.ResponseUtil;
 import com.kcb.common.server.UrlUtil;
 import com.kcb.common.util.StatusBarUtil;
 import com.kcb.common.util.StringMatchUtil;
@@ -32,7 +33,7 @@ import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
 import com.kcb.student.adapter.LookTestAdapter;
 import com.kcb.student.database.test.TestDao;
-import com.kcb.student.model.account.KAccount;
+import com.kcb.student.model.KAccount;
 import com.kcbTeam.R;
 
 /**
@@ -202,10 +203,14 @@ public class LookTestActivity extends BaseActivity implements OnSearchListener, 
                             mAdapter.notifyDataSetChanged();
                             listTitleLayout.setVisibility(View.VISIBLE);
                         }
+                        progressBar.hide(LookTestActivity.this);
                     }
                 }, new ErrorListener() {
                     @Override
-                    public void onErrorResponse(VolleyError error) {}
+                    public void onErrorResponse(VolleyError error) {
+                        progressBar.hide(LookTestActivity.this);
+                        ResponseUtil.toastError(error);
+                    }
                 });
         RequestUtil.getInstance().addToRequestQueue(request, TAG);
     }

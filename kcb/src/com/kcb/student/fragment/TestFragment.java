@@ -28,7 +28,7 @@ import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
 import com.kcb.student.activity.test.LookTestActivity;
 import com.kcb.student.activity.test.StartTestActivity;
 import com.kcb.student.database.test.TestDao;
-import com.kcb.student.model.account.KAccount;
+import com.kcb.student.model.KAccount;
 import com.kcbTeam.R;
 
 /**

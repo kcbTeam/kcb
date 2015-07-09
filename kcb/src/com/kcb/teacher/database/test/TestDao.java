@@ -81,7 +81,7 @@ public class TestDao {
         contentValues.put(TestTable.COLUMN_TIME, test.getTime());
         contentValues.put(TestTable.COLUMN_DATE, test.getDate());
         contentValues.put(TestTable.COLUMN_HASTESTED, test.hasTested());
-        contentValues.put(TestTable.COLUMN_ROW_DATA, test.toString());
+        contentValues.put(TestTable.COLUMN_QUESTIONS, test.toString());
         return contentValues;
     }
 
@@ -96,7 +96,7 @@ public class TestDao {
                     try {
                         test =
                                 Test.fromJsonObject(new JSONObject(new String(cursor.getBlob(cursor
-                                        .getColumnIndex(TestTable.COLUMN_ROW_DATA)))));
+                                        .getColumnIndex(TestTable.COLUMN_QUESTIONS)))));
                     } catch (JSONException e) {}
                 }
             } catch (Exception e) {} finally {
@@ -117,7 +117,7 @@ public class TestDao {
                     try {
                         Test test =
                                 Test.fromJsonObject(new JSONObject(new String(cursor.getBlob(cursor
-                                        .getColumnIndex(TestTable.COLUMN_ROW_DATA)))));
+                                        .getColumnIndex(TestTable.COLUMN_QUESTIONS)))));
                         tests.add(test);
                     } catch (JSONException e) {}
                 }
@@ -137,7 +137,7 @@ public class TestDao {
                     try {
                         Test test =
                                 Test.fromJsonObject(new JSONObject(new String(cursor.getBlob(cursor
-                                        .getColumnIndex(TestTable.COLUMN_ROW_DATA)))));
+                                        .getColumnIndex(TestTable.COLUMN_QUESTIONS)))));
                         tests.add(test);
                     } catch (JSONException e) {}
                 }

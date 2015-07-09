@@ -105,10 +105,10 @@ public class QuestionItem implements Serializable {
     }
 
     // 设置传输图片时候的key
-    public void setBitmapKey(String bitmapKey) {
+    public void setBitmapKey(int questionId) {
         mBitmapKey = "";
         if (!isText()) {
-            mBitmapKey = bitmapKey;
+            mBitmapKey = "question_" + questionId + "_item_" + mId;
         }
     }
 
@@ -152,7 +152,10 @@ public class QuestionItem implements Serializable {
         return false;
     }
 
-    public boolean isCompleted() {
+    /**
+     * 编辑测试：题目内容/选项是否编辑完成了
+     */
+    public boolean isEidtFinish() {
         return !TextUtils.isEmpty(mText) || mBitmap != null;
     }
 
@@ -175,10 +178,7 @@ public class QuestionItem implements Serializable {
     public static final String KEY_ISRIGHT = "isright";
     public static final String KEY_ISSELECTED = "isselected";
 
-    /**
-     * 发送到服务器的JsonObject包括的是图片String，保存到数据库的JsonObject包括的是图片的路径。
-     */
-    public JSONObject toJsonObject(boolean toServer) {
+    public JSONObject toJsonObject() {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put(KEY_ID, mId);

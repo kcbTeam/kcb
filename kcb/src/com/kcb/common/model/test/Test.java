@@ -3,6 +3,7 @@ package com.kcb.common.model.test;
 import java.io.File;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -25,12 +26,12 @@ public class Test implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private String mId; // from server when start test
-    private String mName; // test name
-    private int mTime = 300; // default test time is 5 minutes，即300s
-    private long mDate; // test date, create date or start test date
-    private boolean mHasTested; // true if teacher start test
-    private List<Question> mQuestions;
+    private String mId; // 后台分配的测试Id
+    private String mName; // 测试的名称
+    private int mTime; // 测试的时间，多少秒
+    private long mDate; // 测试创建的时间 ——> 修改的时间 ——> 开始的时间
+    private boolean mHasTested; // 是否测试过了
+    private List<Question> mQuestions; // 测试包括的问题
 
     public Test() {
         mQuestions = new ArrayList<Question>();
@@ -73,7 +74,9 @@ public class Test implements Serializable {
     }
 
     public String getDateString() {
-        return new Date(mDate).toString();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String date = sdf.format(new Date(getDate()));
+        return date;
     }
 
     public void setDate(long date) {
@@ -127,18 +130,24 @@ public class Test implements Serializable {
         return mQuestions.size();
     }
 
-    public boolean isCompleted() {
+    /**
+     * 编辑内容：此测试是否编辑完成了
+     */
+    public boolean isEditFinish() {
         for (int i = 0; i < mQuestions.size(); i++) {
-            if (!mQuestions.get(i).isCompleted()) {
+            if (!mQuestions.get(i).isEditFinish()) {
                 return false;
             }
         }
         return true;
     }
 
-    public int getUnCompleteIndex() {
+    /**
+     * 获取第一个未完成的的题目编号
+     */
+    public int getFirstUnFinishQuestionIndex() {
         for (int i = 0; i < mQuestions.size(); i++) {
-            if (!mQuestions.get(i).isCompleted()) {
+            if (!mQuestions.get(i).isEditFinish()) {
                 return i;
             }
         }
@@ -155,10 +164,18 @@ public class Test implements Serializable {
         }
     }
 
-    // 转成的string不会放到数据库中，只保存路径
     @Override
     public String toString() {
-        return toJsonObject(false).toString();
+        return toJsonObject().toString();
+    }
+
+    // 学生模块，保存测试信息到数据库时，获取题目内容
+    public String getQuestionsString() {
+        JSONArray questionArray = new JSONArray();
+        for (int i = 0; i < mQuestions.size(); i++) {
+            questionArray.put(mQuestions.get(i).toJsonObject());
+        }
+        return questionArray.toString();
     }
 
     public void release() {
@@ -186,7 +203,7 @@ public class Test implements Serializable {
         try {
             requestObject.put(KEY_ID, KAccount.getAccountId());
             setQuestionId();
-            requestObject.put(KEY_TEST, toJsonObject(true));
+            requestObject.put(KEY_TEST, toJsonObject());
         } catch (JSONException e) {}
 
         MultipartEntity entity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
@@ -228,25 +245,21 @@ public class Test implements Serializable {
     /**
      * 发送到服务器的JsonObject包括的是图片String，保存到数据库的JsonObject包括的是图片的路径。
      */
-    public JSONObject toJsonObject(boolean toServer) {
+    public JSONObject toJsonObject() {
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put(KEY_ID, mId);
-
-            jsonObject.put(KEY_NAME, mName);
-            // jsonObject.put(KEY_NAME, getUTF8XMLString(mName));
-
-            jsonObject.put(KEY_TIME, mTime);
-            jsonObject.put(KEY_DATE, mDate);
-            jsonObject.put(KEY_HASTESTED, mHasTested);
+            jsonObject.put(KEY_ID, mId); // 测试id
+            jsonObject.put(KEY_NAME, mName); // 测试名称
+            jsonObject.put(KEY_TIME, mTime); // 测试的时间，单位为秒
+            jsonObject.put(KEY_DATE, mDate); // 测试的开始时间戳
+            jsonObject.put(KEY_HASTESTED, mHasTested); // 是否已经测试过了
 
             JSONArray questionArray = new JSONArray();
             for (int i = 0; i < mQuestions.size(); i++) {
                 mQuestions.get(i).setId(i);
-                questionArray.put(mQuestions.get(i).toJsonObject(toServer));
+                questionArray.put(mQuestions.get(i).toJsonObject());
             }
-
-            jsonObject.put(KEY_QUESTION, questionArray);
+            jsonObject.put(KEY_QUESTION, questionArray); // 测试包括的题目
         } catch (JSONException e) {}
         return jsonObject;
     }
@@ -303,7 +316,7 @@ public class Test implements Serializable {
     }
 
     /**
-     * 当删除一个测试中的一个题目的时候，需要重新命名图片的名称
+     * 当删除一个测试中的一个题目的时候，需要重新命名保存的图片名称； 因为图片名称和题目id有关，而删除题目后，题目的id会变化； 题目id从0开始递增；
      */
     public void renameBitmap() {
         for (int i = 0; i < mQuestions.size(); i++) {
