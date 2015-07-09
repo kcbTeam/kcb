@@ -133,12 +133,17 @@ public class Question implements Serializable {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put(KEY_ID, mId);
+            mTitleItem.setBitmapKey("question_" + getId() + "_item_0");
             jsonObject.put(KEY_TITLE, mTitleItem.toJsonObject(toServer));
 
             JSONArray choiceArray = new JSONArray();
+            mChoiceAItem.setBitmapKey("question_" + getId() + "_item_1");
             choiceArray.put(mChoiceAItem.toJsonObject(toServer));
+            mChoiceBItem.setBitmapKey("question_" + getId() + "_item_2");
             choiceArray.put(mChoiceBItem.toJsonObject(toServer));
+            mChoiceCItem.setBitmapKey("question_" + getId() + "_item_3");
             choiceArray.put(mChoiceCItem.toJsonObject(toServer));
+            mChoiceDItem.setBitmapKey("question_" + getId() + "_item_4");
             choiceArray.put(mChoiceDItem.toJsonObject(toServer));
 
             jsonObject.put(KEY_CHOICE, choiceArray);

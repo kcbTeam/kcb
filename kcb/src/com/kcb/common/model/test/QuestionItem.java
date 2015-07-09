@@ -32,6 +32,8 @@ public class QuestionItem implements Serializable {
     private Bitmap mBitmap; // 图片内容
     private String mBitmapPath; // 如果是老师出题，题目在本地的保存路径
     private String mBitmapUrl; // 如果从后台拿取图片，拿的是图片的url
+    // 发送图片的时候，对应的key，格式为 question_0_item_0，第一个数字从0开始，表示题目的id，第二个数字为0-4，表示题目内容、4个选项
+    private String mBitmapKey;
 
     private boolean mIsRight; // useful when item is choice
     private boolean mIsSelected; // used in stu module, useful when item is choice, true if stu
@@ -102,6 +104,14 @@ public class QuestionItem implements Serializable {
         return mBitmapPath;
     }
 
+    // 设置传输图片时候的key
+    public void setBitmapKey(String bitmapKey) {
+        mBitmapKey = "";
+        if (!isText()) {
+            mBitmapKey = bitmapKey;
+        }
+    }
+
     public String getBitmapString() {
         Bitmap bitmap = getBitmap();
         if (null != bitmap) {
@@ -161,6 +171,7 @@ public class QuestionItem implements Serializable {
     public static final String KEY_TEXT = "text";
     public static final String KEY_BITMAPPATH = "bitmappath";
     public static final String KEY_BITMAPURL = "bitmapurl";
+    public static final String KEY_BITMAPKEY = "bitmapkey";
     public static final String KEY_ISRIGHT = "isright";
     public static final String KEY_ISSELECTED = "isselected";
 
@@ -175,6 +186,7 @@ public class QuestionItem implements Serializable {
             jsonObject.put(KEY_TEXT, mText);
             jsonObject.put(KEY_BITMAPPATH, mBitmapPath);
             jsonObject.put(KEY_BITMAPURL, mBitmapUrl);
+            jsonObject.put(KEY_BITMAPKEY, mBitmapKey);
             jsonObject.put(KEY_ISRIGHT, mIsRight);
             jsonObject.put(KEY_ISSELECTED, mIsSelected);
         } catch (JSONException e) {}
