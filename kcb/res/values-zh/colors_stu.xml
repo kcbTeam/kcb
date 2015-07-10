@@ -3,5 +3,6 @@
 
     <color name="stu_primary">#009688</color>
     <color name="stu_primary_dark">#00796B</color>
+    <color name="stu_primary_50">#E0F2F1</color>
 
 </resources>

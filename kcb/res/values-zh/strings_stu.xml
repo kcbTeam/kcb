@@ -23,7 +23,6 @@
 
     <!-- HomeActivity Start -->
     <!-- 侧边栏 -->
-    <string name="stu_drawer_university">所在学校：</string>
     <string name="stu_drawer_course">当前课程：</string>
     <string name="stu_drawer_teacher">任课老师：</string>
     <!--  -->

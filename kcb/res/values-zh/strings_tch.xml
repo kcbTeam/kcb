@@ -22,7 +22,6 @@
 
     <!-- HomeActivity start -->
     <!-- 侧边栏 -->
-    <string name="tch_drawer_university">所在学校：</string>
     <string name="tch_drawer_course">当前课程：</string>
     <string name="tch_drawer_class">当前班级：</string>
     <!--  -->
