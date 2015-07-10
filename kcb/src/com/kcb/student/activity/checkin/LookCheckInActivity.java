@@ -2,8 +2,7 @@ package com.kcb.student.activity.checkin;
 
 import java.util.ArrayList;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import org.json.JSONArray;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,7 +15,7 @@ import com.android.volley.Request.Method;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.Entry;
@@ -32,8 +31,8 @@ import com.kcb.common.util.StatusBarUtil;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
 import com.kcb.student.database.checkin.CheckInDao;
-import com.kcb.student.model.account.KAccount;
-import com.kcb.student.model.checkin.CheckInResult;
+import com.kcb.student.database.checkin.CheckInResult;
+import com.kcb.student.model.KAccount;
 import com.kcbTeam.R;
 
 /**
@@ -188,36 +187,42 @@ public class LookCheckInActivity extends BaseActivity {
             return;
         }
         progressBar.setVisibility(View.VISIBLE);
-        JsonObjectRequest request =
-                new JsonObjectRequest(Method.GET, UrlUtil.getStuCheckinResultUrl(
-                        KAccount.getAccountId(), KAccount.getTchId()), new Listener<JSONObject>() {
+        // 获取此时间戳之后的签到结果
+        // TODO 增加db 操作
+        CheckInDao checkInDao = new CheckInDao(LookCheckInActivity.this);
+        long date = checkInDao.getLeastDate();
+        checkInDao.close();
+        JsonArrayRequest request =
+                new JsonArrayRequest(Method.GET, UrlUtil.getStuCheckinResultUrl(
+                        KAccount.getAccountId(), KAccount.getTchId(), date),
+                        new Listener<JSONArray>() {
 
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        LogUtil.i(TAG, "stu get checkin result, response is " + response.toString());
-                        // save to database
-                        try {
-                            JSONObject jsonObject = response.getJSONObject("data");
-                            CheckInResult checkInResult = CheckInResult.fromJsonObejct(jsonObject);
-                            CheckInDao checkInDao = new CheckInDao(LookCheckInActivity.this);
-                            checkInDao.deleteAll();
-                            checkInDao.add(checkInResult);
-                            checkInDao.close();
-                            // show result
-                            initData();
-                            progressBar.hide(LookCheckInActivity.this);
-                        } catch (JSONException e) {
-                            LogUtil.e(TAG, e.getMessage());
-                        }
-                    }
-                }, new ErrorListener() {
+                            @Override
+                            public void onResponse(JSONArray response) {
+                                LogUtil.i(
+                                        TAG,
+                                        "stu get checkin result, response is "
+                                                + response.toString());
+                                // save to database
+                                CheckInDao checkInDao = new CheckInDao(LookCheckInActivity.this);
+                                for (int i = 0; i < response.length(); i++) {
+                                    CheckInResult checkinResult =
+                                            CheckInResult.fromJsonObject(response.optJSONObject(i));
+                                    checkInDao.add(checkinResult);
+                                }
+                                checkInDao.close();
+                                // show result
+                                initData();
+                                progressBar.hide(LookCheckInActivity.this);
+                            }
+                        }, new ErrorListener() {
 
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        progressBar.hide(LookCheckInActivity.this);
-                        ResponseUtil.toastError(error);
-                    }
-                });
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                progressBar.hide(LookCheckInActivity.this);
+                                ResponseUtil.toastError(error);
+                            }
+                        });
         RequestUtil.getInstance().addToRequestQueue(request, TAG);
     }
 

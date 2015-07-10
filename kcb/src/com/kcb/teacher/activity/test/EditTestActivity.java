@@ -222,8 +222,8 @@ public class EditTestActivity extends BaseActivity {
 
     private void finishEditTest() {
         questionEditView.saveQuestion();
-        if (!sTest.isCompleted()) {
-            int unCompletedIndex = sTest.getUnCompleteIndex() + 1;
+        if (!sTest.isEditFinish()) {
+            int unCompletedIndex = sTest.getFirstUnFinishQuestionIndex() + 1;
             ToastUtil.toast(String.format(getResources()
                     .getString(R.string.tch_question_unfinished), unCompletedIndex));
         } else {

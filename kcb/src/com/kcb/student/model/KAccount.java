@@ -1,4 +1,4 @@
-package com.kcb.student.model.account;
+package com.kcb.student.model;
 
 import android.content.Context;
 import android.content.SharedPreferences;

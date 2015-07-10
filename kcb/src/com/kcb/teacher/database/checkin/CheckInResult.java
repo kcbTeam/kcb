@@ -1,4 +1,4 @@
-package com.kcb.teacher.model.checkin;
+package com.kcb.teacher.database.checkin;
 
 import java.io.Serializable;
 import java.util.ArrayList;

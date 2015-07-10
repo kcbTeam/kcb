@@ -3,9 +3,6 @@ package com.kcb.teacher.database.test;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -31,6 +28,9 @@ public class TestDao {
         mDatabase = mOpenHelper.getWritableDatabase();
     }
 
+    /**
+     * 是否有这个测试了，如果有，不能添加重名的测试；
+     */
     public boolean hasTest(String testName) {
         Cursor cursor =
                 mDatabase.query(TestTable.TABLE_NAME, null, TestTable.COLUMN_NAME + "=?",
@@ -46,11 +46,14 @@ public class TestDao {
         return count > 0;
     }
 
+    /**
+     * 获取为开始的测试，可以用来开始、编辑； 注意：true在SQLite中存的是1，false存的是0，都出来也是1或0；
+     */
     public List<String> getUnStartTestName() {
         Cursor cursor =
                 mDatabase.query(TestTable.TABLE_NAME, new String[] {TestTable.COLUMN_NAME},
-                        TestTable.COLUMN_HASTESTED + "=?", new String[] {String.valueOf(false)},
-                        null, null, null);
+                        TestTable.COLUMN_HASTESTED + "=?", new String[] {String.valueOf(0)}, null,
+                        null, null);
         List<String> names = new ArrayList<String>();
         if (null != cursor) {
             try {
@@ -65,6 +68,9 @@ public class TestDao {
         return names;
     }
 
+    /**
+     * 编辑测试后，保存到数据库； 查看测试结果，保存到数据库； 每次开始一个测试后，删除此测试，之后，此测试只能通过查看测试结果页面刷新出来；
+     */
     public void add(Test test) {
         mDatabase.insert(TestTable.TABLE_NAME, null, getTestContentValues(test));
     }
@@ -81,8 +87,20 @@ public class TestDao {
         contentValues.put(TestTable.COLUMN_TIME, test.getTime());
         contentValues.put(TestTable.COLUMN_DATE, test.getDate());
         contentValues.put(TestTable.COLUMN_HASTESTED, test.hasTested());
-        contentValues.put(TestTable.COLUMN_ROW_DATA, test.toString());
+        contentValues.put(TestTable.COLUMN_QUESTIONS, test.getQuestionsString());
         return contentValues;
+    }
+
+    private Test getTestFromCursor(Cursor cursor) {
+        Test test = new Test();
+        test.setId(cursor.getString(cursor.getColumnIndex(TestTable.COLUMN_ID)));
+        test.setName(cursor.getString(cursor.getColumnIndex(TestTable.COLUMN_NAME)));
+        test.setTime(cursor.getInt(cursor.getColumnIndex(TestTable.COLUMN_TIME)));
+        test.setDate(cursor.getLong(cursor.getColumnIndex(TestTable.COLUMN_DATE)));
+        int hasTested = cursor.getInt(cursor.getColumnIndex(TestTable.COLUMN_HASTESTED));
+        test.setHasTested(hasTested == 1 ? true : false);
+        test.setQuestions(cursor.getString(cursor.getColumnIndex(TestTable.COLUMN_QUESTIONS)));
+        return test;
     }
 
     public Test getByName(String testName) {
@@ -93,11 +111,7 @@ public class TestDao {
         if (null != cursor) {
             try {
                 if (cursor.moveToFirst()) {
-                    try {
-                        test =
-                                Test.fromJsonObject(new JSONObject(new String(cursor.getBlob(cursor
-                                        .getColumnIndex(TestTable.COLUMN_ROW_DATA)))));
-                    } catch (JSONException e) {}
+                    test = getTestFromCursor(cursor);
                 }
             } catch (Exception e) {} finally {
                 cursor.close();
@@ -109,17 +123,13 @@ public class TestDao {
     public List<Test> getHasTested() {
         Cursor cursor =
                 mDatabase.query(TestTable.TABLE_NAME, null, TestTable.COLUMN_HASTESTED + "=?",
-                        new String[] {String.valueOf(true)}, null, null, null);
+                        new String[] {String.valueOf(1)}, null, null, null);
         List<Test> tests = new ArrayList<Test>();
         if (null != cursor) {
             try {
                 while (cursor.moveToNext()) {
-                    try {
-                        Test test =
-                                Test.fromJsonObject(new JSONObject(new String(cursor.getBlob(cursor
-                                        .getColumnIndex(TestTable.COLUMN_ROW_DATA)))));
-                        tests.add(test);
-                    } catch (JSONException e) {}
+                    Test test = getTestFromCursor(cursor);
+                    tests.add(test);
                 }
             } catch (Exception e) {} finally {
                 cursor.close();
@@ -134,12 +144,8 @@ public class TestDao {
         if (null != cursor) {
             try {
                 while (cursor.moveToNext()) {
-                    try {
-                        Test test =
-                                Test.fromJsonObject(new JSONObject(new String(cursor.getBlob(cursor
-                                        .getColumnIndex(TestTable.COLUMN_ROW_DATA)))));
-                        tests.add(test);
-                    } catch (JSONException e) {}
+                    Test test = getTestFromCursor(cursor);
+                    tests.add(test);
                 }
             } catch (Exception e) {} finally {
                 cursor.close();

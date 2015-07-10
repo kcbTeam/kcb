@@ -21,9 +21,11 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.kcb.common.base.BaseActivity;
 import com.kcb.common.model.test.Test;
 import com.kcb.common.server.RequestUtil;
+import com.kcb.common.server.ResponseUtil;
 import com.kcb.common.server.UrlUtil;
 import com.kcb.common.util.StatusBarUtil;
 import com.kcb.common.util.StringMatchUtil;
+import com.kcb.common.util.ToastUtil;
 import com.kcb.common.view.common.EmptyTipView;
 import com.kcb.common.view.common.SearchEditText;
 import com.kcb.common.view.common.SearchEditText.OnSearchListener;
@@ -31,7 +33,7 @@ import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
 import com.kcb.student.adapter.LookTestAdapter;
 import com.kcb.student.database.test.TestDao;
-import com.kcb.student.model.account.KAccount;
+import com.kcb.student.model.KAccount;
 import com.kcbTeam.R;
 
 /**
@@ -98,7 +100,7 @@ public class LookTestActivity extends BaseActivity implements OnSearchListener, 
     @Override
     protected void initData() {
         TestDao testDao = new TestDao(LookTestActivity.this);
-        mAllTests = testDao.getTerminatedTests();
+        mAllTests = testDao.getAll();
         testDao.close();
 
         if (mAllTests.isEmpty()) {
@@ -157,20 +159,29 @@ public class LookTestActivity extends BaseActivity implements OnSearchListener, 
         mAdapter.notifyDataSetChanged();
     }
 
+    /**
+     * 点击列表的某一项，判断测试是否结束了，如果结束了可以进入，并刷新UI； 如果没有结束，提示结束后才可查看结果；
+     * 
+     */
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        LookTestDetailActivity.start(LookTestActivity.this, mAdapter.getItem(position));
+        Test test = mAdapter.getItem(position);
+        if (test.hasEnded()) {
+            mAdapter.notifyDataSetChanged();
+            LookTestDetailActivity.start(LookTestActivity.this, mAdapter.getItem(position));
+        } else {
+            ToastUtil.toast("测试结束后才可查看结果");
+        }
     }
 
     /**
-     * 刷新，根据学号、本地保存的最近一次测试时间戳获取测试；
+     * 刷新，根据学号、本地保存的最近一次测试时间戳获取测试； 将获取到的内容存到数据库，刷新UI；
      */
     private void refresh() {
         if (progressBar.getVisibility() == View.VISIBLE) {
             return;
         }
         progressBar.setVisibility(View.VISIBLE);
-        // if success, show listview title & search edittext;
         long date = 0;
         if (mAdapter.getCount() > 0) {
             date = mAdapter.getItem(0).getDate();
@@ -180,22 +191,32 @@ public class LookTestActivity extends BaseActivity implements OnSearchListener, 
                         KAccount.getAccountId(), date), new Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
+                        // 获取测试，并存到数据库中；
                         List<Test> tests = new ArrayList<Test>();
+                        TestDao testDao = new TestDao(LookTestActivity.this);
                         for (int i = 0; i < response.length(); i++) {
                             Test test = Test.fromJsonObject(response.optJSONObject(i));
                             tests.add(test);
+                            testDao.add(test);
                         }
+                        testDao.close();
+                        // 刷新UI；
                         if (!tests.isEmpty()) {
                             mAllTests.addAll(tests);
                             mSearchedTests.clear();
                             mSearchedTests.addAll(mAllTests);
                             mAdapter.notifyDataSetChanged();
+                            searchEditText.setText(""); // 清空搜索框内容
                             listTitleLayout.setVisibility(View.VISIBLE);
                         }
+                        progressBar.hide(LookTestActivity.this);
                     }
                 }, new ErrorListener() {
                     @Override
-                    public void onErrorResponse(VolleyError error) {}
+                    public void onErrorResponse(VolleyError error) {
+                        progressBar.hide(LookTestActivity.this);
+                        ResponseUtil.toastError(error);
+                    }
                 });
         RequestUtil.getInstance().addToRequestQueue(request, TAG);
     }

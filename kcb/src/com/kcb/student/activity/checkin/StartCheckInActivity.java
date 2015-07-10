@@ -31,7 +31,7 @@ import com.kcb.library.view.PaperButton;
 import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
 import com.kcb.student.adapter.StartCheckInAdapter;
 import com.kcb.student.adapter.StartCheckInAdapter.RecyclerItemClickListener;
-import com.kcb.student.model.account.KAccount;
+import com.kcb.student.model.KAccount;
 import com.kcbTeam.R;
 
 /**

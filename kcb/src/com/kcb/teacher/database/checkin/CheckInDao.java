@@ -12,7 +12,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.kcb.teacher.database.KSQLiteOpenHelper;
-import com.kcb.teacher.model.checkin.CheckInResult;
 
 public class CheckInDao {
 

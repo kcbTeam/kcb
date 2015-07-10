@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.kcb.teacher.model.checkin.CheckInResult;
+import com.kcb.teacher.database.checkin.CheckInResult;
 import com.kcbTeam.R;
 
 /**

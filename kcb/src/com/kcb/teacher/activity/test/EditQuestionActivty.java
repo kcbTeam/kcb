@@ -88,7 +88,7 @@ public class EditQuestionActivty extends BaseActivity {
                 break;
             case R.id.button_finish:
                 questionEditView.saveQuestion();
-                if (!sQuestion.isCompleted()) {
+                if (!sQuestion.isEditFinish()) {
                     ToastUtil.toast(R.string.tch_question_not_finish);
                 } else {
                     Intent intent = new Intent();

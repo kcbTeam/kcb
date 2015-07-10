@@ -6,7 +6,6 @@ import java.util.List;
 import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 
 import android.os.Bundle;
 import android.view.View;
@@ -20,7 +19,6 @@ import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.kcb.common.base.BaseActivity;
-import com.kcb.common.model.answer.TestAnswer;
 import com.kcb.common.model.test.Test;
 import com.kcb.common.server.RequestUtil;
 import com.kcb.common.server.ResponseUtil;
@@ -35,7 +33,7 @@ import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
 import com.kcb.teacher.adapter.test.LookTestAdapter;
 import com.kcb.teacher.database.test.TestDao;
-import com.kcb.teacher.model.account.KAccount;
+import com.kcb.teacher.model.KAccount;
 import com.kcbTeam.R;
 
 /**
@@ -174,37 +172,29 @@ public class LookTestActivity extends BaseActivity implements OnSearchListener, 
             return;
         }
         progressBar.setVisibility(View.VISIBLE);
+        // 获取此时间戳之后的测试，包括内容和结果
+        long date = 0;
+        if (mAdapter.getCount() > 0) {
+            date = mAdapter.getItem(0).getDate();
+        }
         JsonArrayRequest request =
-                new JsonArrayRequest(Method.GET, UrlUtil.getTchTestLookresultUrl(KAccount
-                        .getAccountId()), new Listener<JSONArray>() {
+                new JsonArrayRequest(Method.GET, UrlUtil.getTchTestLookresultUrl(
+                        KAccount.getAccountId(), date), new Listener<JSONArray>() {
 
                     @Override
                     public void onResponse(JSONArray response) {
-                        LogUtil.i(TAG, "tch get test result, response is " + response);
-                        // get answer
-                        List<TestAnswer> testAnswers = new ArrayList<TestAnswer>();
-                        for (int i = 0; i < response.length(); i++) {
-                            try {
-                                testAnswers.add(TestAnswer.fromJsonObject(response.getJSONObject(i)));
-                            } catch (JSONException e) {}
-                        }
-                        // set answer
-                        for (Test test : mAllTests) {
-                            for (TestAnswer testAnswer : testAnswers) {
-                                if (test.getId().equals(testAnswer.getId())) {
-                                    test.setAnswer(testAnswer);
-                                }
-                            }
-                        }
-                        // save test
+                        LogUtil.i(TAG, "tch get test result, response is " + response.toString());
+                        // response包括多个测试，每个测试包括内容和结果
+                        // 添加到数据库，更新UI
                         TestDao testDao = new TestDao(LookTestActivity.this);
-                        testDao.deleteAll();
-                        for (Test test : mAllTests) {
+                        for (int i = 0; i < response.length(); i++) {
+                            Test test = Test.fromJsonObject(response.optJSONObject(i));
+                            mAllTests.add(test);
                             testDao.add(test);
                         }
                         testDao.close();
+
                         // switch view
-                        progressBar.hide(LookTestActivity.this);
                         if (!mAllTests.isEmpty()) {
                             searchEditText.setVisibility(View.VISIBLE);
                             listTitleLayout.setVisibility(View.VISIBLE);
@@ -213,7 +203,10 @@ public class LookTestActivity extends BaseActivity implements OnSearchListener, 
                         // show test
                         mSearchedTests.clear();
                         mSearchedTests.addAll(mAllTests);
+                        searchEditText.setText("");
                         mAdapter.notifyDataSetChanged();
+
+                        progressBar.hide(LookTestActivity.this);
                     }
                 }, new ErrorListener() {
 

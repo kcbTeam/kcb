@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.kcb.teacher.model.stucentre.Student;
+import com.kcb.teacher.database.students.Student;
 import com.kcbTeam.R;
 
 /**

@@ -20,7 +20,7 @@ import com.github.mikephil.charting.utils.PercentFormatter;
 import com.kcb.common.base.BaseActivity;
 import com.kcb.common.util.StatusBarUtil;
 import com.kcb.library.view.buttonflat.ButtonFlat;
-import com.kcb.teacher.model.stucentre.Student;
+import com.kcb.teacher.database.students.Student;
 import com.kcbTeam.R;
 
 /**

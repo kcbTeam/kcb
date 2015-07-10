@@ -34,7 +34,7 @@ import com.kcb.common.view.test.AnswerQuestionView;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
 import com.kcb.student.database.test.TestDao;
-import com.kcb.student.model.account.KAccount;
+import com.kcb.student.model.KAccount;
 import com.kcbTeam.R;
 
 /**

@@ -57,6 +57,7 @@ public class LookTestAdapter extends BaseAdapter {
             holder = new ViewHolder();
             convertView =
                     LayoutInflater.from(mContext).inflate(R.layout.stu_listitem_look_test, null);
+            holder.rootLayout = convertView.findViewById(R.id.layout_root);
             holder.nameTextView = (TextView) convertView.findViewById(R.id.textview_testname);
             holder.numTextView = (TextView) convertView.findViewById(R.id.textview_questionnum);
             holder.dateTextView = (TextView) convertView.findViewById(R.id.textview_testdate);
@@ -69,11 +70,17 @@ public class LookTestAdapter extends BaseAdapter {
     }
 
     public final class ViewHolder {
+        public View rootLayout;
         public TextView nameTextView;
         public TextView numTextView;
         public TextView dateTextView;
 
         public void setTest(Test test) {
+            if (test.hasEnded()) {
+                rootLayout.setBackgroundColor(mContext.getResources().getColor(R.color.white));
+            } else {
+                rootLayout.setBackgroundColor(mContext.getResources().getColor(R.color.black_300));
+            }
             nameTextView.setText(test.getName());
             numTextView.setText(String.valueOf(test.getQuestionNum()));
             dateTextView.setText(test.getDateString());

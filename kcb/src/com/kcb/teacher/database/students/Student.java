@@ -1,4 +1,4 @@
-package com.kcb.teacher.model.stucentre;
+package com.kcb.teacher.database.students;
 
 import java.io.Serializable;
 

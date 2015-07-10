@@ -22,7 +22,7 @@ import com.kcb.library.view.FloatingEditText;
 import com.kcb.library.view.PaperButton;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
-import com.kcb.teacher.model.account.KAccount;
+import com.kcb.teacher.model.KAccount;
 import com.kcbTeam.R;
 
 public class ModifyPasswordActivity extends BaseActivity {

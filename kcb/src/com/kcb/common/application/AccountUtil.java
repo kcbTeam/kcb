@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
-import com.kcb.student.model.account.KAccount;
+import com.kcb.student.model.KAccount;
 
 public class AccountUtil {
 
@@ -32,6 +32,6 @@ public class AccountUtil {
     }
 
     public static boolean hasAccount() {
-        return KAccount.hasAccount() || com.kcb.teacher.model.account.KAccount.hasAccount();
+        return KAccount.hasAccount() || com.kcb.teacher.model.KAccount.hasAccount();
     }
 }

@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.kcb.teacher.model.checkin.UncheckedStudent;
+import com.kcb.teacher.database.checkin.UncheckedStudent;
 import com.kcbTeam.R;
 
 /**

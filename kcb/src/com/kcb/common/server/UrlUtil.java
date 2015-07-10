@@ -57,8 +57,8 @@ public class UrlUtil {
 
     private static final String url_stu_checkin_getresult = IP + "/v1/stu/checkin/getresult";
 
-    public static String getStuCheckinResultUrl(String stuId, String tchId) {
-        return url_stu_checkin_getresult + "?stuid=" + stuId + "&tchid=" + tchId;
+    public static String getStuCheckinResultUrl(String stuId, String tchId, long date) {
+        return url_stu_checkin_getresult + "?stuid=" + stuId + "&tchid=" + tchId + "&date=" + date;
     }
 
     /**
@@ -148,18 +148,26 @@ public class UrlUtil {
         return url_tch_test_detect + "?tchid=" + tchId;
     }
 
-    // 3.2 start test
+    // 3.2 开始测试
     private static final String url_tch_test_start = IP + "/v1/tch/test/start";
 
     public static String getTchTestStartUrl() {
         return url_tch_test_start;
     }
 
-    // 3.3 look test result
+    // 3.3 查看测试结果，包括内容和详情
     private static final String url_tch_test_lookresult = IP + "/v1/tch/test/lookresult";
 
-    public static String getTchTestLookresultUrl(String id) {
-        return url_tch_test_lookresult + "?tchid=" + id;
+    public static String getTchTestLookresultUrl(String id, long date) {
+        return url_tch_test_lookresult + "?tchid=" + id + "&date=" + date;
+    }
+
+    // 3.4 查看测试结果，只有详情
+    private static final String url_tch_test_lookresultdetail = IP
+            + "/v1/tch/test/lookresultdetail";
+
+    public static String getTchTestLookresultdetailUrl(String tchId, String testId) {
+        return url_tch_test_lookresultdetail + "?tchid=" + tchId + "&testid=" + testId;
     }
 
     /**
