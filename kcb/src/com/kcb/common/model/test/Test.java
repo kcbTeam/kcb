@@ -29,7 +29,7 @@ public class Test implements Serializable {
 
     private String mId; // 后台分配的测试Id
     private String mName; // 测试的名称
-    private int mTime; // 测试的时间，多少秒
+    private int mTime = 300; // 测试的时间，多少秒，默认300s
     private long mDate; // 测试创建的时间 ——> 修改的时间 ——> 开始的时间
     private boolean mHasTested; // 是否测试过了
     private List<Question> mQuestions; // 测试包括的问题
@@ -52,6 +52,10 @@ public class Test implements Serializable {
 
     public String getId() {
         return mId;
+    }
+
+    public void setName(String name) {
+        mName = name;
     }
 
     public String getName() {
@@ -88,8 +92,18 @@ public class Test implements Serializable {
         return mHasTested;
     }
 
-    public void setHasTested(boolean isTested) {
-        mHasTested = isTested;
+    public void setHasTested(int hasTested) {
+        mHasTested = hasTested == 1 ? true : false;
+    }
+
+    public void setQuestions(String questions) {
+        JSONArray questionArray;
+        try {
+            questionArray = new JSONArray(questions);
+            for (int i = 0; i < questionArray.length(); i++) {
+                mQuestions.add(Question.fromJsonObject(questionArray.optJSONObject(i)));
+            }
+        } catch (JSONException e) {}
     }
 
     // 如果测试的结束时间 < 现在的时间，表示已经结束了

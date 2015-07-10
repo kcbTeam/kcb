@@ -2,6 +2,7 @@ package com.kcb.teacher.fragment;
 
 import java.util.List;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Intent;
@@ -122,12 +123,17 @@ public class TestFragment extends BaseFragment {
 
                             @Override
                             public void onResponse(String response) {
-                                startProgressBar.hide(getActivity());
-                                if ("true".equals(response)) { // 有正在进行的测试
-                                    ToastUtil.toast(R.string.tch_has_starting_test);
-                                } else {
-                                    startTest();
-                                }
+                                startProgressBar.setVisibility(View.GONE);
+                                try {
+                                    JSONObject jsonObject = new JSONObject(response);
+                                    LogUtil.i(TAG, "tch detect, response is " + response);
+                                    startProgressBar.hide(getActivity());
+                                    if ("true".equals(jsonObject.optBoolean("has"))) { // 有正在进行的测试
+                                        ToastUtil.toast(R.string.tch_has_starting_test);
+                                    } else {
+                                        startTest();
+                                    }
+                                } catch (JSONException e) {}
                             }
                         }, new ErrorListener() {
 

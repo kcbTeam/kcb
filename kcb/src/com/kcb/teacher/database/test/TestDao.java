@@ -54,9 +54,12 @@ public class TestDao {
      */
     public List<String> getUnStartTestName() {
         Cursor cursor =
-                mDatabase.query(TestTable.TABLE_NAME, new String[] {TestTable.COLUMN_NAME},
-                        TestTable.COLUMN_HASTESTED + "=?", new String[] {String.valueOf(false)},
-                        null, null, null);
+                mDatabase.query(TestTable.TABLE_NAME, new String[] {TestTable.COLUMN_NAME}, null,
+                        null, null, null, null);
+        // Cursor cursor =
+        // mDatabase.query(TestTable.TABLE_NAME, new String[] {TestTable.COLUMN_NAME},
+        // TestTable.COLUMN_HASTESTED + "=?", new String[] {String.valueOf(false)},
+        // null, null, null);
         List<String> names = new ArrayList<String>();
         if (null != cursor) {
             try {
@@ -72,9 +75,7 @@ public class TestDao {
     }
 
     /**
-     * 编辑测试后，保存到数据库；
-     * 查看测试结果，保存到数据库；
-     * 每次开始一个测试后，删除此测试，之后，此测试只能通过查看测试结果页面刷新出来；
+     * 编辑测试后，保存到数据库； 查看测试结果，保存到数据库； 每次开始一个测试后，删除此测试，之后，此测试只能通过查看测试结果页面刷新出来；
      */
     public void add(Test test) {
         mDatabase.insert(TestTable.TABLE_NAME, null, getTestContentValues(test));
@@ -92,7 +93,26 @@ public class TestDao {
         contentValues.put(TestTable.COLUMN_TIME, test.getTime());
         contentValues.put(TestTable.COLUMN_DATE, test.getDate());
         contentValues.put(TestTable.COLUMN_HASTESTED, test.hasTested());
-        contentValues.put(TestTable.COLUMN_QUESTIONS, test.toString());
+        contentValues.put(TestTable.COLUMN_QUESTIONS, test.getQuestionsString());
+        return contentValues;
+    }
+    
+    private ContentValues getTestFromCursor(Cursor cursor) {
+        Test test = new Test();
+        test.setId(cursor.getString(cursor.getColumnIndex(TestTable.COLUMN_ID)));
+        test.setName(cursor.getString(cursor.getColumnIndex(TestTable.COLUMN_NAME)));
+        test.setTime(cursor.getInt(cursor.getColumnIndex(TestTable.COLUMN_TIME)));
+        test.setDate(cursor.getLong(cursor.getColumnIndex(TestTable.COLUMN_DATE)));
+        test.setHasTested(cursor.getInt(cursor.getColumnIndex(TestTable.COLUMN_HASTESTED)));
+        test.setQuestions(cursor.getString(cursor.getColumnIndex(TestTable.COLUMN_ID)));
+
+        
+        contentValues.put(TestTable.COLUMN_ID, test.getId());
+        contentValues.put(TestTable.COLUMN_NAME, test.getName());
+        contentValues.put(TestTable.COLUMN_TIME, test.getTime());
+        contentValues.put(TestTable.COLUMN_DATE, test.getDate());
+        contentValues.put(TestTable.COLUMN_HASTESTED, test.hasTested());
+        contentValues.put(TestTable.COLUMN_QUESTIONS, test.getQuestionsString());
         return contentValues;
     }
 
