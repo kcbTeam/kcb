@@ -98,14 +98,14 @@
         <item name="android:layout_height">32dp</item>
         <item name="android:background">@color/blue</item>
     </style>
-    <!-- 底部有多个按钮的布局 -->
+    <!-- 顶部/底部有多个按钮的布局 -->
     <style name="common_bottom_button_layout">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">48dp</item>
-        <item name="android:layout_alignParentBottom">true</item>
         <item name="android:orientation">horizontal</item>
+        <item name="android:background">@color/black_200</item>
     </style>
-    <!-- 底部的多个按钮 -->
+    <!-- 顶部/底部的多个按钮 -->
     <style name="common_bottom_button">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">match_parent</item>

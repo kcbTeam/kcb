@@ -56,8 +56,7 @@ import com.kcbTeam.R;
  */
 public class StuCentreFragment extends BaseFragment
         implements
-            OnSearchListener,
-            OnItemClickListener {
+            OnSearchListener {
 
     private static final String TAG = StuCentreFragment.class.getName();
 
@@ -119,8 +118,6 @@ public class StuCentreFragment extends BaseFragment
         correctRaTextView.setOnClickListener(this);
 
         listView = (ListView) view.findViewById(R.id.listview);
-        listView.setOnItemClickListener(this);
-
         emptyTipView = (EmptyTipView) view.findViewById(R.id.emptytipview);
 
         setSortIcon(INDEX_ID);
@@ -210,11 +207,6 @@ public class StuCentreFragment extends BaseFragment
         mSearchedStudents.addAll(mAllStudents);
         setSortIcon(INDEX_ID);
         mAdapter.notifyDataSetChanged();
-    }
-
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        StuCentreActivity.start(getActivity(), mAdapter.getItem(position));
     }
 
     private void setSortIcon(int index) {

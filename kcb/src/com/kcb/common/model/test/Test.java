@@ -79,7 +79,7 @@ public class Test implements Serializable {
     }
 
     public String getDateString() {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd\nHH:mm:ss");
         String date = sdf.format(new Date(getDate()));
         return date;
     }

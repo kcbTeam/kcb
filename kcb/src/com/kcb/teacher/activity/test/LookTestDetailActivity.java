@@ -15,6 +15,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.kcb.common.base.BaseActivity;
 import com.kcb.common.model.test.Test;
+import com.kcb.common.server.RequestUtil;
 import com.kcb.common.server.ResponseUtil;
 import com.kcb.common.server.UrlUtil;
 import com.kcb.common.util.LogUtil;
@@ -73,8 +74,11 @@ public class LookTestDetailActivity extends BaseActivity {
 
         lastButton = (ButtonFlat) findViewById(R.id.button_last);
         lastButton.setOnClickListener(this);
+        lastButton.setRippleColor(getResources().getColor(R.color.black_400));
+
         nextButton = (ButtonFlat) findViewById(R.id.button_next);
         nextButton.setOnClickListener(this);
+        nextButton.setRippleColor(getResources().getColor(R.color.black_400));
     }
 
     @Override
@@ -138,6 +142,7 @@ public class LookTestDetailActivity extends BaseActivity {
                         ResponseUtil.toastError(error);
                     }
                 });
+        RequestUtil.getInstance().addToRequestQueue(request, TAG);
     }
 
     private void lastQuestion() {

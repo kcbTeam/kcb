@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.kcb.library.view.buttonflat.ButtonFlat;
+import com.kcb.teacher.activity.stucentre.StuCentreActivity;
 import com.kcb.teacher.database.students.Student;
 import com.kcbTeam.R;
 
@@ -44,11 +46,13 @@ public class StuCentreAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
         if (convertView == null) {
             convertView = View.inflate(mContext, R.layout.tch_listitem_stucentre, null);
             holder = new ViewHolder();
+            holder.rootButton = (ButtonFlat) convertView.findViewById(R.id.button_root);
+            holder.rootButton.setRippleColor(mContext.getResources().getColor(R.color.black_300));
             holder.studentName = (TextView) convertView.findViewById(R.id.textview_studentname);
             holder.studentId = (TextView) convertView.findViewById(R.id.textview_studentid);
             holder.checkInRate = (TextView) convertView.findViewById(R.id.textview_checkinRate);
@@ -58,14 +62,22 @@ public class StuCentreAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         holder.setStudent(getItem(position));
+        holder.rootButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                StuCentreActivity.start(mContext, getItem(position));
+            }
+        });
         return convertView;
     }
 
     private class ViewHolder {
-        TextView studentName;
-        TextView studentId;
-        TextView checkInRate;
-        TextView correctRate;
+        public ButtonFlat rootButton;
+        public TextView studentName;
+        public TextView studentId;
+        public TextView checkInRate;
+        public TextView correctRate;
 
         public void setStudent(Student student) {
             studentName.setText(student.getName());

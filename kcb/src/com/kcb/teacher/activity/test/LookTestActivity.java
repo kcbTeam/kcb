@@ -1,6 +1,7 @@
 package com.kcb.teacher.activity.test;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
@@ -9,8 +10,6 @@ import org.json.JSONArray;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import com.android.volley.Request.Method;
@@ -43,7 +42,7 @@ import com.kcbTeam.R;
  * @author: ZQJ
  * @date: 2015年5月16日 下午4:00:49
  */
-public class LookTestActivity extends BaseActivity implements OnSearchListener, OnItemClickListener {
+public class LookTestActivity extends BaseActivity implements OnSearchListener {
 
     private static final String TAG = LookTestActivity.class.getName();
 
@@ -96,6 +95,7 @@ public class LookTestActivity extends BaseActivity implements OnSearchListener, 
     protected void initData() {
         TestDao testDao = new TestDao(LookTestActivity.this);
         mAllTests = testDao.getHasTested();
+        Collections.reverse(mAllTests); // 最近的测试在最上方
         testDao.close();
 
         if (mAllTests.isEmpty()) {
@@ -108,9 +108,9 @@ public class LookTestActivity extends BaseActivity implements OnSearchListener, 
         mSearchedTests = new ArrayList<Test>();
         mSearchedTests.addAll(mAllTests);
 
+        // listview 的点击事件在adapter中处理
         mAdapter = new LookTestAdapter(this, mSearchedTests);
         listView.setAdapter(mAdapter);
-        listView.setOnItemClickListener(this);
     }
 
     @Override
@@ -162,11 +162,6 @@ public class LookTestActivity extends BaseActivity implements OnSearchListener, 
         mAdapter.notifyDataSetChanged();
     }
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        LookTestDetailActivity.start(LookTestActivity.this, mAdapter.getItem(position));
-    }
-
     private void refresh() {
         if (progressBar.getVisibility() == View.VISIBLE) {
             return;
@@ -189,7 +184,7 @@ public class LookTestActivity extends BaseActivity implements OnSearchListener, 
                         TestDao testDao = new TestDao(LookTestActivity.this);
                         for (int i = 0; i < response.length(); i++) {
                             Test test = Test.fromJsonObject(response.optJSONObject(i));
-                            mAllTests.add(test);
+                            mAllTests.add(0, test); // 最新的测试在最上方
                             testDao.add(test);
                         }
                         testDao.close();

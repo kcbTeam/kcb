@@ -41,7 +41,8 @@
 
     <LinearLayout
         android:id="@+id/layout_buttons"
-        style="@style/common_bottom_button_layout" >
+        style="@style/common_bottom_button_layout"
+        android:layout_alignParentBottom="true" >
 
         <com.kcb.library.view.buttonflat.ButtonFlat
             android:id="@+id/button_last"
