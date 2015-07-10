@@ -1,4 +1,4 @@
-package com.kcb.student.view;
+package com.kcb.teacher.view;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,12 +10,13 @@ import android.widget.TextView;
 
 import com.kcb.common.util.DialogUtil;
 import com.kcb.library.view.buttonflat.ButtonFlat;
-import com.kcb.student.activity.common.HomeActivity;
-import com.kcb.student.activity.common.LoginActivity;
-import com.kcb.student.activity.common.ModifyPasswordActivity;
-import com.kcb.student.database.checkin.CheckInDao;
-import com.kcb.student.database.test.TestDao;
-import com.kcb.student.model.KAccount;
+import com.kcb.teacher.activity.common.HomeActivity;
+import com.kcb.teacher.activity.common.LoginActivity;
+import com.kcb.teacher.activity.common.ModifyPasswordActivity;
+import com.kcb.teacher.database.checkin.CheckInDao;
+import com.kcb.teacher.database.students.StudentDao;
+import com.kcb.teacher.database.test.TestDao;
+import com.kcb.teacher.model.KAccount;
 import com.kcbTeam.R;
 
 // TODO 分享一下、牛人排行
@@ -46,9 +47,9 @@ public class LeftDrawerLayout extends LinearLayout implements OnClickListener {
     private TextView userNameTextView;
     private TextView idTextView;
 
-    private TextView universityTextView;
+    private TextView universityTextview;
     private TextView courseTextView;
-    private TextView teacherNameTextView;
+    private TextView classTextView;
 
     private ButtonFlat switchSourceButton;
     private ButtonFlat modifyPasswordButton;
@@ -60,7 +61,7 @@ public class LeftDrawerLayout extends LinearLayout implements OnClickListener {
 
     private void init(Context context) {
         mContext = context;
-        inflate(mContext, R.layout.stu_activity_home_leftdrawer, this);
+        inflate(mContext, R.layout.tch_activity_home_leftdrawer, this);
         initView();
     }
 
@@ -70,12 +71,12 @@ public class LeftDrawerLayout extends LinearLayout implements OnClickListener {
         idTextView = (TextView) findViewById(R.id.textview_id);
         idTextView.setText(KAccount.getAccountId());
 
-        universityTextView = (TextView) findViewById(R.id.textview_university);
-        universityTextView.setText("东南大学");
+        universityTextview = (TextView) findViewById(R.id.textview_university);
+        universityTextview.setText("东南大学");
         courseTextView = (TextView) findViewById(R.id.textview_course);
         courseTextView.setText("数字信号处理");
-        teacherNameTextView = (TextView) findViewById(R.id.textview_teachername);
-        teacherNameTextView.setText(KAccount.getTchName());
+        classTextView = (TextView) findViewById(R.id.textview_class);
+        classTextView.setText("Y22010220");
 
         switchSourceButton = (ButtonFlat) findViewById(R.id.button_switchsource);
         switchSourceButton.setOnClickListener(this);
@@ -123,8 +124,8 @@ public class LeftDrawerLayout extends LinearLayout implements OnClickListener {
     }
 
     private void exitAccount() {
-        DialogUtil.showNormalDialog(mContext, R.string.stu_drawer_exit_account,
-                R.string.stu_exit_account_tip, R.string.stu_comm_sure, new View.OnClickListener() {
+        DialogUtil.showNormalDialog(mContext, R.string.tch_drawer_exit_account,
+                R.string.tch_exit_account_tip, R.string.tch_comm_sure, new View.OnClickListener() {
 
                     @Override
                     public void onClick(View v) {
@@ -141,10 +142,15 @@ public class LeftDrawerLayout extends LinearLayout implements OnClickListener {
                         testDao.deleteAll();
                         testDao.close();
 
+                        // delete student
+                        StudentDao studentDao = new StudentDao(mContext);
+                        studentDao.deleteAll();
+                        studentDao.close();
+
                         // goto login activity
                         LoginActivity.start(mContext);
                         ((HomeActivity) mContext).finish();
                     }
-                }, R.string.stu_comm_cancel, null);
+                }, R.string.tch_comm_cancel, null);
     }
 }

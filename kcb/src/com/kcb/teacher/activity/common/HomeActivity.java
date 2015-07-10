@@ -1,33 +1,28 @@
 package com.kcb.teacher.activity.common;
 
+import static android.view.Gravity.START;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.graphics.drawable.BitmapDrawable;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.DrawerLayout;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.kcb.common.base.BaseFragmentActivity;
-import com.kcb.common.util.DialogUtil;
 import com.kcb.common.util.StatusBarUtil;
 import com.kcb.common.util.ToastUtil;
+import com.kcb.library.view.DrawerArrowDrawable;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
-import com.kcb.teacher.database.checkin.CheckInDao;
-import com.kcb.teacher.database.students.StudentDao;
-import com.kcb.teacher.database.test.TestDao;
 import com.kcb.teacher.fragment.CheckInFragment;
 import com.kcb.teacher.fragment.StuCentreFragment;
 import com.kcb.teacher.fragment.TestFragment;
-import com.kcb.teacher.model.KAccount;
 import com.kcbTeam.R;
 
 /**
@@ -43,10 +38,15 @@ public class HomeActivity extends BaseFragmentActivity {
     private final int INDEX_TEST = 1;
     private final int INDEX_STUCENTER = 2;
 
+    private DrawerLayout drawerLayout; // 包裹了侧边栏和主体内容
+
+    private ImageView menuImageView; // 左上角的菜单图片
+    private DrawerArrowDrawable drawerArrowDrawable; // 用于绘制菜单图片
+    private float offset;
+    private boolean flipped;
+
     private SmoothProgressBar progressBar;
 
-    private ButtonFlat accountButton;
-    private TextView userNameTextView;
     private TextView titleTextView;
     private ButtonFlat refreshButton;
 
@@ -68,8 +68,6 @@ public class HomeActivity extends BaseFragmentActivity {
     private ImageView stuCenterImageView;
     private TextView stuCenterTextView;
 
-    private PopupWindow popupWindow;
-
     private int mCurrentIndex;
 
     @Override
@@ -84,18 +82,38 @@ public class HomeActivity extends BaseFragmentActivity {
 
     @Override
     protected void initView() {
-        progressBar = (SmoothProgressBar) findViewById(R.id.progressbar_refresh);
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawerlayout);
 
-        accountButton = (ButtonFlat) findViewById(R.id.button_account);
-        accountButton.setOnClickListener(this);
+        drawerArrowDrawable = new DrawerArrowDrawable(getResources());
+        drawerArrowDrawable.setStrokeColor(Color.WHITE);
 
-        userNameTextView = (TextView) findViewById(R.id.textview_username);
-        userNameTextView.setText(KAccount.getAccountName());
+        menuImageView = (ImageView) findViewById(R.id.imageview_menu);
+        menuImageView.setOnClickListener(this);
+        menuImageView.setImageDrawable(drawerArrowDrawable);
+
+        drawerLayout.setDrawerListener(new DrawerLayout.SimpleDrawerListener() {
+            @Override
+            public void onDrawerSlide(View drawerView, float slideOffset) {
+                offset = slideOffset;
+                // Sometimes slideOffset ends up so close to but not quite 1 or 0.
+                if (slideOffset >= .995) {
+                    flipped = true;
+                    drawerArrowDrawable.setFlip(flipped);
+                } else if (slideOffset <= .005) {
+                    flipped = false;
+                    drawerArrowDrawable.setFlip(flipped);
+                }
+
+                drawerArrowDrawable.setParameter(offset);
+            }
+        });
 
         titleTextView = (TextView) findViewById(R.id.textview_title);
 
         refreshButton = (ButtonFlat) findViewById(R.id.button_refresh);
         refreshButton.setOnClickListener(this);
+
+        progressBar = (SmoothProgressBar) findViewById(R.id.progressbar_refresh);
 
         checkInButton = (ButtonFlat) findViewById(R.id.button_checkin);
         checkInButton.setOnClickListener(this);
@@ -126,14 +144,11 @@ public class HomeActivity extends BaseFragmentActivity {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.button_account:
-                if (null != popupWindow && popupWindow.isShowing()) {
-                    popupWindow.dismiss();
+            case R.id.imageview_menu:
+                if (drawerLayout.isDrawerVisible(START)) {
+                    drawerLayout.closeDrawer(START);
                 } else {
-                    if (null == popupWindow) {
-                        initPopupWindow();
-                    }
-                    popupWindow.showAsDropDown(v, 0, 0);
+                    drawerLayout.openDrawer(START);
                 }
                 break;
             case R.id.button_refresh:
@@ -259,77 +274,6 @@ public class HomeActivity extends BaseFragmentActivity {
         }
     }
 
-    @SuppressWarnings("deprecation")
-    public void initPopupWindow() {
-        View customView = View.inflate(HomeActivity.this, R.layout.tch_popupwindow_account, null);
-        popupWindow =
-                new PopupWindow(customView, ViewGroup.LayoutParams.WRAP_CONTENT,
-                        ViewGroup.LayoutParams.WRAP_CONTENT);
-        popupWindow.setTouchable(true);
-        popupWindow.setFocusable(true);
-        popupWindow.setBackgroundDrawable(new BitmapDrawable());
-        popupWindow.setOutsideTouchable(true);
-
-        OnClickListener clickListener = new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                switch (v.getId()) {
-                    case R.id.button_modifypassword:
-                        popupWindow.dismiss();
-                        Intent intent = new Intent(HomeActivity.this, ModifyPasswordActivity.class);
-                        startActivity(intent);
-                        break;
-                    case R.id.button_exit:
-                        popupWindow.dismiss();
-                        exitAccount();
-                        break;
-                    default:
-                        break;
-                }
-            }
-        };
-
-        ButtonFlat modifyButton = (ButtonFlat) customView.findViewById(R.id.button_modifypassword);
-        modifyButton.setOnClickListener(clickListener);
-        modifyButton.setRippleColor(getResources().getColor(R.color.black_400));
-
-        ButtonFlat exitButton = (ButtonFlat) customView.findViewById(R.id.button_exit);
-        exitButton.setOnClickListener(clickListener);
-        exitButton.setRippleColor(getResources().getColor(R.color.black_400));
-    }
-
-    private void exitAccount() {
-        DialogUtil.showNormalDialog(HomeActivity.this, R.string.tch_exit_account,
-                R.string.tch_exit_account_tip, R.string.tch_comm_sure, new View.OnClickListener() {
-
-                    @Override
-                    public void onClick(View v) {
-                        // delete account
-                        KAccount.deleteAccount();
-
-                        // delete checkin result
-                        CheckInDao checkInDao = new CheckInDao(HomeActivity.this);
-                        checkInDao.deleteAll();
-                        checkInDao.close();
-
-                        // delete test result
-                        TestDao testDao = new TestDao(HomeActivity.this);
-                        testDao.deleteAll();
-                        testDao.close();
-
-                        // delete student
-                        StudentDao studentDao = new StudentDao(HomeActivity.this);
-                        studentDao.deleteAll();
-                        studentDao.close();
-
-                        // goto login activity
-                        LoginActivity.start(HomeActivity.this);
-                        finish();
-                    }
-                }, R.string.tch_comm_cancel, null);
-    }
-
     private boolean hasClickBack = false;
 
     @Override
@@ -356,7 +300,6 @@ public class HomeActivity extends BaseFragmentActivity {
         mTestFragment = null;
         mStuCentreFragment = null;
         mFragmentManager = null;
-        popupWindow = null;
     }
 
     /**
