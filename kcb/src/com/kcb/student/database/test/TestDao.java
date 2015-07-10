@@ -48,28 +48,6 @@ public class TestDao {
     }
 
     /**
-     * TODO delete 学生查看测试结果； 获取测试时间已到的测试；
-     */
-    public List<Test> getTimeEndTests() {
-        Cursor cursor = mDatabase.query(TestTable.TABLE_NAME, null, null, null, null, null, null);
-        List<Test> tests = new ArrayList<Test>();
-        if (null != cursor) {
-            try {
-                while (cursor.moveToNext()) {
-                    Test test = getTestFromCursor(cursor);
-                    // 如果结束的时间小于现在的时间，表示测试结束了
-                    if (test.getDate() + test.getTime() * 1000 < System.currentTimeMillis()) {
-                        tests.add(test);
-                    }
-                }
-            } catch (Exception e) {} finally {
-                cursor.close();
-            }
-        }
-        return tests;
-    }
-
-    /**
      * 获得所有的测试
      */
     public List<Test> getAll() {

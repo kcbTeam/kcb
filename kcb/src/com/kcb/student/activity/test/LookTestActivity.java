@@ -9,8 +9,6 @@ import org.json.JSONArray;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import com.android.volley.Request.Method;
@@ -25,7 +23,6 @@ import com.kcb.common.server.ResponseUtil;
 import com.kcb.common.server.UrlUtil;
 import com.kcb.common.util.StatusBarUtil;
 import com.kcb.common.util.StringMatchUtil;
-import com.kcb.common.util.ToastUtil;
 import com.kcb.common.view.common.EmptyTipView;
 import com.kcb.common.view.common.SearchEditText;
 import com.kcb.common.view.common.SearchEditText.OnSearchListener;
@@ -43,7 +40,7 @@ import com.kcbTeam.R;
  * @author: Ding
  * @date: 2015年5月7日 下午5:09:20
  */
-public class LookTestActivity extends BaseActivity implements OnSearchListener, OnItemClickListener {
+public class LookTestActivity extends BaseActivity implements OnSearchListener {
 
     private static final String TAG = LookTestActivity.class.getName();
 
@@ -92,7 +89,6 @@ public class LookTestActivity extends BaseActivity implements OnSearchListener, 
 
         listTitleLayout = findViewById(R.id.layout_listview_title);
         listView = (ListView) findViewById(R.id.listview_test);
-        listView.setOnItemClickListener(this);
 
         emptyTipView = (EmptyTipView) findViewById(R.id.emptytipview);
     }
@@ -157,21 +153,6 @@ public class LookTestActivity extends BaseActivity implements OnSearchListener, 
         mSearchedTests.clear();
         mSearchedTests.addAll(mAllTests);
         mAdapter.notifyDataSetChanged();
-    }
-
-    /**
-     * 点击列表的某一项，判断测试是否结束了，如果结束了可以进入，并刷新UI； 如果没有结束，提示结束后才可查看结果；
-     * 
-     */
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Test test = mAdapter.getItem(position);
-        if (test.hasEnded()) {
-            mAdapter.notifyDataSetChanged();
-            LookTestDetailActivity.start(LookTestActivity.this, mAdapter.getItem(position));
-        } else {
-            ToastUtil.toast("测试结束后才可查看结果");
-        }
     }
 
     /**

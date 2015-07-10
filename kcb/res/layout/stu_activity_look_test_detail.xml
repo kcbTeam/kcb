@@ -34,11 +34,8 @@
 
     <LinearLayout
         android:id="@+id/layout_buttons"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_alignParentBottom="true"
-        android:background="@color/black_200"
-        android:orientation="horizontal" >
+        style="@style/common_bottom_button_layout"
+        android:layout_alignParentBottom="true" >
 
         <com.kcb.library.view.buttonflat.ButtonFlat
             android:id="@+id/button_last"

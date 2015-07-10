@@ -8,8 +8,6 @@ import org.json.JSONException;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import com.android.volley.Request.Method;
@@ -38,7 +36,7 @@ import com.kcbTeam.R;
  * @author: ZQJ
  * @date: 2015年4月24日 下午3:22:02
  */
-public class LookCheckInActivity extends BaseActivity implements OnItemClickListener {
+public class LookCheckInActivity extends BaseActivity {
 
     private static final String TAG = LookCheckInActivity.class.getName();
 
@@ -74,7 +72,6 @@ public class LookCheckInActivity extends BaseActivity implements OnItemClickList
 
         listTitleLayout = findViewById(R.id.layout_listview_title);
         listView = (ListView) findViewById(R.id.listview);
-        listView.setOnItemClickListener(this);
 
         emptyTipView = (EmptyTipView) findViewById(R.id.emptytipview);
     }
@@ -107,11 +104,6 @@ public class LookCheckInActivity extends BaseActivity implements OnItemClickList
             default:
                 break;
         }
-    }
-
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        LookCheckInDetailActivity.start(LookCheckInActivity.this, mAdapter.getItem(position));
     }
 
     /**

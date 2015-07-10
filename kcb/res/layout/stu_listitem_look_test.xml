@@ -1,38 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:buttonflat="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/layout_root"
+<com.kcb.library.view.buttonflat.ButtonFlat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:widget="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/button_root"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:gravity="center_vertical"
-    android:orientation="horizontal"
-    android:weightSum="4" >
+    widget:clickAfterRipple="true"
+    widget:rippleSpeed="48" >
 
-    <TextView
-        android:id="@+id/textview_testname"
-        android:layout_width="0dp"
-        android:layout_height="44dp"
-        android:layout_weight="2"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="center_vertical"
-        android:textColor="@color/black"
-        android:textSize="@dimen/text_size_large" />
+        android:orientation="horizontal"
+        android:weightSum="4" >
 
-    <TextView
-        android:id="@+id/textview_questionnum"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:textColor="@color/black"
-        android:textSize="@dimen/text_size_small" />
+        <TextView
+            android:id="@+id/textview_testname"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_weight="2"
+            android:gravity="center_vertical"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_large" />
 
-    <TextView
-        android:id="@+id/textview_testdate"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:textColor="@color/black"
-        android:textSize="@dimen/text_size_small" />
+        <TextView
+            android:id="@+id/textview_questionnum"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_small" />
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/textview_testdate"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_small" />
+    </LinearLayout>
+
+</com.kcb.library.view.buttonflat.ButtonFlat>
