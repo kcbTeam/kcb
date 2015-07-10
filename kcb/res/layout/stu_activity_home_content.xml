@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:widget="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/view_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:ignore="contentDescription" >
+
+    <RelativeLayout
+        android:id="@+id/layout_title"
+        style="@style/stu_title_layout" >
+
+        <ImageView
+            android:id="@+id/imageview_menu"
+            android:layout_width="@dimen/activity_header_height"
+            android:layout_height="@dimen/activity_header_height"
+            android:scaleType="centerInside" />
+
+        <TextView
+            android:id="@+id/textview_title"
+            style="@style/common_center_title"
+            android:layout_centerInParent="true"
+            android:gravity="center" />
+    </RelativeLayout>
+
+    <fragment
+        android:id="@+id/fragment_checkin"
+        android:name="com.kcb.student.fragment.CheckInFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/layout_title" />
+
+    <fragment
+        android:id="@+id/fragment_test"
+        android:name="com.kcb.student.fragment.TestFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/layout_title" />
+
+    <LinearLayout
+        android:id="@+id/layout_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/black_300"
+        android:orientation="horizontal" >
+
+        <com.kcb.library.view.buttonflat.ButtonFlat
+            android:id="@+id/button_checkin"
+            style="@style/common_tab"
+            android:text=""
+            widget:clickAfterRipple="false"
+            widget:rippleSpeed="18" >
+
+            <ImageView
+                android:id="@+id/imageview_checkin"
+                style="@style/common_tab_imageview"
+                android:src="@drawable/ic_assignment_turned_in_white_36dp" />
+
+            <TextView
+                android:id="@+id/textview_tab_checkin"
+                style="@style/common_tab_textview"
+                android:layout_below="@id/imageview_checkin"
+                android:text="@string/stu_class_checkin" />
+        </com.kcb.library.view.buttonflat.ButtonFlat>
+
+        <com.kcb.library.view.buttonflat.ButtonFlat
+            android:id="@+id/button_test"
+            style="@style/common_tab"
+            android:text=""
+            widget:clickAfterRipple="false"
+            widget:rippleSpeed="18" >
+
+            <ImageView
+                android:id="@+id/imageview_test"
+                style="@style/common_tab_imageview"
+                android:src="@drawable/ic_event_note_white_36dp" />
+
+            <TextView
+                android:id="@+id/textview_tab_test"
+                style="@style/common_tab_textview"
+                android:layout_below="@id/imageview_test"
+                android:text="@string/stu_class_test" />
+        </com.kcb.library.view.buttonflat.ButtonFlat>
+    </LinearLayout>
+
+    <View
+        style="@style/common_divider"
+        android:layout_above="@id/layout_buttons"
+        android:background="@color/black_200" />
+
+</RelativeLayout>

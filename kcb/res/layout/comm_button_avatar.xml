@@ -14,7 +14,7 @@
         android:layout_width="48dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/ic_perm_identity_white_24dp" >
+        android:src="@drawable/ic_timer_auto_white_48dp" >
     </ImageView>
 
     <TextView

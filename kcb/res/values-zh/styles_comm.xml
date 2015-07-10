@@ -114,6 +114,32 @@
     <!-- ********** 基本组件 end ********** -->
 
 
+    <!-- ********** 侧边栏 start ********** -->
+    <!-- 每一项 -->
+    <style name="common_drawer_button">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">48dp</item>
+    </style>
+    <!-- 每一项中的图片 -->
+    <style name="common_drawer_imageview">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:paddingLeft">16dp</item>
+    </style>
+    <!-- 每一项中的文字 -->
+    <style name="common_drawer_textview">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">16dp</item>
+        <item name="android:textColor">@color/black_700</item>
+        <item name="android:textSize">@dimen/text_size_medium</item>
+    </style>
+    <!-- ********** 侧边栏 end ********** -->
+
+
     <!-- ********** 主页 start ********** -->
     <!-- 上方中部显示tab的文字 -->
     <style name="common_center_title">

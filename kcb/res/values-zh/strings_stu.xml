@@ -22,7 +22,18 @@
 
 
     <!-- HomeActivity Start -->
-    <!-- tabs -->
+    <!-- 侧边栏 -->
+    <string name="stu_drawer_university">所在学校：</string>
+    <string name="stu_drawer_course">当前课程：</string>
+    <string name="stu_drawer_teacher">任课老师：</string>
+    <!--  -->
+    <string name="stu_drawer_switch_course">切换课程</string>
+    <string name="stu_drawer_modify_password">修改密码</string>
+    <string name="stu_drawer_feedback">意见反馈</string>
+    <string name="stu_drawer_update_app">软件升级</string>
+    <string name="stu_drawer_exit_account">退出账号</string>
+    <string name="stu_exit_account_tip">退出后，下次使用时需要重新登录。</string>
+    <!--  -->
     <string name="stu_class_checkin">课堂签到</string>
     <string name="stu_class_test">课堂小测试</string>
     <!--  -->
@@ -34,10 +45,6 @@
     <string name="stu_start_test">开始答题</string>
     <string name="stu_look_test_result">查看测试结果</string>
     <string name="stu_no_test_now">没有正在进行的测试</string>
-    <!--  -->
-    <string name="stu_modify_password">修改密码</string>
-    <string name="stu_exit_account">退出账号</string>
-    <string name="stu_exit_account_tip">退出后，下次使用时需要重新登录。</string>
     <!--  -->
     <string name="stu_click_again_exit_app">再按一次退出课程宝</string>
     <!-- HomeActivity End -->
