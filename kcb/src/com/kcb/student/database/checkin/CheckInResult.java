@@ -7,8 +7,11 @@ import java.util.Date;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.annotation.SuppressLint;
+
 import com.kcb.common.util.LogUtil;
 
+@SuppressLint("SimpleDateFormat")
 public class CheckInResult {
 
     private static final String TAG = CheckInResult.class.getName();
@@ -21,7 +24,8 @@ public class CheckInResult {
     }
 
     public String getDateString() {
-        return new Date(mDate).toString();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd\nHH:mm:ss");
+        return sdf.format(new Date(mDate));
     }
 
     public boolean getHasChecked() {

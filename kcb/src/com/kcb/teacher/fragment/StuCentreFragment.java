@@ -17,8 +17,6 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -37,7 +35,6 @@ import com.kcb.common.view.common.EmptyTipView;
 import com.kcb.common.view.common.SearchEditText;
 import com.kcb.common.view.common.SearchEditText.OnSearchListener;
 import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
-import com.kcb.teacher.activity.stucentre.StuCentreActivity;
 import com.kcb.teacher.adapter.StuCentreAdapter;
 import com.kcb.teacher.database.students.Student;
 import com.kcb.teacher.database.students.StudentDao;
@@ -54,9 +51,7 @@ import com.kcbTeam.R;
  * @author: ZQJ
  * @date: 2015年4月24日 下午3:24:10
  */
-public class StuCentreFragment extends BaseFragment
-        implements
-            OnSearchListener {
+public class StuCentreFragment extends BaseFragment implements OnSearchListener {
 
     private static final String TAG = StuCentreFragment.class.getName();
 

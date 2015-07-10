@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.kcb.library.view.buttonflat.ButtonFlat;
+import com.kcb.teacher.activity.checkin.LookCheckInDetailActivity;
 import com.kcb.teacher.database.checkin.CheckInResult;
 import com.kcbTeam.R;
 
@@ -49,11 +51,14 @@ public class LookCheckInAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder = null;
         if (convertView == null) {
             convertView = View.inflate(mContext, R.layout.tch_listitem_look_checkin, null);
             viewHolder = new ViewHolder();
+            viewHolder.rootButton = (ButtonFlat) convertView.findViewById(R.id.button_root);
+            viewHolder.rootButton.setRippleColor(mContext.getResources()
+                    .getColor(R.color.black_400));
             viewHolder.dateTextView = (TextView) convertView.findViewById(R.id.textview_date);
             viewHolder.rateTextView = (TextView) convertView.findViewById(R.id.textview_rate);
             convertView.setTag(viewHolder);
@@ -61,10 +66,18 @@ public class LookCheckInAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         viewHolder.setCheckInResult(getItem(position));
+        viewHolder.rootButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                LookCheckInDetailActivity.start(mContext, getItem(position));
+            }
+        });
         return convertView;
     }
 
     private class ViewHolder {
+        public ButtonFlat rootButton;
         public TextView dateTextView;
         public TextView rateTextView;
 

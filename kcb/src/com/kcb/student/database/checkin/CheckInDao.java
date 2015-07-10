@@ -37,7 +37,7 @@ public class CheckInDao {
     public int getSuccessTimes() {
         Cursor cursor =
                 mDatabase.query(CheckInTable.TABLE_NAME, null, CheckInTable.COLUMN_HASCHECKED
-                        + "=?", new String[] {String.valueOf(true)}, null, null, null);
+                        + "=?", new String[] {String.valueOf(1)}, null, null, null);
         int times = 0;
         if (null != cursor) {
             try {
@@ -73,11 +73,12 @@ public class CheckInDao {
         long date = 0;
         Cursor cursor =
                 mDatabase.query(CheckInTable.TABLE_NAME, new String[] {CheckInTable.COLUMN_DATE},
-                        null, null, null, null, "DESC");
+                        null, null, null, null, CheckInTable.COLUMN_DATE + " DESC");
         if (null != cursor) {
             try {
-                cursor.moveToFirst();
-                date = cursor.getLong(cursor.getColumnIndex(CheckInTable.COLUMN_DATE));
+                if (cursor.moveToFirst()) {
+                    date = cursor.getLong(cursor.getColumnIndex(CheckInTable.COLUMN_DATE));
+                }
             } catch (Exception e) {} finally {
                 cursor.close();
             }
