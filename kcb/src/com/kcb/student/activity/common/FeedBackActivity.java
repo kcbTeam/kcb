@@ -17,6 +17,7 @@ import com.kcb.common.base.BaseActivity;
 import com.kcb.common.server.RequestUtil;
 import com.kcb.common.server.ResponseUtil;
 import com.kcb.common.server.UrlUtil;
+import com.kcb.common.util.StatusBarUtil;
 import com.kcb.common.util.ToastUtil;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
@@ -47,6 +48,7 @@ public class FeedBackActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.stu_activity_feedback);
+        StatusBarUtil.setStuStatusBarColor(this);
 
         initView();
         initData();

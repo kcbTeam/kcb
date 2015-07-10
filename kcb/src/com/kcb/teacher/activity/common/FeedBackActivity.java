@@ -17,6 +17,7 @@ import com.kcb.common.base.BaseActivity;
 import com.kcb.common.server.RequestUtil;
 import com.kcb.common.server.ResponseUtil;
 import com.kcb.common.server.UrlUtil;
+import com.kcb.common.util.StatusBarUtil;
 import com.kcb.common.util.ToastUtil;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
@@ -46,7 +47,8 @@ public class FeedBackActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.stu_activity_feedback);
+        setContentView(R.layout.tch_activity_feedback);
+        StatusBarUtil.setTchStatusBarColor(this);
 
         initView();
         initData();
@@ -56,11 +58,9 @@ public class FeedBackActivity extends BaseActivity {
     protected void initView() {
         backButton = (ButtonFlat) findViewById(R.id.button_back);
         backButton.setOnClickListener(this);
-        backButton.setRippleColor(getResources().getColor(R.color.stu_primary_dark));
 
         finishButton = (ButtonFlat) findViewById(R.id.button_finish);
         finishButton.setOnClickListener(this);
-        finishButton.setRippleColor(getResources().getColor(R.color.stu_primary_dark));
 
         progressBar = (SmoothProgressBar) findViewById(R.id.progressbar_finish);
 
