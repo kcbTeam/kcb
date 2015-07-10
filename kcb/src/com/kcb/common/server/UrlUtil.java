@@ -1,6 +1,5 @@
 package com.kcb.common.server;
 
-import com.kcb.student.model.KAccount;
 
 
 /**
@@ -122,6 +121,13 @@ public class UrlUtil {
 
     public static String getTchModifyPasswordUrl(String id, String newPassword) {
         return url_tch_modifypassword + "?tchid=" + id + "&new=" + newPassword;
+    }
+
+    // 1.4 意见反馈
+    private static final String url_tch_feedback = IP + "/v1/tch/account/feedback";
+
+    public static String getTchFeedbackUrl(String tchId, String tchName) {
+        return url_tch_feedback + "?tchid=" + tchId + "&tchname=" + tchName;
     }
 
     /**

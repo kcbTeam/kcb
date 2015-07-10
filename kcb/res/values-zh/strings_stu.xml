@@ -65,6 +65,7 @@
     <!-- FeedBack start -->
     <string name="stu_feedback_tip">说说你对这个app的一些看法或者建议吧~我们会在后续的版本中注意的！</string>
     <string name="stu_feedback_hint">我想说...</string>
+    <string name="stu_feedback_success">提交成功，感谢反馈！</string>
     <!-- FeedBack end -->
 
 

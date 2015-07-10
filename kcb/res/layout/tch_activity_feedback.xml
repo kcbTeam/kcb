@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:widget="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/activity_background"
+    android:fitsSystemWindows="true"
+    tools:ignore="contentDescription" >
+
+    <LinearLayout
+        android:id="@+id/layout_title"
+        style="@style/tch_title_layout" >
+
+        <include layout="@layout/comm_button_back" />
+
+        <TextView
+            style="@style/common_title"
+            android:text="@string/tch_drawer_feedback" />
+
+        <include layout="@layout/comm_button_finish" />
+    </LinearLayout>
+
+    <com.kcb.library.view.smoothprogressbar.SmoothProgressBar
+        android:id="@+id/progressbar_finish"
+        style="@style/common_title_progressbar"
+        android:layout_below="@id/layout_title"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/textview_tip"
+        style="@style/common_tip_textview"
+        android:layout_below="@id/layout_title"
+        android:layout_marginTop="16dp"
+        android:text="@string/tch_feedback_tip" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textview_tip"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="16dp" >
+
+        <EditText
+            android:id="@+id/edittext_feedback"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/comm_rectangle"
+            android:gravity="top|left"
+            android:hint="@string/tch_feedback_hint"
+            android:inputType="textMultiLine"
+            android:lineSpacingExtra="2dp"
+            android:minLines="7"
+            android:padding="8dp"
+            android:textColor="@color/black_700"
+            android:textColorHint="@color/black_400"
+            android:textCursorDrawable="@drawable/comm_text_cursor"
+            android:textSize="@dimen/text_size_medium" />
+    </ScrollView>
+
+</RelativeLayout>

@@ -1,4 +1,4 @@
-package com.kcb.student.activity.common;
+package com.kcb.teacher.activity.common;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -20,7 +20,7 @@ import com.kcb.common.server.UrlUtil;
 import com.kcb.common.util.ToastUtil;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
-import com.kcb.student.model.KAccount;
+import com.kcb.teacher.model.KAccount;
 import com.kcbTeam.R;
 
 /**
@@ -111,23 +111,22 @@ public class FeedBackActivity extends BaseActivity {
         }
         progressBar.setVisibility(View.VISIBLE);
         StringRequest request =
-                new StringRequest(Method.POST, UrlUtil.getStuFeedbackUrl(KAccount.getAccountId(),
-                        KAccount.getAccountName(), KAccount.getTchId(), KAccount.getTchName()),
-                        new Listener<String>() {
-                            @Override
-                            public void onResponse(String response) {
-                                ToastUtil.toast(R.string.stu_feedback_success);
-                                progressBar.hide(FeedBackActivity.this);
-                                submitSuccess = true;
-                                onBackPressed();
-                            }
-                        }, new ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                progressBar.hide(FeedBackActivity.this);
-                                ResponseUtil.toastError(error);
-                            }
-                        });
+                new StringRequest(Method.POST, UrlUtil.getTchFeedbackUrl(KAccount.getAccountId(),
+                        com.kcb.teacher.model.KAccount.getAccountName()), new Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        ToastUtil.toast(R.string.tch_feedback_success);
+                        progressBar.hide(FeedBackActivity.this);
+                        submitSuccess = true;
+                        onBackPressed();
+                    }
+                }, new ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        progressBar.hide(FeedBackActivity.this);
+                        ResponseUtil.toastError(error);
+                    }
+                });
         RequestUtil.getInstance().addToRequestQueue(request, TAG);
     }
 }
