@@ -13,7 +13,7 @@
         android:id="@+id/layout_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/stu_primary_dark"
+        android:background="@color/tch_primary_dark"
         android:padding="16dp" >
 
         <ImageView
@@ -49,7 +49,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/textview_id"
-            android:text="@string/stu_drawer_university"
+            android:text="@string/tch_drawer_university"
             android:textColor="@color/black_200"
             android:textSize="@dimen/text_size_medium" />
 
@@ -69,7 +69,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/textview_universitytip"
             android:paddingTop="4dp"
-            android:text="@string/stu_drawer_course"
+            android:text="@string/tch_drawer_course"
             android:textColor="@color/black_200"
             android:textSize="@dimen/text_size_medium" />
 
@@ -84,21 +84,21 @@
             android:textSize="@dimen/text_size_medium" />
 
         <TextView
-            android:id="@+id/textview_teachertip"
+            android:id="@+id/textview_classtip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/textview_coursetip"
             android:paddingTop="4dp"
-            android:text="@string/stu_drawer_teacher"
+            android:text="@string/tch_drawer_class"
             android:textColor="@color/black_200"
             android:textSize="@dimen/text_size_medium" />
 
         <TextView
-            android:id="@+id/textview_teachername"
+            android:id="@+id/textview_class"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/textview_teachertip"
-            android:layout_toRightOf="@id/textview_teachertip"
+            android:layout_alignBottom="@id/textview_classtip"
+            android:layout_toRightOf="@id/textview_classtip"
             android:paddingLeft="4dp"
             android:textColor="@color/black_200"
             android:textSize="@dimen/text_size_medium" />
@@ -118,7 +118,7 @@
         <TextView
             style="@style/common_drawer_textview"
             android:layout_toRightOf="@id/imageview_switchsource"
-            android:text="@string/stu_drawer_switch_course" />
+            android:text="@string/tch_drawer_switch_course" />
     </com.kcb.library.view.buttonflat.ButtonFlat>
 
     <com.kcb.library.view.buttonflat.ButtonFlat
@@ -134,7 +134,7 @@
         <TextView
             style="@style/common_drawer_textview"
             android:layout_toRightOf="@id/imageview_modifypassword"
-            android:text="@string/stu_drawer_modify_password" />
+            android:text="@string/tch_drawer_modify_password" />
     </com.kcb.library.view.buttonflat.ButtonFlat>
 
     <com.kcb.library.view.buttonflat.ButtonFlat
@@ -150,7 +150,7 @@
         <TextView
             style="@style/common_drawer_textview"
             android:layout_toRightOf="@id/imageview_feedback"
-            android:text="@string/stu_drawer_feedback" />
+            android:text="@string/tch_drawer_feedback" />
     </com.kcb.library.view.buttonflat.ButtonFlat>
 
     <com.kcb.library.view.buttonflat.ButtonFlat
@@ -166,7 +166,7 @@
         <TextView
             style="@style/common_drawer_textview"
             android:layout_toRightOf="@id/imageview_update"
-            android:text="@string/stu_drawer_update_app" />
+            android:text="@string/tch_drawer_update_app" />
     </com.kcb.library.view.buttonflat.ButtonFlat>
 
     <com.kcb.library.view.buttonflat.ButtonFlat
@@ -183,7 +183,7 @@
         <TextView
             style="@style/common_drawer_textview"
             android:layout_toRightOf="@id/imageview_exit"
-            android:text="@string/stu_drawer_exit_account" />
+            android:text="@string/tch_drawer_exit_account" />
     </com.kcb.library.view.buttonflat.ButtonFlat>
 
 </LinearLayout>

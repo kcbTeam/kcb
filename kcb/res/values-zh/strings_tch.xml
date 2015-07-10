@@ -21,6 +21,17 @@
 
 
     <!-- HomeActivity start -->
+    <!-- 侧边栏 -->
+    <string name="tch_drawer_university">所在学校：</string>
+    <string name="tch_drawer_course">当前课程：</string>
+    <string name="tch_drawer_class">当前班级：</string>
+    <!--  -->
+    <string name="tch_drawer_switch_course">切换课程</string>
+    <string name="tch_drawer_modify_password">修改密码</string>
+    <string name="tch_drawer_feedback">意见反馈</string>
+    <string name="tch_drawer_update_app">软件升级</string>
+    <string name="tch_drawer_exit_account">退出账号</string>
+    <string name="tch_exit_account_tip">退出后，不会保存未进行的测试，下次使用时需要重新登录。</string>
     <!-- tabs -->
     <string name="tch_class_checkin">课堂签到</string>
     <string name="tch_class_test">课堂小测试</string>
@@ -47,14 +58,11 @@
     <string name="tch_correct_rate">正确率</string>
     <string name="tch_no_student">没有学生信息</string>
     <!-- menu -->
-    <string name="tch_exit_account">退出账号</string>
-    <string name="tch_exit_account_tip">退出后，不会保存未进行的测试，下次使用时需要重新登录。</string>
     <string name="tch_click_again_exit_app">再按一次退出课程宝</string>
     <!-- HomeActivty end -->
 
 
     <!-- Modify PassWord Start -->
-    <string name="tch_modify_password">修改密码</string>
     <string name="tch_input_old_password">输入原密码</string>
     <string name="tch_old_password">原密码</string>
     <string name="tch_next_step">下一步</string>
