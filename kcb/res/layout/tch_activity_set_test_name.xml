@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:materialdesign="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:widget="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -95,8 +94,8 @@
         android:layout_marginLeft="-24.5dp"
         android:layout_marginRight="-24.5dp"
         android:background="@color/blue"
-        materialdesign:max="9"
-        materialdesign:min="1"
-        materialdesign:showNumberIndicator="true" />
+        widget:max="9"
+        widget:min="1"
+        widget:showNumberIndicator="true" />
 
 </RelativeLayout>

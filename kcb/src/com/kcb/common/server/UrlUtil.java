@@ -1,6 +1,7 @@
 package com.kcb.common.server;
 
 
+
 /**
  * 
  * @className: UrlUtil
@@ -37,6 +38,15 @@ public class UrlUtil {
 
     public static String getStuModifyPasswordUrl(String id, String newPassword) {
         return url_stu_modifypassword + "?stuid=" + id + "&new=" + newPassword;
+    }
+
+    // 1.4 意见反馈
+    private static final String url_stu_feedback = IP + "/v1/stu/account/feedback";
+
+    public static String getStuFeedbackUrl(String stuId, String stuName, String tchId,
+            String tchName) {
+        return url_stu_feedback + "?stuid=" + stuId + "&stuname=" + stuName + "&tchid=" + tchId
+                + "&tchname=" + tchName;
     }
 
     /**
@@ -111,6 +121,13 @@ public class UrlUtil {
 
     public static String getTchModifyPasswordUrl(String id, String newPassword) {
         return url_tch_modifypassword + "?tchid=" + id + "&new=" + newPassword;
+    }
+
+    // 1.4 意见反馈
+    private static final String url_tch_feedback = IP + "/v1/tch/account/feedback";
+
+    public static String getTchFeedbackUrl(String tchId, String tchName) {
+        return url_tch_feedback + "?tchid=" + tchId + "&tchname=" + tchName;
     }
 
     /**

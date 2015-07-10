@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.kcb.common.util.DialogUtil;
 import com.kcb.library.view.buttonflat.ButtonFlat;
+import com.kcb.teacher.activity.common.FeedBackActivity;
 import com.kcb.teacher.activity.common.HomeActivity;
 import com.kcb.teacher.activity.common.LoginActivity;
 import com.kcb.teacher.activity.common.ModifyPasswordActivity;
@@ -110,7 +111,8 @@ public class LeftDrawerLayout extends LinearLayout implements OnClickListener {
                 mContext.startActivity(intent);
                 break;
             case R.id.button_feedback:
-
+                Intent intent2 = new Intent(mContext, FeedBackActivity.class);
+                mContext.startActivity(intent2);
                 break;
             case R.id.button_updateapp:
 
