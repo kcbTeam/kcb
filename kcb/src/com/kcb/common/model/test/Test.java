@@ -92,8 +92,8 @@ public class Test implements Serializable {
         return mHasTested;
     }
 
-    public void setHasTested(int hasTested) {
-        mHasTested = hasTested == 1 ? true : false;
+    public void setHasTested(boolean hasTested) {
+        mHasTested = hasTested;
     }
 
     public void setQuestions(String questions) {

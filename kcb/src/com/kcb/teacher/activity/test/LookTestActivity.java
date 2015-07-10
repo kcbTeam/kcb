@@ -193,7 +193,7 @@ public class LookTestActivity extends BaseActivity implements OnSearchListener, 
                             testDao.add(test);
                         }
                         testDao.close();
-                        
+
                         // switch view
                         if (!mAllTests.isEmpty()) {
                             searchEditText.setVisibility(View.VISIBLE);

@@ -3,9 +3,6 @@ package com.kcb.student.database.test;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -38,9 +35,20 @@ public class TestDao {
         mDatabase.insert(TestTable.TABLE_NAME, null, contentValues);
     }
 
+    private Test getTestFromCursor(Cursor cursor) {
+        Test test = new Test();
+        test.setId(cursor.getString(cursor.getColumnIndex(TestTable.COLUMN_ID)));
+        test.setName(cursor.getString(cursor.getColumnIndex(TestTable.COLUMN_NAME)));
+        test.setTime(cursor.getInt(cursor.getColumnIndex(TestTable.COLUMN_TIME)));
+        test.setDate(cursor.getLong(cursor.getColumnIndex(TestTable.COLUMN_DATE)));
+        int hasTested = cursor.getInt(cursor.getColumnIndex(TestTable.COLUMN_HASTESTED));
+        test.setHasTested(hasTested == 1 ? true : false);
+        test.setQuestions(cursor.getString(cursor.getColumnIndex(TestTable.COLUMN_QUESTIONS)));
+        return test;
+    }
+
     /**
-     * TODO delete
-     * 学生查看测试结果； 获取测试时间已到的测试；
+     * TODO delete 学生查看测试结果； 获取测试时间已到的测试；
      */
     public List<Test> getTimeEndTests() {
         Cursor cursor = mDatabase.query(TestTable.TABLE_NAME, null, null, null, null, null, null);
@@ -48,15 +56,11 @@ public class TestDao {
         if (null != cursor) {
             try {
                 while (cursor.moveToNext()) {
-                    try {
-                        Test test =
-                                Test.fromJsonObject(new JSONObject(cursor.getString(cursor
-                                        .getColumnIndex(TestTable.COLUMN_QUESTIONS))));
-                        // 如果结束的时间小于现在的时间，表示测试结束了
-                        if (test.getDate() + test.getTime() * 1000 < System.currentTimeMillis()) {
-                            tests.add(test);
-                        }
-                    } catch (JSONException e) {}
+                    Test test = getTestFromCursor(cursor);
+                    // 如果结束的时间小于现在的时间，表示测试结束了
+                    if (test.getDate() + test.getTime() * 1000 < System.currentTimeMillis()) {
+                        tests.add(test);
+                    }
                 }
             } catch (Exception e) {} finally {
                 cursor.close();
@@ -74,12 +78,8 @@ public class TestDao {
         if (null != cursor) {
             try {
                 while (cursor.moveToNext()) {
-                    try {
-                        Test test =
-                                Test.fromJsonObject(new JSONObject(cursor.getString(cursor
-                                        .getColumnIndex(TestTable.COLUMN_QUESTIONS))));
-                        tests.add(test);
-                    } catch (JSONException e) {}
+                    Test test = getTestFromCursor(cursor);
+                    tests.add(test);
                 }
             } catch (Exception e) {} finally {
                 cursor.close();

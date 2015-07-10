@@ -154,7 +154,7 @@ public class QuestionItem implements Serializable {
     public boolean isEidtFinish() {
         return !TextUtils.isEmpty(mText) || mBitmap != null;
     }
-    
+
     public void deleteBitmap() {
         if (null != mBitmapPath) {
             new File(mBitmapPath).delete();

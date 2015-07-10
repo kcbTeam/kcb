@@ -67,8 +67,7 @@ public class CheckInDao {
     }
 
     /**
-     * 获取最近的一次签到时间；
-     * 将时间由大到小倒序后，取出第一个值就是最近的时间；
+     * 获取最近的一次签到时间； 将时间由大到小倒序后，取出第一个值就是最近的时间；
      */
     public long getLeastDate() {
         long date = 0;
