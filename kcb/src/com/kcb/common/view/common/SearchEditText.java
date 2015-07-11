@@ -5,10 +5,9 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 
+import com.kcb.common.base.BaseRelativeLayout;
 import com.kcb.library.view.FloatingEditText;
 import com.kcbTeam.R;
 
@@ -19,21 +18,18 @@ import com.kcbTeam.R;
  * @author: wanghang
  * @date: 2015-6-7 下午9:08:04
  */
-public class SearchEditText extends RelativeLayout implements TextWatcher, OnClickListener {
+public class SearchEditText extends BaseRelativeLayout implements TextWatcher {
 
     public SearchEditText(Context context) {
         super(context);
-        init(context);
     }
 
     public SearchEditText(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init(context);
     }
 
     public SearchEditText(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        init(context);
     }
 
     /**
@@ -53,12 +49,14 @@ public class SearchEditText extends RelativeLayout implements TextWatcher, OnCli
     /**
      * 1 step
      */
-    private void init(Context context) {
+    @Override
+    public void init(Context context) {
         inflate(context, R.layout.comm_view_edittext_search, this);
         initView();
     }
 
-    private void initView() {
+    @Override
+    public void initView() {
         searchEditText = (FloatingEditText) findViewById(R.id.edittext_search);
         searchEditText.addTextChangedListener(this);
 
@@ -66,15 +64,20 @@ public class SearchEditText extends RelativeLayout implements TextWatcher, OnCli
         clearImageView.setOnClickListener(this);
     }
 
+    @Override
+    public void release() {
+        mListener = null;
+    }
+
     /**
-     * 2 step
+     * 1 step
      */
     public void setOnSearchListener(OnSearchListener listener) {
         mListener = listener;
     }
 
     /**
-     * 3 step
+     * 2 step
      */
     public void setHint(int resId) {
         searchEditText.setHint(resId);
@@ -113,9 +116,5 @@ public class SearchEditText extends RelativeLayout implements TextWatcher, OnCli
 
     public void setText(String text) {
         searchEditText.setText(text);
-    }
-
-    public void release() {
-        mListener = null;
     }
 }
