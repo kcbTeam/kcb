@@ -18,9 +18,9 @@ import com.kcb.teacher.database.checkin.CheckInDao;
 import com.kcb.teacher.database.students.StudentDao;
 import com.kcb.teacher.database.test.TestDao;
 import com.kcb.teacher.model.KAccount;
+import com.kcb.teacher.util.SharedPreferenceUtil;
 import com.kcbTeam.R;
 
-// TODO 分享一下、牛人排行
 /**
  * 
  * @className: LeftDrawerLayout
@@ -131,26 +131,31 @@ public class LeftDrawerLayout extends LinearLayout implements OnClickListener {
 
                     @Override
                     public void onClick(View v) {
-                        // delete account
-                        KAccount.deleteAccount();
+                        // 删除账户信息
+                        KAccount.clear();
 
-                        // delete checkin result
+                        // 删除签到信息
                         CheckInDao checkInDao = new CheckInDao(mContext);
                         checkInDao.deleteAll();
                         checkInDao.close();
 
-                        // delete test result
+                        // 删除测试信息
                         TestDao testDao = new TestDao(mContext);
                         testDao.deleteAll();
                         testDao.close();
 
-                        // delete student
+                        // 删除学生信息
                         StudentDao studentDao = new StudentDao(mContext);
                         studentDao.deleteAll();
                         studentDao.close();
 
-                        // goto login activity
+                        // 删除SharedPreference数据
+                        SharedPreferenceUtil.clear();
+
+                        // 显示登录界面
                         LoginActivity.start(mContext);
+
+                        // 销毁主界面
                         ((HomeActivity) mContext).finish();
                     }
                 }, R.string.tch_comm_cancel, null);
