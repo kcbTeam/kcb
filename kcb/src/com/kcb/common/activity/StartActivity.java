@@ -9,9 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.kcb.common.application.AccountUtil;
 import com.kcb.common.base.BaseActivity;
 import com.kcb.common.listener.DelayClickListener;
+import com.kcb.common.util.AccountUtil;
 import com.kcb.library.view.ColorAnimationView;
 import com.kcb.library.view.PaperButton;
 import com.kcb.student.activity.common.HomeActivity;
