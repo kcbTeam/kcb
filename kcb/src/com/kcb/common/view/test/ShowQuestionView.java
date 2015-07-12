@@ -12,7 +12,9 @@ import com.kcb.common.base.BaseLinearLayout;
 import com.kcb.common.model.test.Question;
 import com.kcb.common.model.test.QuestionItem;
 import com.kcb.common.util.DialogUtil;
+import com.kcb.common.util.ImageLoaderUtil;
 import com.kcbTeam.R;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 /**
  * 
@@ -177,6 +179,10 @@ public class ShowQuestionView extends BaseLinearLayout {
         } else {
             textView.setText("");
             textView.setVisibility(View.GONE);
+            // TODO 使用UIL网络图片加载框架
+            ImageLoader.getInstance().displayImage(item.getBitmapUrl(), imageView,
+                    ImageLoaderUtil.getOptions());
+
             new LoadBitmapAsyncTask(imageView).execute(item);
             imageView.setVisibility(View.VISIBLE);
         }
