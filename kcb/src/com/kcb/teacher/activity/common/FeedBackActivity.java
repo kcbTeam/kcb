@@ -1,8 +1,5 @@
 package com.kcb.teacher.activity.common;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -22,6 +19,7 @@ import com.kcb.common.util.ToastUtil;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
 import com.kcb.teacher.model.KAccount;
+import com.kcb.teacher.util.SharedPreferenceUtil;
 import com.kcbTeam.R;
 
 /**
@@ -41,8 +39,6 @@ public class FeedBackActivity extends BaseActivity {
     private EditText feedbackEditText;
 
     private boolean submitSuccess; // 如果提交失败，然后返回了，将内容保存；
-
-    private static final String PREF_KEY = "feedback"; // activity私有的sharedpreference
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,8 +68,7 @@ public class FeedBackActivity extends BaseActivity {
      */
     @Override
     protected void initData() {
-        SharedPreferences preference = getPreferences(Context.MODE_PRIVATE);
-        feedbackEditText.setText(preference.getString(PREF_KEY, ""));
+        feedbackEditText.setText(SharedPreferenceUtil.getFeedbackContent());
     }
 
     @Override
@@ -92,15 +87,13 @@ public class FeedBackActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        // 保存为提交的内容到本地；
-        if (!submitSuccess) {
+        if (!submitSuccess) { // 如果未提交成功，保存内容到本地；
             String feedback = feedbackEditText.getText().toString().trim();
             if (!TextUtils.isEmpty(feedback)) {
-                SharedPreferences preference = getPreferences(Context.MODE_PRIVATE);
-                Editor editor = preference.edit();
-                editor.putString(PREF_KEY, feedback);
-                editor.commit();
+                SharedPreferenceUtil.setFeedbackContent(feedback);
             }
+        } else { // 如果提交成功，清空数据；
+            SharedPreferenceUtil.setFeedbackContent("");
         }
         super.onBackPressed();
     }

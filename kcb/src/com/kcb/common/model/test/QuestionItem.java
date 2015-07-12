@@ -108,6 +108,10 @@ public class QuestionItem implements Serializable {
     public String getBitmapPath() {
         return mBitmapPath;
     }
+    
+    public String getBitmapUrl(){
+        return mBitmapUrl;
+    }
 
     // 设置传输图片时候的key
     public void setBitmapKey(int questionId) {

@@ -4,10 +4,9 @@ import android.content.Context;
 import android.text.InputType;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 
+import com.kcb.common.base.BaseRelativeLayout;
 import com.kcb.library.view.FloatingEditText;
 import com.kcbTeam.R;
 
@@ -18,54 +17,39 @@ import com.kcbTeam.R;
  * @author: wanghang
  * @date: 2015-6-7 下午9:08:04
  */
-public class PasswordEditText extends RelativeLayout implements OnClickListener {
+public class PasswordEditText extends BaseRelativeLayout {
 
     public PasswordEditText(Context context) {
         super(context);
-        init(context);
     }
 
     public PasswordEditText(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init(context);
     }
 
     public PasswordEditText(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        init(context);
     }
 
     private FloatingEditText passwordEditText;
     private ImageView changeInputTypeImageView;
 
-    /**
-     * 1 step
-     */
-    private void init(Context context) {
+    @Override
+    public void init(Context context) {
         inflate(context, R.layout.comm_view_edittext_password, this);
         initView();
     }
 
-    private void initView() {
+    @Override
+    public void initView() {
         passwordEditText = (FloatingEditText) findViewById(R.id.edittext_password);
 
         changeInputTypeImageView = (ImageView) findViewById(R.id.imageview_changeinputtype);
         changeInputTypeImageView.setOnClickListener(this);
     }
 
-    /**
-     * 3 step
-     */
-    public void setHint(int resId) {
-        passwordEditText.setHint(resId);
-    }
-
-    /**
-     * 4 step
-     */
-    public String getText() {
-        return passwordEditText.getText().toString();
-    }
+    @Override
+    public void release() {}
 
     @Override
     public void onClick(View v) {
@@ -90,5 +74,13 @@ public class PasswordEditText extends RelativeLayout implements OnClickListener 
             default:
                 break;
         }
+    }
+
+    public void setHint(int resId) {
+        passwordEditText.setHint(resId);
+    }
+
+    public String getText() {
+        return passwordEditText.getText().toString();
     }
 }

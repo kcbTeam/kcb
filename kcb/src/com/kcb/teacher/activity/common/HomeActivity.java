@@ -10,6 +10,7 @@ import android.os.Handler;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -277,7 +278,21 @@ public class HomeActivity extends BaseFragmentActivity {
     private boolean hasClickBack = false;
 
     @Override
-    public void onBackPressed() {
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        switch (keyCode) {
+            case KeyEvent.KEYCODE_BACK:
+                exitApp();
+                break;
+            case KeyEvent.KEYCODE_MENU:
+                onClick(menuImageView);
+                break;
+            default:
+                break;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    private void exitApp() {
         if (!hasClickBack) {
             hasClickBack = true;
             ToastUtil.toast(R.string.tch_click_again_exit_app);

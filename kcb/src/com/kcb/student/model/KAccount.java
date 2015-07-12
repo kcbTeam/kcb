@@ -57,7 +57,10 @@ public class KAccount {
         editor.commit();
     }
 
-    public static void deleteAccount() {
+    /**
+     * 退出账号的时候，删除账号信息；
+     */
+    public static void clear() {
         SharedPreferences sPreferences =
                 KApplication.getInstance().getSharedPreferences(STU_ACCOUNT, Context.MODE_PRIVATE);
         Editor editor = sPreferences.edit();
