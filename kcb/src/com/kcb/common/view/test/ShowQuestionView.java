@@ -182,8 +182,8 @@ public class ShowQuestionView extends BaseLinearLayout {
             // TODO 使用UIL网络图片加载框架
             ImageLoader.getInstance().displayImage(item.getBitmapUrl(), imageView,
                     ImageLoaderUtil.getOptions());
-
-            new LoadBitmapAsyncTask(imageView).execute(item);
+            // TODO delete?
+            // new LoadBitmapAsyncTask(imageView).execute(item);
             imageView.setVisibility(View.VISIBLE);
         }
         if (null != checkIcon) {
