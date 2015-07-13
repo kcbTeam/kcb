@@ -107,6 +107,7 @@
                 android:id="@+id/button_switchsource"
                 style="@style/common_drawer_button"
                 android:layout_marginTop="8dp"
+                android:visibility="gone"
                 widget:rippleSpeed="36" >
 
                 <ImageView
@@ -123,6 +124,7 @@
             <com.kcb.library.view.buttonflat.ButtonFlat
                 android:id="@+id/button_modifypassword"
                 style="@style/common_drawer_button"
+                android:layout_marginTop="8dp"
                 widget:rippleSpeed="36" >
 
                 <ImageView
@@ -171,7 +173,6 @@
             <com.kcb.library.view.buttonflat.ButtonFlat
                 android:id="@+id/button_exitaccount"
                 style="@style/common_drawer_button"
-                android:layout_marginBottom="8dp"
                 widget:rippleSpeed="36" >
 
                 <ImageView
@@ -183,6 +184,23 @@
                     style="@style/common_drawer_textview"
                     android:layout_toRightOf="@id/imageview_exit"
                     android:text="@string/tch_drawer_exit_account" />
+            </com.kcb.library.view.buttonflat.ButtonFlat>
+
+            <com.kcb.library.view.buttonflat.ButtonFlat
+                android:id="@+id/button_aboutus"
+                style="@style/common_drawer_button"
+                android:layout_marginBottom="8dp"
+                widget:rippleSpeed="36" >
+
+                <ImageView
+                    android:id="@+id/imageview_aboutus"
+                    style="@style/common_drawer_imageview"
+                    android:src="@drawable/ic_tag_faces_grey600_24dp" />
+
+                <TextView
+                    style="@style/common_drawer_textview"
+                    android:layout_toRightOf="@id/imageview_aboutus"
+                    android:text="@string/tch_drawer_aboutus" />
             </com.kcb.library.view.buttonflat.ButtonFlat>
         </LinearLayout>
     </ScrollView>

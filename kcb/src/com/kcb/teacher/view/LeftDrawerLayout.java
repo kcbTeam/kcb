@@ -8,6 +8,7 @@ import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.kcb.common.activity.AboutusActivity;
 import com.kcb.common.util.DialogUtil;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.teacher.activity.common.FeedBackActivity;
@@ -57,6 +58,7 @@ public class LeftDrawerLayout extends LinearLayout implements OnClickListener {
     private ButtonFlat feedbackButton;
     private ButtonFlat updateAppButton;
     private ButtonFlat exitAccountButton;
+    private ButtonFlat aboutusButton;
 
     private Context mContext;
 
@@ -98,6 +100,10 @@ public class LeftDrawerLayout extends LinearLayout implements OnClickListener {
         exitAccountButton = (ButtonFlat) findViewById(R.id.button_exitaccount);;
         exitAccountButton.setOnClickListener(this);
         exitAccountButton.setRippleColor(getResources().getColor(R.color.black_300));
+
+        aboutusButton = (ButtonFlat) findViewById(R.id.button_aboutus);
+        aboutusButton.setOnClickListener(this);
+        aboutusButton.setRippleColor(getResources().getColor(R.color.black_300));
     }
 
     @Override
@@ -119,6 +125,9 @@ public class LeftDrawerLayout extends LinearLayout implements OnClickListener {
                 break;
             case R.id.button_exitaccount:
                 exitAccount();
+                break;
+            case R.id.button_aboutus:
+                AboutusActivity.startTch(mContext);
                 break;
             default:
                 break;
