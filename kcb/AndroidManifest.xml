@@ -151,10 +151,10 @@
         <!-- teacher end -->
         <meta-data
             android:name="UMENG_APPKEY"
-            android:value="55a1c97767e58e3cfc006692" />
+            android:value="55a26e6a67e58e69ed008abe" />
         <meta-data
             android:name="UMENG_CHANNEL"
-            android:value="channel_one" />
+            android:value="zqj" />
     </application>
 
 </manifest>

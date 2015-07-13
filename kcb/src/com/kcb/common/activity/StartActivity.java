@@ -17,6 +17,7 @@ import com.kcb.library.view.PaperButton;
 import com.kcb.student.activity.common.HomeActivity;
 import com.kcb.student.activity.common.LoginActivity;
 import com.kcbTeam.R;
+import com.umeng.analytics.MobclickAgent;
 
 /**
  * 
@@ -142,6 +143,21 @@ public class StartActivity extends BaseActivity {
     public void onBackPressed() {
         super.onBackPressed();
         System.exit(0);
+    }
+    
+    /**
+     * onResume onPause added umeng code.
+     */
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 
     @Override
