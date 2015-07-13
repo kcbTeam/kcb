@@ -14,6 +14,7 @@ import com.kcb.common.base.BaseActivity;
 import com.kcb.common.server.RequestUtil;
 import com.kcb.common.server.ResponseUtil;
 import com.kcb.common.server.UrlUtil;
+import com.kcb.common.util.AnimationUtil;
 import com.kcb.common.util.StatusBarUtil;
 import com.kcb.common.util.ToastUtil;
 import com.kcb.library.view.buttonflat.ButtonFlat;
@@ -99,6 +100,11 @@ public class FeedBackActivity extends BaseActivity {
     }
 
     private void submitFeedback() {
+        String feedbackString = feedbackEditText.getText().toString();
+        if (TextUtils.isEmpty(feedbackString)) {
+            AnimationUtil.shake(feedbackEditText);
+            return;
+        }
         if (progressBar.getVisibility() == View.VISIBLE) {
             return;
         }

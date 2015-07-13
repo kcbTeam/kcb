@@ -16,6 +16,7 @@ import com.kcb.common.server.RequestUtil;
 import com.kcb.common.server.ResponseUtil;
 import com.kcb.common.server.UrlUtil;
 import com.kcb.common.util.AnimationUtil;
+import com.kcb.common.util.LogUtil;
 import com.kcb.common.util.StatusBarUtil;
 import com.kcb.common.util.ToastUtil;
 import com.kcb.library.view.FloatingEditText;
@@ -134,6 +135,7 @@ public class ModifyPasswordActivity extends BaseActivity {
                             nextProgressBar.hide(ModifyPasswordActivity.this);
                             if (null != error.networkResponse
                                     && error.networkResponse.statusCode == 400) {
+                                LogUtil.e(TAG, getString(R.string.tch_password_error));
                                 ToastUtil.toast(R.string.tch_password_error);
                             } else {
                                 ResponseUtil.toastError(error);
@@ -170,6 +172,7 @@ public class ModifyPasswordActivity extends BaseActivity {
 
                                 @Override
                                 public void run() {
+                                    LogUtil.i(TAG, getString(R.string.tch_modify_success));
                                     ToastUtil.toast(R.string.tch_modify_success);
                                     finish();
                                 }

@@ -142,9 +142,13 @@ public class LoginActivity extends BaseActivity {
                                     if (null != networkResponse) {
                                         int statusCode = networkResponse.statusCode;
                                         if (statusCode == 400) {
+                                            LogUtil.e(TAG, getString(R.string.tch_id_error));
                                             ToastUtil.toast(R.string.tch_id_error);
                                         } else if (statusCode == 401) {
+                                            LogUtil.e(TAG, getString(R.string.tch_password_error));
                                             ToastUtil.toast(R.string.tch_password_error);
+                                        } else {
+                                            ResponseUtil.toastError(error);
                                         }
                                     } else {
                                         ResponseUtil.toastError(error);

@@ -5,6 +5,8 @@ import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -220,6 +222,33 @@ public class Test implements Serializable {
     public void renameBitmap() {
         for (int i = 0; i < mQuestions.size(); i++) {
             mQuestions.get(i).renameBitmap(mName, i);
+        }
+    }
+
+    /**
+     * 学生拿到题目后，需要打乱题目的顺序、选项的顺序；
+     * 然后存储到数据库中；
+     */
+    public void shuffle() {
+        // 先打乱题目
+        Collections.shuffle(mQuestions);
+        // 再打乱每个题目中的四个选项
+        for (int i = 0; i < mQuestions.size(); i++) {
+            // 获得一个题目
+            Question question = mQuestions.get(i);
+            // 把题目的选项添加到一个列表
+            List<QuestionItem> items = new ArrayList<QuestionItem>();
+            items.add(question.getChoiceA());
+            items.add(question.getChoiceB());
+            items.add(question.getChoiceC());
+            items.add(question.getChoiceD());
+            // 打乱列表
+            Collections.shuffle(items);
+            // 然后重置选项，这样选项就打乱了
+            question.setChoiceA(items.get(0));
+            question.setChoiceB(items.get(1));
+            question.setChoiceC(items.get(2));
+            question.setChoiceD(items.get(3));
         }
     }
 

@@ -113,8 +113,12 @@ public class CheckInFragment extends BaseFragment {
                             int statusCode = networkResponse.statusCode;
                             if (statusCode == 400) {
                                 ToastUtil.toast(R.string.stu_no_checkin);
+                                LogUtil.e(TAG, getString(R.string.stu_no_checkin));
                             } else if (statusCode == 401) {
                                 ToastUtil.toast(R.string.stu_has_checkin);
+                                LogUtil.e(TAG, getString(R.string.stu_has_checkin));
+                            } else {
+                                ResponseUtil.toastError(error);
                             }
                         } else {
                             ResponseUtil.toastError(error);

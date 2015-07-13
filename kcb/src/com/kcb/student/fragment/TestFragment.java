@@ -93,22 +93,12 @@ public class TestFragment extends BaseFragment {
     private final String KEY_REMAINTIME = "remaintime";
     private final String KEY_TEST = "test";
 
-    // 获取到图片之后的操作也能使耗时的，因为会将string转成图片，而图片可能过多；所以需要异步处理图片
+    // 开始答题
     private void startTest() {
         if (startProgressBar.getVisibility() == View.VISIBLE) {
             return;
         }
         startProgressBar.setVisibility(View.VISIBLE);
-        new Thread(new Runnable() {
-
-            @Override
-            public void run() {
-                getTestFromServer();
-            }
-        }).start();
-    }
-
-    private void getTestFromServer() {
         JsonObjectRequest request =
                 new JsonObjectRequest(Method.GET, UrlUtil.getStuTestStartUrl(
                         KAccount.getAccountId(), KAccount.getTchId()), new Listener<JSONObject>() {
@@ -120,18 +110,16 @@ public class TestFragment extends BaseFragment {
                         final int remaintime = response.optInt(KEY_REMAINTIME);
                         final Test test = Test.fromJsonObject(response.optJSONObject(KEY_TEST));
 
+                        // 打乱测试中的题目和选项
+                        test.shuffle();
+
                         TestDao testDao = new TestDao(getActivity());
-                        testDao.add(test); // 不会保存图片本身，保存图片路径
+                        testDao.add(test);
                         testDao.close();
 
-                        getActivity().runOnUiThread(new Runnable() {
-
-                            @Override
-                            public void run() {
-                                StartTestActivity.start(getActivity(), test, remaintime);
-                                startProgressBar.hide(getActivity());
-                            }
-                        });
+                        // 进入开始答题页面
+                        StartTestActivity.start(getActivity(), test, remaintime);
+                        startProgressBar.hide(getActivity());
                     }
                 }, new ErrorListener() {
 
@@ -144,6 +132,7 @@ public class TestFragment extends BaseFragment {
                                 startProgressBar.hide(getActivity());
                                 NetworkResponse response = error.networkResponse;
                                 if (null != response && response.statusCode == 400) {
+                                    LogUtil.e(TAG, getString(R.string.stu_no_test_now));
                                     ToastUtil.toast(R.string.stu_no_test_now);
                                 } else {
                                     ResponseUtil.toastError(error);

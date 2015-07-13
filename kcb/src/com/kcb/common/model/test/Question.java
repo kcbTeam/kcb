@@ -74,17 +74,33 @@ public class Question implements Serializable {
     public QuestionItem getChoiceA() {
         return mChoiceAItem;
     }
+    
+    public void setChoiceA(QuestionItem item){
+        mChoiceAItem = item;
+    }
 
     public QuestionItem getChoiceB() {
         return mChoiceBItem;
+    }
+    
+    public void setChoiceB(QuestionItem item){
+        mChoiceBItem = item;
     }
 
     public QuestionItem getChoiceC() {
         return mChoiceCItem;
     }
+    
+    public void setChoiceC(QuestionItem item){
+        mChoiceCItem = item;
+    }
 
     public QuestionItem getChoiceD() {
         return mChoiceDItem;
+    }
+    
+    public void setChoiceD(QuestionItem item){
+        mChoiceDItem = item;
     }
 
     public boolean equal(Question questionObj) {

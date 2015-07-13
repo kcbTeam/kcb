@@ -108,8 +108,8 @@ public class QuestionItem implements Serializable {
     public String getBitmapPath() {
         return mBitmapPath;
     }
-    
-    public String getBitmapUrl(){
+
+    public String getBitmapUrl() {
         return mBitmapUrl;
     }
 
