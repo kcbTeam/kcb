@@ -23,7 +23,6 @@ import com.kcb.common.server.ResponseUtil;
 import com.kcb.common.server.UrlUtil;
 import com.kcb.common.util.AnimationUtil;
 import com.kcb.common.util.DialogUtil;
-import com.kcb.common.util.LogUtil;
 import com.kcb.common.util.StatusBarUtil;
 import com.kcb.common.util.ToastUtil;
 import com.kcb.common.view.dialog.MaterialDialog;
@@ -101,9 +100,8 @@ public class StartCheckInActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        mRemainTime = 10;
-        // mRemainTime = Integer.valueOf(getIntent().getStringExtra(DATA_TIME));
-        LogUtil.i(TAG, "remain time is " + mRemainTime);
+        // mRemainTime = 10;
+        mRemainTime = Integer.valueOf(getIntent().getStringExtra(DATA_REMAIN_TIME));
 
         mHandler = new Handler(getMainLooper()) {
             public void handleMessage(android.os.Message msg) {
@@ -274,11 +272,11 @@ public class StartCheckInActivity extends BaseActivity {
     /**
      * start
      */
-    private static final String DATA_TIME = "data_time";
+    private static final String DATA_REMAIN_TIME = "data_remaintime";
 
     public static void start(Context context, String time) {
         Intent intent = new Intent(context, StartCheckInActivity.class);
-        intent.putExtra(DATA_TIME, time);
+        intent.putExtra(DATA_REMAIN_TIME, time);
         context.startActivity(intent);
     }
 }

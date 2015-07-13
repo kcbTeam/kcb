@@ -93,22 +93,12 @@ public class TestFragment extends BaseFragment {
     private final String KEY_REMAINTIME = "remaintime";
     private final String KEY_TEST = "test";
 
-    // 获取到图片之后的操作也能使耗时的，因为会将string转成图片，而图片可能过多；所以需要异步处理图片
+    // 开始答题
     private void startTest() {
         if (startProgressBar.getVisibility() == View.VISIBLE) {
             return;
         }
         startProgressBar.setVisibility(View.VISIBLE);
-        new Thread(new Runnable() {
-
-            @Override
-            public void run() {
-                getTestFromServer();
-            }
-        }).start();
-    }
-
-    private void getTestFromServer() {
         JsonObjectRequest request =
                 new JsonObjectRequest(Method.GET, UrlUtil.getStuTestStartUrl(
                         KAccount.getAccountId(), KAccount.getTchId()), new Listener<JSONObject>() {
@@ -144,6 +134,7 @@ public class TestFragment extends BaseFragment {
                                 startProgressBar.hide(getActivity());
                                 NetworkResponse response = error.networkResponse;
                                 if (null != response && response.statusCode == 400) {
+                                    LogUtil.e(TAG, getString(R.string.stu_no_test_now));
                                     ToastUtil.toast(R.string.stu_no_test_now);
                                 } else {
                                     ResponseUtil.toastError(error);

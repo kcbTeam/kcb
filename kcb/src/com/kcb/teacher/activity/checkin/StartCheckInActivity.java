@@ -16,6 +16,7 @@ import com.kcb.common.server.RequestUtil;
 import com.kcb.common.server.ResponseUtil;
 import com.kcb.common.server.UrlUtil;
 import com.kcb.common.util.DialogUtil;
+import com.kcb.common.util.LogUtil;
 import com.kcb.common.util.StatusBarUtil;
 import com.kcb.common.util.ToastUtil;
 import com.kcb.library.view.PaperButton;
@@ -121,12 +122,14 @@ public class StartCheckInActivity extends BaseActivity {
             public void onClick(View v) {
                 startProgressBar.setVisibility(View.VISIBLE);
                 startTipTextView.setText(R.string.tch_wait);
+                LogUtil.i(TAG, "tch start checkin, checkin num is " + mNum);
                 StringRequest request =
                         new StringRequest(Method.POST, UrlUtil.getTchCheckinStartUrl(
                                 KAccount.getAccountId(), mNum), new Listener<String>() {
 
                             @Override
                             public void onResponse(String response) {
+                                LogUtil.i(TAG, getString(R.string.tch_checkin_started));
                                 ToastUtil.toast(R.string.tch_checkin_started);
                                 finish();
                             }
