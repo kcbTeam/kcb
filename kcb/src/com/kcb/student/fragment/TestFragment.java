@@ -110,18 +110,16 @@ public class TestFragment extends BaseFragment {
                         final int remaintime = response.optInt(KEY_REMAINTIME);
                         final Test test = Test.fromJsonObject(response.optJSONObject(KEY_TEST));
 
+                        // 打乱测试中的题目和选项
+                        test.shuffle();
+
                         TestDao testDao = new TestDao(getActivity());
-                        testDao.add(test); // 不会保存图片本身，保存图片路径
+                        testDao.add(test);
                         testDao.close();
 
-                        getActivity().runOnUiThread(new Runnable() {
-
-                            @Override
-                            public void run() {
-                                StartTestActivity.start(getActivity(), test, remaintime);
-                                startProgressBar.hide(getActivity());
-                            }
-                        });
+                        // 进入开始答题页面
+                        StartTestActivity.start(getActivity(), test, remaintime);
+                        startProgressBar.hide(getActivity());
                     }
                 }, new ErrorListener() {
 
