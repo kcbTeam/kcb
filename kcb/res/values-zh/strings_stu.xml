@@ -30,9 +30,10 @@
     <string name="stu_drawer_modify_password">修改密码</string>
     <string name="stu_drawer_feedback">意见反馈</string>
     <string name="stu_drawer_update_app">软件升级</string>
+    <string name="stu_has_newest">已经是最新版本</string>
     <string name="stu_drawer_exit_account">退出账号</string>
-    <string name="stu_drawer_aboutus">关于我们</string>
     <string name="stu_exit_account_tip">退出后，下次使用时需要重新登录。</string>
+    <string name="stu_drawer_aboutus">关于我们</string>
     <!--  -->
     <string name="stu_class_checkin">课堂签到</string>
     <string name="stu_class_test">课堂小测试</string>
