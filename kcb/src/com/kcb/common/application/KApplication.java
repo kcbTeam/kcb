@@ -1,5 +1,7 @@
 package com.kcb.common.application;
 
+import com.kcb.common.util.ImageLoaderUtil;
+
 import android.app.Application;
 
 /**
@@ -14,13 +16,15 @@ public class KApplication extends Application {
     // don't use this instance casually, we use for toast context, but can't use for dialog context
     private static KApplication instance;
 
+    public static KApplication getInstance() {
+        return instance;
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
         instance = this;
-    }
 
-    public static KApplication getInstance() {
-        return instance;
+        ImageLoaderUtil.init();
     }
 }

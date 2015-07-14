@@ -211,9 +211,6 @@ public class LookTestActivity extends BaseActivity implements OnSearchListener {
         for (Test test : mAllTests) {
             test.release();
         }
-        for (Test test : mSearchedTests) {
-            test.release();
-        }
         mAllTests = null;
         mSearchedTests = null;
     }

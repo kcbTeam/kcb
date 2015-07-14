@@ -2,6 +2,7 @@ package com.kcb.common.view.test;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
@@ -178,9 +179,13 @@ public class ShowQuestionView extends BaseLinearLayout {
         } else {
             textView.setText("");
             textView.setVisibility(View.GONE);
-            // 使用UIL网络图片加载框架
-            ImageLoader.getInstance().displayImage(item.getBitmapUrl(), imageView,
-                    ImageLoaderUtil.getOptions());
+            if (!TextUtils.isEmpty(item.getBitmapUrl())) {
+                // 使用UIL网络图片加载框架
+                ImageLoader.getInstance().displayImage(item.getBitmapUrl(), imageView,
+                        ImageLoaderUtil.getOptions());
+            } else {
+                imageView.setImageBitmap(item.getBitmap());
+            }
             imageView.setVisibility(View.VISIBLE);
         }
         if (null != checkIcon) {
