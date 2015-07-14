@@ -30,6 +30,7 @@
     <string name="tch_drawer_feedback">意见反馈</string>
     <string name="tch_drawer_update_app">软件升级</string>
     <string name="tch_drawer_exit_account">退出账号</string>
+    <string name="tch_drawer_aboutus">关于我们</string>
     <string name="tch_exit_account_tip">退出后，不会保存未进行的测试，下次使用时需要重新登录。</string>
     <!-- tabs -->
     <string name="tch_class_checkin">课堂签到</string>

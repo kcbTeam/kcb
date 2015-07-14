@@ -2,7 +2,6 @@ package com.kcb.common.view.test;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.os.AsyncTask;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
@@ -179,11 +178,9 @@ public class ShowQuestionView extends BaseLinearLayout {
         } else {
             textView.setText("");
             textView.setVisibility(View.GONE);
-            // TODO 使用UIL网络图片加载框架
+            // 使用UIL网络图片加载框架
             ImageLoader.getInstance().displayImage(item.getBitmapUrl(), imageView,
                     ImageLoaderUtil.getOptions());
-            // TODO delete?
-            // new LoadBitmapAsyncTask(imageView).execute(item);
             imageView.setVisibility(View.VISIBLE);
         }
         if (null != checkIcon) {
@@ -215,29 +212,6 @@ public class ShowQuestionView extends BaseLinearLayout {
                 default:
                     break;
             }
-        }
-    }
-
-    /**
-     * 异步加载图片；
-     */
-    private class LoadBitmapAsyncTask extends AsyncTask<QuestionItem, Integer, Bitmap> {
-
-        private ImageView imageView;
-
-        public LoadBitmapAsyncTask(ImageView _imageView) {
-            imageView = _imageView;
-        }
-
-        @Override
-        protected Bitmap doInBackground(QuestionItem... params) {
-            Bitmap bitmap = params[0].getBitmap();
-            return bitmap;
-        }
-
-        @Override
-        protected void onPostExecute(Bitmap result) {
-            imageView.setImageBitmap(result);
         }
     }
 }

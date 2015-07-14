@@ -1,7 +1,6 @@
 package com.kcb.common.view.test;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
@@ -11,8 +10,10 @@ import com.kcb.common.base.BaseLinearLayout;
 import com.kcb.common.model.test.Question;
 import com.kcb.common.model.test.QuestionItem;
 import com.kcb.common.util.DialogUtil;
+import com.kcb.common.util.ImageLoaderUtil;
 import com.kcb.library.view.checkbox.CheckBox;
 import com.kcbTeam.R;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 /**
  * 
@@ -57,7 +58,6 @@ public class AnswerQuestionView extends BaseLinearLayout {
     private CheckBox cCheckBox;
     private CheckBox dCheckBox;
 
-    private Context mContext;
     private Question mQuestion;
 
     @Override
@@ -144,12 +144,13 @@ public class AnswerQuestionView extends BaseLinearLayout {
         dCheckBox.setChecked(mQuestion.getChoiceD().isSelected());
     }
 
-    // 如果是文字，直接显示；如果是图片，使用UIL加载；TODO
+    // 如果是文字，直接显示；如果是图片，使用UIL加载；
     private void showQuestionItem(TextView textView, ImageView imageView, QuestionItem item) {
         if (item.isText()) {
             textView.setText(item.getText());
         } else {
-            Bitmap bitmap = item.getBitmap();
+            ImageLoader.getInstance().displayImage(item.getBitmapUrl(), imageView,
+                    ImageLoaderUtil.getOptions());
         }
     }
 

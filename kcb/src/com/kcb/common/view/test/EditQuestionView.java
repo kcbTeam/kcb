@@ -13,13 +13,12 @@ import android.provider.MediaStore;
 import android.provider.MediaStore.Images.Media;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.kcb.common.base.BaseLinearLayout;
 import com.kcb.common.model.test.Question;
 import com.kcb.common.model.test.QuestionItem;
 import com.kcb.common.util.BitmapUtil;
@@ -31,21 +30,18 @@ import com.kcb.teacher.activity.test.CropPictureActivity;
 import com.kcb.teacher.util.FileUtil;
 import com.kcbTeam.R;
 
-public class EditQuestionView extends LinearLayout implements OnClickListener, OnLongClickListener {
+public class EditQuestionView extends BaseLinearLayout implements OnLongClickListener {
 
     public EditQuestionView(Context context) {
         super(context);
-        init(context);
     }
 
     public EditQuestionView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init(context);
     }
 
     public EditQuestionView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        init(context);
     }
 
     private TextView questionIndexTextView;
@@ -70,7 +66,6 @@ public class EditQuestionView extends LinearLayout implements OnClickListener, O
     private CheckBox checkBoxC;
     private CheckBox checkBoxD;
 
-    private Context mContext;
     private String mTestName;
     private int mIndex;
     private Question mQuestion;
@@ -88,13 +83,15 @@ public class EditQuestionView extends LinearLayout implements OnClickListener, O
     private final int EDIT_MODE_TEXT = 1;
     private final int EDIT_MODE_BITMAP = 2;
 
-    private void init(Context context) {
+    @Override
+    public void init(Context context) {
         mContext = context;
         inflate(context, R.layout.comm_view_question_edit, this);
         initView();
     }
 
-    private void initView() {
+    @Override
+    public void initView() {
         questionIndexTextView = (TextView) findViewById(R.id.textview_input_problem_tip);
 
         titleEditText = (EditText) findViewById(R.id.edittext_title);
@@ -126,6 +123,12 @@ public class EditQuestionView extends LinearLayout implements OnClickListener, O
         checkBoxB = (CheckBox) findViewById(R.id.checkBox_B);
         checkBoxC = (CheckBox) findViewById(R.id.checkBox_C);
         checkBoxD = (CheckBox) findViewById(R.id.checkBox_D);
+    }
+
+    @Override
+    public void release() {
+        mContext = null;
+        mQuestion = null;
     }
 
     public void showQuestion(String testName, int index, Question question) {
@@ -453,10 +456,5 @@ public class EditQuestionView extends LinearLayout implements OnClickListener, O
         bItem.setIsRight(checkBoxB.isCheck());
         cItem.setIsRight(checkBoxC.isCheck());
         dItem.setIsRight(checkBoxD.isCheck());
-    }
-
-    public void release() {
-        mContext = null;
-        mQuestion = null;
     }
 }
