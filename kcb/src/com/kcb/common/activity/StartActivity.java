@@ -184,7 +184,7 @@ public class StartActivity extends BaseActivity {
     }
 
     /**
-     * onResume onPause added umeng code.
+     * 在onResume和onPause函数里集成友盟的代码
      */
     @Override
     protected void onResume() {
