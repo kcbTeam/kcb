@@ -22,7 +22,6 @@ import com.kcb.library.view.PaperButton;
 import com.kcb.student.activity.common.HomeActivity;
 import com.kcb.student.activity.common.LoginActivity;
 import com.kcbTeam.R;
-import com.umeng.analytics.MobclickAgent;
 
 /**
  * 
@@ -34,7 +33,7 @@ import com.umeng.analytics.MobclickAgent;
 public class StartActivity extends BaseActivity {
 
     private static final String TAG = StartActivity.class.getName();
-    
+
     private ColorAnimationView colorAnimationView;
     private ViewPager viewPager;
 
@@ -43,7 +42,7 @@ public class StartActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
+
         LogUtil.i(TAG, "on create");
         // 如果已经登录过了，直接进入这界面，否则显示此界面
         if (!AccountUtil.hasAccount()) {
@@ -51,17 +50,17 @@ public class StartActivity extends BaseActivity {
             setContentView(R.layout.comm_activity_start);
             initView();
         } else {
-//            if (needStartApp()) {
+            // if (needStartApp()) {
             LogUtil.i(TAG, "start has account");
-                if (AccountUtil.getAccountType() == AccountUtil.TYPE_STU) {
-                    LogUtil.i(TAG, "start student");
-                    HomeActivity.start(this);
-                } else {
-                    LogUtil.i(TAG, "start teacher");
-                    com.kcb.teacher.activity.common.HomeActivity.start(this);
-                }
-                finish();
-//            }
+            if (AccountUtil.getAccountType() == AccountUtil.TYPE_STU) {
+                LogUtil.i(TAG, "start student");
+                HomeActivity.start(this);
+            } else {
+                LogUtil.i(TAG, "start teacher");
+                com.kcb.teacher.activity.common.HomeActivity.start(this);
+            }
+            finish();
+            // }
         }
     }
 
@@ -181,21 +180,6 @@ public class StartActivity extends BaseActivity {
     public void onBackPressed() {
         super.onBackPressed();
         System.exit(0);
-    }
-
-    /**
-     * 在onResume和onPause函数里集成友盟的代码
-     */
-    @Override
-    protected void onResume() {
-        super.onResume();
-        MobclickAgent.onResume(this);
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        MobclickAgent.onPause(this);
     }
 
     @Override

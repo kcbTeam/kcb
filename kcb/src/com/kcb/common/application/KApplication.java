@@ -1,8 +1,8 @@
 package com.kcb.common.application;
 
-import com.kcb.common.util.ImageLoaderUtil;
-
 import android.app.Application;
+
+import com.kcb.common.util.ImageLoaderUtil;
 
 /**
  * 

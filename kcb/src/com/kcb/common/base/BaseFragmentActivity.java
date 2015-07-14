@@ -1,9 +1,10 @@
 package com.kcb.common.base;
 
-import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
+
+import com.umeng.analytics.MobclickAgent;
 
 /**
  * 
@@ -20,4 +21,18 @@ public abstract class BaseFragmentActivity extends FragmentActivity implements O
 
     @Override
     public void onClick(View v) {}
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+
 }
