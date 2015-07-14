@@ -1,5 +1,7 @@
 package com.kcb.student.view;
 
+import java.io.File;
+
 import android.content.Context;
 import android.content.Intent;
 import android.util.AttributeSet;
@@ -12,6 +14,7 @@ import com.kcb.common.activity.AboutusActivity;
 import com.kcb.common.util.DialogUtil;
 import com.kcb.common.util.ToastUtil;
 import com.kcb.library.view.buttonflat.ButtonFlat;
+import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
 import com.kcb.student.activity.common.FeedBackActivity;
 import com.kcb.student.activity.common.HomeActivity;
 import com.kcb.student.activity.common.LoginActivity;
@@ -60,7 +63,10 @@ public class LeftDrawerLayout extends LinearLayout implements OnClickListener {
     private ButtonFlat switchSourceButton;
     private ButtonFlat modifyPasswordButton;
     private ButtonFlat feedbackButton;
+
     private ButtonFlat updateAppButton;
+    private SmoothProgressBar progressBar;
+
     private ButtonFlat exitAccountButton;
     private ButtonFlat aboutusButton;
 
@@ -100,6 +106,7 @@ public class LeftDrawerLayout extends LinearLayout implements OnClickListener {
         updateAppButton = (ButtonFlat) findViewById(R.id.button_updateapp);
         updateAppButton.setOnClickListener(this);
         updateAppButton.setRippleColor(getResources().getColor(R.color.black_300));
+        progressBar = (SmoothProgressBar) findViewById(R.id.progressbar_check);
 
         exitAccountButton = (ButtonFlat) findViewById(R.id.button_exitaccount);;
         exitAccountButton.setOnClickListener(this);
@@ -142,6 +149,11 @@ public class LeftDrawerLayout extends LinearLayout implements OnClickListener {
      * 更新app
      */
     private void updateApp() {
+        if (progressBar.getVisibility() == View.VISIBLE) {
+            return;
+        }
+        progressBar.setVisibility(View.VISIBLE);
+
         // 不自动弹出更新框，有更新的时候再弹出
         UmengUpdateAgent.setUpdateAutoPopup(false);
         // 任何网络都允许更新
@@ -150,9 +162,11 @@ public class LeftDrawerLayout extends LinearLayout implements OnClickListener {
         UmengUpdateAgent.setUpdateListener(new UmengUpdateListener() {
             @Override
             public void onUpdateReturned(int updateStatus, UpdateResponse updateInfo) {
+                progressBar.setVisibility(View.GONE);
                 switch (updateStatus) {
                     case UpdateStatus.Yes: // 有更新
-                        UmengUpdateAgent.showUpdateDialog(mContext, updateInfo);
+                        // 弹出更新对话框
+                        showUpdateAppDialog(updateInfo);
                         break;
                     case UpdateStatus.No: // 没有更新
                         ToastUtil.toast(R.string.stu_has_newest);
@@ -165,6 +179,25 @@ public class LeftDrawerLayout extends LinearLayout implements OnClickListener {
         });
         // 开始检查更新
         UmengUpdateAgent.update(mContext);
+    }
+
+    private void showUpdateAppDialog(final UpdateResponse updateInfo) {
+        DialogUtil.showNormalDialog(mContext, R.string.stu_drawer_update_app, getResources()
+                .getString(R.string.stu_update_log) + updateInfo.updateLog,
+                R.string.stu_comm_update, new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        // TODO 开始更新
+                        // 检测是否已经下载过了
+                        File file = UmengUpdateAgent.downloadedFile(mContext, updateInfo);
+                        if (null == file) { // 没有下载过
+                            UmengUpdateAgent.startDownload(mContext, updateInfo);
+                        } else { // 已经下载过了
+                            UmengUpdateAgent.startInstall(mContext, file);
+                        }
+                    }
+                }, R.string.stu_comm_cancel, null);
     }
 
     private void exitAccount() {

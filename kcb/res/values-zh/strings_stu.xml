@@ -7,6 +7,7 @@
     <string name="stu_comm_submit">提交</string>
     <string name="stu_comm_tip">提醒</string>
     <string name="stu_comm_complete">完成</string>
+    <string name="stu_comm_update">更新</string>
     <!-- Commom End -->
 
 
@@ -31,6 +32,7 @@
     <string name="stu_drawer_feedback">意见反馈</string>
     <string name="stu_drawer_update_app">软件升级</string>
     <string name="stu_has_newest">已经是最新版本</string>
+    <string name="stu_update_log">本次更新包括：\n</string>
     <string name="stu_drawer_exit_account">退出账号</string>
     <string name="stu_exit_account_tip">退出后，下次使用时需要重新登录。</string>
     <string name="stu_drawer_aboutus">关于我们</string>

@@ -31,6 +31,8 @@ import com.kcbTeam.R;
  */
 public class HomeActivity extends BaseFragmentActivity {
 
+    private static final String TAG = HomeActivity.class.getName();
+    
     private final int INDEX_CHECKIN = 0;
     private final int INDEX_TEST = 1;
 
@@ -58,6 +60,7 @@ public class HomeActivity extends BaseFragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
         setContentView(R.layout.stu_activity_home);
         StatusBarUtil.setStuStatusBarColor(this);
 

@@ -1,5 +1,9 @@
 package com.kcb.common.activity;
 
+import java.util.List;
+
+import android.app.ActivityManager;
+import android.app.ActivityManager.RunningTaskInfo;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +16,7 @@ import android.widget.ImageView;
 import com.kcb.common.base.BaseActivity;
 import com.kcb.common.listener.DelayClickListener;
 import com.kcb.common.util.AccountUtil;
+import com.kcb.common.util.LogUtil;
 import com.kcb.library.view.ColorAnimationView;
 import com.kcb.library.view.PaperButton;
 import com.kcb.student.activity.common.HomeActivity;
@@ -28,6 +33,8 @@ import com.umeng.analytics.MobclickAgent;
  */
 public class StartActivity extends BaseActivity {
 
+    private static final String TAG = StartActivity.class.getName();
+    
     private ColorAnimationView colorAnimationView;
     private ViewPager viewPager;
 
@@ -36,18 +43,25 @@ public class StartActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        
+        LogUtil.i(TAG, "on create");
         // 如果已经登录过了，直接进入这界面，否则显示此界面
         if (!AccountUtil.hasAccount()) {
+            LogUtil.i(TAG, "start has no account");
             setContentView(R.layout.comm_activity_start);
             initView();
         } else {
-            if (AccountUtil.getAccountType() == AccountUtil.TYPE_STU) {
-                HomeActivity.start(this);
-            } else {
-                com.kcb.teacher.activity.common.HomeActivity.start(this);
-            }
-            finish();
+//            if (needStartApp()) {
+            LogUtil.i(TAG, "start has account");
+                if (AccountUtil.getAccountType() == AccountUtil.TYPE_STU) {
+                    LogUtil.i(TAG, "start student");
+                    HomeActivity.start(this);
+                } else {
+                    LogUtil.i(TAG, "start teacher");
+                    com.kcb.teacher.activity.common.HomeActivity.start(this);
+                }
+                finish();
+//            }
         }
     }
 
@@ -71,6 +85,30 @@ public class StartActivity extends BaseActivity {
 
     @Override
     protected void initData() {}
+
+    private boolean needStartApp() {
+        // get runninng tasks
+        final ActivityManager am = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        List<RunningTaskInfo> tasksInfo = am.getRunningTasks(1024);
+        // has running task
+        if (!tasksInfo.isEmpty()) {
+            final String ourAppPackageName = getPackageName();
+            RunningTaskInfo taskInfo;
+            final int size = tasksInfo.size();
+            for (int i = 0; i < size; i++) {// detect app is running or not
+                taskInfo = tasksInfo.get(i);
+                if (ourAppPackageName.equals(taskInfo.baseActivity.getPackageName())) {
+                    // continue application start only if there is the only
+                    // Activity in the task
+                    // (BTW in this case this is the StartupActivity)
+                    return taskInfo.numActivities == 1;
+                }
+            }
+        }
+        tasksInfo.clear();
+        tasksInfo = null;
+        return true;
+    }
 
     private class StartAdapter extends PagerAdapter {
         private int[] mBackgroundBitmapIds = new int[] {R.drawable.ic_launcher,
