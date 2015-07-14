@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.kcbTeam"
-    android:versionCode="1"
+    android:versionCode="2"
     android:versionName="1.0" >
 
     <uses-sdk
@@ -23,6 +23,26 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+
+        <!-- Umeng start -->
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="55a26e6a67e58e69ed008abe" />
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="zqj" />
+
+        <service
+            android:name="com.umeng.update.net.DownloadingService"
+            android:process=":DownloadingService" >
+        </service>
+
+        <activity
+            android:name="com.umeng.update.UpdateDialogActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+        </activity>
+        <!-- Umeng end -->
+
 
         <!-- common start -->
         <activity
@@ -49,7 +69,9 @@
         </activity>
         <activity
             android:name="com.kcb.student.activity.common.HomeActivity"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+android:finishOnTaskLaunch="true"            
+             >
         </activity>
         <activity
             android:name="com.kcb.student.activity.common.ModifyPasswordActivity"
@@ -153,12 +175,6 @@
             android:screenOrientation="portrait" >
         </activity>
         <!-- teacher end -->
-        <meta-data
-            android:name="UMENG_APPKEY"
-            android:value="55a26e6a67e58e69ed008abe" />
-        <meta-data
-            android:name="UMENG_CHANNEL"
-            android:value="zqj" />
     </application>
 
 </manifest>

@@ -2,11 +2,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true" >
+    android:fitsSystemWindows="true"
+    tools:ignore="contentDescription" >
+
+    <LinearLayout
+        android:id="@+id/layout_title"
+        style="@style/stu_title_layout" >
+
+        <include layout="@layout/comm_button_back" />
+
+        <TextView
+            android:id="@+id/textview_appname"
+            style="@style/common_title"
+            android:text="@string/stu_drawer_aboutus" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageview_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layout_title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/ic_launcher" />
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="关于我们" />
+        android:id="@+id/textview_version"
+        style="@style/common_tip_textview"
+        android:layout_below="@id/imageview_logo"
+        android:layout_centerHorizontal="true"
+        android:gravity="center" />
 
 </RelativeLayout>

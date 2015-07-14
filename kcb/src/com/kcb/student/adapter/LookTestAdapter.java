@@ -62,7 +62,7 @@ public class LookTestAdapter extends BaseAdapter {
             convertView =
                     LayoutInflater.from(mContext).inflate(R.layout.stu_listitem_look_test, null);
             holder.rootButton = (ButtonFlat) convertView.findViewById(R.id.button_root);
-            holder.rootButton.setRippleColor(mContext.getResources().getColor(R.color.black_400));
+            holder.rootButton.setRippleColor(mContext.getResources().getColor(R.color.black_300));
             holder.testNameTextView = (TextView) convertView.findViewById(R.id.textview_testname);
             holder.questionNumTextView =
                     (TextView) convertView.findViewById(R.id.textview_questionnum);

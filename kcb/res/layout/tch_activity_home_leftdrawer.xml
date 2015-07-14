@@ -98,7 +98,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" >
@@ -141,6 +141,7 @@
             <com.kcb.library.view.buttonflat.ButtonFlat
                 android:id="@+id/button_feedback"
                 style="@style/common_drawer_button"
+                android:layout_below="@id/button_modifypassword"
                 widget:rippleSpeed="36" >
 
                 <ImageView
@@ -157,6 +158,7 @@
             <com.kcb.library.view.buttonflat.ButtonFlat
                 android:id="@+id/button_updateapp"
                 style="@style/common_drawer_button"
+                android:layout_below="@id/button_feedback"
                 widget:rippleSpeed="36" >
 
                 <ImageView
@@ -170,9 +172,16 @@
                     android:text="@string/tch_drawer_update_app" />
             </com.kcb.library.view.buttonflat.ButtonFlat>
 
+            <com.kcb.library.view.smoothprogressbar.SmoothProgressBar
+                android:id="@+id/progressbar_check"
+                style="@style/common_title_progressbar"
+                android:layout_alignBottom="@id/button_updateapp"
+                android:visibility="gone" />
+
             <com.kcb.library.view.buttonflat.ButtonFlat
                 android:id="@+id/button_exitaccount"
                 style="@style/common_drawer_button"
+                android:layout_below="@id/button_updateapp"
                 widget:rippleSpeed="36" >
 
                 <ImageView
@@ -189,6 +198,7 @@
             <com.kcb.library.view.buttonflat.ButtonFlat
                 android:id="@+id/button_aboutus"
                 style="@style/common_drawer_button"
+                android:layout_below="@id/button_exitaccount"
                 android:layout_marginBottom="8dp"
                 widget:rippleSpeed="36" >
 
@@ -202,7 +212,7 @@
                     android:layout_toRightOf="@id/imageview_aboutus"
                     android:text="@string/tch_drawer_aboutus" />
             </com.kcb.library.view.buttonflat.ButtonFlat>
-        </LinearLayout>
+        </RelativeLayout>
     </ScrollView>
 
 </LinearLayout>

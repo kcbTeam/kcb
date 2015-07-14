@@ -128,7 +128,7 @@ public class TestFragment extends BaseFragment {
                                     JSONObject jsonObject = new JSONObject(response);
                                     LogUtil.i(TAG, "tch detect, response is " + response);
                                     startProgressBar.hide(getActivity());
-                                    if ("true".equals(jsonObject.optBoolean("has"))) { // 有正在进行的测试
+                                    if (jsonObject.optBoolean("has") == true) { // 有正在进行的测试
                                         ToastUtil.toast(R.string.tch_has_starting_test);
                                     } else {
                                         startTest();
