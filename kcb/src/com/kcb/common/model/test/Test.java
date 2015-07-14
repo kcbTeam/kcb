@@ -5,7 +5,6 @@ import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -226,8 +225,7 @@ public class Test implements Serializable {
     }
 
     /**
-     * 学生拿到题目后，需要打乱题目的顺序、选项的顺序；
-     * 然后存储到数据库中；
+     * 学生拿到题目后，需要打乱题目的顺序、选项的顺序； 然后存储到数据库中；
      */
     public void shuffle() {
         // 先打乱题目

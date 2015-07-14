@@ -144,7 +144,7 @@ public class StartActivity extends BaseActivity {
         super.onBackPressed();
         System.exit(0);
     }
-    
+
     /**
      * onResume onPause added umeng code.
      */
