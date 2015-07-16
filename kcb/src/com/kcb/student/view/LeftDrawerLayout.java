@@ -24,6 +24,7 @@ import com.kcb.student.database.test.TestDao;
 import com.kcb.student.model.KAccount;
 import com.kcb.student.util.SharedPreferenceUtil;
 import com.kcbTeam.R;
+import com.umeng.update.UmengDownloadListener;
 import com.umeng.update.UmengUpdateAgent;
 import com.umeng.update.UmengUpdateListener;
 import com.umeng.update.UpdateResponse;
@@ -176,6 +177,17 @@ public class LeftDrawerLayout extends LinearLayout implements OnClickListener {
                         break;
                 }
             }
+        });
+        UmengUpdateAgent.setDownloadListener(new UmengDownloadListener() {
+            
+            @Override
+            public void OnDownloadUpdate(int arg0) {}
+            
+            @Override
+            public void OnDownloadStart() {}
+            
+            @Override
+            public void OnDownloadEnd(int arg0, String arg1) {}
         });
         // 开始检查更新
         UmengUpdateAgent.update(mContext);

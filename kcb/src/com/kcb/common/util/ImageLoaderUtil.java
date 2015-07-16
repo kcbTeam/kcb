@@ -82,7 +82,8 @@ public class ImageLoaderUtil {
                         // .diskCacheSize(50 * 1024 * 1024)
                         // 磁盘缓存能够存储的最多文件数量，默认没有限制
                         // .diskCacheFileCount(100)
-                        // 磁盘缓存的文件名字管理者，默认是HashCodeFileNameGenerator
+                        // 磁盘缓存的文件名字管理者，根据图片的url生成的文件名必须是唯一的；
+                        // 默认是HashCodeFileNameGenerator，用图片url的hashcode作为唯一的文件名；
                         // .diskCacheFileNameGenerator(new HashCodeFileNameGenerator())
                         // 图片下载器，默认为BaseImageDownloader
                         // .imageDownloader(new BaseImageDownloader(KApplication.getInstance()))
