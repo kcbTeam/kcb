@@ -13,7 +13,6 @@ import com.android.volley.Request.Method;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.kcb.common.base.BaseActivity;
@@ -94,7 +93,9 @@ public class FeedBackActivity extends BaseActivity {
                 onBackPressed();
                 break;
             case R.id.button_feedbacklist:
-                getFeedbackList(UrlUtil.getCommFeedbackLookAllUrl());
+                // getFeedbackList(UrlUtil.getCommFeedbackLookAllUrl());
+                // getFeedbackList(UrlUtil.getCommFeedbackLookStuUrl(KAccount.getAccountId()));
+                getFeedbackList(UrlUtil.getCommFeedbackLookTchUrl(KAccount.getTchId()));
                 break;
             case R.id.button_finish:
                 submitFeedback();
@@ -164,29 +165,33 @@ public class FeedBackActivity extends BaseActivity {
         feedBack.setTchName(KAccount.getTchName());
         feedBack.setIsSecret(false);
         feedBack.setText(feedbackString);
+
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("data", feedBack.toJsonObject());
         } catch (JSONException e) {}
+
+        LogUtil.i(TAG, feedBack.toJsonObject() + "");
+
         // 发送请求
-        JsonObjectRequest request =
-                new JsonObjectRequest(Method.POST, UrlUtil.getCommFeedbackSubmitUrl(), jsonObject,
-                        new Listener<JSONObject>() {
-                            @Override
-                            public void onResponse(JSONObject response) {
-                                ToastUtil.toast(R.string.stu_feedback_success);
-                                progressBar.hide(FeedBackActivity.this);
-                                submitSuccess = true;
-                                // 清空输入框的内容
-                                feedbackEditText.setText("");
-                            }
-                        }, new ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                progressBar.hide(FeedBackActivity.this);
-                                ResponseUtil.toastError(error);
-                            }
-                        });
+        StringRequest request =
+                new StringRequest(Method.POST, UrlUtil.getCommFeedbackSubmitUrl(feedBack
+                        .toJsonObject()), new Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        ToastUtil.toast(R.string.stu_feedback_success);
+                        progressBar.hide(FeedBackActivity.this);
+                        submitSuccess = true;
+                        // 清空输入框的内容
+                        feedbackEditText.setText("");
+                    }
+                }, new ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        progressBar.hide(FeedBackActivity.this);
+                        ResponseUtil.toastError(error);
+                    }
+                });
         RequestUtil.getInstance().addToRequestQueue(request, TAG);
     }
 }
