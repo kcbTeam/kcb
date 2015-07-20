@@ -37,4 +37,9 @@
     <string name="comm_bitmap_dialog_title_D">D选项</string>
     <!-- 选项 end -->
 
+
+    <!-- 关于我们 -->
+    <string name="comm_appinfo">课程宝的创作团队一直致力于打造实用、易用、美观的移动互联网软件。\n\n团队具有8名成员，均来自东南大学、南京邮电大学，我们中有重度app玩家、产品规划师、交互设计师、开发工程师。\n\n我们具有敏锐的用户需求洞察力、极其挑剔的交互体验观和追求完美的做事态度。\n\n课程宝是我们借助开源社区、合力创作的第一款app，愿为老师、学生的教学活动带来一些便利，希望给你们带来不一样的体验！</string>
+    <string name="comm_copyright">Copyright© 2015-2020 KcbTeam.\nAll Rights Reserved.</string>
+
 </resources>
