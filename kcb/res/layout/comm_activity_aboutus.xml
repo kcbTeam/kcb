@@ -30,7 +30,31 @@
         android:id="@+id/textview_version"
         style="@style/common_tip_textview"
         android:layout_below="@id/imageview_logo"
-        android:layout_centerHorizontal="true"
         android:gravity="center" />
+
+    <ScrollView
+        android:id="@+id/scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/textview_copyright"
+        android:layout_below="@id/textview_version" >
+
+        <TextView
+            android:id="@+id/textview_appinfo"
+            style="@style/common_tip_textview"
+            android:layout_marginTop="24dp"
+            android:lineSpacingExtra="4dp"
+            android:text="@string/comm_appinfo"
+            android:textColor="@color/black_700" />
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/textview_copyright"
+        style="@style/common_tip_textview"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:text="@string/comm_copyright"
+        android:textColor="@color/black_500"
+        android:textSize="@dimen/text_size_micro" />
 
 </RelativeLayout>

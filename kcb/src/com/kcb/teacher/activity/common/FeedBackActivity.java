@@ -1,5 +1,8 @@
 package com.kcb.teacher.activity.common;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -9,8 +12,9 @@ import com.android.volley.Request.Method;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.kcb.common.base.BaseActivity;
+import com.kcb.common.model.feedback.FeedBack;
 import com.kcb.common.server.RequestUtil;
 import com.kcb.common.server.ResponseUtil;
 import com.kcb.common.server.UrlUtil;
@@ -39,7 +43,7 @@ public class FeedBackActivity extends BaseActivity {
     private SmoothProgressBar progressBar;
     private EditText feedbackEditText;
 
-    private boolean submitSuccess; // 如果提交失败，然后返回了，将内容保存；
+    private boolean submitSuccess; // 如果提交失败，然后返回了，将内容保存；如果成功，不保存内容；
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,23 +113,37 @@ public class FeedBackActivity extends BaseActivity {
             return;
         }
         progressBar.setVisibility(View.VISIBLE);
-        StringRequest request =
-                new StringRequest(Method.POST, UrlUtil.getTchFeedbackUrl(KAccount.getAccountId(),
-                        com.kcb.teacher.model.KAccount.getAccountName()), new Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        ToastUtil.toast(R.string.tch_feedback_success);
-                        progressBar.hide(FeedBackActivity.this);
-                        submitSuccess = true;
-                        onBackPressed();
-                    }
-                }, new ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        progressBar.hide(FeedBackActivity.this);
-                        ResponseUtil.toastError(error);
-                    }
-                });
+
+        // 请求的参数
+        FeedBack feedBack = new FeedBack();
+        feedBack.setType(FeedBack.TYPE.TYPE_TO_APP);
+        feedBack.setTchId(KAccount.getAccountId());
+        feedBack.setTchName(KAccount.getAccountName());
+        feedBack.setIsSecret(false);
+        feedBack.setText(feedbackString);
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("data", feedBack.toJsonObject());
+        } catch (JSONException e) {}
+        // 发送请求
+        JsonObjectRequest request =
+                new JsonObjectRequest(Method.POST, UrlUtil.getCommFeedbackSubmitUrl(null), jsonObject,
+                        new Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                ToastUtil.toast(R.string.tch_feedback_success);
+                                progressBar.hide(FeedBackActivity.this);
+                                submitSuccess = true;
+                                // 清空输入框的内容
+                                feedbackEditText.setText("");
+                            }
+                        }, new ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                progressBar.hide(FeedBackActivity.this);
+                                ResponseUtil.toastError(error);
+                            }
+                        });
         RequestUtil.getInstance().addToRequestQueue(request, TAG);
     }
 }

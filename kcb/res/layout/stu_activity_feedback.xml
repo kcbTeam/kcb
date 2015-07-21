@@ -18,6 +18,8 @@
             style="@style/common_title"
             android:text="@string/stu_drawer_feedback" />
 
+        <include layout="@layout/comm_button_feedbacklist" />
+
         <include layout="@layout/comm_button_finish" />
     </LinearLayout>
 
