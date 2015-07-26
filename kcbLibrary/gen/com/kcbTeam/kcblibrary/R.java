@@ -1047,7 +1047,7 @@ containing a value of this type.
           @attr name com.kcbTeam.kcblibrary:contentPaddingTop
         */
         public static int CardView_contentPaddingTop = 9;
-        /** Attributes that can be used with a CropImageView.
+        /**  CropImageView 
            <p>Includes the following attributes:</p>
            <table>
            <colgroup align="left" />

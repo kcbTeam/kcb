@@ -2,7 +2,7 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle" >
 
-    <size android:height="48dp" />
+    <size android:height="@dimen/activity_header_height" />
 
     <solid android:color="@color/stu_primary" />
 
