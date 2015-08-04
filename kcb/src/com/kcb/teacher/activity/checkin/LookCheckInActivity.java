@@ -1,10 +1,12 @@
 package com.kcb.teacher.activity.checkin;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.os.Bundle;
 import android.view.View;
@@ -15,10 +17,12 @@ import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.kcb.common.base.BaseActivity;
 import com.kcb.common.server.RequestUtil;
 import com.kcb.common.server.ResponseUtil;
 import com.kcb.common.server.UrlUtil;
+import com.kcb.common.util.LogUtil;
 import com.kcb.common.util.StatusBarUtil;
 import com.kcb.common.view.common.EmptyTipView;
 import com.kcb.library.view.buttonflat.ButtonFlat;
@@ -81,6 +85,8 @@ public class LookCheckInActivity extends BaseActivity {
         CheckInDao checkInDao = new CheckInDao(LookCheckInActivity.this);
         mCheckInResults = checkInDao.getAll();
         checkInDao.close();
+        
+        Collections.reverse(mCheckInResults);
 
         if (mCheckInResults.isEmpty()) {
             listTitleLayout.setVisibility(View.INVISIBLE);
@@ -117,22 +123,25 @@ public class LookCheckInActivity extends BaseActivity {
         // 获取此时间戳之后的签到结果
         long date = 0;
         if (mAdapter.getCount() > 0) {
-            date = mAdapter.getItem(0).getDate();
+            date = mAdapter.getItem(0).getDateLong();
         }
-        JsonArrayRequest request =
-                new JsonArrayRequest(Method.GET, UrlUtil.getTchCheckinGetresultUrl(
-                        KAccount.getAccountId(), date), new Listener<JSONArray>() {
+        JsonObjectRequest request =
+                new JsonObjectRequest(Method.GET, UrlUtil.getTchCheckinGetresultUrl(
+                        KAccount.getAccountId(), date), new Listener<JSONObject>() {
 
                     @Override
-                    public void onResponse(JSONArray response) {
+                    public void onResponse(JSONObject response) {
+                        LogUtil.i(TAG, "tch get checkin result, response is " + response.toString());
+                        // TODO
                         // 解析结果，保存到数据库
                         // 因为后台查询耗时很长，所以结果中只有日期和签到率
                         // 点击列表中的每一项后，如果本地没有数据，会在下一个页面向后台发送一次请求
+                        JSONArray jsonArray = response.optJSONArray("data");
                         List<CheckInResult> results = new ArrayList<CheckInResult>();
-                        for (int i = 0; i < response.length(); i++) {
+                        for (int i = 0; i < jsonArray.length(); i++) {
                             try {
                                 CheckInResult checkInResult =
-                                        CheckInResult.fromJsonObject(response.getJSONObject(i));
+                                        CheckInResult.fromJsonObject(jsonArray.getJSONObject(i));
                                 results.add(checkInResult);
                             } catch (JSONException e) {}
                         }
@@ -150,7 +159,9 @@ public class LookCheckInActivity extends BaseActivity {
                             }
                             checkInDao.close();
 
+                            Collections.reverse(mCheckInResults);
                             mCheckInResults.addAll(results);
+                            Collections.reverse(mCheckInResults);
                             mAdapter.notifyDataSetChanged();
                         }
                         progressBar.hide(LookCheckInActivity.this);

@@ -60,6 +60,7 @@ public class LookCheckInAdapter extends BaseAdapter {
             viewHolder.rootButton.setRippleColor(mContext.getResources()
                     .getColor(R.color.black_400));
             viewHolder.dateTextView = (TextView) convertView.findViewById(R.id.textview_date);
+            viewHolder.timeTextView = (TextView) convertView.findViewById(R.id.textview_time);
             viewHolder.rateTextView = (TextView) convertView.findViewById(R.id.textview_rate);
             convertView.setTag(viewHolder);
         } else {
@@ -79,10 +80,12 @@ public class LookCheckInAdapter extends BaseAdapter {
     private class ViewHolder {
         public ButtonFlat rootButton;
         public TextView dateTextView;
+        public TextView timeTextView;
         public TextView rateTextView;
 
         public void setCheckInResult(CheckInResult result) {
             dateTextView.setText(result.getDateString());
+            timeTextView.setText(result.getTimeString());
             rateTextView.setText(String.valueOf(result.getRate()));
         }
     }
