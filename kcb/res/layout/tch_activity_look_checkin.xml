@@ -32,7 +32,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/layout_title"
-        android:layout_marginBottom="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="16dp"
@@ -49,9 +48,9 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginRight="16dp"
             android:layout_weight="1"
-            android:gravity="center_horizontal"
+            android:gravity="center_vertical|right"
+            android:paddingRight="32dp"
             android:text="@string/tch_checkin_rate"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_small" />
@@ -64,7 +63,11 @@
         android:layout_below="@id/layout_listview_title"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginTop="16dp" >
+        android:layout_marginTop="16dp"
+        android:scrollbarSize="2dp"
+        android:scrollbarStyle="outsideInset"
+        android:scrollbarThumbVertical="@color/black_300"
+        android:scrollbars="vertical" >
     </ListView>
 
     <com.kcb.common.view.common.EmptyTipView

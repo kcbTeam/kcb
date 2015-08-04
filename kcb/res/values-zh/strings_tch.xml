@@ -91,6 +91,7 @@
     <string name="tch_start_checkin_tip">签到结束后可查看结果，点击确定开始签到。</string>
     <string name="tch_wait">请稍等……</string>
     <string name="tch_checkin_started">签到已开始</string>
+    <string name="tch_checkin_unfinish">无法开始，有正在进行的签到</string>
     <!-- StartCheckInActivity end -->
 
 
@@ -101,13 +102,12 @@
 
 
     <!-- LookCheckInDetailActivity start -->
-    <string name="tch_name">姓名</string>
-    <string name="tch_stuid">学号</string>
-    <string name="tch_unchecked_stuinfo">未到课学生信息</string>
-    <string name="tch_unchecked_time">未到课次数</string>
     <string name="tch_checkin_rate_tip">本次到课率为%1$d%%</string>
+    <string name="tch_unchecked_stuinfo">未到课学生信息</string>
     <string name="tch_checkin_success">成功签到</string>
     <string name="tch_checkin_failed">未签到</string>
+    <string name="tch_name">姓名/学号</string>
+    <string name="tch_unchecked_rate">未到课率</string>
     <!-- LookCheckInDetailActivity start -->
 
 

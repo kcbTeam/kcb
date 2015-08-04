@@ -31,7 +31,8 @@ public class UncheckedStudent implements Serializable {
     }
 
     public double getUnCheckedRate() {
-        return mUnCheckedRate;
+        double rate = (double) Math.round(mUnCheckedRate * 100) / 100;
+        return rate;
     }
 
     /**

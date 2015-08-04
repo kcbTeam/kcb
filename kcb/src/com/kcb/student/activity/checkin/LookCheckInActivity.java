@@ -3,6 +3,7 @@ package com.kcb.student.activity.checkin;
 import java.util.ArrayList;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,6 +17,7 @@ import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.Entry;
@@ -192,22 +194,24 @@ public class LookCheckInActivity extends BaseActivity {
         CheckInDao checkInDao = new CheckInDao(LookCheckInActivity.this);
         long date = checkInDao.getLeastDate();
         checkInDao.close();
-        JsonArrayRequest request =
-                new JsonArrayRequest(Method.GET, UrlUtil.getStuCheckinResultUrl(
+        JsonObjectRequest request =
+                new JsonObjectRequest(Method.GET, UrlUtil.getStuCheckinResultUrl(
                         KAccount.getAccountId(), KAccount.getTchId(), date),
-                        new Listener<JSONArray>() {
+                        new Listener<JSONObject>() {
 
                             @Override
-                            public void onResponse(JSONArray response) {
+                            public void onResponse(JSONObject response) {
                                 LogUtil.i(
                                         TAG,
                                         "stu get checkin result, response is "
                                                 + response.toString());
+                                
+                                JSONArray jsonArray = response.optJSONArray("data");
                                 // save to database
                                 CheckInDao checkInDao = new CheckInDao(LookCheckInActivity.this);
-                                for (int i = 0; i < response.length(); i++) {
+                                for (int i = 0; i < jsonArray.length(); i++) {
                                     CheckInResult checkinResult =
-                                            CheckInResult.fromJsonObject(response.optJSONObject(i));
+                                            CheckInResult.fromJsonObject(jsonArray.optJSONObject(i));
                                     checkInDao.add(checkinResult);
                                 }
                                 checkInDao.close();

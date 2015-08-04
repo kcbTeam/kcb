@@ -111,8 +111,13 @@ public class LoginActivity extends BaseActivity {
     private final String KEY_TCHID = "tchid";
     private final String KEY_TCHNAME = "tchname";
 
+    /**
+     * 登录；
+     */
     private void login() {
+        // 取出id中的空格
         final String stuId = idEditText.getText().toString().trim().replace(" ", "");
+        // 不需要取密码中的空格，密码可以包括空格
         final String password = passwordEditText.getText();
         if (TextUtils.isEmpty(stuId)) {
             idEditText.requestFocus();

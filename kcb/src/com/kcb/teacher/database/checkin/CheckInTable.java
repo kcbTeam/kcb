@@ -9,5 +9,5 @@ public class CheckInTable {
     public final static String COLUMN_ROW_DATA = "checkin";
 
     public final static String CREATE_TABLE = "create table if not exists " + TABLE_NAME + "("
-            + COLUMN_DATE + " long," + COLUMN_RATE + " double," + COLUMN_ROW_DATA + " text)";
+            + COLUMN_DATE + " text," + COLUMN_RATE + " double," + COLUMN_ROW_DATA + " text)";
 }

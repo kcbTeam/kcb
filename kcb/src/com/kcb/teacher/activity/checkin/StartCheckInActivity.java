@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.android.volley.Request.Method;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
+import com.android.volley.NetworkResponse;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.kcb.common.base.BaseActivity;
@@ -140,7 +141,17 @@ public class StartCheckInActivity extends BaseActivity {
                                 startTipTextView
                                         .setText(getString(R.string.tch_two_min_finish_checkin));
                                 startProgressBar.hide(StartCheckInActivity.this);
-                                ResponseUtil.toastError(error);
+                                NetworkResponse networkResponse = error.networkResponse;
+                                if (null != networkResponse) {
+                                    int statusCode = networkResponse.statusCode;
+                                    if (statusCode == 400) {
+                                        ToastUtil.toast(R.string.tch_checkin_unfinish);
+                                    } else {
+                                        ResponseUtil.toastError(error);
+                                    }
+                                } else {
+                                    ResponseUtil.toastError(error);
+                                }
                             }
                         });
                 RequestUtil.getInstance().addToRequestQueue(request, TAG);

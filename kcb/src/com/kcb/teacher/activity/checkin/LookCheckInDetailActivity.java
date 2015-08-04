@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.content.Context;
 import android.content.Intent;
@@ -20,7 +21,7 @@ import com.android.volley.Request.Method;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.Entry;
@@ -54,10 +55,10 @@ public class LookCheckInDetailActivity extends BaseFragmentActivity implements O
     private static final String TAG = LookCheckInDetailActivity.class.getName();
 
     private ButtonFlat backButton;
+    private TextView dateTextView;
     private ButtonFlat refreshButton;
     private SmoothProgressBar progressBar;
 
-    private TextView dateTextView;
     private TextView rateTextView;
 
     private PieChart pieChart;
@@ -105,12 +106,12 @@ public class LookCheckInDetailActivity extends BaseFragmentActivity implements O
     protected void initData() {
         mCheckInRate = (float) sCheckInResult.getRate();
 
-        dateTextView.setText(sCheckInResult.getDateString());
+        dateTextView.setText(sCheckInResult.getDateTimeString());
         rateTextView.setText(String.format(getResources().getString(R.string.tch_checkin_rate_tip),
                 (int) (100 * mCheckInRate)));
 
         List<UncheckedStudent> students = sCheckInResult.getUnCheckedStudents();
-        if (mCheckInRate != 1) { // 如果签到率不为1
+        if (mCheckInRate != 1) { // 如果签到率不为1，表示有未签到的学生；
             if (students.isEmpty()) { // 但是有没有未签到的学生信息，需要请求学生信息；
                 refreshButton.setVisibility(View.VISIBLE);
                 refresh();
@@ -127,21 +128,22 @@ public class LookCheckInDetailActivity extends BaseFragmentActivity implements O
         }
         progressBar.setVisibility(View.VISIBLE);
         // 返回的结果是多个学生信息，包括姓名、学号、未签到率，需要终端按未签到率排序
-        JsonArrayRequest request =
-                new JsonArrayRequest(Method.GET, UrlUtil.getTchCheckinGetResultDetailUrl(
-                        KAccount.getAccountId(), sCheckInResult.getDate()),
-                        new Listener<JSONArray>() {
+        JsonObjectRequest request =
+                new JsonObjectRequest(Method.GET, UrlUtil.getTchCheckinGetResultDetailUrl(
+                        KAccount.getAccountId(), sCheckInResult.getDateLong()),
+                        new Listener<JSONObject>() {
 
                             @Override
-                            public void onResponse(JSONArray response) {
+                            public void onResponse(JSONObject response) {
                                 // 解析未签到学生详情，保存到数据库中
                                 // 更新UI
+                                JSONArray jsonArray = response.optJSONArray("data");
                                 try {
                                     List<UncheckedStudent> students =
                                             new ArrayList<UncheckedStudent>();
-                                    for (int i = 0; i < response.length(); i++) {
+                                    for (int i = 0; i < jsonArray.length(); i++) {
                                         UncheckedStudent student =
-                                                UncheckedStudent.fromJsonObject(response
+                                                UncheckedStudent.fromJsonObject(jsonArray
                                                         .getJSONObject(i));
                                         students.add(student);
                                     }
@@ -169,6 +171,7 @@ public class LookCheckInDetailActivity extends BaseFragmentActivity implements O
     }
 
     private void showUncheckedStudents() {
+        refreshButton.setVisibility(View.GONE);
         stuInfoTipTextView.setVisibility(View.VISIBLE);
         listviewTitleLayout.setVisibility(View.VISIBLE);
         listView.setVisibility(View.VISIBLE);
@@ -224,7 +227,7 @@ public class LookCheckInDetailActivity extends BaseFragmentActivity implements O
         PieData data = new PieData(xVals, dataSet);
         data.setValueFormatter(new PercentFormatter());
         data.setValueTextSize(11f);
-        data.setValueTextColor(Color.BLUE);
+        data.setValueTextColor(Color.WHITE);
 
         pieChart.setData(data);
         pieChart.highlightValues(null);
@@ -249,8 +252,10 @@ public class LookCheckInDetailActivity extends BaseFragmentActivity implements O
         super.onDestroy();
         pieChart = null;
         sCheckInResult = null;
-        mAdapter.release();
-        mAdapter = null;
+        if (null != mAdapter) {
+            mAdapter.release();
+            mAdapter = null;
+        }
     }
 
     /**

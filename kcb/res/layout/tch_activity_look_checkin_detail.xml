@@ -30,10 +30,11 @@
 
     <TextView
         android:id="@+id/textview_rate"
+        style="@style/common_tip_textview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/layout_title"
-        android:layout_margin="16dp" />
+        android:layout_marginTop="8dp" />
 
     <com.github.mikephil.charting.charts.PieChart
         android:id="@+id/piechart"
@@ -45,11 +46,12 @@
 
     <TextView
         android:id="@+id/textview_stuinfotip"
+        style="@style/common_tip_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/piechart"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
         android:text="@string/tch_unchecked_stuinfo"
         android:visibility="gone" />
 
@@ -64,21 +66,19 @@
         android:visibility="gone" >
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/tch_name" />
+            android:layout_weight="1"
+            android:text="@string/tch_name"
+            android:textSize="@dimen/text_size_small" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="80dp"
-            android:text="@string/tch_stuid" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="100dp"
-            android:text="@string/tch_unchecked_time" />
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/tch_unchecked_rate"
+            android:textSize="@dimen/text_size_small" />
     </LinearLayout>
 
     <ListView
@@ -88,7 +88,11 @@
         android:layout_below="@id/layout_listview_title"
         android:layout_marginLeft="24dp"
         android:layout_marginRight="24dp"
-        android:layout_marginTop="20dp"
+        android:listSelector="@color/activity_background"
+        android:scrollbarSize="2dp"
+        android:scrollbarStyle="outsideInset"
+        android:scrollbarThumbVertical="@color/black_300"
+        android:scrollbars="vertical"
         android:visibility="gone" >
     </ListView>
 
