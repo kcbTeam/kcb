@@ -58,7 +58,7 @@ public class LookCheckInAdapter extends BaseAdapter {
             viewHolder = new ViewHolder();
             viewHolder.rootButton = (ButtonFlat) convertView.findViewById(R.id.button_root);
             viewHolder.rootButton.setRippleColor(mContext.getResources()
-                    .getColor(R.color.black_400));
+                    .getColor(R.color.black_300));
             viewHolder.dateTextView = (TextView) convertView.findViewById(R.id.textview_date);
             viewHolder.timeTextView = (TextView) convertView.findViewById(R.id.textview_time);
             viewHolder.rateTextView = (TextView) convertView.findViewById(R.id.textview_rate);
