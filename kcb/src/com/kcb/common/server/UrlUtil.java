@@ -1,9 +1,12 @@
 package com.kcb.common.server;
 
 import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.net.URLEncoder;
 
 import org.json.JSONObject;
+
+import android.webkit.URLUtil;
 
 import com.kcb.common.util.LogUtil;
 
@@ -232,8 +235,14 @@ public class UrlUtil {
     // 2.2 查看签到结果
     private static final String url_tch_checkin_getresult = IP + "/v1/tch/checkin/getresult";
 
-    public static String getTchCheckinGetresultUrl(String tchId, long date) {
-        return url_tch_checkin_getresult + "?tchid=" + tchId + "&date=" + date;
+    public static String getTchCheckinGetresultUrl(String tchId, String date) {
+        String url = "";
+        String encodeDate;
+        try {
+            encodeDate = URLEncoder.encode(date, "utf-8");
+            url = url_tch_checkin_getresult + "?tchid=" + tchId + "&date=" + encodeDate;
+        } catch (UnsupportedEncodingException e) {}
+        return url;
     }
 
     // 2.3 查看签到结果详情
