@@ -205,10 +205,14 @@ public class LookCheckInActivity extends BaseActivity {
                                         TAG,
                                         "stu get checkin result, response is "
                                                 + response.toString());
-                                
-                                JSONArray jsonArray = response.optJSONArray("data");
+
+                                JSONArray jsonArray =
+                                        response.optJSONObject("data").optJSONArray("result");
                                 // save to database
                                 CheckInDao checkInDao = new CheckInDao(LookCheckInActivity.this);
+                                // delete all
+                                checkInDao.deleteAll();
+
                                 for (int i = 0; i < jsonArray.length(); i++) {
                                     CheckInResult checkinResult =
                                             CheckInResult.fromJsonObject(jsonArray.optJSONObject(i));

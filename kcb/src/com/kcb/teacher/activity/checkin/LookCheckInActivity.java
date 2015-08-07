@@ -121,9 +121,9 @@ public class LookCheckInActivity extends BaseActivity {
         }
         progressBar.setVisibility(View.VISIBLE);
         // 获取此时间戳之后的签到结果
-        long date = 0;
+        String date = "";
         if (mAdapter.getCount() > 0) {
-            date = mAdapter.getItem(0).getDateLong();
+            date = mAdapter.getItem(0).getDateTimeString();
         }
         JsonObjectRequest request =
                 new JsonObjectRequest(Method.GET, UrlUtil.getTchCheckinGetresultUrl(
