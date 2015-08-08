@@ -1,7 +1,6 @@
 package com.kcb.common.model.test;
 
 import java.io.File;
-import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -18,15 +17,15 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.annotation.SuppressLint;
+
 import com.kcb.common.model.answer.QuestionAnswer;
 import com.kcb.common.model.answer.TestAnswer;
 import com.kcb.student.util.FileUtil;
 import com.kcb.teacher.database.test.QuestionResult;
 import com.kcb.teacher.model.KAccount;
 
-public class Test implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+public class Test {
 
     private String mId; // 后台分配的测试Id
     private String mName; // 测试的名称
@@ -79,6 +78,7 @@ public class Test implements Serializable {
         return mDate;
     }
 
+    @SuppressLint("SimpleDateFormat")
     public String getDateString() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd\nHH:mm:ss");
         String date = sdf.format(new Date(getDate()));
@@ -336,29 +336,6 @@ public class Test implements Serializable {
         return jsonObject;
     }
 
-    /**
-     * Get XML String of utf-8
-     * 
-     * @return XML-Formed string
-     */
-    // public static String getUTF8XMLString(String xml) {
-    // // A StringBuffer Object
-    // StringBuffer sb = new StringBuffer();
-    // sb.append(xml);
-    // String xmString = "";
-    // String xmlUTF8 = "";
-    // try {
-    // xmString = new String(sb.toString().getBytes("UTF-8"));
-    // xmlUTF8 = URLEncoder.encode(xmString, "UTF-8");
-    // System.out.println("utf-8 编码：" + xmlUTF8);
-    // } catch (UnsupportedEncodingException e) {
-    // // TODO Auto-generated catch block
-    // e.printStackTrace();
-    // }
-    // // return to String Formed
-    // return xmlUTF8;
-    // }
-
     public static Test fromJsonObject(JSONObject jsonObject) {
         Test test = new Test();
         test.mId = jsonObject.optString(KEY_ID);
@@ -369,10 +346,8 @@ public class Test implements Serializable {
 
         JSONArray questionArray = jsonObject.optJSONArray(KEY_QUESTION);
         for (int i = 0; i < questionArray.length(); i++) {
-            try {
-                Question question = Question.fromJsonObject(questionArray.getJSONObject(i));
-                test.mQuestions.add(question);
-            } catch (JSONException e) {}
+            Question question = Question.fromJsonObject(questionArray.optJSONObject(i));
+            test.mQuestions.add(question);
         }
         return test;
     }

@@ -1,7 +1,5 @@
 package com.kcb.common.model.test;
 
-import java.io.Serializable;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -13,9 +11,7 @@ import org.json.JSONObject;
  * @author: ZQJ
  * @date: 2015年5月8日 上午10:08:21
  */
-public class Question implements Serializable {
-
-    private static final long serialVersionUID = 2L;
+public class Question {
 
     private int mId; // 题号，由客户端确定，从0开始递增，如果删除了一个测试中的某个题目，题目需要重新设置id，以保持id的连续性
     private double mRate; // 此题的正确率
@@ -123,6 +119,22 @@ public class Question implements Serializable {
                 && (mChoiceAItem.isRight() || mChoiceBItem.isRight() || mChoiceCItem.isRight() || mChoiceDItem
                         .isRight());
     }
+    
+    public void deleteBitmap() {
+        mTitleItem.deleteBitmap();
+        mChoiceAItem.deleteBitmap();
+        mChoiceBItem.deleteBitmap();
+        mChoiceCItem.deleteBitmap();
+        mChoiceDItem.deleteBitmap();
+    }
+
+    public void renameBitmap(String testName, int questionIndex) {
+        mTitleItem.renameBitmap(testName, questionIndex, 0);
+        mChoiceAItem.renameBitmap(testName, questionIndex, 1);
+        mChoiceBItem.renameBitmap(testName, questionIndex, 2);
+        mChoiceCItem.renameBitmap(testName, questionIndex, 3);
+        mChoiceDItem.renameBitmap(testName, questionIndex, 4);
+    }
 
     public void release() {
         mTitleItem.release();
@@ -176,30 +188,12 @@ public class Question implements Serializable {
         question.mTitleItem = QuestionItem.fromJsonObject(jsonObject.optJSONObject(KEY_TITLE));
 
         JSONArray choiceArray = jsonObject.optJSONArray(KEY_CHOICES);
-        try {
-            question.mChoiceAItem = QuestionItem.fromJsonObject(choiceArray.getJSONObject(0));
-            question.mChoiceBItem = QuestionItem.fromJsonObject(choiceArray.getJSONObject(1));
-            question.mChoiceCItem = QuestionItem.fromJsonObject(choiceArray.getJSONObject(2));
-            question.mChoiceDItem = QuestionItem.fromJsonObject(choiceArray.getJSONObject(3));
-        } catch (JSONException e) {}
+        question.mChoiceAItem = QuestionItem.fromJsonObject(choiceArray.optJSONObject(0));
+        question.mChoiceBItem = QuestionItem.fromJsonObject(choiceArray.optJSONObject(1));
+        question.mChoiceCItem = QuestionItem.fromJsonObject(choiceArray.optJSONObject(2));
+        question.mChoiceDItem = QuestionItem.fromJsonObject(choiceArray.optJSONObject(3));
 
         question.mRate = jsonObject.optDouble(KEY_RATE);
         return question;
-    }
-
-    public void deleteBitmap() {
-        mTitleItem.deleteBitmap();
-        mChoiceAItem.deleteBitmap();
-        mChoiceBItem.deleteBitmap();
-        mChoiceCItem.deleteBitmap();
-        mChoiceDItem.deleteBitmap();
-    }
-
-    public void renameBitmap(String testName, int questionIndex) {
-        mTitleItem.renameBitmap(testName, questionIndex, 0);
-        mChoiceAItem.renameBitmap(testName, questionIndex, 1);
-        mChoiceBItem.renameBitmap(testName, questionIndex, 2);
-        mChoiceCItem.renameBitmap(testName, questionIndex, 3);
-        mChoiceDItem.renameBitmap(testName, questionIndex, 4);
     }
 }

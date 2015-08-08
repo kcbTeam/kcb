@@ -1,7 +1,6 @@
 package com.kcb.common.model.test;
 
 import java.io.File;
-import java.io.Serializable;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -19,9 +18,7 @@ import com.kcb.student.util.FileUtil;
  * @author: ZQJ
  * @date: 2015年5月15日 下午8:07:01
  */
-public class QuestionItem implements Serializable {
-
-    private static final long serialVersionUID = 4919254309171318451L;
+public class QuestionItem {
 
     private int mId; // item的id，由终端确定，0标识title，1-4表示四个选项
 

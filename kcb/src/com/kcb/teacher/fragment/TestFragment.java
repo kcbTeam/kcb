@@ -184,22 +184,6 @@ public class TestFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 startProgressBar.setVisibility(View.VISIBLE);
-
-                // // TODO 参数放在请求体里面
-                // JSONObject jsonObject2 = new JSONObject();
-                //
-                // JSONObject requestObject = new JSONObject();
-                // try {
-                // requestObject.put(KEY_ID, KAccount.getAccountId());
-                // test.setQuestionId();
-                // requestObject.put(KEY_TEST, test.toJsonObject(true));
-                //
-                // jsonObject2.put("data", requestObject);
-                // } catch (JSONException e) {}
-
-                // LogUtil.i(TAG, "tch start test, request body is " +
-                // jsonObject2.toString());
-
                 MultipartRequest request2 =
                         new MultipartRequest(Method.POST, UrlUtil.getTchTestStartUrl(),
                                 test.toHttpEntity(), new Listener<JSONObject>() {
@@ -207,10 +191,9 @@ public class TestFragment extends BaseFragment {
                                     @Override
                                     public void onResponse(JSONObject response) {
                                         LogUtil.i(TAG, "tch start test, response is " + response);
+                                        // 开始测试之后，获取测试的id和开始的时间戳
                                         long date = response.optLong(KEY_DATE);
                                         String testId = response.optString(KEY_TESTID);
-                                        LogUtil.i(TAG, "tch start test, get date is " + date);
-                                        LogUtil.i(TAG, "tch start test, get testId is " + testId);
 
                                         TestDao testDao = new TestDao(getActivity());
 

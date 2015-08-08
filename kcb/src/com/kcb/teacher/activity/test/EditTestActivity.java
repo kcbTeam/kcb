@@ -159,7 +159,7 @@ public class EditTestActivity extends BaseActivity {
                     public void onClick(View v) {
                         sTest.addQuestion();
                         showTestNameNum();
-                        switchNextButton();
+                        // switchNextButton();
                         ToastUtil.toast(String.format(
                                 getResources().getString(R.string.tch_question_added), questionNum));
                     }
@@ -226,6 +226,9 @@ public class EditTestActivity extends BaseActivity {
             int unCompletedIndex = sTest.getFirstUnFinishQuestionIndex() + 1;
             ToastUtil.toast(String.format(getResources()
                     .getString(R.string.tch_question_unfinished), unCompletedIndex));
+
+            mCurrentQuestionIndex = unCompletedIndex - 1;
+            showQuestion();
         } else {
             new Handler().postDelayed(new Runnable() {
 
