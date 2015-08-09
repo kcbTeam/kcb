@@ -57,13 +57,16 @@ public class ModifyPasswordActivity extends BaseActivity {
         backButton.setOnClickListener(this);
 
         oldPasswordEditText = (FloatingEditText) findViewById(R.id.edittext_oldpassword);
+        oldPasswordEditText.setHighlightedColor(getResources().getColor(R.color.blue));
         nextButton = (PaperButton) findViewById(R.id.button_next);
         nextButton.setOnClickListener(mClickListener);
         nextProgressBar = (SmoothProgressBar) findViewById(R.id.progressbar_next);
 
         newPasswordLayout = findViewById(R.id.layout_newpassword);
         newPasswordEditText = (FloatingEditText) findViewById(R.id.edittext_newpassword);
+        newPasswordEditText.setHighlightedColor(getResources().getColor(R.color.blue));
         repeatPassWordEditText = (FloatingEditText) findViewById(R.id.edittext_repeatpassword);
+        repeatPassWordEditText.setHighlightedColor(getResources().getColor(R.color.blue));
         finishButton = (PaperButton) findViewById(R.id.button_finish);
         finishButton.setOnClickListener(mClickListener);
         finishProgressBar = (SmoothProgressBar) findViewById(R.id.progressbar_finish);

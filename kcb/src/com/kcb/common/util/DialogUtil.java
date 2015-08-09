@@ -24,6 +24,13 @@ public class DialogUtil {
 
     private static final String TAG = DialogUtil.class.getName();
 
+    // 在老师、学生模块的确定按钮字体颜色应该不一样
+    private static int sSureTextColor;
+
+    public static void setSureTextColor(int color) {
+        sSureTextColor = color;
+    }
+
     /**
      * 
      * @title: showNormalDialog
@@ -48,6 +55,7 @@ public class DialogUtil {
             dialog.setMessage(messageResId);
             dialog.setSureButton(sureResId, sureListener);
             dialog.setCancelButton(cancelResId, cancelListener);
+            dialog.setSureTextColor(sSureTextColor);
         } catch (Exception e) {
             LogUtil.e(TAG, e.getMessage());
         }
@@ -78,6 +86,7 @@ public class DialogUtil {
             dialog.setMessage(message);
             dialog.setSureButton(sureResId, sureListener);
             dialog.setCancelButton(cancelResId, cancelListener);
+            dialog.setSureTextColor(sSureTextColor);
         } catch (Exception e) {
             LogUtil.e(TAG, e.getMessage());
         }
@@ -108,6 +117,7 @@ public class DialogUtil {
             dialog.setAdapter(messages);
             dialog.setSureButton(sureResId, sureListener);
             dialog.setCancelButton(cancelResId, cancelListener);
+            dialog.setSureTextColor(sSureTextColor);
         } catch (Exception e) {
             LogUtil.e(TAG, e.getMessage());
         }
@@ -134,6 +144,7 @@ public class DialogUtil {
             dialog.setTitle(titleResId);
             dialog.setImageView(bitmap);
             dialog.setOnActionListener(flag, listener);
+            dialog.setSureTextColor(sSureTextColor);
         } catch (Exception e) {
             LogUtil.e(TAG, e.getMessage());
         }

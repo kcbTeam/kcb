@@ -199,4 +199,11 @@ public class MaterialListDialog extends android.app.Dialog {
     public void enableAddOrEditMode() {
         mAdapter.enableAddOrEditMode();
     }
+
+    /**
+     * step 6
+     */
+    public void setSureTextColor(int color) {
+        sureButton.setTextColor(color);
+    }
 }

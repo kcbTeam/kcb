@@ -48,6 +48,7 @@
     <string name="stu_start_test">开始答题</string>
     <string name="stu_look_test_result">查看测试结果</string>
     <string name="stu_no_test_now">没有正在进行的测试</string>
+    <string name="stu_has_test">你已经参与了本次测试</string>
     <!--  -->
     <string name="stu_click_again_exit_app">再按一次退出课程宝</string>
     <!-- HomeActivity End -->
@@ -97,7 +98,6 @@
     <string name="stu_question_index">题目%1$d</string>
     <string name="stu_select_choice">勾出正确选项</string>
     <string name="stu_remain_time">还剩%1$d分%2$d秒</string>
-    <string name="stu_question_save">第%1$d题已保存</string>
     <string name="stu_answer_submitted">答案已提交，测试结束后可查看结果</string>
     <string name="stu_test_time_end">时间已到，无法继续作答，请提交本次答案。</string>
     <string name="stu_submit_test_finish">提交后，需要等待测试结束，才可以查看测试结果。</string>

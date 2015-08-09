@@ -11,9 +11,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.provider.Telephony.Mms.Rate;
-import android.text.format.DateUtils;
-
 /**
  * 
  * @className: CheckInResult
@@ -43,10 +40,10 @@ public class CheckInResult implements Serializable {
         return dateLong;
     }
 
-    public String getDateTimeString(){
+    public String getDateTimeString() {
         return mDate;
     }
-    
+
     public String getDateString() {
         return mDate.substring(0, mDate.lastIndexOf(" "));
         // return mDate.replace(" ", "\n");

@@ -16,7 +16,6 @@ import com.android.volley.Request.Method;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.kcb.common.base.BaseActivity;
 import com.kcb.common.server.RequestUtil;
@@ -85,7 +84,7 @@ public class LookCheckInActivity extends BaseActivity {
         CheckInDao checkInDao = new CheckInDao(LookCheckInActivity.this);
         mCheckInResults = checkInDao.getAll();
         checkInDao.close();
-        
+
         Collections.reverse(mCheckInResults);
 
         if (mCheckInResults.isEmpty()) {

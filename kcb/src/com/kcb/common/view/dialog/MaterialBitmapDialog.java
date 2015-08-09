@@ -180,6 +180,13 @@ public class MaterialBitmapDialog extends android.app.Dialog implements OnClickL
             mListener = listener;
         }
     }
+    
+    /**
+     * step 6
+     */
+    public void setSureTextColor(int color) {
+        sureButton.setTextColor(color);
+    }
 
     @Override
     public void onClick(View v) {

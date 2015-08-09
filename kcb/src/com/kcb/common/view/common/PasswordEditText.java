@@ -32,7 +32,13 @@ public class PasswordEditText extends BaseRelativeLayout {
     }
 
     private FloatingEditText passwordEditText;
+    private static int sFloatingColor; // 编辑框获得焦点的颜色
+
     private ImageView changeInputTypeImageView;
+
+    public static void setFloatingColor(int color) {
+        sFloatingColor = color;
+    }
 
     @Override
     public void init(Context context) {
@@ -43,6 +49,7 @@ public class PasswordEditText extends BaseRelativeLayout {
     @Override
     public void initView() {
         passwordEditText = (FloatingEditText) findViewById(R.id.edittext_password);
+        passwordEditText.setHighlightedColor(sFloatingColor);
 
         changeInputTypeImageView = (ImageView) findViewById(R.id.imageview_changeinputtype);
         changeInputTypeImageView.setOnClickListener(this);

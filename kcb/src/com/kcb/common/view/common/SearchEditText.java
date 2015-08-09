@@ -42,9 +42,18 @@ public class SearchEditText extends BaseRelativeLayout implements TextWatcher {
     }
 
     private FloatingEditText searchEditText;
+    private static int sFloatingColor; // 编辑框获得焦点的颜色
+    
     private ImageView clearImageView;
 
     private OnSearchListener mListener;
+    
+    /**
+     * 进入HomeActivity的时候设置
+     */
+    public static void setFloatingColor(int color){
+        sFloatingColor = color;
+    }
 
     /**
      * 1 step
@@ -59,6 +68,7 @@ public class SearchEditText extends BaseRelativeLayout implements TextWatcher {
     public void initView() {
         searchEditText = (FloatingEditText) findViewById(R.id.edittext_search);
         searchEditText.addTextChangedListener(this);
+        searchEditText.setHighlightedColor(sFloatingColor);
 
         clearImageView = (ImageView) findViewById(R.id.imageview_clear);
         clearImageView.setOnClickListener(this);

@@ -65,6 +65,8 @@ public class LoginActivity extends BaseActivity {
         backButton.setOnClickListener(this);
 
         idEditText = (FloatingEditText) findViewById(R.id.edittext_id);
+        idEditText.setHighlightedColor(getResources().getColor(R.color.blue));
+
         passwordEditText = (PasswordEditText) findViewById(R.id.passwordedittext);
         passwordEditText.setHint(R.string.tch_password);
 

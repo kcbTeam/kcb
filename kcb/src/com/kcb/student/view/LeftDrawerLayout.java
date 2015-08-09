@@ -179,13 +179,13 @@ public class LeftDrawerLayout extends LinearLayout implements OnClickListener {
             }
         });
         UmengUpdateAgent.setDownloadListener(new UmengDownloadListener() {
-            
+
             @Override
             public void OnDownloadUpdate(int arg0) {}
-            
+
             @Override
             public void OnDownloadStart() {}
-            
+
             @Override
             public void OnDownloadEnd(int arg0, String arg1) {}
         });

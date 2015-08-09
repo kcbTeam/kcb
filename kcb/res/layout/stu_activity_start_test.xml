@@ -22,7 +22,7 @@
             android:layout_height="@dimen/activity_header_height"
             android:layout_marginRight="16dp"
             android:gravity="center_vertical"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="@dimen/text_size_medium" />
     </LinearLayout>
 

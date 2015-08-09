@@ -19,15 +19,15 @@ package com.edmodo.cropper.cropwindow.edge;
  */
 public class EdgePair {
 
-    // Member Variables ////////////////////////////////////////////////////////
+	// Member Variables ////////////////////////////////////////////////////////
 
-    public Edge primary;
-    public Edge secondary;
+	public Edge primary;
+	public Edge secondary;
 
-    // Constructor /////////////////////////////////////////////////////////////
+	// Constructor /////////////////////////////////////////////////////////////
 
-    public EdgePair(Edge edge1, Edge edge2) {
-        primary = edge1;
-        secondary = edge2;
-    }
+	public EdgePair(Edge edge1, Edge edge2) {
+		primary = edge1;
+		secondary = edge2;
+	}
 }

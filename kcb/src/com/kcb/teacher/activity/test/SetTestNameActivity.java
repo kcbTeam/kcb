@@ -52,6 +52,7 @@ public class SetTestNameActivity extends BaseActivity {
         finishButton.setOnClickListener(this);
 
         testNameEditText = (FloatingEditText) findViewById(R.id.edittext_testname);
+        testNameEditText.setHighlightedColor(getResources().getColor(R.color.blue));
 
         setNumTextView = (TextView) findViewById(R.id.textview_setnum);
         setNumTextView.setText(String.format(getString(R.string.tch_set_question_num), 3));

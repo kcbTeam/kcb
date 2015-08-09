@@ -23,8 +23,9 @@ import android.graphics.Bitmap;
 import com.nostra13.universalimageloader.cache.memory.MemoryCache;
 
 /**
- * Decorator for {@link MemoryCache}. Provides special feature for cache: if some cached object age
- * exceeds defined value then this object will be removed from cache.
+ * Decorator for {@link MemoryCache}. Provides special feature for cache: if
+ * some cached object age exceeds defined value then this object will be removed
+ * from cache.
  * 
  * @author Sergey Tarasevich (nostra13[at]gmail[dot]com)
  * @see MemoryCache
@@ -32,56 +33,60 @@ import com.nostra13.universalimageloader.cache.memory.MemoryCache;
  */
 public class LimitedAgeMemoryCache implements MemoryCache {
 
-    private final MemoryCache cache;
+	private final MemoryCache cache;
 
-    private final long maxAge;
-    private final Map<String, Long> loadingDates = Collections
-            .synchronizedMap(new HashMap<String, Long>());
+	private final long maxAge;
+	private final Map<String, Long> loadingDates = Collections
+			.synchronizedMap(new HashMap<String, Long>());
 
-    /**
-     * @param cache Wrapped memory cache
-     * @param maxAge Max object age <b>(in seconds)</b>. If object age will exceed this value then
-     *        it'll be removed from cache on next treatment (and therefore be reloaded).
-     */
-    public LimitedAgeMemoryCache(MemoryCache cache, long maxAge) {
-        this.cache = cache;
-        this.maxAge = maxAge * 1000; // to milliseconds
-    }
+	/**
+	 * @param cache
+	 *            Wrapped memory cache
+	 * @param maxAge
+	 *            Max object age <b>(in seconds)</b>. If object age will exceed
+	 *            this value then it'll be removed from cache on next treatment
+	 *            (and therefore be reloaded).
+	 */
+	public LimitedAgeMemoryCache(MemoryCache cache, long maxAge) {
+		this.cache = cache;
+		this.maxAge = maxAge * 1000; // to milliseconds
+	}
 
-    @Override
-    public boolean put(String key, Bitmap value) {
-        boolean putSuccesfully = cache.put(key, value);
-        if (putSuccesfully) {
-            loadingDates.put(key, System.currentTimeMillis());
-        }
-        return putSuccesfully;
-    }
+	@Override
+	public boolean put(String key, Bitmap value) {
+		boolean putSuccesfully = cache.put(key, value);
+		if (putSuccesfully) {
+			loadingDates.put(key, System.currentTimeMillis());
+		}
+		return putSuccesfully;
+	}
 
-    @Override
-    public Bitmap get(String key) {
-        Long loadingDate = loadingDates.get(key);
-        if (loadingDate != null && System.currentTimeMillis() - loadingDate > maxAge) {
-            cache.remove(key);
-            loadingDates.remove(key);
-        }
+	@Override
+	public Bitmap get(String key) {
+		Long loadingDate = loadingDates.get(key);
+		if (loadingDate != null
+				&& System.currentTimeMillis() - loadingDate > maxAge) {
+			cache.remove(key);
+			loadingDates.remove(key);
+		}
 
-        return cache.get(key);
-    }
+		return cache.get(key);
+	}
 
-    @Override
-    public Bitmap remove(String key) {
-        loadingDates.remove(key);
-        return cache.remove(key);
-    }
+	@Override
+	public Bitmap remove(String key) {
+		loadingDates.remove(key);
+		return cache.remove(key);
+	}
 
-    @Override
-    public Collection<String> keys() {
-        return cache.keys();
-    }
+	@Override
+	public Collection<String> keys() {
+		return cache.keys();
+	}
 
-    @Override
-    public void clear() {
-        cache.clear();
-        loadingDates.clear();
-    }
+	@Override
+	public void clear() {
+		cache.clear();
+		loadingDates.clear();
+	}
 }

@@ -13,7 +13,6 @@ import com.android.volley.Request.Method;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.kcb.common.base.BaseActivity;
 import com.kcb.common.model.feedback.FeedBack;
@@ -175,23 +174,23 @@ public class FeedBackActivity extends BaseActivity {
 
         // 发送请求
         StringRequest request =
-                new StringRequest(Method.POST, UrlUtil.getCommFeedbackSubmitUrl(feedBack
-                        .toJsonObject()), new Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        ToastUtil.toast(R.string.stu_feedback_success);
-                        progressBar.hide(FeedBackActivity.this);
-                        submitSuccess = true;
-                        // 清空输入框的内容
-                        feedbackEditText.setText("");
-                    }
-                }, new ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        progressBar.hide(FeedBackActivity.this);
-                        ResponseUtil.toastError(error);
-                    }
-                });
+                new StringRequest(Method.POST, UrlUtil.getCommFeedbackSubmitUrl(),
+                        new Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                ToastUtil.toast(R.string.stu_feedback_success);
+                                progressBar.hide(FeedBackActivity.this);
+                                submitSuccess = true;
+                                // 清空输入框的内容
+                                feedbackEditText.setText("");
+                            }
+                        }, new ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                progressBar.hide(FeedBackActivity.this);
+                                ResponseUtil.toastError(error);
+                            }
+                        });
         RequestUtil.getInstance().addToRequestQueue(request, TAG);
     }
 }

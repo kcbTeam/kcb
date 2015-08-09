@@ -21,6 +21,6 @@ package com.nostra13.universalimageloader.cache.disc.naming;
  */
 public interface FileNameGenerator {
 
-    /** Generates unique file name for image defined by URI */
-    String generate(String imageUri);
+	/** Generates unique file name for image defined by URI */
+	String generate(String imageUri);
 }

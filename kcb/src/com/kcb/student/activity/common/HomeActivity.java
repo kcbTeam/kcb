@@ -17,8 +17,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.kcb.common.base.BaseFragmentActivity;
+import com.kcb.common.util.DialogUtil;
 import com.kcb.common.util.StatusBarUtil;
 import com.kcb.common.util.ToastUtil;
+import com.kcb.common.view.common.PasswordEditText;
+import com.kcb.common.view.common.SearchEditText;
 import com.kcb.library.view.DrawerArrowDrawable;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcbTeam.R;
@@ -69,6 +72,10 @@ public class HomeActivity extends BaseFragmentActivity {
 
     @Override
     protected void initView() {
+        // 设置通用控件的属性
+        initCommonView();
+
+        // 侧边栏
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerlayout);
 
         drawerArrowDrawable = new DrawerArrowDrawable(getResources());
@@ -117,6 +124,15 @@ public class HomeActivity extends BaseFragmentActivity {
         mFragments[INDEX_TEST] = mFragmentManager.findFragmentById(R.id.fragment_test);
 
         switchFragment(INDEX_CHECKIN);
+    }
+
+    private void initCommonView() {
+        int color = getResources().getColor(R.color.stu_primary);
+        // 设置对话框的确定按钮颜色
+        DialogUtil.setSureTextColor(color);
+        // 设置输入框获取焦点的颜色
+        SearchEditText.setFloatingColor(color);
+        PasswordEditText.setFloatingColor(color);
     }
 
     @Override

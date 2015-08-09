@@ -1,6 +1,9 @@
 package com.kcb.common.model.test;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -168,6 +171,22 @@ public class QuestionItem {
             String newPath = FileUtil.getQuestionItemPath(testName, questionIndex + 1, itemIndex);
             file.renameTo(new File(newPath));
             mBitmapPath = newPath;
+        }
+    }
+
+    public void decode() {
+        if (mIsText) {
+            try {
+                mText = URLDecoder.decode(mText, "utf-8");
+            } catch (UnsupportedEncodingException e) {}
+        }
+    }
+
+    public void encode() {
+        if (mIsText) {
+            try {
+                mText = URLEncoder.encode(mText, "utf-8");
+            } catch (UnsupportedEncodingException e) {}
         }
     }
 

@@ -250,6 +250,21 @@ public class Test {
         }
     }
 
+    /**
+     * 拿到的字符串是编码了的，需要先解码
+     */
+    public void decode() {
+        for (Question question : mQuestions) {
+            question.decode();
+        }
+    }
+
+    public void encode() {
+        for (Question question : mQuestions) {
+            question.encode();
+        }
+    }
+
     public void release() {
         for (int i = 0; i < mQuestions.size(); i++) {
             mQuestions.get(i).release();
@@ -275,6 +290,8 @@ public class Test {
         try {
             requestObject.put(KEY_ID, KAccount.getAccountId());
             setQuestionId();
+            // 编码文字
+            encode();
             requestObject.put(KEY_TEST, toJsonObject());
         } catch (JSONException e) {}
 

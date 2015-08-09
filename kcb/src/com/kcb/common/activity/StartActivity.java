@@ -1,9 +1,5 @@
 package com.kcb.common.activity;
 
-import java.util.List;
-
-import android.app.ActivityManager;
-import android.app.ActivityManager.RunningTaskInfo;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,7 +12,9 @@ import android.widget.ImageView;
 import com.kcb.common.base.BaseActivity;
 import com.kcb.common.listener.DelayClickListener;
 import com.kcb.common.util.AccountUtil;
+import com.kcb.common.util.DialogUtil;
 import com.kcb.common.util.LogUtil;
+import com.kcb.common.view.common.PasswordEditText;
 import com.kcb.library.view.ColorAnimationView;
 import com.kcb.library.view.PaperButton;
 import com.kcb.student.activity.common.HomeActivity;
@@ -50,7 +48,6 @@ public class StartActivity extends BaseActivity {
             setContentView(R.layout.comm_activity_start);
             initView();
         } else {
-            // if (needStartApp()) {
             LogUtil.i(TAG, "start has account");
             if (AccountUtil.getAccountType() == AccountUtil.TYPE_STU) {
                 LogUtil.i(TAG, "start student");
@@ -60,7 +57,6 @@ public class StartActivity extends BaseActivity {
                 com.kcb.teacher.activity.common.HomeActivity.start(this);
             }
             finish();
-            // }
         }
     }
 
@@ -84,30 +80,6 @@ public class StartActivity extends BaseActivity {
 
     @Override
     protected void initData() {}
-
-    private boolean needStartApp() {
-        // get runninng tasks
-        final ActivityManager am = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-        List<RunningTaskInfo> tasksInfo = am.getRunningTasks(1024);
-        // has running task
-        if (!tasksInfo.isEmpty()) {
-            final String ourAppPackageName = getPackageName();
-            RunningTaskInfo taskInfo;
-            final int size = tasksInfo.size();
-            for (int i = 0; i < size; i++) {// detect app is running or not
-                taskInfo = tasksInfo.get(i);
-                if (ourAppPackageName.equals(taskInfo.baseActivity.getPackageName())) {
-                    // continue application start only if there is the only
-                    // Activity in the task
-                    // (BTW in this case this is the StartupActivity)
-                    return taskInfo.numActivities == 1;
-                }
-            }
-        }
-        tasksInfo.clear();
-        tasksInfo = null;
-        return true;
-    }
 
     private class StartAdapter extends PagerAdapter {
         private int[] mBackgroundBitmapIds = new int[] {R.drawable.ic_launcher,
@@ -151,9 +123,12 @@ public class StartActivity extends BaseActivity {
                 Intent intent = null;
                 switch (v.getId()) {
                     case R.id.button_stu:
+                        PasswordEditText.setFloatingColor(getResources().getColor(
+                                R.color.stu_primary));
                         intent = new Intent(StartActivity.this, LoginActivity.class);
                         break;
                     case R.id.button_tch:
+                        PasswordEditText.setFloatingColor(getResources().getColor(R.color.blue));
                         intent =
                                 new Intent(StartActivity.this,
                                         com.kcb.teacher.activity.common.LoginActivity.class);

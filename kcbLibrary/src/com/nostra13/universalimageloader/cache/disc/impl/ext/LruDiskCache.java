@@ -28,7 +28,8 @@ import com.nostra13.universalimageloader.utils.L;
 
 /**
  * Disk cache based on "Least-Recently Used" principle. Adapter pattern, adapts
- * {@link com.nostra13.universalimageloader.cache.disc.impl.ext.DiskLruCache DiskLruCache} to
+ * {@link com.nostra13.universalimageloader.cache.disc.impl.ext.DiskLruCache
+ * DiskLruCache} to
  * {@link com.nostra13.universalimageloader.cache.disc.DiskCache DiskCache}
  * 
  * @author Sergey Tarasevich (nostra13[at]gmail[dot]com)
@@ -36,208 +37,231 @@ import com.nostra13.universalimageloader.utils.L;
  * @since 1.9.2
  */
 public class LruDiskCache implements DiskCache {
-    /** {@value */
-    public static final int DEFAULT_BUFFER_SIZE = 32 * 1024; // 32 Kb
-    /** {@value */
-    public static final Bitmap.CompressFormat DEFAULT_COMPRESS_FORMAT = Bitmap.CompressFormat.PNG;
-    /** {@value */
-    public static final int DEFAULT_COMPRESS_QUALITY = 100;
+	/** {@value */
+	public static final int DEFAULT_BUFFER_SIZE = 32 * 1024; // 32 Kb
+	/** {@value */
+	public static final Bitmap.CompressFormat DEFAULT_COMPRESS_FORMAT = Bitmap.CompressFormat.PNG;
+	/** {@value */
+	public static final int DEFAULT_COMPRESS_QUALITY = 100;
 
-    private static final String ERROR_ARG_NULL = " argument must be not null";
-    private static final String ERROR_ARG_NEGATIVE = " argument must be positive number";
+	private static final String ERROR_ARG_NULL = " argument must be not null";
+	private static final String ERROR_ARG_NEGATIVE = " argument must be positive number";
 
-    protected DiskLruCache cache;
-    private File reserveCacheDir;
+	protected DiskLruCache cache;
+	private File reserveCacheDir;
 
-    protected final FileNameGenerator fileNameGenerator;
+	protected final FileNameGenerator fileNameGenerator;
 
-    protected int bufferSize = DEFAULT_BUFFER_SIZE;
+	protected int bufferSize = DEFAULT_BUFFER_SIZE;
 
-    protected Bitmap.CompressFormat compressFormat = DEFAULT_COMPRESS_FORMAT;
-    protected int compressQuality = DEFAULT_COMPRESS_QUALITY;
+	protected Bitmap.CompressFormat compressFormat = DEFAULT_COMPRESS_FORMAT;
+	protected int compressQuality = DEFAULT_COMPRESS_QUALITY;
 
-    /**
-     * @param cacheDir Directory for file caching
-     * @param fileNameGenerator
-     *        {@linkplain com.nostra13.universalimageloader.cache.disc.naming.FileNameGenerator Name
-     *        generator} for cached files. Generated names must match the regex
-     *        <strong>[a-z0-9_-]{1,64}</strong>
-     * @param cacheMaxSize Max cache size in bytes. <b>0</b> means cache size is unlimited.
-     * @throws IOException if cache can't be initialized (e.g. "No space left on device")
-     */
-    public LruDiskCache(File cacheDir, FileNameGenerator fileNameGenerator, long cacheMaxSize)
-            throws IOException {
-        this(cacheDir, null, fileNameGenerator, cacheMaxSize, 0);
-    }
+	/**
+	 * @param cacheDir
+	 *            Directory for file caching
+	 * @param fileNameGenerator
+	 *            {@linkplain com.nostra13.universalimageloader.cache.disc.naming.FileNameGenerator
+	 *            Name generator} for cached files. Generated names must match
+	 *            the regex <strong>[a-z0-9_-]{1,64}</strong>
+	 * @param cacheMaxSize
+	 *            Max cache size in bytes. <b>0</b> means cache size is
+	 *            unlimited.
+	 * @throws IOException
+	 *             if cache can't be initialized (e.g.
+	 *             "No space left on device")
+	 */
+	public LruDiskCache(File cacheDir, FileNameGenerator fileNameGenerator,
+			long cacheMaxSize) throws IOException {
+		this(cacheDir, null, fileNameGenerator, cacheMaxSize, 0);
+	}
 
-    /**
-     * @param cacheDir Directory for file caching
-     * @param reserveCacheDir null-ok; Reserve directory for file caching. It's used when the
-     *        primary directory isn't available.
-     * @param fileNameGenerator
-     *        {@linkplain com.nostra13.universalimageloader.cache.disc.naming.FileNameGenerator Name
-     *        generator} for cached files. Generated names must match the regex
-     *        <strong>[a-z0-9_-]{1,64}</strong>
-     * @param cacheMaxSize Max cache size in bytes. <b>0</b> means cache size is unlimited.
-     * @param cacheMaxFileCount Max file count in cache. <b>0</b> means file count is unlimited.
-     * @throws IOException if cache can't be initialized (e.g. "No space left on device")
-     */
-    public LruDiskCache(File cacheDir, File reserveCacheDir, FileNameGenerator fileNameGenerator,
-            long cacheMaxSize, int cacheMaxFileCount) throws IOException {
-        if (cacheDir == null) {
-            throw new IllegalArgumentException("cacheDir" + ERROR_ARG_NULL);
-        }
-        if (cacheMaxSize < 0) {
-            throw new IllegalArgumentException("cacheMaxSize" + ERROR_ARG_NEGATIVE);
-        }
-        if (cacheMaxFileCount < 0) {
-            throw new IllegalArgumentException("cacheMaxFileCount" + ERROR_ARG_NEGATIVE);
-        }
-        if (fileNameGenerator == null) {
-            throw new IllegalArgumentException("fileNameGenerator" + ERROR_ARG_NULL);
-        }
+	/**
+	 * @param cacheDir
+	 *            Directory for file caching
+	 * @param reserveCacheDir
+	 *            null-ok; Reserve directory for file caching. It's used when
+	 *            the primary directory isn't available.
+	 * @param fileNameGenerator
+	 *            {@linkplain com.nostra13.universalimageloader.cache.disc.naming.FileNameGenerator
+	 *            Name generator} for cached files. Generated names must match
+	 *            the regex <strong>[a-z0-9_-]{1,64}</strong>
+	 * @param cacheMaxSize
+	 *            Max cache size in bytes. <b>0</b> means cache size is
+	 *            unlimited.
+	 * @param cacheMaxFileCount
+	 *            Max file count in cache. <b>0</b> means file count is
+	 *            unlimited.
+	 * @throws IOException
+	 *             if cache can't be initialized (e.g.
+	 *             "No space left on device")
+	 */
+	public LruDiskCache(File cacheDir, File reserveCacheDir,
+			FileNameGenerator fileNameGenerator, long cacheMaxSize,
+			int cacheMaxFileCount) throws IOException {
+		if (cacheDir == null) {
+			throw new IllegalArgumentException("cacheDir" + ERROR_ARG_NULL);
+		}
+		if (cacheMaxSize < 0) {
+			throw new IllegalArgumentException("cacheMaxSize"
+					+ ERROR_ARG_NEGATIVE);
+		}
+		if (cacheMaxFileCount < 0) {
+			throw new IllegalArgumentException("cacheMaxFileCount"
+					+ ERROR_ARG_NEGATIVE);
+		}
+		if (fileNameGenerator == null) {
+			throw new IllegalArgumentException("fileNameGenerator"
+					+ ERROR_ARG_NULL);
+		}
 
-        if (cacheMaxSize == 0) {
-            cacheMaxSize = Long.MAX_VALUE;
-        }
-        if (cacheMaxFileCount == 0) {
-            cacheMaxFileCount = Integer.MAX_VALUE;
-        }
+		if (cacheMaxSize == 0) {
+			cacheMaxSize = Long.MAX_VALUE;
+		}
+		if (cacheMaxFileCount == 0) {
+			cacheMaxFileCount = Integer.MAX_VALUE;
+		}
 
-        this.reserveCacheDir = reserveCacheDir;
-        this.fileNameGenerator = fileNameGenerator;
-        initCache(cacheDir, reserveCacheDir, cacheMaxSize, cacheMaxFileCount);
-    }
+		this.reserveCacheDir = reserveCacheDir;
+		this.fileNameGenerator = fileNameGenerator;
+		initCache(cacheDir, reserveCacheDir, cacheMaxSize, cacheMaxFileCount);
+	}
 
-    private void initCache(File cacheDir, File reserveCacheDir, long cacheMaxSize,
-            int cacheMaxFileCount) throws IOException {
-        try {
-            cache = DiskLruCache.open(cacheDir, 1, 1, cacheMaxSize, cacheMaxFileCount);
-        } catch (IOException e) {
-            L.e(e);
-            if (reserveCacheDir != null) {
-                initCache(reserveCacheDir, null, cacheMaxSize, cacheMaxFileCount);
-            }
-            if (cache == null) {
-                throw e; // new RuntimeException("Can't initialize disk cache", e);
-            }
-        }
-    }
+	private void initCache(File cacheDir, File reserveCacheDir,
+			long cacheMaxSize, int cacheMaxFileCount) throws IOException {
+		try {
+			cache = DiskLruCache.open(cacheDir, 1, 1, cacheMaxSize,
+					cacheMaxFileCount);
+		} catch (IOException e) {
+			L.e(e);
+			if (reserveCacheDir != null) {
+				initCache(reserveCacheDir, null, cacheMaxSize,
+						cacheMaxFileCount);
+			}
+			if (cache == null) {
+				throw e; // new RuntimeException("Can't initialize disk cache",
+							// e);
+			}
+		}
+	}
 
-    @Override
-    public File getDirectory() {
-        return cache.getDirectory();
-    }
+	@Override
+	public File getDirectory() {
+		return cache.getDirectory();
+	}
 
-    @Override
-    public File get(String imageUri) {
-        DiskLruCache.Snapshot snapshot = null;
-        try {
-            snapshot = cache.get(getKey(imageUri));
-            return snapshot == null ? null : snapshot.getFile(0);
-        } catch (IOException e) {
-            L.e(e);
-            return null;
-        } finally {
-            if (snapshot != null) {
-                snapshot.close();
-            }
-        }
-    }
+	@Override
+	public File get(String imageUri) {
+		DiskLruCache.Snapshot snapshot = null;
+		try {
+			snapshot = cache.get(getKey(imageUri));
+			return snapshot == null ? null : snapshot.getFile(0);
+		} catch (IOException e) {
+			L.e(e);
+			return null;
+		} finally {
+			if (snapshot != null) {
+				snapshot.close();
+			}
+		}
+	}
 
-    @Override
-    public boolean save(String imageUri, InputStream imageStream, IoUtils.CopyListener listener)
-            throws IOException {
-        DiskLruCache.Editor editor = cache.edit(getKey(imageUri));
-        if (editor == null) {
-            return false;
-        }
+	@Override
+	public boolean save(String imageUri, InputStream imageStream,
+			IoUtils.CopyListener listener) throws IOException {
+		DiskLruCache.Editor editor = cache.edit(getKey(imageUri));
+		if (editor == null) {
+			return false;
+		}
 
-        OutputStream os = new BufferedOutputStream(editor.newOutputStream(0), bufferSize);
-        boolean copied = false;
-        try {
-            copied = IoUtils.copyStream(imageStream, os, listener, bufferSize);
-        } finally {
-            IoUtils.closeSilently(os);
-            if (copied) {
-                editor.commit();
-            } else {
-                editor.abort();
-            }
-        }
-        return copied;
-    }
+		OutputStream os = new BufferedOutputStream(editor.newOutputStream(0),
+				bufferSize);
+		boolean copied = false;
+		try {
+			copied = IoUtils.copyStream(imageStream, os, listener, bufferSize);
+		} finally {
+			IoUtils.closeSilently(os);
+			if (copied) {
+				editor.commit();
+			} else {
+				editor.abort();
+			}
+		}
+		return copied;
+	}
 
-    @Override
-    public boolean save(String imageUri, Bitmap bitmap) throws IOException {
-        DiskLruCache.Editor editor = cache.edit(getKey(imageUri));
-        if (editor == null) {
-            return false;
-        }
+	@Override
+	public boolean save(String imageUri, Bitmap bitmap) throws IOException {
+		DiskLruCache.Editor editor = cache.edit(getKey(imageUri));
+		if (editor == null) {
+			return false;
+		}
 
-        OutputStream os = new BufferedOutputStream(editor.newOutputStream(0), bufferSize);
-        boolean savedSuccessfully = false;
-        try {
-            savedSuccessfully = bitmap.compress(compressFormat, compressQuality, os);
-        } finally {
-            IoUtils.closeSilently(os);
-        }
-        if (savedSuccessfully) {
-            editor.commit();
-        } else {
-            editor.abort();
-        }
-        return savedSuccessfully;
-    }
+		OutputStream os = new BufferedOutputStream(editor.newOutputStream(0),
+				bufferSize);
+		boolean savedSuccessfully = false;
+		try {
+			savedSuccessfully = bitmap.compress(compressFormat,
+					compressQuality, os);
+		} finally {
+			IoUtils.closeSilently(os);
+		}
+		if (savedSuccessfully) {
+			editor.commit();
+		} else {
+			editor.abort();
+		}
+		return savedSuccessfully;
+	}
 
-    @Override
-    public boolean remove(String imageUri) {
-        try {
-            return cache.remove(getKey(imageUri));
-        } catch (IOException e) {
-            L.e(e);
-            return false;
-        }
-    }
+	@Override
+	public boolean remove(String imageUri) {
+		try {
+			return cache.remove(getKey(imageUri));
+		} catch (IOException e) {
+			L.e(e);
+			return false;
+		}
+	}
 
-    @Override
-    public void close() {
-        try {
-            cache.close();
-        } catch (IOException e) {
-            L.e(e);
-        }
-        cache = null;
-    }
+	@Override
+	public void close() {
+		try {
+			cache.close();
+		} catch (IOException e) {
+			L.e(e);
+		}
+		cache = null;
+	}
 
-    @Override
-    public void clear() {
-        try {
-            cache.delete();
-        } catch (IOException e) {
-            L.e(e);
-        }
-        try {
-            initCache(cache.getDirectory(), reserveCacheDir, cache.getMaxSize(),
-                    cache.getMaxFileCount());
-        } catch (IOException e) {
-            L.e(e);
-        }
-    }
+	@Override
+	public void clear() {
+		try {
+			cache.delete();
+		} catch (IOException e) {
+			L.e(e);
+		}
+		try {
+			initCache(cache.getDirectory(), reserveCacheDir,
+					cache.getMaxSize(), cache.getMaxFileCount());
+		} catch (IOException e) {
+			L.e(e);
+		}
+	}
 
-    private String getKey(String imageUri) {
-        return fileNameGenerator.generate(imageUri);
-    }
+	private String getKey(String imageUri) {
+		return fileNameGenerator.generate(imageUri);
+	}
 
-    public void setBufferSize(int bufferSize) {
-        this.bufferSize = bufferSize;
-    }
+	public void setBufferSize(int bufferSize) {
+		this.bufferSize = bufferSize;
+	}
 
-    public void setCompressFormat(Bitmap.CompressFormat compressFormat) {
-        this.compressFormat = compressFormat;
-    }
+	public void setCompressFormat(Bitmap.CompressFormat compressFormat) {
+		this.compressFormat = compressFormat;
+	}
 
-    public void setCompressQuality(int compressQuality) {
-        this.compressQuality = compressQuality;
-    }
+	public void setCompressQuality(int compressQuality) {
+		this.compressQuality = compressQuality;
+	}
 }

@@ -30,8 +30,8 @@ import com.nostra13.universalimageloader.cache.memory.BaseMemoryCache;
  * @since 1.5.3
  */
 public class WeakMemoryCache extends BaseMemoryCache {
-    @Override
-    protected Reference<Bitmap> createReference(Bitmap value) {
-        return new WeakReference<Bitmap>(value);
-    }
+	@Override
+	protected Reference<Bitmap> createReference(Bitmap value) {
+		return new WeakReference<Bitmap>(value);
+	}
 }

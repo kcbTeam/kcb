@@ -19,11 +19,11 @@ package com.android.volley;
  */
 @SuppressWarnings("serial")
 public class ServerError extends VolleyError {
-    public ServerError(NetworkResponse networkResponse) {
-        super(networkResponse);
-    }
+	public ServerError(NetworkResponse networkResponse) {
+		super(networkResponse);
+	}
 
-    public ServerError() {
-        super();
-    }
+	public ServerError() {
+		super();
+	}
 }

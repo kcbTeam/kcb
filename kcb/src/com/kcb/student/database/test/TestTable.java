@@ -19,6 +19,6 @@ public class TestTable {
     public final static String COLUMN_QUESTIONS = "questions"; // 测试中的题目
 
     public final static String CREATE_TABLE = "create table if not exists " + TABLE_NAME + "("
-            + COLUMN_ID + " text," + COLUMN_NAME + " text primary key," + COLUMN_TIME + " integer,"
+            + COLUMN_ID + " text," + COLUMN_NAME + " text," + COLUMN_TIME + " integer,"
             + COLUMN_DATE + " long," + COLUMN_HASTESTED + " boolean," + COLUMN_QUESTIONS + " text)";
 }

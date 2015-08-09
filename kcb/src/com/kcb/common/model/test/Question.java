@@ -119,7 +119,7 @@ public class Question {
                 && (mChoiceAItem.isRight() || mChoiceBItem.isRight() || mChoiceCItem.isRight() || mChoiceDItem
                         .isRight());
     }
-    
+
     public void deleteBitmap() {
         mTitleItem.deleteBitmap();
         mChoiceAItem.deleteBitmap();
@@ -134,6 +134,25 @@ public class Question {
         mChoiceBItem.renameBitmap(testName, questionIndex, 2);
         mChoiceCItem.renameBitmap(testName, questionIndex, 3);
         mChoiceDItem.renameBitmap(testName, questionIndex, 4);
+    }
+
+    /**
+     * 解码字符串
+     */
+    public void decode() {
+        mTitleItem.decode();
+        mChoiceAItem.decode();
+        mChoiceBItem.decode();
+        mChoiceCItem.decode();
+        mChoiceDItem.decode();
+    }
+
+    public void encode() {
+        mTitleItem.encode();
+        mChoiceAItem.encode();
+        mChoiceBItem.encode();
+        mChoiceCItem.encode();
+        mChoiceDItem.encode();
     }
 
     public void release() {

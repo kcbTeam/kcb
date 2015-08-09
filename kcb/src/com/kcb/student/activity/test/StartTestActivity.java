@@ -145,16 +145,16 @@ public class StartTestActivity extends BaseActivity {
     }
 
     private void lastQuestion() {
+        saveAnswer();
         if (mQuestionIndex > 0) {
-            saveAnswer();
             mQuestionIndex--;
             showQuestion();
         }
     }
 
     private void nextQuesion() {
+        saveAnswer();
         if (mQuestionIndex < sTest.getQuestionNum() - 1) {
-            saveAnswer();
             mQuestionIndex++;
             showQuestion();
         }
@@ -164,7 +164,7 @@ public class StartTestActivity extends BaseActivity {
         if (progressBar.getVisibility() == View.VISIBLE) {
             return;
         }
-        answerQuestionView.saveAnswer();
+        saveAnswer();
 
         // get unfinished question index
         List<Integer> unFinishedIndexs = mTestAnswer.getUnFinishedIndex();
@@ -265,11 +265,7 @@ public class StartTestActivity extends BaseActivity {
 
     private void saveAnswer() {
         answerQuestionView.saveAnswer();
-        if (!getCurrentQuestion().equal(mTempQuestion)) {
-            mTestAnswer.saveQuestionAnswer(getCurrentQuestion());
-            ToastUtil.toast(String.format(getResources().getString(R.string.stu_question_save),
-                    mQuestionIndex + 1));
-        }
+        mTestAnswer.saveQuestionAnswer(getCurrentQuestion());
     }
 
     private Question getCurrentQuestion() {

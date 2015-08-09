@@ -1,5 +1,6 @@
 package com.kcb.common.view.dialog;
 
+import android.R.integer;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
@@ -200,5 +201,12 @@ public class MaterialDialog extends android.app.Dialog {
     public void setCancelable(boolean flag) {
         super.setCancelable(flag);
         mCancelable = flag;
+    }
+
+    /**
+     * step 6
+     */
+    public void setSureTextColor(int color) {
+        sureButton.setTextColor(color);
     }
 }

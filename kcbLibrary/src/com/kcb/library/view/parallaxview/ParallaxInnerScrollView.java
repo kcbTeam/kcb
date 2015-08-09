@@ -14,29 +14,30 @@ import com.kcb.library.view.parallaxview.ParallaxScrollView.InnerScrollViewScrol
  */
 public class ParallaxInnerScrollView extends ScrollView {
 
-    private InnerScrollViewScrollListener mScrollListener;
+	private InnerScrollViewScrollListener mScrollListener;
 
-    public void setOnScrollListener(InnerScrollViewScrollListener listener) {
-        mScrollListener = listener;
-    }
+	public void setOnScrollListener(InnerScrollViewScrollListener listener) {
+		mScrollListener = listener;
+	}
 
-    public ParallaxInnerScrollView(Context context, AttributeSet attrs, int defStyle) {
-        super(context, attrs, defStyle);
-    }
+	public ParallaxInnerScrollView(Context context, AttributeSet attrs,
+			int defStyle) {
+		super(context, attrs, defStyle);
+	}
 
-    public ParallaxInnerScrollView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-    }
+	public ParallaxInnerScrollView(Context context, AttributeSet attrs) {
+		super(context, attrs);
+	}
 
-    public ParallaxInnerScrollView(Context context) {
-        super(context);
-    }
+	public ParallaxInnerScrollView(Context context) {
+		super(context);
+	}
 
-    @Override
-    protected void onScrollChanged(int l, int t, int oldl, int oldt) {
-        super.onScrollChanged(l, t, oldl, oldt);
-        if (null != mScrollListener) {
-            mScrollListener.onScroll();
-        }
-    }
+	@Override
+	protected void onScrollChanged(int l, int t, int oldl, int oldt) {
+		super.onScrollChanged(l, t, oldl, oldt);
+		if (null != mScrollListener) {
+			mScrollListener.onScroll();
+		}
+	}
 }

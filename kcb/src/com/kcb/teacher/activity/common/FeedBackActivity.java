@@ -127,7 +127,7 @@ public class FeedBackActivity extends BaseActivity {
         } catch (JSONException e) {}
         // 发送请求
         JsonObjectRequest request =
-                new JsonObjectRequest(Method.POST, UrlUtil.getCommFeedbackSubmitUrl(null), jsonObject,
+                new JsonObjectRequest(Method.POST, UrlUtil.getCommFeedbackSubmitUrl(), jsonObject,
                         new Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject response) {

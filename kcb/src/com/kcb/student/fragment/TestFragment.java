@@ -112,6 +112,7 @@ public class TestFragment extends BaseFragment {
 
                         // 打乱测试中的题目和选项
                         test.shuffle();
+                        test.decode();
 
                         TestDao testDao = new TestDao(getActivity());
                         testDao.add(test);
@@ -131,9 +132,15 @@ public class TestFragment extends BaseFragment {
                             public void run() {
                                 startProgressBar.hide(getActivity());
                                 NetworkResponse response = error.networkResponse;
-                                if (null != response && response.statusCode == 400) {
-                                    LogUtil.e(TAG, getString(R.string.stu_no_test_now));
-                                    ToastUtil.toast(R.string.stu_no_test_now);
+                                if (null != response) {
+                                    int statusCode = response.statusCode;
+                                    if (statusCode == 400) {
+                                        LogUtil.e(TAG, getString(R.string.stu_no_test_now));
+                                        ToastUtil.toast(R.string.stu_no_test_now);
+                                    } else if (statusCode == 401) {
+                                        LogUtil.e(TAG, getString(R.string.stu_has_test));
+                                        ToastUtil.toast(R.string.stu_has_test);
+                                    }
                                 } else {
                                     ResponseUtil.toastError(error);
                                 }

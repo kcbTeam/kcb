@@ -1,12 +1,7 @@
 package com.kcb.common.server;
 
 import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.net.URLEncoder;
-
-import org.json.JSONObject;
-
-import android.webkit.URLUtil;
 
 import com.kcb.common.util.LogUtil;
 
@@ -33,10 +28,6 @@ public class UrlUtil {
      */
     // 1.1 提交意见反馈
     private static final String url_common_feedback_submit = IP + "/v1/common/feedback/submit";
-
-    public static String getCommFeedbackSubmitUrl(JSONObject jsonObject) {
-        return url_common_feedback_submit + "?data=" + jsonObject.toString();
-    }
 
     public static String getCommFeedbackSubmitUrl() {
         return url_common_feedback_submit;
