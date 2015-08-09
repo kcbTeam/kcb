@@ -85,9 +85,9 @@ public class MaterialBitmapDialog extends android.app.Dialog implements OnClickL
                 return false;
             }
         });
-        contentView = (LinearLayout) findViewById(R.id.contentDialog);
+        contentView = (RelativeLayout) findViewById(R.id.contentDialog);
 
-        titleTextView = (TextView) findViewById(R.id.title);
+        titleTextView = (TextView) findViewById(R.id.textview_title);
 
         photoView = (PhotoView) findViewById(R.id.photoview);
         mAttacher = new PhotoViewAttacher(photoView);
@@ -180,7 +180,7 @@ public class MaterialBitmapDialog extends android.app.Dialog implements OnClickL
             mListener = listener;
         }
     }
-    
+
     /**
      * step 6
      */
