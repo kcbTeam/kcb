@@ -24,7 +24,9 @@ public class DialogUtil {
 
     private static final String TAG = DialogUtil.class.getName();
 
-    // 在老师、学生模块的确定按钮字体颜色应该不一样
+    /**
+     * 在老师、学生模块的确定按钮字体颜色应该不一样
+     */
     private static int sSureTextColor;
 
     public static void setSureTextColor(int color) {
