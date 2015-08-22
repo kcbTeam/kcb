@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">课程宝</string>
+    <string name="app_name">好课堂</string>
+
+    <!-- 引导页面 start -->
+    <string name="comm_student">我是学生</string>
+    <string name="comm_teacher">我是老师</string>
+    <!-- 引导页面 end -->
+
 
     <!-- 对话框 start -->
     <string name="comm_sure">确定</string>
@@ -11,12 +17,6 @@
     <string name="comm_delete_bitmap">确定删除这张图片？</string>
     <string name="comm_zoom_tip">可以双击或捏合手指来缩放图片。</string>
     <!-- 对话框 end -->
-
-
-    <!-- 引导页面 start -->
-    <string name="comm_student">我是学生</string>
-    <string name="comm_teacher">我是老师</string>
-    <!-- 引导页面 end -->
 
 
     <!-- 网络请求 start -->

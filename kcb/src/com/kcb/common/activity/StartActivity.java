@@ -82,8 +82,8 @@ public class StartActivity extends BaseActivity {
     protected void initData() {}
 
     private class StartAdapter extends PagerAdapter {
-        private int[] mBackgroundBitmapIds = new int[] {R.drawable.ic_launcher,
-                R.drawable.ic_launcher, R.drawable.ic_launcher};
+        private int[] mBackgroundBitmapIds = new int[] {R.drawable.ic_activity_start_1,
+                R.drawable.ic_activity_start_2, R.drawable.ic_launcher};
 
         @Override
         public int getCount() {

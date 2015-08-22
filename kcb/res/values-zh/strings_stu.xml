@@ -13,6 +13,7 @@
 
     <!-- LoginActivity Start -->
     <string name="stu_stu_login">学生登录</string>
+    <string name="stu_login_tip">首次登录时，密码和学号一样</string>
     <string name="stu_stuid">学号</string>
     <string name="stu_password">密码</string>
     <string name="stu_login">登录</string>

@@ -19,19 +19,11 @@
             android:text="@string/stu_stu_login" />
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/imageview_app"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/layout_title"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
-        android:src="@drawable/ic_launcher" />
-
     <com.kcb.library.view.FloatingEditText
         android:id="@+id/edittext_id"
         style="@style/common_edittext"
-        android:layout_below="@id/imageview_app"
+        android:layout_below="@id/layout_title"
+        android:layout_marginTop="36dp"
         android:hint="@string/stu_stuid" />
 
     <com.kcb.common.view.common.PasswordEditText
@@ -55,5 +47,15 @@
         android:layout_alignLeft="@id/button_login"
         android:layout_alignRight="@id/button_login"
         android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/textview_tip"
+        style="@style/common_tip_textview"
+        android:layout_width="wrap_content"
+        android:layout_below="@id/button_login"
+        android:layout_centerHorizontal="true"
+        android:drawableLeft="@drawable/ic_info_outline_grey600_18dp"
+        android:gravity="center_vertical"
+        android:text="@string/stu_login_tip" />
 
 </RelativeLayout>

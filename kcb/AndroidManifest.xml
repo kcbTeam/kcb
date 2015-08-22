@@ -47,7 +47,8 @@
         <!-- common start -->
         <activity
             android:name="com.kcb.common.activity.StartActivity"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
