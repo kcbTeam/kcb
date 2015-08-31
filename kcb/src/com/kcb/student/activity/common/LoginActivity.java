@@ -141,20 +141,18 @@ public class LoginActivity extends BaseActivity {
 
                                         @Override
                                         public void run() {
-                                            try {
-                                                JSONObject data = response.getJSONObject(KEY_DATA);
-                                                String stuName = data.optString(KEY_STUNAME);
-                                                String tchId = data.optString(KEY_TCHID);
-                                                String tchName = data.optString(KEY_TCHNAME);
-                                                // save account
-                                                KAccount account =
-                                                        new KAccount(stuId, stuName, tchId, tchName);
-                                                KAccount.saveAccount(account);
-                                                AccountUtil.setAccountType(AccountUtil.TYPE_STU);
-                                                // goto HomeActivity
-                                                HomeActivity.start(LoginActivity.this);
-                                                finish();
-                                            } catch (JSONException e) {}
+                                            // JSONObject data = response.getJSONObject(KEY_DATA);
+                                            String stuName = response.optString(KEY_STUNAME);
+                                            String tchId = response.optString(KEY_TCHID);
+                                            String tchName = response.optString(KEY_TCHNAME);
+                                            // save account
+                                            KAccount account =
+                                                    new KAccount(stuId, stuName, tchId, tchName);
+                                            KAccount.saveAccount(account);
+                                            AccountUtil.setAccountType(AccountUtil.TYPE_STU);
+                                            // goto HomeActivity
+                                            HomeActivity.start(LoginActivity.this);
+                                            finish();
                                         }
                                     }, 500);
                                 };

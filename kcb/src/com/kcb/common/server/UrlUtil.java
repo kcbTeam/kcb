@@ -18,7 +18,7 @@ public class UrlUtil {
 
     private static final String TAG = UrlUtil.class.getName();
 
-    private static final String IP = "http://armani.aliapp.com";
+    private static final String IP = "http://123.56.42.224";
 
     /**
      * ******************************common module******************************
@@ -58,7 +58,8 @@ public class UrlUtil {
      * **********1, account**********
      */
     // 1.1 登录
-    private static final String url_stu_login = IP + "/v1/stu/account/login";
+    // private static final String url_stu_login = IP + "/v1/stu/account/login";
+    private static final String url_stu_login = IP + "/TestServlet02/stuLogin";
 
     public static String getStuLoginUrl(String id, String password) {
         String url = "";
@@ -75,7 +76,7 @@ public class UrlUtil {
     }
 
     // 1.2 验证原密码
-    private static final String url_stu_checkoldpassword = IP + "/v1/stu/account/checkoldpassword";
+    private static final String url_stu_checkoldpassword = IP + "/TestServlet02/stuReset";
 
     public static String getStuCheckOldPasswordUrl(String id, String password) {
         String url = "";
@@ -84,7 +85,9 @@ public class UrlUtil {
         try {
             encodeId = URLEncoder.encode(id, "utf-8");
             encodePassword = URLEncoder.encode(password, "utf-8");
-            url = url_stu_checkoldpassword + "?stuid=" + encodeId + "&old=" + encodePassword;
+            url =
+                    url_stu_checkoldpassword + "?stuCode=" + encodeId + "&old=" + encodePassword
+                            + "&flag=0";
         } catch (UnsupportedEncodingException e) {
             LogUtil.e(TAG, e.getMessage());
         }
@@ -92,7 +95,7 @@ public class UrlUtil {
     }
 
     // 1.3 修改密码
-    private static final String url_stu_modifypassword = IP + "/v1/stu/account/modifypassword";
+    private static final String url_stu_modifypassword = IP + "/TestServlet02/stuReset";
 
     public static String getStuModifyPasswordUrl(String id, String newPassword) {
         String url = "";
@@ -101,7 +104,9 @@ public class UrlUtil {
         try {
             encodeId = URLEncoder.encode(id, "utf-8");
             encodePassword = URLEncoder.encode(newPassword, "utf-8");
-            url = url_stu_modifypassword + "?stuid=" + encodeId + "&new=" + encodePassword;
+            url =
+                    url_stu_modifypassword + "?stuCode=" + encodeId + "&new=" + encodePassword
+                            + "&flag=1";
         } catch (UnsupportedEncodingException e) {
             LogUtil.e(TAG, e.getMessage());
         }
@@ -159,11 +164,12 @@ public class UrlUtil {
     /**
      * ******************************tch module******************************
      */
+    
     /**
      * **********1, account**********
      */
     // 1.1 登录
-    private static final String url_tch_login = IP + "/v1/tch/account/login";
+    private static final String url_tch_login = IP + "/TestServlet02/tecLogin";
 
     public static String getTchLoginUrl(String id, String password) {
         String url = "";
@@ -172,7 +178,7 @@ public class UrlUtil {
         try {
             encodeId = URLEncoder.encode(id, "utf-8");
             encodePassword = URLEncoder.encode(password, "utf-8");
-            url = url_tch_login + "?tchid=" + encodeId + "&password=" + encodePassword;
+            url = url_tch_login + "?tchCode=" + encodeId + "&password=" + encodePassword;
         } catch (UnsupportedEncodingException e) {
             LogUtil.e(TAG, e.getMessage());
         }
@@ -180,7 +186,7 @@ public class UrlUtil {
     }
 
     // 1.2 验证原密码
-    private static final String url_tch_checkoldpassword = IP + "/v1/tch/account/checkoldpassword";
+    private static final String url_tch_checkoldpassword = IP + "/TestServlet02/tecReset";
 
     public static String getTchCheckOldPasswordUrl(String id, String password) {
         String url = "";
@@ -189,7 +195,7 @@ public class UrlUtil {
         try {
             encodeId = URLEncoder.encode(id, "utf-8");
             encodePassword = URLEncoder.encode(password, "utf-8");
-            url = url_tch_checkoldpassword + "?tchid=" + encodeId + "&old=" + encodePassword;
+            url = url_tch_checkoldpassword + "?tchCode=" + encodeId + "&old=" + encodePassword;
         } catch (UnsupportedEncodingException e) {
             LogUtil.e(TAG, e.getMessage());
         }
@@ -197,7 +203,7 @@ public class UrlUtil {
     }
 
     // 1.3 修改密码
-    private static final String url_tch_modifypassword = IP + "/v1/tch/account/modifypassword";
+    private static final String url_tch_modifypassword = IP + "/TestServlet02/tecReset";
 
     public static String getTchModifyPasswordUrl(String id, String newPassword) {
         String url = "";
@@ -206,7 +212,7 @@ public class UrlUtil {
         try {
             encodeId = URLEncoder.encode(id, "utf-8");
             encodePassword = URLEncoder.encode(newPassword, "utf-8");
-            url = url_tch_modifypassword + "?tchid=" + encodeId + "&new=" + encodePassword;
+            url = url_tch_modifypassword + "?tchCode=" + encodeId + "&new=" + encodePassword;
         } catch (UnsupportedEncodingException e) {
             LogUtil.e(TAG, e.getMessage());
         }
