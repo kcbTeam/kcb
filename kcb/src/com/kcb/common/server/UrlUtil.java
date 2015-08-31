@@ -225,7 +225,6 @@ public class UrlUtil {
     // 2.1 开始签到
 //    private static final String url_tch_checkin_start = IP + "/v1/tch/checkin/start";
     private static final String url_tch_checkin_start = IP + "/TestServlet02/tchCheckin";
-//    private static final String url_tch_checkin_start = "http://132.228.191.40" + "/TestServlet02/tecCheckin";
 
     public static String getTchCheckinStartUrl(String id, int num) {
         return url_tch_checkin_start + "?tchCode=" + id + "&num=" + num;
