@@ -68,7 +68,7 @@ public class UrlUtil {
         try {
             encodeId = URLEncoder.encode(id, "utf-8");
             encodePassword = URLEncoder.encode(password, "utf-8");
-            url = url_stu_login + "?stuid=" + encodeId + "&password=" + encodePassword;
+            url = url_stu_login + "?stuCode=" + encodeId + "&password=" + encodePassword;
         } catch (UnsupportedEncodingException e) {
             LogUtil.e(TAG, e.getMessage());
         }
