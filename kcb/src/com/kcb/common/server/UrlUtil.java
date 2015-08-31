@@ -223,13 +223,15 @@ public class UrlUtil {
      * **********2, checkin**********
      */
     // 2.1 开始签到
-    private static final String url_tch_checkin_start = IP + "/v1/tch/checkin/start";
+//    private static final String url_tch_checkin_start = IP + "/v1/tch/checkin/start";
+    private static final String url_tch_checkin_start = IP + "/TestServlet02/tecChickin";
 
     public static String getTchCheckinStartUrl(String id, int num) {
-        return url_tch_checkin_start + "?tchid=" + id + "&num=" + num;
+        return url_tch_checkin_start + "?tchCode=" + id + "&randomNum=" + num;
     }
 
     // 2.2 查看签到结果
+//    private static final String url_tch_checkin_getresult = IP + "/v1/tch/checkin/getresult";
     private static final String url_tch_checkin_getresult = IP + "/v1/tch/checkin/getresult";
 
     public static String getTchCheckinGetresultUrl(String tchId, String date) {

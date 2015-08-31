@@ -168,6 +168,10 @@ public class LoginActivity extends BaseActivity {
                                         } else if (statusCode == 401) {
                                             ToastUtil.toast(R.string.stu_password_error);
                                             LogUtil.e(TAG, getString(R.string.stu_password_error));
+                                        } else if (statusCode == 402) {
+                                            // TODO
+                                            ToastUtil.toast("您还没有老师");
+                                            LogUtil.e(TAG, "您还没有老师");
                                         } else {
                                             ResponseUtil.toastError(error);
                                         }
