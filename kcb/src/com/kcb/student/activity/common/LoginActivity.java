@@ -110,7 +110,7 @@ public class LoginActivity extends BaseActivity {
 
     private final String KEY_DATA = "data";
     private final String KEY_STUNAME = "stuname";
-    private final String KEY_TCHID = "tchid";
+    private final String KEY_TCHID = "tchCode";
     private final String KEY_TCHNAME = "tchname";
 
     /**

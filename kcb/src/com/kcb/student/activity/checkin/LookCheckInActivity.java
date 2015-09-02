@@ -189,13 +189,13 @@ public class LookCheckInActivity extends BaseActivity {
         }
         progressBar.setVisibility(View.VISIBLE);
         // 获取此时间戳之后的签到结果
-        // TODO 增加db 操作
-        CheckInDao checkInDao = new CheckInDao(LookCheckInActivity.this);
-        long date = checkInDao.getLeastDate();
-        checkInDao.close();
+        // TODO 增加db 操作(此功能已被取缔，查询签到结果每次都是 获取全部的记录)
+//        CheckInDao checkInDao = new CheckInDao(LookCheckInActivity.this);
+//        long date = checkInDao.getLeastDate();
+//        checkInDao.close();
         JsonObjectRequest request =
                 new JsonObjectRequest(Method.GET, UrlUtil.getStuCheckinResultUrl(
-                        KAccount.getAccountId(), KAccount.getTchId(), date),
+                        KAccount.getAccountId(), KAccount.getTchId()),
                         new Listener<JSONObject>() {
 
                             @Override

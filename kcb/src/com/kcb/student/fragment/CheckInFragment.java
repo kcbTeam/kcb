@@ -90,42 +90,45 @@ public class CheckInFragment extends BaseFragment {
         if (progressBar.getVisibility() == View.VISIBLE) {
             return;
         }
-        progressBar.setVisibility(View.VISIBLE);
-        StringRequest request =
-                new StringRequest(Method.POST, UrlUtil.getStuCheckinStartUrl(
-                        KAccount.getAccountId(), KAccount.getTchId()), new Listener<String>() {
-                    public void onResponse(final String remainTime) {
-                        LogUtil.i(TAG, "start checkin, remainTime is " + remainTime);
-                        new Handler().postDelayed(new Runnable() {
-
-                            @Override
-                            public void run() {
-                                progressBar.setVisibility(View.INVISIBLE);
-                                StartCheckInActivity.start(getActivity(), remainTime);
-                            }
-                        }, 500);
-                    };
-                }, new ErrorListener() {
-                    public void onErrorResponse(VolleyError error) {
-                        progressBar.hide(getActivity());
-                        NetworkResponse networkResponse = error.networkResponse;
-                        if (null != networkResponse) {
-                            int statusCode = networkResponse.statusCode;
-                            if (statusCode == 400) {
-                                ToastUtil.toast(R.string.stu_no_checkin);
-                                LogUtil.e(TAG, getString(R.string.stu_no_checkin));
-                            } else if (statusCode == 401) {
-                                ToastUtil.toast(R.string.stu_has_checkin);
-                                LogUtil.e(TAG, getString(R.string.stu_has_checkin));
-                            } else {
-                                ResponseUtil.toastError(error);
-                            }
-                        } else {
-                            ResponseUtil.toastError(error);
-                        }
-                    };
-                });
-        RequestUtil.getInstance().addToRequestQueue(request, TAG);
+        //TODO
+        
+        StartCheckInActivity.start(getActivity(), "120");
+//        progressBar.setVisibility(View.VISIBLE);
+//        StringRequest request =
+//                new StringRequest(Method.POST, UrlUtil.getStuCheckinStartUrl(
+//                        KAccount.getAccountId(), KAccount.getTchId()), new Listener<String>() {
+//                    public void onResponse(final String remainTime) {
+//                        LogUtil.i(TAG, "start checkin, remainTime is " + remainTime);
+//                        new Handler().postDelayed(new Runnable() {
+//
+//                            @Override
+//                            public void run() {
+//                                progressBar.setVisibility(View.INVISIBLE);
+//                                StartCheckInActivity.start(getActivity(), remainTime);
+//                            }
+//                        }, 500);
+//                    };
+//                }, new ErrorListener() {
+//                    public void onErrorResponse(VolleyError error) {
+//                        progressBar.hide(getActivity());
+//                        NetworkResponse networkResponse = error.networkResponse;
+//                        if (null != networkResponse) {
+//                            int statusCode = networkResponse.statusCode;
+//                            if (statusCode == 400) {
+//                                ToastUtil.toast(R.string.stu_no_checkin);
+//                                LogUtil.e(TAG, getString(R.string.stu_no_checkin));
+//                            } else if (statusCode == 401) {
+//                                ToastUtil.toast(R.string.stu_has_checkin);
+//                                LogUtil.e(TAG, getString(R.string.stu_has_checkin));
+//                            } else {
+//                                ResponseUtil.toastError(error);
+//                            }
+//                        } else {
+//                            ResponseUtil.toastError(error);
+//                        }
+//                    };
+//                });
+//        RequestUtil.getInstance().addToRequestQueue(request, TAG);
     }
 
     @Override
