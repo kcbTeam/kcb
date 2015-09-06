@@ -4,6 +4,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 import com.kcb.common.util.LogUtil;
+import com.kcb.student.fragment.CheckInFragment;
 
 
 
@@ -120,24 +121,25 @@ public class UrlUtil {
     private static final String url_stu_checkin_start = IP + "/TestServlet02/stuCheckin";
 
     public static String getStuCheckinStartUrl(String stuId, String tchId) {
-        return url_stu_checkin_start + "?stuCode=" + stuId + "&tchCode=" + tchId;
+        return url_stu_checkin_start + "?flag=0" + "&stuCode=" + stuId + "&tchCode=" + tchId;
     }
 
     // 2.2 提交签到
     private static final String url_stu_checkin_submit = IP + "/TestServlet02/stuCheckin";
 
-    public static String getStuCheckinSubmitUrl(String stuid, String tchId, String num) {
-        return url_stu_checkin_submit + "?stuCode=" + stuid + "&tchCode=" + tchId + "&num=" + num;
+    public static String getStuCheckinSubmitUrl(String stuid, String state) {
+        return url_stu_checkin_submit + "?flag=1" + "&stuCode=" + stuid + "&ckid="
+                + CheckInFragment.ckid + "&state=" + state;
     }
 
     // 2.3 获取签到结果
     private static final String url_stu_checkin_getresult = IP + "/v1/stu/checkin/getresult";
 
-//      取缔了
-//    public static String getStuCheckinResultUrl(String stuId, String tchId, long date) {
-//        return url_stu_checkin_getresult + "?stuid=" + stuId + "&tchid=" + tchId + "&date=" + date;
-//    }
-    
+    // 取缔了
+    // public static String getStuCheckinResultUrl(String stuId, String tchId, long date) {
+    // return url_stu_checkin_getresult + "?stuid=" + stuId + "&tchid=" + tchId + "&date=" + date;
+    // }
+
     public static String getStuCheckinResultUrl(String stuId, String tchId) {
         return url_stu_checkin_getresult + "?stuid=" + stuId + "&tchid=" + tchId;
     }
@@ -169,7 +171,7 @@ public class UrlUtil {
     /**
      * ******************************tch module******************************
      */
-    
+
     /**
      * **********1, account**********
      */
@@ -228,7 +230,7 @@ public class UrlUtil {
      * **********2, checkin**********
      */
     // 2.1 开始签到
-//    private static final String url_tch_checkin_start = IP + "/v1/tch/checkin/start";
+    // private static final String url_tch_checkin_start = IP + "/v1/tch/checkin/start";
     private static final String url_tch_checkin_start = IP + "/TestServlet02/tchCheckin";
 
     public static String getTchCheckinStartUrl(String id, int num) {
@@ -236,7 +238,7 @@ public class UrlUtil {
     }
 
     // 2.2 查看签到结果
-//    private static final String url_tch_checkin_getresult = IP + "/v1/tch/checkin/getresult";
+    // private static final String url_tch_checkin_getresult = IP + "/v1/tch/checkin/getresult";
     private static final String url_tch_checkin_getresult = IP + "/v1/tch/checkin/getresult";
 
     public static String getTchCheckinGetresultUrl(String tchId, String date) {

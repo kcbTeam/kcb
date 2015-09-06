@@ -24,7 +24,7 @@ public class CheckInResult {
     }
 
     public String getDateString() {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd\nHH:mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return sdf.format(new Date(mDate));
     }
 

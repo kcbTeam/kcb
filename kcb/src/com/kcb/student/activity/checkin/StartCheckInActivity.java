@@ -30,6 +30,7 @@ import com.kcb.library.view.PaperButton;
 import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
 import com.kcb.student.adapter.StartCheckInAdapter;
 import com.kcb.student.adapter.StartCheckInAdapter.RecyclerItemClickListener;
+import com.kcb.student.fragment.CheckInFragment;
 import com.kcb.student.model.KAccount;
 import com.kcbTeam.R;
 
@@ -190,7 +191,10 @@ public class StartCheckInActivity extends BaseActivity {
             }
         }
     };
-
+    
+    //TODO add 2015-9-6
+    private final String STATE_SUCCESS = "0";
+    private final String STATE_FAILED = "1";
     private DelayClickListener mClickListener = new DelayClickListener(
             DelayClickListener.DELAY_PAPER_BUTTON) {
 
@@ -203,10 +207,16 @@ public class StartCheckInActivity extends BaseActivity {
                 AnimationUtil.shake(tipTextView);
                 return;
             }
+            //TODO add 2015-9-6
+            if(!getNum().equals(CheckInFragment.num)){
+                ToastUtil.toast(R.string.stu_checkin_num_error);
+                clearNum();
+                return;
+            }
             progressBar.setVisibility(View.VISIBLE);
             StringRequest request =
                     new StringRequest(Method.POST, UrlUtil.getStuCheckinSubmitUrl(
-                            KAccount.getAccountId(), KAccount.getTchId(), getNum()),
+                            KAccount.getAccountId(),STATE_SUCCESS),
                             new Listener<String>() {
 
                                 @Override
@@ -230,6 +240,33 @@ public class StartCheckInActivity extends BaseActivity {
                                 }
                             });
             RequestUtil.getInstance().addToRequestQueue(request, TAG);
+//            progressBar.setVisibility(View.VISIBLE);
+//            StringRequest request =
+//                    new StringRequest(Method.POST, UrlUtil.getStuCheckinSubmitUrl(
+//                            KAccount.getAccountId(), KAccount.getTchId(), getNum()),
+//                            new Listener<String>() {
+//
+//                                @Override
+//                                public void onResponse(String response) {
+//                                    ToastUtil.toast(R.string.stu_checkin_success);
+//                                    finish();
+//                                }
+//                            }, new ErrorListener() {
+//
+//                                @Override
+//                                public void onErrorResponse(VolleyError error) {
+//                                    progressBar.hide(StartCheckInActivity.this);
+//                                    NetworkResponse networkResponse = error.networkResponse;
+//                                    if (null != networkResponse
+//                                            && networkResponse.statusCode == 400) {
+//                                        ToastUtil.toast(R.string.stu_checkin_num_error);
+//                                        clearNum();
+//                                    } else {
+//                                        ResponseUtil.toastError(error);
+//                                    }
+//                                }
+//                            });
+//            RequestUtil.getInstance().addToRequestQueue(request, TAG);
         }
     };
 
