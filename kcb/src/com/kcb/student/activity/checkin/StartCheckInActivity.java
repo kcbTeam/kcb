@@ -234,7 +234,10 @@ public class StartCheckInActivity extends BaseActivity {
                                             && networkResponse.statusCode == 400) {
                                         ToastUtil.toast(R.string.stu_checkin_num_error);
                                         clearNum();
-                                    } else {
+                                    } else if(null != networkResponse
+                                            && networkResponse.statusCode == 401){
+                                        ToastUtil.toast(R.string.stu_has_checkin);
+                                    }else {
                                         ResponseUtil.toastError(error);
                                     }
                                 }

@@ -35,8 +35,9 @@ public class CheckInResult {
     /**
      * json to checkin result
      */
-    public static final String KEY_DATE = "date";
+    public static final String KEY_DATE = "createDate";
     public static final String KEY_HASCHECKED = "haschecked";
+    public static final String KEY_STATE = "state";
 
     public JSONObject toJsonObject() {
         JSONObject jsonObject = new JSONObject();
@@ -53,10 +54,10 @@ public class CheckInResult {
         try {
             Date date = sdf.parse(jsonObject.optString(KEY_DATE));
             result.mDate = date.getTime();
+            result.mHasChecked = jsonObject.optString(KEY_STATE).equals("0");
         } catch (ParseException e) {
             LogUtil.e(TAG, e.getMessage());
         }
-        result.mHasChecked = jsonObject.optBoolean(KEY_HASCHECKED);
         return result;
     }
 }

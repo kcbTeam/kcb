@@ -133,15 +133,15 @@ public class UrlUtil {
     }
 
     // 2.3 获取签到结果
-    private static final String url_stu_checkin_getresult = IP + "/v1/stu/checkin/getresult";
+    private static final String url_stu_checkin_getresult = IP + "/TestServlet02/stuCheckin";
 
     // 取缔了
     // public static String getStuCheckinResultUrl(String stuId, String tchId, long date) {
     // return url_stu_checkin_getresult + "?stuid=" + stuId + "&tchid=" + tchId + "&date=" + date;
     // }
 
-    public static String getStuCheckinResultUrl(String stuId, String tchId) {
-        return url_stu_checkin_getresult + "?stuid=" + stuId + "&tchid=" + tchId;
+    public static String getStuCheckinResultUrl(String stuId) {
+        return url_stu_checkin_getresult + "?flag=2" + "&stuCode=" + stuId;
     }
 
     /**

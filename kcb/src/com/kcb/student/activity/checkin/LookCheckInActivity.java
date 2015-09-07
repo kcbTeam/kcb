@@ -190,46 +190,42 @@ public class LookCheckInActivity extends BaseActivity {
         progressBar.setVisibility(View.VISIBLE);
         // 获取此时间戳之后的签到结果
         // TODO 增加db 操作(此功能已被取缔，查询签到结果每次都是 获取全部的记录)
-//        CheckInDao checkInDao = new CheckInDao(LookCheckInActivity.this);
-//        long date = checkInDao.getLeastDate();
-//        checkInDao.close();
+        // CheckInDao checkInDao = new CheckInDao(LookCheckInActivity.this);
+        // long date = checkInDao.getLeastDate();
+        // checkInDao.close();
         JsonObjectRequest request =
-                new JsonObjectRequest(Method.GET, UrlUtil.getStuCheckinResultUrl(
-                        KAccount.getAccountId(), KAccount.getTchId()),
-                        new Listener<JSONObject>() {
+                new JsonObjectRequest(Method.GET, UrlUtil.getStuCheckinResultUrl(KAccount
+                        .getAccountId()), new Listener<JSONObject>() {
 
-                            @Override
-                            public void onResponse(JSONObject response) {
-                                LogUtil.i(
-                                        TAG,
-                                        "stu get checkin result, response is "
-                                                + response.toString());
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        LogUtil.i(TAG, "stu get checkin result, response is " + response.toString());
 
-                                JSONArray jsonArray =
-                                        response.optJSONObject("data").optJSONArray("result");
-                                // save to database
-                                CheckInDao checkInDao = new CheckInDao(LookCheckInActivity.this);
-                                // delete all
-                                checkInDao.deleteAll();
-
-                                for (int i = 0; i < jsonArray.length(); i++) {
-                                    CheckInResult checkinResult =
-                                            CheckInResult.fromJsonObject(jsonArray.optJSONObject(i));
-                                    checkInDao.add(checkinResult);
-                                }
-                                checkInDao.close();
-                                // show result
-                                initData();
-                                progressBar.hide(LookCheckInActivity.this);
+                        JSONArray jsonArray = response.optJSONArray("content");
+                        // save to database
+                        CheckInDao checkInDao = new CheckInDao(LookCheckInActivity.this);
+                        // delete all
+                        checkInDao.deleteAll();
+                        if (null != jsonArray) {
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                CheckInResult checkinResult =
+                                        CheckInResult.fromJsonObject(jsonArray.optJSONObject(i));
+                                checkInDao.add(checkinResult);
                             }
-                        }, new ErrorListener() {
+                        }
+                        checkInDao.close();
+                        // show result
+                        initData();
+                        progressBar.hide(LookCheckInActivity.this);
+                    }
+                }, new ErrorListener() {
 
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                progressBar.hide(LookCheckInActivity.this);
-                                ResponseUtil.toastError(error);
-                            }
-                        });
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        progressBar.hide(LookCheckInActivity.this);
+                        ResponseUtil.toastError(error);
+                    }
+                });
         RequestUtil.getInstance().addToRequestQueue(request, TAG);
     }
 
