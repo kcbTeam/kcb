@@ -86,7 +86,7 @@ public class LookCheckInAdapter extends BaseAdapter {
         public void setCheckInResult(CheckInResult result) {
             dateTextView.setText(result.getDateString());
             timeTextView.setText(result.getTimeString());
-            rateTextView.setText(String.valueOf(result.getRate()));
+            rateTextView.setText(String.format("%1$.2f", result.getRate()));
         }
     }
 }

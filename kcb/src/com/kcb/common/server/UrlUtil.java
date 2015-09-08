@@ -234,20 +234,16 @@ public class UrlUtil {
     private static final String url_tch_checkin_start = IP + "/TestServlet02/tchCheckin";
 
     public static String getTchCheckinStartUrl(String id, int num) {
-        return url_tch_checkin_start + "?tchCode=" + id + "&num=" + num;
+        return url_tch_checkin_start + "?flag=0&tchCode=" + id + "&num=" + num;
     }
 
     // 2.2 查看签到结果
     // private static final String url_tch_checkin_getresult = IP + "/v1/tch/checkin/getresult";
-    private static final String url_tch_checkin_getresult = IP + "/v1/tch/checkin/getresult";
+    private static final String url_tch_checkin_getresult = IP + "/TestServlet02/tchCheckin";
 
-    public static String getTchCheckinGetresultUrl(String tchId, String date) {
+    public static String getTchCheckinGetresultUrl(String tchId) {
         String url = "";
-        String encodeDate;
-        try {
-            encodeDate = URLEncoder.encode(date, "utf-8");
-            url = url_tch_checkin_getresult + "?tchid=" + tchId + "&date=" + encodeDate;
-        } catch (UnsupportedEncodingException e) {}
+        url = url_tch_checkin_getresult + "?flag=1&tchCode=" + tchId;
         return url;
     }
 

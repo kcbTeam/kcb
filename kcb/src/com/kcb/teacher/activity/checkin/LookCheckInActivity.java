@@ -85,8 +85,6 @@ public class LookCheckInActivity extends BaseActivity {
         mCheckInResults = checkInDao.getAll();
         checkInDao.close();
 
-        Collections.reverse(mCheckInResults);
-
         if (mCheckInResults.isEmpty()) {
             listTitleLayout.setVisibility(View.INVISIBLE);
             emptyTipView.setVisibility(View.VISIBLE);
@@ -119,14 +117,9 @@ public class LookCheckInActivity extends BaseActivity {
             return;
         }
         progressBar.setVisibility(View.VISIBLE);
-        // 获取此时间戳之后的签到结果
-        String date = "";
-        if (mAdapter.getCount() > 0) {
-            date = mAdapter.getItem(0).getDateTimeString();
-        }
         JsonObjectRequest request =
-                new JsonObjectRequest(Method.GET, UrlUtil.getTchCheckinGetresultUrl(
-                        KAccount.getAccountId(), date), new Listener<JSONObject>() {
+                new JsonObjectRequest(Method.GET, UrlUtil.getTchCheckinGetresultUrl(KAccount
+                        .getAccountId()), new Listener<JSONObject>() {
 
                     @Override
                     public void onResponse(JSONObject response) {
@@ -134,8 +127,7 @@ public class LookCheckInActivity extends BaseActivity {
                         // TODO
                         // 解析结果，保存到数据库
                         // 因为后台查询耗时很长，所以结果中只有日期和签到率
-                        // 点击列表中的每一项后，如果本地没有数据，会在下一个页面向后台发送一次请求
-                        JSONArray jsonArray = response.optJSONArray("data");
+                        JSONArray jsonArray = response.optJSONArray("content");
                         List<CheckInResult> results = new ArrayList<CheckInResult>();
                         for (int i = 0; i < jsonArray.length(); i++) {
                             try {
@@ -153,14 +145,13 @@ public class LookCheckInActivity extends BaseActivity {
                             }
 
                             CheckInDao checkInDao = new CheckInDao(LookCheckInActivity.this);
+                            checkInDao.deleteAll();
                             for (CheckInResult result : results) {
                                 checkInDao.add(result);
                             }
                             checkInDao.close();
-
-                            Collections.reverse(mCheckInResults);
+                            mCheckInResults.clear();
                             mCheckInResults.addAll(results);
-                            Collections.reverse(mCheckInResults);
                             mAdapter.notifyDataSetChanged();
                         }
                         progressBar.hide(LookCheckInActivity.this);

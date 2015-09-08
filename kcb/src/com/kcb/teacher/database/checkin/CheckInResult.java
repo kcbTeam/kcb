@@ -22,12 +22,23 @@ public class CheckInResult implements Serializable {
 
     private static final long serialVersionUID = 3L;
 
+    private String mId;
     private String mDate;
-    private double mRate;
+
+    private float mUncheckNum;
+    private float mTotalNum;
     private List<UncheckedStudent> mUnCheckedStudents;
 
     private CheckInResult() {
         mUnCheckedStudents = new ArrayList<UncheckedStudent>();
+    }
+
+    public String getId() {
+        return this.mId;
+    }
+
+    public void setId(String id) {
+        mId = id;
     }
 
     public long getDateLong() {
@@ -64,9 +75,8 @@ public class CheckInResult implements Serializable {
         return mDate.substring(mDate.lastIndexOf(" ") + 1);
     }
 
-    public double getRate() {
-        double rate = (double) Math.round(mRate * 100) / 100;
-        return rate;
+    public float getRate() {
+        return 1 - mUncheckNum / mTotalNum;
     }
 
     public List<UncheckedStudent> getUnCheckedStudents() {
@@ -80,15 +90,19 @@ public class CheckInResult implements Serializable {
     /**
      * checkinresult to json ,json to checkinresult
      */
-    public static final String KEY_DATE = "date";
-    public static final String KEY_RATE = "rate";
+    public static final String KEY_ID = "checkin_id";
+    public static final String KEY_DATE = "createDate";
+    public static final String KEY_UNCHECKNUM = "unchecknum";
+    public static final String KEY_TOTALNUM = "num";
     public static final String KEY_UNCHECKSTU = "uncheckstudents";
 
     public JSONObject toJsonObject() {
         JSONObject jsonObject = new JSONObject();
         try {
+            jsonObject.put(KEY_ID, mId);
             jsonObject.put(KEY_DATE, mDate);
-            jsonObject.put(KEY_RATE, mRate);
+            jsonObject.put(KEY_UNCHECKNUM, mUncheckNum);
+            jsonObject.put(KEY_TOTALNUM, mTotalNum);
 
             JSONArray jsonArray = new JSONArray();
             for (int i = 0; i < mUnCheckedStudents.size(); i++) {
@@ -105,16 +119,18 @@ public class CheckInResult implements Serializable {
     public static CheckInResult fromJsonObject(JSONObject jsonObject) {
         CheckInResult checkInResult = new CheckInResult();
         // 服务器端返回的日期格式为 2015-08-01 20:45:00.0
-        String dateString = jsonObject.optString(KEY_DATE);
         // SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
         // Date date = new Date();
         // try {
         // date = sdf.parse(dateString);
         // } catch (ParseException e) {}
         // long dateLong = date.getTime();
-
+        String id = jsonObject.optString(KEY_ID);
+        checkInResult.mId = id;
+        String dateString = jsonObject.optString(KEY_DATE);
         checkInResult.mDate = dateString;
-        checkInResult.mRate = jsonObject.optDouble(KEY_RATE);
+        checkInResult.mUncheckNum= Float.valueOf(jsonObject.optString(KEY_UNCHECKNUM));
+        checkInResult.mTotalNum = Float.valueOf(jsonObject.optString(KEY_TOTALNUM));
 
         // 如果是从数据库中读取数据，需要获取学生的信息；
         JSONArray jsonArray = jsonObject.optJSONArray(KEY_UNCHECKSTU);
