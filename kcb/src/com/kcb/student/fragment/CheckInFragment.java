@@ -154,6 +154,7 @@ public class CheckInFragment extends BaseFragment {
                         } else {
                             ResponseUtil.toastError(error);
                         }
+                        progressBar.setVisibility(View.INVISIBLE);
                     }
                 });
         // StringRequest request1 =

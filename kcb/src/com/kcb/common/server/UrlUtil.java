@@ -248,11 +248,10 @@ public class UrlUtil {
     }
 
     // 2.3 查看签到结果详情
-    private static final String url_tch_checkin_getresultdetail = IP
-            + "/v1/tch/checkin/getresultdetail";
+    private static final String url_tch_checkin_getresultdetail = IP + "/TestServlet02/tchCheckin";
 
-    public static String getTchCheckinGetResultDetailUrl(String tchId, long date) {
-        return url_tch_checkin_getresultdetail + "?tchid=" + tchId + "&date=" + date;
+    public static String getTchCheckinGetResultDetailUrl(String check_id) {
+        return url_tch_checkin_getresultdetail + "?flag=2&check_id=" + check_id;
     }
 
     /**

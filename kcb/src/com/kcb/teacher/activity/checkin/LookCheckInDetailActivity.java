@@ -7,6 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.R.integer;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -81,6 +82,7 @@ public class LookCheckInDetailActivity extends BaseFragmentActivity implements O
 
         initView();
         initData();
+        refresh();
     }
 
     @Override
@@ -130,21 +132,21 @@ public class LookCheckInDetailActivity extends BaseFragmentActivity implements O
         // 返回的结果是多个学生信息，包括姓名、学号、未签到率，需要终端按未签到率排序
         JsonObjectRequest request =
                 new JsonObjectRequest(Method.GET, UrlUtil.getTchCheckinGetResultDetailUrl(
-                        KAccount.getAccountId(), sCheckInResult.getDateLong()),
+                        sCheckInResult.getId()),
                         new Listener<JSONObject>() {
 
                             @Override
                             public void onResponse(JSONObject response) {
                                 // 解析未签到学生详情，保存到数据库中
                                 // 更新UI
-                                JSONArray jsonArray = response.optJSONArray("data");
+                                JSONArray jsonArray = response.optJSONArray("content");
                                 try {
                                     List<UncheckedStudent> students =
                                             new ArrayList<UncheckedStudent>();
                                     for (int i = 0; i < jsonArray.length(); i++) {
                                         UncheckedStudent student =
                                                 UncheckedStudent.fromJsonObject(jsonArray
-                                                        .getJSONObject(i));
+                                                        .getJSONObject(i),true);
                                         students.add(student);
                                     }
                                     sCheckInResult.getUnCheckedStudents().addAll(students);

@@ -55,6 +55,8 @@ public class LookCheckInActivity extends BaseActivity {
     List<CheckInResult> mCheckInResults;
     private LookCheckInAdapter mAdapter;
 
+    public static int mCheckInNum;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,7 +92,7 @@ public class LookCheckInActivity extends BaseActivity {
             emptyTipView.setVisibility(View.VISIBLE);
             emptyTipView.setEmptyText(R.string.tch_no_checkin_result);
         }
-
+        mCheckInNum = mCheckInResults.size();
         mAdapter = new LookCheckInAdapter(LookCheckInActivity.this, mCheckInResults);
         listView.setAdapter(mAdapter);
     }
@@ -152,6 +154,7 @@ public class LookCheckInActivity extends BaseActivity {
                             checkInDao.close();
                             mCheckInResults.clear();
                             mCheckInResults.addAll(results);
+                            mCheckInNum = mCheckInResults.size();
                             mAdapter.notifyDataSetChanged();
                         }
                         progressBar.hide(LookCheckInActivity.this);

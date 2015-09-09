@@ -5,6 +5,8 @@ import java.io.Serializable;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.kcb.teacher.activity.checkin.LookCheckInActivity;
+
 /**
  * 
  * @className: UncheckedStudent
@@ -39,9 +41,10 @@ public class UncheckedStudent implements Serializable {
      * uncheckedstudent to json, json to uncheckedstudent
      * 
      */
-    public static final String KEY_ID = "id";
-    public static final String KEY_NAME = "name";
+    public static final String KEY_ID = "stuCode";
+    public static final String KEY_NAME = "realname";
     public static final String KEY_UNCHECKRATE = "uncheckedrate";
+    public static final String KEY_UNCHECKNUM = "uncheck";
 
     public JSONObject toJsonObject() {
         JSONObject jsonObject = new JSONObject();
@@ -60,6 +63,16 @@ public class UncheckedStudent implements Serializable {
         student.mId = jsonObject.optString(KEY_ID);
         student.mName = jsonObject.optString(KEY_NAME);
         student.mUnCheckedRate = jsonObject.optDouble(KEY_UNCHECKRATE);
+        return student;
+    }
+
+    public static UncheckedStudent fromJsonObject(JSONObject jsonObject, boolean fromInternet) {
+        UncheckedStudent student = new UncheckedStudent();
+        student.mId = jsonObject.optString(KEY_ID);
+        student.mName = jsonObject.optString(KEY_NAME);
+        student.mUnCheckedRate =
+                Double.valueOf(jsonObject.optString(KEY_UNCHECKNUM))
+                        / LookCheckInActivity.mCheckInNum;
         return student;
     }
 }
