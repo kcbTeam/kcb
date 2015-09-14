@@ -265,7 +265,7 @@ public class UrlUtil {
     }
 
     // 3.2 开始测试
-    private static final String url_tch_test_start = IP + "/v1/tch/test/start";
+    private static final String url_tch_test_start = IP + "/TestServlet02/tchTest";
 
     public static String getTchTestStartUrl() {
         return url_tch_test_start;

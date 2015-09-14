@@ -1,11 +1,14 @@
 package com.kcb.teacher.fragment;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -21,6 +24,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.kcb.common.base.BaseFragment;
 import com.kcb.common.listener.DelayClickListener;
 import com.kcb.common.model.test.Test;
+import com.kcb.common.server.HttpAssist;
 import com.kcb.common.server.MultipartRequest;
 import com.kcb.common.server.RequestUtil;
 import com.kcb.common.server.ResponseUtil;
@@ -94,7 +98,12 @@ public class TestFragment extends BaseFragment {
             switch (v.getId()) {
                 case R.id.button_start:
                     // 判断是否有未结束的测试，如果有，不能开始一个新的测试
-                    detectTest();
+                    // TODO
+//                    List<File> files = new ArrayList<File>();
+//                    files.add(new File("/sdcard/image2.jpg"));
+//                    files.add(new File("/sdcard/image1.jpg"));
+//                    HttpAssist.uploadFile(files);
+                    startTest();
                     break;
                 case R.id.button_edit:
                     addOrEditTest();

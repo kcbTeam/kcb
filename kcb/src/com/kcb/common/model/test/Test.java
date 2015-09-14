@@ -1,6 +1,10 @@
 package com.kcb.common.model.test;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -367,5 +371,61 @@ public class Test {
             test.mQuestions.add(question);
         }
         return test;
+    }
+
+    
+    /**
+     * 获取图片部分的文件数据
+     * 
+     * @title: getBitmapFiles
+     * @description:
+     * @author: Zqj
+     * @date: 2015年9月14日 下午6:39:16
+     * @return
+     */
+    public List<File> getBitmapFiles() {
+        List<File> files = new ArrayList<File>();
+        for (int i = 0; i < mQuestions.size(); i++) {
+            Question question = mQuestions.get(i);
+            if (!question.getTitle().isText()) {
+                files.add(new File(question.getTitle().getBitmapPath()));
+            }
+            if (!question.getChoiceA().isText()) {
+                files.add(new File(question.getChoiceA().getBitmapPath()));
+            }
+            if (!question.getChoiceB().isText()) {
+                files.add(new File(question.getChoiceB().getBitmapPath()));
+            }
+            if (!question.getChoiceC().isText()) {
+                files.add(new File(question.getChoiceC().getBitmapPath()));
+            }
+            if (!question.getChoiceD().isText()) {
+                files.add(new File(question.getChoiceD().getBitmapPath()));
+            }
+        }
+        return files;
+    }
+    
+    /**
+     * 获取文字部分
+     * @title: getStringPart
+     * @description: 
+     * @author: Zqj
+     * @date: 2015年9月14日 下午6:41:17
+     * @return
+     */
+    public JSONObject getStringPart() {
+        final String KEY_ID = "tchid";
+        final String KEY_TEST = "test";
+
+        JSONObject requestObject = new JSONObject();
+        try {
+            requestObject.put(KEY_ID, KAccount.getAccountId());
+            setQuestionId();
+            // 编码文字
+            encode();
+            requestObject.put(KEY_TEST, toJsonObject());
+        } catch (JSONException e) {}
+        return requestObject;
     }
 }
