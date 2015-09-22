@@ -1,10 +1,6 @@
 package com.kcb.common.model.test;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -373,7 +369,8 @@ public class Test {
         return test;
     }
 
-    
+
+    //TODO
     /**
      * 获取图片部分的文件数据
      * 
@@ -405,27 +402,38 @@ public class Test {
         }
         return files;
     }
-    
+
     /**
      * 获取文字部分
+     * 
      * @title: getStringPart
-     * @description: 
+     * @description:
      * @author: Zqj
      * @date: 2015年9月14日 下午6:41:17
      * @return
      */
-    public JSONObject getStringPart() {
-        final String KEY_ID = "tchid";
-        final String KEY_TEST = "test";
-
-        JSONObject requestObject = new JSONObject();
+    public String getStringPart() {
+        QuestionItem.testName = mName;
+        final String KEY_ID = "tch_code";
+        final String KEY_NAME = "name";
+        final String KEY_CREATETIME = "create_time";
+        final String KEY_STARTTIME = "start_time";
+        final String KEY_DURATION = "duration";
+        final String KEY_QUESTION = "question";
+        JSONObject jsonObject = new JSONObject();
         try {
-            requestObject.put(KEY_ID, KAccount.getAccountId());
-            setQuestionId();
-            // 编码文字
-            encode();
-            requestObject.put(KEY_TEST, toJsonObject());
+            jsonObject.put(KEY_ID, KAccount.getAccountId());
+            jsonObject.put(KEY_NAME, mName);
+            jsonObject.put(KEY_CREATETIME, mDate);
+            jsonObject.put(KEY_STARTTIME, System.currentTimeMillis());
+            jsonObject.put(KEY_DURATION, mTime);
+            JSONArray jsonArray = new JSONArray();
+            for (int i = 0; i < mQuestions.size(); i++) {
+                jsonArray.put(mQuestions.get(i).toJsonForInternet(i + 1));
+            }
+            jsonObject.put(KEY_QUESTION, jsonArray);
         } catch (JSONException e) {}
-        return requestObject;
+
+        return jsonObject.toString();
     }
 }

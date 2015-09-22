@@ -20,6 +20,7 @@ import com.android.volley.Request.Method;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.kcb.common.base.BaseFragment;
 import com.kcb.common.listener.DelayClickListener;
@@ -99,10 +100,10 @@ public class TestFragment extends BaseFragment {
                 case R.id.button_start:
                     // 判断是否有未结束的测试，如果有，不能开始一个新的测试
                     // TODO
-//                    List<File> files = new ArrayList<File>();
-//                    files.add(new File("/sdcard/image2.jpg"));
-//                    files.add(new File("/sdcard/image1.jpg"));
-//                    HttpAssist.uploadFile(files);
+                    // List<File> files = new ArrayList<File>();
+                    // files.add(new File("/sdcard/image2.jpg"));
+                    // files.add(new File("/sdcard/image1.jpg"));
+                    // HttpAssist.uploadFile(files);
                     startTest();
                     break;
                 case R.id.button_edit:
@@ -193,59 +194,85 @@ public class TestFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 startProgressBar.setVisibility(View.VISIBLE);
-                MultipartRequest request2 =
-                        new MultipartRequest(Method.POST, UrlUtil.getTchTestStartUrl(),
-                                test.toHttpEntity(), new Listener<JSONObject>() {
-
-                                    @Override
-                                    public void onResponse(JSONObject response) {
-                                        LogUtil.i(TAG, "tch start test, response is " + response);
-                                        // 开始测试之后，获取测试的id和开始的时间戳
-                                        long date = response.optLong(KEY_DATE);
-                                        String testId = response.optString(KEY_TESTID);
-
-                                        TestDao testDao = new TestDao(getActivity());
-
-                                        test.setHasTested(true);
-                                        test.setDate(date);
-                                        test.setId(testId);
-
-                                        testDao.update(test);
-                                        testDao.close();
-
-                                        ToastUtil.toast(R.string.tch_test_started);
-                                        startProgressBar.hide(getActivity());
-                                    }
-                                }, new ErrorListener() {
-
-                                    @Override
-                                    public void onErrorResponse(VolleyError error) {
-                                        startProgressBar.hide(getActivity());
-                                        ResponseUtil.toastError(error);
-                                    }
-                                });
-
-
-                // TODO post 返回 500
-                // JsonObjectRequest request =
-                // new JsonObjectRequest(Method.POST,
-                // UrlUtil.getTchTestStartUrl(requestObject),
-                // new JSONObject(), new Listener<JSONObject>() {
+                // MultipartRequest request2 =
+                // new MultipartRequest(Method.POST, UrlUtil.getTchTestStartUrl(),
+                // test.toHttpEntity(), new Listener<JSONObject>() {
                 //
                 // @Override
-                // public void onResponse(JSONObject response) {}
+                // public void onResponse(JSONObject response) {
+                // LogUtil.i(TAG, "tch start test, response is " + response);
+                // // 开始测试之后，获取测试的id和开始的时间戳
+                // long date = response.optLong(KEY_DATE);
+                // String testId = response.optString(KEY_TESTID);
+                //
+                // TestDao testDao = new TestDao(getActivity());
+                //
+                // test.setHasTested(true);
+                // test.setDate(date);
+                // test.setId(testId);
+                //
+                // testDao.update(test);
+                // testDao.close();
+                //
+                // ToastUtil.toast(R.string.tch_test_started);
+                // startProgressBar.hide(getActivity());
+                // }
                 // }, new ErrorListener() {
                 //
                 // @Override
-                // public void onErrorResponse(final VolleyError error) {
-                // getActivity().runOnUiThread(new Runnable() {
-                //
-                // @Override
-                // public void run() {}
-                // });
+                // public void onErrorResponse(VolleyError error) {
+                // startProgressBar.hide(getActivity());
+                // ResponseUtil.toastError(error);
                 // }
                 // });
-                RequestUtil.getInstance().addToRequestQueue(request2, TAG);
+                //
+                //
+                // // TODO post 返回 500
+                // // JsonObjectRequest request =
+                // // new JsonObjectRequest(Method.POST,
+                // // UrlUtil.getTchTestStartUrl(requestObject),
+                // // new JSONObject(), new Listener<JSONObject>() {
+                // //
+                // // @Override
+                // // public void onResponse(JSONObject response) {}
+                // // }, new ErrorListener() {
+                // //
+                // // @Override
+                // // public void onErrorResponse(final VolleyError error) {
+                // // getActivity().runOnUiThread(new Runnable() {
+                // //
+                // // @Override
+                // // public void run() {}
+                // // });
+                // // }
+                // // });
+                // RequestUtil.getInstance().addToRequestQueue(request2, TAG);
+                JsonObjectRequest request =
+                        new JsonObjectRequest(Method.POST, UrlUtil.getTchTestStartUrl(0,
+                                test.getStringPart()), new Listener<JSONObject>() {
+
+                            @Override
+                            public void onResponse(JSONObject arg0) {
+                                TestDao testDao = new TestDao(getActivity());
+                                test.setHasTested(true);
+                                // test.setId(testId);
+
+                                testDao.update(test);
+                                testDao.close();
+
+                                ToastUtil.toast(R.string.tch_test_started);
+                                startProgressBar.hide(getActivity());
+                            }
+
+                        }, new ErrorListener() {
+
+                            @Override
+                            public void onErrorResponse(VolleyError arg0) {
+
+                            }
+
+                        });
+                RequestUtil.getInstance().addToRequestQueue(request, TAG);
             }
         };
         DialogUtil.showNormalDialog(

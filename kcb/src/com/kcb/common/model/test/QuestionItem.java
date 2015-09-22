@@ -236,4 +236,34 @@ public class QuestionItem {
         item.mIsSelected = jsonObject.optBoolean(KEY_ISSELECTED); // 如果是选项，表示是否选择了
         return item;
     }
+
+    /**
+     * 
+     * @title: toJsonForInternet
+     * @description:
+     * @author: Zqj
+     * @date: 2015年9月15日 下午2:48:11
+     * @return
+     */
+
+    // TODO
+    public static String testName;
+
+    public JSONObject toJsonForInternet(int questionNum, int choiceNum) {
+        final String KEY_ISTEXT = "istext";
+        final String KEY_CONETENT = "content";
+        final String KEY_VALUE = "keyValue";
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put(KEY_ISTEXT, mIsText);
+            if (isText()) {
+                jsonObject.put(KEY_CONETENT, mText);
+            } else {
+                jsonObject.put(KEY_CONETENT, testName + "_" + questionNum + "_" + choiceNum
+                        + ".png");
+            }
+            jsonObject.put(KEY_VALUE, testName + "_" + questionNum + "_" + choiceNum);
+        } catch (JSONException e) {}
+        return jsonObject;
+    }
 }

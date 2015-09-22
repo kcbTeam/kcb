@@ -267,8 +267,14 @@ public class UrlUtil {
     // 3.2 开始测试
     private static final String url_tch_test_start = IP + "/TestServlet02/tchTest";
 
-    public static String getTchTestStartUrl() {
-        return url_tch_test_start;
+    public static String getTchTestStartUrl(int flag, String data) {
+        return url_tch_test_start + "?flag=" + flag + "&data=" + data;
+    }
+
+    private static final String url_tch_test_star_uploadt = IP + "/upload";
+
+    public static String getTchTestUpLoadUrl() {
+        return url_tch_test_star_uploadt;
     }
 
     // 3.3 查看测试结果，包括内容和详情
