@@ -251,16 +251,23 @@ public class QuestionItem {
 
     public JSONObject toJsonForInternet(int questionNum, int choiceNum) {
         final String KEY_ISTEXT = "istext";
+        final String KEY_ISRIGHT = "isright";
         final String KEY_CONETENT = "content";
         final String KEY_VALUE = "keyValue";
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put(KEY_ISTEXT, mIsText);
             if (isText()) {
+                jsonObject.put(KEY_ISTEXT, "0");
                 jsonObject.put(KEY_CONETENT, mText);
             } else {
+                jsonObject.put(KEY_ISTEXT, "1");
                 jsonObject.put(KEY_CONETENT, testName + "_" + questionNum + "_" + choiceNum
                         + ".png");
+            }
+            if (isRight()) {
+                jsonObject.put(KEY_ISRIGHT, "0");
+            } else {
+                jsonObject.put(KEY_ISRIGHT, "1");
             }
             jsonObject.put(KEY_VALUE, testName + "_" + questionNum + "_" + choiceNum);
         } catch (JSONException e) {}

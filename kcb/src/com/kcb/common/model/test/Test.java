@@ -2,6 +2,8 @@ package com.kcb.common.model.test;
 
 import java.io.File;
 import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -370,7 +372,7 @@ public class Test {
     }
 
 
-    //TODO
+    // TODO
     /**
      * 获取图片部分的文件数据
      * 
@@ -382,6 +384,7 @@ public class Test {
      */
     public List<File> getBitmapFiles() {
         List<File> files = new ArrayList<File>();
+        File file = null;
         for (int i = 0; i < mQuestions.size(); i++) {
             Question question = mQuestions.get(i);
             if (!question.getTitle().isText()) {

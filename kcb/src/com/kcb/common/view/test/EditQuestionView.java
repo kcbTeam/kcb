@@ -3,6 +3,9 @@ package com.kcb.common.view.test;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 
 import android.app.Activity;
 import android.content.Context;
@@ -18,11 +21,13 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.github.mikephil.charting.utils.Utils;
 import com.kcb.common.base.BaseLinearLayout;
 import com.kcb.common.model.test.Question;
 import com.kcb.common.model.test.QuestionItem;
 import com.kcb.common.util.BitmapUtil;
 import com.kcb.common.util.DialogUtil;
+import com.kcb.common.util.MD5Util;
 import com.kcb.common.util.ToastUtil;
 import com.kcb.common.view.dialog.MaterialBitmapDialog.OnActionListener;
 import com.kcb.library.view.checkbox.CheckBox;
@@ -376,8 +381,10 @@ public class EditQuestionView extends BaseLinearLayout implements OnLongClickLis
                     // 保持的图片path： /kcb/testname/题目index_选项Index.png
                     // 比如：/kcb/导数的意义/1_0.png，表示测试——导数的意义中，第1道题的题目的图片。
                     // 比如：/kcb/导数的意义/2_3.png，表示测试——导数的意义中，第2道题的C选项的图片。
+                    // TODO:
+                    String testNameForPic = MD5Util.MD5(mTestName);
                     final String bitmapPath =
-                            FileUtil.getQuestionItemPath(mTestName, mIndex + 1, mLongClickTag);
+                            FileUtil.getQuestionItemPath(testNameForPic, mIndex + 1, mLongClickTag);
                     new Thread(new Runnable() {
 
                         @Override

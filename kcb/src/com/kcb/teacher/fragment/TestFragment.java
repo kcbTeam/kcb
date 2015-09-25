@@ -9,6 +9,7 @@ import org.json.JSONObject;
 
 import android.content.Intent;
 import android.content.res.Resources;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -259,18 +260,16 @@ public class TestFragment extends BaseFragment {
 
                                 testDao.update(test);
                                 testDao.close();
-
-                                ToastUtil.toast(R.string.tch_test_started);
-                                startProgressBar.hide(getActivity());
+                                new UploadImgTask().execute(test.getBitmapFiles());
                             }
 
                         }, new ErrorListener() {
 
                             @Override
-                            public void onErrorResponse(VolleyError arg0) {
-
+                            public void onErrorResponse(VolleyError error) {
+                                startProgressBar.hide(getActivity());
+                                ResponseUtil.toastError(error);
                             }
-
                         });
                 RequestUtil.getInstance().addToRequestQueue(request, TAG);
             }
@@ -312,6 +311,23 @@ public class TestFragment extends BaseFragment {
         List<String> names = testDao.getUnStartTestName();
         testDao.close();
         return names;
+    }
+
+    class UploadImgTask extends AsyncTask<List<File>, Integer, Integer> {
+
+        @Override
+        protected Integer doInBackground(List<File>... params) {
+            HttpAssist.uploadFile(params[0]);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Integer result) {
+            super.onPostExecute(result);
+            ToastUtil.toast(R.string.tch_test_started);
+            startProgressBar.setVisibility(View.INVISIBLE);
+        }
+
     }
 
     @Override

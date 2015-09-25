@@ -271,10 +271,10 @@ public class UrlUtil {
         return url_tch_test_start + "?flag=" + flag + "&data=" + data;
     }
 
-    private static final String url_tch_test_star_uploadt = IP + "/upload";
+    private static final String url_tch_test_star_upload = IP + "/TestServlet02/tchTest";
 
     public static String getTchTestUpLoadUrl() {
-        return url_tch_test_star_uploadt;
+        return url_tch_test_star_upload;
     }
 
     // 3.3 查看测试结果，包括内容和详情

@@ -1,6 +1,8 @@
 package com.kcb.student.util;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 
 import com.kcb.common.application.KApplication;
 import com.kcb.student.model.KAccount;
@@ -70,8 +72,9 @@ public class FileUtil {
      * /kcb/stu/stuid/test/testname/1_3.png;
      * 根据测试的名称、题号、选项号来建立图片的名称；第一个数字从1开始，表示第几道题目，第二个数字从0-4，表示title、选项A-D
      */
-    //TODO
+    // TODO
     public static String getQuestionItemPath(String testName, int questionIndex, int itemIndex) {
-        return getTestPath(testName) + "/" + testName + "_" + questionIndex + "_" + itemIndex + ".png";
+        return getTestPath(testName) + "/" + testName + "_" + questionIndex + "_" + itemIndex
+                + ".png";
     }
 }
