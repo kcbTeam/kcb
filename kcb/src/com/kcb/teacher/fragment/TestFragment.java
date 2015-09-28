@@ -17,7 +17,9 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request.Method;
+import com.android.volley.Response;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
@@ -105,7 +107,7 @@ public class TestFragment extends BaseFragment {
                     // files.add(new File("/sdcard/image2.jpg"));
                     // files.add(new File("/sdcard/image1.jpg"));
                     // HttpAssist.uploadFile(files);
-                    startTest();
+                    detectTest();
                     break;
                 case R.id.button_edit:
                     addOrEditTest();
@@ -128,32 +130,32 @@ public class TestFragment extends BaseFragment {
             return;
         }
         startProgressBar.setVisibility(View.VISIBLE);
-        StringRequest request =
-                new StringRequest(Method.GET, UrlUtil.getTchTestDetectUrl(KAccount.getAccountId()),
-                        new Listener<String>() {
+        JsonObjectRequest request =
+                new JsonObjectRequest(Method.GET, UrlUtil.getTchTestDetectUrl(0,
+                        KAccount.getAccountId()), new Listener<JSONObject>() {
 
-                            @Override
-                            public void onResponse(String response) {
-                                startProgressBar.setVisibility(View.GONE);
-                                try {
-                                    JSONObject jsonObject = new JSONObject(response);
-                                    LogUtil.i(TAG, "tch detect, response is " + response);
-                                    startProgressBar.hide(getActivity());
-                                    if (jsonObject.optBoolean("has") == true) { // 有正在进行的测试
-                                        ToastUtil.toast(R.string.tch_has_starting_test);
-                                    } else {
-                                        startTest();
-                                    }
-                                } catch (JSONException e) {}
-                            }
-                        }, new ErrorListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        startProgressBar.setVisibility(View.GONE);
+                        LogUtil.i(TAG, "tch detect, response is " + response);
+                        startProgressBar.hide(getActivity());
+                        long currentTime = System.currentTimeMillis();
+                        long startTime = response.optLong("start_time");
+                        int duration = response.optInt("last_time");
+                        if (currentTime < startTime + duration * 1000) { // 有正在进行的测试
+                            ToastUtil.toast(R.string.tch_has_starting_test);
+                        } else {
+                            startTest();
+                        }
+                    }
+                }, new ErrorListener() {
 
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                startProgressBar.hide(getActivity());
-                                ResponseUtil.toastError(error);
-                            }
-                        });
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        startProgressBar.hide(getActivity());
+                        ResponseUtil.toastError(error);
+                    }
+                });
         RequestUtil.getInstance().addToRequestQueue(request, TAG);
     }
 
@@ -248,12 +250,12 @@ public class TestFragment extends BaseFragment {
                 // // }
                 // // });
                 // RequestUtil.getInstance().addToRequestQueue(request2, TAG);
-                JsonObjectRequest request =
-                        new JsonObjectRequest(Method.POST, UrlUtil.getTchTestStartUrl(0,
-                                test.getStringPart()), new Listener<JSONObject>() {
+                StringRequest request =
+                        new StringRequest(Method.POST, UrlUtil.getTchTestStartUrl(1,
+                                test.getStringPart()), new Listener<String>() {
 
                             @Override
-                            public void onResponse(JSONObject arg0) {
+                            public void onResponse(String arg0) {
                                 TestDao testDao = new TestDao(getActivity());
                                 test.setHasTested(true);
                                 // test.setId(testId);

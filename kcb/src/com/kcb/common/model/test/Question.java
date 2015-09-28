@@ -216,6 +216,29 @@ public class Question {
         return question;
     }
 
+    // TODO fengexian
+    
+    public static Question fromInternetJsonObject(JSONObject jsonObject) {
+        Question question = new Question();
+        question.mTitleItem =
+                QuestionItem.fromInternetJsonObject(jsonObject.optJSONObject("title"));
+        try {
+            question.mChoiceAItem =
+                    QuestionItem.fromInternetJsonObject(jsonObject.optJSONArray("choice")
+                            .getJSONObject(0));
+            question.mChoiceBItem =
+                    QuestionItem.fromInternetJsonObject(jsonObject.optJSONArray("choice")
+                            .getJSONObject(1));
+            question.mChoiceCItem =
+                    QuestionItem.fromInternetJsonObject(jsonObject.optJSONArray("choice")
+                            .getJSONObject(2));
+            question.mChoiceDItem =
+                    QuestionItem.fromInternetJsonObject(jsonObject.optJSONArray("choice")
+                            .getJSONObject(3));
+        } catch (JSONException e) {}
+        return question;
+    }
+
 
     /**
      * 
@@ -225,42 +248,19 @@ public class Question {
      * @date: 2015年9月15日 下午3:02:39
      * @return
      */
-    //TODO
+    // TODO
     public JSONObject toJsonForInternet(int questionNum) {
         final String KEY_TITLE = "title";
         final String KEY_CHOICE = "choice";
-        final String KEY_ANSWER = "answer";
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put(KEY_TITLE, mTitleItem.toJsonForInternet(questionNum,0));
-            JSONArray jsonWrongArray = new JSONArray();
-            JSONArray jsonCorrectArray = new JSONArray();
-
-            if (mChoiceAItem.isRight()) {
-                jsonCorrectArray.put(mChoiceAItem.toJsonForInternet(questionNum,1));
-            } else {
-                jsonWrongArray.put(mChoiceAItem.toJsonForInternet(questionNum,1));
-            }
-
-            if (mChoiceBItem.isRight()) {
-                jsonCorrectArray.put(mChoiceBItem.toJsonForInternet(questionNum,2));
-            } else {
-                jsonWrongArray.put(mChoiceBItem.toJsonForInternet(questionNum,2));
-            }
-
-            if (mChoiceCItem.isRight()) {
-                jsonCorrectArray.put(mChoiceCItem.toJsonForInternet(questionNum,3));
-            } else {
-                jsonWrongArray.put(mChoiceCItem.toJsonForInternet(questionNum,3));
-            }
-
-            if (mChoiceDItem.isRight()) {
-                jsonCorrectArray.put(mChoiceDItem.toJsonForInternet(questionNum,4));
-            } else {
-                jsonWrongArray.put(mChoiceDItem.toJsonForInternet(questionNum,4));
-            }
-            jsonObject.put(KEY_CHOICE, jsonWrongArray);
-            jsonObject.put(KEY_ANSWER, jsonCorrectArray);
+            jsonObject.put(KEY_TITLE, mTitleItem.toJsonForInternet(questionNum, 0));
+            JSONArray jsonArray = new JSONArray();
+            jsonArray.put(mChoiceAItem.toJsonForInternet(questionNum, 1));
+            jsonArray.put(mChoiceBItem.toJsonForInternet(questionNum, 2));
+            jsonArray.put(mChoiceCItem.toJsonForInternet(questionNum, 3));
+            jsonArray.put(mChoiceDItem.toJsonForInternet(questionNum, 4));
+            jsonObject.put(KEY_CHOICE, jsonArray);
         } catch (JSONException e) {}
         return jsonObject;
     }

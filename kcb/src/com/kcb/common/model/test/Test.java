@@ -23,6 +23,7 @@ import android.annotation.SuppressLint;
 
 import com.kcb.common.model.answer.QuestionAnswer;
 import com.kcb.common.model.answer.TestAnswer;
+import com.kcb.common.util.MD5Util;
 import com.kcb.student.util.FileUtil;
 import com.kcb.teacher.database.test.QuestionResult;
 import com.kcb.teacher.model.KAccount;
@@ -372,7 +373,24 @@ public class Test {
     }
 
 
-    // TODO
+    // TODO 
+
+    public static Test fromInternetJsonObject(JSONObject jsonObject) {
+        Test test = new Test();
+        test.mId = jsonObject.optString("id");
+        test.mName = jsonObject.optString("name");
+        test.mTime = Integer.valueOf(jsonObject.optString("time"));
+        test.mDate = jsonObject.optLong("date");
+        JSONArray jsonArray = jsonObject.optJSONArray("question");
+        for (int i = 0; i < jsonArray.length(); i++) {
+            Question question =
+                    Question.fromInternetJsonObject(jsonObject.optJSONObject("question"));
+            test.mQuestions.add(question);
+        }
+        return test;
+    }
+
+
     /**
      * 获取图片部分的文件数据
      * 
@@ -417,16 +435,18 @@ public class Test {
      */
     public String getStringPart() {
         QuestionItem.testName = mName;
+        String urlName = URLEncoder.encode(mName);
         final String KEY_ID = "tch_code";
         final String KEY_NAME = "name";
         final String KEY_CREATETIME = "create_time";
         final String KEY_STARTTIME = "start_time";
         final String KEY_DURATION = "duration";
         final String KEY_QUESTION = "question";
+        encode();
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put(KEY_ID, KAccount.getAccountId());
-            jsonObject.put(KEY_NAME, mName);
+            jsonObject.put(KEY_NAME, urlName);
             jsonObject.put(KEY_CREATETIME, mDate);
             jsonObject.put(KEY_STARTTIME, System.currentTimeMillis());
             jsonObject.put(KEY_DURATION, mTime);

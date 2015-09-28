@@ -258,10 +258,10 @@ public class UrlUtil {
      * **********3, test**********
      */
     // 3.1 检测有没有正在进行的测试
-    private static final String url_tch_test_detect = IP + "/v1/tch/test/detect";
+    private static final String url_tch_test_detect = IP + "/TestServlet02/tchTest";
 
-    public static String getTchTestDetectUrl(String tchId) {
-        return url_tch_test_detect + "?tchid=" + tchId;
+    public static String getTchTestDetectUrl(int flag, String tchCode) {
+        return url_tch_test_detect + "?flag=" + flag + "&tchCode=" + tchCode;
     }
 
     // 3.2 开始测试

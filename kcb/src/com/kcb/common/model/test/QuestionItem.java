@@ -12,6 +12,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.text.TextUtils;
 
+import com.kcb.common.util.MD5Util;
 import com.kcb.student.util.FileUtil;
 
 /**
@@ -37,6 +38,8 @@ public class QuestionItem {
     private boolean mIsRight; // 如果是选项，表示选项是否是正确项
     private boolean mIsSelected; // 在学生模块，如果是选项，表示学生是否选择了此项
 
+    private String mKeyValue;
+
     public QuestionItem() {
         mIsText = true;
         mText = "";
@@ -56,6 +59,15 @@ public class QuestionItem {
         newItem.mIsRight = oldItem.mIsRight;
         newItem.mIsSelected = oldItem.mIsSelected;
     }
+
+    public String getKeyValue() {
+        return this.mKeyValue;
+    }
+
+    public void setKeyValue(String keyValue) {
+        this.mKeyValue = keyValue;
+    }
+
 
     public void setId(int id) {
         mId = id;
@@ -237,6 +249,21 @@ public class QuestionItem {
         return item;
     }
 
+    // TODO 分割线
+
+    public static QuestionItem fromInternetJsonObject(JSONObject jsonObject) {
+        QuestionItem questionItem = new QuestionItem();
+        questionItem.mIsText = jsonObject.optString("istext").equals("0");
+        if (questionItem.mIsText) {
+            questionItem.mText = jsonObject.optString("content");
+        } else {
+            questionItem.mBitmapUrl = jsonObject.optString("content");
+        }
+        questionItem.mIsRight = jsonObject.optString("isright").equals("0");
+        questionItem.mKeyValue = jsonObject.optString("keyValue");
+        return questionItem;
+    }
+
     /**
      * 
      * @title: toJsonForInternet
@@ -246,7 +273,6 @@ public class QuestionItem {
      * @return
      */
 
-    // TODO
     public static String testName;
 
     public JSONObject toJsonForInternet(int questionNum, int choiceNum) {
@@ -254,6 +280,9 @@ public class QuestionItem {
         final String KEY_ISRIGHT = "isright";
         final String KEY_CONETENT = "content";
         final String KEY_VALUE = "keyValue";
+        String urlName = URLEncoder.encode(testName);
+        String md5Name = MD5Util.MD5(testName);
+
         JSONObject jsonObject = new JSONObject();
         try {
             if (isText()) {
@@ -261,15 +290,15 @@ public class QuestionItem {
                 jsonObject.put(KEY_CONETENT, mText);
             } else {
                 jsonObject.put(KEY_ISTEXT, "1");
-                jsonObject.put(KEY_CONETENT, testName + "_" + questionNum + "_" + choiceNum
-                        + ".png");
+                jsonObject
+                        .put(KEY_CONETENT, md5Name + "_" + questionNum + "_" + choiceNum + ".png");
             }
             if (isRight()) {
                 jsonObject.put(KEY_ISRIGHT, "0");
             } else {
                 jsonObject.put(KEY_ISRIGHT, "1");
             }
-            jsonObject.put(KEY_VALUE, testName + "_" + questionNum + "_" + choiceNum);
+            jsonObject.put(KEY_VALUE, urlName + "_" + questionNum + "_" + choiceNum);
         } catch (JSONException e) {}
         return jsonObject;
     }
