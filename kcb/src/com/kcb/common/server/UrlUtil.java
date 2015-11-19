@@ -141,18 +141,28 @@ public class UrlUtil {
     // }
 
     public static String getStuCheckinResultUrl(String stuId) {
-        return url_stu_checkin_getresult + "?flag=2" + "&stuCode=" + stuId;
+        return url_stu_checkin_getresult + "?flag=2" + "&tchCode=" + stuId;
     }
 
     /**
      * **********3, test**********
      */
-    // 3.1 开始测试
-    private static final String url_stu_test_start = IP + "/v1/stu/test/start";
-
-    public static String getStuTestStartUrl(String stuId, String tchId) {
-        return url_stu_test_start + "?stuid=" + stuId + "&tchid=" + tchId;
+    // check tes
+    public static String getStuCheckTestUrl(String tchId) {
+        return IP + "/TestServlet02/tchTest?flag=0&tchCode=" + tchId;
     }
+
+    // 3.1 开始测试
+
+    public static String getStuTestStartUrl(String tchId, long startTime) {
+        return IP + "/TestServlet02/stuTest?flag=1&tchCode=" + tchId + "&start_time=" + startTime;
+    }
+
+    // private static final String url_stu_test_start = IP + "/v1/stu/test/start";
+    //
+    // public static String getStuTestStartUrl(String stuId, String tchId) {
+    // return url_stu_test_start + "?stuid=" + stuId + "&tchid=" + tchId;
+    // }
 
     // 3.2 结束测试
     private static final String url_stu_test_end = IP + "/v1/stu/test/finish";

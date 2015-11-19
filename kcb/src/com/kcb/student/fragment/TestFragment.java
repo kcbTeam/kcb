@@ -79,7 +79,7 @@ public class TestFragment extends BaseFragment {
         public void doClick(View v) {
             switch (v.getId()) {
                 case R.id.button_start_test:
-                    startTest();
+                    checkTest();
                     break;
                 case R.id.button_look_test:
                     lookTestResult();
@@ -90,36 +90,64 @@ public class TestFragment extends BaseFragment {
         }
     };
 
+    // 检查是否有正在进行的测试
+    private void checkTest() {
+        JsonObjectRequest request =
+                new JsonObjectRequest(Method.POST, UrlUtil.getStuCheckTestUrl(KAccount
+                        .getTchId()), new Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        int duration = response.optInt("last_time");
+                        long startTime = response.optLong("start_time");
+                        if ((System.currentTimeMillis() - startTime) > duration) {
+                            ToastUtil.toast(R.string.stu_no_test_now);
+                        } else {
+                            startTest(startTime);
+                        }
+                    }
+                }, new ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        ResponseUtil.toastError(error);
+                    }
+                });
+        RequestUtil.getInstance().addToRequestQueue(request, TAG);
+        LogUtil.i(TAG, request.getUrl());
+    }
+
     private final String KEY_REMAINTIME = "remaintime";
     private final String KEY_TEST = "test";
 
+
     // 开始答题
-    private void startTest() {
+    private void startTest(final long startTime) {
         if (startProgressBar.getVisibility() == View.VISIBLE) {
             return;
         }
         startProgressBar.setVisibility(View.VISIBLE);
         JsonObjectRequest request =
-                new JsonObjectRequest(Method.GET, UrlUtil.getStuTestStartUrl(
-                        KAccount.getAccountId(), KAccount.getTchId()), new Listener<JSONObject>() {
+                new JsonObjectRequest(Method.GET, UrlUtil.getStuTestStartUrl(KAccount.getTchId(),
+                        startTime), new Listener<JSONObject>() {
 
                     @Override
                     public void onResponse(JSONObject response) {
                         LogUtil.i(TAG, "stu get test from server, response is " + response);
 
-                        final int remaintime = response.optInt(KEY_REMAINTIME);
-                        final Test test = Test.fromJsonObject(response.optJSONObject(KEY_TEST));
-
-                        // 打乱测试中的题目和选项
-                        test.shuffle();
-                        test.decode();
-
-                        TestDao testDao = new TestDao(getActivity());
-                        testDao.add(test);
-                        testDao.close();
-
-                        // 进入开始答题页面
-                        StartTestActivity.start(getActivity(), test, remaintime);
+                        final int remaintime = (int) (System.currentTimeMillis() - startTime);
+//                        final Test test = Test.fromJsonObject(response.optJSONObject(KEY_TEST));
+//
+//                        // 打乱测试中的题目和选项
+//                        test.shuffle();
+//                        test.decode();
+//
+//                        TestDao testDao = new TestDao(getActivity());
+//                        testDao.add(test);
+//                        testDao.close();
+//
+//                        // 进入开始答题页面
+//                        StartTestActivity.start(getActivity(), test, remaintime);
                         startProgressBar.hide(getActivity());
                     }
                 }, new ErrorListener() {
