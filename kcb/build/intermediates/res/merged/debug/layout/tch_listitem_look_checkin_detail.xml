@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingBottom="8dp"
+    android:paddingTop="8dp" >
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/textview_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black_700"
+            android:textSize="@dimen/text_size_medium" />
+
+        <TextView
+            android:id="@+id/textview_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black_500"
+            android:textSize="@dimen/text_size_small" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textview_unchecked_rate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center_horizontal"
+        android:textColor="@color/black_700"
+        android:textSize="@dimen/text_size_medium" />
+
+</LinearLayout><!-- From: file:/F:/repo/labApps/kcb/kcb/res/layout/tch_listitem_look_checkin_detail.xml -->

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:widget="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/activity_background"
+    android:orientation="vertical"
+    tools:ignore="contentDescription" >
+
+    <ImageView
+        android:id="@+id/imageview_background"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        android:layout_centerInParent="true" />
+
+    <com.kcb.library.view.PaperButton
+        android:id="@+id/button_stu"
+        style="@style/common_paper_button_big"
+        android:layout_above="@+id/button_tch"
+        android:visibility="gone"
+        widget:paper_text="@string/comm_student"
+        widget:paper_text_color="@color/stu_primary"
+        widget:paper_text_size="@dimen/text_size_large" />
+
+    <com.kcb.library.view.PaperButton
+        android:id="@+id/button_tch"
+        style="@style/common_paper_button_big"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="24dp"
+        android:visibility="gone"
+        widget:paper_text="@string/comm_teacher"
+        widget:paper_text_color="@color/tch_primary_dark"
+        widget:paper_text_size="@dimen/text_size_large" />
+
+</RelativeLayout><!-- From: file:/F:/repo/labApps/kcb/kcb/res/layout/comm_pageritem_start.xml -->

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dialog_rootView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#55000000" >
+
+    <LinearLayout
+        android:id="@+id/contentDialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="48dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginTop="48dp"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:padding="24dp" >
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_weight="0"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_large" />
+
+        <ListView
+            android:id="@+id/listmessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:divider="@color/black_200"
+            android:dividerHeight="1dp"
+            android:listSelector="@color/white"
+            android:scrollbarSize="2dp"
+            android:scrollbarStyle="outsideInset"
+            android:scrollbarThumbVertical="@color/black_300"
+            android:scrollbars="vertical" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_weight="0"
+            android:orientation="horizontal" >
+
+            <com.kcb.library.view.buttonflat.ButtonFlat
+                android:id="@+id/button_accept"
+                android:layout_width="72dp"
+                android:layout_height="36dp"
+                android:layout_alignParentRight="true"
+                android:background="@color/blue"
+                android:text="@string/comm_sure" />
+
+            <com.kcb.library.view.buttonflat.ButtonFlat
+                android:id="@+id/button_cancel"
+                android:layout_width="72dp"
+                android:layout_height="36dp"
+                android:layout_toLeftOf="@id/button_accept"
+                android:background="@color/black_500"
+                android:text="@string/comm_cancel"
+                android:visibility="gone" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</RelativeLayout><!-- From: file:/F:/repo/labApps/kcb/kcb/res/layout/comm_material_list_dialog.xml -->

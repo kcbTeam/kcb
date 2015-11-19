@@ -1,0 +1,17 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="${relativePackage}.${activityClass}" >
+
+    <com.kcb.library.view.ColorAnimationView
+        android:id="@+id/color_animation_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</RelativeLayout><!-- From: file:/F:/repo/labApps/kcb/kcb/res/layout/comm_activity_start.xml -->

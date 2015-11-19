@@ -1,0 +1,535 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- From: file:/F:/repo/labApps/kcb/kcb/res/values-zh/colors_comm.xml -->
+    <eat-comment/>
+    <color name="activity_background">#f5f5f5</color>
+    <color name="black">#000000</color>
+    <color name="black_100">#f5f5f5</color>
+    <color name="black_200">#eeeeee</color>
+    <color name="black_300">#e0e0e0</color>
+    <color name="black_400">#bdbdbd</color>
+    <color name="black_50">#fafafa</color>
+    <color name="black_500">#9e9e9e</color>
+    <color name="black_700">#616161</color>
+    <color name="black_divider">#e0e0e0</color>
+    <color name="blue">#427fed</color>
+    <!-- From: file:/F:/repo/labApps/kcb/kcb/res/values-zh/colors_stu.xml -->
+    <eat-comment/>
+    <color name="stu_primary">#009688</color>
+    <color name="stu_primary_50">#E0F2F1</color>
+    <color name="stu_primary_dark">#00796B</color>
+    <!-- From: file:/F:/repo/labApps/kcb/kcb/res/values-zh/colors_tch.xml -->
+    <eat-comment/>
+    <color name="tch_primary">#3F51B5</color>
+    <color name="tch_primary_50">#E8EAF6</color>
+    <color name="tch_primary_dark">#303F9F</color>
+    <!-- From: file:/F:/repo/labApps/kcb/kcb/res/values-zh/colors_comm.xml -->
+    <eat-comment/>
+    <color name="white">#ffffff</color>
+    <!-- From: file:/F:/repo/labApps/kcb/kcb/res/values-zh/dimens.xml -->
+    <eat-comment/>
+    <dimen name="activity_header_height">50dp</dimen>
+    <dimen name="step_tip_margin_top">24dp</dimen>
+    <dimen name="text_size_large">18dp</dimen>
+    <dimen name="text_size_medium">16dp</dimen>
+    <dimen name="text_size_micro">12dp</dimen>
+    <dimen name="text_size_small">14dp</dimen>
+    <dimen name="text_size_x_large">20dp</dimen>
+    <!-- From: file:/F:/repo/labApps/kcb/kcb/build/intermediates/exploded-aar/kcb/kcbLibrary/unspecified/res/values-zh/values-zh.xml -->
+    <eat-comment/>
+    <string name="UMAppUpdate">应用更新</string>
+    <string name="UMBreak_Network">未联网</string>
+    <string name="UMDialog_InstallAPK">最新版本已下载，是否安装？</string>
+    <string name="UMGprsCondition">（提示：非WIFI环境）</string>
+    <string name="UMIgnore">忽略该版</string>
+    <string name="UMNewVersion">最新版本: </string>
+    <string name="UMNotNow">以后再说</string>
+    <string name="UMTargetSize">新版本大小:</string>
+    <string name="UMToast_IsUpdating">正在更新中....</string>
+    <string name="UMUpdateContent">更新内容</string>
+    <string name="UMUpdateNow">立即更新</string>
+    <string name="UMUpdateSize">仅需要下载:</string>
+    <string name="UMUpdateTitle">发现新版本</string>
+    <!-- From: file:/F:/repo/labApps/kcb/kcb/res/values-zh/strings_comm.xml -->
+    <eat-comment/>
+    <string name="app_name">好课堂</string>
+    <string name="comm_appinfo">课程宝的创作团队一直致力于打造实用、易用、美观的移动互联网软件。\n\n团队具有8名成员，均来自东南大学、南京邮电大学，我们中有重度app玩家、产品规划师、交互设计师、开发工程师。\n\n我们具有敏锐的用户需求洞察力、极其挑剔的交互体验观和追求完美的做事态度。\n\n课程宝是我们借助开源社区、合力创作的第一款app，愿为老师、学生的教学活动带来一些便利，希望给你们带来不一样的体验！</string>
+    <string name="comm_bitmap_dialog_title_A">A选项</string>
+    <string name="comm_bitmap_dialog_title_B">B选项</string>
+    <string name="comm_bitmap_dialog_title_C">C选项</string>
+    <string name="comm_bitmap_dialog_title_D">D选项</string>
+    <string name="comm_bitmap_dialog_title_title">题目</string>
+    <string name="comm_cancel">取消</string>
+    <string name="comm_choice_A">A</string>
+    <string name="comm_choice_B">B</string>
+    <string name="comm_choice_C">C</string>
+    <string name="comm_choice_D">D</string>
+    <string name="comm_copyright">Copyright© 2015-2020 KcbTeam.\nAll Rights Reserved.</string>
+    <string name="comm_delete">删除</string>
+    <string name="comm_delete_bitmap">确定删除这张图片？</string>
+    <string name="comm_retakephoto">重拍</string>
+    <string name="comm_student">我是学生</string>
+    <string name="comm_sure">确定</string>
+    <string name="comm_teacher">我是老师</string>
+    <string name="comm_zoom_tip">可以双击或捏合手指来缩放图片。</string>
+    <string name="network_error">网络出错了，请检查网络连接</string>
+    <string name="server_error">服务器出错了，请稍后再试</string>
+    <!-- From: file:/F:/repo/labApps/kcb/kcb/res/values-zh/strings_stu.xml -->
+    <eat-comment/>
+    <string name="stu_answer_submitted">答案已提交，测试结束后可查看结果</string>
+    <string name="stu_checkin_num_error">签到数字错误</string>
+    <string name="stu_checkin_rate">%1$s老师开始了%2$d次签到，其中你成功签到了%3$d次。</string>
+    <string name="stu_checkin_remain_time">倒计时：%1$d秒</string>
+    <string name="stu_checkin_success">签到成功</string>
+    <string name="stu_checkin_time_end">时间已到，你未完成本次签到。</string>
+    <string name="stu_checkin_unfinish">签到未完成</string>
+    <string name="stu_class_checkin">课堂签到</string>
+    <string name="stu_class_test">课堂小测试</string>
+    <string name="stu_click_again_exit_app">再按一次退出课程宝</string>
+    <string name="stu_comm_cancel">取消</string>
+    <string name="stu_comm_complete">完成</string>
+    <string name="stu_comm_submit">提交</string>
+    <string name="stu_comm_sure">确定</string>
+    <string name="stu_comm_tip">提醒</string>
+    <string name="stu_comm_update">更新</string>
+    <string name="stu_drawer_aboutus">关于我们</string>
+    <string name="stu_drawer_course">当前课程：</string>
+    <string name="stu_drawer_exit_account">退出账号</string>
+    <string name="stu_drawer_feedback">意见反馈</string>
+    <string name="stu_drawer_modify_password">修改密码</string>
+    <string name="stu_drawer_switch_course">切换课程</string>
+    <string name="stu_drawer_teacher">任课老师：</string>
+    <string name="stu_drawer_update_app">软件升级</string>
+    <string name="stu_exit_account_tip">退出后，下次使用时需要重新登录。</string>
+    <string name="stu_feedback_hint">我想说...</string>
+    <string name="stu_feedback_success">提交成功，感谢反馈！</string>
+    <string name="stu_feedback_tip">说说你对这个app的一些看法或者建议吧~我们会在后续的版本中注意的！</string>
+    <string name="stu_has_checkin">已经签到过了</string>
+    <string name="stu_has_newest">已经是最新版本</string>
+    <string name="stu_has_test">你已经参与了本次测试</string>
+    <string name="stu_id_error">学号错误</string>
+    <string name="stu_input_checkin_num">请输入老师报出的签到数字</string>
+    <string name="stu_input_new_password">输入新密码，记住它</string>
+    <string name="stu_input_old_password">输入原密码</string>
+    <string name="stu_input_test_name_search">输入测试名称搜索</string>
+    <string name="stu_last_question">上一题</string>
+    <string name="stu_login">登录</string>
+    <string name="stu_login_tip">首次登录时，密码和学号一样</string>
+    <string name="stu_look_checkin_result">查看签到结果</string>
+    <string name="stu_look_result_testend">测试结束后才可查看结果</string>
+    <string name="stu_look_test_result">查看测试结果</string>
+    <string name="stu_modify_success">修改成功</string>
+    <string name="stu_new_password">新密码</string>
+    <string name="stu_next_question">下一题</string>
+    <string name="stu_next_step">下一步</string>
+    <string name="stu_no_checkin">没有正在进行的签到</string>
+    <string name="stu_no_test_now">没有正在进行的测试</string>
+    <string name="stu_no_test_result">没有测试结果</string>
+    <string name="stu_old_password">原密码</string>
+    <string name="stu_password">密码</string>
+    <string name="stu_password_error">密码错误</string>
+    <string name="stu_question_index">题目%1$d</string>
+    <string name="stu_question_num">题目数量</string>
+    <string name="stu_remain_time">还剩%1$d分%2$d秒</string>
+    <string name="stu_repeat_new_password">再次输入新密码</string>
+    <string name="stu_select_choice">勾出正确选项</string>
+    <string name="stu_start_checkin">开始签到  </string>
+    <string name="stu_start_test">开始答题</string>
+    <string name="stu_stu_login">学生登录</string>
+    <string name="stu_stuid">学号</string>
+    <string name="stu_submit_answer">提交答案</string>
+    <string name="stu_submit_test_finish">提交后，需要等待测试结束，才可以查看测试结果。</string>
+    <string name="stu_submit_test_miss">第 %1$s 题未完成，确定提交？</string>
+    <string name="stu_success_checkin">成功签到</string>
+    <string name="stu_test_date">测试日期</string>
+    <string name="stu_test_name">测试名称</string>
+    <string name="stu_test_name_num">%1$s（共%2$d题）</string>
+    <string name="stu_test_time_end">时间已到，无法继续作答，请提交本次答案。</string>
+    <string name="stu_test_unfinish">测试未结束</string>
+    <string name="stu_twice_password_unequal">两次输入密码不一致</string>
+    <string name="stu_uncheckin">未签到</string>
+    <string name="stu_update_log">本次更新包括：\n</string>
+    <!-- From: file:/F:/repo/labApps/kcb/kcb/res/values-zh/strings_tch.xml -->
+    <eat-comment/>
+    <string name="tch_absent">缺课</string>
+    <string name="tch_account">账号</string>
+    <string name="tch_add">添加</string>
+    <string name="tch_add_new_test">添加一个新测试</string>
+    <string name="tch_add_or_edit_test">添加 / 编辑测试</string>
+    <string name="tch_add_question">添加一题</string>
+    <string name="tch_add_question_tip">确定添加第 %1$d 题？</string>
+    <string name="tch_add_test">添加新测试</string>
+    <string name="tch_add_test_first">请先添加一个测试</string>
+    <string name="tch_attendance">到课</string>
+    <string name="tch_checkin_date">签到日期</string>
+    <string name="tch_checkin_failed">未签到</string>
+    <string name="tch_checkin_rate">签到率</string>
+    <string name="tch_checkin_rate_tip">本次到课率为%1$d%%</string>
+    <string name="tch_checkin_started">签到已开始</string>
+    <string name="tch_checkin_success">成功签到</string>
+    <string name="tch_checkin_unfinish">无法开始，有正在进行的签到</string>
+    <string name="tch_class_checkin">课堂签到</string>
+    <string name="tch_class_test">课堂小测试</string>
+    <string name="tch_click_again_exit_app">再按一次退出课程宝</string>
+    <string name="tch_comm_cancel">取消</string>
+    <string name="tch_comm_complete">完成</string>
+    <string name="tch_comm_delete">删除</string>
+    <string name="tch_comm_start">开始</string>
+    <string name="tch_comm_sure">确定</string>
+    <string name="tch_comm_update">更新</string>
+    <string name="tch_correct">正确</string>
+    <string name="tch_correct_rate">正确率</string>
+    <string name="tch_crop_picture">裁剪图片</string>
+    <string name="tch_crop_tip">为了节省流量和上传题目的时间，请少用图片、只保留有效图片部分。</string>
+    <string name="tch_delete_question">删除本题</string>
+    <string name="tch_delete_question_tip">确定删除第 %1$d 题？</string>
+    <string name="tch_delete_success">删除成功</string>
+    <string name="tch_delete_test_tip">确定删除测试——%1$s？</string>
+    <string name="tch_delete_tip">确认删除该题吗？</string>
+    <string name="tch_deleted">已删除</string>
+    <string name="tch_drawer_aboutus">关于我们</string>
+    <string name="tch_drawer_class">当前班级：</string>
+    <string name="tch_drawer_course">当前课程：</string>
+    <string name="tch_drawer_exit_account">退出账号</string>
+    <string name="tch_drawer_feedback">意见反馈</string>
+    <string name="tch_drawer_modify_password">修改密码</string>
+    <string name="tch_drawer_switch_course">切换课程</string>
+    <string name="tch_drawer_update_app">软件升级</string>
+    <string name="tch_edit_question_item_hint">输入文字，或者长按拍照</string>
+    <string name="tch_edit_test">编辑测试</string>
+    <string name="tch_error">错误</string>
+    <string name="tch_exit_account_tip">退出后，不会保存未进行的测试，下次使用时需要重新登录。</string>
+    <string name="tch_feedback_hint">我想说...</string>
+    <string name="tch_feedback_success">提交成功，感谢反馈！</string>
+    <string name="tch_feedback_tip">说说你对这个app的一些看法或者建议吧~我们会在后续的版本中注意的！</string>
+    <string name="tch_has_newest">已经是最新版本</string>
+    <string name="tch_has_same_test_name">测试名称已经被使用了</string>
+    <string name="tch_has_starting_test">有一个正在进行的测试</string>
+    <string name="tch_id_error">账号错误</string>
+    <string name="tch_input_choice">输入选项，并勾出正确项</string>
+    <string name="tch_input_name_search">输入姓名搜索</string>
+    <string name="tch_input_new_password">输入新密码，记住它</string>
+    <string name="tch_input_old_password">输入原密码</string>
+    <string name="tch_input_test_name_search">输入名称搜索</string>
+    <string name="tch_input_title">输入题目%1$d</string>
+    <string name="tch_last_question">上一题</string>
+    <string name="tch_login">登录</string>
+    <string name="tch_login_tip">首次登录时，密码和账号一样</string>
+    <string name="tch_look_checkin_result">查看签到结果</string>
+    <string name="tch_look_test_result">查看测试结果</string>
+    <string name="tch_modify_success">修改成功</string>
+    <string name="tch_name">姓名/学号</string>
+    <string name="tch_new_password">新密码</string>
+    <string name="tch_next_question">下一题</string>
+    <string name="tch_next_step">下一步</string>
+    <string name="tch_no_camera_app">没有可以拍照的应用程序</string>
+    <string name="tch_no_checkin_result">没有签到结果</string>
+    <string name="tch_no_student">没有学生信息</string>
+    <string name="tch_no_test_result">没有测试结果</string>
+    <string name="tch_not_save_if_cancel">取消后，不会保存本次测试。</string>
+    <string name="tch_old_password">原密码</string>
+    <string name="tch_password">密码</string>
+    <string name="tch_password_error">密码错误</string>
+    <string name="tch_question_added">第%1$d题已添加</string>
+    <string name="tch_question_index">第%1$d题</string>
+    <string name="tch_question_not_finish">题目未完成</string>
+    <string name="tch_question_num">题目数量</string>
+    <string name="tch_question_saved">第%1$d题已保存</string>
+    <string name="tch_question_unfinished">第%1$s题未完成</string>
+    <string name="tch_question_uplimited">最多只能有9题</string>
+    <string name="tch_repeat_new_password">再次输入新密码</string>
+    <string name="tch_saved">已保存</string>
+    <string name="tch_select_test">选择测试</string>
+    <string name="tch_set_question_num">设置题目数量：%1$d</string>
+    <string name="tch_set_test_name">为本次测试起一个名字</string>
+    <string name="tch_set_test_name_hint">例如：科学的概念和应用</string>
+    <string name="tch_set_test_time">设置测试时间</string>
+    <string name="tch_set_test_time_tip">本次测试包括 %1$d 道题，答题时间为： %2$d 分钟</string>
+    <string name="tch_start">开始</string>
+    <string name="tch_start_checkin">开始签到</string>
+    <string name="tch_start_checkin_tip">签到结束后可查看结果，点击确定开始签到。</string>
+    <string name="tch_start_test">开始测试</string>
+    <string name="tch_start_test_tip">本次测试的名称为——%1$s，包括 %2$d 道题，时间为 %3$d 分钟。\n\n如果题目中图片较多，上传题目会较慢，请耐心等待。</string>
+    <string name="tch_stu_checkin_rate">%1$s的到课率为%2$d%%</string>
+    <string name="tch_stu_correct_rate">%1$s的选择题正确率为%2$d%%</string>
+    <string name="tch_stu_info">学生信息</string>
+    <string name="tch_student_center">学生中心</string>
+    <string name="tch_tch_login">老师登录</string>
+    <string name="tch_tell_stu_checkin_num">将签到数字告诉在场的学生</string>
+    <string name="tch_test_date">测试日期</string>
+    <string name="tch_test_name">测试名称</string>
+    <string name="tch_test_name_num">%1$s（共%2$d题）</string>
+    <string name="tch_test_started">测试已开始，结束后可查看结果</string>
+    <string name="tch_twice_password_unequal">两次输入密码不一致</string>
+    <string name="tch_two_min_finish_checkin">开始后，学生有两分钟完成签到</string>
+    <string name="tch_unchecked_rate">未到课率</string>
+    <string name="tch_unchecked_stuinfo">未到课学生信息</string>
+    <string name="tch_update_log">本次更新包括：\n</string>
+    <string name="tch_wait">请稍等……</string>
+    <!-- From: file:/F:/repo/labApps/kcb/kcb/build/intermediates/exploded-aar/kcb/kcbLibrary/unspecified/res/values-zh/values-zh.xml -->
+    <eat-comment/>
+    <string name="umeng_common_action_cancel">取消</string>
+    <string name="umeng_common_action_continue">继续</string>
+    <string name="umeng_common_action_info_exist">正在下载中.</string>
+    <string name="umeng_common_action_pause">暂停</string>
+    <string name="umeng_common_download_failed">下载失败</string>
+    <string name="umeng_common_download_finish">下载完成，请点击安装</string>
+    <string name="umeng_common_download_notification_prefix">正在下载: </string>
+    <string name="umeng_common_info_interrupt">下载出错啦，请检查网络后继续。</string>
+    <string name="umeng_common_network_break_alert">请连接网络后再尝试！</string>
+    <string name="umeng_common_patch_finish">更新完成，请点击安装</string>
+    <string name="umeng_common_pause_notification_prefix">暂停: </string>
+    <string name="umeng_common_silent_download_finish">新版本已经准备好，请点击安装</string>
+    <string name="umeng_common_start_download_notification">正在下载应用</string>
+    <string name="umeng_common_start_patch_notification">正在更新安装包</string>
+    <!-- From: file:/F:/repo/labApps/kcb/kcb/res/values-zh/styles_comm.xml -->
+    <eat-comment/>
+    <style name="AppBaseTheme" parent="android:Theme.Light.NoTitleBar"/>
+    <style name="AppTheme" parent="AppBaseTheme"/>
+    <style name="common_bottom_button">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+    <style name="common_bottom_button_layout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:background">@color/black_200</item>
+    </style>
+    <style name="common_center_title">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/text_size_x_large</item>
+        <item name="android:singleLine">true</item>
+    </style>
+    <style name="common_checkbox">
+        <item name="android:layout_width">32dp</item>
+        <item name="android:layout_height">32dp</item>
+        <item name="android:background">@color/blue</item>
+    </style>
+    <style name="common_divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/black_divider</item>
+    </style>
+    <style name="common_drawer_button">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">48dp</item>
+    </style>
+    <style name="common_drawer_imageview">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:paddingLeft">16dp</item>
+    </style>
+    <style name="common_drawer_textview">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">16dp</item>
+        <item name="android:textColor">@color/black_700</item>
+        <item name="android:textSize">@dimen/text_size_medium</item>
+    </style>
+    <style name="common_edittext">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginRight">40dp</item>
+        <item name="android:layout_marginLeft">40dp</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:maxLength">15</item>
+        <item name="android:inputType">text</item>
+        <item name="android:textCursorDrawable">@drawable/comm_text_cursor</item>
+    </style>
+    <style name="common_edittext_password" parent="@style/common_edittext">
+        <item name="android:inputType">textPassword</item>
+    </style>
+    <style name="common_empty_tip_view">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerInParent">true</item>
+        <item name="android:visibility">gone</item>
+    </style>
+    <style name="common_paper_button">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">54dp</item>
+        <item name="android:layout_marginRight">36dp</item>
+        <item name="android:layout_marginLeft">36dp</item>
+    </style>
+    <style name="common_paper_button_big" parent="@style/common_paper_button">
+        <item name="android:layout_height">64dp</item>
+    </style>
+    <style name="common_question_show_choice">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+    <style name="common_question_show_choice_checkbox">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">top</item>
+    </style>
+    <style name="common_question_show_choice_imageview">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:maxHeight">100dp</item>
+        <item name="android:adjustViewBounds">true</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:padding">4dp</item>
+        <item name="android:visibility">gone</item>
+        <item name="android:scaleType">fitCenter</item>
+    </style>
+    <style name="common_question_show_choice_textview">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:padding">4dp</item>
+        <item name="android:textColor">@color/black_700</item>
+        <item name="android:textSize">@dimen/text_size_medium</item>
+    </style>
+    <style name="common_question_show_choice_tip">
+        <item name="android:layout_gravity">top</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingRight">4dp</item>
+        <item name="android:paddingTop">4dp</item>
+        <item name="android:textColor">@color/black_700</item>
+        <item name="android:textSize">@dimen/text_size_medium</item>
+    </style>
+    <style name="common_tab">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">54dp</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+    <style name="common_tab_imageview">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerHorizontal">true</item>
+    </style>
+    <style name="common_tab_textview">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:textSize">@dimen/text_size_micro</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+    <style name="common_tip_textview">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">16dp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/text_size_medium</item>
+    </style>
+    <style name="common_title">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/text_size_large</item>
+        <item name="android:singleLine">true</item>
+    </style>
+    <style name="common_title_icon">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerInParent">true</item>
+    </style>
+    <style name="common_title_icon_layout">
+        <item name="android:layout_width">48dp</item>
+        <item name="android:layout_height">@dimen/activity_header_height</item>
+    </style>
+    <style name="common_title_left" parent="@style/common_title">
+        <item name="android:paddingLeft">16dp</item>
+    </style>
+    <style name="common_title_progressbar" parent="@style/SmoothProgressBar">
+        <item name="android:layout_marginLeft">0dp</item>
+        <item name="android:layout_marginRight">0dp</item>
+        <item name="android:layout_marginTop">-7dp</item>
+    </style>
+    <!-- From: file:/F:/repo/labApps/kcb/kcb/res/values-zh/styles_stu.xml -->
+    <eat-comment/>
+    <style name="stu_checkin_num">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">54dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">@dimen/text_size_large</item>
+        <item name="android:textColor">@color/black_700</item>
+        <item name="android:background">@drawable/comm_rectangle</item>
+    </style>
+    <style name="stu_title_layout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/stu_activity_header</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+    <!-- From: file:/F:/repo/labApps/kcb/kcb/res/values-zh/styles_tch.xml -->
+    <eat-comment/>
+    <style name="tch_checkin_num">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">36dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">@dimen/text_size_large</item>
+        <item name="android:textColor">@color/black_700</item>
+        <item name="android:background">@drawable/comm_rectangle</item>
+    </style>
+    <style name="tch_question_edit_choice_checkbox">
+        <item name="android:layout_width">32dp</item>
+        <item name="android:layout_height">32dp</item>
+        <item name="android:layout_gravity">top</item>
+        <item name="android:background">@color/blue</item>
+    </style>
+    <style name="tch_question_edit_choice_edittext">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:textColor">@color/black_700</item>
+        <item name="android:textSize">@dimen/text_size_medium</item>
+        <item name="android:background">@drawable/comm_rectangle</item>
+        <item name="android:textCursorDrawable">@drawable/comm_text_cursor</item>
+    </style>
+    <style name="tch_question_edit_choice_imageview">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:maxHeight">100dp</item>
+        <item name="android:adjustViewBounds">true</item>
+        <item name="android:padding">2dp</item>
+        <item name="android:layout_centerInParent">true</item>
+        <item name="android:scaleType">fitCenter</item>
+    </style>
+    <style name="tch_question_edit_choice_inputlayout">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@drawable/comm_rectangle</item>
+    </style>
+    <style name="tch_question_edit_choice_layout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+    <style name="tch_question_edit_choice_tip">
+        <item name="android:layout_gravity">top</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingRight">4dp</item>
+        <item name="android:paddingTop">4dp</item>
+        <item name="android:textColor">@color/black_700</item>
+        <item name="android:textSize">@dimen/text_size_medium</item>
+    </style>
+    <style name="tch_title_layout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/tch_activity_header</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+</resources>

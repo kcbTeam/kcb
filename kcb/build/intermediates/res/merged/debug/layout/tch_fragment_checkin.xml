@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:widget="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center" >
+
+    <com.kcb.library.view.PaperButton
+        android:id="@+id/button_start_checkin"
+        style="@style/common_paper_button_big"
+        widget:paper_text="@string/tch_start_checkin"
+        widget:paper_text_color="@color/black_700"
+        widget:paper_text_size="@dimen/text_size_medium" />
+
+    <com.kcb.library.view.PaperButton
+        android:id="@+id/button_look_checkin"
+        style="@style/common_paper_button_big"
+        android:layout_below="@id/button_start_checkin"
+        widget:paper_text="@string/tch_look_checkin_result"
+        widget:paper_text_color="@color/black_700"
+        widget:paper_text_size="@dimen/text_size_medium" />
+
+</RelativeLayout><!-- From: file:/F:/repo/labApps/kcb/kcb/res/layout/tch_fragment_checkin.xml -->

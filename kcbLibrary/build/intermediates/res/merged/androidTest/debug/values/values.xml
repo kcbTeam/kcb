@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- From: file:/F:/repo/labApps/kcb/kcbLibrary/build/intermediates/bundles/debug/res/values/values.xml -->
+    <eat-comment/>
+    <integer-array name="gplus_colors">
+        <item>@color/gplus_color_1</item>
+        <item>@color/gplus_color_2</item>
+        <item>@color/gplus_color_3</item>
+        <item>@color/gplus_color_4</item>
+    </integer-array>
+    <bool name="spb_default_mirror_mode">false</bool>
+    <bool name="spb_default_progressiveStart_activated">false</bool>
+    <bool name="spb_default_reversed">false</bool>
+    <color name="black_translucent">#50000000</color>
+    <color name="cardview_dark_background">#FF202020</color>
+    <color name="cardview_light_background">#FFFAFAFA</color>
+    <color name="cardview_shadow_end_color">#03000000</color>
+    <color name="cardview_shadow_start_color">#37000000</color>
+    <color name="floating_edit_text_color">#bdbdbd</color>
+    <color name="floating_edit_text_error_color">#DB4437</color>
+    <color name="floating_edit_text_highlighted_color">#427fed</color>
+    <color name="gplus_color_1">#3e802f</color>
+    <color name="gplus_color_2">#f4b400</color>
+    <color name="gplus_color_3">#427fed</color>
+    <color name="gplus_color_4">#b23424</color>
+    <color name="material_dialog_thumbColor">#66aaaaaa</color>
+    <color name="paper_button_color">#ffffffff</color>
+    <color name="paper_button_shadow_color">#000000</color>
+    <color name="paper_text_color">#60000000</color>
+    <color name="radio_checked_color">#427fed</color>
+    <color name="radio_color">#6d6d6d</color>
+    <color name="spb_default_color">#33b5e5</color>
+    <color name="tb_munion_item_force">#e3e3e3</color>
+    <color name="thumbColor">#66aaaaaa</color>
+    <declare-styleable name="CardView"><attr format="color" name="cardBackgroundColor"/><attr format="dimension" name="cardCornerRadius"/><attr format="dimension" name="cardElevation"/><attr format="dimension" name="cardMaxElevation"/><attr format="boolean" name="cardUseCompatPadding"/><attr format="boolean" name="cardPreventCornerOverlap"/><attr format="dimension" name="contentPadding"/><attr format="dimension" name="contentPaddingLeft"/><attr format="dimension" name="contentPaddingRight"/><attr format="dimension" name="contentPaddingTop"/><attr format="dimension" name="contentPaddingBottom"/></declare-styleable>
+    <declare-styleable name="CropImageView"><attr name="guidelines"><enum name="on" value="2"/><enum name="onTouch" value="1"/><enum name="off" value="0"/></attr><attr format="boolean" name="fixAspectRatio"/><attr format="integer" name="aspectRatioX"/><attr format="integer" name="aspectRatioY"/><attr format="reference" name="imageResource"/></declare-styleable>
+    <declare-styleable name="CustomAttributes"><attr format="color|reference" name="rippleColor"/><attr format="float" name="rippleSpeed"/><attr format="boolean" name="showNumberIndicator"/><attr format="integer" name="max"/><attr format="integer" name="min"/><attr format="integer" name="value"/><attr format="integer" name="progress"/><attr format="dimension" name="ringWidth"/><attr format="boolean" name="check"/><attr format="dimension" name="checkBoxSize"/><attr format="dimension" name="thumbSize"/><attr format="integer" name="iconDrawable"/><attr format="dimension" name="iconSize"/><attr format="boolean" name="animate"/><attr format="float" name="rippleBorderRadius"/><attr format="boolean" name="clickAfterRipple"/></declare-styleable>
+    <declare-styleable name="FloatingEditText"><attr format="float" name="floating_edit_text_hint_scale"/><attr format="color" name="floating_edit_text_color"/><attr format="color" name="floating_edit_text_highlighted_color"/><attr format="color" name="floating_edit_text_error_color"/><attr format="dimension" name="floating_edit_text_underline_height"/><attr format="dimension" name="floating_edit_text_underline_highlighted_height"/></declare-styleable>
+    <declare-styleable name="PaperButton"><attr format="string" name="paper_text"/><attr format="dimension" name="paper_text_size"/><attr format="color" name="paper_text_color"/><attr format="string" name="paper_font"/><attr format="color" name="paper_color"/><attr format="dimension" name="paper_corner_radius"/><attr format="float" name="paper_shadow_radius"/><attr format="float" name="paper_shadow_offset_x"/><attr format="float" name="paper_shadow_offset_y"/><attr format="color" name="paper_shadow_color"/></declare-styleable>
+    <declare-styleable name="RadioButton"><attr format="color" name="radio_color"/><attr format="color" name="radio_checked_color"/></declare-styleable>
+    <declare-styleable name="SmoothProgressBar"><attr format="reference" name="spbStyle"/><attr format="color" name="spb_color"/><attr format="dimension" name="spb_stroke_width"/><attr format="dimension" name="spb_stroke_separator_length"/><attr format="integer" name="spb_sections_count"/><attr format="float" name="spb_speed"/><attr format="float" name="spb_progressiveStart_speed"/><attr format="float" name="spb_progressiveStop_speed"/><attr format="enum" name="spb_interpolator"><enum name="spb_interpolator_accelerate" value="0"/><enum name="spb_interpolator_linear" value="1"/><enum name="spb_interpolator_acceleratedecelerate" value="2"/><enum name="spb_interpolator_decelerate" value="3"/></attr><attr format="boolean" name="spb_reversed"/><attr format="boolean" name="spb_mirror_mode"/><attr format="reference" name="spb_colors"/><attr format="boolean" name="spb_progressiveStart_activated"/><attr format="reference" name="spb_background"/><attr format="boolean" name="spb_generate_background_with_colors"/><attr format="boolean" name="spb_gradients"/></declare-styleable>
+    <dimen name="cardview_compat_inset_shadow">1dp</dimen>
+    <dimen name="cardview_default_elevation">2dp</dimen>
+    <dimen name="cardview_default_radius">2dp</dimen>
+    <dimen name="floating_edit_text_underline_height">1dp</dimen>
+    <dimen name="floating_edit_text_underline_highlighted_height">2dp</dimen>
+    <dimen name="paper_button_corner_radius">2dp</dimen>
+    <dimen name="paper_padding">8dp</dimen>
+    <dimen name="paper_text_size">15sp</dimen>
+    <dimen name="radio_border_radius">10dp</dimen>
+    <dimen name="radio_height">36dp</dimen>
+    <dimen name="radio_ripple_radius">18dp</dimen>
+    <dimen name="radio_stroke_width">2dp</dimen>
+    <dimen name="radio_thumb_radius">6dp</dimen>
+    <dimen name="radio_width">36dp</dimen>
+    <dimen name="spb_default_stroke_separator_length">4dp</dimen>
+    <dimen name="spb_default_stroke_width">4dp</dimen>
+    <integer name="spb_default_interpolator">0</integer>
+    <integer name="spb_default_sections_count">4</integer>
+    <string name="UMAppUpdate">App updating</string>
+    <string name="UMBreak_Network">Please make sure you are connected to internet,update failed</string>
+    <string name="UMDialog_InstallAPK">The lastest version has been downloaded, install now ?</string>
+    <string name="UMGprsCondition">(Warning: Not WIFI Condition)</string>
+    <string name="UMIgnore">Ingore this</string>
+    <string name="UMNewVersion">Latest version: </string>
+    <string name="UMNotNow">Not now</string>
+    <string name="UMTargetSize">Target size: </string>
+    <string name="UMToast_IsUpdating">Updating....</string>
+    <string name="UMUpdateCheck">2.6.0.1.20150312</string>
+    <string name="UMUpdateContent">Update Content</string>
+    <string name="UMUpdateNow">Update now</string>
+    <string name="UMUpdateSize">Update size: </string>
+    <string name="UMUpdateTitle">New version found</string>
+    <string name="app_name">kcbLibrary</string>
+    <item format="float" name="spb_default_speed" type="string">1</item>
+    <string name="tb_munion_tip_download_prefix">正在下载:</string>
+    <string name="umeng_common_action_cancel">Cancel</string>
+    <string name="umeng_common_action_continue">Continue</string>
+    <string name="umeng_common_action_info_exist">The app is already in downloading list.</string>
+    <string name="umeng_common_action_pause">Pause</string>
+    <string name="umeng_common_download_failed">Download Failed! </string>
+    <string name="umeng_common_download_finish">Download finished,click to install it.</string>
+    <string name="umeng_common_download_notification_prefix">Downloading: </string>
+    <string name="umeng_common_icon">icon</string>
+    <string name="umeng_common_info_interrupt">dowload interrupted.</string>
+    <string name="umeng_common_network_break_alert">Please make sure you are connected to internet, download failed</string>
+    <string name="umeng_common_patch_finish">Patch finished,click to install it.</string>
+    <string name="umeng_common_pause_notification_prefix">Pause: </string>
+    <string name="umeng_common_silent_download_finish">New version is ready,click to install it.</string>
+    <string name="umeng_common_start_download_notification">Download start.</string>
+    <string name="umeng_common_start_patch_notification">Patch start.</string>
+    <style name="AppBaseTheme" parent="android:Theme.Light"/>
+    <style name="AppTheme" parent="AppBaseTheme"/>
+    <style name="CardView">
+        <item name="cardBackgroundColor">@color/cardview_light_background</item>
+        <item name="cardCornerRadius">@dimen/cardview_default_radius</item>
+        <item name="cardElevation">@dimen/cardview_default_elevation</item>
+        <item name="cardMaxElevation">@dimen/cardview_default_elevation</item>
+        <item name="cardUseCompatPadding">false</item>
+        <item name="cardPreventCornerOverlap">true</item>
+    </style>
+    <style name="CardView.Dark">
+        <item name="cardBackgroundColor">@color/cardview_dark_background</item>
+    </style>
+    <style name="CardView.Light">
+        <item name="cardBackgroundColor">@color/cardview_light_background</item>
+    </style>
+    <style name="SmoothProgressBar" parent="android:Widget.ProgressBar.Horizontal">
+        <item name="spb_color">@color/spb_default_color</item>
+        <item name="spb_sections_count">@integer/spb_default_sections_count</item>
+        <item name="spb_speed">@string/spb_default_speed</item>
+        <item name="spb_stroke_width">@dimen/spb_default_stroke_width</item>
+        <item name="spb_stroke_separator_length">@dimen/spb_default_stroke_separator_length</item>
+        <item name="spb_reversed">@bool/spb_default_reversed</item>
+        <item name="spb_mirror_mode">@bool/spb_default_mirror_mode</item>
+        <item name="spb_interpolator">@integer/spb_default_interpolator</item>
+        <item name="spb_colors">@array/gplus_colors</item>
+        <item name="spb_progressiveStart_speed">2</item>
+        <item name="spb_progressiveStop_speed">3.4</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginBottom">-6dp</item>
+        <item name="android:layout_marginLeft">8dp</item>
+        <item name="android:layout_marginRight">8dp</item>
+        <item name="android:indeterminate">true</item>
+    </style>
+</resources>

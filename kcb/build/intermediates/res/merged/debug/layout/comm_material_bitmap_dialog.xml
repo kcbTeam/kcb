@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/dialog_rootView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#55000000"
+    tools:ignore="contentDescription" >
+
+    <RelativeLayout
+        android:id="@+id/contentDialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_margin="24dp"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:padding="24dp" >
+
+        <TextView
+            android:id="@+id/textview_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_large" />
+
+        <TextView
+            android:id="@+id/textview_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textview_title"
+            android:layout_marginBottom="16dp"
+            android:lineSpacingExtra="2dp"
+            android:text="@string/comm_zoom_tip"
+            android:textColor="@color/black_700"
+            android:textSize="@dimen/text_size_medium" />
+
+        <uk.co.senab.photoview.PhotoView
+            android:id="@+id/photoview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/layout_buttons"
+            android:layout_below="@id/textview_message" />
+
+        <LinearLayout
+            android:id="@+id/layout_buttons"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal" >
+
+            <com.kcb.library.view.buttonflat.ButtonFlat
+                android:id="@+id/button_delete"
+                android:layout_width="72dp"
+                android:layout_height="36dp"
+                android:background="@color/black_500"
+                android:text="@string/comm_delete" />
+
+            <com.kcb.library.view.buttonflat.ButtonFlat
+                android:id="@+id/button_retakephoto"
+                android:layout_width="72dp"
+                android:layout_height="36dp"
+                android:background="@color/black_500"
+                android:text="@string/comm_retakephoto" />
+
+            <com.kcb.library.view.buttonflat.ButtonFlat
+                android:id="@+id/button_accept"
+                android:layout_width="72dp"
+                android:layout_height="36dp"
+                android:background="@color/blue"
+                android:text="@string/comm_sure" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout><!-- From: file:/F:/repo/labApps/kcb/kcb/res/layout/comm_material_bitmap_dialog.xml -->

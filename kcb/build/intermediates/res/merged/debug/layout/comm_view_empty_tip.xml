@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:ignore="contentDescription" >
+
+    <ImageView
+        android:id="@+id/imageview_empty_icon"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:src="@drawable/ic_content_paste_grey600_48dp" />
+
+    <TextView
+        android:id="@+id/textview_empty_tip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:textColor="@color/black_700"
+        android:textSize="@dimen/text_size_medium" />
+
+</LinearLayout><!-- From: file:/F:/repo/labApps/kcb/kcb/res/layout/comm_view_empty_tip.xml -->

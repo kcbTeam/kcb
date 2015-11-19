@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/kcb.iml" filepath="$PROJECT_DIR$/kcb.iml" />
+      <module fileurl="file://$PROJECT_DIR$/kcb/kcb-kcb.iml" filepath="$PROJECT_DIR$/kcb/kcb-kcb.iml" />
+      <module fileurl="file://$PROJECT_DIR$/kcbLibrary/kcbLibrary.iml" filepath="$PROJECT_DIR$/kcbLibrary/kcbLibrary.iml" />
+    </modules>
+  </component>
+</project>

@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.kcbTeam"
+    android:versionCode="1"
+    android:versionName="1.0 Beta" >
+
+    <uses-sdk
+        android:minSdkVersion="14"
+        android:targetSdkVersion="21" />
+
+    <!-- uses permission start -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+    <!-- uses permission end -->
+    <application
+        android:name="com.kcb.common.application.KApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+
+        <!-- Umeng start -->
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="55a26e6a67e58e69ed008abe" />
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="zqj" />
+
+        <service
+            android:name="com.umeng.update.net.DownloadingService"
+            android:process=":DownloadingService" >
+        </service>
+
+        <activity
+            android:name="com.umeng.update.UpdateDialogActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+        </activity>
+        <!-- Umeng end -->
+
+
+        <!-- common start -->
+        <activity
+            android:name="com.kcb.common.activity.StartActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.kcb.common.activity.AboutusActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- common end -->
+
+
+        <!-- student start -->
+        <activity
+            android:name="com.kcb.student.activity.common.LoginActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible" >
+        </activity>
+        <activity
+            android:name="com.kcb.student.activity.common.HomeActivity"
+            android:finishOnTaskLaunch="true"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.kcb.student.activity.common.ModifyPasswordActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysVisible|adjustResize" >
+        </activity>
+        <activity
+            android:name="com.kcb.student.activity.common.FeedBackActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible" >
+        </activity>
+        <activity
+            android:name="com.kcb.student.activity.checkin.StartCheckInActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.kcb.student.activity.checkin.LookCheckInActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.kcb.student.activity.test.StartTestActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.kcb.student.activity.test.LookTestActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.kcb.student.activity.test.LookTestDetailActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- student end -->
+
+
+        <!-- teacher start -->
+        <activity
+            android:name="com.kcb.teacher.activity.common.LoginActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible" >
+        </activity>
+        <activity
+            android:name="com.kcb.teacher.activity.common.HomeActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing" >
+        </activity>
+        <activity
+            android:name="com.kcb.teacher.activity.common.ModifyPasswordActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysVisible|adjustResize" >
+        </activity>
+        <activity
+            android:name="com.kcb.teacher.activity.common.FeedBackActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible" >
+        </activity>
+        <activity
+            android:name="com.kcb.teacher.activity.checkin.StartCheckInActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.kcb.teacher.activity.checkin.LookCheckInActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.kcb.teacher.activity.checkin.LookCheckInDetailActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.kcb.teacher.activity.test.SetTestNameActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible" >
+        </activity>
+        <activity
+            android:name="com.kcb.teacher.activity.test.EditTestActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize" >
+        </activity>
+        <activity
+            android:name="com.kcb.teacher.activity.test.CropPictureActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.kcb.teacher.activity.test.SetTestTimeActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.kcb.teacher.activity.test.EditQuestionActivty"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" >
+        </activity>
+        <activity
+            android:name="com.kcb.teacher.activity.test.LookTestActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.kcb.teacher.activity.test.LookTestDetailActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.kcb.teacher.activity.stucentre.StuCentreActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- teacher end -->
+    </application>
+
+</manifest>

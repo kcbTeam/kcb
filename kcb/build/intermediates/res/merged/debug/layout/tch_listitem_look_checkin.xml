@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.kcb.library.view.buttonflat.ButtonFlat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:widget="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/button_root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    widget:clickAfterRipple="true"
+    widget:rippleSpeed="48" >
+
+    <TextView
+        android:id="@+id/textview_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="2dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="4dp"
+        android:gravity="center_vertical|left"
+        android:textColor="@color/black_700"
+        android:textSize="@dimen/text_size_medium" />
+
+    <TextView
+        android:id="@+id/textview_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textview_date"
+        android:layout_marginBottom="4dp"
+        android:layout_marginLeft="16dp"
+        android:gravity="center_vertical|left"
+        android:textColor="@color/black_500"
+        android:textSize="@dimen/text_size_small" />
+
+    <TextView
+        android:id="@+id/textview_rate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:gravity="center_vertical"
+        android:paddingRight="40dp"
+        android:textColor="@color/black_700"
+        android:textSize="@dimen/text_size_large" />
+
+</com.kcb.library.view.buttonflat.ButtonFlat><!-- From: file:/F:/repo/labApps/kcb/kcb/res/layout/tch_listitem_look_checkin.xml -->

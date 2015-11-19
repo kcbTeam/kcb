@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:widget="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black_100"
+    android:clickable="true"
+    android:orientation="vertical"
+    tools:ignore="contentDescription" >
+
+    <RelativeLayout
+        android:id="@+id/layout_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/stu_primary_dark"
+        android:padding="16dp" >
+
+        <ImageView
+            android:id="@+id/imageview_account"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_timer_auto_white_48dp" >
+        </ImageView>
+
+        <TextView
+            android:id="@+id/textview_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:layout_marginLeft="8dp"
+            android:layout_toRightOf="@id/imageview_account"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_large" />
+
+        <TextView
+            android:id="@+id/textview_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/textview_username"
+            android:layout_marginBottom="2dp"
+            android:layout_toRightOf="@id/textview_username"
+            android:paddingLeft="8dp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_medium" />
+
+        <TextView
+            android:id="@+id/textview_university"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/textview_username"
+            android:layout_below="@id/textview_username"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_medium" />
+
+        <TextView
+            android:id="@+id/textview_coursetip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textview_university"
+            android:layout_marginTop="16dp"
+            android:text="@string/stu_drawer_course"
+            android:textColor="@color/stu_primary_50"
+            android:textSize="@dimen/text_size_medium" />
+
+        <TextView
+            android:id="@+id/textview_course"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/textview_coursetip"
+            android:layout_toRightOf="@id/textview_coursetip"
+            android:paddingLeft="4dp"
+            android:textColor="@color/stu_primary_50"
+            android:textSize="@dimen/text_size_medium" />
+
+        <TextView
+            android:id="@+id/textview_teachertip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textview_coursetip"
+            android:paddingTop="4dp"
+            android:text="@string/stu_drawer_teacher"
+            android:textColor="@color/stu_primary_50"
+            android:textSize="@dimen/text_size_medium" />
+
+        <TextView
+            android:id="@+id/textview_teachername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/textview_teachertip"
+            android:layout_toRightOf="@id/textview_teachertip"
+            android:paddingLeft="4dp"
+            android:textColor="@color/stu_primary_50"
+            android:textSize="@dimen/text_size_medium" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <com.kcb.library.view.buttonflat.ButtonFlat
+                android:id="@+id/button_switchsource"
+                style="@style/common_drawer_button"
+                android:layout_marginTop="8dp"
+                android:visibility="gone"
+                widget:rippleSpeed="36" >
+
+                <ImageView
+                    android:id="@+id/imageview_switchsource"
+                    style="@style/common_drawer_imageview"
+                    android:src="@drawable/ic_book_grey600_24dp" />
+
+                <TextView
+                    style="@style/common_drawer_textview"
+                    android:layout_toRightOf="@id/imageview_switchsource"
+                    android:text="@string/stu_drawer_switch_course" />
+            </com.kcb.library.view.buttonflat.ButtonFlat>
+
+            <com.kcb.library.view.buttonflat.ButtonFlat
+                android:id="@+id/button_modifypassword"
+                style="@style/common_drawer_button"
+                android:layout_marginTop="8dp"
+                widget:rippleSpeed="36" >
+
+                <ImageView
+                    android:id="@+id/imageview_modifypassword"
+                    style="@style/common_drawer_imageview"
+                    android:src="@drawable/ic_vpn_key_grey600_24dp" />
+
+                <TextView
+                    style="@style/common_drawer_textview"
+                    android:layout_toRightOf="@id/imageview_modifypassword"
+                    android:text="@string/stu_drawer_modify_password" />
+            </com.kcb.library.view.buttonflat.ButtonFlat>
+
+            <com.kcb.library.view.buttonflat.ButtonFlat
+                android:id="@+id/button_feedback"
+                style="@style/common_drawer_button"
+                android:layout_below="@id/button_modifypassword"
+                widget:rippleSpeed="36" >
+
+                <ImageView
+                    android:id="@+id/imageview_feedback"
+                    style="@style/common_drawer_imageview"
+                    android:src="@drawable/ic_thumb_up_grey600_24dp" />
+
+                <TextView
+                    style="@style/common_drawer_textview"
+                    android:layout_toRightOf="@id/imageview_feedback"
+                    android:text="@string/stu_drawer_feedback" />
+            </com.kcb.library.view.buttonflat.ButtonFlat>
+
+            <com.kcb.library.view.buttonflat.ButtonFlat
+                android:id="@+id/button_updateapp"
+                style="@style/common_drawer_button"
+                android:layout_below="@id/button_feedback"
+                widget:rippleSpeed="36" >
+
+                <ImageView
+                    android:id="@+id/imageview_update"
+                    style="@style/common_drawer_imageview"
+                    android:src="@drawable/ic_cloud_upload_grey600_24dp" />
+
+                <TextView
+                    style="@style/common_drawer_textview"
+                    android:layout_toRightOf="@id/imageview_update"
+                    android:text="@string/stu_drawer_update_app" />
+            </com.kcb.library.view.buttonflat.ButtonFlat>
+
+            <com.kcb.library.view.smoothprogressbar.SmoothProgressBar
+                android:id="@+id/progressbar_check"
+                style="@style/common_title_progressbar"
+                android:layout_alignBottom="@id/button_updateapp"
+                android:visibility="gone" />
+
+            <com.kcb.library.view.buttonflat.ButtonFlat
+                android:id="@+id/button_exitaccount"
+                style="@style/common_drawer_button"
+                android:layout_below="@id/button_updateapp"
+                widget:rippleSpeed="36" >
+
+                <ImageView
+                    android:id="@+id/imageview_exit"
+                    style="@style/common_drawer_imageview"
+                    android:src="@drawable/ic_exit_to_app_grey600_24dp" />
+
+                <TextView
+                    style="@style/common_drawer_textview"
+                    android:layout_toRightOf="@id/imageview_exit"
+                    android:text="@string/stu_drawer_exit_account" />
+            </com.kcb.library.view.buttonflat.ButtonFlat>
+
+            <com.kcb.library.view.buttonflat.ButtonFlat
+                android:id="@+id/button_aboutus"
+                style="@style/common_drawer_button"
+                android:layout_below="@id/button_exitaccount"
+                android:layout_marginBottom="8dp"
+                widget:rippleSpeed="36" >
+
+                <ImageView
+                    android:id="@+id/imageview_aboutus"
+                    style="@style/common_drawer_imageview"
+                    android:src="@drawable/ic_tag_faces_grey600_24dp" />
+
+                <TextView
+                    style="@style/common_drawer_textview"
+                    android:layout_toRightOf="@id/imageview_aboutus"
+                    android:text="@string/stu_drawer_aboutus" />
+            </com.kcb.library.view.buttonflat.ButtonFlat>
+        </RelativeLayout>
+    </ScrollView>
+
+</LinearLayout><!-- From: file:/F:/repo/labApps/kcb/kcb/res/layout/stu_activity_home_leftdrawer.xml -->

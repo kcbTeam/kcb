@@ -1,14 +1,12 @@
 package com.kcb.common.model.test;
 
-import java.io.File;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
+import android.annotation.SuppressLint;
+
+import com.kcb.common.model.answer.QuestionAnswer;
+import com.kcb.common.model.answer.TestAnswer;
+import com.kcb.student.util.FileUtil;
+import com.kcb.teacher.database.test.QuestionResult;
+import com.kcb.teacher.model.KAccount;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.entity.mime.HttpMultipartMode;
@@ -19,14 +17,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.annotation.SuppressLint;
-
-import com.kcb.common.model.answer.QuestionAnswer;
-import com.kcb.common.model.answer.TestAnswer;
-import com.kcb.common.util.MD5Util;
-import com.kcb.student.util.FileUtil;
-import com.kcb.teacher.database.test.QuestionResult;
-import com.kcb.teacher.model.KAccount;
+import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
 
 public class Test {
 
@@ -380,11 +378,11 @@ public class Test {
         test.mId = jsonObject.optString("id");
         test.mName = jsonObject.optString("name");
         test.mTime = Integer.valueOf(jsonObject.optString("time"));
-        test.mDate = jsonObject.optLong("date");
+        test.mDate = Long.valueOf(jsonObject.optString("date"));
         JSONArray jsonArray = jsonObject.optJSONArray("question");
         for (int i = 0; i < jsonArray.length(); i++) {
             Question question =
-                    Question.fromInternetJsonObject(jsonObject.optJSONObject("question"));
+                    Question.fromInternetJsonObject(jsonArray.optJSONObject(i));
             test.mQuestions.add(question);
         }
         return test;

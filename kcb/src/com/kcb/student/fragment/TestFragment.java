@@ -1,7 +1,5 @@
 package com.kcb.student.fragment;
 
-import org.json.JSONObject;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -26,10 +24,10 @@ import com.kcb.common.util.ToastUtil;
 import com.kcb.library.view.PaperButton;
 import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
 import com.kcb.student.activity.test.LookTestActivity;
-import com.kcb.student.activity.test.StartTestActivity;
-import com.kcb.student.database.test.TestDao;
 import com.kcb.student.model.KAccount;
 import com.kcbTeam.R;
+
+import org.json.JSONObject;
 
 /**
  * @className: TestFragment
@@ -100,7 +98,7 @@ public class TestFragment extends BaseFragment {
                     public void onResponse(JSONObject response) {
                         int duration = response.optInt("last_time");
                         long startTime = response.optLong("start_time");
-                        if ((System.currentTimeMillis() - startTime) > duration) {
+                        if ((System.currentTimeMillis() - startTime) > duration * 1000) {
                             ToastUtil.toast(R.string.stu_no_test_now);
                         } else {
                             startTest(startTime);
@@ -136,7 +134,7 @@ public class TestFragment extends BaseFragment {
                         LogUtil.i(TAG, "stu get test from server, response is " + response);
 
                         final int remaintime = (int) (System.currentTimeMillis() - startTime);
-//                        final Test test = Test.fromJsonObject(response.optJSONObject(KEY_TEST));
+                        final Test test = Test.fromJsonObject(response.optJSONObject(KEY_TEST));
 //
 //                        // 打乱测试中的题目和选项
 //                        test.shuffle();

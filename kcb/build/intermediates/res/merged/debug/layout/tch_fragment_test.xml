@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:widget="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center" >
+
+    <com.kcb.library.view.PaperButton
+        android:id="@+id/button_start"
+        style="@style/common_paper_button_big"
+        widget:paper_text="@string/tch_start_test"
+        widget:paper_text_color="@color/black_700"
+        widget:paper_text_size="@dimen/text_size_medium" />
+
+    <com.kcb.library.view.smoothprogressbar.SmoothProgressBar
+        android:id="@+id/progressbar_start"
+        style="@style/SmoothProgressBar"
+        android:layout_alignBottom="@id/button_start"
+        android:layout_alignLeft="@id/button_start"
+        android:layout_alignRight="@id/button_start"
+        android:visibility="invisible" />
+
+    <com.kcb.library.view.PaperButton
+        android:id="@+id/button_edit"
+        style="@style/common_paper_button_big"
+        android:layout_below="@id/button_start"
+        widget:paper_text="@string/tch_add_or_edit_test"
+        widget:paper_text_color="@color/black_700"
+        widget:paper_text_size="@dimen/text_size_medium" />
+
+    <com.kcb.library.view.PaperButton
+        android:id="@+id/button_look_result"
+        style="@style/common_paper_button_big"
+        android:layout_below="@id/button_edit"
+        widget:paper_text="@string/tch_look_test_result"
+        widget:paper_text_color="@color/black_700"
+        widget:paper_text_size="@dimen/text_size_medium" />
+
+</RelativeLayout><!-- From: file:/F:/repo/labApps/kcb/kcb/res/layout/tch_fragment_test.xml -->

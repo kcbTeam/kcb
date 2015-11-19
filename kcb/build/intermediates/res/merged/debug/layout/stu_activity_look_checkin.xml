@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/activity_background"
+    android:fitsSystemWindows="true"
+    tools:ignore="contentDescription" >
+
+    <LinearLayout
+        android:id="@+id/layout_title"
+        style="@style/stu_title_layout" >
+
+        <include layout="@layout/comm_button_back" />
+
+        <TextView
+            style="@style/common_title"
+            android:text="@string/stu_look_checkin_result" />
+
+        <include layout="@layout/comm_button_refresh" />
+    </LinearLayout>
+
+    <com.kcb.library.view.smoothprogressbar.SmoothProgressBar
+        android:id="@+id/progressbar_refresh"
+        style="@style/common_title_progressbar"
+        android:layout_below="@id/layout_title"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/textview_rate"
+        style="@style/common_tip_textview"
+        android:layout_below="@id/layout_title"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="16dp" />
+
+    <com.github.mikephil.charting.charts.PieChart
+        android:id="@+id/piechart_rate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textview_rate"
+        android:layout_marginBottom="64dp"
+        android:layout_marginLeft="48dp"
+        android:layout_marginRight="48dp"
+        android:layout_marginTop="24dp" />
+
+</RelativeLayout><!-- From: file:/F:/repo/labApps/kcb/kcb/res/layout/stu_activity_look_checkin.xml -->

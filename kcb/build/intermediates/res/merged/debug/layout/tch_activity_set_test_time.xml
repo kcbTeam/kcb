@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:widget="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/activity_background"
+    android:fitsSystemWindows="true"
+    tools:ignore="contentDescription" >
+
+    <LinearLayout
+        android:id="@+id/layout_title"
+        style="@style/tch_title_layout" >
+
+        <TextView
+            android:id="@+id/textview_title"
+            style="@style/common_title_left"
+            android:text="@string/tch_set_test_time" />
+
+        <include layout="@layout/comm_button_delete" />
+
+        <include layout="@layout/comm_button_cancel" />
+
+        <include layout="@layout/comm_button_finish" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_settime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layout_title"
+        android:background="@color/black_300"
+        android:orientation="vertical"
+        android:paddingTop="8dp" >
+
+        <TextView
+            android:id="@+id/textview_testtime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_medium" />
+
+        <com.kcb.library.slider.Slider
+            android:id="@+id/slider_testtime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/blue"
+            widget:max="10"
+            widget:min="2"
+            widget:showNumberIndicator="true" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/listview_questions"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/layout_settime"
+        android:divider="@color/black_divider"
+        android:dividerHeight="16dp" >
+    </ListView>
+
+</RelativeLayout><!-- From: file:/F:/repo/labApps/kcb/kcb/res/layout/tch_activity_set_test_time.xml -->

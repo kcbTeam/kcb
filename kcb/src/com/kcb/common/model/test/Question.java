@@ -220,6 +220,7 @@ public class Question {
     
     public static Question fromInternetJsonObject(JSONObject jsonObject) {
         Question question = new Question();
+        question.mId = Integer.valueOf(jsonObject.optString("id"));
         question.mTitleItem =
                 QuestionItem.fromInternetJsonObject(jsonObject.optJSONObject("title"));
         try {

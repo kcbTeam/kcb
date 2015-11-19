@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:widget="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/activity_background"
+    android:fitsSystemWindows="true"
+    tools:ignore="contentDescription" >
+
+    <LinearLayout
+        android:id="@+id/layout_title"
+        style="@style/tch_title_layout" >
+
+        <include layout="@layout/comm_button_back" />
+
+        <TextView
+            android:id="@+id/textview_appname"
+            style="@style/common_title"
+            android:text="@string/tch_tch_login" />
+    </LinearLayout>
+
+    <com.kcb.library.view.FloatingEditText
+        android:id="@+id/edittext_id"
+        style="@style/common_edittext"
+        android:layout_below="@id/layout_title"
+        android:layout_marginTop="36dp"
+        android:hint="@string/tch_account" />
+
+    <com.kcb.common.view.common.PasswordEditText
+        android:id="@+id/passwordedittext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edittext_id" />
+
+    <com.kcb.library.view.PaperButton
+        android:id="@+id/button_login"
+        style="@style/common_paper_button"
+        android:layout_below="@id/passwordedittext"
+        widget:paper_text="@string/tch_login"
+        widget:paper_text_color="@color/black_700"
+        widget:paper_text_size="@dimen/text_size_medium" />
+
+    <com.kcb.library.view.smoothprogressbar.SmoothProgressBar
+        android:id="@+id/progressbar_login"
+        style="@style/SmoothProgressBar"
+        android:layout_alignBottom="@id/button_login"
+        android:layout_alignLeft="@id/button_login"
+        android:layout_alignRight="@id/button_login"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/textview_tip"
+        style="@style/common_tip_textview"
+        android:layout_width="wrap_content"
+        android:layout_below="@id/button_login"
+        android:layout_centerHorizontal="true"
+        android:drawableLeft="@drawable/ic_info_outline_grey600_18dp"
+        android:gravity="center_vertical"
+        android:text="@string/tch_login_tip" />
+
+</RelativeLayout><!-- From: file:/F:/repo/labApps/kcb/kcb/res/layout/tch_activity_login.xml -->
