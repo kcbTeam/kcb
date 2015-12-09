@@ -1,25 +1,16 @@
 package com.kcb.teacher.fragment;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 
-import com.android.volley.NetworkResponse;
 import com.android.volley.Request.Method;
-import com.android.volley.Response;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
@@ -29,7 +20,6 @@ import com.kcb.common.base.BaseFragment;
 import com.kcb.common.listener.DelayClickListener;
 import com.kcb.common.model.test.Test;
 import com.kcb.common.server.HttpAssist;
-import com.kcb.common.server.MultipartRequest;
 import com.kcb.common.server.RequestUtil;
 import com.kcb.common.server.ResponseUtil;
 import com.kcb.common.server.UrlUtil;
@@ -47,8 +37,12 @@ import com.kcb.teacher.database.test.TestDao;
 import com.kcb.teacher.model.KAccount;
 import com.kcbTeam.R;
 
+import org.json.JSONObject;
+
+import java.io.File;
+import java.util.List;
+
 /**
- * 
  * @className: TestFragment
  * @description:
  * @author: ZQJ & ljx
@@ -63,6 +57,9 @@ public class TestFragment extends BaseFragment {
 
     private PaperButton addOrEditTestButton;
     private PaperButton lookTestResultButton;
+
+    //TODO
+    private int log_id;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -92,7 +89,8 @@ public class TestFragment extends BaseFragment {
     }
 
     @Override
-    protected void initData() {}
+    protected void initData() {
+    }
 
     private DelayClickListener mClickListener = new DelayClickListener(
             DelayClickListener.DELAY_PAPER_BUTTON) {
@@ -139,6 +137,7 @@ public class TestFragment extends BaseFragment {
                         startProgressBar.setVisibility(View.GONE);
                         LogUtil.i(TAG, "tch detect, response is " + response);
                         startProgressBar.hide(getActivity());
+                        log_id = response.optInt("log_id");
                         long currentTime = System.currentTimeMillis();
                         long startTime = response.optLong("start_time");
                         int duration = response.optInt("last_time");
@@ -282,6 +281,28 @@ public class TestFragment extends BaseFragment {
                 String.format(getString(R.string.tch_start_test_tip), test.getName(),
                         test.getQuestionNum(), test.getMinTime()), R.string.tch_comm_sure,
                 sureListener, R.string.tch_comm_cancel, null);
+
+        // 启动中止测试进程
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                StringRequest request = new StringRequest(Method.POST, UrlUtil.getTchTestFinishUrl(KAccount.getAccountId(), log_id),
+                        new Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                LogUtil.i("asd", response.toString());
+                                ToastUtil.toast("刚发布的测试时间已到，可查看详情");
+                            }
+                        },
+                        new ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+
+                            }
+                        });
+                RequestUtil.getInstance().addToRequestQueue(request);
+            }
+        }, 1000 * test.getTime());
     }
 
     private void addOrEditTest() {

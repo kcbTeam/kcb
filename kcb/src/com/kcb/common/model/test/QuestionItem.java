@@ -1,13 +1,5 @@
 package com.kcb.common.model.test;
 
-import java.io.File;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.text.TextUtils;
@@ -15,8 +7,15 @@ import android.text.TextUtils;
 import com.kcb.common.util.MD5Util;
 import com.kcb.student.util.FileUtil;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+
 /**
- * 
  * @className: TextContent
  * @description:
  * @author: ZQJ
@@ -190,7 +189,8 @@ public class QuestionItem {
         if (mIsText) {
             try {
                 mText = URLDecoder.decode(mText, "utf-8");
-            } catch (UnsupportedEncodingException e) {}
+            } catch (UnsupportedEncodingException e) {
+            }
         }
     }
 
@@ -198,7 +198,8 @@ public class QuestionItem {
         if (mIsText) {
             try {
                 mText = URLEncoder.encode(mText, "utf-8");
-            } catch (UnsupportedEncodingException e) {}
+            } catch (UnsupportedEncodingException e) {
+            }
         }
     }
 
@@ -232,7 +233,8 @@ public class QuestionItem {
             jsonObject.put(KEY_BITMAPKEY, mBitmapKey); // 发送到后台时用的key
             jsonObject.put(KEY_ISRIGHT, mIsRight); // 如果是选项，表示是否是正确选项
             jsonObject.put(KEY_ISSELECTED, mIsSelected); // 如果是选项，表示是否选择了
-        } catch (JSONException e) {}
+        } catch (JSONException e) {
+        }
         return jsonObject;
     }
 
@@ -257,15 +259,16 @@ public class QuestionItem {
         if (questionItem.mIsText) {
             questionItem.mText = jsonObject.optString("content");
         } else {
-            questionItem.mBitmapUrl = jsonObject.optString("content");
+            questionItem.mBitmapUrl = "http://123.56.42.224/TestServlet02/" + jsonObject.optString("content");
         }
-        questionItem.mIsRight = jsonObject.optString("isright").equals("0");
+        if (!TextUtils.isEmpty(jsonObject.optString("isright"))) {
+            questionItem.mIsRight = jsonObject.optString("isright").equals("0");
+        }
         questionItem.mKeyValue = jsonObject.optString("keyValue");
         return questionItem;
     }
 
     /**
-     * 
      * @title: toJsonForInternet
      * @description:
      * @author: Zqj
@@ -299,7 +302,8 @@ public class QuestionItem {
                 jsonObject.put(KEY_ISRIGHT, "1");
             }
             jsonObject.put(KEY_VALUE, urlName + "_" + questionNum + "_" + choiceNum);
-        } catch (JSONException e) {}
+        } catch (JSONException e) {
+        }
         return jsonObject;
     }
 }

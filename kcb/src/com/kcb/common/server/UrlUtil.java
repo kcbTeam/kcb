@@ -1,10 +1,10 @@
 package com.kcb.common.server;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-
 import com.kcb.common.util.LogUtil;
 import com.kcb.student.fragment.CheckInFragment;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 
 
@@ -154,8 +154,8 @@ public class UrlUtil {
 
     // 3.1 开始测试
 
-    public static String getStuTestStartUrl(String tchId, long startTime) {
-        return IP + "/TestServlet02/stuTest?flag=1&tchCode=" + tchId + "&start_time=" + startTime;
+    public static String getStuTestStartUrl(String stuId, String tchId) {
+        return IP + "/TestServlet02/stuTest?stuCode=" + stuId + "&tchCode=" + tchId;
     }
 
     // private static final String url_stu_test_start = IP + "/v1/stu/test/start";
@@ -274,17 +274,22 @@ public class UrlUtil {
         return url_tch_test_detect + "?flag=" + flag + "&tchCode=" + tchCode;
     }
 
-    // 3.2 开始测试
+    // 3.2.1 开始测试
     private static final String url_tch_test_start = IP + "/TestServlet02/tchTest";
 
     public static String getTchTestStartUrl(int flag, String data) {
         return url_tch_test_start + "?flag=" + flag + "&data=" + data;
     }
 
-    private static final String url_tch_test_star_upload = IP + "/TestServlet02/tchTest";
+    private static final String url_tch_test_star_upload = IP + "/TestServlet02/tchTest?flag=2";
 
     public static String getTchTestUpLoadUrl() {
         return url_tch_test_star_upload;
+    }
+
+    // 3.2.2 结束测试
+    public static String getTchTestFinishUrl(String tchCode,int log_id){
+        return IP + "/TestServlet02/tchTest?tchCode=" + tchCode + "&logId=" + log_id;
     }
 
     // 3.3 查看测试结果，包括内容和详情

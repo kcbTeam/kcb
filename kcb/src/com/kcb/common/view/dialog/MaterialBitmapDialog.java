@@ -1,7 +1,5 @@
 package com.kcb.common.view.dialog;
 
-import uk.co.senab.photoview.PhotoView;
-import uk.co.senab.photoview.PhotoViewAttacher;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -15,16 +13,19 @@ import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView.ScaleType;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.kcb.common.util.DialogUtil;
+import com.kcb.common.util.ImageLoaderUtil;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcbTeam.R;
+import com.nostra13.universalimageloader.core.ImageLoader;
+
+import uk.co.senab.photoview.PhotoView;
+import uk.co.senab.photoview.PhotoViewAttacher;
 
 /**
- * 
  * @className: MaterialBitmapDialog
  * @description: 显示图片的对话框，在编辑题目页面，可以删除、裁剪图片
  * @author: wanghang
@@ -124,10 +125,12 @@ public class MaterialBitmapDialog extends android.app.Dialog implements OnClickL
         anim.setAnimationListener(new AnimationListener() {
 
             @Override
-            public void onAnimationStart(Animation animation) {}
+            public void onAnimationStart(Animation animation) {
+            }
 
             @Override
-            public void onAnimationRepeat(Animation animation) {}
+            public void onAnimationRepeat(Animation animation) {
+            }
 
             @Override
             public void onAnimationEnd(Animation animation) {
@@ -166,6 +169,11 @@ public class MaterialBitmapDialog extends android.app.Dialog implements OnClickL
      */
     public void setImageView(Bitmap bitmap) {
         photoView.setImageBitmap(bitmap);
+    }
+
+    public void setImageView(String bitmapUrl) {
+        ImageLoader.getInstance().displayImage(bitmapUrl, photoView,
+                ImageLoaderUtil.getOptions());
     }
 
     /**

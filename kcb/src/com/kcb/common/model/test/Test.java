@@ -375,9 +375,9 @@ public class Test {
 
     public static Test fromInternetJsonObject(JSONObject jsonObject) {
         Test test = new Test();
-        test.mId = jsonObject.optString("id");
+        test.mId = String.valueOf(jsonObject.optInt("id"));
         test.mName = jsonObject.optString("name");
-        test.mTime = Integer.valueOf(jsonObject.optString("time"));
+        test.mTime = jsonObject.optInt("time");
         test.mDate = Long.valueOf(jsonObject.optString("date"));
         JSONArray jsonArray = jsonObject.optJSONArray("question");
         for (int i = 0; i < jsonArray.length(); i++) {

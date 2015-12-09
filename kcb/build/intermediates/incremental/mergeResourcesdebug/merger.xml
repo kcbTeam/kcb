@@ -97,7 +97,7 @@
         <item name="android:textSize">@dimen/text_size_micro</item>
         <item name="android:textColor">@color/white</item>
     </style><style name="common_question_show_choice_tip">
-        <item name="android:layout_gravity">top</item>
+        <item name="android:layout_gravity">center_vertical</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:paddingRight">4dp</item>
@@ -166,8 +166,8 @@
         <item name="android:adjustViewBounds">true</item>
         <item name="android:layout_weight">1</item>
         <item name="android:padding">4dp</item>
-        <item name="android:visibility">gone</item>
-        <item name="android:scaleType">fitCenter</item>
+        <item name="android:visibility">invisible</item>
+        <item name="android:scaleType">centerInside</item>
     </style><style name="AppTheme" parent="AppBaseTheme"/><style name="common_drawer_imageview">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>

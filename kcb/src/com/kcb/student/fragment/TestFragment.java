@@ -24,6 +24,8 @@ import com.kcb.common.util.ToastUtil;
 import com.kcb.library.view.PaperButton;
 import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
 import com.kcb.student.activity.test.LookTestActivity;
+import com.kcb.student.activity.test.StartTestActivity;
+import com.kcb.student.database.test.TestDao;
 import com.kcb.student.model.KAccount;
 import com.kcbTeam.R;
 
@@ -68,7 +70,8 @@ public class TestFragment extends BaseFragment {
     }
 
     @Override
-    protected void initData() {}
+    protected void initData() {
+    }
 
     private DelayClickListener mClickListener = new DelayClickListener(
             DelayClickListener.DELAY_PAPER_BUTTON) {
@@ -77,7 +80,9 @@ public class TestFragment extends BaseFragment {
         public void doClick(View v) {
             switch (v.getId()) {
                 case R.id.button_start_test:
-                    checkTest();
+                    //TODO
+                    //                    checkTest();
+                    startTest();
                     break;
                 case R.id.button_look_test:
                     lookTestResult();
@@ -101,7 +106,7 @@ public class TestFragment extends BaseFragment {
                         if ((System.currentTimeMillis() - startTime) > duration * 1000) {
                             ToastUtil.toast(R.string.stu_no_test_now);
                         } else {
-                            startTest(startTime);
+                            startTest();
                         }
                     }
                 }, new ErrorListener() {
@@ -120,32 +125,39 @@ public class TestFragment extends BaseFragment {
 
 
     // 开始答题
-    private void startTest(final long startTime) {
+    private void startTest() {
         if (startProgressBar.getVisibility() == View.VISIBLE) {
             return;
         }
         startProgressBar.setVisibility(View.VISIBLE);
         JsonObjectRequest request =
-                new JsonObjectRequest(Method.GET, UrlUtil.getStuTestStartUrl(KAccount.getTchId(),
-                        startTime), new Listener<JSONObject>() {
+                new JsonObjectRequest(Method.POST, UrlUtil.getStuTestStartUrl(KAccount.getAccountId(),
+                        KAccount.getTchId()), new Listener<JSONObject>() {
 
                     @Override
                     public void onResponse(JSONObject response) {
                         LogUtil.i(TAG, "stu get test from server, response is " + response);
+                        //TODO
+                        long createTime = response.optLong("date");
+                        int duration = response.optInt("time");
+                        long remainTime = (int) (duration * 1000 + createTime - System.currentTimeMillis()) / 1000;
+                        if (remainTime <= 0) {
+                            startProgressBar.hide(getActivity());
+                            ToastUtil.toast(R.string.stu_no_test_now);
+                            return;
+                        }
+                        final Test test = Test.fromInternetJsonObject(response);
+                        //
+                        //                        // 打乱测试中的题目和选项
+                        test.shuffle();
+                        //                        test.decode();
 
-                        final int remaintime = (int) (System.currentTimeMillis() - startTime);
-                        final Test test = Test.fromJsonObject(response.optJSONObject(KEY_TEST));
-//
-//                        // 打乱测试中的题目和选项
-//                        test.shuffle();
-//                        test.decode();
-//
-//                        TestDao testDao = new TestDao(getActivity());
-//                        testDao.add(test);
-//                        testDao.close();
-//
-//                        // 进入开始答题页面
-//                        StartTestActivity.start(getActivity(), test, remaintime);
+                        TestDao testDao = new TestDao(getActivity());
+                        testDao.add(test);
+                        testDao.close();
+                        //
+                        // 进入开始答题页面
+                        StartTestActivity.start(getActivity(), test, (int) remainTime);
                         startProgressBar.hide(getActivity());
                     }
                 }, new ErrorListener() {
@@ -160,7 +172,7 @@ public class TestFragment extends BaseFragment {
                                 NetworkResponse response = error.networkResponse;
                                 if (null != response) {
                                     int statusCode = response.statusCode;
-                                    if (statusCode == 400) {
+                                    if (statusCode == 400 || statusCode == 402) {
                                         LogUtil.e(TAG, getString(R.string.stu_no_test_now));
                                         ToastUtil.toast(R.string.stu_no_test_now);
                                     } else if (statusCode == 401) {

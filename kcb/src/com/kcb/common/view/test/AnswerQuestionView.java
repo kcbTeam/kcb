@@ -1,6 +1,7 @@
 package com.kcb.common.view.test;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
@@ -16,7 +17,6 @@ import com.kcbTeam.R;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 /**
- * 
  * @className: AnswerQuestionView
  * @description: 学生回答题目
  * @author: wanghang
@@ -147,8 +147,12 @@ public class AnswerQuestionView extends BaseLinearLayout {
     // 如果是文字，直接显示；如果是图片，使用UIL加载；
     private void showQuestionItem(TextView textView, ImageView imageView, QuestionItem item) {
         if (item.isText()) {
+            imageView.setVisibility(INVISIBLE);
+            textView.setVisibility(VISIBLE);
             textView.setText(item.getText());
         } else {
+            imageView.setVisibility(VISIBLE);
+            textView.setVisibility(INVISIBLE);
             ImageLoader.getInstance().displayImage(item.getBitmapUrl(), imageView,
                     ImageLoaderUtil.getOptions());
         }
@@ -160,7 +164,11 @@ public class AnswerQuestionView extends BaseLinearLayout {
     private void showBitmapDialog(int titleResId, QuestionItem item) {
         // 先判断是不是图片
         if (!item.isText()) {
-            DialogUtil.showBitmapDialog(mContext, titleResId, item.getBitmap(), null, -1);
+            if (null != item.getBitmap()) {
+                DialogUtil.showBitmapDialog(mContext, titleResId, item.getBitmap(), null, -1);
+            } else if (!TextUtils.isEmpty(item.getBitmapUrl())) {
+                DialogUtil.showBitmapDialog(mContext, titleResId, item.getBitmapUrl(), null, -1);
+            }
         }
     }
 

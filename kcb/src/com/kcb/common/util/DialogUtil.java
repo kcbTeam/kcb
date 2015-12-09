@@ -151,4 +151,18 @@ public class DialogUtil {
             LogUtil.e(TAG, e.getMessage());
         }
     }
+
+    public static void showBitmapDialog(Context context, int titleResId, String bitmapUrl,
+                                        OnActionListener listener, int flag) {
+        MaterialBitmapDialog dialog = new MaterialBitmapDialog(context);
+        try {
+            dialog.show();
+            dialog.setTitle(titleResId);
+            dialog.setImageView(bitmapUrl);
+            dialog.setOnActionListener(flag, listener);
+            dialog.setSureTextColor(sSureTextColor);
+        } catch (Exception e) {
+            LogUtil.e(TAG, e.getMessage());
+        }
+    }
 }
