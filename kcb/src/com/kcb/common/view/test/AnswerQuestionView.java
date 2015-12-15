@@ -147,12 +147,12 @@ public class AnswerQuestionView extends BaseLinearLayout {
     // 如果是文字，直接显示；如果是图片，使用UIL加载；
     private void showQuestionItem(TextView textView, ImageView imageView, QuestionItem item) {
         if (item.isText()) {
-            imageView.setVisibility(INVISIBLE);
+            imageView.setVisibility(GONE);
             textView.setVisibility(VISIBLE);
             textView.setText(item.getText());
         } else {
             imageView.setVisibility(VISIBLE);
-            textView.setVisibility(INVISIBLE);
+            textView.setVisibility(GONE);
             ImageLoader.getInstance().displayImage(item.getBitmapUrl(), imageView,
                     ImageLoaderUtil.getOptions());
         }
