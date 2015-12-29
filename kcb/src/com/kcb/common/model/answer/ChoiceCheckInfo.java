@@ -1,9 +1,9 @@
 package com.kcb.common.model.answer;
 
+import com.kcb.common.model.test.QuestionItem;
+
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import com.kcb.common.model.test.QuestionItem;
 
 /**
  * 
@@ -15,12 +15,14 @@ import com.kcb.common.model.test.QuestionItem;
 public class ChoiceCheckInfo {
 
     private int mId; // choice id
+    private String mkeyValue;
     private boolean mIsSelected; // stu select it or not
 
     public ChoiceCheckInfo() {}
 
     public ChoiceCheckInfo(QuestionItem item) {
         mId = item.getId();
+        mkeyValue = item.getKeyValue();
     }
 
     public void setIsSelected(QuestionItem item) {
@@ -29,6 +31,10 @@ public class ChoiceCheckInfo {
 
     public boolean isSelected() {
         return mIsSelected;
+    }
+
+    public String getkeyValue() {
+        return mkeyValue;
     }
 
     /**

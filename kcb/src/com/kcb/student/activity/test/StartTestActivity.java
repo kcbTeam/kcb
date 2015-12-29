@@ -1,10 +1,5 @@
 package com.kcb.student.activity.test;
 
-import java.util.List;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -36,6 +31,11 @@ import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
 import com.kcb.student.database.test.TestDao;
 import com.kcb.student.model.KAccount;
 import com.kcbTeam.R;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.List;
 
 /**
  * 
@@ -206,8 +206,8 @@ public class StartTestActivity extends BaseActivity {
         testDao.close();
     }
 
-    private static final String KEY_STUID = "sutid";
-    private static final String KEY_TESTID = "testid";
+    private static final String KEY_STUID = "stu_code";
+    private static final String KEY_TESTID = "test_id";
     private static final String KEY_TESTANSWER = "testanswer";
 
     private void submitAnswerToServer() {
@@ -215,7 +215,7 @@ public class StartTestActivity extends BaseActivity {
         try {
             jsonObject.put(KEY_STUID, KAccount.getAccountId());
             jsonObject.put(KEY_TESTID, mTestAnswer.getId());
-            jsonObject.put(KEY_TESTANSWER, mTestAnswer.toJsonArray());
+            jsonObject.put(KEY_TESTANSWER, mTestAnswer.answerInfo());
         } catch (JSONException e) {}
         LogUtil.i(TAG, "stu send answer to server, body is " + jsonObject.toString());
         JsonObjectRequest request =

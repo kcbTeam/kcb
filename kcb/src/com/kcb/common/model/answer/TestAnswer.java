@@ -1,17 +1,16 @@
 package com.kcb.common.model.answer;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.kcb.common.model.test.Question;
+import com.kcb.common.model.test.Test;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.kcb.common.model.test.Question;
-import com.kcb.common.model.test.Test;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * 
  * @className: TestAnswer
  * @description: answer for a test
  * @author: wanghang
@@ -22,7 +21,8 @@ public class TestAnswer {
     private String mId; // test id
     private List<QuestionAnswer> mQuestionAnswers;
 
-    public TestAnswer() {}
+    public TestAnswer() {
+    }
 
     public TestAnswer(Test test) {
         mId = test.getId();
@@ -30,6 +30,8 @@ public class TestAnswer {
         for (int i = 0; i < test.getQuestionNum(); i++) {
             mQuestionAnswers.add(new QuestionAnswer(test.getQuestion(i)));
         }
+        //
+        mTestPointer = test;
     }
 
     public String getId() {
@@ -76,7 +78,8 @@ public class TestAnswer {
             }
 
             jsonObject.put(KEY_QUESTION_ANSWER, jsonArray);
-        } catch (JSONException e) {}
+        } catch (JSONException e) {
+        }
         return jsonObject;
     }
 
@@ -98,7 +101,22 @@ public class TestAnswer {
                 testAnswer.mQuestionAnswers.add(QuestionAnswer.fromJsonObject(jsonArray
                         .getJSONObject(i)));
             }
-        } catch (JSONException e) {}
+        } catch (JSONException e) {
+        }
         return testAnswer;
     }
+
+    /**
+     * xia
+     */
+    private Test mTestPointer;
+
+    public JSONArray answerInfo() {
+        JSONArray jsonArray = new JSONArray();
+        for (int i = 0; i < mQuestionAnswers.size(); i++) {
+            jsonArray.put(mQuestionAnswers.get(i).anserInfo());
+        }
+        return jsonArray;
+    }
+
 }

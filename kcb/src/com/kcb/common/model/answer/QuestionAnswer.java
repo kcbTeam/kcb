@@ -1,13 +1,12 @@
 package com.kcb.common.model.answer;
 
+import com.kcb.common.model.test.Question;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.kcb.common.model.test.Question;
-
 /**
- * 
  * @className: QuestionAnswer
  * @description: answer for one question
  * @author: wanghang
@@ -22,7 +21,8 @@ public class QuestionAnswer {
     private ChoiceCheckInfo mCInfo;
     private ChoiceCheckInfo mDInfo;
 
-    public QuestionAnswer() {}
+    public QuestionAnswer() {
+    }
 
     public QuestionAnswer(Question question) {
         mId = question.getId();
@@ -30,6 +30,8 @@ public class QuestionAnswer {
         mBInfo = new ChoiceCheckInfo(question.getChoiceB());
         mCInfo = new ChoiceCheckInfo(question.getChoiceC());
         mDInfo = new ChoiceCheckInfo(question.getChoiceD());
+
+        mQuestionPointer = question;
     }
 
     public int getId() {
@@ -72,7 +74,8 @@ public class QuestionAnswer {
             jsonArray.put(mDInfo.toJsonObject());
 
             jsonObject.put(KEY_CHOICE, jsonArray);
-        } catch (JSONException e) {}
+        } catch (JSONException e) {
+        }
         return jsonObject;
     }
 
@@ -87,7 +90,62 @@ public class QuestionAnswer {
             questionAnswer.mBInfo = ChoiceCheckInfo.fromJsonObject(jsonArray.getJSONObject(1));
             questionAnswer.mCInfo = ChoiceCheckInfo.fromJsonObject(jsonArray.getJSONObject(2));
             questionAnswer.mDInfo = ChoiceCheckInfo.fromJsonObject(jsonArray.getJSONObject(3));
-        } catch (JSONException e) {}
+        } catch (JSONException e) {
+        }
         return questionAnswer;
+    }
+
+    /**
+     * xia
+     */
+    private Question mQuestionPointer;
+
+    public JSONObject anserInfo() {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("qtb_id", mId);
+            JSONArray jsonArray = new JSONArray();
+            int isRight = 1;
+            if (mAInfo.isSelected()) {
+                jsonArray.put(mAInfo.getkeyValue());
+                if (!mQuestionPointer.getChoiceA().isRight())
+                    isRight = 0;
+            }
+            if (mBInfo.isSelected()) {
+                jsonArray.put(mBInfo.getkeyValue());
+                if (!mQuestionPointer.getChoiceB().isRight())
+                    isRight = 0;
+            }
+            if (mCInfo.isSelected()) {
+                jsonArray.put(mCInfo.getkeyValue());
+                if (!mQuestionPointer.getChoiceC().isRight())
+                    isRight = 0;
+            }
+            if (mDInfo.isSelected()) {
+                jsonArray.put(mDInfo.getkeyValue());
+                if (!mQuestionPointer.getChoiceD().isRight())
+                    isRight = 0;
+            }
+            jsonObject.put("awr_key", jsonArray);
+            jsonObject.put("isright", isRight);
+
+            jsonArray = new JSONArray();
+            if (mQuestionPointer.getChoiceA().isRight()) {
+                jsonArray.put(mQuestionPointer.getChoiceA().getKeyValue());
+            }
+            if (mQuestionPointer.getChoiceB().isRight()) {
+                jsonArray.put(mQuestionPointer.getChoiceB().getKeyValue());
+            }
+            if (mQuestionPointer.getChoiceC().isRight()) {
+                jsonArray.put(mQuestionPointer.getChoiceC().getKeyValue());
+            }
+            if (mQuestionPointer.getChoiceD().isRight()) {
+                jsonArray.put(mQuestionPointer.getChoiceD().getKeyValue());
+            }
+
+            jsonObject.put("right_key", jsonArray);
+        } catch (JSONException e) {
+        }
+        return jsonObject;
     }
 }
