@@ -203,6 +203,7 @@ public class LookTestActivity extends BaseActivity implements OnSearchListener {
                             mAdapter.notifyDataSetChanged();
                             searchEditText.setText(""); // 清空搜索框内容
                             listTitleLayout.setVisibility(View.VISIBLE);
+                            searchEditText.setVisibility(View.VISIBLE);
                             emptyTipView.setVisibility(View.INVISIBLE);
                         }
                         progressBar.hide(LookTestActivity.this);

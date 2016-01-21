@@ -397,9 +397,14 @@ public class Test {
 
     private String testDate;
     private int questionNum;
+    private int rightNum;
 
     public String getTestDate() {
         return testDate;
+    }
+
+    public int getRightNum() {
+        return rightNum;
     }
 
     public static Test fromJsoSimple(JSONObject jsonObject) {
@@ -409,6 +414,7 @@ public class Test {
         test.mName = jsonObject.optString("testName");
         test.testDate = jsonObject.optString("stateDate");
         test.questionNum = jsonObject.optInt("sumNum");
+        test.rightNum = jsonObject.optInt("rightNum");
         //        try {
         //            test.mDate = sdf.parse(jsonObject.optString("stateDate")).getTime();
         //        } catch (ParseException e) {

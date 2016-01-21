@@ -104,7 +104,7 @@ public class LookTestAdapter extends BaseAdapter {
             } else {
                 testNameTextView.setCompoundDrawables(null, null, null, null);
             }
-            questionNumTextView.setText(String.valueOf(test.getQuestionNum()));
+            questionNumTextView.setText(String.valueOf(test.getRightNum()) + "/" + String.valueOf(test.getQuestionNum()));
             testDateTextView.setText(test.getTestDate());
         }
     }
