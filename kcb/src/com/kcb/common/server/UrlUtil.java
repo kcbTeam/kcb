@@ -7,9 +7,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 
-
 /**
- * 
  * @className: UrlUtil
  * @description: define and get stu/tch http url here
  * @author: wanghang
@@ -155,7 +153,7 @@ public class UrlUtil {
     // 3.1 开始测试
 
     public static String getStuTestStartUrl(String stuId, String tchId) {
-        return IP + "/TestServlet02/stuTest?stuCode=" + stuId + "&tchCode=" + tchId;
+        return IP + "/TestServlet02/stuTest?stuCode=" + stuId + "&tchCode=" + tchId + "&flag=0";
     }
 
     // private static final String url_stu_test_start = IP + "/v1/stu/test/start";
@@ -165,17 +163,19 @@ public class UrlUtil {
     // }
 
     // 3.2 结束测试
-    private static final String url_stu_test_end = IP + "/v1/stu/test/finish";
+    //    private static final String url_stu_test_end = IP + "/v1/stu/test/finish";
+    private static final String url_stu_test_end = IP + "/TestServlet02/stuTest?flag=1";
 
-    public static String getStuTestFinishUrl() {
-        return url_stu_test_end;
+    public static String getStuTestFinishUrl(String data) {
+        return url_stu_test_end + "&data=" + data;
     }
 
     // 3.3 查看测试结果
-    private static final String url_stu_test_lookresult = IP + "/v1/stu/test/lookresult";
+//    private static final String url_stu_test_lookresult = IP + "/v1/stu/test/lookresult";
+    private static final String url_stu_test_lookresult = IP + "/TestServlet02/stuTest?flag=2&stuCode=";
 
-    public static String getStuTestLookResultUrl(String stuId, long date) {
-        return url_stu_test_lookresult + "?stuid=" + stuId + "&date=" + date;
+    public static String getStuTestLookResultUrl(String stuCode) {
+        return url_stu_test_lookresult + stuCode;
     }
 
     /**
@@ -288,7 +288,7 @@ public class UrlUtil {
     }
 
     // 3.2.2 结束测试
-    public static String getTchTestFinishUrl(String tchCode,int log_id){
+    public static String getTchTestFinishUrl(String tchCode, int log_id) {
         return IP + "/TestServlet02/tchTest?tchCode=" + tchCode + "&logId=" + log_id;
     }
 

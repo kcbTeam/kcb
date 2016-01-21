@@ -141,7 +141,7 @@ public class TestFragment extends BaseFragment {
                         long createTime = response.optLong("date");
                         int duration = response.optInt("time");
                         long remainTime = (int) (duration * 1000 + createTime - System.currentTimeMillis()) / 1000;
-                        remainTime = 1000; //for local test
+//                        remainTime = 1000; //for local test
                         if (remainTime <= 0) {
                             startProgressBar.hide(getActivity());
                             ToastUtil.toast(R.string.stu_no_test_now);

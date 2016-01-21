@@ -1,12 +1,5 @@
 package com.kcb.student.activity.test;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
-
-import org.json.JSONArray;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
@@ -15,8 +8,9 @@ import com.android.volley.Request.Method;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.kcb.common.base.BaseActivity;
+import com.kcb.common.cache.CacheSP;
 import com.kcb.common.model.test.Test;
 import com.kcb.common.server.RequestUtil;
 import com.kcb.common.server.ResponseUtil;
@@ -29,12 +23,18 @@ import com.kcb.common.view.common.SearchEditText.OnSearchListener;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.library.view.smoothprogressbar.SmoothProgressBar;
 import com.kcb.student.adapter.LookTestAdapter;
-import com.kcb.student.database.test.TestDao;
 import com.kcb.student.model.KAccount;
 import com.kcbTeam.R;
 
+import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- * 
  * @className: TestResultActivity
  * @description:
  * @author: Ding
@@ -95,9 +95,19 @@ public class LookTestActivity extends BaseActivity implements OnSearchListener {
 
     @Override
     protected void initData() {
-        TestDao testDao = new TestDao(LookTestActivity.this);
-        mAllTests = testDao.getAll();
-        testDao.close();
+//        TestDao testDao = new TestDao(LookTestActivity.this);
+//        mAllTests = testDao.getAll();
+//        testDao.close();
+        mAllTests = new ArrayList<Test>();
+        JSONObject response = CacheSP.getStuTestListJson()
+                .optJSONObject("resultCon");
+        if(null != response){
+            JSONArray testArray = response.optJSONArray("testLog");
+            for (int i = 0; i < testArray.length(); i++) {
+                Test test = Test.fromJsoSimple(testArray.optJSONObject(i));
+                mAllTests.add(test);
+            }
+        }
 
         if (mAllTests.isEmpty()) {
             listTitleLayout.setVisibility(View.INVISIBLE);
@@ -140,10 +150,11 @@ public class LookTestActivity extends BaseActivity implements OnSearchListener {
         for (int i = 0; i < mAllTests.size(); i++) {
             String name = mAllTests.get(i).getName();
             try {
-                if (StringMatchUtil.isMatch(name, mSearchKey)) {
+                if (StringMatchUtil.isMatch(name, text)) {
                     mSearchedTests.add(mAllTests.get(i));
                 }
-            } catch (BadHanyuPinyinOutputFormatCombination e) {}
+            } catch (BadHanyuPinyinOutputFormatCombination e) {
+            }
         }
         mAdapter.notifyDataSetChanged();
     }
@@ -167,30 +178,35 @@ public class LookTestActivity extends BaseActivity implements OnSearchListener {
         if (mAdapter.getCount() > 0) {
             date = mAdapter.getItem(0).getDate();
         }
-        JsonArrayRequest request =
-                new JsonArrayRequest(Method.GET, UrlUtil.getStuTestLookResultUrl(
-                        KAccount.getAccountId(), date), new Listener<JSONArray>() {
+        JsonObjectRequest request =
+                new JsonObjectRequest(Method.GET, UrlUtil.getStuTestLookResultUrl(
+                        KAccount.getAccountId()), new Listener<JSONObject>() {
                     @Override
-                    public void onResponse(JSONArray response) {
+                    public void onResponse(JSONObject response) {
                         // 获取测试，并存到数据库中；
+                        JSONObject jsonObject = response.optJSONObject("resultCon");
                         List<Test> tests = new ArrayList<Test>();
-                        TestDao testDao = new TestDao(LookTestActivity.this);
-                        for (int i = 0; i < response.length(); i++) {
-                            Test test = Test.fromJsonObject(response.optJSONObject(i));
-                            tests.add(test);
-                            testDao.add(test);
+                        if(null != jsonObject){
+                            JSONArray testArray = jsonObject.optJSONArray("testLog");
+                            for (int i = 0; i < testArray.length(); i++) {
+                                //                            Test test = Test.fromJsonObject(response.optJSONObject(i));
+                                Test test = Test.fromJsoSimple(testArray.optJSONObject(i));
+                                tests.add(test);
+                            }
                         }
-                        testDao.close();
                         // 刷新UI；
                         if (!tests.isEmpty()) {
+                            mAllTests.clear();
                             mAllTests.addAll(tests);
                             mSearchedTests.clear();
                             mSearchedTests.addAll(mAllTests);
                             mAdapter.notifyDataSetChanged();
                             searchEditText.setText(""); // 清空搜索框内容
                             listTitleLayout.setVisibility(View.VISIBLE);
+                            emptyTipView.setVisibility(View.INVISIBLE);
                         }
                         progressBar.hide(LookTestActivity.this);
+                        CacheSP.saveStuTestListJson(response.toString());
                     }
                 }, new ErrorListener() {
                     @Override

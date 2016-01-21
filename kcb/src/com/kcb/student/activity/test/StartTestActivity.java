@@ -12,7 +12,7 @@ import com.android.volley.Request.Method;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.kcb.common.base.BaseActivity;
 import com.kcb.common.model.answer.TestAnswer;
 import com.kcb.common.model.test.Question;
@@ -38,7 +38,6 @@ import org.json.JSONObject;
 import java.util.List;
 
 /**
- * 
  * @className: TestActivity
  * @description:
  * @author: Tao Li
@@ -122,7 +121,9 @@ public class StartTestActivity extends BaseActivity {
                     sendEmptyMessageDelayed(MESSAGE_TIME_REDUCE, 1000);
                     mRemainTime--;
                 }
-            };
+            }
+
+            ;
         };
         mHandler.sendEmptyMessage(MESSAGE_TIME_REDUCE);
     }
@@ -207,8 +208,10 @@ public class StartTestActivity extends BaseActivity {
     }
 
     private static final String KEY_STUID = "stu_code";
-    private static final String KEY_TESTID = "test_id";
+    private static final String KEY_TESTID = "log_id";
     private static final String KEY_TESTANSWER = "testanswer";
+    private static final String KEY_QUES_NUM = "sumNum";
+    private static final String KEY_RIGHT_NUM = "rightNum";
 
     private void submitAnswerToServer() {
         JSONObject jsonObject = new JSONObject();
@@ -216,26 +219,45 @@ public class StartTestActivity extends BaseActivity {
             jsonObject.put(KEY_STUID, KAccount.getAccountId());
             jsonObject.put(KEY_TESTID, mTestAnswer.getId());
             jsonObject.put(KEY_TESTANSWER, mTestAnswer.answerInfo());
-        } catch (JSONException e) {}
+            jsonObject.put(KEY_QUES_NUM,mTestAnswer.getSumNum());
+            jsonObject.put(KEY_RIGHT_NUM,mTestAnswer.getRightNum());
+        } catch (JSONException e) {
+        }
         LogUtil.i(TAG, "stu send answer to server, body is " + jsonObject.toString());
-        JsonObjectRequest request =
-                new JsonObjectRequest(Method.POST, UrlUtil.getStuTestFinishUrl(), jsonObject,
-                        new Listener<JSONObject>() {
-
-                            @Override
-                            public void onResponse(JSONObject response) {
-                                ToastUtil.toast(R.string.stu_answer_submitted);
-                                progressBar.hide(StartTestActivity.this);
-                                finish();
-                            }
-                        }, new ErrorListener() {
-
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                progressBar.hide(StartTestActivity.this);
-                                ResponseUtil.toastError(error);
-                            }
-                        });
+        //        JsonObjectRequest request =
+        //                new JsonObjectRequest(Method.POST, UrlUtil.getStuTestFinishUrl(), jsonObject,
+        //                        new Listener<JSONObject>() {
+        //
+        //                            @Override
+        //                            public void onResponse(JSONObject response) {
+        //                                ToastUtil.toast(R.string.stu_answer_submitted);
+        //                                progressBar.hide(StartTestActivity.this);
+        //                                finish();
+        //                            }
+        //                        }, new ErrorListener() {
+        //
+        //                            @Override
+        //                            public void onErrorResponse(VolleyError error) {
+        //                                progressBar.hide(StartTestActivity.this);
+        //                                ResponseUtil.toastError(error);
+        //                            }
+        //                        });
+        StringRequest request = new StringRequest(Method.POST, UrlUtil.getStuTestFinishUrl(jsonObject.toString()),
+                new Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        ToastUtil.toast(R.string.stu_answer_submitted);
+                        progressBar.hide(StartTestActivity.this);
+                        finish();
+                    }
+                },
+                new ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        progressBar.hide(StartTestActivity.this);
+                        ResponseUtil.toastError(error);
+                    }
+                });
         RequestUtil.getInstance().addToRequestQueue(request, TAG);
     }
 

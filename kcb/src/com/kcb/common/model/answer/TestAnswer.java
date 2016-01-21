@@ -110,13 +110,26 @@ public class TestAnswer {
      * xia
      */
     private Test mTestPointer;
+    private int sumNum;
+    private int rightNum;
+
 
     public JSONArray answerInfo() {
         JSONArray jsonArray = new JSONArray();
+        sumNum = mQuestionAnswers.size();
         for (int i = 0; i < mQuestionAnswers.size(); i++) {
             jsonArray.put(mQuestionAnswers.get(i).anserInfo());
+            if(mQuestionAnswers.get(i).isCorrect())
+                rightNum++;
         }
         return jsonArray;
     }
 
+    public int getSumNum(){
+        return sumNum;
+    }
+
+    public int getRightNum() {
+        return rightNum;
+    }
 }

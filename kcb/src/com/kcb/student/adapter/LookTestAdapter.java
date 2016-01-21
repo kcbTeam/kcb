@@ -1,7 +1,5 @@
 package com.kcb.student.adapter;
 
-import java.util.List;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -16,6 +14,8 @@ import com.kcb.common.util.ToastUtil;
 import com.kcb.library.view.buttonflat.ButtonFlat;
 import com.kcb.student.activity.test.LookTestDetailActivity;
 import com.kcbTeam.R;
+
+import java.util.List;
 
 /**
  * @className: TestResultAdapter
@@ -105,7 +105,7 @@ public class LookTestAdapter extends BaseAdapter {
                 testNameTextView.setCompoundDrawables(null, null, null, null);
             }
             questionNumTextView.setText(String.valueOf(test.getQuestionNum()));
-            testDateTextView.setText(test.getDateString());
+            testDateTextView.setText(test.getTestDate());
         }
     }
 }

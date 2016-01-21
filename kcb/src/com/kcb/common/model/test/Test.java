@@ -105,7 +105,8 @@ public class Test {
             for (int i = 0; i < questionArray.length(); i++) {
                 mQuestions.add(Question.fromJsonObject(questionArray.optJSONObject(i)));
             }
-        } catch (JSONException e) {}
+        } catch (JSONException e) {
+        }
     }
 
     // 如果测试的结束时间 < 现在的时间，表示已经结束了
@@ -144,6 +145,9 @@ public class Test {
     }
 
     public int getQuestionNum() {
+        if(mQuestions.isEmpty()){
+            return questionNum;
+        }
         return mQuestions.size();
     }
 
@@ -294,12 +298,14 @@ public class Test {
             // 编码文字
             encode();
             requestObject.put(KEY_TEST, toJsonObject());
-        } catch (JSONException e) {}
+        } catch (JSONException e) {
+        }
 
         MultipartEntity entity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
         try {
             entity.addPart("data", new StringBody(requestObject.toString()));
-        } catch (UnsupportedEncodingException e) {}
+        } catch (UnsupportedEncodingException e) {
+        }
 
         for (int i = 0; i < mQuestions.size(); i++) {
             Question question = mQuestions.get(i);
@@ -350,7 +356,8 @@ public class Test {
                 questionArray.put(mQuestions.get(i).toJsonObject());
             }
             jsonObject.put(KEY_QUESTION, questionArray); // 测试包括的题目
-        } catch (JSONException e) {}
+        } catch (JSONException e) {
+        }
         return jsonObject;
     }
 
@@ -388,15 +395,37 @@ public class Test {
         return test;
     }
 
+    private String testDate;
+    private int questionNum;
+
+    public String getTestDate() {
+        return testDate;
+    }
+
+    public static Test fromJsoSimple(JSONObject jsonObject) {
+        SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss");
+        Test test = new Test();
+        test.mId = String.valueOf(jsonObject.optInt("testId"));
+        test.mName = jsonObject.optString("testName");
+        test.testDate = jsonObject.optString("stateDate");
+        test.questionNum = jsonObject.optInt("sumNum");
+        //        try {
+        //            test.mDate = sdf.parse(jsonObject.optString("stateDate")).getTime();
+        //        } catch (ParseException e) {
+        //            e.printStackTrace();
+        //        }
+        return test;
+    }
+
 
     /**
      * 获取图片部分的文件数据
-     * 
+     *
+     * @return
      * @title: getBitmapFiles
      * @description:
      * @author: Zqj
      * @date: 2015年9月14日 下午6:39:16
-     * @return
      */
     public List<File> getBitmapFiles() {
         List<File> files = new ArrayList<File>();
@@ -424,12 +453,12 @@ public class Test {
 
     /**
      * 获取文字部分
-     * 
+     *
+     * @return
      * @title: getStringPart
      * @description:
      * @author: Zqj
      * @date: 2015年9月14日 下午6:41:17
-     * @return
      */
     public String getStringPart() {
         QuestionItem.testName = mName;
@@ -453,7 +482,8 @@ public class Test {
                 jsonArray.put(mQuestions.get(i).toJsonForInternet(i + 1));
             }
             jsonObject.put(KEY_QUESTION, jsonArray);
-        } catch (JSONException e) {}
+        } catch (JSONException e) {
+        }
 
         return jsonObject.toString();
     }

@@ -98,33 +98,53 @@ public class QuestionAnswer {
     /**
      * xia
      */
+    public boolean isCorrect(){
+        if (mAInfo.isSelected()) {
+            if (!mQuestionPointer.getChoiceA().isRight())
+                return false;
+        }
+        if (mBInfo.isSelected()) {
+            if (!mQuestionPointer.getChoiceB().isRight())
+                return false;
+        }
+        if (mCInfo.isSelected()) {
+            if (!mQuestionPointer.getChoiceC().isRight())
+                return false;
+        }
+        if (mDInfo.isSelected()) {
+            if (!mQuestionPointer.getChoiceD().isRight())
+                return false;
+        }
+        return true;
+    }
+
     private Question mQuestionPointer;
 
     public JSONObject anserInfo() {
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("qtb_id", mId);
+            jsonObject.put("qtb_id", String.valueOf(mId));
             JSONArray jsonArray = new JSONArray();
-            int isRight = 1;
+            String isRight = "1";
             if (mAInfo.isSelected()) {
                 jsonArray.put(mAInfo.getkeyValue());
                 if (!mQuestionPointer.getChoiceA().isRight())
-                    isRight = 0;
+                    isRight = "0";
             }
             if (mBInfo.isSelected()) {
                 jsonArray.put(mBInfo.getkeyValue());
                 if (!mQuestionPointer.getChoiceB().isRight())
-                    isRight = 0;
+                    isRight = "0";
             }
             if (mCInfo.isSelected()) {
                 jsonArray.put(mCInfo.getkeyValue());
                 if (!mQuestionPointer.getChoiceC().isRight())
-                    isRight = 0;
+                    isRight = "0";
             }
             if (mDInfo.isSelected()) {
                 jsonArray.put(mDInfo.getkeyValue());
                 if (!mQuestionPointer.getChoiceD().isRight())
-                    isRight = 0;
+                    isRight = "0";
             }
             jsonObject.put("awr_key", jsonArray);
             jsonObject.put("isright", isRight);

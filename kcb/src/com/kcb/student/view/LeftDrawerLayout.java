@@ -1,7 +1,5 @@
 package com.kcb.student.view;
 
-import java.io.File;
-
 import android.content.Context;
 import android.content.Intent;
 import android.util.AttributeSet;
@@ -11,6 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.kcb.common.activity.AboutusActivity;
+import com.kcb.common.cache.CacheSP;
 import com.kcb.common.util.DialogUtil;
 import com.kcb.common.util.ToastUtil;
 import com.kcb.library.view.buttonflat.ButtonFlat;
@@ -29,6 +28,8 @@ import com.umeng.update.UmengUpdateAgent;
 import com.umeng.update.UmengUpdateListener;
 import com.umeng.update.UpdateResponse;
 import com.umeng.update.UpdateStatus;
+
+import java.io.File;
 
 /**
  * 
@@ -233,6 +234,9 @@ public class LeftDrawerLayout extends LinearLayout implements OnClickListener {
 
                         // 删除SharedPreference数据
                         SharedPreferenceUtil.clear();
+
+                        //delete sp cache
+                        CacheSP.clear();
 
                         // 显示登录页面
                         LoginActivity.start(mContext);
